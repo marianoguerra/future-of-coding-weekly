@@ -1,0 +1,16 @@
+---
+name: Newsletter Week Issue
+about: This is the default issue to open each week to collect resources
+title: Resources for Newsletter 2019/{MM}/{WeekNumber}
+labels: ''
+assignees: marianoguerra
+
+---
+
+**IMPORTANT** replace {MM} and {WeekNumber} on the issue with the current month (01 to 12) and week number (1 to 4) and remove this line.
+
+This issue collects resources for the newsletter of the year/month/week that should be in the title
+
+If you want to contribute open the issue and paste a resource you think is worth sharing in the newsletter and comment on the issue of the week.
+
+Use comment reactions on issue comments to upvote/downvote/whatever each submission the reactions that have a clear sense of positive/negative will be considered to rank the submissions of the week.
