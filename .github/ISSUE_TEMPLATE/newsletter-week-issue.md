@@ -1,7 +1,7 @@
 ---
 name: Newsletter Week Issue
 about: This is the default issue to open each week to collect resources
-title: Resources for Newsletter 2019/{MM}/{WeekNumber}
+title: Resources for Newsletter 2020/{MM}/{WeekNumber}
 labels: ''
 assignees: marianoguerra
 
