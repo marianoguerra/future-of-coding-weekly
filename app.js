@@ -34,8 +34,12 @@ function link(url, label) {
 }
 
 function onComments(comments) {
-  const outputNode = document.getElementById('output');
-  comments.forEach((comment, _i, _it) => handleComment(comment, outputNode));
+  const outputNode = document.getElementById('output'),
+    contributors = {};
+  comments.forEach((comment, _i, _it) => {
+    contributors[comment.user.login] = comment.user;
+    handleComment(comment, outputNode);
+  });
   outputNode.appendChild(
     ce('hr', {style: 'border:0;border-top:1px solid #cccccc'})
   );
@@ -48,6 +52,20 @@ function onComments(comments) {
       ' for instructions, have a productive week!'
     )
   );
+
+  const contributorsSorted = Object.keys(contributors).sort(),
+    contributorsDom = ce('p', {}, 'Contributors: ');
+
+  contributorsSorted.forEach((username, i, arr) => {
+    const dom = ce('a', {href: contributors[username].html_url}, username);
+    contributorsDom.appendChild(dom);
+
+    if (i + 1 < arr.length) {
+      contributorsDom.appendChild(toNode(', '));
+    }
+  });
+
+  outputNode.appendChild(contributorsDom);
 
   document.getElementById(
     'output-html'
