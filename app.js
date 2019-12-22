@@ -1,5 +1,5 @@
 //@format
-
+/*globals SimpleMarkdown*/
 const USER = 'marianoguerra',
   REPO = 'future-of-coding-weekly',
   ISSUES_URL = `https://api.github.com/repos/${USER}/${REPO}/issues`;
@@ -26,20 +26,21 @@ function ce(tag, attrs, ...body) {
 }
 
 function handleComment(comment, node) {
-  node.appendChild(ce('p', {}, comment.body));
+  const container = ce('div', {style: 'margin-top:1em'});
+  container.innerHTML = mdToHTML(comment.body);
+
+  node.appendChild(container);
 }
 
 function link(url, label) {
   return ce('a', {href: url, target: '_blank'}, label || url);
 }
 
-function onComments(comments) {
+function onCommentsFinished(contributors) {
   const outputNode = document.getElementById('output'),
-    contributors = {};
-  comments.forEach((comment, _i, _it) => {
-    contributors[comment.user.login] = comment.user;
-    handleComment(comment, outputNode);
-  });
+    contributorsSorted = Object.keys(contributors).sort(),
+    contributorsDom = ce('p', {}, 'Contributors: ');
+
   outputNode.appendChild(
     ce('hr', {style: 'border:0;border-top:1px solid #cccccc'})
   );
@@ -52,9 +53,6 @@ function onComments(comments) {
       ' for instructions, have a productive week!'
     )
   );
-
-  const contributorsSorted = Object.keys(contributors).sort(),
-    contributorsDom = ce('p', {}, 'Contributors: ');
 
   contributorsSorted.forEach((username, i, arr) => {
     const dom = ce('a', {href: contributors[username].html_url}, username);
@@ -72,8 +70,30 @@ function onComments(comments) {
   ).textContent = outputNode.innerHTML.replace(/<p>/g, '\n\n<p>').trim();
 }
 
+function onComments(comments, baseUrl, count, contributors) {
+  const outputNode = document.getElementById('output');
+
+  comments.forEach((comment, _i, _it) => {
+    contributors[comment.user.login] = comment.user;
+    handleComment(comment, outputNode);
+  });
+
+  if (comments.length === 0) {
+    onCommentsFinished(contributors);
+  } else {
+    loadCommentsPage(baseUrl, count, contributors, onComments);
+  }
+}
+
+function loadCommentsPage(baseUrl, count, contributors, callback) {
+  fetchJson(baseUrl + count, comments =>
+    callback(comments, baseUrl, count + 1, contributors)
+  );
+}
+
 function handleIssue(issue) {
-  fetchJson(issue.comments_url, onComments);
+  const contributors = {};
+  loadCommentsPage(issue.comments_url + '?page=', 1, contributors, onComments);
 }
 
 function showMsg(className, txt) {
@@ -119,6 +139,15 @@ function fetchJson(url, onData) {
 function main() {
   console.log('fetching issues');
   fetchJson(ISSUES_URL, handleIssues);
+}
+
+const rawBuiltParser = SimpleMarkdown.parserFor(SimpleMarkdown.defaultRules),
+  htmlOutput = SimpleMarkdown.htmlFor(
+    SimpleMarkdown.ruleOutput(SimpleMarkdown.defaultRules, 'html')
+  );
+
+function mdToHTML(txt) {
+  return htmlOutput(rawBuiltParser(txt + '\n\n', {inline: false}));
 }
 
 main();
