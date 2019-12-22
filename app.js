@@ -44,15 +44,6 @@ function onCommentsFinished(contributors) {
   outputNode.appendChild(
     ce('hr', {style: 'border:0;border-top:1px solid #cccccc'})
   );
-  outputNode.appendChild(
-    ce(
-      'p',
-      {style: 'text-align:center'},
-      'Want to contribute? Check ',
-      link('https://github.com/marianoguerra/future-of-coding-weekly'),
-      ' for instructions, have a productive week!'
-    )
-  );
 
   contributorsSorted.forEach((username, i, arr) => {
     const dom = ce('a', {href: contributors[username].html_url}, username);
@@ -64,6 +55,16 @@ function onCommentsFinished(contributors) {
   });
 
   outputNode.appendChild(contributorsDom);
+
+  outputNode.appendChild(
+    ce(
+      'p',
+      {style: 'text-align:center'},
+      'Want to contribute? Check ',
+      link('https://github.com/marianoguerra/future-of-coding-weekly'),
+      ' for instructions, have a productive week!'
+    )
+  );
 
   document.getElementById(
     'output-html'
