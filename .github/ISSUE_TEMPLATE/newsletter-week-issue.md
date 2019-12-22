@@ -13,4 +13,6 @@ This issue collects resources for the newsletter of the year/month/week that sho
 
 If you want to contribute open the issue and paste a resource you think is worth sharing in the newsletter and comment on the issue of the week.
 
-Use comment reactions on issue comments to upvote/downvote/whatever each submission the reactions that have a clear sense of positive/negative will be considered to rank the submissions of the week.
+**Use markdown for formatting**, ideally **a contribution should have a title a link and optionally a description.**
+
+Use comment reactions on issue comments to up vote/down vote/whatever each submission the reactions that have a clear sense of positive/negative will be considered to rank the submissions of the week.
