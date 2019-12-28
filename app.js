@@ -142,10 +142,31 @@ function main() {
   fetchJson(ISSUES_URL, handleIssues);
 }
 
-const rawBuiltParser = SimpleMarkdown.parserFor(SimpleMarkdown.defaultRules),
-  htmlOutput = SimpleMarkdown.htmlFor(
-    SimpleMarkdown.ruleOutput(SimpleMarkdown.defaultRules, 'html')
-  );
+const defaultRules = SimpleMarkdown.defaultRules;
+
+function overrideDefaultHtml(ruleName, overrideFn) {
+  return Object.assign({}, defaultRules[ruleName], {html: overrideFn});
+}
+
+const customRules = {
+    paragraph: overrideDefaultHtml('paragraph', function(node, output, state) {
+      return '<p>' + output(node.content, state) + '</p>\n';
+    }),
+    blockQuote: overrideDefaultHtml('blockQuote', function(
+      node,
+      output,
+      state
+    ) {
+      return (
+        '<blockquote style="margin-left:1em;color:#555555;font-style:italic">' +
+        output(node.content, state) +
+        '</blockquote>\n'
+      );
+    })
+  },
+  rules = Object.assign({}, defaultRules, customRules),
+  rawBuiltParser = SimpleMarkdown.parserFor(rules),
+  htmlOutput = SimpleMarkdown.htmlFor(SimpleMarkdown.ruleOutput(rules, 'html'));
 
 function mdToHTML(txt) {
   return htmlOutput(rawBuiltParser(txt + '\n\n', {inline: false}));
