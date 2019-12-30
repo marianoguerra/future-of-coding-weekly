@@ -59,7 +59,16 @@ function onCommentsFinished(contributors) {
   outputNode.appendChild(
     ce(
       'p',
-      {style: 'text-align:center'},
+      {},
+      'Not a member yet? check the ',
+      link('https://futureofcoding.org/', 'Future of Coding Community')
+    )
+  );
+
+  outputNode.appendChild(
+    ce(
+      'p',
+      {},
       'Want to contribute? Check ',
       link('https://github.com/marianoguerra/future-of-coding-weekly'),
       ' for instructions, have a productive week!'
