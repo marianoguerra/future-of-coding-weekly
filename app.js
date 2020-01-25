@@ -80,12 +80,20 @@ function onCommentsFinished(contributors) {
   ).textContent = outputNode.innerHTML.replace(/<p>/g, '\n\n<p>').trim();
 }
 
-function onComments(comments, baseUrl, count, contributors) {
-  const outputNode = document.getElementById('output');
+function addCommentSeparator(outputNode) {
+  outputNode.appendChild(ce('p', {}, '--'));
+}
 
-  comments.forEach((comment, _i, _it) => {
+function onComments(comments, baseUrl, count, contributors) {
+  const outputNode = document.getElementById('output'),
+    lastIndex = comments.length - 1;
+
+  comments.forEach((comment, i, _it) => {
     contributors[comment.user.login] = comment.user;
     handleComment(comment, outputNode);
+    if (i < lastIndex) {
+      addCommentSeparator(outputNode);
+    }
   });
 
   if (comments.length === 0) {
