@@ -1,13 +1,13 @@
 ---
 name: Newsletter Week Issue
 about: This is the default issue to open each week to collect resources
-title: Resources for Newsletter 2020/{MM}/{WeekNumber}
+title: Future of Coding Weekly 2020/0{M} Week {W} 
 labels: ''
 assignees: marianoguerra
 
 ---
 
-**IMPORTANT** replace {MM} and {WeekNumber} on the issue with the current month (01 to 12) and week number (1 to 4) and remove this line.
+**IMPORTANT** replace {M} and {W} on the issue with the current month (01 to 12) and week number (1 to 4) and remove this line.
 
 This issue collects resources for the newsletter of the year/month/week that should be in the title
 
