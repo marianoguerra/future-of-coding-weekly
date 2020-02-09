@@ -25,9 +25,27 @@ function ce(tag, attrs, ...body) {
   return node;
 }
 
-function handleComment(comment, node) {
-  const container = ce('div', {style: 'margin-top:1em'});
-  container.innerHTML = mdToHTML(comment.body);
+function handleComment(comment, node, authors) {
+  const container = ce('div', {style: 'margin-top:1em'}),
+    markdown = comment.body,
+    matchResult = (
+      new RegExp('\\[([^\\[]*?)\\]\\((https://twitter.com/.*?)\\)', 'gm').exec(
+        markdown
+      ) || []
+    ).slice(1);
+
+  container.innerHTML = mdToHTML(markdown);
+
+  if (matchResult.length === 0) {
+    console.log(matchResult, markdown);
+  }
+  matchResult.forEach((v, i, arr) => {
+    if (i % 2 === 0) {
+      const username = v,
+        url = arr[i + 1];
+      authors.push([username, url]);
+    }
+  });
 
   node.appendChild(container);
 }
@@ -36,9 +54,13 @@ function link(url, label) {
   return ce('a', {href: url, target: '_blank'}, label || url);
 }
 
-function onCommentsFinished(contributors) {
+function onCommentsFinished(contributors, authors) {
   const outputNode = document.getElementById('output'),
     contributorsSorted = Object.keys(contributors).sort(),
+    authorsSorted = authors.sort(([userA], [userB]) =>
+      userA.localeCompare(userB)
+    ),
+    authorsDom = ce('p', {}, 'Authors: '),
     contributorsDom = ce('p', {}, 'Contributors: ');
 
   outputNode.appendChild(
@@ -54,7 +76,21 @@ function onCommentsFinished(contributors) {
     }
   });
 
+  authorsSorted.forEach(([name, url], i, arr) => {
+    const dom = ce('a', {href: url}, name);
+    authorsDom.appendChild(dom);
+
+    if (i + 1 < arr.length) {
+      authorsDom.appendChild(toNode(', '));
+    }
+  });
+
+  console.log(
+    authorsSorted.map(([_, url]) => '@' + url.split('/')[3]).join(' ')
+  );
+
   outputNode.appendChild(contributorsDom);
+  outputNode.appendChild(authorsDom);
 
   outputNode.appendChild(
     ce(
@@ -93,34 +129,41 @@ function addCommentSeparator(outputNode) {
   outputNode.appendChild(ce('p', {}, '--'));
 }
 
-function onComments(comments, baseUrl, count, contributors) {
+function onComments(comments, baseUrl, count, contributors, authors) {
   const outputNode = document.getElementById('output'),
     lastIndex = comments.length - 1;
 
   comments.forEach((comment, i, _it) => {
     contributors[comment.user.login] = comment.user;
-    handleComment(comment, outputNode);
+    handleComment(comment, outputNode, authors);
     if (i < lastIndex) {
       addCommentSeparator(outputNode);
     }
   });
 
   if (comments.length === 0) {
-    onCommentsFinished(contributors);
+    onCommentsFinished(contributors, authors);
   } else {
-    loadCommentsPage(baseUrl, count, contributors, onComments);
+    loadCommentsPage(baseUrl, count, contributors, authors, onComments);
   }
 }
 
-function loadCommentsPage(baseUrl, count, contributors, callback) {
+function loadCommentsPage(baseUrl, count, contributors, authors, callback) {
   fetchJson(baseUrl + count, comments =>
-    callback(comments, baseUrl, count + 1, contributors)
+    callback(comments, baseUrl, count + 1, contributors, authors)
   );
 }
 
 function handleIssue(issue) {
-  const contributors = {};
-  loadCommentsPage(issue.comments_url + '?page=', 1, contributors, onComments);
+  const contributors = {},
+    authors = [];
+  loadCommentsPage(
+    issue.comments_url + '?page=',
+    1,
+    contributors,
+    authors,
+    onComments
+  );
 }
 
 function showMsg(className, txt) {
