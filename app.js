@@ -69,6 +69,15 @@ function onCommentsFinished(contributors) {
     ce(
       'p',
       {},
+      'Not convinced yet? check the ',
+      link('https://tinyletter.com/marianoguerra/archive', 'Newsletter Archive')
+    )
+  );
+
+  outputNode.appendChild(
+    ce(
+      'p',
+      {},
       'Want to contribute? Check ',
       link('https://github.com/marianoguerra/future-of-coding-weekly'),
       ' for instructions, have a productive week!'
