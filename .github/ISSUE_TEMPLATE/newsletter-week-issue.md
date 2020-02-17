@@ -15,6 +15,6 @@ If you want to contribute open the issue and paste a resource you think is worth
 
 **Use markdown for formatting**, ideally **a contribution should have a title a link and optionally a description.**
 
-Add emojis to signal videos 🎥 article 📝 demo 🎮 thread 🧵 audio 🎧
+Add emojis to signal videos 🎥 article 📝 demo 🎮 thread 🧵 audio 🎧 twitter 🐦 idea 🧠 podcast 🎙️
 
 Use comment reactions on issue comments to up vote/down vote/whatever each submission the reactions that have a clear sense of positive/negative will be considered to rank the submissions of the week.
