@@ -18,7 +18,8 @@ function main() {
         'Kartik Agaram': '[Kartik Agaram](http://akkartik.name/about)',
         'Scott Anderson':
           '[Scott Anderson](https://twitter.com/ImpossibleScott)',
-        'Will Crichton': '[Will Crichton](willcrichton.net)'
+        'Will Crichton': '[Will Crichton](willcrichton.net)',
+        'Charlie Roberts': '[Charlie Roberts](https://www.charlie-roberts.com)'
       }
     },
     computed: {
