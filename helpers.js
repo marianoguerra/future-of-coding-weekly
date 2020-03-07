@@ -19,7 +19,8 @@ function main() {
         'Scott Anderson':
           '[Scott Anderson](https://twitter.com/ImpossibleScott)',
         'Will Crichton': '[Will Crichton](willcrichton.net)',
-        'Charlie Roberts': '[Charlie Roberts](https://www.charlie-roberts.com)'
+        'Charlie Roberts': '[Charlie Roberts](https://www.charlie-roberts.com)',
+        'Ivan Reese': '[Ivan Reese](https://twitter.com/spiralganglion)'
       }
     },
     computed: {
