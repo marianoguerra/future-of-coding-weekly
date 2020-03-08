@@ -20,7 +20,12 @@ function main() {
           '[Scott Anderson](https://twitter.com/ImpossibleScott)',
         'Will Crichton': '[Will Crichton](willcrichton.net)',
         'Charlie Roberts': '[Charlie Roberts](https://www.charlie-roberts.com)',
-        'Ivan Reese': '[Ivan Reese](https://twitter.com/spiralganglion)'
+        'Ivan Reese': '[Ivan Reese](https://twitter.com/spiralganglion)',
+        'Chris Martens':
+          '[Chris Martens](https://sites.google.com/ncsu.edu/cmartens?authuser=2)'
+      },
+      pronouns: {
+        'Chris Martens': 'They/Them'
       }
     },
     computed: {
