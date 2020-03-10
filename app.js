@@ -105,6 +105,15 @@ function onCommentsFinished(contributors, authors) {
     ce(
       'p',
       {},
+      'Not subscribed yet? fix that here: ',
+      link('https://tinyletter.com/marianoguerra/', 'Subscribe to Newsletter')
+    )
+  );
+
+  outputNode.appendChild(
+    ce(
+      'p',
+      {},
       'Not convinced yet? check the ',
       link('https://tinyletter.com/marianoguerra/archive', 'Newsletter Archive')
     )
@@ -116,7 +125,7 @@ function onCommentsFinished(contributors, authors) {
       {},
       'Want to contribute? Check ',
       link('https://github.com/marianoguerra/future-of-coding-weekly'),
-      ' for instructions, have a productive week!'
+      ' for instructions'
     )
   );
 
