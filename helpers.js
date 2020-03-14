@@ -63,17 +63,37 @@ function main() {
       copyAuthorText: function() {
         navigator.clipboard.writeText(this.curAuthorText);
       },
+      clearAuthor: function() {
+        this.curAuthor = '';
+      },
       copyByText: function() {
         navigator.clipboard.writeText(this.curByText);
       },
+      clearBy: function() {
+        this.curBy = '';
+        this.curByUrl = '';
+      },
       copySlackThreadText: function() {
         navigator.clipboard.writeText(this.curSlackThreadText);
+      },
+      clearSlackThread: function() {
+        this.curSlackThread = '';
       },
       copyMessage: function() {
         navigator.clipboard.writeText(this.message);
       },
       copyUrl: function() {
         navigator.clipboard.writeText(this.urlMd);
+      },
+      clearUrl: function() {
+        this.url = '';
+        this.urlTitle = '';
+      },
+      clearAll: function() {
+        this.clearAuthor();
+        this.clearBy();
+        this.clearSlackThread();
+        this.clearUrl();
       }
     }
   });
