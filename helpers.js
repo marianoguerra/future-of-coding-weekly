@@ -22,7 +22,9 @@ function main() {
         'Charlie Roberts': '[Charlie Roberts](https://www.charlie-roberts.com)',
         'Ivan Reese': '[Ivan Reese](https://twitter.com/spiralganglion)',
         'Chris Martens':
-          '[Chris Martens](https://sites.google.com/ncsu.edu/cmartens?authuser=2)'
+          '[Chris Martens](https://sites.google.com/ncsu.edu/cmartens?authuser=2)',
+        'Mariano Guerra': '[Mariano Guerra](https://twitter.com/warianoguerra)',
+        Prathyush: '[Prathyush](https://twitter.com/prabros)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
