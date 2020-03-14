@@ -6,6 +6,8 @@ function main() {
     el: '#app',
     data: {
       curAuthor: '',
+      curBy: '',
+      curByUrl: '',
       curSlackThread: '',
       url: '',
       urlTitle: '',
@@ -34,6 +36,9 @@ function main() {
       curAuthorText: function() {
         return this.authors[this.curAuthor] || '**' + this.curAuthor + '**';
       },
+      curByText: function() {
+        return this.curBy ? `[${this.curBy}](${this.curByUrl})` : '';
+      },
       curSlackThreadText: function() {
         return '(🧵[Slack Thread](' + this.curSlackThread + '))';
       },
@@ -47,6 +52,7 @@ function main() {
           this.urlMd +
           '. Via ' +
           this.curAuthorText +
+          (this.curByText ? ' By ' + this.curByText : '') +
           ' ' +
           this.curSlackThreadText
         );
@@ -56,6 +62,9 @@ function main() {
     methods: {
       copyAuthorText: function() {
         navigator.clipboard.writeText(this.curAuthorText);
+      },
+      copyByText: function() {
+        navigator.clipboard.writeText(this.curByText);
       },
       copySlackThreadText: function() {
         navigator.clipboard.writeText(this.curSlackThreadText);
