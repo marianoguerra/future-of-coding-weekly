@@ -135,7 +135,7 @@ function onCommentsFinished(contributors, authors) {
 }
 
 function addCommentSeparator(outputNode) {
-  outputNode.appendChild(ce('p', {}, '--'));
+  outputNode.appendChild(ce('p', {}, '🚥'));
 }
 
 function onComments(comments, baseUrl, count, contributors, authors) {
