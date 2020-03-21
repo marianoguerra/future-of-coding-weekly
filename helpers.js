@@ -27,7 +27,8 @@ function main() {
           '[Chris Martens](https://sites.google.com/ncsu.edu/cmartens?authuser=2)',
         'Mariano Guerra': '[Mariano Guerra](https://twitter.com/warianoguerra)',
         Prathyush: '[Prathyush](https://twitter.com/prabros)',
-          'Peter Abrahamsen': '[Peter Abrahamsen](https://twitter.com/peidran)'
+        'Peter Abrahamsen': '[Peter Abrahamsen](https://twitter.com/peidran)',
+        'Michael Mamic': '[Michael Mamic](https://twitter.com/mchlmmc)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
