@@ -28,7 +28,10 @@ function main() {
         'Mariano Guerra': '[Mariano Guerra](https://twitter.com/warianoguerra)',
         Prathyush: '[Prathyush](https://twitter.com/prabros)',
         'Peter Abrahamsen': '[Peter Abrahamsen](https://twitter.com/peidran)',
-        'Michael Mamic': '[Michael Mamic](https://twitter.com/mchlmmc)'
+        'Michael Mamic': '[Michael Mamic](https://twitter.com/mchlmmc)',
+        'Christopher Galtenberg':
+          '[Christopher Galtenberg](twitter.com/galtenberg)',
+        'Edward de Jong': '[Edward de Jong](http://beadslang.com/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
