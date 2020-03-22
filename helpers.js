@@ -31,7 +31,9 @@ function main() {
         'Michael Mamic': '[Michael Mamic](https://twitter.com/mchlmmc)',
         'Christopher Galtenberg':
           '[Christopher Galtenberg](twitter.com/galtenberg)',
-        'Edward de Jong': '[Edward de Jong](http://beadslang.com/)'
+        'Edward de Jong': '[Edward de Jong](http://beadslang.com/)',
+        Karki: '[Karki](https://github.com/deepakkarki)',
+        Brent: '[Brent](https://www.linkedin.com/in/brentgracey/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
