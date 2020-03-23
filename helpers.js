@@ -30,7 +30,7 @@ function main() {
         'Peter Abrahamsen': '[Peter Abrahamsen](https://twitter.com/peidran)',
         'Michael Mamic': '[Michael Mamic](https://twitter.com/mchlmmc)',
         'Christopher Galtenberg':
-          '[Christopher Galtenberg](twitter.com/galtenberg)',
+          '[Christopher Galtenberg](https://twitter.com/galtenberg)',
         'Edward de Jong': '[Edward de Jong](http://beadslang.com/)',
         Karki: '[Karki](https://github.com/deepakkarki)',
         Brent: '[Brent](https://www.linkedin.com/in/brentgracey/)'
