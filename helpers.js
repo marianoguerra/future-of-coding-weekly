@@ -12,6 +12,7 @@ function main() {
       url: '',
       urlTitle: '',
       lastSelectedEmoji: '',
+      quotes: '',
       authors: {
         'Sol Bekic': '[Sol Bekic](https://twitter.com/S0lll0s)',
         'Shalabh Chaturvedi':
@@ -63,8 +64,19 @@ function main() {
           this.curAuthorText +
           (this.curByText ? ' By ' + this.curByText : '') +
           ' ' +
-          this.curSlackThreadText
+          this.curSlackThreadText +
+          '\n\n' +
+          this.quotesMd
         );
+      },
+      quotesMd: function() {
+        const quotes = this.quotes.trim();
+        return quotes === ''
+          ? ''
+          : quotes
+              .split('\n')
+              .map((line, _i, _it) => '> ' + line)
+              .join('\n\n');
       }
     },
 
@@ -98,11 +110,15 @@ function main() {
         this.url = '';
         this.urlTitle = '';
       },
+      clearQuotes: function() {
+        this.quotes = '';
+      },
       clearAll: function() {
         this.clearAuthor();
         this.clearBy();
         this.clearSlackThread();
         this.clearUrl();
+        this.clearQuotes();
       }
     }
   });
