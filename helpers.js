@@ -33,7 +33,9 @@ function main() {
           '[Christopher Galtenberg](https://twitter.com/galtenberg)',
         'Edward de Jong': '[Edward de Jong](http://beadslang.com/)',
         Karki: '[Karki](https://github.com/deepakkarki)',
-        Brent: '[Brent](https://www.linkedin.com/in/brentgracey/)'
+        Brent: '[Brent](https://www.linkedin.com/in/brentgracey/)',
+        'Steve Peak': '[Steve Peak](https://twitter.com/iopeak)',
+        'Daniel Garcia': '[Daniel Garcia](https://pel-daniel.github.io/cv/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
