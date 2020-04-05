@@ -38,7 +38,9 @@ function main() {
         'Steve Peak': '[Steve Peak](https://twitter.com/iopeak)',
         'Daniel Garcia': '[Daniel Garcia](https://pel-daniel.github.io/cv/)',
         'Vladimir Gordeev':
-          '[Vladimir Gordeev](https://twitter.com/vladimir_vg)'
+          '[Vladimir Gordeev](https://twitter.com/vladimir_vg)',
+        'Temirlan Nugmanov':
+          '[Temirlan Nugmanov](https://twitter.com/optemization)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
