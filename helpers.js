@@ -36,26 +36,28 @@ function main() {
         Karki: '[Karki](https://github.com/deepakkarki)',
         Brent: '[Brent](https://www.linkedin.com/in/brentgracey/)',
         'Steve Peak': '[Steve Peak](https://twitter.com/iopeak)',
-        'Daniel Garcia': '[Daniel Garcia](https://pel-daniel.github.io/cv/)'
+        'Daniel Garcia': '[Daniel Garcia](https://pel-daniel.github.io/cv/)',
+        'Vladimir Gordeev':
+          '[Vladimir Gordeev](https://twitter.com/vladimir_vg)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
       }
     },
     computed: {
-      curAuthorText: function() {
+      curAuthorText: function () {
         return this.authors[this.curAuthor] || '**' + this.curAuthor + '**';
       },
-      curByText: function() {
+      curByText: function () {
         return this.curBy ? `[${this.curBy}](${this.curByUrl})` : '';
       },
-      curSlackThreadText: function() {
+      curSlackThreadText: function () {
         return '(🧵[Slack Thread](' + this.curSlackThread + '))';
       },
-      urlMd: function() {
+      urlMd: function () {
         return `[${this.urlTitle}](${this.url})`;
       },
-      message: function() {
+      message: function () {
         return (
           this.lastSelectedEmoji +
           ' ' +
@@ -69,7 +71,7 @@ function main() {
           this.quotesMd
         );
       },
-      quotesMd: function() {
+      quotesMd: function () {
         const quotes = this.quotes.trim();
         return quotes === ''
           ? ''
@@ -81,39 +83,39 @@ function main() {
     },
 
     methods: {
-      copyAuthorText: function() {
+      copyAuthorText: function () {
         navigator.clipboard.writeText(this.curAuthorText);
       },
-      clearAuthor: function() {
+      clearAuthor: function () {
         this.curAuthor = '';
       },
-      copyByText: function() {
+      copyByText: function () {
         navigator.clipboard.writeText(this.curByText);
       },
-      clearBy: function() {
+      clearBy: function () {
         this.curBy = '';
         this.curByUrl = '';
       },
-      copySlackThreadText: function() {
+      copySlackThreadText: function () {
         navigator.clipboard.writeText(this.curSlackThreadText);
       },
-      clearSlackThread: function() {
+      clearSlackThread: function () {
         this.curSlackThread = '';
       },
-      copyMessage: function() {
+      copyMessage: function () {
         navigator.clipboard.writeText(this.message);
       },
-      copyUrl: function() {
+      copyUrl: function () {
         navigator.clipboard.writeText(this.urlMd);
       },
-      clearUrl: function() {
+      clearUrl: function () {
         this.url = '';
         this.urlTitle = '';
       },
-      clearQuotes: function() {
+      clearQuotes: function () {
         this.quotes = '';
       },
-      clearAll: function() {
+      clearAll: function () {
         this.clearAuthor();
         this.clearBy();
         this.clearSlackThread();
@@ -123,7 +125,7 @@ function main() {
     }
   });
 
-  window.copyInnerContent = function(e) {
+  window.copyInnerContent = function (e) {
     const emoji = e.target.innerText;
     navigator.clipboard.writeText(emoji);
     app.lastSelectedEmoji = emoji;
