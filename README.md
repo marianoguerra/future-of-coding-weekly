@@ -22,6 +22,8 @@ Script heavily based on this: https://github.com/zach-snell/slack-export
 
 ### Setup
 
+Create an app here: https://api.slack.com/apps
+
 Install this libraries
 
 ```
@@ -43,13 +45,9 @@ users:read
 	View people in the workspace
 ```
 
-
 Change the dates (usually from monday to monday) and the output dir
 
 ```
 export SLACK_TOKEN=xoxp-your-token-here
 python3 slack_export.py --token $SLACK_TOKEN --publicChannels general feedback --from-date=2020-04-06 --to-date=2020-04-13 --output-dir=history/2020-04-w-2
 ```
-
-
-
