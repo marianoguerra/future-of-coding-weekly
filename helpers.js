@@ -43,7 +43,8 @@ function main() {
           '[Temirlan Nugmanov](https://twitter.com/optemization)',
         'Max Krieger': '[Max Krieger](https://twitter.com/maxkriegers)',
         'David Piepgrass': '[David Piepgrass](https://twitter.com/DPiepgrass)',
-        'Josh Cho': '[Josh Cho](https://twitter.com/JoshCho321)'
+        'Josh Cho': '[Josh Cho](https://twitter.com/JoshCho321)',
+        'Samuel Squire': '[Samuel Squire](https://github.com/samsquire)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
