@@ -44,7 +44,8 @@ function main() {
         'Max Krieger': '[Max Krieger](https://twitter.com/maxkriegers)',
         'David Piepgrass': '[David Piepgrass](https://twitter.com/DPiepgrass)',
         'Josh Cho': '[Josh Cho](https://twitter.com/JoshCho321)',
-        'Samuel Squire': '[Samuel Squire](https://github.com/samsquire)'
+        'Samuel Squire': '[Samuel Squire](https://github.com/samsquire)',
+        'Aria Minaei': '[Aria Minaei](https://twitter.com/ariaminaei)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
