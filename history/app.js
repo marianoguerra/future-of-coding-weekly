@@ -5,11 +5,21 @@ function dummyUser(user) {
   return {user, name: user, real_name: user};
 }
 
+function getRealName(username, users) {
+  const user = users[username];
+  console.log(username, user);
+  return user === undefined ? username : '@(' + user.real_name + ')';
+}
+
+const USER_REF_REGEX = /<@(.*?)>/g;
 function enrichMessage(msg, users) {
   const date = new Date(+msg.ts * 1000),
     {user} = msg;
 
   msg.$date = date;
+  msg.$text = msg.text.replace(USER_REF_REGEX, (_, username) =>
+    getRealName(username, users)
+  );
   try {
     msg.$dateStr = date.toISOString();
   } catch (error) {
@@ -96,12 +106,6 @@ function usersToUsersById(users) {
   }
 
   return result;
-}
-
-let uid = 0;
-function genUid() {
-  uid += 1;
-  return '' + uid;
 }
 
 function main() {
