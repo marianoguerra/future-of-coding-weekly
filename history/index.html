@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body class="p-3">
+
+    <div id="app">
+      <input class="form-control my-2" placeholder="Channel" v-model="history.channel">
+      <input class="form-control my-2" placeholder="Folder" v-model="history.folder">
+      <input class="form-control my-2" placeholder="File" v-model="history.file">
+      <div class="alert alert-sm alert-info my-3">Try 2020-02-25 above and click "Load History"</div>
+
+      <button class="btn btn-sm btn-primary" v-on:click="loadUsers()">Load Users</button>
+      <button class="btn btn-sm btn-primary" v-on:click="loadHistory()">Load History</button>
+
+      <div v-if="history.loading" class="alert alert-info my-3">
+        Loading History
+      </div>
+
+      <div v-if="users.loading" class="alert alert-info my-3">
+        Loading Users
+      </div>
+
+      <div>
+        <div v-for="msg in history.msgs" :key="msg.ts" class="alert alert-primary my-3">
+          <span class="small text-muted">{{msg.$dateStr}}</span> <span class="font-weight-bold">{{msg.$user.real_name}}: </span>
+          <p>{{msg.text}}</p>
+
+          <div v-for="resp in msg.responses" :key="resp.ts" class="alert alert-dark ml-3 my-3">
+            <span class="small text-muted">{{resp.$dateStr}}</span> <span class="font-weight-bold">{{resp.$user.real_name}}: </span>
+            <p>{{resp.text}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
