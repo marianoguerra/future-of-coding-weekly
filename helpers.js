@@ -40,7 +40,10 @@ function main() {
         'Vladimir Gordeev':
           '[Vladimir Gordeev](https://twitter.com/vladimir_vg)',
         'Temirlan Nugmanov':
-          '[Temirlan Nugmanov](https://twitter.com/optemization)'
+          '[Temirlan Nugmanov](https://twitter.com/optemization)',
+        'Max Krieger': '[Max Krieger](https://twitter.com/maxkriegers)',
+        'David Piepgrass': '[David Piepgrass](https://twitter.com/DPiepgrass)',
+        'Josh Cho': '[Josh Cho](https://twitter.com/JoshCho321)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
