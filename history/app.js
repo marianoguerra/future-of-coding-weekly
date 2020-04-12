@@ -1,5 +1,5 @@
 //@format
-/*globals Vue*/
+/*globals Vue, SimpleMarkdown*/
 
 function dummyUser(user) {
   return {user, name: user, real_name: user};
@@ -7,19 +7,20 @@ function dummyUser(user) {
 
 function getRealName(username, users) {
   const user = users[username];
-  console.log(username, user);
-  return user === undefined ? username : '@(' + user.real_name + ')';
+  return user === undefined ? username : '**' + user.real_name + '**';
 }
 
-const USER_REF_REGEX = /<@(.*?)>/g;
+const USER_REF_REGEX = /<@(.*?)>/g,
+  GT_REGEX = /&gt;/g;
 function enrichMessage(msg, users) {
   const date = new Date(+msg.ts * 1000),
     {user} = msg;
 
   msg.$date = date;
-  msg.$text = msg.text.replace(USER_REF_REGEX, (_, username) =>
-    getRealName(username, users)
-  );
+  msg.$text = msg.text
+    .replace(USER_REF_REGEX, (_, username) => getRealName(username, users))
+    .replace(GT_REGEX, '>');
+  msg.$html = mdToHTML(msg.$text);
   try {
     msg.$dateStr = date.toISOString();
   } catch (error) {
@@ -159,6 +160,36 @@ function main() {
   });
 
   app.loadUsers().then(_ => app.loadHistory());
+}
+
+const defaultRules = SimpleMarkdown.defaultRules;
+
+function overrideDefaultHtml(ruleName, overrideFn) {
+  return Object.assign({}, defaultRules[ruleName], {html: overrideFn});
+}
+
+const customRules = {
+    paragraph: overrideDefaultHtml('paragraph', function (node, output, state) {
+      return '<p>' + output(node.content, state) + '</p>\n';
+    }),
+    blockQuote: overrideDefaultHtml('blockQuote', function (
+      node,
+      output,
+      state
+    ) {
+      return (
+        '<blockquote style="margin-left:1em;color:#555555;font-style:italic">' +
+        output(node.content, state) +
+        '</blockquote>\n'
+      );
+    })
+  },
+  rules = Object.assign({}, defaultRules, customRules),
+  rawBuiltParser = SimpleMarkdown.parserFor(rules),
+  htmlOutput = SimpleMarkdown.htmlFor(SimpleMarkdown.ruleOutput(rules, 'html'));
+
+function mdToHTML(txt) {
+  return htmlOutput(rawBuiltParser(txt + '\n\n', {inline: false}));
 }
 
 main();
