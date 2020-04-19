@@ -48,7 +48,8 @@ function main() {
         'Aria Minaei': '[Aria Minaei](https://twitter.com/ariaminaei)',
         'Stefan Lesser': '[Stefan Lesser](https://twitter.com/stefanlesser)',
         'Paul Biggar': '[Paul Biggar](https://twitter.com/paulbiggar)',
-        'Chris Maughan': '[Chris Maughan](https://twitter.com/cmaughan)'
+        'Chris Maughan': '[Chris Maughan](https://twitter.com/cmaughan)',
+        'Yair Chuchem': '[Yair Chuchem](https://twitter.com/yairchu)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
