@@ -1,5 +1,72 @@
 //@format
-/*globals Vue, SimpleMarkdown*/
+/*globals Vue, Promise, SimpleMarkdown*/
+
+const INDEX_ENTRY_REGEX = /^([0-9]{4})-([0-9]{2})-w-([0-9])\/(.*?)\/([0-9]{4})-([0-9]{2})-([0-9]{2}).json$/;
+
+function downloadAs(exportObj, exportName, contentType) {
+  const dataBlob = new Blob([exportObj], {type: contentType});
+
+  if (navigator.msSaveBlob) {
+    navigator.msSaveBlob(dataBlob, exportName);
+  } else {
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(dataBlob);
+    link.setAttribute('download', exportName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+}
+
+function msgToMd(msg) {
+  const base = `*[${msg.$dateStr}]* **${msg.$user.real_name}**:\n\n${msg.$text}`;
+  if (msg.responses.length === 0) {
+    return base;
+  } else {
+    return (
+      base +
+      '\n\n\n' +
+      msg.responses
+        .map(
+          msg =>
+            `> *[${msg.$dateStr}]* **${msg.$user.real_name}**:\n\n${msg.$text}`
+        )
+        .join('\n\n\n')
+    );
+  }
+}
+class IndexEntry {
+  constructor(
+    weekYear,
+    weekMonth,
+    weekNum,
+    channel,
+    segmentYear,
+    segmentMonth,
+    segmentDay
+  ) {
+    this.weekYear = weekYear;
+    this.weekMonth = weekMonth;
+    this.weekNum = weekNum;
+    this.channel = channel;
+    this.segmentYear = segmentYear;
+    this.segmentMonth = segmentMonth;
+    this.segmentDay = segmentDay;
+  }
+
+  toUrl() {
+    const {
+      weekYear,
+      weekMonth,
+      weekNum,
+      channel,
+      segmentYear,
+      segmentMonth,
+      segmentDay
+    } = this;
+    return `${weekYear}-${weekMonth}-w-${weekNum}/${channel}/${segmentYear}-${segmentMonth}-${segmentDay}.json`;
+  }
+}
 
 function dummyUser(user) {
   return {user, name: user, real_name: user};
@@ -32,9 +99,8 @@ function enrichMessage(msg, users) {
   return msg;
 }
 
-function parseHistoryChannelData(data, users) {
-  const msgOrder = [],
-    msgByTs = {};
+function parseHistoryChannelData(data, users, msgByTs) {
+  const msgOrder = [];
 
   for (let i = 0, len = data.length; i < len; i += 1) {
     const msg = data[i];
@@ -92,7 +158,6 @@ function parseHistoryChannelData(data, users) {
     }
   }
 
-  console.log(msgOrder, msgByTs);
   return msgOrder;
 }
 
@@ -113,53 +178,134 @@ function main() {
   const app = new Vue({
     el: '#app',
     data: {
-      history: {
+      index: {
         loading: false,
-        channel: 'general',
-        folder: '2020-03-w-1',
-        file: '2020-02-24',
-        data: [],
-        msgs: []
+        weeksSelected: {},
+        channelsSelected: {},
+        loadedWeeks: {},
+        channels: {},
+        entries: [],
+        weeks: {}
       },
-      users: {
-        loading: false,
-        data: [],
-        byUserId: {}
+      history: {
+        msgs: [],
+        msgsByTs: {}
       }
     },
     methods: {
-      loadUsers: function () {
-        const {folder} = this.history;
-        this.users.loading = true;
-        return fetch(`${folder}/users.json`)
+      loadChannelWeek: function (channel, week) {
+        const weekEntries = this.index.weeks[week];
+
+        this.msgs = [];
+
+        fetch(`${week}/users.json`)
           .then(resp => resp.json())
-          .then(data => {
-            this.users.loading = false;
-            this.users.data = data;
-            this.users.byUserId = usersToUsersById(data);
+          .then(usersData => {
+            const usersById = usersToUsersById(usersData),
+              reqs = weekEntries
+                .filter(entry => entry.channel === channel)
+                .map(entry =>
+                  fetch(entry.toUrl())
+                    .then(resp => resp.json())
+                    .then(msgs => {
+                      return {msgs, usersById};
+                    })
+                );
+
+            return Promise.allSettled(reqs);
+          })
+          .then(results => {
+            // first fill all msgs by ts
+            results.forEach(({value}) =>
+              value.msgs.forEach(msg => {
+                this.history.msgsByTs[msg.ts] = msg;
+              })
+            );
+
+            // then parse msgs (because they may refer to msgs from other
+            // days/weeks
+            results.forEach(({value}) => {
+              this.history.msgs = this.history.msgs.concat(
+                parseHistoryChannelData(
+                  value.msgs,
+                  value.usersById,
+                  this.history.msgsByTs
+                )
+              );
+            });
           });
       },
-      loadHistory: function () {
-        const {folder, channel, file} = this.history;
-        this.history.loading = true;
-        this.history.data = [];
-        return fetch(`${folder}/${channel}/${file}.json`)
-          .then(resp => resp.json())
-          .then(data => {
-            console.log('got', data);
-            this.history.loading = false;
-            Vue.set(
-              this.history,
-              'msgs',
-              parseHistoryChannelData(data, this.users.byUserId)
-            );
-            this.history.data = data;
+      loadSelected: function () {
+        for (let channel in this.index.channelsSelected) {
+          for (let week in this.index.weeksSelected) {
+            this.loadChannelWeek(channel, week);
+          }
+        }
+      },
+      exportAsMd: function () {
+        const txt = this.history.msgs
+          .map(msg => msgToMd(msg))
+          .join('\n\n---\n\n');
+        downloadAs(txt, 'foc-dump.md', 'text/markdown');
+      },
+      onWeekSelected: function (weekKey) {
+        console.log('weekKeySelected', weekKey);
+      },
+      onChannelSelected: function (channel) {
+        console.log('channelSelected', channel);
+      },
+      parseIndex: function (indexText) {
+        const indexWeeks = {};
+
+        this.index.entries = indexText
+          .trim()
+          .split('\n')
+          .map(line => {
+            const [
+                weekYear,
+                weekMonth,
+                weekNum,
+                channel,
+                segmentYear,
+                segmentMonth,
+                segmentDay
+              ] = line.match(INDEX_ENTRY_REGEX).slice(1),
+              indexEntry = new IndexEntry(
+                weekYear,
+                weekMonth,
+                weekNum,
+                channel,
+                segmentYear,
+                segmentMonth,
+                segmentDay
+              ),
+              indexWeekKey = `${weekYear}-${weekMonth}-w-${weekNum}`;
+
+            if (indexWeeks[indexWeekKey] === undefined) {
+              indexWeeks[indexWeekKey] = [];
+            }
+
+            indexWeeks[indexWeekKey].push(indexEntry);
+            this.index.channels[channel] = true;
+
+            return indexEntry;
+          });
+
+        this.index.weeks = indexWeeks;
+      },
+      loadIndex: function () {
+        this.index.loading = true;
+        return fetch('index.txt')
+          .then(resp => resp.text())
+          .then(indexText => {
+            this.index.loading = false;
+            this.parseIndex(indexText);
           });
       }
     }
   });
 
-  app.loadUsers().then(_ => app.loadHistory());
+  app.loadIndex();
 }
 
 const defaultRules = SimpleMarkdown.defaultRules;

@@ -8,28 +8,42 @@
   <body class="p-3">
 
     <div id="app">
-      <input class="form-control my-2" placeholder="Channel" v-model="history.channel">
-      <input class="form-control my-2" placeholder="Folder" v-model="history.folder">
-      <input class="form-control my-2" placeholder="File" v-model="history.file">
-      <div class="alert alert-sm alert-info my-3">Try 2020-02-25 above and click "Load History"</div>
-
-      <button class="btn btn-sm btn-primary" v-on:click="loadUsers()">Load Users</button>
-      <button class="btn btn-sm btn-primary" v-on:click="loadHistory()">Load History</button>
-
-      <div v-if="history.loading" class="alert alert-info my-3">
-        Loading History
+      <div v-if="index.loading" class="alert alert-info my-3">
+        Loading Index
       </div>
 
-      <div v-if="users.loading" class="alert alert-info my-3">
-        Loading Users
+      <div v-if="!index.loading" class="row">
+        <div class="col">
+          <ul>
+            <li v-for="(entries, key) in index.weeks">
+              <label>
+                <input type="checkbox" v-model="index.weeksSelected[key]" v-on:change="onWeekSelected(key)">
+                {{key}}
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <ul>
+            <li v-for="(entries, key) in index.channels">
+              <label>
+                <input type="checkbox" v-model="index.channelsSelected[key]" v-on:change="onChannelSelected(key)">
+                {{key}}
+              </label>
+            </li>
+          </ul>
+
+          <button class="btn btn-primary" v-on:click="loadSelected()">Load</button>
+          <button class="btn btn-primary" v-on:click="exportAsMd()">Export as Markdown</button>
+        </div>
       </div>
 
       <div>
-        <div v-for="msg in history.msgs" :key="msg.ts" class="alert alert-primary my-3 bg-light">
+        <div v-for="msg in history.msgs" :key="msg.ts" class="alert alert-primary my-1 p-2 bg-light">
           <span class="small text-muted">{{msg.$dateStr}}</span> <span class="font-weight-bold">{{msg.$user.real_name}}: </span>
           <p v-html="msg.$html"></p>
 
-          <div v-for="resp in msg.responses" :key="resp.ts" class="alert alert-dark ml-3 my-3 bg-light">
+          <div v-for="resp in msg.responses" :key="resp.ts" class="alert alert-dark p-2 ml-1 my-1 bg-light">
             <span class="small text-muted">{{resp.$dateStr}}</span> <span class="font-weight-bold">{{resp.$user.real_name}}: </span>
             <p v-html="resp.$html"></p>
           </div>
