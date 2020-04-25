@@ -42,12 +42,12 @@
       </div>
 
       <div id="msgs-output">
-        <div v-for="msg in history.msgs" :key="msg.ts" class="alert alert-dark msg-root my-1 p-2 bg-light">
-          <span class="small text-muted">{{msg.$dateStr}}</span> <span class="font-weight-bold">{{msg.$user.real_name}}: </span>
+        <div v-for="msg in history.msgs" :key="msg.ts" class="alert alert-dark msg-root my-1 p-2 bg-light" :id="msg.$dateStrISO">
+          <span class="small text-muted"><a :href="'#' + msg.$dateStrISO">{{msg.$dateStr}}</a></span> <span class="font-weight-bold">{{msg.$user.real_name}}: </span>
           <p v-html="msg.$html"></p>
 
-          <div v-for="resp in msg.responses" :key="resp.ts" class="alert alert-dark msg-response p-2 ml-1 my-1 bg-light">
-            <span class="small text-muted">{{resp.$dateStr}}</span> <span class="font-weight-bold">{{resp.$user.real_name}}: </span>
+          <div v-for="resp in msg.responses" :key="resp.ts" class="alert alert-dark msg-response p-2 ml-1 my-1 bg-light" :id="resp.$dateStrISO">
+            <span class="small text-muted"><a :href="'#' + resp.$dateStrISO">{{resp.$dateStr}}</a></span> <span class="font-weight-bold">{{resp.$user.real_name}}: </span>
             <p v-html="resp.$html"></p>
           </div>
         </div>

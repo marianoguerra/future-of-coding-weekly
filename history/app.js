@@ -99,7 +99,8 @@ function enrichMessage(msg, users) {
     );
   msg.$html = mdToHTML(msg.$text);
   try {
-    msg.$dateStr = date.toISOString().replace('T', ' ').slice(0, -5);
+    msg.$dateStrISO = date.toISOString();
+    msg.$dateStr = msg.$dateStrISO.replace('T', ' ').slice(0, -5);
   } catch (error) {
     console.log(date, msg, error);
     msg.$dateStr = 'Invalid Date';
