@@ -53,7 +53,9 @@ function main() {
         'Jacob Chapman': '[Jacob Chapman](https://unli.xyz/)',
         'Justin': '[Justin](https://twitter.com/newplagiarist)',
         'Jonathan Edwards': '[Jonathan Edwards](https://twitter.com/jonathoda/)',
-        'Tom Lieber': '[Tom Lieber](https://twitter.com/alltom)'
+        'Tom Lieber': '[Tom Lieber](https://twitter.com/alltom)',
+        'noahtren': '[noahtren](https://twitter.com/noahtren)',
+        'Jack Armitage': '[Jack Armitage](https://twitter.com/jdkarmitage)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
