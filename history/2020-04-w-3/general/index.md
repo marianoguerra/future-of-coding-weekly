@@ -20,7 +20,7 @@ now with markdown formatting and username replacement
 
 > *[2020-04-12 23:16:48]* **Mariano Guerra**:
 
-which makes me think that it may be really easy to export to a single markdown page :thinking_face:
+which makes me think that it may be really easy to export to a single markdown page 🤔
 
 
 > *[2020-04-12 23:21:21]* **Scott Anderson**:
@@ -58,7 +58,7 @@ I'm fine doing it in a low effort way. When I joined it was impossible for me to
 
 > *[2020-04-13 09:00:40]* **Chris Maughan**:
 
-I'm keen to share and get feedback on my work in progress for sure.  I've been thinking about how to do video/twitch/youtube for a while now, so that might be an interesting adventure :wink:  Sounds like a great idea to me.
+I'm keen to share and get feedback on my work in progress for sure.  I've been thinking about how to do video/twitch/youtube for a while now, so that might be an interesting adventure 😉  Sounds like a great idea to me.
 
 
 > *[2020-04-15 08:51:38]* **Vladimir Gordeev**:
@@ -68,7 +68,7 @@ Probably people would like to react to these two-minute-week videos. Should we p
 
 > *[2020-04-15 09:17:39]* **Mariano Guerra**:
 
-yes, I will post a link to the video with a title/summary and a link to the thread (it would help if the author provides the title/summary :slightly_smiling_face:)
+yes, I will post a link to the video with a title/summary and a link to the thread (it would help if the author provides the title/summary 🙂)
 
 
 > *[2020-04-15 15:29:28]* **Ivan Reese**:
@@ -90,7 +90,7 @@ I plan to make one
 
 > *[2020-04-15 15:40:32]* **Mariano Guerra**:
 
-imaginary construct guy here :slightly_smiling_face:
+imaginary construct guy here 🙂
 
 
 > *[2020-04-15 16:04:10]* **Chris Maughan**:
@@ -105,12 +105,12 @@ Yes, I'll make one; is there a channel now?
 
 > *[2020-04-15 16:20:02]* **Chris Maughan**:
 
-Thanks :wink:
+Thanks 😉
 
 
 > *[2020-04-17 09:55:13]* **Nick Smith**:
 
-I think I need to buy a better microphone :sweat_smile:. I'm also trying to summarise the progress of my project more broadly so I can situate my videos (and start a blog as well).
+I think I need to buy a better microphone 😅. I'm also trying to summarise the progress of my project more broadly so I can situate my videos (and start a blog as well).
 
 
 > *[2020-04-17 10:13:49]* **Sol Bekic**:
@@ -180,7 +180,7 @@ I like it. I don't follow the step where he "pastes the query into the app" thou
 
 > *[2020-04-13 17:20:19]* **Karki**:
 
-I like it and would like to see more such stuff :slightly_smiling_face:
+I like it and would like to see more such stuff 🙂
 Anything to do with rapid application development, prototyping is welcome here!
 
 
@@ -269,7 +269,7 @@ Here I'll highlight <https://news.ycombinator.com/item?id=22860549> as surfacing
 
 > *[2020-04-14 00:42:37]* **Kartik Agaram**:
 
-Of course I also enjoyed your comment, Shalabh :slightly_smiling_face:
+Of course I also enjoyed your comment, Shalabh 🙂
 
 <https://news.ycombinator.com/item?id=22857551#22861015>
 
@@ -312,16 +312,16 @@ The thing they miss is; they are all "end-users" from some perspective. Are they
 
 > *[2020-04-14 12:49:30]* **J. Ryan Stinnett**:
 
-It was definitely interesting to see how a broader audience like HN reacts to the ideas today. :sweat_smile: Some people there are very comfortable with the current world of computing and don't see a need for change, so they indeed seemed to miss the point, but that's probably okay. To be honest, it's very early days for these malleability ideas, so it seems natural. I am sure many people (esp. on HN) might not be interested when there's no startup to back or quick solution to try out today, and that's okay. For now, I'm mainly hoping to reach anyone interested in experimenting with these ideas or wanting to learn more about those who are doing so.
+It was definitely interesting to see how a broader audience like HN reacts to the ideas today. 😅 Some people there are very comfortable with the current world of computing and don't see a need for change, so they indeed seemed to miss the point, but that's probably okay. To be honest, it's very early days for these malleability ideas, so it seems natural. I am sure many people (esp. on HN) might not be interested when there's no startup to back or quick solution to try out today, and that's okay. For now, I'm mainly hoping to reach anyone interested in experimenting with these ideas or wanting to learn more about those who are doing so.
 
 At the same time, there was some good discussion of finer details in a few of the sub-threads, and I hope it has at least planted a seed for people to think about the ideas over time. Even if people disagree or don't see the point in it today, hopefully they are at least now aware that some people do, and may be more open to such ideas down the road.
 
-Since the HN post appeared, a lot of new people have gotten in touch to share their excitement for these ideas, so overall I'd say the HN post was a positive step even if there are many confused people in the comments. Thanks to everyone here who may have waded in the HN comments with their own perspective. :smile:
+Since the HN post appeared, a lot of new people have gotten in touch to share their excitement for these ideas, so overall I'd say the HN post was a positive step even if there are many confused people in the comments. Thanks to everyone here who may have waded in the HN comments with their own perspective. 😄
 
 
 > *[2020-04-14 12:52:21]* **J. Ryan Stinnett**:
 
-**Kartik Agaram** If there are any elements of the HN thread in particular that might refine how the malleability ideas are portrayed for the future, do let me know so it can be improved. Or if you mean you're just not interested in the topic / not important to you, that's okay too, no hard feelings. :slightly_smiling_face:
+**Kartik Agaram** If there are any elements of the HN thread in particular that might refine how the malleability ideas are portrayed for the future, do let me know so it can be improved. Or if you mean you're just not interested in the topic / not important to you, that's okay too, no hard feelings. 🙂
 
 
 > *[2020-04-14 15:53:10]* **Kartik Agaram**:
@@ -331,21 +331,21 @@ Oh I'm _very_ interested in the topic. This is why I have strong feelings about 
 
 > *[2020-04-14 16:46:02]* **J. Ryan Stinnett**:
 
-**Kartik Agaram** Ah great, I wasn't sure how to interpret your statement above "I found the HN thread more useful than the post it was commenting on"... I assume it means you don't find the <https://malleable.systems/> site useful, but you are interested in the topic, so I am curious if you see room for improvement or if you feel a completely different approach is needed. Thanks for your earlier suggestion to add info on trade-offs. :slightly_smiling_face:
+**Kartik Agaram** Ah great, I wasn't sure how to interpret your statement above "I found the HN thread more useful than the post it was commenting on"... I assume it means you don't find the <https://malleable.systems/> site useful, but you are interested in the topic, so I am curious if you see room for improvement or if you feel a completely different approach is needed. Thanks for your earlier suggestion to add info on trade-offs. 🙂
 
 
 > *[2020-04-14 17:27:48]* **Kartik Agaram**:
 
-Yeah, sorry about that :grimacing: [1]. I was referring purely to the narrow subjective feeling I got while reading the prose on both pages. The domain name and the headline resonates strongly. When your previous thread rolled by I spent a lot of time trying to pin down what bothered me about it, and to come up with some constructive feedback. I couldn't think of any, so I chose to err on the side of saying nothing. This time around I'm still unable to be as constructive as I would like, sorry about that. I'm still thinking about this, because it matters a lot to me. I _want_ this page to be superior to drive-by comments by people on the internet.
+Yeah, sorry about that 😬 [1]. I was referring purely to the narrow subjective feeling I got while reading the prose on both pages. The domain name and the headline resonates strongly. When your previous thread rolled by I spent a lot of time trying to pin down what bothered me about it, and to come up with some constructive feedback. I couldn't think of any, so I chose to err on the side of saying nothing. This time around I'm still unable to be as constructive as I would like, sorry about that. I'm still thinking about this, because it matters a lot to me. I _want_ this page to be superior to drive-by comments by people on the internet.
 
 [1] I come from a culture where feedback is often incredibly subtle, and given with lots of circumlocution. In spite of that I'm a pretty unsubtle guy. The result: many times in my life I've failed to heed warnings that (to others) seemed really repeated and increasingly unsubtle. This still happens, even after I moved to the West. As a result, I sometimes accidentally come across as overly harsh without intending to, the way someone may speak overly loudly if they can't hear themselves. At other times, I consciously err on the side of harshing, just to make a contrast really obvious and make sure that others don't end up in the failure modes I've found myself in.
 
 
 > *[2020-04-14 23:53:55]* **J. Ryan Stinnett**:
 
-**Kartik Agaram** Thanks for the detailed reply! That helps me understand your perspective. If you happen to think of changes down the line or would like to contribute a post on the site, feel free to react out. :slightly_smiling_face: 
+**Kartik Agaram** Thanks for the detailed reply! That helps me understand your perspective. If you happen to think of changes down the line or would like to contribute a post on the site, feel free to react out. 🙂 
 
-It might be interesting for someone (other than me) to write an “anti-post” on the blog synthesising all the ways it will “definitely never” work... :thinking_face: It would be good to have another voice in the spectrum of perspectives represented. I think such a post would just inspire me further to prove it can be done. :sweat_smile:
+It might be interesting for someone (other than me) to write an “anti-post” on the blog synthesising all the ways it will “definitely never” work... 🤔 It would be good to have another voice in the spectrum of perspectives represented. I think such a post would just inspire me further to prove it can be done. 😅
 
 
 > *[2020-04-15 07:42:04]* **Kartik Agaram**:
@@ -354,7 +354,7 @@ I don't feel that it will definitely never work. I think it _has to_ work, becau
 
 In <https://futureofcoding.slack.com/archives/C5T9GPWFL/p1586869277389100?thread_ts=1584718837.435500&cid=C5T9GPWFL> you suggested that you're trying to separate goals from solutions and focus on the former. That's reasonable as a goal for this particular page. (It's also why I find this page unsatisfying.) But it also seems reasonable for it to trigger conversations about the how. That doesn't feel like "missing the point". Isn't that sort of conversation what this page is designed to engender?
 
-Perhaps it will help to triangulate by bringing up my mission: <http://akkartik.name/about>. Not to brag, but we're attacking highly overlapping if not isomorphic problems. By definition I should have addressed any shortcomings I bring up here. It stays high-level, focuses on goals, but also indicates the sorts of trade-offs I'm willing to make. I'd love to receive similar criticism from you about what it's lacking. I should probably update it after my recent efforts writing my paper :sweat_smile: It's quite possible there's a cultural chasm here from me spending too much time on HN. I'd love to understand it better.
+Perhaps it will help to triangulate by bringing up my mission: <http://akkartik.name/about>. Not to brag, but we're attacking highly overlapping if not isomorphic problems. By definition I should have addressed any shortcomings I bring up here. It stays high-level, focuses on goals, but also indicates the sorts of trade-offs I'm willing to make. I'd love to receive similar criticism from you about what it's lacking. I should probably update it after my recent efforts writing my paper 😅 It's quite possible there's a cultural chasm here from me spending too much time on HN. I'd love to understand it better.
 
 Perhaps it would help to drill down into which comments you consider to be missing the point. It might require a private conversation, but it might help make this conversation more concrete. Here, I'll start by summarizing how I view the top-level comments:
 
@@ -390,7 +390,7 @@ Overall, there's a refreshing lack of "startup mindset" in this thread, particul
 > *[2020-04-15 16:06:51]* **Shalabh Chaturvedi**:
 
 >  HN is easy and fashionable to diss, but I found this thread useful. Yes you have to filter, and yes you need some flame-retardant underwear at times, but if you're willing to sift through you get some gems.
-Just wanted to say I generally agree with this, which is why I go to HN :smile:. I guess I was just expecting to see a higher 'hit rate' with this post.
+Just wanted to say I generally agree with this, which is why I go to HN 😄. I guess I was just expecting to see a higher 'hit rate' with this post.
 
 
 > *[2020-04-15 16:07:15]* **Shalabh Chaturvedi**:
@@ -412,7 +412,7 @@ Thanks for the pointer (I don't follow HN much these days). It's a pity that mos
 
 > *[2020-04-19 21:17:47]* **J. Ryan Stinnett**:
 
-**Dan Cook** Ah, that video's more like history plus an alternative universe, but that would also be interesting, yes! :smile: For "anti-post", I was thinking something like "malleability will never work because X, Y, Z, ..." (hopefully as something longer form like a blog post where there's more to think about than your typical HN comment).
+**Dan Cook** Ah, that video's more like history plus an alternative universe, but that would also be interesting, yes! 😄 For "anti-post", I was thinking something like "malleability will never work because X, Y, Z, ..." (hopefully as something longer form like a blog post where there's more to think about than your typical HN comment).
 
 ---
 
@@ -578,7 +578,7 @@ I'm watching Joseph White's talk now. I really like his phrase "careful friction
 
 This is a great article that touches on psychology, languages, and language
 <https://medium.com/@old_sound/programming-languages-are-not-languages-c6f161a78c44>
-P.s. those references are :heart_eyes:
+P.s. those references are 😍
 
 
 > *[2020-04-15 06:04:15]* **Edward de Jong**:
@@ -639,7 +639,7 @@ unison promises that your code is always in a valid state: <https://www.unisonwe
 
 > *[2020-04-15 13:36:00]* **Mariano Guerra**:
 
-dynamically typed languages support incomplete programs as long as you don't step into the incomplete code :slightly_smiling_face:
+dynamically typed languages support incomplete programs as long as you don't step into the incomplete code 🙂
 
 
 > *[2020-04-15 13:36:25]* **Mariano Guerra**:
@@ -743,7 +743,7 @@ Though this is not a sufficiently complete solution... A theory is that the "nex
 
 *[2020-04-17 04:59:32]* **Kartik Agaram**:
 
-Don Knuth: _"The Art of Computer Programming is a manifesto. It describes the way I love to do math and the way I wish I had been taught."_ :thinking_face:
+Don Knuth: _"The Art of Computer Programming is a manifesto. It describes the way I love to do math and the way I wish I had been taught."_ 🤔
 
 <https://www.quantamagazine.org/computer-scientist-donald-knuth-cant-stop-telling-stories-20200416|https://www.quantamagazine.org/computer-scientist-donald-knuth-cant-stop-telling-stories-20200416>
 
@@ -756,12 +756,12 @@ I'm building my FoC project in a
 
 > *[2020-04-17 15:24:32]* **Chris Maughan**:
 
-How do I say 'both' :wink:
+How do I say 'both' 😉
 
 
 > *[2020-04-17 15:25:01]* **Chris Maughan**:
 
-Ah, I can click both, fine :wink:
+Ah, I can click both, fine 😉
 
 
 > *[2020-04-17 15:47:13]* **Kartik Agaram**:
@@ -809,7 +809,7 @@ My language is dynamically typed because I prefer dynamic typing, it's easier to
 
 > *[2020-04-18 02:08:38]* **Doug Moen**:
 
-Since this is Future of Coding, maybe we can discuss the ideal FoC implementation language for building your new language. Maybe we can design it and implement it as a group project. :grinning:
+Since this is Future of Coding, maybe we can discuss the ideal FoC implementation language for building your new language. Maybe we can design it and implement it as a group project. 😀
 
 
 > *[2020-04-18 02:13:06]* **Ivan Reese**:
@@ -860,7 +860,7 @@ That quote about SQL is from a reunion in 1995 reminiscing about what… the ear
 
 I know people with multiple degrees who struggle to connect HDMI cables, a task barely more difficult than a square-peg-square-hole baby toy. When it comes to getting started, it's not about how difficult the task is, but the narrative the person has about the task.
 
-You can _tap and click_ stuff today, so people's narratives about _typing_ stuff has changed. At the time SQL was invented, a non-programmer would be what—someone who could use DOS but not Fortran or BASIC? If Phyllis Reisner ran the same human-factors tests today, SQL would probably appear to be less usable than it was in the '70s. Actually, that'd be a fun study. :laughing:
+You can _tap and click_ stuff today, so people's narratives about _typing_ stuff has changed. At the time SQL was invented, a non-programmer would be what—someone who could use DOS but not Fortran or BASIC? If Phyllis Reisner ran the same human-factors tests today, SQL would probably appear to be less usable than it was in the '70s. Actually, that'd be a fun study. 😆
 
 Out of curiosity, I browsed a few beginner SQL tutorials just now. Five didn't say anything how easy it is to get started with SQL, or imply in any way that SQL was designed with human factors in mind. The sixth does point out that, hey, there's a million database software packages out there now and most have custom commands, but all you gotta learn is six commands (with a list of their simple, evocative names) and you'll know pretty much everything you need to know about SQL. Now that's a tutorial for non-programmers about a language designed for non-programmers.
 
@@ -915,7 +915,7 @@ The way I see it, serendipity = finding someone new to import into one's 150. Th
 
 > *[2020-04-18 04:18:00]* **Chris Rabl**:
 
-i normally take solace in the fact that nobody reads my blog so i can post whatever i want there :slightly_smiling_face: but in all seriousness, maybe don't treat it like a blog then? i think there's value in writing about your experiences + synthesizing information, and there are ways to do that without keeping a "journal". some good examples in this twitter thread that's been making the rounds lately: <https://twitter.com/Mappletons/status/1250532315459194880>
+i normally take solace in the fact that nobody reads my blog so i can post whatever i want there 🙂 but in all seriousness, maybe don't treat it like a blog then? i think there's value in writing about your experiences + synthesizing information, and there are ways to do that without keeping a "journal". some good examples in this twitter thread that's been making the rounds lately: <https://twitter.com/Mappletons/status/1250532315459194880>
 
 
 > *[2020-04-18 05:23:56]* **Ivan Reese**:
@@ -942,7 +942,7 @@ Bumping back to the original topic, 99% of the time the goal is just to write mo
 
 I'll respond to everyone at once:
 • We definitely *can* overshare without causing complaint. There are a lot of blog posts out there, and I'm sure most readers will just close the page if they find a post uninsightful or misinformed; they won't send an email to the author. I strongly disagree with the proposal to do whatever I feel is best for myself without concern for others. That's a very egocentric worldview. Wasting people's time is a real and pervasive problem.
-• I agree it is sensible to share more with those you are closest to. That's a good replacement for social media posts. I already excel at this because I don't post any social media content whatsoever :stuck_out_tongue:! Unfortunately it doesn't work well for niche technical topics, since your family and housemates probably aren't interested in the future of programming, and even software engineering colleagues may not be. Unfortunately, I don't have many people to talk to IRL about my research interests.
+• I agree it is sensible to share more with those you are closest to. That's a good replacement for social media posts. I already excel at this because I don't post any social media content whatsoever 😛! Unfortunately it doesn't work well for niche technical topics, since your family and housemates probably aren't interested in the future of programming, and even software engineering colleagues may not be. Unfortunately, I don't have many people to talk to IRL about my research interests.
 • Yes, maybe what I really want is not a blog, but an externalisation of my beliefs and ideas that I can share with people when appropriate. I've been liking the way Andy Matuschak does this. Roam Research seems to be the new hotness for linked notes, though I'd rather not build my knowledge base on a proprietary platform.
 
 
@@ -955,7 +955,7 @@ Unfortunately as far as I can tell, there aren't software packages that enable t
 
 *[2020-04-18 18:40:13]* **Ivan Reese**:
 
-:postal_horn: <!channel> :postal_horn:
+📯 **`@channel`** 📯
 
 We have a new channel — **`#two-minute-week`**
 
@@ -965,7 +965,7 @@ There's a writeup with more info and recording tips on the website: <https://fut
 
 This is a brand new channel and a new mode of interaction for us, so if you have ideas or suggestions for neat things we can do now that this channel exists, drop them in **`#meta`**.
 
-I'm excited to see all the neat and varied projects we're all building, and follow their progress from week to week. :beers:
+I'm excited to see all the neat and varied projects we're all building, and follow their progress from week to week. 🍻
 
 
 > *[2020-04-18 18:43:28]* **Corey Montella**:
