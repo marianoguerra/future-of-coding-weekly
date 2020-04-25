@@ -52,7 +52,8 @@ function main() {
         'Yair Chuchem': '[Yair Chuchem](https://twitter.com/yairchu)',
         'Jacob Chapman': '[Jacob Chapman](https://unli.xyz/)',
         'Justin': '[Justin](https://twitter.com/newplagiarist)',
-        'Jonathan Edwards': '[Jonathan Edwards](https://twitter.com/jonathoda/)'
+        'Jonathan Edwards': '[Jonathan Edwards](https://twitter.com/jonathoda/)',
+        'Tom Lieber': '[Tom Lieber](https://twitter.com/alltom)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
