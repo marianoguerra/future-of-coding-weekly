@@ -84,6 +84,7 @@ const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'},
 	USER_REF_REGEX = /<@(.*?)>/g,
 	ENTITIES_REGEX = /&(gt|lt|amp);/g,
 	GROUP_REF_REGEX = /<#(.*?)\|(.*?)>/g,
+	THING_REF_REGEX = /<!(.*?)>/g,
 	SKIN_REF_REGEX_TEXT = ':(' + Object.keys(skinIdsToCodes).join('|') + '):',
 	SKIN_REF_REGEX = new RegExp(SKIN_REF_REGEX_TEXT, 'g'),
 	EMOJI_REF_REGEX_TEXT =
@@ -99,6 +100,10 @@ function enrichMessage(msg, users) {
 		.replace(
 			GROUP_REF_REGEX,
 			(_, _gid, groupName) => '**`#' + groupName + '`**'
+		)
+		.replace(
+			THING_REF_REGEX,
+			(_, thing) => '**`@' + thing + '`**'
 		)
 		.replace(
 			ENTITIES_REGEX,
