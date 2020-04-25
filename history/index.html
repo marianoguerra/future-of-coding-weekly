@@ -4,6 +4,8 @@
     <meta charset=utf-8>
     <title>Future of Coding History</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- this has to be duplicated in history/app.js EXPORT_HTML_PREFIX to make export look the same as this -->
+    <style>.alert{border-radius:0}.msg-response{background-color:white!important}</style>
   </head>
   <body class="p-3">
 
@@ -35,15 +37,16 @@
 
           <button class="btn btn-primary" v-on:click="loadSelected()">Load</button>
           <button class="btn btn-primary" v-on:click="exportAsMd()">Export as Markdown</button>
+          <button class="btn btn-primary" v-on:click="exportAsHTML()">Export as HTML</button>
         </div>
       </div>
 
-      <div>
-        <div v-for="msg in history.msgs" :key="msg.ts" class="alert alert-primary my-1 p-2 bg-light">
+      <div id="msgs-output">
+        <div v-for="msg in history.msgs" :key="msg.ts" class="alert alert-dark msg-root my-1 p-2 bg-light">
           <span class="small text-muted">{{msg.$dateStr}}</span> <span class="font-weight-bold">{{msg.$user.real_name}}: </span>
           <p v-html="msg.$html"></p>
 
-          <div v-for="resp in msg.responses" :key="resp.ts" class="alert alert-dark p-2 ml-1 my-1 bg-light">
+          <div v-for="resp in msg.responses" :key="resp.ts" class="alert alert-dark msg-response p-2 ml-1 my-1 bg-light">
             <span class="small text-muted">{{resp.$dateStr}}</span> <span class="font-weight-bold">{{resp.$user.real_name}}: </span>
             <p v-html="resp.$html"></p>
           </div>

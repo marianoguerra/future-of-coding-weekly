@@ -77,8 +77,11 @@ function getRealName(username, users) {
   return user === undefined ? username : '**' + user.real_name + '**';
 }
 
+const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'};
+
 const USER_REF_REGEX = /<@(.*?)>/g,
-  GT_REGEX = /&gt;/g;
+  ENTITIES_REGEX = /&(gt|lt|amp);/g,
+  GROUP_REF_REGEX = /<#(.*?)\|(.*?)>/g;
 function enrichMessage(msg, users) {
   const date = new Date(+msg.ts * 1000),
     {user} = msg;
@@ -86,10 +89,17 @@ function enrichMessage(msg, users) {
   msg.$date = date;
   msg.$text = msg.text
     .replace(USER_REF_REGEX, (_, username) => getRealName(username, users))
-    .replace(GT_REGEX, '>');
+    .replace(
+      GROUP_REF_REGEX,
+      (_, _gid, groupName) => '**`#' + groupName + '`**'
+    )
+    .replace(
+      ENTITIES_REGEX,
+      (match, entity) => ENTITIES_TO_TEXT[entity] || match
+    );
   msg.$html = mdToHTML(msg.$text);
   try {
-    msg.$dateStr = date.toISOString();
+    msg.$dateStr = date.toISOString().replace('T', ' ').slice(0, -5);
   } catch (error) {
     console.log(date, msg, error);
     msg.$dateStr = 'Invalid Date';
@@ -248,6 +258,13 @@ function main() {
           .join('\n\n---\n\n');
         downloadAs(txt, 'foc-dump.md', 'text/markdown');
       },
+      exportAsHTML: function () {
+        const msgsOutputNode = document.getElementById('msgs-output'),
+          msgsOutput = msgsOutputNode.innerHTML,
+          html = EXPORT_HTML_PREFIX + msgsOutput + EXPORT_HTML_SUFFIX;
+
+        downloadAs(html, 'foc-dump.html', 'text/html');
+      },
       onWeekSelected: function (weekKey) {
         console.log('weekKeySelected', weekKey);
       },
@@ -307,6 +324,22 @@ function main() {
 
   app.loadIndex();
 }
+
+const EXPORT_HTML_PREFIX = `
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>.alert{border-radius:0}.msg-response{background-color:white!important}</style>
+  </head>
+  <body class="p-3">
+`,
+  EXPORT_HTML_SUFFIX = `
+  </body>
+</html>
+`;
 
 const defaultRules = SimpleMarkdown.defaultRules;
 
