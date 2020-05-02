@@ -69,7 +69,7 @@ function main() {
         return this.curBy ? `[${this.curBy}](${this.curByUrl})` : '';
       },
       curSlackThreadText: function () {
-        return '(🧵[Slack Thread](' + this.curSlackThread + '))';
+        return '(🧵[Conversation](' + this.curSlackThread + '))';
       },
       urlMd: function () {
         return `[${this.urlTitle}](${this.url})`;
