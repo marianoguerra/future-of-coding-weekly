@@ -1,0 +1,632 @@
+[
+    {
+        "client_msg_id": "be3c1521-d70a-429f-8ddc-a1fac5e4db2b",
+        "type": "message",
+        "text": "How does SIMD offer an alternative to call return? I'm confused.. and MLIR improves on the generality of the IR representation, it doesn't necessarily change anything about the computational model it represents",
+        "user": "UHDQ62M4P",
+        "ts": "1585694955.059400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "s34F",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "How does SIMD offer an alternative to call return? I'm confused.. and MLIR improves on the generality of the IR representation, it doesn't necessarily change anything about the computational model it represents"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "ddad20c8-77b9-47be-ad25-8541511f60af",
+        "type": "message",
+        "text": "SIMD offers an alternative to the perf hit of not aligning with LLVM \u2014\u00a0if your new language primitive can be expressed efficiently in terms of SIMD, then missing out on the LLVM optimizations doesn't matter to you.\n\nThis is of course just a theory. For one, I don't have any particular primitive in mind. For two, I don't know enough about LLVM \u2014\u00a0perhaps there is, in fact, no computation that can be accelerated by SIMD that wouldn't be meaningfully slowed for lack of compiler optimizations.",
+        "user": "UC2A2ARPT",
+        "ts": "1585701826.059700",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1585702241.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tPEA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "SIMD offers an alternative to the perf hit of not aligning with LLVM \u2014\u00a0if your new language primitive can be expressed efficiently in terms of SIMD, then missing out on the LLVM optimizations doesn't matter to you.\n\nThis is of course just a theory. For one, I don't have any particular primitive in mind. For two, I don't know enough about LLVM \u2014\u00a0perhaps there is, in fact, no computation that can be accelerated by SIMD that wouldn't be meaningfully slowed for lack of compiler optimizations."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "77c40a40-ddd5-443a-b2af-5fc2e1e4ac0e",
+        "type": "message",
+        "text": "Also I'll just point out that I'm getting a vibe from a lot of people that their \"future of coding\" involves C-like performance. Most applications aren't limited by operations per second... so I'm puzzled by why people are limiting their visions to ones with a clear mapping to C-like constructs. Only asymptotic complexity matters broadly, since that is what separates the possible from the impossible.",
+        "user": "UCGAK10LS",
+        "ts": "1585702390.060400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Ltc",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Also I'll just point out that I'm getting a vibe from a lot of people that their \"future of coding\" involves C-like performance. Most applications aren't limited by operations per second... so I'm puzzled by why people are limiting their visions to ones with a clear mapping to C-like constructs. Only asymptotic complexity matters broadly, since that is what separates the possible from the impossible."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT",
+                    "U8A5MS6R1",
+                    "UJ6LDMMN0",
+                    "UHWC9PXBL"
+                ],
+                "count": 4
+            }
+        ]
+    },
+    {
+        "client_msg_id": "52ba3807-7924-4b52-bfcd-097eadb3bf83",
+        "type": "message",
+        "text": "LLVM and its gigantic array of optimizations, is insanely complex, with diminishing benefits for ordinary programs. I once did a test of a huge program and compiled it with lots of optimizations, and then compiled down to 486 era only instructions. About 1% difference. The sad truth is that CPU's are so fast now that both sides of a branch are executed, and many things that used to cost don't; but what determines your overall performance is how you have your data arranged in memory. If you can keep from hopping around RAM and stay in the caches your program runs like the wind. That's why some of the C programs are so fast, is that they were laid out very carefully from a data structure point of view, and why Java is notorious slow, because it sprays objects all over the heap. 99% of computers are idle nowadays; outside of big data and very specialized applications performance is really the last place to put your effort. Ease of maintenance trumps CPU costs in the vast majority of applications. That being said, there is no excuse for the sweathogs that we see today, where hundreds of megabytes are used to draw a single tab  window in Chrome, etc.\n\nIt is also true that CPU's are often advertised as being much faster than they really are. I once did a benchmark on a fairly CPU intensive app, and found that an e3 was faster than a far more expensive Xeon processor with many cores, because this was a mostly single threaded program, and adding all the cores trades off performance for single threaded. Also i discovered that some programs are faster with hyperthreading turned off, particularly those that do lots of interrupts because pretending you have more cores than you really do entails tradeoffs as well. Intel's product line is bewildering and a lot of products are sold for huge premiums just because they have some super rare instructions that spy agencies want. There's lots of nonsense out there. Intel hasn't added a useful instruction since they added true random numbers; most of the new ones are crazy; designed primarily to waste the engineering time of the cloners in China.",
+        "user": "UEQ6M68H0",
+        "ts": "1585712805.061200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1585714485.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YQgI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "LLVM and its gigantic array of optimizations, is insanely complex, with diminishing benefits for ordinary programs. I once did a test of a huge program and compiled it with lots of optimizations, and then compiled down to 486 era only instructions. About 1% difference. The sad truth is that CPU's are so fast now that both sides of a branch are executed, and many things that used to cost don't; but what determines your overall performance is how you have your data arranged in memory. If you can keep from hopping around RAM and stay in the caches your program runs like the wind. That's why some of the C programs are so fast, is that they were laid out very carefully from a data structure point of view, and why Java is notorious slow, because it sprays objects all over the heap. 99% of computers are idle nowadays; outside of big data and very specialized applications performance is really the last place to put your effort. Ease of maintenance trumps CPU costs in the vast majority of applications. That being said, there is no excuse for the sweathogs that we see today, where hundreds of megabytes are used to draw a single tab  window in Chrome, etc.\n\nIt is also true that CPU's are often advertised as being much faster than they really are. I once did a benchmark on a fairly CPU intensive app, and found that an e3 was faster than a far more expensive Xeon processor with many cores, because this was a mostly single threaded program, and adding all the cores trades off performance for single threaded. Also i discovered that some programs are faster with hyperthreading turned off, particularly those that do lots of interrupts because pretending you have more cores than you really do entails tradeoffs as well. Intel's product line is bewildering and a lot of products are sold for huge premiums just because they have some super rare instructions that spy agencies want. There's lots of nonsense out there. Intel hasn't added a useful instruction since they added true random numbers; most of the new ones are crazy; designed primarily to waste the engineering time of the cloners in China."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "d6b21782-bcfb-44c0-81a2-6c2e5d931551",
+        "type": "message",
+        "text": "Reminds me of a Ruby interpreter story from a while back.  (I forget the details.)  But the gist is that the struct for a Ruby object is generally five words in size.  *Padding* the size to eight words yielded a performance improvement from lining up better CPU caches.",
+        "user": "UA14TGLTC",
+        "ts": "1585716111.061600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mI9D",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Reminds me of a Ruby interpreter story from a while back.  (I forget the details.)  But the gist is that the struct for a Ruby object is generally five words in size.  "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Padding ",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "the size to eight words yielded a performance improvement from lining up better CPU caches."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "c21bf7e9-3263-4af6-ae05-0d900b4ba8d9",
+        "type": "message",
+        "text": "Alignment used to matter quite a bit. I don't think so any more, because so much pipelining is happening. They have so many billions of transistors to throw around, but RAM is holding the whole thing back. RAM speeds have only slightly increased compared to CPU power; billions awaits to the company that creates a breakthrough. DRAM has hardly changed. And is the main cost in servers. A few years ago, Samsung had a terrible recall for the Note cellphones that caught on fire; they lost billions and made it up by tripling RAM prices, and then everyone else raised their prices. Took years to come back down again. There is a revolution coming where the RAM will no longer be volatile. That is a very interesting change that i have planned for in my Beads system. Writing to the disk will be a thing of the past.",
+        "user": "UEQ6M68H0",
+        "ts": "1585720719.061800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zS/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Alignment used to matter quite a bit. I don't think so any more, because so much pipelining is happening. They have so many billions of transistors to throw around, but RAM is holding the whole thing back. RAM speeds have only slightly increased compared to CPU power; billions awaits to the company that creates a breakthrough. DRAM has hardly changed. And is the main cost in servers. A few years ago, Samsung had a terrible recall for the Note cellphones that caught on fire; they lost billions and made it up by tripling RAM prices, and then everyone else raised their prices. Took years to come back down again. There is a revolution coming where the RAM will no longer be volatile. That is a very interesting change that i have planned for in my Beads system. Writing to the disk will be a thing of the past."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "59a549d8-6b0a-437b-8575-bad6e06c506d",
+        "type": "message",
+        "text": "&gt; Also I'll just point out that I'm getting a vibe from a lot of people that their \"future of coding\" involves C-like performance. Most applications aren't limited by operations per second... so I'm puzzled by why people are limiting their visions to ones with a clear mapping to C-like constructs. Only asymptotic complexity matters broadly, since that is what separates the possible from the impossible.\nI didn't mean to suggest that C like performance is necessary. In fact I think optimising compilers are very bad for understanding. The examples I gave were cases of asymptotic complexity being different, and in high level languages. Shalabh's async track trace example is one that has nothing to do with performance.\n\nFor me it's not about the performance so much as the tension of presenting a model of computation that is fundamentally at odds with reality. The disagreement is whether or not this matters. The answer to this question basically comes down to how airtight your abstractions are. My main point is these issues can be avoided if you just make it possible to draw back the curtain.\n\nIf your abstraction is blocking my understanding, let me easily remove it. If your abstraction is *not* blocking my understanding, whether or not I can remove it is moot because I won't want to.",
+        "user": "UDQBTJ211",
+        "ts": "1585727606.062000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NiTg",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Also I'll just point out that I'm getting a vibe from a lot of people that their \"future of coding\" involves C-like performance. Most applications aren't limited by operations per second... so I'm puzzled by why people are limiting their visions to ones with a clear mapping to C-like constructs. Only asymptotic complexity matters broadly, since that is what separates the possible from the impossible."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI didn't mean to suggest that C like performance is necessary. In fact I think optimising compilers are very bad for understanding. The examples I gave were cases of asymptotic complexity being different, and in high level languages. Shalabh's async track trace example is one that has nothing to do with performance.\n\nFor me it's not about the performance so much as the tension of presenting a model of computation that is fundamentally at odds with reality. The disagreement is whether or not this matters. The answer to this question basically comes down to how airtight your abstractions are. My main point is these issues can be avoided if you just make it possible to draw back the curtain.\n\nIf your abstraction is blocking my understanding, let me easily remove it. If your abstraction is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "not",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " blocking my understanding, whether or not I can remove it is moot because I won't want to."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "4c0a4b00-c2a0-4e33-a693-38048325f584",
+        "type": "message",
+        "text": "If a language has a bad abstraction, then the solution is to replace it with a better abstraction, not expose the machine code (the \"reality\") that the bad abstraction compiles to. I can't think of any situation in which exposing the machine code is a good idea, because if the user has to think about machine code, then my language has failed to achieve its purpose, which is to be a new foundation for specifying &amp; reasoning about computation. What I *do* want to expose via my programming environment is the time &amp; space complexity of programs, so the user can reason about what is possible and impossible. If the language is designed well, then the environment can provide an intuitive explanation for why a program has a particular complexity.",
+        "user": "UCGAK10LS",
+        "ts": "1585729956.062200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Fget",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If a language has a bad abstraction, then the solution is to replace it with a better abstraction, not expose the machine code (the \"reality\") that the bad abstraction compiles to. I can't think of any situation in which exposing the machine code is a good idea, because if the user has to think about machine code, then my language has failed to achieve its purpose, which is to be a new foundation for specifying & reasoning about computation. What I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "do",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " want to expose via my programming environment is the time & space complexity of programs, so the user can reason about what is possible and impossible. If the language is designed well, then the environment can provide an intuitive explanation for why a program has a particular complexity."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "7f913944-ba8a-435a-aecb-03679fda8ea3",
+        "type": "message",
+        "text": "Possibly a failure of imagination on my part, but I guess I'm struggling to understand what you mean by \"time\", if not number of CPU instructions, and \"space\" if not number of memory bits. If you do mean these, then isn't your abstraction tied tightly to \"C concepts\" as well...?",
+        "user": "UDQBTJ211",
+        "ts": "1585730448.062400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tCN/y",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Possibly a failure of imagination on my part, but I guess I'm struggling to understand what you mean by \"time\", if not number of CPU instructions, and \"space\" if not number of memory bits. If you do mean these, then isn't your abstraction tied tightly to \"C concepts\" as well...?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "b6df756a-ad71-47b6-a0f6-f86468869042",
+        "type": "message",
+        "text": "The CS notions of time and space complexity have never been based on CPU instructions or memory bits. They talk about the rate of growth of time and space measured in abstract \"operations\" and \"stored data\" relative to the \"input size\" of your program, the concrete units being irrelevant (since we're interested in the slope).",
+        "user": "UCGAK10LS",
+        "ts": "1585731763.062600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Kkm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The CS notions of time and space complexity have never been based on CPU instructions or memory bits. They talk about the rate of growth of time and space measured in abstract \"operations\" and \"stored data\" relative to the \"input size\" of your program, the concrete units being irrelevant (since we're interested in the slope)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "939dc2b2-d96c-473f-9ce1-a0e9957dda09",
+        "type": "message",
+        "text": "You can't provide an exact number for operations or data storage regardless of what units you use, until code actually runs. The number of concrete operations in any program with a branch instruction varies with the input, but its (worst case) time complexity will be fixed, across all inputs.",
+        "user": "UCGAK10LS",
+        "ts": "1585731970.062800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "h1f1l",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You can't provide an exact number for operations or data storage regardless of what units you use, until code actually runs. The number of concrete operations in any program with a branch instruction varies with the input, but its (worst case) time complexity will be fixed, across all inputs."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "5fa828ed-092e-4401-81cd-d1fe6528b463",
+        "type": "message",
+        "text": "Yes, but specifically in your language, how are you measuring \"operations\"? Surely in a way that maps very closely to x86 instructions? Otherwise, what's the value of this information?\n\nObviously it's possible to define some notion of \"operation\" that treats add(a, b), sqrt(n) and factorize(n) all as \"one operation\", and then discuss time complexity in terms of these - but this is not an analysis that is particularly useful.\n\nWe have actually built machines that map \"memory space\" to metres (RAM), and \"instruction count\" to seconds (CPUs), which is why time and space complexity analysis (in these terms) is useful to humans.",
+        "user": "UDQBTJ211",
+        "ts": "1585732829.063000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Pc2E",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, but specifically in your language, how are you measuring \"operations\"? Surely in a way that maps very closely to x86 instructions? Otherwise, what's the value of this information?\n\nObviously it's possible to define some notion of \"operation\" that treats add(a, b), sqrt(n) and factorize(n) all as \"one operation\", and then discuss time complexity in terms of these - but this is not an analysis that is particularly useful.\n\nWe have actually built machines that map \"memory space\" to metres (RAM), and \"instruction count\" to seconds (CPUs), which is why time and space complexity analysis (in these terms) is useful to humans."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "DAF37581-6A6D-491B-86F5-AC65420F4C6F",
+        "type": "message",
+        "text": "I\u2019ll ask you the same question: how do you measure operations in a C program? An x86 program? How useful is that measure? Whatever measure I choose would be no worse.",
+        "user": "UCGAK10LS",
+        "ts": "1585733107.064700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Vh8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I\u2019ll ask you the same question: how do you measure operations in a C program? An x86 program? How useful is that measure? Whatever measure I choose would be no worse."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "17631561-F917-46BE-B77C-CB7BF4E46042",
+        "type": "message",
+        "text": "For that reason, I\u2019m not going to tell users how long a program did/might run by operation count, like \u201c173\u201d. It\u2019s not useful. I could tell them the runtime in seconds, if they need to benchmark.",
+        "user": "UCGAK10LS",
+        "ts": "1585733238.066800",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1585733967.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dg+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "For that reason, I\u2019m not going to tell users how long a program did/might run by operation count, like \u201c173\u201d. It\u2019s not useful. I could tell them the runtime in seconds, if they need to benchmark."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "3FCB6B91-237C-4A60-BE7C-3622B3B2F212",
+        "type": "message",
+        "text": "(Spoiler: you can\u2019t specify how long an instruction is going to take across all CPUs, not even all x86 CPUs, nor all Intel x86 CPUs. It varies by model. You also can\u2019t predict how long any memory access is going to take in any multi-threaded or multi-process system, which is all consumer systems). ",
+        "user": "UCGAK10LS",
+        "ts": "1585733499.071200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "o22k",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(Spoiler: you can\u2019t specify how long an instruction is going to take across all CPUs, not even all x86 CPUs, nor all Intel x86 CPUs. It varies by model. You also can\u2019t predict how long any memory access is going to take in any multi-threaded or multi-process system, which is all consumer systems). "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "685a99c7-c55c-4917-91f2-11eca336cb11",
+        "type": "message",
+        "text": "The sentence I was struggling with was;\n&gt; What I *do* want to expose via my programming environment is the time &amp; space complexity of programs, so the user can reason about what is possible and impossible",
+        "user": "UDQBTJ211",
+        "ts": "1585733838.071400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sFl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The sentence I was struggling with was;\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "do",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " want to expose via my programming environment is the time & space complexity of programs, so the user can reason about what is possible and impossible"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "dc7556b8-fc97-4461-aad1-d162804963ed",
+        "type": "message",
+        "text": "Perhaps I will have to wait to see a concrete example of the kind of environment that you mean",
+        "user": "UDQBTJ211",
+        "ts": "1585733870.071600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "i9ba",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Perhaps I will have to wait to see a concrete example of the kind of environment that you mean"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "A71F41D3-92B4-4A48-A625-55D010015991",
+        "type": "message",
+        "text": "You could, but I\u2019m talking distant future. Designing a programming language by oneself is a Herculean effort. By that sentence, I mean literally O(n), O(nlogn) etc, but with a better syntax, not math notation.",
+        "user": "UCGAK10LS",
+        "ts": "1585734121.074900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZJVhQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You could, but I\u2019m talking distant future. Designing a programming language by oneself is a Herculean effort. By that sentence, I mean literally O(n), O(nlogn) etc, but with a better syntax, not math notation."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585420887.013400",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "3ed0a2eb-b42d-42f6-8d2a-d5e15b1d3805",
+        "type": "message",
+        "text": "<@UFB8STN7K> re: #4 - he does make an argument - if you look around in the tech/dev community, you will see a lot of focus has shifted from \u201chey I had an idea so i hacked it up and i think this might be a good product\u201d to \u201chey lets make a todo list app and ship it and call ourselves entrepeneur makers and focus on pumping out same old just to ship stuff\u201d",
+        "user": "UNBPP291C",
+        "ts": "1585738174.075200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "W/BwN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UFB8STN7K"
+                            },
+                            {
+                                "type": "text",
+                                "text": " re: #4 - he does make an argument - if you look around in the tech/dev community, you will see a lot of focus has shifted from \u201chey I had an idea so i hacked it up and i think this might be a good product\u201d to \u201chey lets make a todo list app and ship it and call ourselves entrepeneur makers and focus on pumping out same old just to ship stuff\u201d"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585616341.042100",
+        "parent_user_id": "UBSMEUXAA"
+    },
+    {
+        "client_msg_id": "ac71f922-127d-44a1-83f0-bda5b7df5563",
+        "type": "message",
+        "text": "the hacker spirit has been replaced by \u201centrepeneur\u201d spirit. even tho I wouldnt say replaced, Id just say the scene has scaled quite a lot and that kind stuff is the stuff that people promote externally while hacker communities promote things internally so it has less visibility",
+        "user": "UNBPP291C",
+        "ts": "1585738261.075400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TSh08",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the hacker spirit has been replaced by \u201centrepeneur\u201d spirit. even tho I wouldnt say replaced, Id just say the scene has scaled quite a lot and that kind stuff is the stuff that people promote externally while hacker communities promote things internally so it has less visibility"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585616341.042100",
+        "parent_user_id": "UBSMEUXAA"
+    }
+]

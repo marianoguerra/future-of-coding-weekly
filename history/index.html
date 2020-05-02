@@ -10,35 +10,36 @@
   <body class="p-3">
 
     <div id="app">
-      <div v-if="index.loading" class="alert alert-info my-3">
-        Loading Index
+      <div class="row">
+        <div class="col">
+          <input type="date" v-model="fromDate" class="form-control">
+        </div>
+        <div class="col">
+          <input type="date" v-model="toDate" class="form-control">
+        </div>
+        <div class="col">
+          <select v-model="channel" class="custom-select">
+            <option value="general">#general</option>
+            <option value="feedback">#feedback</option>
+            <option value="two-minute-week">#two-minute-week</option>
+          </select>
+        </div>
       </div>
 
-      <div v-if="!index.loading" class="row">
-        <div class="col">
-          <ul>
-            <li v-for="(entries, key) in index.weeks">
-              <label>
-                <input type="checkbox" v-model="index.weeksSelected[key]" v-on:change="onWeekSelected(key)">
-                {{key}}
-              </label>
-            </li>
-          </ul>
-        </div>
-        <div class="col">
-          <ul>
-            <li v-for="(entries, key) in index.channels">
-              <label>
-                <input type="checkbox" v-model="index.channelsSelected[key]" v-on:change="onChannelSelected(key)">
-                {{key}}
-              </label>
-            </li>
-          </ul>
-
+      <div class="row mt-1">
+        <div class="col text-center">
           <button class="btn btn-primary" v-on:click="loadSelected()">Load</button>
+        </div>
+        <div class="col text-center">
           <button class="btn btn-primary" v-on:click="exportAsMd()">Export as Markdown</button>
+        </div>
+        <div class="col text-center">
           <button class="btn btn-primary" v-on:click="exportAsHTML()">Export as HTML</button>
         </div>
+      </div>
+
+      <div v-if="loadingStatus !== null" class="alert alert-info my-3">
+        {{loadingStatus}}
       </div>
 
       <div id="msgs-output">

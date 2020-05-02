@@ -1,0 +1,1305 @@
+[
+    {
+        "client_msg_id": "8b9bd5ad-c319-4118-84c2-bd36450a3e68",
+        "type": "message",
+        "text": "There's an interesting connection betwen BP and <http://people.csail.mit.edu/brooks/papers/AIM-864.pdf>",
+        "user": "UCUSW7WVD",
+        "ts": "1581289273.060800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3WF",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There's an interesting connection betwen BP and "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://people.csail.mit.edu/brooks/papers/AIM-864.pdf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "b2b6fda0-cb46-41ff-b129-95ac3f699695",
+        "type": "message",
+        "text": "Imperative programming is concerned with the order in which things happen.\n\nFunctional programming tries to make things as atemporal as possible, robust to multiple orderings of operations.\n\nOP shows how to write unordered behaviors -- but rely on the operations happening in just the right order. (at time 9:30) I don't understand why this is a good thing! It seems to be the worst of both worlds. I still have to think about the order in which I want things to happen, but now I can't just describe the order directly. I have to arrange behaviors to make that order emergently occur. And now readers can't just read behaviors and understand their purpose. They have to _simulate_ them to understand implications. Why is this an improvement on just regular much-maligned imperative programming?\n\nIn fairness, OP is not by the creator of BP. But it doesn't seem like a strong case.",
+        "user": "UCUSW7WVD",
+        "ts": "1581289598.061000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WGBHK",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Imperative programming is concerned with the order in which things happen.\n\nFunctional programming tries to make things as atemporal as possible, robust to multiple orderings of operations.\n\nOP shows how to write unordered behaviors -- but rely on the operations happening in just the right order. (at time 9:30) I don't understand why this is a good thing! It seems to be the worst of both worlds. I still have to think about the order in which I want things to happen, but now I can't just describe the order directly. I have to arrange behaviors to make that order emergently occur. And now readers can't just read behaviors and understand their purpose. They have to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "simulate",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " them to understand implications. Why is this an improvement on just regular much-maligned imperative programming?\n\nIn fairness, OP is not by the creator of BP. But it doesn't seem like a strong case."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "5b362a56-29ca-4713-81cd-f1410bce6902",
+        "type": "message",
+        "text": "I'm at 12 minutes now, and OP is talking about modifying a program based on just reading an event trace. I _love_ traces, and I _want_ to nod along. But wait a minute, what if a program needed events to happen in different orders in two different scenarios? Most real-world programs have many many scenarios they need to work in. Never allowing ourselves to touch existing parts of the program seems like a bad way to reliably get the desired effect.\n\nIt's not clear to me how this block means \"block loadingAccount until adShown\":\n```yield {\n  wait: 'adShown'\n  block: 'loadingAccount'\n}```\nCan somebody explain this? Is it assuming there's another b-thread somewhere pumping out 'loadingAccount' events _ad infinitum_?",
+        "user": "UCUSW7WVD",
+        "ts": "1581290295.061600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4wSAy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm at 12 minutes now, and OP is talking about modifying a program based on just reading an event trace. I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "love",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " traces, and I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "want",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to nod along. But wait a minute, what if a program needed events to happen in different orders in two different scenarios? Most real-world programs have many many scenarios they need to work in. Never allowing ourselves to touch existing parts of the program seems like a bad way to reliably get the desired effect.\n\nIt's not clear to me how this block means \"block loadingAccount until adShown\":\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yield {\n  wait: 'adShown'\n  block: 'loadingAccount'\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nCan somebody explain this? Is it assuming there's another b-thread somewhere pumping out 'loadingAccount' events "
+                            },
+                            {
+                                "type": "text",
+                                "text": "ad infinitum",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "ec4d5d1b-b17d-4cfa-b78a-60d8d518e44b",
+        "type": "message",
+        "text": "The animations suggest that b-threads run in lock step, each `yield` in them taking equal time. Is this true? Certainly the examples here would have wildly different behavior for different relative timings. Being this sensitive to timing seems really bad. It gives me flashbacks to writing Verilog code and running into bugs from signals not getting to a latch in time for the next clock cycle.\n\nOk, I'll stop spamming this thread. Summary: I have been slowly thinking about BP over 1.5 years now, and my opinion is slowly crystallizing to opposition. OP seems like a poor advertisement for BP. Either it's misunderstanding BP or it's making certain drawbacks very obvious but not self-aware of doing so.",
+        "user": "UCUSW7WVD",
+        "ts": "1581290720.061800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dJXEQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The animations suggest that b-threads run in lock step, each "
+                            },
+                            {
+                                "type": "text",
+                                "text": "yield",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in them taking equal time. Is this true? Certainly the examples here would have wildly different behavior for different relative timings. Being this sensitive to timing seems really bad. It gives me flashbacks to writing Verilog code and running into bugs from signals not getting to a latch in time for the next clock cycle.\n\nOk, I'll stop spamming this thread. Summary: I have been slowly thinking about BP over 1.5 years now, and my opinion is slowly crystallizing to opposition. OP seems like a poor advertisement for BP. Either it's misunderstanding BP or it's making certain drawbacks very obvious but not self-aware of doing so."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "2bcb4d41-2e1b-4457-9c31-c22f66568e75",
+        "type": "message",
+        "text": "Ah, I see that <http://www.wisdom.weizmann.ac.il/~amarron/BP%20-%20CACM%20-%20Author%20version.pdf> (the original BP paper?) admits the possibility of conflicting b-threads in Section 5.1. They point out that:\n\n* Conflicts can be resolved using priorities. Which absolutely requires new b-threads to be aware of what older b-threads exist.\n* A model-checker is required to warn programmers when conflict may arise.\n\nUsing BP in React seems like a recipe for spaghetti until React gains a model-checker. Is there one in development somewhere?",
+        "user": "UCUSW7WVD",
+        "ts": "1581292548.062100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vh7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ah, I see that "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://www.wisdom.weizmann.ac.il/~amarron/BP%20-%20CACM%20-%20Author%20version.pdf"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (the original BP paper?) admits the possibility of conflicting b-threads in Section 5.1. They point out that:\n\n* Conflicts can be resolved using priorities. Which absolutely requires new b-threads to be aware of what older b-threads exist.\n* A model-checker is required to warn programmers when conflict may arise.\n\nUsing BP in React seems like a recipe for spaghetti until React gains a model-checker. Is there one in development somewhere?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "72790792-68ea-4bac-b517-5c972894cf9b",
+        "type": "message",
+        "text": "Actually the deduction of what sections of the screen drawing functions need to be executed again is predicate logic, where logical implication is being calculated automatically. This saves you the trouble of writing all the implication rules for every microscopic change in your model. As the number of controls grows on the screen, the number of interactions between the widgets on the screen can grow exponentially. This is a feature directly borrowed from PROLOG and it is not common.  The Unix  Make build tool language uses an explicit predicate logic for example, and another example of automatic predicate logic in Beads is the compiler's module system which is borrowed from Modula-2 whereby you can specify imports very simply and it builds the total list of modules to compile, and does them in the correct order. The key thing with predicate logic is to try and avoid having users write the predicates explicitly, because they are not easy to construct. The average programmer knows simple boolean logic but long predicate chains are downright opaque to most. One should always keep in mind the example  of Principia Mathematica by Russell &amp; Whitehead, which took something on the order of 100 pages of gibberish to prove 1+1 = 2. Logical purity is an altar on which you can sacrifice all productivity.",
+        "user": "UEQ6M68H0",
+        "ts": "1581317344.062600",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1581317390.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Ln6Zi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Actually the deduction of what sections of the screen drawing functions need to be executed again is predicate logic, where logical implication is being calculated automatically. This saves you the trouble of writing all the implication rules for every microscopic change in your model. As the number of controls grows on the screen, the number of interactions between the widgets on the screen can grow exponentially. This is a feature directly borrowed from PROLOG and it is not common.  The Unix  Make build tool language uses an explicit predicate logic for example, and another example of automatic predicate logic in Beads is the compiler's module system which is borrowed from Modula-2 whereby you can specify imports very simply and it builds the total list of modules to compile, and does them in the correct order. The key thing with predicate logic is to try and avoid having users write the predicates explicitly, because they are not easy to construct. The average programmer knows simple boolean logic but long predicate chains are downright opaque to most. One should always keep in mind the example  of Principia Mathematica by Russell & Whitehead, which took something on the order of 100 pages of gibberish to prove 1+1 = 2. Logical purity is an altar on which you can sacrifice all productivity."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581027718.051600",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "5ff00be5-bea8-4df1-a014-2864dd3205e1",
+        "type": "message",
+        "text": "Is anyone aware of prior work on languages where:\n\u2022 the program can be modified in-place\n\u2022 variables can be re-bound (i.e. the program has a linear top-to-bottom flow)\n\u2022 updates are patched in so that changes do not cause unnecessary recomputation\nI have a demo of what I'm referring to here: <https://twitter.com/paulgb/status/1226691281184808961>",
+        "user": "UR482RFPY",
+        "ts": "1581337872.066300",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "fallback": "<https://twitter.com/paulgb|@paulgb>: This is spiritually similar to Dataflow programming, except that variables can be modified. The semantics are the same as if the entire program was rerun top to bottom on every edit.\n\nIf anyone is aware of prior work, I'd love to see it. I'm stumbling in the dark here :slightly_smiling_face: <https://pbs.twimg.com/ext_tw_video_thumb/1226691256002191361/pu/img/aNCkCkwWBAmwwcPj.jpg>",
+                "ts": 1581300966,
+                "author_name": "Paul Butler",
+                "author_link": "https://twitter.com/paulgb/status/1226691281184808961",
+                "author_icon": "https://pbs.twimg.com/profile_images/804550316901310464/f1tpHoCH_normal.jpg",
+                "author_subname": "@paulgb",
+                "text": "This is spiritually similar to Dataflow programming, except that variables can be modified. The semantics are the same as if the entire program was rerun top to bottom on every edit.\n\nIf anyone is aware of prior work, I'd love to see it. I'm stumbling in the dark here :slightly_smiling_face:",
+                "service_name": "twitter",
+                "service_url": "https://twitter.com/",
+                "from_url": "https://twitter.com/paulgb/status/1226691281184808961",
+                "thumb_url": "https://pbs.twimg.com/ext_tw_video_thumb/1226691256002191361/pu/img/aNCkCkwWBAmwwcPj.jpg",
+                "thumb_width": 960,
+                "thumb_height": 503,
+                "video_html_width": 960,
+                "video_html_height": 503,
+                "video_html": "<video controls poster=\"https://pbs.twimg.com/ext_tw_video_thumb/1226691256002191361/pu/img/aNCkCkwWBAmwwcPj.jpg\" width=\"960\" height=\"503\"><source type=\"video/mp4\" src=\"https://video.twimg.com/ext_tw_video/1226691256002191361/pu/vid/958x502/QNLTFLUjqeqO479k.mp4?tag=10\"></video>",
+                "id": 1,
+                "original_url": "https://twitter.com/paulgb/status/1226691281184808961",
+                "footer": "Twitter",
+                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zUP78",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Is anyone aware of prior work on languages where:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "the program can be modified in-place"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "variables can be re-bound (i.e. the program has a linear top-to-bottom flow)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "updates are patched in so that changes do not cause unnecessary recomputation"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I have a demo of what I'm referring to here: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://twitter.com/paulgb/status/1226691281184808961"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "reply_count": 33,
+        "reply_users_count": 11,
+        "latest_reply": "1581707505.168900",
+        "reply_users": [
+            "UR482RFPY",
+            "UA14TGLTC",
+            "UEBG0NPDK",
+            "UCUSW7WVD",
+            "U5STGTB3J",
+            "UEQ6M68H0",
+            "UGWUJUZHT",
+            "UNCP67JSK",
+            "UGS8TUVK6",
+            "UJFN50C00",
+            "UDQBTJ211"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "10585744-1aa2-45b6-a0f6-f99281e34a9f",
+        "type": "message",
+        "text": "Under the hood, it's a dataflow-like DAG, but with a layer on top that tracks where variables are bound and splices edits into the DAG as they are made.",
+        "user": "UR482RFPY",
+        "ts": "1581337944.066500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FJ4r",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Under the hood, it's a dataflow-like DAG, but with a layer on top that tracks where variables are bound and splices edits into the DAG as they are made."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "699e0709-ccea-4472-87d6-87df16dd3a6d",
+        "type": "message",
+        "text": "Would be nifty.",
+        "user": "UA14TGLTC",
+        "ts": "1581338374.066800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BwK2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Would be nifty."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "4DFB50DD-7067-43C4-827B-B35E6B537764",
+        "type": "message",
+        "text": "Sounds like semi-naive datalog",
+        "user": "UEBG0NPDK",
+        "ts": "1581349264.067700",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UEBG0NPDK",
+            "ts": "1581358470.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3Yue",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sounds like semi-naive datalog"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "366fb7e7-0035-4d31-bb29-fa0b14922f1a",
+        "type": "message",
+        "text": "One nearby place I'd like to get to is to pick the start and end of a trace for a manual run and interactively turn it into a reproducible test. The tool would say things like, \"Program did a read from disk at this point. Record/edit fake?\"\n\nOr to extract unit tests for a function based on executions seen during a manual run. Or runs.",
+        "user": "UCUSW7WVD",
+        "ts": "1581352947.067900",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1581353062.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SCRY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One nearby place I'd like to get to is to pick the start and end of a trace for a manual run and interactively turn it into a reproducible test. The tool would say things like, \"Program did a read from disk at this point. Record/edit fake?\"\n\nOr to extract unit tests for a function based on executions seen during a manual run. Or runs."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "798B88F1-2BBE-4955-AF53-C788CE681DDF",
+        "type": "message",
+        "text": "<@UCUSW7WVD> Are you familiar with snapshot testing?",
+        "user": "U5STGTB3J",
+        "ts": "1581355634.068700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "oM2B",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Are you familiar with snapshot testing?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "4bbd1343-da3d-45ff-a094-798fa71e5187",
+        "type": "message",
+        "text": "well, the notebooks in Mathematica operate exactly like your demo; the program chunks are re-executed from the top on each change.  If you are talking about stopping the program part way and continuing, this goes back to mainframe checkpoint/restart features which were used to allow the user continue a batch program that might have taken days to run from some previously designated checkpoint. The minute you have a change point inside a loop, it then becomes rather ambiguous, if not downright dangerous, to consider restarting partially. The specific example that is the pain point, is if you add an IF statement inside a loop, do you continue at iteration #130 and then add in the IF statement; that really isn't accurate, so you really have to re-run the whole loop. This is the reason why these incremental change systems are fraught with complexity and do not offer the certitude that is the requirement for debugging complex systems. Sure if you are just tweaking a line thickness parameter on which nothing else depends, one can tweak without any harm, but if the branching changes anywhere in a program it could behave dramatically different, and thus requires a complete restart from the beginning.",
+        "user": "UEQ6M68H0",
+        "ts": "1581358006.068900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Qx3oB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "well, the notebooks in Mathematica operate exactly like your demo; the program chunks are re-executed from the top on each change.  If you are talking about stopping the program part way and continuing, this goes back to mainframe checkpoint/restart features which were used to allow the user continue a batch program that might have taken days to run from some previously designated checkpoint. The minute you have a change point inside a loop, it then becomes rather ambiguous, if not downright dangerous, to consider restarting partially. The specific example that is the pain point, is if you add an IF statement inside a loop, do you continue at iteration #130 and then add in the IF statement; that really isn't accurate, so you really have to re-run the whole loop. This is the reason why these incremental change systems are fraught with complexity and do not offer the certitude that is the requirement for debugging complex systems. Sure if you are just tweaking a line thickness parameter on which nothing else depends, one can tweak without any harm, but if the branching changes anywhere in a program it could behave dramatically different, and thus requires a complete restart from the beginning."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UR482RFPY"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a0a3c729-a9f1-4027-8dc2-0910ec34f52c",
+        "type": "message",
+        "text": "<@U5STGTB3J> There's a similarity but it's superficial. Snapshots are fundamentally opaque to many tools, and once you get on them it takes momentum to switch to something else. The tests I'm proposing are more like a 'wizard' to bootstrap a new function. Particularly for teaching, where preexisting tests can help people see the benefits without having to put in a bunch of work up front. But they'll still get curated before they get checked in to version control. Merging manually and automatically generated tests is out of scope.",
+        "user": "UCUSW7WVD",
+        "ts": "1581359421.069200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=SeSO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U5STGTB3J"
+                            },
+                            {
+                                "type": "text",
+                                "text": " There's a similarity but it's superficial. Snapshots are fundamentally opaque to many tools, and once you get on them it takes momentum to switch to something else. The tests I'm proposing are more like a 'wizard' to bootstrap a new function. Particularly for teaching, where preexisting tests can help people see the benefits without having to put in a bunch of work up front. But they'll still get curated before they get checked in to version control. Merging manually and automatically generated tests is out of scope."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U5STGTB3J",
+                    "UKJGU23KP"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "883a9c3c-fb48-431a-ba34-815734764437",
+        "type": "message",
+        "text": "<@UEQ6M68H0> right, I think a lot of these ideas break down when you are dealing with a complex/stateful codebase. The intended use here is for notebook-style analysis; in particular the dataflow graph is shallow in the sense that it only tracks dependencies between global variables (function calls and control structures are opaque). The semantics are guided by the principal that it should be *as if* you ran top-to-bottom; the live patching is just a sort of optimization.",
+        "user": "UR482RFPY",
+        "ts": "1581361831.069400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "84jH",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UEQ6M68H0"
+                            },
+                            {
+                                "type": "text",
+                                "text": " right, I think a lot of these ideas break down when you are dealing with a complex/stateful codebase. The intended use here is for notebook-style analysis; in particular the dataflow graph is shallow in the sense that it only tracks dependencies between global variables (function calls and control structures are opaque). The semantics are guided by the principal that it should be "
+                            },
+                            {
+                                "type": "text",
+                                "text": "as if",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " you ran top-to-bottom; the live patching is just a sort of optimization."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "a86309a2-c554-4813-b4c1-d8ec1307c273",
+        "type": "message",
+        "text": "Frankly, i don't know any programmers who have that much difficulty debugging a program that runs top to bottom with no branching or state. That goes back to mainframe day style of code, and it was very straightforward to just keep bisecting the program, and via a binary search find the source of a problem. To this day the bisection process is still used a great deal. Most notebook program fragments are short, and can just be rerun from scratch on each keystroke change. The real challenge is building interactive graphical software, especially something that connects to a server which has remote state. Then re-running things becomes a very interesting proposition. For that type of work, it is common to run a virtual server locally, so that you can freeze the state of both systems at once. It is a very interesting aspect to debugging nowadays, and by shaking out most of the bugs with a local server, you can then deploy and hopefully just a few bugs remain. Mathematica is a huge success; the company has 700 employees, and an insurmountable lead in their market.",
+        "user": "UEQ6M68H0",
+        "ts": "1581366497.069800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "p7SK",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Frankly, i don't know any programmers who have that much difficulty debugging a program that runs top to bottom with no branching or state. That goes back to mainframe day style of code, and it was very straightforward to just keep bisecting the program, and via a binary search find the source of a problem. To this day the bisection process is still used a great deal. Most notebook program fragments are short, and can just be rerun from scratch on each keystroke change. The real challenge is building interactive graphical software, especially something that connects to a server which has remote state. Then re-running things becomes a very interesting proposition. For that type of work, it is common to run a virtual server locally, so that you can freeze the state of both systems at once. It is a very interesting aspect to debugging nowadays, and by shaking out most of the bugs with a local server, you can then deploy and hopefully just a few bugs remain. Mathematica is a huge success; the company has 700 employees, and an insurmountable lead in their market."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "a5619261-711d-4eb3-b146-a98670699f2f",
+        "type": "message",
+        "text": "<https://twitter.com/jasonlaster11/status/1226965515144482827>",
+        "user": "UN9R2KEUE",
+        "ts": "1581367691.070100",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "fallback": "<https://twitter.com/jasonlaster11|@jasonlaster11>: The gods have a sense of humor.  \n\nOf course Web Replay launches on the same day that Replay is removed from Firefox's UI. \n\nNOTE:  it was not planned this way\n\n:zap:  <https://webreplay.io/>\n:thinking_face:  <https://phabricator.services.mozilla.com/D60679>",
+                "ts": 1581366349,
+                "author_name": "Jason Laster",
+                "author_link": "https://twitter.com/jasonlaster11/status/1226965515144482827",
+                "author_icon": "https://pbs.twimg.com/profile_images/3188722524/5790e7b88809e42d6e02e2120189aaf2_normal.jpeg",
+                "author_subname": "@jasonlaster11",
+                "text": "The gods have a sense of humor.  \n\nOf course Web Replay launches on the same day that Replay is removed from Firefox's UI. \n\nNOTE:  it was not planned this way\n\n:zap:  <https://webreplay.io/>\n:thinking_face:  <https://phabricator.services.mozilla.com/D60679>",
+                "service_name": "twitter",
+                "service_url": "https://twitter.com/",
+                "from_url": "https://twitter.com/jasonlaster11/status/1226965515144482827",
+                "id": 1,
+                "original_url": "https://twitter.com/jasonlaster11/status/1226965515144482827",
+                "footer": "Twitter",
+                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zawe",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://twitter.com/jasonlaster11/status/1226965515144482827"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "exploding_head",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "356c45d5-88a4-4476-b299-f50f570be786",
+        "type": "message",
+        "text": "^--- would anyone like to join our private beta testing group?",
+        "user": "UN9R2KEUE",
+        "ts": "1581367713.070600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JrdPo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "^--- would anyone like to join our private beta testing group?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "client_msg_id": "cc72214b-1475-436d-af64-418c080bd1c3",
+        "type": "message",
+        "text": "CC <@UML4ZEKDK> <@UE3KC0VK6> <@UC2A2ARPT>",
+        "user": "UN9R2KEUE",
+        "ts": "1581367747.071100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FM=NK",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "CC "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UML4ZEKDK"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UE3KC0VK6"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UC2A2ARPT"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581367747.071100",
+        "reply_count": 2,
+        "reply_users_count": 1,
+        "latest_reply": "1581375237.076100",
+        "reply_users": [
+            "UML4ZEKDK"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "ea29c63d-771b-4c4a-b4c6-91266e97992c",
+        "type": "message",
+        "text": "CC <@U5T9JLUAE> <@UA14TGLTC> <@UAVCC2X70> <@UD512T5AT> <@UHWC9PXBL> <@UD3AK9JRF>",
+        "user": "UN9R2KEUE",
+        "ts": "1581367813.071600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "weRu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "CC "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U5T9JLUAE"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UA14TGLTC"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UAVCC2X70"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UD512T5AT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UHWC9PXBL"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UD3AK9JRF"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581367813.071600",
+        "reply_count": 8,
+        "reply_users_count": 6,
+        "latest_reply": "1583304563.080800",
+        "reply_users": [
+            "UC2A2ARPT",
+            "UD3AK9JRF",
+            "U5T9JLUAE",
+            "UHWC9PXBL",
+            "UN9R2KEUE",
+            "UAVCC2X70"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "b521499d-e843-4884-b23e-8e5227f8216d",
+        "type": "message",
+        "text": "Thanks for the invite. I don't think this would fit with what I'm working on right now, but I'm excited that the project is continuing and hope to see it thrive.",
+        "user": "UC2A2ARPT",
+        "ts": "1581368116.071700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Hvl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for the invite. I don't think this would fit with what I'm working on right now, but I'm excited that the project is continuing and hope to see it thrive."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581367813.071600",
+        "parent_user_id": "UN9R2KEUE"
+    },
+    {
+        "client_msg_id": "84D6D35E-F54E-4A48-A3BC-67F9AE52BF1E",
+        "type": "message",
+        "text": "ahh \u201cparticipatory execution\u201d is an absolutely killer way of putting something i\u2019ve long thought about",
+        "user": "UHWC9PXBL",
+        "ts": "1581368336.072900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dIBC0",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "ahh \u201cparticipatory execution\u201d is an absolutely killer way of putting something i\u2019ve long thought about"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580597761.309900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6c181944-d468-46c8-b8a7-343d9d72d1f6",
+        "type": "message",
+        "text": "The use case I have in mind is not debugging, but interactive exploration. As an example, in an experimental notebook, I sometimes have code that procedurally makes a calculation like this:\n```data = load_data()\ndata = data.filter(cond)\ndata.age.mean()\n```\nThe goal of this is that if I remove the `filter` line, it immediately recalculates the (now unfiltered) mean, without reloading the data itself.",
+        "user": "UR482RFPY",
+        "ts": "1581373831.073800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "DyC",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The use case I have in mind is not debugging, but interactive exploration. As an example, in an experimental notebook, I sometimes have code that procedurally makes a calculation like this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "data = load_data()\ndata = data.filter(cond)\ndata.age.mean()\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe goal of this is that if I remove the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "filter",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " line, it immediately recalculates the (now unfiltered) mean, without reloading the data itself."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e01ce5b0-8761-425d-94e9-60eb6b6b17b0",
+        "type": "message",
+        "text": "I've been looking into Mathematica, thanks for the tip. I don't have access to a license any more so I'm trying to understand the execution semantics from YouTube videos, if you know any good ones :slightly_smiling_face:",
+        "user": "UR482RFPY",
+        "ts": "1581373875.074100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4CDP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've been looking into Mathematica, thanks for the tip. I don't have access to a license any more so I'm trying to understand the execution semantics from YouTube videos, if you know any good ones "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "33e6deca-b3b2-4698-9eaa-9725e09f721d",
+        "type": "message",
+        "text": "Do Common Lisp's \"multiple restarts\" give you some ideas?",
+        "user": "UGWUJUZHT",
+        "ts": "1581374532.074300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qPU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Do Common Lisp's \"multiple restarts\" give you some ideas?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "C9F66720-CB39-4E6A-BFEC-2EA1BAD0C837",
+        "type": "message",
+        "text": "Likewise, I\u2019m glad to see the release, but I\u2019m not doing anything Web at the moment. ",
+        "user": "UD3AK9JRF",
+        "ts": "1581374625.075600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "N58Mf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Likewise, I\u2019m glad to see the release, but I\u2019m not doing anything Web at the moment. "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581367813.071600",
+        "parent_user_id": "UN9R2KEUE"
+    },
+    {
+        "client_msg_id": "2a06bccc-af42-4324-bf68-3ee1e75bee04",
+        "type": "message",
+        "text": "Thanks for the invite! :smile: Not sure I can handle another Slack to join, but I joined the mailing list and followed the Twitter account.",
+        "user": "UML4ZEKDK",
+        "ts": "1581375123.075900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wmTJp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for the invite! "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Not sure I can handle another Slack to join, but I joined the mailing list and followed the Twitter account."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581367747.071100",
+        "parent_user_id": "UN9R2KEUE"
+    },
+    {
+        "client_msg_id": "d808716e-96cb-482c-8fb7-c217048fa033",
+        "type": "message",
+        "text": "Sorry to hear Mozilla has cancelled the project... :rage: I hope you can find success with it as something more independent.",
+        "user": "UML4ZEKDK",
+        "ts": "1581375237.076100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wEx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sorry to hear Mozilla has cancelled the project... "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "rage"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I hope you can find success with it as something more independent."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581367747.071100",
+        "parent_user_id": "UN9R2KEUE"
+    },
+    {
+        "client_msg_id": "bdb7b689-1d4c-479e-aac0-62a94f190a30",
+        "type": "message",
+        "text": "Here's the video on logpoints: <https://www.youtube.com/watch?v=0fCjDThbC_s>\nvia <https://webreplay.io/features/time-travel-debugging.html>\nVery cool indeed. A debugger that speaks to my debug-by-print biases.",
+        "user": "UCUSW7WVD",
+        "ts": "1581375393.077000",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/",
+                "title": "Web Replay: Logpoints",
+                "title_link": "https://www.youtube.com/watch?v=0fCjDThbC_s",
+                "author_name": "Web Replay",
+                "author_link": "https://www.youtube.com/channel/UCKYzCe0O2TiXseLUuT4OVoQ",
+                "thumb_url": "https://i.ytimg.com/vi/0fCjDThbC_s/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Web Replay: Logpoints",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https://www.youtube.com/embed/0fCjDThbC_s?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 300,
+                "from_url": "https://www.youtube.com/watch?v=0fCjDThbC_s",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "id": 1,
+                "original_url": "https://www.youtube.com/watch?v=0fCjDThbC_s"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Qtfp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Here's the video on logpoints: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.youtube.com/watch?v=0fCjDThbC_s"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nvia "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://webreplay.io/features/time-travel-debugging.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nVery cool indeed. A debugger that speaks to my debug-by-print biases."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581375393.077000",
+        "reply_count": 10,
+        "reply_users_count": 4,
+        "latest_reply": "1581698255.150100",
+        "reply_users": [
+            "U8A5MS6R1",
+            "UN9R2KEUE",
+            "UEQ6M68H0",
+            "UHWC9PXBL"
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U8A5MS6R1",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e891ca1d-f6b0-43ce-9291-f0ba01e8a84d",
+        "type": "message",
+        "text": "<@UCUSW7WVD> yes. Finally a debugging tool for folks who love both the  Debugger and the Console",
+        "user": "UN9R2KEUE",
+        "ts": "1581375514.077800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "EeA5M",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " yes. Finally a debugging tool for folks who love both the  Debugger and the Console"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fe3c6643-0c40-4a44-a4e5-d379560ffe84",
+        "type": "message",
+        "text": "but yeah, in all seriousness, i think all debugging starts by building a chronology of events and then proceeds to developing an intuition into the why and how",
+        "user": "UN9R2KEUE",
+        "ts": "1581375550.078500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cXFEy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "but yeah, in all seriousness, i think all debugging starts by building a chronology of events and then proceeds to developing an intuition into the why and how"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD",
+                    "UD3AK9JRF",
+                    "UP6G25H35",
+                    "UFLN9JFRT",
+                    "UC2A2ARPT"
+                ],
+                "count": 5
+            }
+        ]
+    }
+]

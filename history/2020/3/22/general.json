@@ -1,0 +1,830 @@
+[
+    {
+        "type": "message",
+        "text": "@Dan Cook a nuanced point of departure: i think everyone gets complexity of software wrong (caveat: still formulating this mental model)\n\nTLRDR: By analogy, imagine being transported to an alternate universe where the world hasn't discovered complexity theory.\nAnd imagine all the discussions people have on how fast/slow algorithm X is over Y or library A over B.\nEveryone would be \"wrong\" in the way they think about thinking about the problem, regardless of whether they were right/wrong in a specific instance\nBut this is how we are tackling the complexity of software.\n\nDetails:\n-(handwaivy assumption)  \u2203a theory of software development to be discovered and that is homomorphic to complexity theory\n- Different \"software development methods\" have an inherent design complexity\n- handwaiving what \"software development methods\" means but reasonable to say it could be \n  HW = {set of hardware archs}\n  L = {set of programming langs}\n  OS = {set of OS}\n  IDE = {set of IDEs, including debuggers}\n  F = {set of libraries/frameworks}\n\n  P = {set of platforms} = HW x L x IDE x OS x F e.g. iOS, Facebook, Android, PS4,\n  E = {set of ecosystems} = IDE x L x F\n  etc\n- Some problems have a combinatoric complexity while others may have linear or sublinear (for whatever that means)\n  - Ex: designing a new general purpose language is the problem space of HW x OS x IDE x F\n  - designing a DSL is a significantly smaller subspace of that vector space \n- everyone \"gets it wrong\" bc we don't understand the problem space. \n  - I posit that some solutions are inherently NP-hard or lower bounded but people don't realize it (analogy: you're not getting below \u0398(nlogn) for a comparison based sort)\n  - Some solutions are great bc they reformulate the problem (oh look, let's use radix sort and now we have sub \u0398(nlogn) sorts)\n  - Most of the time the underlying \"method\" is bad \u0398(n^2) and all the solutions proposed are simply ameliorating constant factors so we'll never solve the root problem\n  - But ofc, sometimes constant factors are super important and big wins (eg the canonical example these days of how much faster linear search is than most things for small N)",
+        "user": "U01003H81UM",
+        "ts": "1584832188.487900",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1584235196.324400",
+        "parent_user_id": "U01003H81UM"
+    },
+    {
+        "type": "message",
+        "text": "------------------------------------------\nIn that frame of reference, i'd say i disagree that \"better understanding tools\" fundementally address the problem. \nSoftware is complex bc it's a combinatorial explosion of multiple layers/components. I bemoan the multitiude of layers in software development but bc software is intangible, people forget they're necessary. Few people propose writing their own OS as a solution; even fewer propose writing their own HW ISA.",
+        "user": "U01003H81UM",
+        "ts": "1584832495.488100",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1584235196.324400",
+        "parent_user_id": "U01003H81UM"
+    },
+    {
+        "type": "message",
+        "text": "\nI'd class most people's solutions:\n* \"Just don't do it\" e.g. Casey Murati crowd\n  - Viable but these guys miss the fact that what they're doing is solving a subspace of the problem, not the general solution\n  - I concur that sometimes there are accidental layers of abstraction but in the real world, we can't carte blanche remove them all\n  - Analogy: \n    Me: my sort algorithm is O(n^2) and it's slow when I have to sort 10,000s of records\n    Them: don't sort 10,000s records\n    Me: ....\n\n* \"Better tooling\"\n  - \"if we had better understanding, we could reason about stuff better\" e.g. better debuggers, things like sourcegraph, sourcetrail, etc\n  - I think this is by far necessary and good but it's also often times linear solutions to *combinatorial problems*\n  \n* \"DSL approach\"\n  - \"everyone should be using their own DSLs\" e.g. Jonathan Blow's approach to Jai vs. the Rust approach\n  - (unproven but working assumption) the general case of the problem itself is NP Hard\n  - but domain specific problems are clearly not\n  - no one makes their own DSLs bc it's a lot of overhead\n  - Solution: we can bring that cost down orders of magnitude and then everyone can create their own DSLs. Ex:\n    - LLVM ecosystem is the best example of this\n    - JAI language's approach\n    - Any shading language \n    - Any particle/fx system in games is effectively it's own DSL even if it's not textual\n\nI've personally moved from the 2nd camp to the 3rd camp and my whole approach is predicated on that in a sense",
+        "user": "U01003H81UM",
+        "ts": "1584833717.488800",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U01003H81UM",
+            "ts": "1584833797.000000"
+        },
+        "thread_ts": "1584235196.324400",
+        "parent_user_id": "U01003H81UM"
+    },
+    {
+        "client_msg_id": "3cfc3a28-ebe3-4ef1-a718-5681abe85746",
+        "type": "message",
+        "text": "<@URKQXRCAC> Thanks for the Woden reference. I'm not looking for a game engine. Woden uses the AbstractGPU package, written by the same author, to access the GPU, and that is of greater interest.\n\nPharo doesn't have a standard framework for GPU accelerated graphics. Glamorous Toolkit uses a custom version of Pharo that replaces the 2D rendering system with Skia, which is a GPU accelerated 2D vector graphics library. I would need the ability to write Pharo code that mixes Skia 2D graphics and AbstractGPU 3D graphics in the same widget.\n\nOne way forward is to fork the GToolkit version of Pharo, and fork AbstractGPU, and create a new Pharo distro where the two GPU graphics layers are integrated, so that they can both output graphics to the same shared OpenGL or Vulkan context.\n\nSeems like a big commitment, so I have to consider if this is the best way to get a GUI for Curv. Another consideration is that I'd like the ability to run the Curv GUI in a web browser, probably using Web Assembly, and I don't see how this approach would get me there.",
+        "user": "UJN1TAYEQ",
+        "ts": "1584834139.489800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tPgS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "URKQXRCAC"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Thanks for the Woden reference. I'm not looking for a game engine. Woden uses the AbstractGPU package, written by the same author, to access the GPU, and that is of greater interest.\n\nPharo doesn't have a standard framework for GPU accelerated graphics. Glamorous Toolkit uses a custom version of Pharo that replaces the 2D rendering system with Skia, which is a GPU accelerated 2D vector graphics library. I would need the ability to write Pharo code that mixes Skia 2D graphics and AbstractGPU 3D graphics in the same widget.\n\nOne way forward is to fork the GToolkit version of Pharo, and fork AbstractGPU, and create a new Pharo distro where the two GPU graphics layers are integrated, so that they can both output graphics to the same shared OpenGL or Vulkan context.\n\nSeems like a big commitment, so I have to consider if this is the best way to get a GUI for Curv. Another consideration is that I'd like the ability to run the Curv GUI in a web browser, probably using Web Assembly, and I don't see how this approach would get me there."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584241702.325100",
+        "parent_user_id": "UD3AK9JRF"
+    },
+    {
+        "client_msg_id": "083A6B84-EBA8-462F-B2D4-6C698949C073",
+        "type": "message",
+        "text": "I don\u2019t think this is worth anyone\u2019s attention tbh. Its the boring old idea of \u201crepresent the control structure as a graph\u201d (like a flowchart). People realised a long time ago that this isn\u2019t really helpful. The authors even briefly admit they have no empirical evidence that demonstrates effectiveness.",
+        "user": "UCGAK10LS",
+        "ts": "1584834420.493700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QLN4L",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don\u2019t think this is worth anyone\u2019s attention tbh. Its the boring old idea of \u201crepresent the control structure as a graph\u201d (like a flowchart). People realised a long time ago that this isn\u2019t really helpful. The authors even briefly admit they have no empirical evidence that demonstrates effectiveness."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584806326.483400",
+        "parent_user_id": "UBSMEUXAA"
+    },
+    {
+        "client_msg_id": "5d1bfdfe-bf46-4421-97a6-2fa976f98393",
+        "type": "message",
+        "text": "I had hoped that Web Assembly would end the tyranny of JS in the browser; alas, the powers that be deemed that Web Assembly programs would run in a separate thread and be unable to touch the screen which runs in a different thread. So for now Web Assembly is for heavy CPU work, and is not the trapdoor that us JS-haters were hoping for. If you are using a static language, there is no reason to do just in time compilation; ahead of time compilation can be extremely efficient, and not need the super fancy super complex V8 engine, which makes everyone dependent on Google's Chrome.\n\nI think everyone outside the browser companies had been hoping for a simple virtual machine that included graphical primitives that we could all program to; that would have been the beginning of a new era, where we are running virtual machines in the browser that  give platform independence yet GPU accelerated graphics. Adobe AIR does this outside the browser, but I and many others were all hoping for a single unified 2D and 3D graphical interface that would span IOS, Android, desktop and web, and then we could stop all this framework and simplify the development stack tremendously; perhaps down to a single language.",
+        "user": "UEQ6M68H0",
+        "ts": "1584835521.493900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GGQzA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I had hoped that Web Assembly would end the tyranny of JS in the browser; alas, the powers that be deemed that Web Assembly programs would run in a separate thread and be unable to touch the screen which runs in a different thread. So for now Web Assembly is for heavy CPU work, and is not the trapdoor that us JS-haters were hoping for. If you are using a static language, there is no reason to do just in time compilation; ahead of time compilation can be extremely efficient, and not need the super fancy super complex V8 engine, which makes everyone dependent on Google's Chrome.\n\nI think everyone outside the browser companies had been hoping for a simple virtual machine that included graphical primitives that we could all program to; that would have been the beginning of a new era, where we are running virtual machines in the browser that  give platform independence yet GPU accelerated graphics. Adobe AIR does this outside the browser, but I and many others were all hoping for a single unified 2D and 3D graphical interface that would span IOS, Android, desktop and web, and then we could stop all this framework and simplify the development stack tremendously; perhaps down to a single language."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584241702.325100",
+        "parent_user_id": "UD3AK9JRF"
+    },
+    {
+        "client_msg_id": "3c10819e-3412-4099-95c6-3b78e17564ec",
+        "type": "message",
+        "text": "Yeah, I wish AIR had made some inroads and Flash hadn't died off.  They had their virtues.",
+        "user": "UA14TGLTC",
+        "ts": "1584837715.494100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nnP6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, I wish AIR had made some inroads and Flash hadn't died off.  They had their virtues."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584241702.325100",
+        "parent_user_id": "UD3AK9JRF"
+    },
+    {
+        "client_msg_id": "f314a6f9-fde0-4637-9df1-ebcd12a36e18",
+        "type": "message",
+        "text": "Yes, Web Assembly is getting a graphics layer. The WASI project is going to adopt WebGPU as its low level graphics API. This will provide the same API for WebAssembly modules running both inside and outside a web browser. The WebGPU standard is still being designed, so this all still in the future. In general, Web Assembly is a work in progress; it isn't finished yet. Mozilla and Google are both working on their own open source implementations of a WebGPU library, which will be portable to all major operating systems. These libraries will have a C interface, and there is a single shared copy of the C header file on github that is compatible with either WebGPU library implementation. In addition to these C bindings, there will be a Javascript binding in all major web browsers (Safari, Edge, Chrome, Firefox), and there will be a WebAssembly binding courtesy of WASI. Once WebGPU is further along, I'm going to use it instead of OpenGL in Curv as my GPU programming interface.\n\nThe virtue of all this technology I just mentioned is that it isn't proprietary to just one company. Instead, it is the product of industry consortiums, and is being standardized as a collection of W3C standards. There will be multiple compatible open source implementations. This is a big improvement over AIR and Flash. Because it is standardized and open source with multiple implementations, the tech isn't going to vanish when the one company that owns the sole proprietary implementation loses interest.",
+        "user": "UJN1TAYEQ",
+        "ts": "1584839987.494600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/gh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, Web Assembly is getting a graphics layer. The WASI project is going to adopt WebGPU as its low level graphics API. This will provide the same API for WebAssembly modules running both inside and outside a web browser. The WebGPU standard is still being designed, so this all still in the future. In general, Web Assembly is a work in progress; it isn't finished yet. Mozilla and Google are both working on their own open source implementations of a WebGPU library, which will be portable to all major operating systems. These libraries will have a C interface, and there is a single shared copy of the C header file on github that is compatible with either WebGPU library implementation. In addition to these C bindings, there will be a Javascript binding in all major web browsers (Safari, Edge, Chrome, Firefox), and there will be a WebAssembly binding courtesy of WASI. Once WebGPU is further along, I'm going to use it instead of OpenGL in Curv as my GPU programming interface.\n\nThe virtue of all this technology I just mentioned is that it isn't proprietary to just one company. Instead, it is the product of industry consortiums, and is being standardized as a collection of W3C standards. There will be multiple compatible open source implementations. This is a big improvement over AIR and Flash. Because it is standardized and open source with multiple implementations, the tech isn't going to vanish when the one company that owns the sole proprietary implementation loses interest."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584241702.325100",
+        "parent_user_id": "UD3AK9JRF",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "ULM3U6275",
+                    "UJ6LDMMN0",
+                    "UDQBTJ211"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "983739fa-119e-4c91-b473-3a962d61a786",
+        "type": "message",
+        "text": "I agree with you it was interesting to me from a historical standpoint",
+        "user": "UBSMEUXAA",
+        "ts": "1584842326.494800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dRlo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I agree with you it was interesting to me from a historical standpoint"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584806326.483400",
+        "parent_user_id": "UBSMEUXAA"
+    },
+    {
+        "client_msg_id": "cbbc76ba-da3a-4b18-8921-6830ee27b813",
+        "type": "message",
+        "text": "That they tried it, what their goals were, etc",
+        "user": "UBSMEUXAA",
+        "ts": "1584842357.495000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3JMd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That they tried it, what their goals were, etc"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584806326.483400",
+        "parent_user_id": "UBSMEUXAA"
+    },
+    {
+        "client_msg_id": "e6c81913-af7f-44cf-989b-a07e0433c95d",
+        "type": "message",
+        "text": "I see what your saying about combinatorial complexity! People get gung-ho about things (languages, tools, patterns, practices, programming paradigms) that are \"better\" along one dimension, and ignore that maybe they're worse along other dimensions, so the material improvement overall is actually negligible or negative (of you include all costs -- which you must, or you're cooking the data).\n\nNow sure, the _incidental_ (accidental) complexity in software/code is just a sub-space of the total complexity. You cannot tool-away or language-away _any_ of the complexity of the _problem_-space -- that just is what it is.\n\n...Well, _sort of_. There can be unnecessary complexity on that side, too. You need a software system to run your factory, and even if you had the perfect language and code for that kind of thing, the factory is very complicated to manage! ... But wouldn't you know it, you could have accomplished better productivity with 3 people and a small toolbox! No amount of software solutioning for that factory had any hope of fixing that situation!\n\nBut here's the thing: That _should_ be the level that software professionals think at! Software is just one tool in your toolbox. (And that's not secret knowledge; it got pounded into our heads at a SCRUM bootcamp last week). Not just _should_, but that's the entire thing that a software professional is  _being paid for_! So it's a disaster that the status quo is not even at that level!\n\nAnd why isn't it? I think it's because there's so much complexity at all the layers _below that_, that _that's_ what software developers thing their job is about. But none of the focus on languages and patterns and tools has _any real value_ if it doesn't improve our ability work and reason about (and in) the problem space.\n\nWhat's super frustrating to me, is we've had sufficient means for _decades_ (in terms of programming language) to outline the problem space in code, and (for the most part) none of the \"advancements\" (aka recycling) in PLs have improved that in any significant way. And developers _still don't know how to do it_.\n\nLet me explain: Let's say the problem space can be well represented by a picture or diagram, on terms of looking at it and thinking about it, pointing at it and discussing it, changing it, etc. It doesn't significantly matter whether you use a pencil, a whiteboard, arrange pebbles on the ground, or toothpicks on a table-top ... In all cases, you can *look* at the darn thing, and see what it is! Sure, you can _see_ the pebbles, or the ink, but that's not the thing you're actually _looking at_. So long as the medium is _sufficient_ for creating a picture of the thing so that _that's_ what you are looking at, that's what matters.\n\nNow an _insufficient_ *medium* would be boulders or colony of ants. An insufficient _representation_ would be throwing toothpicks on the ground and arbitrarily assigning meaning to it; or writing down a list of coordinate-pairs or a crap ton of prose (:zipper_mouth_face:) _describing_ a diagram. If you get _that_ wrong, then it doesn't matter how much \"better\" your medium is!\n\nNow sure, you could argue that pen is more fine-grained then sand (:slightly_smiling_face:) for writing text annotations, or that pencil is eraseable, or that text-files are easier to share and track changes ... And _of course_ those things matter; but they matter _far far less_ than a coherent model -- which is much more a matter of discipline (or in a world where it's been done enough times to know better, _common [freaking] sense_) than anything else.\n\nFrom where I stand, the status quo of software is more at the level of debating whether red ink is better than blue ink; or pencil vs keyboard; or how much better one can diagram with an ergonomically shaped pen (oh thank goodness you solved that one!). Or maybe it's that some people diagram with axially-aligned rectangles, and others with circles and ovals, and there's a never-ending debate as to which is better or more \"geometrically pure\". But for crying out loud, a crayon with your non-dominant hand is better if you know what a coherent picture of the thing would even look like!\n\nSo what is \"sufficient\"? Functions, variables, conditions, abstraction; and making those be proper subsets of the _human_ model that the software IS. (This topic is hard to discuss, due to deeply ingrained ideas about how a \"computer thinks\" -- We \"have to\" do it that way ... NO, you HAVE TO deliver _human value_, and be and to reason about your code in terms of the _human model ..._ I'll leave it at that for now).\n\n... But alas, I'm only half-right on this.\n\nYes, if people knew how to make sane human models in code (which is _not that hard to understand_, but unfortunately stunted by tons of the wrong thinking that's painfully difficult to challenge / unlearn) ... then things would already be 100x better on so many levels. We'd be thinking _way_ closer to the human model; that would actually be _the thing that is being designed_ in the code and the thing that developers _see_ when looking at the code. The _code_ (and language, etc.) is _just_ the medium for expressing it!\n\n... I'm half-right because code (as currently done) is only _borderline_ sufficient. _If_ developers had the right mindset, and it was used properly -- and a (_freaking reasonable_) expectation of a _professional_ (or having earned a college degree in the stuff), then maybe it would be obvious enough. But alas, this is not the state of things, and a pile of text is _really hard_ to point at and discuss this matter. Even if _developers_ could work with that though, not just any human could look at that and make sense of it.\n\nThat's a barrier that I think can be breached, if there's something malleable enough to be / become a more obvious representation.\n\nI think both these \"halves\" go hand-in-hand. When you can see the model for what it is, it will be much easier to see sanity / insanity. And when things can be sane, then YES, the ability to model things more fluidly will be invaluable and people _will_ be able to manage it -- because the thing they are designing is something that makes sense on a human level!",
+        "user": "UAVCC2X70",
+        "ts": "1584849424.495300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iyx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I see what your saying about combinatorial complexity! People get gung-ho about things (languages, tools, patterns, practices, programming paradigms) that are \"better\" along one dimension, and ignore that maybe they're worse along other dimensions, so the material improvement overall is actually negligible or negative (of you include all costs -- which you must, or you're cooking the data).\n\nNow sure, the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "incidental",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (accidental) complexity in software/code is just a sub-space of the total complexity. You cannot tool-away or language-away "
+                            },
+                            {
+                                "type": "text",
+                                "text": "any",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " of the complexity of the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "problem",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "-space -- that just is what it is.\n\n...Well, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "sort of",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". There can be unnecessary complexity on that side, too. You need a software system to run your factory, and even if you had the perfect language and code for that kind of thing, the factory is very complicated to manage! ... But wouldn't you know it, you could have accomplished better productivity with 3 people and a small toolbox! No amount of software solutioning for that factory had any hope of fixing that situation!\n\nBut here's the thing: That "
+                            },
+                            {
+                                "type": "text",
+                                "text": "should",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " be the level that software professionals think at! Software is just one tool in your toolbox. (And that's not secret knowledge; it got pounded into our heads at a SCRUM bootcamp last week). Not just "
+                            },
+                            {
+                                "type": "text",
+                                "text": "should",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", but that's the entire thing that a software professional is  "
+                            },
+                            {
+                                "type": "text",
+                                "text": "being paid for",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "! So it's a disaster that the status quo is not even at that level!\n\nAnd why isn't it? I think it's because there's so much complexity at all the layers "
+                            },
+                            {
+                                "type": "text",
+                                "text": "below that",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", that "
+                            },
+                            {
+                                "type": "text",
+                                "text": "that's",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " what software developers thing their job is about. But none of the focus on languages and patterns and tools has "
+                            },
+                            {
+                                "type": "text",
+                                "text": "any real value",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " if it doesn't improve our ability work and reason about (and in) the problem space.\n\nWhat's super frustrating to me, is we've had sufficient means for "
+                            },
+                            {
+                                "type": "text",
+                                "text": "decades",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (in terms of programming language) to outline the problem space in code, and (for the most part) none of the \"advancements\" (aka recycling) in PLs have improved that in any significant way. And developers "
+                            },
+                            {
+                                "type": "text",
+                                "text": "still don't know how to do it",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nLet me explain: Let's say the problem space can be well represented by a picture or diagram, on terms of looking at it and thinking about it, pointing at it and discussing it, changing it, etc. It doesn't significantly matter whether you use a pencil, a whiteboard, arrange pebbles on the ground, or toothpicks on a table-top ... In all cases, you can "
+                            },
+                            {
+                                "type": "text",
+                                "text": "look",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " at the darn thing, and see what it is! Sure, you can "
+                            },
+                            {
+                                "type": "text",
+                                "text": "see",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " the pebbles, or the ink, but that's not the thing you're actually "
+                            },
+                            {
+                                "type": "text",
+                                "text": "looking at",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". So long as the medium is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "sufficient",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " for creating a picture of the thing so that "
+                            },
+                            {
+                                "type": "text",
+                                "text": "that's",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " what you are looking at, that's what matters.\n\nNow an "
+                            },
+                            {
+                                "type": "text",
+                                "text": "insufficient",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "medium",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " would be boulders or colony of ants. An insufficient "
+                            },
+                            {
+                                "type": "text",
+                                "text": "representation ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "would be throwing toothpicks on the ground and arbitrarily assigning meaning to it; or writing down a list of coordinate-pairs or a crap ton of prose ("
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "zipper_mouth_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") "
+                            },
+                            {
+                                "type": "text",
+                                "text": "describing",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " a diagram. If you get "
+                            },
+                            {
+                                "type": "text",
+                                "text": "that",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " wrong, then it doesn't matter how much \"better\" your medium is!\n\nNow sure, you could argue that pen is more fine-grained then sand ("
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") for writing text annotations, or that pencil is eraseable, or that text-files are easier to share and track changes ... And "
+                            },
+                            {
+                                "type": "text",
+                                "text": "of course",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " those things matter; but they matter "
+                            },
+                            {
+                                "type": "text",
+                                "text": "far far less",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " than a coherent model -- which is much more a matter of discipline (or in a world where it's been done enough times to know better, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "common [freaking] sense",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ") than anything else.\n\nFrom where I stand, the status quo of software is more at the level of debating whether red ink is better than blue ink; or pencil vs keyboard; or how much better one can diagram with an ergonomically shaped pen (oh thank goodness you solved that one!). Or maybe it's that some people diagram with axially-aligned rectangles, and others with circles and ovals, and there's a never-ending debate as to which is better or more \"geometrically pure\". But for crying out loud, a crayon with your non-dominant hand is better if you know what a coherent picture of the thing would even look like!\n\nSo what is \"sufficient\"? Functions, variables, conditions, abstraction; and making those be proper subsets of the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "human",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " model that the software IS. (This topic is hard to discuss, due to deeply ingrained ideas about how a \"computer thinks\" -- We \"have to\" do it that way ... NO, you HAVE TO deliver "
+                            },
+                            {
+                                "type": "text",
+                                "text": "human value",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and be and to reason about your code in terms of the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "human model ... ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "I'll leave it at that for now).\n\n... But alas, I'm only half-right on this.\n\nYes, if people knew how to make sane human models in code (which is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "not that hard to understand",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", but unfortunately stunted by tons of the wrong thinking that's painfully difficult to challenge / unlearn) ... then things would already be 100x better on so many levels. We'd be thinking "
+                            },
+                            {
+                                "type": "text",
+                                "text": "way",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " closer to the human model; that would actually be "
+                            },
+                            {
+                                "type": "text",
+                                "text": "the thing that is being designed",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in the code and the thing that developers "
+                            },
+                            {
+                                "type": "text",
+                                "text": "see",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " when looking at the code. The "
+                            },
+                            {
+                                "type": "text",
+                                "text": "code",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (and language, etc.) is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "just",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " the medium for expressing it!\n\n... I'm half-right because code (as currently done) is only "
+                            },
+                            {
+                                "type": "text",
+                                "text": "borderline",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " sufficient. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "If",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " developers had the right mindset, and it was used properly -- and a ("
+                            },
+                            {
+                                "type": "text",
+                                "text": "freaking reasonable",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ") expectation of a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "professional",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (or having earned a college degree in the stuff), then maybe it would be obvious enough. But alas, this is not the state of things, and a pile of text is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "really hard",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to point at and discuss this matter. Even if "
+                            },
+                            {
+                                "type": "text",
+                                "text": "developers",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " could work with that though, not just any human could look at that and make sense of it.\n\nThat's a barrier that I think can be breached, if there's something malleable enough to be / become a more obvious representation.\n\nI think both these \"halves\" go hand-in-hand. When you can see the model for what it is, it will be much easier to see sanity / insanity. And when things can be sane, then YES, the ability to model things more fluidly will be invaluable and people "
+                            },
+                            {
+                                "type": "text",
+                                "text": "will",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " be able to manage it -- because the thing they are designing is something that makes sense on a human level!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584235196.324400",
+        "parent_user_id": "U01003H81UM",
+        "reactions": [
+            {
+                "name": "point_up",
+                "users": [
+                    "U01003H81UM"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "daf1a8f3-dd74-4462-b845-dfaddf4fde9d",
+        "type": "message",
+        "text": "I might as well add some remaining pieces of my software vision, now that I've already dumped most of it into a single thread :P \n\n1. Despite the power of abstraction and recursive generation that code offers, source code itself is still more or less a hand-written 1-to-1 representation of the running program that is to be generated from it. That's like drawing a fractal manually, rather than recursively. But in a self-contained system where any code can operate on or generate any other code, that power can be bootstrapped right back into the code. The same goes for programming language and user interface, etc.\n\n2. Many software systems are divided by architectural or language boundaries (e.g. SQL database + .NET backend service + JavaScript running in a browser). But in a self-contained self-building system, all that code could \"live\" (literally, as I explained before) in the same place, and using a common representation, and the separate artifacts &amp; code could be generated out from it. For example, a single variable could affect logic in all components. Or perhaps that whole system could be coded as if the boundaries did not exist (e.g. like Dark lang) and in the most direct human terms possible, and then the \"build\" code could walk the code structure and identify which data and behaviors live where, and use some sorry if communication pattern to bridge the gap, without that having to be a thought in the \"design\" code.\n\n3. (Building off of #2) In systems where code is stored (and executed) in a structural form, you can send code from one system to be executed in another. This has the benefit of not needing multiple calls back and forth, and that the sent code could do (sandboxed) things that must remain on that side of the boundary; or vice versa. For example, taking HATEOS to a new level by _sending_ the \"engine of state\" back as part of an HTTP response (i.e. here's the data you requested, and here (code) is how to submit this back, and here (more code) is how to request more about this and what to do with the response; etc.) ... I mean, heck, the browser (or app or whatever else) engine itself could be sent, too! Here's some code, and _here's_ an interpreter for it.",
+        "user": "UAVCC2X70",
+        "ts": "1584855908.495600",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1584868973.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wgGY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I might as well add some remaining pieces of my software vision, now that I've already dumped most of it into a single thread :P \n\n1. Despite the power of abstraction and recursive generation that code offers, source code itself is still more or less a hand-written 1-to-1 representation of the running program that is to be generated from it. That's like drawing a fractal manually, rather than recursively. But in a self-contained system where any code can operate on or generate any other code, that power can be bootstrapped right back into the code. The same goes for programming language and user interface, etc.\n\n2. Many software systems are divided by architectural or language boundaries (e.g. SQL database + .NET backend service + JavaScript running in a browser). But in a self-contained self-building system, all that code could \"live\" (literally, as I explained before) in the same place, and using a common representation, and the separate artifacts & code could be generated out from it. For example, a single variable could affect logic in all components. Or perhaps that whole system could be coded as if the boundaries did not exist (e.g. like Dark lang) and in the most direct human terms possible, and then the \"build\" code could walk the code structure and identify which data and behaviors live where, and use some sorry if communication pattern to bridge the gap, without that having to be a thought in the \"design\" code.\n\n3. (Building off of #2) In systems where code is stored (and executed) in a structural form, you can send code from one system to be executed in another. This has the benefit of not needing multiple calls back and forth, and that the sent code could do (sandboxed) things that must remain on that side of the boundary; or vice versa. For example, taking HATEOS to a new level by "
+                            },
+                            {
+                                "type": "text",
+                                "text": "sending",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " the \"engine of state\" back as part of an HTTP response (i.e. here's the data you requested, and here (code) is how to submit this back, and here (more code) is how to request more about this and what to do with the response; etc.) ... I mean, heck, the browser (or app or whatever else) engine itself could be sent, too! Here's some code, and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "here's",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " an interpreter for it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584235196.324400",
+        "parent_user_id": "U01003H81UM"
+    },
+    {
+        "client_msg_id": "0E3A3C4D-C863-49FA-8DE0-22054D125325",
+        "type": "message",
+        "text": "Adobe sold off the air project to karman Which I believe is owned by Samsung, or some other Korean firm. And it still works, but there are some issues with web GL in regards to text entry fields. It turns out that text entry and soft keyboards are deeply intertwined to the lowest levels of the operating system, and that to do text entry in the field is more than 1 million lines of code, it\u2019s more cold than all the rest of the Graphics Layer put together. It is in fact the single reason why operating systems are so few in quantity, you can do the whole corner of the operating system very easily as the wirth did in his Lilith machine, And there are numerous embedded machine microkernels that are very tiny. But the second you want to support Korean Japanese Chinese Thai text and put Support suddenly things get really hard. And let\u2019s not forget about Hebrew and Arabic which are two important languages that are written right to left, and have to support switching direction and one entry field. So we have webGL will be great for presentation but Will it just fall down when it comes to having text entry That supports the tougher languages which by the way a significant fraction of the world uses. Graphic layer that doesn\u2019t have text entry it\u2019s going to be acceptable for video games but not for business purposes and since were talking about the virtual machine for the future of mankind it\u2019s going to take a while for them to figure this out and I don\u2019t think it\u2019s gonna happen that quickly.",
+        "user": "UEQ6M68H0",
+        "ts": "1584892057.001900",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1584241702.325100",
+        "parent_user_id": "UD3AK9JRF"
+    },
+    {
+        "client_msg_id": "6599816a-c298-4510-af2b-868626c854d1",
+        "type": "message",
+        "text": "If you are building a research system to explore the future of coding, then ASCII text entry might be good enough, depending on what you are researching. The ability to work with a small code base that one person can understand, that allows rapid iteration, might be more important to advancing your research, than the ability to support all the world's languages. And if the resulting system is only useful to 100,000,000 people, instead of to all 7,000,000,000 people, maybe that's good enough for you. Once the ideas are proven to work, then some trillion dollar corporation can take those ideas and replace your 20,000 lines of code with 20,000,000 lines of code. I think there is a virtue in not overengineering stuff that isn't important to your project.",
+        "user": "UJN1TAYEQ",
+        "ts": "1584894508.002500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wFsaE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If you are building a research system to explore the future of coding, then ASCII text entry might be good enough, depending on what you are researching. The ability to work with a small code base that one person can understand, that allows rapid iteration, might be more important to advancing your research, than the ability to support all the world's languages. And if the resulting system is only useful to 100,000,000 people, instead of to all 7,000,000,000 people, maybe that's good enough for you. Once the ideas are proven to work, then some trillion dollar corporation can take those ideas and replace your 20,000 lines of code with 20,000,000 lines of code. I think there is a virtue in not overengineering stuff that isn't important to your project."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1584241702.325100",
+        "parent_user_id": "UD3AK9JRF"
+    }
+]

@@ -1,0 +1,172 @@
+[
+    {
+        "client_msg_id": "295ba795-bde7-4829-8045-b6f224dc607a",
+        "type": "message",
+        "text": "Nice to see more Moonscript :smile:. I work on <http://howl.io|howl.io> which is pretty much all Moonscript.",
+        "user": "U8A5MS6R1",
+        "ts": "1584746249.081500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FBkI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Nice to see more Moonscript "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". I work on "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://howl.io",
+                                "text": "howl.io"
+                            },
+                            {
+                                "type": "text",
+                                "text": " which is pretty much all Moonscript."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "68ae66cd-8fb7-4686-bf2b-3ac303b85364",
+        "type": "message",
+        "text": "Failing pretty early with the following. BTW, does this need a specific version of Lua?\n```$ moon init.moon hello.alv \nmoon: ./copilot.moon:2: (4) module 'core' not found:No LuaRocks module found for core```",
+        "user": "U8A5MS6R1",
+        "ts": "1584748375.081700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MMp=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Failing pretty early with the following. BTW, does this need a specific version of Lua?\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "$ moon init.moon hello.alv \nmoon: ./copilot.moon:2: (4) module 'core' not found:No LuaRocks module found for core"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "f19a8ae8-760e-47c6-a721-e8717e13bec8",
+        "type": "message",
+        "text": "you're running Lua5.1? then the default package.path doesn't look for \"dir/init.lua\"-style modules. You'll need to add \"?/init.lua\" to LUA_PATH or append to package.path at the top of init.moon",
+        "user": "UNGNT3BKR",
+        "ts": "1584783498.082000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=f+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "you're running Lua5.1? then the default package.path doesn't look for \"dir/init.lua\"-style modules. You'll need to add \"?/init.lua\" to LUA_PATH or append to package.path at the top of init.moon"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "babbfcc2-a2ff-4fdd-9219-a9518c065a46",
+        "type": "message",
+        "text": "I havent tested it in a while, but it used to work fine when I still used love2d (which runs luajit/lua5.1). I'm developing in Lua5.3 at the moment",
+        "user": "UNGNT3BKR",
+        "ts": "1584783541.082200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Jr7N7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I havent tested it in a while, but it used to work fine when I still used love2d (which runs luajit/lua5.1). I'm developing in Lua5.3 at the moment"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "<@U8A5MS6R1> I'm noticing there are three more issues with Lua 5.1 i hadn't considered: xpcall doesn't take function arguments in Lua5.1, errors can only be strings, and the bit32 library is not builtin...",
+        "user": "UNGNT3BKR",
+        "ts": "1584792748.082400",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "bit32 is only needed for MIDI, and xpcall I can monkey patch. I guess I can work around the error handling too, but its going to degrade error messages.",
+        "user": "UNGNT3BKR",
+        "ts": "1584792794.082600",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "OTOH all of these features have been backported to luajit, so I think I will recommend running either that or Lua 5.3. I will addd this to the installation instructions asap.",
+        "user": "UNGNT3BKR",
+        "ts": "1584793074.082800",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "<@U8A5MS6R1> I have pushed a patch that supports both luajit (5.1-style) and Lua 5.3.",
+        "user": "UNGNT3BKR",
+        "ts": "1584794386.083000",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    }
+]
