@@ -2,11 +2,8 @@
 /*globals Vue, SimpleMarkdown*/
 import {getNameToCode, textFromCode, skinIdsToCodes} from './emoji.js';
 
-window.textFromCode = textFromCode;
-
 function msgMatchesFilter(msg, filter) {
   const matches = msg.$filterText.indexOf(filter) !== -1;
-  console.log(matches, msg.$filterText);
   return matches;
 }
 
@@ -97,11 +94,7 @@ function enrichMessage(msg, users) {
   }
   msg.$user = users[user] || dummyUser(user);
   msg.$userName = msg.$user.real_name;
-  msg.$filterText = (
-    msg.$dateStrISO +
-    msg.$userName +
-    msg.$text
-  ).toLowerCase();
+  msg.$filterText = (msg.$dateStrISO + msg.$userName + msg.$text).toLowerCase();
 
   return msg;
 }
@@ -220,140 +213,187 @@ function dateToDateString(d) {
   return `${year}-${padZero(month)}-${padZero(day)}`;
 }
 
+function getBaseUrl() {
+  const {origin, pathname} = location;
+  return origin + pathname;
+}
+
 function main() {
-  const app = new Vue({
-    el: '#app',
-    data: {
-      fromDate: yesterdayDate(),
-      toDate: tomorrowDate(),
-      channel: 'general',
-      loadingStatus: null,
-      msgFilter: '',
-      filteredMsgs: [],
-      history: {
-        msgs: [],
-        msgsByTs: {}
+  const query = parseQuery(window.location.search),
+    baseUrl = getBaseUrl(),
+    app = new Vue({
+      el: '#app',
+      data: {
+        baseUrl,
+        queryLink: baseUrl,
+        fromDate: yesterdayDate(),
+        toDate: tomorrowDate(),
+        channel: 'general',
+        loadingStatus: null,
+        msgFilter: '',
+        filteredMsgs: [],
+        history: {
+          msgs: [],
+          msgsByTs: {}
+        },
+        users: {}
       },
-      users: {}
-    },
-    methods: {
-      loadUsers: function () {
-        fetch('users.json')
-          .then(resp => resp.json())
-          .then(usersData => {
-            this.users = usersToUsersById(usersData);
-          });
-      },
-      loadChannelDate(channel, fromDate, toDate, toDateFinal) {
-        if (dateIsLessThanDate(fromDate, toDateFinal)) {
-          const [year, month, day] = dateParts(fromDate),
-            path = `${year}/${month}/${day}/${channel}.json`;
+      methods: {
+        loadUsers: function () {
+          fetch('users.json')
+            .then(resp => resp.json())
+            .then(usersData => {
+              this.users = usersToUsersById(usersData);
+            });
+        },
+        loadChannelDate(channel, fromDate, toDate, toDateFinal) {
+          if (dateIsLessThanDate(fromDate, toDateFinal)) {
+            const [year, month, day] = dateParts(fromDate),
+              path = `${year}/${month}/${day}/${channel}.json`;
 
-          this.loadingStatus = 'Loading ' + path;
+            this.loadingStatus = 'Loading ' + path;
 
-          fetch(path).then(res => {
-            if (res.status === 200) {
-              res.json().then(data => {
-                console.log(
+            fetch(path).then(res => {
+              if (res.status === 200) {
+                res.json().then(data => {
                   parseHistoryChannelData(
                     data,
                     this.users,
                     this.history.msgsByTs,
                     this.history.msgs
-                  ),
-                  data
-                );
+                  );
 
+                  this.loadChannelDate(
+                    channel,
+                    toDate,
+                    addDays(toDate, 1),
+                    toDateFinal
+                  );
+                });
+              } else {
                 this.loadChannelDate(
                   channel,
                   toDate,
                   addDays(toDate, 1),
                   toDateFinal
                 );
-              });
-            } else {
-              this.loadChannelDate(
-                channel,
-                toDate,
-                addDays(toDate, 1),
-                toDateFinal
-              );
-            }
-          });
-        } else {
-          this.loadingStatus = null;
-          this.filterMessages();
-        }
-      },
-      loadChannelDateRange: function (channel, fromDateBase, toDateFinal) {
-        let fromDate = cloneDate(fromDateBase),
-          toDate = addDays(fromDate, 1);
-
-        this.loadChannelDate(channel, fromDate, toDate, toDateFinal);
-      },
-      loadSelected: function () {
-        const fromDate = new Date(this.fromDate),
-          toDate = new Date(this.toDate);
-
-        this.filteredMsgs = [];
-        this.history.msgs = [];
-        this.history.msgsByTs = {};
-
-        this.loadChannelDateRange(this.channel, fromDate, toDate);
-      },
-      getDumpFileName: function (extension) {
-        return (
-          this.channel +
-          '_' +
-          this.fromDate +
-          '_' +
-          this.toDate +
-          '.' +
-          extension
-        );
-      },
-      filterMessages: function () {
-        const filterText = this.msgFilter.toLowerCase(),
-          result = [];
-        for (
-          let i = 0, msgs = this.history.msgs, len = msgs.length;
-          i < len;
-          i += 1
-        ) {
-          const parentMsg = msgs[i],
-            parentMatches = msgMatchesFilter(parentMsg, filterText),
-            responses = parentMsg.responses.filter((msg, _i, _it) =>
-              msgMatchesFilter(msg, filterText)
-            );
-
-          if (parentMatches || responses.length > 0) {
-            result.push(Object.assign({}, parentMsg, {responses}));
+              }
+            });
+          } else {
+            this.loadingStatus = null;
+            this.filterMessages();
           }
+        },
+        loadChannelDateRange: function (channel, fromDateBase, toDateFinal) {
+          let fromDate = cloneDate(fromDateBase),
+            toDate = addDays(fromDate, 1);
+
+          this.loadChannelDate(channel, fromDate, toDate, toDateFinal);
+        },
+        loadSelected: function () {
+          const fromDate = new Date(this.fromDate),
+            toDate = new Date(this.toDate);
+
+          this.filteredMsgs = [];
+          this.history.msgs = [];
+          this.history.msgsByTs = {};
+
+          this.loadChannelDateRange(this.channel, fromDate, toDate);
+        },
+        getDumpFileName: function (extension) {
+          return (
+            this.channel +
+            '_' +
+            this.fromDate +
+            '_' +
+            this.toDate +
+            '.' +
+            extension
+          );
+        },
+        filterMessages: function () {
+          const filterText = this.msgFilter.toLowerCase(),
+            result = [];
+          for (
+            let i = 0, msgs = this.history.msgs, len = msgs.length;
+            i < len;
+            i += 1
+          ) {
+            const parentMsg = msgs[i],
+              parentMatches = msgMatchesFilter(parentMsg, filterText),
+              responses = parentMsg.responses.filter((msg, _i, _it) =>
+                msgMatchesFilter(msg, filterText)
+              );
+
+            if (parentMatches || responses.length > 0) {
+              result.push(Object.assign({}, parentMsg, {responses}));
+            }
+          }
+
+          this.filteredMsgs = result;
+        },
+        onFilterChanged: function (e) {
+          this.msgFilter = e.target.value;
+          this.filterMessages();
+          this.updateQueryLink();
+        },
+        getQueryString: function () {
+          return `?fromDate=${this.fromDate}&toDate=${this.toDate}&channel=${this.channel}&filter=${this.msgFilter}`;
+        },
+        onFromDateChange: function (_e) {
+          this.updateQueryLink();
+        },
+        onToDateChange: function (_e) {
+          this.updateQueryLink();
+        },
+        onChannelChange: function (_e) {
+          this.updateQueryLink();
+        },
+        updateQueryLink: function () {
+          this.queryLink = this.baseUrl + this.getQueryString() + location.hash;
+        },
+        exportAsMd: function () {
+          const txt = this.history.msgs
+            .map(msg => msgToMd(msg))
+            .join('\n\n---\n\n');
+          downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
+        },
+        exportAsHTML: function () {
+          const msgsOutputNode = document.getElementById('msgs-output'),
+            msgsOutput = msgsOutputNode.innerHTML,
+            html = EXPORT_HTML_PREFIX + msgsOutput + EXPORT_HTML_SUFFIX;
+
+          downloadAs(html, this.getDumpFileName('html'), 'text/html');
         }
-
-        this.filteredMsgs = result;
-      },
-      onFilterChanged: function (e) {
-        this.msgFilter = e.target.value;
-        this.filterMessages();
-      },
-      exportAsMd: function () {
-        const txt = this.history.msgs
-          .map(msg => msgToMd(msg))
-          .join('\n\n---\n\n');
-        downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
-      },
-      exportAsHTML: function () {
-        const msgsOutputNode = document.getElementById('msgs-output'),
-          msgsOutput = msgsOutputNode.innerHTML,
-          html = EXPORT_HTML_PREFIX + msgsOutput + EXPORT_HTML_SUFFIX;
-
-        downloadAs(html, this.getDumpFileName('html'), 'text/html');
       }
-    }
-  });
+    });
 
   app.loadUsers();
+  let someParam = false;
+  if (query.fromDate) {
+    app.fromDate = query.fromDate;
+    someParam = true;
+  }
+
+  if (query.toDate) {
+    app.toDate = query.toDate;
+    someParam = true;
+  }
+
+  if (query.channel) {
+    app.channel = query.channel;
+    someParam = true;
+  }
+
+  if (query.filter) {
+    app.msgFilter = query.filter;
+    someParam = true;
+  }
+
+  app.updateQueryLink();
+  if (someParam) {
+    app.loadSelected();
+  }
 }
 
 const EXPORT_HTML_PREFIX = `
@@ -400,6 +440,63 @@ const customRules = {
 
 function mdToHTML(txt) {
   return htmlOutput(rawBuiltParser(txt + '\n\n', {inline: false}));
+}
+
+const hasOwn = Object.prototype.hasOwnProperty;
+
+function decodeQuery(string, escapeQuerySpace) {
+  string += '';
+  if (escapeQuerySpace === undefined) {
+    escapeQuerySpace = true;
+  }
+
+  try {
+    return decodeURIComponent(
+      escapeQuerySpace ? string.replace(/\+/g, '%20') : string
+    );
+  } catch (e) {
+    // we're not going to mess with weird encodings,
+    // give up and return the undecoded original string
+    // see https://github.com/medialize/URI.js/issues/87
+    // see https://github.com/medialize/URI.js/issues/92
+    return string;
+  }
+}
+
+function parseQuery(string, escapeQuerySpace) {
+  if (!string) {
+    return {};
+  }
+
+  // throw out the funky business - "?"[name"="value"&"]+
+  string = string.replace(/&+/g, '&').replace(/^\?*&*|&+$/g, '');
+
+  if (!string) {
+    return {};
+  }
+
+  const items = {},
+    splits = string.split('&'),
+    length = splits.length;
+
+  for (let i = 0; i < length; i += 1) {
+    const v = splits[i].split('='),
+      name = decodeQuery(v.shift(), escapeQuerySpace),
+      // no "=" is null according to http://dvcs.w3.org/hg/url/raw-file/tip/Overview.html#collect-url-parameters
+      value = v.length ? decodeQuery(v.join('='), escapeQuerySpace) : null;
+
+    if (hasOwn.call(items, name)) {
+      if (typeof items[name] === 'string' || items[name] === null) {
+        items[name] = [items[name]];
+      }
+
+      items[name].push(value);
+    } else {
+      items[name] = value;
+    }
+  }
+
+  return items;
 }
 
 main();

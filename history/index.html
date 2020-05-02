@@ -7,7 +7,7 @@
     <!-- this has to be duplicated in history/app.js EXPORT_HTML_PREFIX to make export look the same as this -->
     <style>.alert{border-radius:0}.msg-response{background-color:white!important}</style>
   </head>
-  <body class="p-3">
+  <body class="p-3" style="overflow-y:scroll">
 
     <div id="app">
       <div class="row">
@@ -16,7 +16,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text">From</label>
             </div>
-            <input type="date" v-model="fromDate" class="form-control">
+            <input type="date" v-model="fromDate" class="form-control" v-on:input="onFromDateChange">
           </div>
         </div>
         <div class="col">
@@ -24,7 +24,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text">To</label>
             </div>
-            <input type="date" v-model="toDate" class="form-control">
+            <input type="date" v-model="toDate" class="form-control" v-on:input="onToDateChange">
           </div>
         </div>
         <div class="col">
@@ -32,7 +32,7 @@
             <div class="input-group-prepend">
               <label class="input-group-text">Channel</label>
             </div>
-            <select v-model="channel" class="custom-select">
+            <select v-model="channel" class="custom-select" v-on:input="onChannelChange">
               <option value="general">#general</option>
               <option value="feedback">#feedback</option>
               <option value="two-minute-week">#two-minute-week</option>
@@ -41,15 +41,18 @@
         </div>
       </div>
 
-      <div class="row mt-1">
+      <div class="row mt-3">
         <div class="col text-center">
-          <button class="btn btn-success" v-on:click="loadSelected()">Load</button>
+          <button class="btn btn-success w-100" v-on:click="loadSelected()">Load</button>
         </div>
         <div class="col text-center">
-          <button class="btn btn-primary" v-on:click="exportAsMd()">Export as Markdown</button>
+          <a :href="queryLink" class="btn btn-link w-100" target="_blank">Link to This Search</a>
         </div>
         <div class="col text-center">
-          <button class="btn btn-primary" v-on:click="exportAsHTML()">Export as HTML</button>
+          <div class="btn-group w-100">
+            <button class="btn btn-primary" style="margin-right:2px" v-on:click="exportAsMd()">Export as Markdown</button>
+            <button class="btn btn-primary" v-on:click="exportAsHTML()">Export as HTML</button>
+          </div>
         </div>
       </div>
 
@@ -57,11 +60,20 @@
         {{loadingStatus}}
       </div>
 
-      <div class="input-group my-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text">Filter</label>
+      <div class="row my-3">
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text">Filter</label>
+            </div>
+            <input type="search" v-model="msgFilter" class="form-control" v-on:input="onFilterChanged">
+          </div>
         </div>
-        <input type="search" v-model="msgFilter" class="form-control" v-on:keyUp="onFilterChanged">
+        <div class="col">
+          <div class="alert alert-light text-center">
+            Showing: {{filteredMsgs.length}} / {{history.msgs.length}}
+          </div>
+        </div>
       </div>
 
       <div id="msgs-output">
