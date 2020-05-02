@@ -5,7 +5,7 @@ import os
 import io
 import shutil
 import copy
-from datetime import datetime
+from datetime import datetime, timedelta
 from pick import pick
 from time import sleep
 
@@ -17,17 +17,16 @@ from time import sleep
 # slack.im
 #
 # channelId is the id of the channel/group/im you want to download history for.
-def getHistory(pageableObject, channelId, from_ts, to_ts, pageSize = 100):
+def getHistory(pageableObject, channelId, from_dtime, to_dtime, pageSize = 100):
     messages = []
-    oldTimestamp = '1586124000.0'
-    lastTimestamp = to_ts
+    lastTimestamp = datetime_to_slack_timestamp(to_dtime)
 
     while(True):
         response = pageableObject.history(
             channel = channelId,
-            latest    = lastTimestamp,
-            oldest    = from_ts,
-            count     = pageSize
+            latest  = lastTimestamp,
+            oldest  = datetime_to_slack_timestamp(from_dtime),
+            count   = pageSize
         ).body
 
         messages.extend(response['messages'])
@@ -49,27 +48,27 @@ def mkdir(directory):
 
 
 # create datetime object from slack timestamp ('ts') string
-def parseTimeStamp( timeStamp ):
+def parseTimeStamp(timeStamp):
     if '.' in timeStamp:
         t_list = timeStamp.split('.')
-        if len( t_list ) != 2:
-            raise ValueError( 'Invalid time stamp' )
+        if len(t_list) != 2:
+            raise ValueError('Invalid time stamp')
         else:
-            return datetime.utcfromtimestamp( float(t_list[0]) )
+            return datetime.utcfromtimestamp(float(t_list[0]))
 
 
 # move channel files from old directory to one with new channel name
-def channelRename( oldRoomName, newRoomName ):
+def channelRename(oldRoomName, newRoomName):
     # check if any files need to be moved
     if not os.path.isdir(oldRoomName):
         return
     mkdir(newRoomName)
-    for fileName in os.listdir( oldRoomName ):
-        shutil.move( os.path.join( oldRoomName, fileName ), newRoomName )
-    os.rmdir( oldRoomName )
+    for fileName in os.listdir(oldRoomName):
+        shutil.move(os.path.join(oldRoomName, fileName), newRoomName)
+    os.rmdir(oldRoomName)
 
 
-def writeMessageFile( fileName, messages ):
+def writeMessageFile(fileName, messages):
     directory = os.path.dirname(fileName)
 
     # if there's no data to write to the file, return
@@ -80,38 +79,30 @@ def writeMessageFile( fileName, messages ):
         mkdir(directory)
 
     with open(fileName, 'w') as outFile:
-        json.dump( messages, outFile, indent=4)
+        json.dump(messages, outFile, indent=4)
 
 
 # parse messages by date
-def parseMessages( roomDir, messages, roomType ):
+def parseMessages(base_dir, roomDir, messages, roomType):
     nameChangeFlag = roomType + "_name"
 
     currentFileDate = ''
     currentMessages = []
     for message in messages:
         #first store the date of the next message
-        ts = parseTimeStamp( message['ts'] )
-        fileDate = '{:%Y-%m-%d}'.format(ts)
-
-        #if it's on a different day, write out the previous day's messages
-        if fileDate != currentFileDate:
-            outFileName = u'{room}/{file}.json'.format( room = roomDir, file = currentFileDate )
-            writeMessageFile( outFileName, currentMessages )
-            currentFileDate = fileDate
-            currentMessages = []
+        ts = parseTimeStamp(message['ts'])
 
         # check if current message is a name change
         # dms won't have name change events
-        if roomType != "im" and ( 'subtype' in message ) and message['subtype'] == nameChangeFlag:
+        if roomType != "im" and ('subtype' in message) and message['subtype'] == nameChangeFlag:
             roomDir = message['name']
             oldRoomPath = message['old_name']
             newRoomPath = roomDir
-            channelRename( oldRoomPath, newRoomPath )
+            channelRename(oldRoomPath, newRoomPath)
 
-        currentMessages.append( message )
-    outFileName = u'{room}/{file}.json'.format( room = roomDir, file = currentFileDate )
-    writeMessageFile( outFileName, currentMessages )
+        currentMessages.append(message)
+    outFileName = u'{room}.json'.format(room = roomDir, file = currentFileDate)
+    writeMessageFile(os.path.join(base_dir, outFileName), currentMessages)
 
 def filterConversationsByName(channelsOrGroups, channelOrGroupNames):
     return [conversation for conversation in channelsOrGroups if conversation['name'] in channelOrGroupNames]
@@ -122,7 +113,7 @@ def promptForPublicChannels(channels):
     return [channels[index] for channelName, index in selectedChannels]
 
 # fetch and write history for all public channels
-def fetchPublicChannels(channels, from_ts, to_ts):
+def fetchPublicChannels(channels, from_dtime, to_dtime):
     if dryRun:
         print("Public Channels selected for export:")
         for channel in channels:
@@ -132,10 +123,14 @@ def fetchPublicChannels(channels, from_ts, to_ts):
 
     for channel in channels:
         channel_name = channel['name']
-        print(u"Fetching history for Public Channel: {0}".format(channel_name))
-        mkdir(channel_name)
-        messages = getHistory(slack.channels, channel['id'], from_ts, to_ts)
-        parseMessages(channel_name, messages, 'channel')
+        print(u"Fetching Public Channel: {0} {1} {2}".format(channel_name, from_dtime, to_dtime))
+        base_dir = os.path.join(date_to_dirname(from_dtime))
+        mkdir(base_dir)
+        messages = getHistory(slack.channels, channel['id'], from_dtime, to_dtime)
+        parseMessages(base_dir, channel_name, messages, 'channel')
+
+def date_to_dirname(date):
+    return os.path.join(str(date.year), str(date.month), str(date.day))
 
 # write channels.json file
 def dumpChannelFile():
@@ -143,7 +138,7 @@ def dumpChannelFile():
 
     #We will be overwriting this file on each run.
     with open('channels.json', 'w') as outFile:
-        json.dump( channels , outFile, indent=4)
+        json.dump(channels , outFile, indent=4)
 
 # fetch all users for the channel and return a map userId -> userName
 def getUserMap():
@@ -155,8 +150,8 @@ def getUserMap():
 # stores json of user info
 def dumpUserFile():
     #write to user file, any existing file needs to be overwritten.
-    with open( "users.json", 'w') as userFile:
-        json.dump( users, userFile, indent=4 )
+    with open("users.json", 'w') as userFile:
+        json.dump(users, userFile, indent=4)
 
 # get basic info about the slack channel to ensure the authentication token works
 def doTestAuth():
@@ -203,21 +198,20 @@ def dumpDummyChannel():
     channelName = channels[0]['name']
     mkdir(channelName)
     fileDate = '{:%Y-%m-%d}'.format(datetime.today())
-    outFileName = u'{room}/{file}.json'.format( room = channelName, file = fileDate )
+    outFileName = u'{room}/{file}.json'.format(room = channelName, file = fileDate)
     writeMessageFile(outFileName, [])
 
-def finalize():
-    os.chdir('..')
-    if zipName:
-        shutil.make_archive(zipName, 'zip', outputDirectory, None)
-        shutil.rmtree(outputDirectory)
-    exit()
+def iso_date_to_datetime(date_str):
+    if date_str == 'now':
+        return datetime.now()
+
+    return datetime.fromisoformat(date_str)
+
+def datetime_to_slack_timestamp(dt):
+    return str(dt.timestamp())
 
 def iso_date_to_slack_timestamp(date_str):
-    if date_str == 'now':
-        return None
-
-    dt = datetime.fromisoformat(date_str)
+    dt = iso_date_to_datetime(date_str)
     ts = dt.timestamp()
     return str(ts)
 
@@ -225,7 +219,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Export Slack history')
 
     parser.add_argument('--token', required=True, help="Slack API token")
-    parser.add_argument('--zip', help="Name of a zip file to output as")
 
     parser.add_argument(
         '--dryRun',
@@ -264,7 +257,6 @@ if __name__ == "__main__":
     bootstrapKeyValues()
 
     dryRun = args.dryRun
-    zipName = args.zip
 
     outputDirectory = args.output_dir
     mkdir(outputDirectory)
@@ -280,9 +272,16 @@ if __name__ == "__main__":
         filterConversationsByName,
         promptForPublicChannels)
 
-    from_ts = iso_date_to_slack_timestamp(args.from_date)
-    to_ts = iso_date_to_slack_timestamp(args.to_date)
-    if len(selectedChannels) > 0:
-        fetchPublicChannels(selectedChannels, from_ts, to_ts)
+    from_dtime_base = iso_date_to_datetime(args.from_date)
+    to_dtime_final = iso_date_to_datetime(args.to_date)
+    one_day = timedelta(days=1)
 
-    finalize()
+    from_dtime = from_dtime_base
+    to_dtime = from_dtime + one_day
+
+    if len(selectedChannels) > 0:
+        while from_dtime < to_dtime_final:
+            fetchPublicChannels(selectedChannels, from_dtime, to_dtime)
+            from_dtime = to_dtime
+            to_dtime = to_dtime + one_day
+
