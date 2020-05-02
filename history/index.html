@@ -12,23 +12,38 @@
     <div id="app">
       <div class="row">
         <div class="col">
-          <input type="date" v-model="fromDate" class="form-control">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text">From</label>
+            </div>
+            <input type="date" v-model="fromDate" class="form-control">
+          </div>
         </div>
         <div class="col">
-          <input type="date" v-model="toDate" class="form-control">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text">To</label>
+            </div>
+            <input type="date" v-model="toDate" class="form-control">
+          </div>
         </div>
         <div class="col">
-          <select v-model="channel" class="custom-select">
-            <option value="general">#general</option>
-            <option value="feedback">#feedback</option>
-            <option value="two-minute-week">#two-minute-week</option>
-          </select>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text">Channel</label>
+            </div>
+            <select v-model="channel" class="custom-select">
+              <option value="general">#general</option>
+              <option value="feedback">#feedback</option>
+              <option value="two-minute-week">#two-minute-week</option>
+            </select>
+          </div>
         </div>
       </div>
 
       <div class="row mt-1">
         <div class="col text-center">
-          <button class="btn btn-primary" v-on:click="loadSelected()">Load</button>
+          <button class="btn btn-success" v-on:click="loadSelected()">Load</button>
         </div>
         <div class="col text-center">
           <button class="btn btn-primary" v-on:click="exportAsMd()">Export as Markdown</button>
@@ -42,7 +57,12 @@
         {{loadingStatus}}
       </div>
 
-      <input type="search" v-model="msgFilter" class="form-control my-3" v-on:keyUp="onFilterChanged" placeholder="Message Filter">
+      <div class="input-group my-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Filter</label>
+        </div>
+        <input type="search" v-model="msgFilter" class="form-control" v-on:keyUp="onFilterChanged">
+      </div>
 
       <div id="msgs-output">
         <div v-for="msg in filteredMsgs" :key="msg.ts" class="alert alert-dark msg-root my-1 p-2 bg-light" :id="msg.$dateStrISO">
