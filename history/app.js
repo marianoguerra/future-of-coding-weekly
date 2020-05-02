@@ -4,6 +4,12 @@ import {getNameToCode, textFromCode, skinIdsToCodes} from './emoji.js';
 
 window.textFromCode = textFromCode;
 
+function msgMatchesFilter(msg, filter) {
+  const matches = msg.$filterText.indexOf(filter) !== -1;
+  console.log(matches, msg.$filterText);
+  return matches;
+}
+
 function downloadAs(exportObj, exportName, contentType) {
   const dataBlob = new Blob([exportObj], {type: contentType});
 
@@ -20,7 +26,7 @@ function downloadAs(exportObj, exportName, contentType) {
 }
 
 function msgToMd(msg) {
-  const base = `*[${msg.$dateStr}]* **${msg.$user.real_name}**:\n\n${msg.$text}`;
+  const base = `*[${msg.$dateStr}]* **${msg.$userName}**:\n\n${msg.$text}`;
   if (msg.responses.length === 0) {
     return base;
   } else {
@@ -29,8 +35,7 @@ function msgToMd(msg) {
       '\n\n\n' +
       msg.responses
         .map(
-          msg =>
-            `> *[${msg.$dateStr}]* **${msg.$user.real_name}**:\n\n${msg.$text}`
+          msg => `> *[${msg.$dateStr}]* **${msg.$userName}**:\n\n${msg.$text}`
         )
         .join('\n\n\n')
     );
@@ -88,8 +93,15 @@ function enrichMessage(msg, users) {
   } catch (error) {
     console.log(date, msg, error);
     msg.$dateStr = 'Invalid Date';
+    msg.$dateStrISO = 'Invalid Date';
   }
   msg.$user = users[user] || dummyUser(user);
+  msg.$userName = msg.$user.real_name;
+  msg.$filterText = (
+    msg.$dateStrISO +
+    msg.$userName +
+    msg.$text
+  ).toLowerCase();
 
   return msg;
 }
@@ -216,6 +228,8 @@ function main() {
       toDate: tomorrowDate(),
       channel: 'general',
       loadingStatus: null,
+      msgFilter: '',
+      filteredMsgs: [],
       history: {
         msgs: [],
         msgsByTs: {}
@@ -267,8 +281,8 @@ function main() {
             }
           });
         } else {
-          console.log(this.history.msgs);
           this.loadingStatus = null;
+          this.filterMessages();
         }
       },
       loadChannelDateRange: function (channel, fromDateBase, toDateFinal) {
@@ -281,6 +295,7 @@ function main() {
         const fromDate = new Date(this.fromDate),
           toDate = new Date(this.toDate);
 
+        this.filteredMsgs = [];
         this.history.msgs = [];
         this.history.msgsByTs = {};
 
@@ -296,6 +311,31 @@ function main() {
           '.' +
           extension
         );
+      },
+      filterMessages: function () {
+        const filterText = this.msgFilter.toLowerCase(),
+          result = [];
+        for (
+          let i = 0, msgs = this.history.msgs, len = msgs.length;
+          i < len;
+          i += 1
+        ) {
+          const parentMsg = msgs[i],
+            parentMatches = msgMatchesFilter(parentMsg, filterText),
+            responses = parentMsg.responses.filter((msg, _i, _it) =>
+              msgMatchesFilter(msg, filterText)
+            );
+
+          if (parentMatches || responses.length > 0) {
+            result.push(Object.assign({}, parentMsg, {responses}));
+          }
+        }
+
+        this.filteredMsgs = result;
+      },
+      onFilterChanged: function (e) {
+        this.msgFilter = e.target.value;
+        this.filterMessages();
       },
       exportAsMd: function () {
         const txt = this.history.msgs
