@@ -286,18 +286,29 @@ function main() {
 
         this.loadChannelDateRange(this.channel, fromDate, toDate);
       },
+      getDumpFileName: function (extension) {
+        return (
+          this.channel +
+          '_' +
+          this.fromDate +
+          '_' +
+          this.toDate +
+          '.' +
+          extension
+        );
+      },
       exportAsMd: function () {
         const txt = this.history.msgs
           .map(msg => msgToMd(msg))
           .join('\n\n---\n\n');
-        downloadAs(txt, 'foc-dump.md', 'text/markdown');
+        downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
       },
       exportAsHTML: function () {
         const msgsOutputNode = document.getElementById('msgs-output'),
           msgsOutput = msgsOutputNode.innerHTML,
           html = EXPORT_HTML_PREFIX + msgsOutput + EXPORT_HTML_SUFFIX;
 
-        downloadAs(html, 'foc-dump.html', 'text/html');
+        downloadAs(html, this.getDumpFileName('html'), 'text/html');
       }
     }
   });
