@@ -1,0 +1,1266 @@
+[
+    {
+        "client_msg_id": "595fc4fe-6c0a-4b10-b53a-4c6d55024b71",
+        "type": "message",
+        "text": "I like this online regex \"IDE\": <https://regex101.com/|https://regex101.com/>",
+        "user": "UAL7940NM",
+        "ts": "1574896153.248100",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "title": "Regex101 - online regex editor and debugger",
+                "title_link": "https://regex101.com/",
+                "text": "Regex101 allows you to create, debug, test and have your expressions explained for PHP, PCRE, Python, Golang and JavaScript. The website also features a community where you can share useful expressions.",
+                "fallback": "Regex101 - online regex editor and debugger",
+                "from_url": "https://regex101.com/",
+                "service_icon": "https://regex101.com/static/assets/apple-icon-57x57.png",
+                "service_name": "regex101.com",
+                "id": 1,
+                "original_url": "https://regex101.com/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Jst",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I like this online regex \"IDE\": "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://regex101.com/",
+                                "text": "https://regex101.com/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574880983.245400",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "ULM3U6275",
+                    "UP7SQ8KT3",
+                    "UNE30DK8U"
+                ],
+                "count": 3
+            },
+            {
+                "name": "100",
+                "users": [
+                    "UNE30DK8U"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3f7b82e2-ce11-4a3d-86c6-e216c994ef03",
+        "type": "message",
+        "text": "This is a very Forth-like topic :)",
+        "user": "UAVCC2X70",
+        "ts": "1574899766.248400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kcl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is a very Forth-like topic :)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC",
+        "reactions": [
+            {
+                "name": "grin",
+                "users": [
+                    "UHDQ62M4P"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "75650E0C-5BB9-4A28-8452-ECE719AB105E",
+        "type": "message",
+        "text": "yeah, it would have to be a custom language and environment. you\u2019d need something like unison\u2019s content addressing system. if i were to buzzword it i\u2019d call it a \u201csemantic addressing\u201d system",
+        "user": "UHWC9PXBL",
+        "ts": "1574906767.250600",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1574794252.227300",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "85123bab-e1da-4509-a517-5d99070991ed",
+        "type": "message",
+        "text": "Just to get back to the extension mechanisms, there's three integration points that I think work so well together:\n\n\u2022 Acme will execute any program typed and gestured in the app, setting an environment variable that contains the ID of the Acme window where it's executing. So users \"install\" \"plugins\" by typing a name into the top bar, where it stays until they delete it.\n\u2022 Other programs can connect to Acme via a network protocol which, among other things, lets you control any window given its ID. In particular, if you request a window's event stream, that suppresses almost all default behaviors so that you can redefine what the \"execute\" and \"look\" mouse gestures do, while other windows continue to operate normally.\n\u2022 The network protocol emulates a filesystem interface that for convenience is wrapped by a command-line program whose interface boils down to `9p read [path]` and `9p write [path]`.\nSo given any interface problem, you can attack it in a variety of ways:\n\n\u2022 Make a program that the user invokes, whose input is the current selection and/or whose output overwrites the current selection.\n\u2022 Make a program that controls Acme from afar with the network protocol.\n\u2022 Combination of the first two.\nAnd it's remarkably simple. Like, here's a shell script that you can use as your $EDITOR that opens a file in a new Acme window, adding \"Cancel\" and \"Done\" commands to the UI that dictate the exit code and whether it saves:\n\n```#!/bin/bash\n\nfilename=\"$1\"\n\nwinid=$(echo $(9p read acme/new/ctl) | cut -d ' ' -f 1)\n\n# Open the file\necho name $filename | 9p write acme/$winid/ctl\necho get | 9p write acme/$winid/ctl\n\n# Add commands to the tag line\necho -n Cancel Done | 9p write acme/$winid/tag\n\n9p read acme/$winid/event 2&gt; /dev/null | while read -r line; do\n\tcmd=$(echo $line | cut -d ' ' -f 5)\n\n\tif [ \"$cmd\" == \"Cancel\" ]; then\n\t\t# Mark the file clean\n\t\techo clean | 9p write acme/$winid/ctl\n\n\t\t# Close the window\n\t\techo del | 9p write acme/$winid/ctl\n\n\t\texit 1\n\tfi\n\n\tif [ \"$cmd\" == \"Done\" ]; then\n\t\t# Write the file\n\t\techo put | 9p write acme/$winid/ctl\n\n\t\t# Close the window\n\t\techo del | 9p write acme/$winid/ctl\n\n\t\texit\n\tfi\ndone```\nThe whole thing might be complex to implement for the editor devs, but there are obvious compromises that would make it easy, and probably still be infinitely better than an API that consists entirely of command-line arguments and SIGINT. :sweat_smile: If it ever doesn't seem worth it, consider threads like this: <https://twitter.com/geoffreylitt/status/1178806585289773056>",
+        "user": "UFEQUBNNT",
+        "ts": "1574921333.251500",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "fallback": "<https://twitter.com/geoffreylitt|@geoffreylitt>: Is there a small simple tweak that you desperately wish you could make to some piece of software you use frequently?\n\n(Collecting motivating examples for a tool for end user tweaking)",
+                "ts": 1569884365,
+                "author_name": "Geoffrey Litt",
+                "author_link": "https://twitter.com/geoffreylitt/status/1178806585289773056",
+                "author_icon": "https://pbs.twimg.com/profile_images/722626068293763072/4erM-SPN_normal.jpg",
+                "author_subname": "@geoffreylitt",
+                "text": "Is there a small simple tweak that you desperately wish you could make to some piece of software you use frequently?\n\n(Collecting motivating examples for a tool for end user tweaking)",
+                "service_name": "twitter",
+                "service_url": "https://twitter.com/",
+                "from_url": "https://twitter.com/geoffreylitt/status/1178806585289773056",
+                "id": 1,
+                "original_url": "https://twitter.com/geoffreylitt/status/1178806585289773056",
+                "footer": "Twitter",
+                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Jtqxa",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Just to get back to the extension mechanisms, there's three integration points that I think work so well together:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Acme will execute any program typed and gestured in the app, setting an environment variable that contains the ID of the Acme window where it's executing. So users \"install\" \"plugins\" by typing a name into the top bar, where it stays until they delete it."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Other programs can connect to Acme via a network protocol which, among other things, lets you control any window given its ID. In particular, if you request a window's event stream, that suppresses almost all default behaviors so that you can redefine what the \"execute\" and \"look\" mouse gestures do, while other windows continue to operate normally."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The network protocol emulates a filesystem interface that for convenience is wrapped by a command-line program whose interface boils down to "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "9p read [path]",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " and "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "9p write [path]",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nSo given any interface problem, you can attack it in a variety of ways:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Make a program that the user invokes, whose input is the current selection and/or whose output overwrites the current selection."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Make a program that controls Acme from afar with the network protocol."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Combination of the first two."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAnd it's remarkably simple. Like, here's a shell script that you can use as your $EDITOR that opens a file in a new Acme window, adding \"Cancel\" and \"Done\" commands to the UI that dictate the exit code and whether it saves:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "#!/bin/bash\n\nfilename=\"$1\"\n\nwinid=$(echo $(9p read acme/new/ctl) | cut -d ' ' -f 1)\n\n# Open the file\necho name $filename | 9p write acme/$winid/ctl\necho get | 9p write acme/$winid/ctl\n\n# Add commands to the tag line\necho -n Cancel Done | 9p write acme/$winid/tag\n\n9p read acme/$winid/event 2> /dev/null | while read -r line; do\n\tcmd=$(echo $line | cut -d ' ' -f 5)\n\n\tif [ \"$cmd\" == \"Cancel\" ]; then\n\t\t# Mark the file clean\n\t\techo clean | 9p write acme/$winid/ctl\n\n\t\t# Close the window\n\t\techo del | 9p write acme/$winid/ctl\n\n\t\texit 1\n\tfi\n\n\tif [ \"$cmd\" == \"Done\" ]; then\n\t\t# Write the file\n\t\techo put | 9p write acme/$winid/ctl\n\n\t\t# Close the window\n\t\techo del | 9p write acme/$winid/ctl\n\n\t\texit\n\tfi\ndone"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe whole thing might be complex to implement for the editor devs, but there are obvious compromises that would make it easy, and probably still be infinitely better than an API that consists entirely of command-line arguments and SIGINT. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile"
+                            },
+                            {
+                                "type": "text",
+                                "text": " If it ever doesn't seem worth it, consider threads like this: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://twitter.com/geoffreylitt/status/1178806585289773056"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574624756.123700",
+        "parent_user_id": "UFEQUBNNT"
+    },
+    {
+        "client_msg_id": "c151e4f2-5859-4f77-b1bd-9a3b802c2c9b",
+        "type": "message",
+        "text": "Did anyone ever take the work done by Eve and carry forward the torch and keep developing those ideas? If not, why not? Was the approach a dead-end? I got the sense that it was a promising direction but they simply ran out of money/motivation. I haven\u2019t looked deeply into everyone\u2019s projects here, but been lurking for a while and I don\u2019t seem to hear of any projects that claim to be descendants of Eve--though I could be wrong.",
+        "user": "UNLS33M61",
+        "ts": "1574929029.255500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Zvz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Did anyone ever take the work done by Eve and carry forward the torch and keep developing those ideas? If not, why not? Was the approach a dead-end? I got the sense that it was a promising direction but they simply ran out of money/motivation. I haven\u2019t looked deeply into everyone\u2019s projects here, but been lurking for a while and I don\u2019t seem to hear of any projects that claim to be descendants of Eve--though I could be wrong."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574929029.255500",
+        "reply_count": 23,
+        "reply_users_count": 8,
+        "latest_reply": "1578550920.079300",
+        "reply_users": [
+            "UBN9AFS0N",
+            "ULM3U6275",
+            "UEBG0NPDK",
+            "UHDQ62M4P",
+            "UNLS33M61",
+            "UHWC9PXBL",
+            "UJN1TAYEQ",
+            "UCGR73CAY"
+        ],
+        "subscribed": true,
+        "last_read": "1578550920.079300"
+    },
+    {
+        "client_msg_id": "68aa0c28-3ea6-4f65-8d47-446a51d90807",
+        "type": "message",
+        "text": "Also, as a separate question, I was thinking of getting myself something for Black Friday. Either the Little Schemer or the Little Typer. Which would you recommend if you\u2019ve read either?",
+        "user": "UNLS33M61",
+        "ts": "1574929137.256500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0V8LR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Also, as a separate question, I was thinking of getting myself something for Black Friday. Either the Little Schemer or the Little Typer. Which would you recommend if you\u2019ve read either?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574929137.256500",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1574941495.257100",
+        "reply_users": [
+            "UMU2RLPR8",
+            "UA14TGLTC"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "89787a04-abbe-431d-ac82-1c702a18039c",
+        "type": "message",
+        "text": "I think <http://mech-lang.org/home.html> is trying to continue on that area?",
+        "user": "UBN9AFS0N",
+        "ts": "1574930522.256600",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "title": "The Mech Programming Language",
+                "title_link": "http://mech-lang.org/home.html",
+                "text": "Mech is a language for developing data-driven, reactive systems like animations, games, and robots. It makes composing, transforming, and distributing data easy, allowing you to focus on the essential complexity of your work.",
+                "fallback": "The Mech Programming Language",
+                "from_url": "http://mech-lang.org/home.html",
+                "service_name": "mech-lang.org",
+                "id": 1,
+                "original_url": "http://mech-lang.org/home.html"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "EfN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://mech-lang.org/home.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": " is trying to continue on that area?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574929029.255500",
+        "parent_user_id": "UNLS33M61"
+    },
+    {
+        "client_msg_id": "c77ccf69-96ac-4027-86e7-58a33bd19c12",
+        "type": "message",
+        "text": "i love them both!",
+        "user": "UMU2RLPR8",
+        "ts": "1574934815.256900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Cm1zO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i love them both!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574929137.256500",
+        "parent_user_id": "UNLS33M61"
+    },
+    {
+        "client_msg_id": "91aa061d-9222-4eaf-8843-4b9324162246",
+        "type": "message",
+        "text": "The Reasoned Schemer.  :wink:",
+        "user": "UA14TGLTC",
+        "ts": "1574941495.257100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Tvpcj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The Reasoned Schemer.  "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574929137.256500",
+        "parent_user_id": "UNLS33M61",
+        "reactions": [
+            {
+                "name": "owl",
+                "users": [
+                    "UAJ9DV971"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fe52a560-69ac-4361-b615-796cd9211860",
+        "type": "message",
+        "text": "<@UAVCC2X70> I don\u2019t know Forth, can you give me more intuition on that? :slightly_smiling_face:",
+        "user": "UL3CJ7YKC",
+        "ts": "1574946140.257400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MalU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UAVCC2X70"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I don\u2019t know Forth, can you give me more intuition on that? "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "7bdb445a-5630-429d-a0e9-3107a421353e",
+        "type": "message",
+        "text": "if your language had a link type, equality would be over the url? the text? both?",
+        "user": "UBN9AFS0N",
+        "ts": "1574951564.258100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rGgvm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "if your language had a link type, equality would be over the url? the text? both?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574951564.258100",
+        "reply_count": 14,
+        "reply_users_count": 6,
+        "latest_reply": "1576253680.003400",
+        "reply_users": [
+            "UP28ETUSE",
+            "UC2A2ARPT",
+            "UBN9AFS0N",
+            "UJN1TAYEQ",
+            "U5STGTB3J",
+            "UFEQUBNNT"
+        ],
+        "subscribed": true,
+        "last_read": "1576253680.003400"
+    },
+    {
+        "client_msg_id": "0f952d1c-566e-4410-9a3e-a3f95e2fd683",
+        "type": "message",
+        "text": "I think both? Just like in a standard PL we sometimes need pointer equality and other times we follow the pointer and the check for equality \u2014 entities vs value objects, to use the domain-driven design terminology.",
+        "user": "UP28ETUSE",
+        "ts": "1574951711.260100",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UP28ETUSE",
+            "ts": "1574951749.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zmc",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think both? Just like in a standard PL we sometimes need pointer equality and other times we follow the pointer and the check for equality \u2014 entities vs value objects, to use the domain-driven design terminology."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574951564.258100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "04CFDCE0-5C2E-40B0-BB6F-64956460788E",
+        "type": "message",
+        "text": "What would you say are Eve\u2019s ideas?",
+        "user": "ULM3U6275",
+        "ts": "1574953201.261400",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1574929029.255500",
+        "parent_user_id": "UNLS33M61",
+        "reactions": [
+            {
+                "name": "heavy_check_mark",
+                "users": [
+                    "UE6EFEPTQ",
+                    "U79HM6726"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "539FE303-E8CB-4B5C-8690-AEFCC705A40E",
+        "type": "message",
+        "text": "There would be several separate meanings of equality (equal link, equal text), and then a combined product equality. When comparing, pick the equality you need.",
+        "user": "UC2A2ARPT",
+        "ts": "1574957026.263600",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1574951564.258100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "B1880B5A-9C1E-46A3-B6E1-06609C7D2819",
+        "type": "message",
+        "text": "So considering you're offering accessors for the url and name fields, I guess direct link-to-link equality should be \"both\". Though that does feel more arbitrary. Maybe only allow equality on primitive values? (Oh god)",
+        "user": "UC2A2ARPT",
+        "ts": "1574957182.265200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1574957260.000000"
+        },
+        "thread_ts": "1574951564.258100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "0f73a723-e330-4cdc-acc3-4d930de26f74",
+        "type": "message",
+        "text": "I will allow to compare by either when the user is using the data type, my problem is when for example using a link value as a key in a map, there the equality I choose can only be one",
+        "user": "UBN9AFS0N",
+        "ts": "1574957624.265600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WAC",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I will allow to compare by either when the user is using the data type, my problem is when for example using a link value as a key in a map, there the equality I choose can only be one"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574951564.258100",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3a688372-c5c6-44b3-9393-840653cff790",
+        "type": "message",
+        "text": "maybe I could have 3 types for advanced cases you can pick LinkTitleEq and LinkAddressEq that override equals in different ways, I will see how far I can go with \"full equality\" and how confusing it is (as in the video where the aggregation fails if the user expected to count all links with the same label as equal)",
+        "user": "UBN9AFS0N",
+        "ts": "1574957691.265900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "T6B",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "maybe I could have 3 types for advanced cases you can pick LinkTitleEq and LinkAddressEq that override equals in different ways, I will see how far I can go with \"full equality\" and how confusing it is (as in the video where the aggregation fails if the user expected to count all links with the same label as equal)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574951564.258100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "a12559a9-3811-4899-975a-47c2ca22b8e1",
+        "type": "message",
+        "text": "then there's the case of normalizing a link, are two links the same if the address is the same but one is http and the other https?",
+        "user": "UBN9AFS0N",
+        "ts": "1574957741.266100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nx8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "then there's the case of normalizing a link, are two links the same if the address is the same but one is http and the other https?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574951564.258100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "42DC70B9-96D7-4B55-B956-2F4D68B919BE",
+        "type": "message",
+        "text": "Yeah, there were lots of very different and orthogonal things in there over the years :slightly_smiling_face: which are you specifically interested in?",
+        "user": "UEBG0NPDK",
+        "ts": "1574959815.268100",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1574929029.255500",
+        "parent_user_id": "UNLS33M61"
+    },
+    {
+        "client_msg_id": "8828d79a-4b90-4de1-a058-d961348b0b3e",
+        "type": "message",
+        "text": "I guess what he means is that abstracting (and re-inlining) are trivial operations in Forth.",
+        "user": "UHDQ62M4P",
+        "ts": "1574964683.269900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hntb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I guess what he means is that abstracting (and re-inlining) are trivial operations in Forth."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "2cf2df2f-5293-4078-a0c7-fffef8c72368",
+        "type": "message",
+        "text": "of code, anyway :slightly_smiling_face:",
+        "user": "UHDQ62M4P",
+        "ts": "1574964744.270100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qIN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "of code, anyway "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "405c8824-2096-4558-b0e0-8b74aa5f71ce",
+        "type": "message",
+        "text": "I think this is the right link for my favorite talk on Forth: <https://youtube.com/watch?v=NK0NwqF8F0k|https://youtube.com/watch?v=NK0NwqF8F0k>",
+        "user": "UCUSW7WVD",
+        "ts": "1574965397.270300",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/",
+                "title": "1x Forth",
+                "title_link": "https://youtube.com/watch?v=NK0NwqF8F0k",
+                "author_name": "Samuel Falvo II",
+                "author_link": "https://www.youtube.com/user/saf271828",
+                "thumb_url": "https://i.ytimg.com/vi/NK0NwqF8F0k/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: 1x Forth",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https://www.youtube.com/embed/NK0NwqF8F0k?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 300,
+                "from_url": "https://youtube.com/watch?v=NK0NwqF8F0k",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "id": 1,
+                "original_url": "https://youtube.com/watch?v=NK0NwqF8F0k"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1NZ1Q",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think this is the right link for my favorite talk on Forth: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://youtube.com/watch?v=NK0NwqF8F0k",
+                                "text": "https://youtube.com/watch?v=NK0NwqF8F0k"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "d1f7a971-a51e-4978-8d5d-e901abad90f7",
+        "type": "message",
+        "text": "I click \"Learn\" on <http://mech-lang.org/home.html> and get a blank page. Presumably its trying to use its own tech to show itself off, but its not working. Any docs?",
+        "user": "UHDQ62M4P",
+        "ts": "1574965547.270600",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "title": "The Mech Programming Language",
+                "title_link": "http://mech-lang.org/home.html",
+                "text": "Mech is a language for developing data-driven, reactive systems like animations, games, and robots. It makes composing, transforming, and distributing data easy, allowing you to focus on the essential complexity of your work.",
+                "fallback": "The Mech Programming Language",
+                "from_url": "http://mech-lang.org/home.html",
+                "service_name": "mech-lang.org",
+                "id": 1,
+                "original_url": "http://mech-lang.org/home.html"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uAV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I click \"Learn\" on "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://mech-lang.org/home.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": " and get a blank page. Presumably its trying to use its own tech to show itself off, but its not working. Any docs?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574929029.255500",
+        "parent_user_id": "UNLS33M61"
+    },
+    {
+        "client_msg_id": "cf11c22b-3705-4628-b99d-ff276125a726",
+        "type": "message",
+        "text": "What do instances of the link type denote? Do they denote the file that the URL points to, or do they denote the link itself? What operations are available on link values? Do these operations operate on the contents of the file, or do they operate on the URL? If I print a link value to the console, will I see the contents of the file, or will I see the URL? In the former case, equality should be defined on the file contents. In the latter case, equality should be defined on the URL. What you see when you print a value is a strong hint about how equality should be defined for that value. In Curv, I have a 'file' function that takes a URL as an argument, and returns the contents of the file. If I want URL equality, I use 'url1 == url2'. If I want file equality, I use 'file url1 == file url2'.",
+        "user": "UJN1TAYEQ",
+        "ts": "1574966995.271000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zx4H",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What do instances of the link type denote? Do they denote the file that the URL points to, or do they denote the link itself? What operations are available on link values? Do these operations operate on the contents of the file, or do they operate on the URL? If I print a link value to the console, will I see the contents of the file, or will I see the URL? In the former case, equality should be defined on the file contents. In the latter case, equality should be defined on the URL. What you see when you print a value is a strong hint about how equality should be defined for that value. In Curv, I have a 'file' function that takes a URL as an argument, and returns the contents of the file. If I want URL equality, I use 'url1 == url2'. If I want file equality, I use 'file url1 == file url2'."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574951564.258100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "afacd9d2-ccc3-447b-acfa-5e4b814d0fb3",
+        "type": "message",
+        "text": "<@UCGR73CAY> ^",
+        "user": "UEBG0NPDK",
+        "ts": "1574967612.271200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pYP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCGR73CAY"
+                            },
+                            {
+                                "type": "text",
+                                "text": " ^"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574929029.255500",
+        "parent_user_id": "UNLS33M61",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCGR73CAY"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4ddb3461-d1bf-49a0-ab54-cc0bdddea0c6",
+        "type": "message",
+        "text": "it's a web based application, can't link to files. The object is a link, it's the value itself and the operations operate on the link, I can't operate on the content of the url (I could have an operation to fetch the content if I wanted), can't print to the console, can only display it, if displaying it it will display itself, I could have a function to transform it into an iframe if it made sense.",
+        "user": "UBN9AFS0N",
+        "ts": "1574967724.271400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vw0CA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "it's a web based application, can't link to files. The object is a link, it's the value itself and the operations operate on the link, I can't operate on the content of the url (I could have an operation to fetch the content if I wanted), can't print to the console, can only display it, if displaying it it will display itself, I could have a function to transform it into an iframe if it made sense."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574951564.258100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "a3f17349-f232-4a8f-abf0-2e62e2fd4f49",
+        "type": "message",
+        "text": "What I meant is that Forth is meant to be so simple (compact, anyway) that everything about the program can be invented right there, just for that program. So everything you need to understand is immediately available and no extra layers of bloat.\n\nI haven't watched that video yet, but the description sounds like it's roughly about the same ideas",
+        "user": "UAVCC2X70",
+        "ts": "1574971778.271600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RBxe9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What I meant is that Forth is meant to be so simple (compact, anyway) that everything about the program can be invented right there, just for that program. So everything you need to understand is immediately available and no extra layers of bloat.\n\nI haven't watched that video yet, but the description sounds like it's roughly about the same ideas"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "f657486f-aede-488f-8232-cded9b2e032b",
+        "type": "message",
+        "text": "Yeah, though I'd say Forth's flexible abstractions stem more from the culture of the community than anything technical about the language.",
+        "user": "UCUSW7WVD",
+        "ts": "1574972437.271800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "egsz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, though I'd say Forth's flexible abstractions stem more from the culture of the community than anything technical about the language."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "953566c8-021c-4ca7-b994-8ba30d13dbb7",
+        "type": "message",
+        "text": "ty",
+        "user": "UL3CJ7YKC",
+        "ts": "1574972486.272000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Lfe",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "ty"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "40788701-5164-41f7-b604-3eef0e542a79",
+        "type": "message",
+        "text": "<@UAVCC2X70> \"everything about the program can be invented right there, just for that program\".. but why is that? Does terseness buy you that? A versatile set of built-in functionality? Does it work beyond simple programs?",
+        "user": "UHDQ62M4P",
+        "ts": "1574975937.272200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "X6/EN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UAVCC2X70"
+                            },
+                            {
+                                "type": "text",
+                                "text": " \"everything about the program can be invented right there, just for that program\".. but why is that? Does terseness buy you that? A versatile set of built-in functionality? Does it work beyond simple programs?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "35f6b9f6-22de-459f-9712-f4c1eaa77072",
+        "type": "message",
+        "text": "I guess languages that are verbose and/or lack convenience features do the opposite: they invite abstraction simply to try and cut down on the repeating code you're constantly writing :slightly_smiling_face:",
+        "user": "UHDQ62M4P",
+        "ts": "1574976236.272400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qTbb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I guess languages that are verbose and/or lack convenience features do the opposite: they invite abstraction simply to try and cut down on the repeating code you're constantly writing "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574787700.220500",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "f101fd23-f205-4209-9a63-9e34d2cd6a15",
+        "type": "message",
+        "text": "(Unavoidable) shared mutable state marks cooperating objects + one\u2019s data depends on the other\u2019s (in time) for runtime branching.\n\nCould not we explicitly restrict the access of (lets say 2) objects (1-1 methods) in time - relative to one other?\n\nWe could listen to all the relevant(!) messages to validate the access of objects for the shared state.\n\nThe dev should enumerate 2 things (for each accessing method per mutable state):\n\u2022 All the valid sequences of messages which indicate access is granted for the method. \u201cSynced.\u201d \n\u2022 All the valid sequences of messages which indicate access is denied for the method. \u201cSync needed.\u201d\n(Modelled with Finite Automatons)\n\nWe should be also be able to determine (generate) all the relevant(!) sequences of messages (per state per accessing method) - and check if something is left out. If so, the system prompts us and we must fill put the remaining cases to \u201cgranted\u201d/\u201cdenied\u201d.\n(The general idea is to always EXPLICITLY enumerate when to do and when NOT to do something so we can later check with exhaustive search.)\n\nBy relevant messages and relevant sequences of messages I mean those which by cascading through in the system (calls) might have any chance to effect the access of the method.\n\nOnly if there are too many branches (combinatorial explosion) shall we narrow EXPLICITLY the cases we think behave the same. (By defining more Finite Automatons).\n\nI have this idea for a long time now and I come back to it over and over again. Seems really simple, but did not find anything like that yet. The closest findings are something like TLA+ and Temporal Logic (especially from the complexity of CTL), but to me this process seems quite good and I am not sure why it does not exists yet. <@UCUSW7WVD> <@UDKTZSD6H>",
+        "user": "UL3CJ7YKC",
+        "ts": "1574980329.297900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "k0Cl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(Unavoidable) shared mutable state marks cooperating objects + one\u2019s data depends on the other\u2019s (in time) for runtime branching.\n\nCould not we explicitly restrict the access of (lets say 2) objects (1-1 methods) in time - relative to one other?\n\nWe could listen to all the relevant(!) messages to validate the access of objects for the shared state.\n\nThe dev should enumerate 2 things (for each accessing method per mutable state):\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "All the valid sequences of messages which indicate access is granted for the method. \u201cSynced.\u201d "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "All the valid sequences of messages which indicate access is denied for the method. \u201cSync needed.\u201d"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(Modelled with Finite Automatons)\n\nWe should be also be able to determine (generate) all the relevant(!) sequences of messages (per state per accessing method) - and check if something is left out. If so, the system prompts us and we must fill put the remaining cases to \u201cgranted\u201d/\u201cdenied\u201d.\n(The general idea is to always EXPLICITLY enumerate when to do and when NOT to do something so we can later check with exhaustive search.)\n\nBy relevant messages and relevant sequences of messages I mean those which by cascading through in the system (calls) might have any chance to effect the access of the method.\n\nOnly if there are too many branches (combinatorial explosion) shall we narrow EXPLICITLY the cases we think behave the same. (By defining more Finite Automatons).\n\nI have this idea for a long time now and I come back to it over and over again. Seems really simple, but did not find anything like that yet. The closest findings are something like TLA+ and Temporal Logic (especially from the complexity of CTL), but to me this process seems quite good and I am not sure why it does not exists yet. "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UDKTZSD6H"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574980329.297900",
+        "reply_count": 14,
+        "reply_users_count": 6,
+        "latest_reply": "1575567268.088900",
+        "reply_users": [
+            "UCUSW7WVD",
+            "UL3CJ7YKC",
+            "UHDQ62M4P",
+            "UAVCC2X70",
+            "UBN9AFS0N",
+            "U8A5MS6R1"
+        ],
+        "subscribed": true,
+        "last_read": "1575567268.088900"
+    },
+    {
+        "client_msg_id": "8b544383-1b1a-4b27-a673-5b6197c340e1",
+        "type": "message",
+        "text": "Not following this at all.",
+        "user": "UCUSW7WVD",
+        "ts": "1574980773.298000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uS8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Not following this at all."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574980329.297900",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "9fa16026-3219-4e60-b23c-c5317c89dfa5",
+        "type": "message",
+        "text": "Okay, I\u2019ll try to rephrase it then.",
+        "user": "UL3CJ7YKC",
+        "ts": "1574981068.298200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GecW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Okay, I\u2019ll try to rephrase it then."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574980329.297900",
+        "parent_user_id": "UL3CJ7YKC"
+    }
+]
