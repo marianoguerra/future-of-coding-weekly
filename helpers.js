@@ -56,7 +56,9 @@ function main() {
         'Tom Lieber': '[Tom Lieber](https://twitter.com/alltom)',
         'noahtren': '[noahtren](https://twitter.com/noahtren)',
         'Jack Armitage': '[Jack Armitage](https://twitter.com/jdkarmitage)',
-        'Dan Swirsky': '[Dan Swirsky](https://twitter.com/danskydan)'
+        'Dan Swirsky': '[Dan Swirsky](https://twitter.com/danskydan)',
+        'yoshiki': '[yoshiki](https://twitter.com/yoshikischmitz)',
+        'Alex Wein': '[Alex Wein](https://vis.social/@alexwein)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
