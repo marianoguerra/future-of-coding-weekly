@@ -58,7 +58,8 @@ function main() {
         'Jack Armitage': '[Jack Armitage](https://twitter.com/jdkarmitage)',
         'Dan Swirsky': '[Dan Swirsky](https://twitter.com/danskydan)',
         'yoshiki': '[yoshiki](https://twitter.com/yoshikischmitz)',
-        'Alex Wein': '[Alex Wein](https://vis.social/@alexwein)'
+        'Alex Wein': '[Alex Wein](https://vis.social/@alexwein)',
+        'Doug Moen': '[Doug Moen](http://curv3d.org/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
