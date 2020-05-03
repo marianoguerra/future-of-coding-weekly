@@ -1,0 +1,687 @@
+[
+    {
+        "client_msg_id": "2ec8e0bf-f7a6-4511-b50b-9fada8abe768",
+        "type": "message",
+        "text": "DSLs are better than wide spectrum languages because they are simpler. There is less to learn. The syntax can be specialized for the task. The semantics can be restricted to only what is needed for the task, which leads to cleaner, simpler semantics.",
+        "user": "UJN1TAYEQ",
+        "ts": "1571177686.366000",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571172258.364800",
+        "parent_user_id": "UJN1TAYEQ",
+        "reactions": [
+            {
+                "name": "white_check_mark",
+                "users": [
+                    "UKP3B2J5D"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "bcc778dc-09b6-43ce-9362-42edec375c8e",
+        "type": "message",
+        "text": "I rather like the way Haskell deals with numbers\u2014 most literals are the most general class of Number that can hold them, and usage will refine it to a narrower type where necessary. That seems to me like a decent compromise between ergonomics and flexibility, and it's especially nice because the system does a lot of work for the user to figure out what data type is appropriate.\n\nI think any \"serious\" language must at least provide the capability for a user to _implement_ those data types, even if they are not built into the language. And obviously the exposed \"batteries-in\" types strongly set the tone for the user about what it's like to work with the language.",
+        "user": "U6FKVSVCK",
+        "ts": "1571179223.366400",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571172258.364800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "c3d700a8-82eb-46f4-a491-4c21090cb463",
+        "type": "message",
+        "text": "I currently distinguish between integers and reals in my system, but I don't like it. I strongly agree with the spirit of your \"single numeric type is simpler\" sentiment. I have aims of moving to a more Haskell-y system in my platform. (Hindley-milner is already there, so a good chunk groundwork is laid)",
+        "user": "U6FKVSVCK",
+        "ts": "1571179531.367100",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U6FKVSVCK",
+            "ts": "1571179555.000000"
+        },
+        "thread_ts": "1571172258.364800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "97f6635c-d3f6-43dc-a729-edfcf649adbc",
+        "type": "message",
+        "text": "Although if you want One Format To Rule Them All, quad-precision float has an appeal\u2014 the mantissa is 112 bits (which means integers 112 bits or smaller are exact), and my favorite fact about quad floats is that if 1.0 is 1 AU, then (1ulp) : (the radius of a hydrogen atom) :: (radius of hydrogen atom) : (radius of Earth).\n\n\"128 bits ought to be enough for anybody.\"",
+        "user": "U6FKVSVCK",
+        "ts": "1571181030.367900",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571172258.364800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "C309090D-6113-4A2F-A480-A6D07FF1D407",
+        "type": "message",
+        "text": "what would you propose the DSLs should be implemented in? otherwise i see this as being another brick balanced on top of the host language pyramid",
+        "user": "UHWC9PXBL",
+        "ts": "1571184155.369700",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571172258.364800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "968448a4-dbba-41ce-a125-fec32bf38299",
+        "type": "message",
+        "text": "<@UHWC9PXBL> I'm not sure I understand your post. I would implement a virtual machine, garbage collector, etc, in a systems programming language: something that provides direct access to machine data types, full control over memory layout of objects, and lets me write unsafe code where necessary. You know: like C, C++, maybe Rust. I consider these DSLs, and I wouldn't want to use these languages for everything. A compiler, on the other hand, can quite reasonably be written in a higher level language. What's your proposal, and what about the \"brick balancing\" metaphor?",
+        "user": "UJN1TAYEQ",
+        "ts": "1571189457.374300",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571172258.364800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "ef8bb9fd-9fb5-4866-b8e4-8921ae3690c4",
+        "type": "message",
+        "text": "I think it goes without saying, that all of the FoC projects have as their overt or secret agenda the dethroning of JS. JS was developed in haste, and the HTML/CSS/JS/framework stack is arguably one of the most complex and messy toolchains ever used by programmers. Just from an economic point of view it cannot continue this way, because the costs of code that balloons exponentially in terms of dependencies is non-linear. When people were rushing to get something out quickly to \"get there first\", the poor quality of the toolchain was an acceptable tradeoff, but for companies and products that are now going to be around for decades, it is time to adopt some sensible programming methodologies and tools. We have learned a lot about what kind of errors are common, and how to make it harder for human error to occur, and although inertia is the most powerful force in the universe and the change will take some time, there is hope and opportunity here.",
+        "user": "UEQ6M68H0",
+        "ts": "1571193444.374500",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1570947400.258800",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "10ac9ded-37fd-45fc-96ee-0f5e8fe16d04",
+        "type": "message",
+        "text": "We standardized on python in my company for most scripting use. It eliminated many different scripting languages, and by having one main language it lowers the training cost of new employees. Even though some of our python scripts process huge data sets, we have dedicated machines for those processes, and since they are mostly batch job that run at specific times of day, we don't even care how long they take as long as they finish before the next day! We don't bother to compile using some fancier python alternative, because it just doesn't matter. And when it comes to performance, whether you are running against SSD vs. mechanical HDD matters way more than the programming language or what compiler you used. If it takes 4 hours in plain python and 1 hour in pypy, who cares? Sure there are people with giant data sets, but how much new data does even a medium sized company generate new per day? Not really that much compared to computer speeds.",
+        "user": "UEQ6M68H0",
+        "ts": "1571194143.374700",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571132079.296400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "3ad1a4fe-23d7-404d-815e-367c15a76a23",
+        "type": "message",
+        "text": "People whinge about performance and claim that some new language is X% faster or slower than language Y, but the ease of learning and use, and maintenance costs cost way more than computer power. I can buy used Supermicro or Dell servers for a few hundred that are only a few years old and costs thousands before. We are awash in CPU power today, but human skill is hard to get a hold of (and retain!). So really the future of computing is about making things easier for humans, not faster for the computer.",
+        "user": "UEQ6M68H0",
+        "ts": "1571194305.374900",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571132079.296400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "5fc8d6e5-fea6-4006-a3b1-16fd16e921c9",
+        "type": "message",
+        "text": "Well, we are living in a present where one language+toolchain dominates in the web (the HTML/CSS/JS/framework), because the monopoly of browser manufacturers agreed among themselves to only allow this language. As Web Assembler creeps into the mix, this monopoly is going to end, hence the intense energy to prepare for that opening. In the back end of servers, it is save to say that PHP and Java have dominated the past, and those two are vulnerable. So there is an intense battle for the back end as well. And then there are specialty markets like  ML, VR, 3D gaming, where intense battles rage. Of course no one single language will dominate all these areas, but in a given area, absolutely history shows that people coalesce to at least a 70% level around a language. It started with FORTRAN, then it was COBOL, and then Java (the COBOL of our time), then JS on the web, and in the future who knows. It certainly won't be Java or PHP on the backend, and it won't be JS in the web either. The existing tools are very costly, and with millions of new programmers coming into the field over the next 5 years per some estimates, the existing toolchains represent an arcane, ridiculously frustrating environment. The joke in the TV business was NTSC which is the US' analog tv standard meant never twice the same color, and i wish someone would come up with a cute name for CSS, which is one of the most frustrating languages ever devised. The tiniest error can cause your page to distort in a completely unpredictable manner, and people expect that to be the only way to go for the foreseeable future?  Frustration = manhours wasted, and human costs have to be minimized, otherwise the industry will just outsource.",
+        "user": "UEQ6M68H0",
+        "ts": "1571194977.375100",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571162513.349300",
+        "parent_user_id": "UJKKBAMLL"
+    },
+    {
+        "client_msg_id": "d97b0f32-b879-4c42-bc19-7c5b489ce038",
+        "type": "message",
+        "text": "I feel like this question about many DSL vs. one big general-purpose language becomes useless at some point without actually discussing what a DSL is. I would argue Tensorflow and Numpy are DSLs, but they\u2019re embedded in Python. Most people would just call them libraries. If it\u2019s the latter, does that mean Python is the one true language for data science?",
+        "user": "UFB8STN7K",
+        "ts": "1571196434.376700",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196434.376700",
+        "reply_count": 6,
+        "reply_users_count": 2,
+        "latest_reply": "1571253442.406800",
+        "reply_users": [
+            "UKJGU23KP",
+            "UFB8STN7K"
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UKP3B2J5D"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a16b42ab-93e0-40eb-83a8-d1609483ee1c",
+        "type": "message",
+        "text": "Like of course, each domain has its own set of primitives and operations that make sense for it, and we need libraries/languages/whatever to reflect that. The main question is rather, when there is shared structure between domains, how much of that can be captured by abstractions in the underlying programming system?",
+        "user": "UFB8STN7K",
+        "ts": "1571196503.377700",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196503.377700",
+        "reply_count": 5,
+        "reply_users_count": 2,
+        "latest_reply": "1571257840.407700",
+        "reply_users": [
+            "UEF95M2RH",
+            "UFB8STN7K"
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UKP3B2J5D",
+                    "UAL7940NM"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e7502647-0b4b-4661-af6e-936e6dad9fb7",
+        "type": "message",
+        "text": "Certainly Python is the dominant scripting language of today, and because it is the de-facto standard glue language in the ML field, which is being taught everywhere and hyped as a magic bullet for whatever ails companies,  Python will shoot to the top 3 languages after JS (which dominates web), and Java/.NET/PHP (which dominate server side). I don't expect that Python will ever be dominant in back end or web.",
+        "user": "UEQ6M68H0",
+        "ts": "1571201713.381700",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1571271243.000000"
+        },
+        "thread_ts": "1571201713.381700",
+        "reply_count": 7,
+        "reply_users_count": 3,
+        "latest_reply": "1571271567.411100",
+        "reply_users": [
+            "UMU2RLPR8",
+            "UP448V1PB",
+            "UEQ6M68H0"
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UL3CJ7YKC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "E490AE16-18CB-408A-A713-0DC4489CB6E0",
+        "type": "message",
+        "text": "<@UCUSW7WVD> I agree for software, but any new system that can\u2019t work with existing data and protocols ends up being useless.",
+        "user": "UJBAJNFLK",
+        "ts": "1571211189.383900",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571149857.330400",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "36650FCA-4926-4273-BBF6-8633F9321426",
+        "type": "message",
+        "text": "Racket is a nice example of a platform designed for making interoperable DSLs. Assuming that everyone adopts it, of course, which is unlikely.",
+        "user": "UJBAJNFLK",
+        "ts": "1571211437.386200",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571172258.364800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "b88fd472-8bd6-40e4-ab3c-98d413cf7018",
+        "type": "message",
+        "text": "Absolutely! <https://futureofcoding.slack.com/archives/C5T9GPWFL/p1568821241254900?thread_ts=1568748321.207400> I'm a digital packrat; I wouldn't want to give up my data hoard.",
+        "user": "UCUSW7WVD",
+        "ts": "1571211574.386400",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://futureofcoding.slack.com/archives/C5T9GPWFL/p1568821241254900?thread_ts=1568748321.207400",
+                "fallback": "[September 18th, 2019 8:40 AM] ak: Part of the problem with a word like 'reuse' is that it leads to us conflating many different things. Standardizing on a common protocol is not the same as asking the whole world to use the exact same bits of code.",
+                "ts": "1568821241.254900",
+                "author_id": "UCUSW7WVD",
+                "author_subname": "Kartik Agaram",
+                "channel_id": "C5T9GPWFL",
+                "channel_name": "general",
+                "is_msg_unfurl": true,
+                "is_reply_unfurl": true,
+                "text": "Part of the problem with a word like 'reuse' is that it leads to us conflating many different things. Standardizing on a common protocol is not the same as asking the whole world to use the exact same bits of code.",
+                "author_name": "Kartik Agaram",
+                "author_link": "https://futureofcoding.slack.com/team/UCUSW7WVD",
+                "author_icon": "https://avatars.slack-edge.com/2019-07-14/687915485201_6e649a383cf8f9e366e3_48.png",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "id": 1,
+                "original_url": "https://futureofcoding.slack.com/archives/C5T9GPWFL/p1568821241254900?thread_ts=1568748321.207400",
+                "footer": "From a thread in #general"
+            }
+        ],
+        "thread_ts": "1571149857.330400",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "1b7cb8e9-185a-442e-96e6-16d971ba9da7",
+        "type": "message",
+        "text": "About 40 yrs ago I coined the acronym DTIL - Domain and Target Independent Language - as the definition of what I was striving for, and have been ever since. The Target independence meaning nothing in the language was affected by how the underlying hardware likes to work. Hence efficiency has to be achieved by whatever cleverness the language implementation can deploy; plus I expected hardware to get very much faster in the future (it did).\n\nThus DSLs are the opposite of DTILs, as indeed would a \"TSL\" be - a Target Specific Language. C is a TSL - you can specify `uint16`, etc and fiddle with bits. It's very close to the metal. I guess GLSL and OpenCL are also kinds of TSL: any language that is a wrapper for a machine type.\n\nSo I'm not interested in a number type that is machine-specific, or that makes things faster. If needed, that speed can be achieved by handing-off or wrapping or clever tricks.\n\nAnd I am not interested in `data Nat = Z | S Nat` as my pos-int number system, because no-one talks of three bananas by saying `S S S Z bananas`!\n\nI store numbers as strings, so they can be any length. My challenge of course, is that's not efficient, but I'm on this forum to ask for help with that, amongst other things!",
+        "user": "UE6EFEPTQ",
+        "ts": "1571213130.386700",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UE6EFEPTQ",
+            "ts": "1571213322.000000"
+        },
+        "thread_ts": "1571172258.364800",
+        "parent_user_id": "UJN1TAYEQ",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U8A5MS6R1",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0ac06b0c-4a48-4756-9ba0-380a2a6e3329",
+        "type": "message",
+        "text": "PHP is well down the list these days and python is already up there near the top <https://insights.stackoverflow.com/survey/2019#technology>",
+        "user": "UMU2RLPR8",
+        "ts": "1571213863.387100",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "Stack Overflow",
+                "title": "Stack Overflow Developer Survey 2019",
+                "title_link": "https://insights.stackoverflow.com/survey/2019#technology",
+                "text": "Nearly 90,000 took this comprehensive, annual survey of people who code. Demographics. Most loved, dreaded and wanted technologies. Salary and careers.",
+                "fallback": "Stack Overflow: Stack Overflow Developer Survey 2019",
+                "image_url": "https://cdn.sstatic.net/insights/Img/Survey/2019/TwitterCard.png?v=87e2a0f1b247",
+                "from_url": "https://insights.stackoverflow.com/survey/2019#technology",
+                "image_width": 477,
+                "image_height": 250,
+                "image_bytes": 143789,
+                "service_icon": "https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d",
+                "id": 1,
+                "original_url": "https://insights.stackoverflow.com/survey/2019#technology"
+            }
+        ],
+        "thread_ts": "1571201713.381700",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "af470858-08a8-4402-a95b-f36c57e251ec",
+        "type": "message",
+        "text": "Thanks to <@UL3EE9WR1> for changing the topic to the community documentation. :thumbsup: This is perfect!",
+        "user": "UJKKBAMLL",
+        "ts": "1571214312.387400",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571170191.360800",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "649f0acd-5df9-4fec-9b2c-8f5d81043c96",
+        "type": "message",
+        "text": "<@UEQ6M68H0> Your touch on some positions/observations that I absolutely agree with, which is why I believe (concerning the web backend languages only) instead of replacing PHP/Python/Ruby/Go/etc. we (and future programmers) need cloud glue-code to tie all these services together. FD this is what we are building at Storyscript. Regardless of Storyscript, I believe we need (a) less complexity, (b) more inclusive/diverse/flexible backends (c) better abstraction than k8s (d) tools that are more cohesive so the barrier to entry is less intense for our fellow new developers.",
+        "user": "UJKKBAMLL",
+        "ts": "1571214715.388000",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571162513.349300",
+        "parent_user_id": "UJKKBAMLL"
+    },
+    {
+        "client_msg_id": "f19f90c3-93f3-4e0b-bb2e-15af638860ab",
+        "type": "message",
+        "text": "Python is pretty ubiquitous in web backend, especially where the JVM or .NET CLR aren't a hard requirement.",
+        "user": "UP448V1PB",
+        "ts": "1571238236.389200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UP448V1PB",
+            "ts": "1571238418.000000"
+        },
+        "thread_ts": "1571201713.381700",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "point_up",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "09e09208-54c4-43b0-87cf-fc9bcef7e7d1",
+        "type": "message",
+        "text": "I haven't heard it called a scripting language in about 10 years either :wink:",
+        "user": "UP448V1PB",
+        "ts": "1571238272.389400",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571201713.381700",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "<@UFB8STN7K> I'm not sure I understand exactly what you mean. Could you give:\n\n1. an example of what you mean by shared structure between domains;\n2. an example of it being captured by abstractions in the underlying programming system;\n3. an example of it _not_ being captured by abstractions in the underlying system?",
+        "user": "UEF95M2RH",
+        "ts": "1571240472.394300",
+        "thread_ts": "1571196503.377700",
+        "root": {
+            "client_msg_id": "a16b42ab-93e0-40eb-83a8-d1609483ee1c",
+            "type": "message",
+            "text": "Like of course, each domain has its own set of primitives and operations that make sense for it, and we need libraries/languages/whatever to reflect that. The main question is rather, when there is shared structure between domains, how much of that can be captured by abstractions in the underlying programming system?",
+            "user": "UFB8STN7K",
+            "ts": "1571196503.377700",
+            "team": "T5TCAFTA9",
+            "thread_ts": "1571196503.377700",
+            "reply_count": 5,
+            "reply_users_count": 2,
+            "latest_reply": "1571257840.407700",
+            "reply_users": [
+                "UEF95M2RH",
+                "UFB8STN7K"
+            ],
+            "subscribed": false
+        },
+        "client_msg_id": "f7f89990-4281-426d-8913-a441203fbc82"
+    },
+    {
+        "client_msg_id": "a0fe90ad-0296-4243-a9f4-353863f40fc4",
+        "type": "message",
+        "text": "Given that we agree there will be many DSLs/tools fitting many different industries. I\u2019m proposing a new channel for `cloud-centric languages for application developers` as <#C5T9GPWFL|general> and <#CLYCGTCPL|end-user-programming> are too broad and IMO not capable to sustain this many sub-communities/interests.\n\u2014 Take for example languages could include Storyscript, Darklang, Ballerina, Bloomlang, Strat and maybe Stdlib. These are all cloud focused for application developers.\nI ask now: who is interested in this category (give a :thumbsup: if you are)? Should we create a separate thread for inspiring and sharing ideas (give a :hash: if you agree)? Thank you!",
+        "user": "UJKKBAMLL",
+        "ts": "1571240646.396900",
+        "team": "T5TCAFTA9",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJKKBAMLL",
+                    "U8A5MS6R1",
+                    "UHWC9PXBL",
+                    "UAL7940NM",
+                    "UPDJV04FR"
+                ],
+                "count": 5
+            },
+            {
+                "name": "hash",
+                "users": [
+                    "UJKKBAMLL",
+                    "UFPH678P4",
+                    "UHWC9PXBL"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "75dea7b1-9079-4c64-bbcb-68e8f3360792",
+        "type": "message",
+        "text": "<https://stratechery.com/2019/google-and-ambient-computing/>",
+        "user": "UBN9AFS0N",
+        "ts": "1571241676.397700",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "Stratechery by Ben Thompson",
+                "title": "Google and Ambient Computing",
+                "title_link": "https://stratechery.com/2019/google-and-ambient-computing/",
+                "text": "Google presented a vision of ambient computing that goes beyond the smartphone. The company is well-placed, but faces challenges both in the marketplace and in the mirror.",
+                "fallback": "Stratechery by Ben Thompson: Google and Ambient Computing",
+                "thumb_url": "https://stratechery.com/wp-content/uploads/2019/10/googleambient-1024x768.png",
+                "ts": 1571237470,
+                "from_url": "https://stratechery.com/2019/google-and-ambient-computing/",
+                "thumb_width": 1024,
+                "thumb_height": 768,
+                "service_icon": "https://stratechery.com/favicon/apple-touch-icon.png",
+                "id": 1,
+                "original_url": "https://stratechery.com/2019/google-and-ambient-computing/"
+            }
+        ]
+    },
+    {
+        "client_msg_id": "971dbabb-d87a-405d-a5fa-97ca7a2c0dd8",
+        "type": "message",
+        "text": "anyone working on programming for ambient computing? :slightly_smiling_face:",
+        "user": "UBN9AFS0N",
+        "ts": "1571241687.398100",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571241687.398100",
+        "reply_count": 14,
+        "reply_users_count": 5,
+        "latest_reply": "1571428035.027300",
+        "reply_users": [
+            "UC2A2ARPT",
+            "UN89MTTML",
+            "UHWC9PXBL",
+            "UBM0S2AN4",
+            "UE6EFEPTQ"
+        ],
+        "subscribed": true,
+        "last_read": "1571428035.027300"
+    },
+    {
+        "client_msg_id": "25c09fdc-e2fb-4591-bcba-bc9cf5cf23d3",
+        "type": "message",
+        "text": "It feels akin to <#CL0FBFS8H|robust-computation>.",
+        "user": "UC2A2ARPT",
+        "ts": "1571241786.398200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1571241824.000000"
+        },
+        "thread_ts": "1571241687.398100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "63aba156-2361-4630-ac20-59e66eb43a23",
+        "type": "message",
+        "text": "I\u2019m kind of adjacent to ambient computing, my team works on tools for voice interface design - with ambient computing there are a lot of new types of user interaction that become available",
+        "user": "UN89MTTML",
+        "ts": "1571242037.398500",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571241687.398100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "a1e37275-09b5-43df-986e-b7725bf06c14",
+        "type": "message",
+        "text": "and new patterns that need discovered - like how long it took for say the swipe to refresh pattern to come to mobile",
+        "user": "UN89MTTML",
+        "ts": "1571242075.398700",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571241687.398100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "f8d82b4e-e471-4d4a-8677-1f9998ba0d1b",
+        "type": "message",
+        "text": "Don't believe these surveys of use. PHP is used in a huge fraction of websites, even if just a teeny bit. As the only language built into Apache, it has an unfair advantage. Same with JS for the web; as it is hard-wired into the browser, it has to win.  But yes PHP is dropping as a development language, and with its latest \"kitchen-sink\" version has gotten so complex that it will stop being picked for new projects (i.e. dropping birth rate) that C++ and Java are experiencing.",
+        "user": "UEQ6M68H0",
+        "ts": "1571247122.402500",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1571375865.000000"
+        },
+        "thread_ts": "1571201713.381700",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "5fec1ffd-04ad-4167-88d7-95464282d0ae",
+        "type": "message",
+        "text": "It seems like the OpenAI project has made an impressive amount of progress. If you\u2019re looking for an example of how to go about this, maybe that project would be a good place to start, though the problem and solution space of AI may be much better defined at this point than FoC.",
+        "user": "ULM3U6275",
+        "ts": "1571247197.402700",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1570632039.005300",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "7b18dba6-d66e-4c6c-a023-bd4dedbb48b0",
+        "type": "message",
+        "text": "I have a draft post about how many distinct niches there were for different programming languages.\n\nRelated to that question, are there features of Ruby/Python/JS/Perl that make some of them better or worse suited to data science (and are any of those features different from those that make them better/worse as a general purpose language)? Or is it all path-dependence. Does data science actually require a separate language?\n\nThat was a question I punted on, because I haven\u2019t done data science.",
+        "user": "UKJGU23KP",
+        "ts": "1571249017.402900",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UKJGU23KP",
+            "ts": "1571249035.000000"
+        },
+        "thread_ts": "1571196434.376700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "e03b3cad-882d-49cd-8c4a-d2f9a50a8a3d",
+        "type": "message",
+        "text": "It\u2019s probably 50% path dependence and 50% Python having a good C API. I haven\u2019t evaluated Ruby/JS/Perl, but C integration was critical for numpy and tensorflow.",
+        "user": "UFB8STN7K",
+        "ts": "1571250791.403200",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196434.376700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "bbf93599-f989-4a9e-a296-523ba3878531",
+        "type": "message",
+        "text": "Then I recurse\u2026is there a goal that Ruby/Perl/JS have that precludes a good C api, or is that just path dependence?",
+        "user": "UKJGU23KP",
+        "ts": "1571251001.403400",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196434.376700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "cfdb82d3-18c3-4d6a-b19e-0a52bc8765cf",
+        "type": "message",
+        "text": "The root question I was asking is \u201chow many distinct languages do we need for non-aesthetic reasons?\u201d (i.e. both Ruby and Python are low-ceremony languages, but often people prefer the feel of one of them).",
+        "user": "UKJGU23KP",
+        "ts": "1571251055.403600",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196434.376700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "684e2421-26b9-427c-93d0-bcaa91e1dbf7",
+        "type": "message",
+        "text": "oh sure, php is powering most of the internet it\u2019s just that nobody is writing it any more lol",
+        "user": "UMU2RLPR8",
+        "ts": "1571251139.403800",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571201713.381700",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "ed75ac85-7544-42d7-9c3a-b26247079d18",
+        "type": "message",
+        "text": "It's tough to use OpenAI as a measuring stick. The amount of funding and prestige that they had from the very beginning is incomparable to what we're talking about here. They paid a *lot* to get some of the best very early on.",
+        "user": "UEBG0NPDK",
+        "ts": "1571251446.404000",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1570632039.005300",
+        "parent_user_id": "U5TCAFTD3",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "ULM3U6275"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "cef35d69-4ea6-4de7-9fa5-1d5b4aa115b3",
+        "type": "message",
+        "text": "Facebook has served as a kind of cautionary tale.",
+        "user": "UP448V1PB",
+        "ts": "1571251488.404200",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571201713.381700",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "88741a63-8614-4b41-be75-a578a49bbc38",
+        "type": "message",
+        "text": "Not that I know of. It\u2019s possible that the developers simply intended for people to develop only within the language. Guido intentionally developed python as \u201cBash for C programmers\u201d, so the C integration was a bigger goal from day one. (Again, I don\u2019t know Ruby/Perl/JS, so that\u2019s speculation on their part.)",
+        "user": "UFB8STN7K",
+        "ts": "1571253381.406600",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196434.376700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "eb3b2dc3-2bae-4017-8d9e-1dc9abaea6ae",
+        "type": "message",
+        "text": "It is definitely true though that the more complex the language, the harder the C integration. Lua is notable for being the scripting language with the easiest C integration, hence why it\u2019s embedded in C applications (games, media editors, etc.). Lua\u2019s runtime is super simple and was designed to be embeddable.",
+        "user": "UFB8STN7K",
+        "ts": "1571253442.406800",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196434.376700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "38b2bca3-2382-4a00-b448-40ade78f4915",
+        "type": "message",
+        "text": "1. Many operations in different domains can be meaningfully modeled as higher order functions. Map and filter in the data/list processing domain, route handling in the web processing domain. A language which allows higher-order functions can enable both domains to express that underlying structure in their API.",
+        "user": "UFB8STN7K",
+        "ts": "1571253573.407000",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196503.377700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "d05c535b-e363-45ef-9427-09c781d9268e",
+        "type": "message",
+        "text": "That\u2019s also #2.",
+        "user": "UFB8STN7K",
+        "ts": "1571253581.407200",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196503.377700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "57df8126-fb94-4075-93e7-b1c3dcca4952",
+        "type": "message",
+        "text": "3. And C is a language that does not easily allow the definition and use of higher order functions, so development of such libraries is more difficult.",
+        "user": "UFB8STN7K",
+        "ts": "1571253615.407400",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196503.377700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "533c84a5-d0a5-4afb-bfee-b95983cafa2c",
+        "type": "message",
+        "text": "Thanks, that's very clear.",
+        "user": "UEF95M2RH",
+        "ts": "1571257840.407700",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1571196503.377700",
+        "parent_user_id": "UFB8STN7K",
+        "reactions": [
+            {
+                "name": "innocent",
+                "users": [
+                    "UFB8STN7K"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7f2dba6e-67c1-4b84-bc1d-abfe97150f3b",
+        "type": "message",
+        "text": "<@UEBG0NPDK> Yeah, the level of resources is a big difference. Also, AI has converged on Deep Learning connectionism as the path forward, so it\u2019s much easier see how to usefully invest in it. I recently watched a video of Danny Hillis talking about the Connection Machine and how it was designed for connectionism and essentially had the same computing model as modern GPU/TPU but a about a million times slower than what was required for connectionist networks to start becoming particularly useful. Right model, wrong time. Both supercomputing and AI had \u201cwinters\u201d between their early days of promise until the tech got powerful &amp; cheap enough to make them widely useful (I\u2019m counting cloud computing as modern supercomputing).  Lately, I\u2019ve been wondering if the FoC winter between the early days of LISP and Smalltalk and today are part of a somewhat similar pattern. If so, maybe we\u2019ll need a convergence of hw power, a sufficiently suitable sw stack and standards, to build on top of before we start to see solutions that can clearly point the way forward.",
+        "user": "ULM3U6275",
+        "ts": "1571258505.407900",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1570632039.005300",
+        "parent_user_id": "U5TCAFTD3",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
