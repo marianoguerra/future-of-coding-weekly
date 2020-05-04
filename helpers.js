@@ -59,7 +59,8 @@ function main() {
         'Dan Swirsky': '[Dan Swirsky](https://twitter.com/danskydan)',
         'yoshiki': '[yoshiki](https://twitter.com/yoshikischmitz)',
         'Alex Wein': '[Alex Wein](https://vis.social/@alexwein)',
-        'Doug Moen': '[Doug Moen](http://curv3d.org/)'
+        'Doug Moen': '[Doug Moen](http://curv3d.org/)',
+        'Jamie Brandon': '[Jamie Brandon](https://scattered-thoughts.net/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
