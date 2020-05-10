@@ -60,7 +60,11 @@ function main() {
         'yoshiki': '[yoshiki](https://twitter.com/yoshikischmitz)',
         'Alex Wein': '[Alex Wein](https://vis.social/@alexwein)',
         'Doug Moen': '[Doug Moen](http://curv3d.org/)',
-        'Jamie Brandon': '[Jamie Brandon](https://scattered-thoughts.net/)'
+        'Jamie Brandon': '[Jamie Brandon](https://scattered-thoughts.net/)',
+        'Ryan King': '[Ryan King](https://twitter.com/_RyKi_)',
+        'Shubhadeep Roychowdhury': '[Shubhadeep Roychowdhury](https://github.com/rcshubhadeep)',
+        'Maikel van de Lisdonk': '[Maikel van de Lisdonk](https://www.devhelpr.com/)',
+        'Grigory Hatsevich': '[Grigory Hatsevich](https://hatsevich.ru/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
