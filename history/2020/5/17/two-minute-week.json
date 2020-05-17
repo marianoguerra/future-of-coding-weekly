@@ -1,0 +1,145 @@
+[
+    {
+        "client_msg_id": "4AAED76D-541F-4C41-ADD6-2E6DBF36130C",
+        "type": "message",
+        "text": "What is your end goal? Do you want to be able to develop vst's with your engine which can be used in daw's like ableton or something more standalone? ",
+        "user": "U0123H7JRDM",
+        "ts": "1589698152.388200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "c00",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What is your end goal? Do you want to be able to develop vst's with your engine which can be used in daw's like ableton or something more standalone? "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589660842.386100",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "client_msg_id": "606b63ce-abaf-4fb8-87bd-321ed0a1d928",
+        "type": "message",
+        "text": "<@ULK0Z4MPV> you might consider looking at my Beads language. It has three aspects that relate to your work. It is a clean sheet approach and emits to raw JS with no external dependencies such as Rect, etc.. You declare a model as a graph database schema that will be filled in with data later with data. Then you write chunks of code that draw your screen using the model data in a pure manner (the view). The controller chunks are blocks of code appended to the view drawing subroutines.  There is also the notion of a derived quantity which is lazily evaluated when it is referenced. The key advantage over your method is that if a view drawing function uses model variables, a, b and c, if any of those 3 variables change their value, then the draw chunk is re-executed. This is all tracked automatically without any the programmer having to declare dependencies, similar to how spreadsheets work, except that this is about re-executing drawing functions with memorized parameters, which is quite different than simple formulas being executed in topological order. It has a central event system called the Loom, which combines publish/subscribe, network, keyboard, mouse, timer events into one unified event stream, that is fed to the constellation of code chunks, based on their appropriateness for that event.",
+        "user": "UEQ6M68H0",
+        "ts": "1589702121.389000",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1589702270.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MGh+Q",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "ULK0Z4MPV"
+                            },
+                            {
+                                "type": "text",
+                                "text": " you might consider looking at my Beads language. It has three aspects that relate to your work. It is a clean sheet approach and emits to raw JS with no external dependencies such as Rect, etc.. You declare a model as a graph database schema that will be filled in with data later with data. Then you write chunks of code that draw your screen using the model data in a pure manner (the view). The controller chunks are blocks of code appended to the view drawing subroutines.  There is also the notion of a derived quantity which is lazily evaluated when it is referenced. The key advantage over your method is that if a view drawing function uses model variables, a, b and c, if any of those 3 variables change their value, then the draw chunk is re-executed. This is all tracked automatically without any the programmer having to declare dependencies, similar to how spreadsheets work, except that this is about re-executing drawing functions with memorized parameters, which is quite different than simple formulas being executed in topological order. It has a central event system called the Loom, which combines publish/subscribe, network, keyboard, mouse, timer events into one unified event stream, that is fed to the constellation of code chunks, based on their appropriateness for that event."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589558372.347500",
+        "parent_user_id": "ULK0Z4MPV"
+    },
+    {
+        "client_msg_id": "97984798-FBF0-4D03-83DD-FA38C099B675",
+        "type": "message",
+        "text": "Hi, thanks for sharing your approach!\nSummarizing: the main difference between our implementations is that in yours in each frame the whole graph gets evaluated and in mine a node gets only triggers by an event (which can be external) and this can be dependent of time but certainly not necessarily and most of the time it's user input that trigger a node or other node's triggering other nodes. Both our graphs are directed I think. Also the way the graph gets evaluated is different, in yours the pull architecture as you describe is very different then in mine , which is forward directed.\nVery interesting this discussion about our approaches, I am going to think about it some more.\n",
+        "user": "U0123H7JRDM",
+        "ts": "1589703199.389400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GEi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi, thanks for sharing your approach!\nSummarizing: the main difference between our implementations is that in yours in each frame the whole graph gets evaluated and in mine a node gets only triggers by an event (which can be external) and this can be dependent of time but certainly not necessarily and most of the time it's user input that trigger a node or other node's triggering other nodes. Both our graphs are directed I think. Also the way the graph gets evaluated is different, in yours the pull architecture as you describe is very different then in mine , which is forward directed.\nVery interesting this discussion about our approaches, I am going to think about it some more.\n"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589540394.327600",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "2dcc55c7-6311-422c-8ea9-ddeb903b3487",
+        "type": "message",
+        "text": "Yes, you have it right I think.  Except to say that nodes in my graph that aren't required won't wind up getting evaluated; i.e. if they aren't part of the dependency chain of the output node, then they will not evaluate, and if a node is 'current', it doesn't need to do any work.   I don't allow loops in the network; i.e. a node will not evaluate twice per graph evaluation.  For this reason, I have a generation number on each node which can track the global generation and avoid repeat computation.  It makes the evaluation logic quite clean I think.",
+        "user": "UUQ2EQW21",
+        "ts": "1589706571.389600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Zjm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, you have it right I think.  Except to say that nodes in my graph that aren't required won't wind up getting evaluated; i.e. if they aren't part of the dependency chain of the output node, then they will not evaluate, and if a node is 'current', it doesn't need to do any work.   I don't allow loops in the network; i.e. a node will not evaluate twice per graph evaluation.  For this reason, I have a generation number on each node which can track the global generation and avoid repeat computation.  It makes the evaluation logic quite clean I think."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589540394.327600",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "e2d1d382-36e4-444d-b211-d260fe1e984a",
+        "type": "message",
+        "text": "I am probably quite influenced by the Maya directed graph approach, which was my first exposure to such an idea; though I don't implement the push/pull architecture that they do.",
+        "user": "UUQ2EQW21",
+        "ts": "1589706731.389800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "IaKA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I am probably quite influenced by the Maya directed graph approach, which was my first exposure to such an idea; though I don't implement the push/pull architecture that they do."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589540394.327600",
+        "parent_user_id": "U0123H7JRDM"
+    }
+]
