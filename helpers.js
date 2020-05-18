@@ -64,7 +64,10 @@ function main() {
         'Ryan King': '[Ryan King](https://twitter.com/_RyKi_)',
         'Shubhadeep Roychowdhury': '[Shubhadeep Roychowdhury](https://github.com/rcshubhadeep)',
         'Maikel van de Lisdonk': '[Maikel van de Lisdonk](https://www.devhelpr.com/)',
-        'Grigory Hatsevich': '[Grigory Hatsevich](https://hatsevich.ru/)'
+        'Grigory Hatsevich': '[Grigory Hatsevich](https://hatsevich.ru/)',
+        'Dominik Jančík': '[Dominik Jančík](https://twitter.com/domjancik)',
+        'Paul Sonnentag': '[Paul Sonnentag](https://twitter.com/paulsonnentag)',
+        'Felix Kohlgrüber': '[Felix Kohlgrüber](https://twitter.com/FKohlgrueber)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
