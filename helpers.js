@@ -67,7 +67,12 @@ function main() {
         'Grigory Hatsevich': '[Grigory Hatsevich](https://hatsevich.ru/)',
         'Dominik Jančík': '[Dominik Jančík](https://twitter.com/domjancik)',
         'Paul Sonnentag': '[Paul Sonnentag](https://twitter.com/paulsonnentag)',
-        'Felix Kohlgrüber': '[Felix Kohlgrüber](https://twitter.com/FKohlgrueber)'
+        'Felix Kohlgrüber': '[Felix Kohlgrüber](https://twitter.com/FKohlgrueber)',
+        'Chris Granger': '[Chris Granger](https://twitter.com/ibdknox)',
+        'Nicolas Decoster': '[Nicolas Decoster](https://twitter.com/ogadaki)',
+        'Daniel Owsianski': '[Daniel Owsianski](https://twitter.com/dannyow)',
+        'Vitorio Miliano': '[Vitorio Miliano](http://vitor.io/)',
+        'Andreas S': '[Andreas S](https://twitter.com/curious_reader)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
