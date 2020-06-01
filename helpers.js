@@ -78,7 +78,8 @@ function main() {
         'Korede Aderele': '[Korede Aderele](twitter.com/korede_ta)',
         'Garth Goldwater': '[Garth Goldwater](https://twitter.com/no_defects)',
         'S.M Mukarram Nainar': '[S.M Mukarram Nainar](https://git.sr.ht/~sm2n/)',
-        'Clemens Klokmose': '[Clemens Klokmose](http://www.klokmose.net/clemens/)'
+        'Clemens Klokmose': '[Clemens Klokmose](http://www.klokmose.net/clemens/)',
+        'Maeliza': '[Maeliza](https://www.linkedin.com/in/ma%C3%ABliza-seymour-ab749a36/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
