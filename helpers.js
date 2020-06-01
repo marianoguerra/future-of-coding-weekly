@@ -76,7 +76,9 @@ function main() {
         'Robbie Gleichman': '[Robbie Gleichman](https://www.rgleichman.com/)',
         'J. Ryan Stinnett': '[J. Ryan Stinnett](https://twitter.com/jryans)',
         'Korede Aderele': '[Korede Aderele](twitter.com/korede_ta)',
-        'Garth Goldwater': '[Garth Goldwater](https://twitter.com/no_defects)'
+        'Garth Goldwater': '[Garth Goldwater](https://twitter.com/no_defects)',
+        'S.M Mukarram Nainar': '[S.M Mukarram Nainar](https://git.sr.ht/~sm2n/)',
+        'Clemens Klokmose': '[Clemens Klokmose](http://www.klokmose.net/clemens/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
