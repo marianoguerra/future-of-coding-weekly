@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset=utf-8>
+    <meta charset="utf-8">
     <title>Future of Coding History</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- this has to be duplicated in history/app.js EXPORT_HTML_PREFIX to make export look the same as this -->
@@ -81,9 +81,27 @@
           <span class="small text-muted"><a :href="'#' + msg.$dateStrISO">{{msg.$dateStr}}</a></span> <span class="font-weight-bold">{{msg.$userName}}: </span>
           <p v-html="msg.$html"></p>
 
+          <div class="msg-files">
+              <div v-for="file in msg.files" class="msg-file">
+                <a v-if="file.mimetype.startsWith('video/')" :href="file.url_private" target="_blank">🎥 {{file.title}}</a>
+                <a v-if="file.mimetype.startsWith('image/')" :href="file.url_private">📷 {{file.title}}</a>
+                <a v-if="file.mimetype.startsWith('application/')" :href="file.url_private" target="_blank">📄 {{file.title}}</a>
+                <a v-if="file.mimetype.startsWith('text/')" :href="file.url_private" target="_blank">🗒️ {{file.title}}</a>
+              </div>
+          </div>
+
           <div v-for="resp in msg.responses" :key="resp.ts" class="alert alert-dark msg-response p-2 ml-1 my-1 bg-light" :id="resp.$dateStrISO">
             <span class="small text-muted"><a :href="'#' + resp.$dateStrISO">{{resp.$dateStr}}</a></span> <span class="font-weight-bold">{{resp.$userName}}: </span>
             <p v-html="resp.$html"></p>
+
+            <div class="msg-files">
+              <div v-for="file in resp.files" class="msg-file">
+                <a v-if="file.mimetype.startsWith('video/')" :href="file.url_private" target="_blank">🎥 {{file.title}}</a>
+                <a v-if="file.mimetype.startsWith('image/')" :href="file.url_private" target="_blank">📷 {{file.title}}</a>
+                <a v-if="file.mimetype.startsWith('application/')" :href="file.url_private" target="_blank">📄 {{file.title}}</a>
+                <a v-if="file.mimetype.startsWith('text/')" :href="file.url_private" target="_blank">🗒️ {{file.title}}</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
