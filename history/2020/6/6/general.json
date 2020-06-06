@@ -1,0 +1,184 @@
+[
+    {
+        "client_msg_id": "27d353f2-1ff8-4160-ad51-003358e10646",
+        "type": "message",
+        "text": "Do it.",
+        "user": "UJN1TAYEQ",
+        "ts": "1591394727.480500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "a=CTx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Do it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591362068.469500",
+        "parent_user_id": "UD69XQ9J8"
+    },
+    {
+        "client_msg_id": "4ea4e1e4-7c1c-47ad-916d-00498da28d0c",
+        "type": "message",
+        "text": "One example would be a video game, full of subsystems that all operate with different notions of time \u2014\u00a0networking code working in terms of packets with variable ping, physics locked at 60hz, gameplay logic happening at various rates (some stuff is every frame, some stuff is once every few frames, some stuff goes into a low-priority queue, some stuff happens at specific moments), rendering synced to the display refresh interval, audio happening both in sync with the gameplay logic but also at the audio sampling rate, and on and on. These subsystems are _kinda_ isolated, but they're also _kinda_ interdependent. There could be a lot of shared state, or a lot of dynamism in how these subsystems affect one another, or a lot of design decisions that prioritize performance at all costs. Ultimately, the code needs to be quite deterministic and very well understood in order to ensure that the game runs quickly and correctly, and you don't (can't?) have automated tests or static verification, so you generally have to work on it by loading it all into your head.\n\n(I hope I'm understanding your question correctly. Sorry if this is not what you had in mind.)",
+        "user": "UC2A2ARPT",
+        "ts": "1591414255.480800",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1591414981.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kVv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One example would be a video game, full of subsystems that all operate with different notions of time \u2014\u00a0networking code working in terms of packets with variable ping, physics locked at 60hz, gameplay logic happening at various rates (some stuff is every frame, some stuff is once every few frames, some stuff goes into a low-priority queue, some stuff happens at specific moments), rendering synced to the display refresh interval, audio happening both in sync with the gameplay logic but also at the audio sampling rate, and on and on. These subsystems are "
+                            },
+                            {
+                                "type": "text",
+                                "text": "kinda",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " isolated, but they're also "
+                            },
+                            {
+                                "type": "text",
+                                "text": "kinda",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " interdependent. There could be a lot of shared state, or a lot of dynamism in how these subsystems affect one another, or a lot of design decisions that prioritize performance at all costs. Ultimately, the code needs to be quite deterministic and very well understood in order to ensure that the game runs quickly and correctly, and you don't (can't?) have automated tests or static verification, so you generally have to work on it by loading it all into your head.\n\n(I hope I'm understanding your question correctly. Sorry if this is not what you had in mind.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591313174.458700",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "4959838e-ff34-4801-beba-d2df60720518",
+        "type": "message",
+        "text": "There's intentional lock-in, creeping lock-in, and explicit design to prevent lock-in, which involves in particular well-documented data models, storage formats, and APIs. It's much like code complexity: you have to fight it actively to prevent it from sneaking in.",
+        "user": "UJBAJNFLK",
+        "ts": "1591418291.489000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "N+d4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There's intentional lock-in, creeping lock-in, and explicit design to prevent lock-in, which involves in particular well-documented data models, storage formats, and APIs. It's much like code complexity: you have to fight it actively to prevent it from sneaking in."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591214873.399000",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "e69fd1b0-3b60-4f44-9942-494a5190e184",
+        "type": "message",
+        "text": "This might not be quite the same thing, but here's an idea I had:\n\nA diagram consisting of data (and/or labeled placeholders for data), some is which can be visually nested (lists, key-value maps), and connections (e.g. arrows) that show operations between them.\n\nCopy/assign A to B is an arrow from A to B\n\nConditionals connect a condition to an operation(s). Either a bubble around the operations, or an indicator next to the line representing the operation (and all other operations that stem from it).\n\nA map/select operation where one end is a collection, and the other represents each element. Either some other connector \"down the line\" that \"collects\" it all, or a bubble around the whole map. In either case, the output is the new collection.\n\nSimilar symbols for filter, reduce/aggregate, sort, etc.\n\nSome sort of haskell pattern match. For example, an arrow from A to some (partially specified) nested structure, and then connectors from parts of that nested structure to further operations (which only happen IFF the match succeeded in the first place).\n\nThere's no inherent order to anything, other than by dependency. It's a DAG that you can trace forward or back.",
+        "user": "UAVCC2X70",
+        "ts": "1591422007.489300",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1591423165.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nxE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This might not be quite the same thing, but here's an idea I had:\n\nA diagram consisting of data (and/or labeled placeholders for data), some is which can be visually nested (lists, key-value maps), and connections (e.g. arrows) that show operations between them.\n\nCopy/assign A to B is an arrow from A to B\n\nConditionals connect a condition to an operation(s). Either a bubble around the operations, or an indicator next to the line representing the operation (and all other operations that stem from it).\n\nA map/select operation where one end is a collection, and the other represents each element. Either some other connector \"down the line\" that \"collects\" it all, or a bubble around the whole map. In either case, the output is the new collection.\n\nSimilar symbols for filter, reduce/aggregate, sort, etc.\n\nSome sort of haskell pattern match. For example, an arrow from A to some (partially specified) nested structure, and then connectors from parts of that nested structure to further operations (which only happen IFF the match succeeded in the first place).\n\nThere's no inherent order to anything, other than by dependency. It's a DAG that you can trace forward or back."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591362068.469500",
+        "parent_user_id": "UD69XQ9J8"
+    },
+    {
+        "client_msg_id": "3AE27CA1-7C93-47E8-AC45-610F5E825431",
+        "type": "message",
+        "text": "Lock-in \u201ccreeps in\u201d, because a lot of technology is commercially driven these days, and building on open standards just doesn\u2019t make economic sense in a world where you need to own a platform to make money, or at least make it look like you will at some point in the future.\n\nThe groundbreaking technologies we still have as foundations, the internet, TCP/IP, HTTP, email, etc. have all been invented without business models in mind. What\u2019s locking us in, and what\u2019s keeping us back in inventing the future are the incentives set by business models and what is considered being successful today.",
+        "user": "U5STGTB3J",
+        "ts": "1591449674.001000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4aNX",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Lock-in \u201ccreeps in\u201d, because a lot of technology is commercially driven these days, and building on open standards just doesn\u2019t make economic sense in a world where you need to own a platform to make money, or at least make it look like you will at some point in the future.\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "The groundbreaking technologies we still have as foundations, the internet, TCP/IP, HTTP, email, etc. have all been invented without business models in mind. What\u2019s locking us in, and what\u2019s keeping us back in inventing the future are the incentives set by business models and what is considered being successful today."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591214873.399000",
+        "parent_user_id": "UR482RFPY",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UFLN9JFRT"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
