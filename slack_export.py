@@ -9,6 +9,33 @@ from datetime import datetime, timedelta
 from pick import pick
 from time import sleep
 
+# START monkey patching stuff
+import slacker
+import functools
+def paginated(list_func):
+    # See https://api.slack.com/docs/pagination
+    next_cursor = None
+    while True:
+        response = list_func(cursor=next_cursor)
+        yield response
+        next_cursor = response.body['response_metadata']['next_cursor']
+        if not next_cursor:
+            break
+
+def monkey_patched_list(self, presence=False, cursor=None, limit=None):
+    return self.get(
+        'users.list',
+        params={
+            'presence': int(presence),
+            'cursor': cursor,
+            'limit': limit,
+        }
+    )
+
+slacker.Users.list = monkey_patched_list
+
+# END monkey patching stuff
+
 # fetches the complete message history for a channel/group/im
 #
 # pageableObject could be:
@@ -164,9 +191,11 @@ def doTestAuth():
 # Since Slacker does not Cache.. populate some reused lists
 def bootstrapKeyValues():
     global users, channels
-    users = slack.users.list().body['members']
-    print(u"Found {0} Users".format(len(users)))
-    sleep(1)
+    for response in paginated(functools.partial(slack.users.list, limit=500)):
+        users_page = response.body['members']
+        print(u"Found {0} Users".format(len(users_page)))
+        users.extend(users_page)
+        sleep(1)
 
     channels = slack.channels.list().body['channels']
     print(u"Found {0} Public Channels".format(len(channels)))
@@ -262,10 +291,6 @@ if __name__ == "__main__":
     mkdir(outputDirectory)
     os.chdir(outputDirectory)
 
-    if not dryRun:
-        dumpUserFile()
-        dumpChannelFile()
-
     selectedChannels = selectConversations(
         channels,
         args.publicChannels,
@@ -284,4 +309,8 @@ if __name__ == "__main__":
             fetchPublicChannels(selectedChannels, from_dtime, to_dtime)
             from_dtime = to_dtime
             to_dtime = to_dtime + one_day
+
+    if not dryRun:
+        dumpUserFile()
+        dumpChannelFile()
 
