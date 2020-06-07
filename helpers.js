@@ -51,23 +51,27 @@ function main() {
         'Chris Maughan': '[Chris Maughan](https://twitter.com/cmaughan)',
         'Yair Chuchem': '[Yair Chuchem](https://twitter.com/yairchu)',
         'Jacob Chapman': '[Jacob Chapman](https://unli.xyz/)',
-        'Justin': '[Justin](https://twitter.com/newplagiarist)',
-        'Jonathan Edwards': '[Jonathan Edwards](https://twitter.com/jonathoda/)',
+        Justin: '[Justin](https://twitter.com/newplagiarist)',
+        'Jonathan Edwards':
+          '[Jonathan Edwards](https://twitter.com/jonathoda/)',
         'Tom Lieber': '[Tom Lieber](https://twitter.com/alltom)',
-        'noahtren': '[noahtren](https://twitter.com/noahtren)',
+        noahtren: '[noahtren](https://twitter.com/noahtren)',
         'Jack Armitage': '[Jack Armitage](https://twitter.com/jdkarmitage)',
         'Dan Swirsky': '[Dan Swirsky](https://twitter.com/danskydan)',
-        'yoshiki': '[yoshiki](https://twitter.com/yoshikischmitz)',
+        yoshiki: '[yoshiki](https://twitter.com/yoshikischmitz)',
         'Alex Wein': '[Alex Wein](https://vis.social/@alexwein)',
         'Doug Moen': '[Doug Moen](http://curv3d.org/)',
         'Jamie Brandon': '[Jamie Brandon](https://scattered-thoughts.net/)',
         'Ryan King': '[Ryan King](https://twitter.com/_RyKi_)',
-        'Shubhadeep Roychowdhury': '[Shubhadeep Roychowdhury](https://github.com/rcshubhadeep)',
-        'Maikel van de Lisdonk': '[Maikel van de Lisdonk](https://www.devhelpr.com/)',
+        'Shubhadeep Roychowdhury':
+          '[Shubhadeep Roychowdhury](https://github.com/rcshubhadeep)',
+        'Maikel van de Lisdonk':
+          '[Maikel van de Lisdonk](https://www.devhelpr.com/)',
         'Grigory Hatsevich': '[Grigory Hatsevich](https://hatsevich.ru/)',
         'Dominik Jančík': '[Dominik Jančík](https://twitter.com/domjancik)',
         'Paul Sonnentag': '[Paul Sonnentag](https://twitter.com/paulsonnentag)',
-        'Felix Kohlgrüber': '[Felix Kohlgrüber](https://twitter.com/FKohlgrueber)',
+        'Felix Kohlgrüber':
+          '[Felix Kohlgrüber](https://twitter.com/FKohlgrueber)',
         'Chris Granger': '[Chris Granger](https://twitter.com/ibdknox)',
         'Nicolas Decoster': '[Nicolas Decoster](https://twitter.com/ogadaki)',
         'Daniel Owsianski': '[Daniel Owsianski](https://twitter.com/dannyow)',
@@ -77,9 +81,14 @@ function main() {
         'J. Ryan Stinnett': '[J. Ryan Stinnett](https://twitter.com/jryans)',
         'Korede Aderele': '[Korede Aderele](twitter.com/korede_ta)',
         'Garth Goldwater': '[Garth Goldwater](https://twitter.com/no_defects)',
-        'S.M Mukarram Nainar': '[S.M Mukarram Nainar](https://git.sr.ht/~sm2n/)',
-        'Clemens Klokmose': '[Clemens Klokmose](http://www.klokmose.net/clemens/)',
-        'Maeliza': '[Maeliza](https://www.linkedin.com/in/ma%C3%ABliza-seymour-ab749a36/)'
+        'S.M Mukarram Nainar':
+          '[S.M Mukarram Nainar](https://git.sr.ht/~sm2n/)',
+        'Clemens Klokmose':
+          '[Clemens Klokmose](http://www.klokmose.net/clemens/)',
+        Maeliza:
+          '[Maeliza](https://www.linkedin.com/in/ma%C3%ABliza-seymour-ab749a36/)',
+        'Paul Butler': '[Paul Butler](https://paulbutler.org/)',
+        'Chris Knott': '[Chris Knott](https://github.com/ChrisKnott)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
@@ -87,7 +96,9 @@ function main() {
     },
     computed: {
       curAuthorText: function () {
-        return this.authors[this.curAuthor] || '**' + this.curAuthor + '**';
+        return this.curAuthor
+          ? this.authors[this.curAuthor] || '**' + this.curAuthor + '**'
+          : '';
       },
       curByText: function () {
         return this.curBy ? `[${this.curBy}](${this.curByUrl})` : '';
@@ -96,16 +107,17 @@ function main() {
         return '🧵[Conversation](' + this.curSlackThread + ')';
       },
       urlMd: function () {
-        return `[${this.urlTitle}](${this.url})`;
+        return this.urlTitle && this.url
+          ? `[${this.urlTitle}](${this.url})`
+          : '';
       },
       message: function () {
         return (
           this.lastSelectedEmoji +
           ' ' +
           this.urlMd +
-          '. Via ' +
-          this.curAuthorText +
-          (this.curByText ? ' By ' + this.curByText : '') +
+          (this.curAuthorText ? ' via ' + this.curAuthorText : '') +
+          (this.curByText ? ' by ' + this.curByText : '') +
           ' ' +
           this.curSlackThreadText +
           '\n\n' +
