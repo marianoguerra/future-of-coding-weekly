@@ -88,7 +88,8 @@ function main() {
         Maeliza:
           '[Maeliza](https://www.linkedin.com/in/ma%C3%ABliza-seymour-ab749a36/)',
         'Paul Butler': '[Paul Butler](https://paulbutler.org/)',
-        'Chris Knott': '[Chris Knott](https://github.com/ChrisKnott)'
+        'Chris Knott': '[Chris Knott](https://github.com/ChrisKnott)',
+        'Steve Dekorte': '[Steve Dekorte](https://dekorte.com/)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
