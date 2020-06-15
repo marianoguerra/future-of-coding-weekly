@@ -402,10 +402,9 @@ const EXPORT_HTML_PREFIX = `
   <head>
     <meta charset=utf-8>
     <title>Future of Coding History</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <style>.alert{border-radius:0}.msg-response{background-color:white!important}</style>
+    <link rel="stylesheet" href="style.css">
   </head>
-  <body class="p-3">
+  <body>
 `,
   EXPORT_HTML_SUFFIX = `
   </body>
@@ -422,16 +421,8 @@ const customRules = {
     paragraph: overrideDefaultHtml('paragraph', function (node, output, state) {
       return '<p>' + output(node.content, state) + '</p>\n';
     }),
-    blockQuote: overrideDefaultHtml('blockQuote', function (
-      node,
-      output,
-      state
-    ) {
-      return (
-        '<blockquote style="margin-left:1em;color:#555555;font-style:italic">' +
-        output(node.content, state) +
-        '</blockquote>\n'
-      );
+    blockQuote: overrideDefaultHtml('blockQuote', function (node, output, state) {
+      return '<blockquote>' + output(node.content, state) + '</blockquote>\n';
     })
   },
   rules = Object.assign({}, defaultRules, customRules),
