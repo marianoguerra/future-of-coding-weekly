@@ -407,10 +407,10 @@ const EXPORT_HTML_PREFIX = `
   <body>
     <div id="ui">
       <a id="logo" href="https://futureofcoding.org">
-        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding Archive">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
       </a>
       <div id="small-logo">
-        <a href="https://futureofcoding.org">Future of Coding</a> Archive
+        <a href="https://futureofcoding.org">Future of Coding</a> History
       </div>
       <div id="center">
         <h4>
