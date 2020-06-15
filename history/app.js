@@ -402,11 +402,28 @@ const EXPORT_HTML_PREFIX = `
   <head>
     <meta charset=utf-8>
     <title>Future of Coding History</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
   </head>
   <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding Archive">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> Archive
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
 `,
   EXPORT_HTML_SUFFIX = `
+    </div>
   </body>
 </html>
 `;
