@@ -1,0 +1,609 @@
+[
+    {
+        "client_msg_id": "16230ba3-1551-49a9-b28d-cabd6a21f173",
+        "type": "message",
+        "text": "Definitions appearing after usage reminds me a bit of the original literate programming, where it's important that the source code be free to occur in whatever order best fit the explanation around it.\n\nHow does your approach to out-of-order compilation interact with other language features, like error handling or polymorphism or extension (if you have those)? Eg: what happens if you've used a field that doesn't appear in the type definition? How do you do namespacing without modules?",
+        "user": "UC2A2ARPT",
+        "ts": "1592174217.490500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iX75d",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Definitions appearing after usage reminds me a bit of the original literate programming, where it's important that the source code be free to occur in whatever order best fit the explanation around it.\n\nHow does your approach to out-of-order compilation interact with other language features, like error handling or polymorphism or extension (if you have those)? Eg: what happens if you've used a field that doesn't appear in the type definition? How do you do namespacing without modules?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "019727eb-45b3-4c5f-92ac-f429ecf6dfdc",
+        "type": "message",
+        "text": "(I imagine some of these questions are irrelevant given the design of Mu, but I don't know enough about the design of Mu to know that I'm being a total noob about it :P)",
+        "user": "UC2A2ARPT",
+        "ts": "1592174280.490700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8kDsm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(I imagine some of these questions are irrelevant given the design of Mu, but I don't know enough about the design of Mu to know that I'm being a total noob about it :P)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "27a24aae-158d-406a-9386-feb135197b59",
+        "type": "message",
+        "text": "_Hey!!_ :slightly_smiling_face:",
+        "user": "UCUSW7WVD",
+        "ts": "1592177284.491000",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1592178256.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6YJ2f",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hey!!",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1592141182.488000",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "sob",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f1b1a600-d256-4bc1-927f-ed70a3f1960e",
+        "type": "message",
+        "text": "Yeah, Mu doesn't have namespaces, anything dynamic like `method_missing` (did I understand \"error handling\" right?) or open types. It's fairly unambitious as a language; all the attention has gone to bootstrapping the implementation out of machine code.\n\nBut your concrete question is quite acute. \"What happens if you've used a field that doesn't appear in the type definition?\" I hadn't thought of it yet when I made the video. It only occurred to me in the past week. I now raise an error if a type definition failed to reconcile some field from earlier. But it's a fairly klunky error message; it just says, \"you used field `x` but it doesn't exist.\" It can't give the line or even function that used `x`. Providing such errors is going to complicate the implementation quite a bit, needing to attach source info to uses of fields in types. But I _did_ stake out a position in my paper as being all about the quality of error messages. This whole thing is now making me quite unhappy. Perhaps I'll toss out this flexibility after all.\n\nFunny story: the previous prototype of Mu (a tree-walking interpreter) _did_ have support for literate programming. (And function overloading, and generics, none of which are in the current prototype.) I hadn't connected the dots to think of this as a particularly Literate feature. That might be a good justification to take it out. Thanks!\n\n_The reason Mu doesn't have LP anymore_: I was fine encouraging hunks to refer to local variables that were in the same scope but far away in some other part of the description. However, the way Mu now exposes and requires using registers, hunks can now _destroy_ local variables far away in the same scope (that happen to share the same register). That feels too mind-bending.\n\nThen again, maybe I should allow _shadowing_. So you can't insert naked statements using Literate directives, only blocks. Hmm, that could work. (If I can get the error messages good enough.) Thanks!",
+        "user": "UCUSW7WVD",
+        "ts": "1592179372.491500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tCz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, Mu doesn't have namespaces, anything dynamic like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "method_missing",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (did I understand \"error handling\" right?) or open types. It's fairly unambitious as a language; all the attention has gone to bootstrapping the implementation out of machine code.\n\nBut your concrete question is quite acute. \"What happens if you've used a field that doesn't appear in the type definition?\" I hadn't thought of it yet when I made the video. It only occurred to me in the past week. I now raise an error if a type definition failed to reconcile some field from earlier. But it's a fairly klunky error message; it just says, \"you used field "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " but it doesn't exist.\" It can't give the line or even function that used "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Providing such errors is going to complicate the implementation quite a bit, needing to attach source info to uses of fields in types. But I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "did",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " stake out a position in my paper as being all about the quality of error messages. This whole thing is now making me quite unhappy. Perhaps I'll toss out this flexibility after all.\n\nFunny story: the previous prototype of Mu (a tree-walking interpreter) "
+                            },
+                            {
+                                "type": "text",
+                                "text": "did",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " have support for literate programming. (And function overloading, and generics, none of which are in the current prototype.) I hadn't connected the dots to think of this as a particularly Literate feature. That might be a good justification to take it out. Thanks!\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "The reason Mu doesn't have LP anymore",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ": I was fine encouraging hunks to refer to local variables that were in the same scope but far away in some other part of the description. However, the way Mu now exposes and requires using registers, hunks can now "
+                            },
+                            {
+                                "type": "text",
+                                "text": "destroy",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " local variables far away in the same scope (that happen to share the same register). That feels too mind-bending.\n\nThen again, maybe I should allow "
+                            },
+                            {
+                                "type": "text",
+                                "text": "shadowing",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". So you can't insert naked statements using Literate directives, only blocks. Hmm, that could work. (If I can get the error messages good enough.) Thanks!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "515318c7-985f-4c61-b46b-23aff2b79e9a",
+        "type": "message",
+        "text": "I'm growing aware of a major inconsistency in my belief system. On the one hand I'm constantly pushing for programs in a system to be aware of their dependencies. However, I also dislike modules and namespaces and the need in general to micromanage dependencies in the small within a single program, to manually provide information that a compiler could just deduce.\n\nPerhaps this is a contradiction, and I need to give up opinions that made sense in the context of a highly dynamic, high-level, expressive Lisp dialect. Perhaps a low-level language built in machine code should throw up its hands and require the programmer to do a little more work.\n\nOn the other hand, perhaps this is a _paradox_, and what the two positions share is a desire for parsimonious dependencies. Tools to specify dependencies within a project tend to encourage larger projects with more code. Mu lacks modules for the same reason Mu lacks packages and will never have a package manager.\n\nReader, please let the author know what you think of this precious-snowflake navel-gazing.",
+        "user": "UCUSW7WVD",
+        "ts": "1592180740.491700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kTS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm growing aware of a major inconsistency in my belief system. On the one hand I'm constantly pushing for programs in a system to be aware of their dependencies. However, I also dislike modules and namespaces and the need in general to micromanage dependencies in the small within a single program, to manually provide information that a compiler could just deduce.\n\nPerhaps this is a contradiction, and I need to give up opinions that made sense in the context of a highly dynamic, high-level, expressive Lisp dialect. Perhaps a low-level language built in machine code should throw up its hands and require the programmer to do a little more work.\n\nOn the other hand, perhaps this is a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "paradox",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and what the two positions share is a desire for parsimonious dependencies. Tools to specify dependencies within a project tend to encourage larger projects with more code. Mu lacks modules for the same reason Mu lacks packages and will never have a package manager.\n\nReader, please let the author know what you think of this precious-snowflake navel-gazing."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "5aad861c-cab7-4e9c-82a5-3dec50bb5bc7",
+        "type": "message",
+        "text": "&gt; I hadn't connected the dots to think of this as a particularly Literate feature. That might be a good justification to take it out. Thanks!\nYou troll!\n\n&gt; Reader, please let the author know what you think of this precious-snowflake navel-gazing.\nI think you have some tough decisions ahead of you.\n\n&gt; Then again, maybe I should allow\u00a0_shadowing_.\nIs Mu aimed at beginners? If so, be careful about shadowing. In my experience every new programmer steps on that nail, and I've known some who were then scared away from taking advantage of it for evermore. (Example of the nail: top-level variables can be shadowed, struct members can't, but you often assign to both in the same way.)\n\n&gt; Perhaps a low-level language built in machine code should throw up its hands and require the programmer to do a little more work.\nThat could be a worthwhile bunt for the time being, and you could come back to this in the future.",
+        "user": "UC2A2ARPT",
+        "ts": "1592188455.491900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BMy5D",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I hadn't connected the dots to think of this as a particularly Literate feature. That might be a good justification to take it out. Thanks!"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nYou troll!\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Reader, please let the author know what you think of this precious-snowflake navel-gazing."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI think you have some tough decisions ahead of you.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Then again, maybe I should allow\u00a0"
+                            },
+                            {
+                                "type": "text",
+                                "text": "shadowing",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nIs Mu aimed at beginners? If so, be careful about shadowing. In my experience every new programmer steps on that nail, and I've known some who were then scared away from taking advantage of it for evermore. (Example of the nail: top-level variables can be shadowed, struct members can't, but you often assign to both in the same way.)\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Perhaps a low-level language built in machine code should throw up its hands and require the programmer to do a little more work."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThat could be a worthwhile bunt for the time being, and you could come back to this in the future."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6b7fa9fc-272c-4088-be17-535ccde24d35",
+        "type": "message",
+        "text": "I'd _almost_ made up my mind in the same direction. Then I remembered that I plan a type-checking pass anyway. It'll be some redundant work then, but not more complex. Best of both worlds.\n\nAll problems can be solved with an extra pass.",
+        "user": "UCUSW7WVD",
+        "ts": "1592192558.492200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1592192807.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "l=Y+Q",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'd "
+                            },
+                            {
+                                "type": "text",
+                                "text": "almost",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " made up my mind in the same direction. Then I remembered that I plan a type-checking pass anyway. It'll be some redundant work then, but not more complex. Best of both worlds.\n\nAll problems can be solved with an extra pass."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "f4124041-b66a-496f-a679-a9fd06e129b4",
+        "type": "message",
+        "text": "Still no Literate Programming :+1: Mu _does_ have shadowing, though. Your example of struct members is interesting :thinking_face:",
+        "user": "UCUSW7WVD",
+        "ts": "1592192786.492500",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1592192820.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dI8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Still no Literate Programming "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "+1"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Mu "
+                            },
+                            {
+                                "type": "text",
+                                "text": "does",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " have shadowing, though. Your example of struct members is interesting "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "thinking_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "a9540d22-e0ab-4d89-b71d-691fdb0a0a9a",
+        "type": "message",
+        "text": "That shadow-nail example just another incarnation of references vs values.\n\n```top level\na = 5\nb = a\na = 6\nwtf is b?\n\nstruct\na = {x: 5}\nb = a\na.x = 6\nwft is b?\n\nshadowing\na = 5\n{\n  a = 6\n}\nwtf is a?```\n",
+        "user": "UC2A2ARPT",
+        "ts": "1592193843.493300",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1592193923.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Kj=9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That shadow-nail example just another incarnation of references vs values.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "top level\na = 5\nb = a\na = 6\nwtf is b?\n\nstruct\na = {x: 5}\nb = a\na.x = 6\nwft is b?\n\nshadowing\na = 5\n{\n  a = 6\n}\nwtf is a?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": []
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "ed4066cc-6aa0-499a-8a95-3e4cc93555f5",
+        "type": "message",
+        "text": "Maybe I'll disallow reusing the same variable name. Really I only need shadowing for reusing _registers_.",
+        "user": "UCUSW7WVD",
+        "ts": "1592195545.493600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xbW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Maybe I'll disallow reusing the same variable name. Really I only need shadowing for reusing _registers_."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591570004.468100",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "eec1d127-daa9-4dc1-9a51-072b09380252",
+        "type": "message",
+        "text": "recording a video saying the two paragraph didn't added a lot of value, that's why I just wrote them.",
+        "user": "UBN9AFS0N",
+        "ts": "1592211154.494000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xoH0p",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "recording a video saying the two paragraph didn't added a lot of value, that's why I just wrote them."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1592141182.488000",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7f4a1f07-2ca1-4be6-8e91-01935a7d7d45",
+        "type": "message",
+        "text": "Works in a pinch.",
+        "user": "UC2A2ARPT",
+        "ts": "1592230350.494700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iatI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Works in a pinch."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1592141182.488000",
+        "parent_user_id": "UBN9AFS0N"
+    }
+]
