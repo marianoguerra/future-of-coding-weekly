@@ -89,7 +89,11 @@ function main() {
           '[Maeliza](https://www.linkedin.com/in/ma%C3%ABliza-seymour-ab749a36/)',
         'Paul Butler': '[Paul Butler](https://paulbutler.org/)',
         'Chris Knott': '[Chris Knott](https://github.com/ChrisKnott)',
-        'Steve Dekorte': '[Steve Dekorte](https://dekorte.com/)'
+        'Steve Dekorte': '[Steve Dekorte](https://dekorte.com/)',
+        'Duncan Cragg': '[Duncan Cragg](https://twitter.com/duncancragg)',
+        'Jimmy Miller': '[Jimmy Miller](https://jimmyhmiller.github.io/)',
+        'Gregg Tavares': '[Gregg Tavares](https://gregggman.com)',
+        'Daniel Hines': '[Daniel Hines](https://github.com/d4hines)'
       },
       pronouns: {
         'Chris Martens': 'They/Them'
