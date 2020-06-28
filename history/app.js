@@ -32,7 +32,7 @@ function msgToMd(msg) {
       '\n\n\n' +
       msg.responses
         .map(
-          msg => `> *[${msg.$dateStr}]* **${msg.$userName}**:\n\n${msg.$text}`
+          (msg) => `> *[${msg.$dateStr}]* **${msg.$userName}**:\n\n${msg.$text}`
         )
         .join('\n\n\n')
     );
@@ -46,6 +46,22 @@ function dummyUser(user) {
 function getRealName(username, users) {
   const user = users[username];
   return user === undefined ? username : '**' + user.real_name + '**';
+}
+
+const TW_URL_REF_REGEX = /<(https?:\/\/.*?)>/g,
+  TW_MENTION_REF_REGEX = /<(https?:\/\/.*?)\|(@.*?)>/g;
+function enrichAttachment(att) {
+  if (att.service_name === 'twitter') {
+    att.$html = att.text
+      .replace(
+        TW_MENTION_REF_REGEX,
+        (_, url, handle) => `<a href="${url}">${handle}</a>`
+      )
+      .replace(TW_URL_REF_REGEX, (_, url) => `<a href="${url}">${url}</a>`)
+      .replace(EMOJI_REF_REGEX, (_, emojiCode) =>
+        textFromCode(EMOJI_NAME_TO_CODE[emojiCode])
+      );
+  }
 }
 
 const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'},
@@ -84,6 +100,12 @@ function enrichMessage(msg, users) {
       textFromCode(skinIdsToCodes[skinCode])
     );
   msg.$html = mdToHTML(msg.$text);
+  const atts = msg.attachments;
+  if (atts) {
+    for (let i = 0, len = atts.length; i < len; i += 1) {
+      enrichAttachment(atts[i]);
+    }
+  }
   try {
     msg.$dateStrISO = date.toISOString();
     msg.$dateStr = msg.$dateStrISO.replace('T', ' ').slice(0, -5);
@@ -146,7 +168,7 @@ function parseHistoryChannelData(data, users, msgByTs, msgOrder) {
             text: 'MSG NOT FOUND',
             responses: [msg],
             WHAT_IS_THIS:
-              'a dummy message to attach thread messages to a parent that is not on this file'
+              'a dummy message to attach thread messages to a parent that is not on this file',
           },
           users
         );
@@ -234,15 +256,15 @@ function main() {
         filteredMsgs: [],
         history: {
           msgs: [],
-          msgsByTs: {}
+          msgsByTs: {},
         },
-        users: {}
+        users: {},
       },
       methods: {
         loadUsers: function () {
           fetch('users.json')
-            .then(resp => resp.json())
-            .then(usersData => {
+            .then((resp) => resp.json())
+            .then((usersData) => {
               this.users = usersToUsersById(usersData);
             });
         },
@@ -253,9 +275,9 @@ function main() {
 
             this.loadingStatus = 'Loading ' + path;
 
-            fetch(path).then(res => {
+            fetch(path).then((res) => {
               if (res.status === 200) {
-                res.json().then(data => {
+                res.json().then((data) => {
                   parseHistoryChannelData(
                     data,
                     this.users,
@@ -354,7 +376,7 @@ function main() {
         },
         exportAsMd: function () {
           const txt = this.history.msgs
-            .map(msg => msgToMd(msg))
+            .map((msg) => msgToMd(msg))
             .join('\n\n---\n\n');
           downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
         },
@@ -364,8 +386,8 @@ function main() {
             html = EXPORT_HTML_PREFIX + msgsOutput + EXPORT_HTML_SUFFIX;
 
           downloadAs(html, this.getDumpFileName('html'), 'text/html');
-        }
-      }
+        },
+      },
     });
 
   app.loadUsers();
@@ -438,9 +460,13 @@ const customRules = {
     paragraph: overrideDefaultHtml('paragraph', function (node, output, state) {
       return '<p>' + output(node.content, state) + '</p>\n';
     }),
-    blockQuote: overrideDefaultHtml('blockQuote', function (node, output, state) {
+    blockQuote: overrideDefaultHtml('blockQuote', function (
+      node,
+      output,
+      state
+    ) {
       return '<blockquote>' + output(node.content, state) + '</blockquote>\n';
-    })
+    }),
   },
   rules = Object.assign({}, defaultRules, customRules),
   rawBuiltParser = SimpleMarkdown.parserFor(rules),

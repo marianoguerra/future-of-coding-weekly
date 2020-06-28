@@ -78,6 +78,14 @@
           <span class="user">{{msg.$userName}}</span>
           <a class="date" :href="'#' + msg.$dateStrISO">{{msg.$dateStr}}</a>
           <div class="message" v-html="msg.$html"></div>
+          <div class="attachments">
+            <div v-if="msg.attachments" v-for="att in msg.attachments">
+              <blockquote v-if="att.service_name === 'twitter'">
+                <p class="tweet"><span class="tweet-icon">🐦</span> <a :href="'https://twitter.com/' + att.author_subname" class="tweet-author">{{att.author_name}}</a>: <span class="tweet-msg" v-html="att.$html"></span>
+                </p>
+              </blockquote>
+            </div>
+          </div>
           <div class="files">
             <div v-for="file in msg.files">
               <a v-if="file.mimetype.startsWith('video/')" :href="file.url_private" target="_blank">🎥 {{file.title}}</a>
@@ -92,6 +100,14 @@
               <span class="user">{{resp.$userName}}</span>
               <a class="date" :href="'#' + resp.$dateStrISO">{{resp.$dateStr}}</a>
               <div class="message" v-html="resp.$html"></div>
+              <div class="attachments">
+                <div v-if="resp.attachments" v-for="att in resp.attachments">
+                  <blockquote v-if="att.service_name === 'twitter'">
+                    <p class="tweet"><span class="tweet-icon">🐦</span> <a :href="'https://twitter.com/' + att.author_subname" class="tweet-author">{{att.author_name}}</a>: <span class="tweet-msg" v-html="att.$html"></span>
+                    </p>
+                  </blockquote>
+                </div>
+              </div>
               <div class="files">
                 <div v-for="file in resp.files">
                   <a v-if="file.mimetype.startsWith('video/')" :href="file.url_private" target="_blank">🎥 {{file.title}}</a>
