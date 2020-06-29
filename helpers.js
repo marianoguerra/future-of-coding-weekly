@@ -93,11 +93,13 @@ function main() {
         'Duncan Cragg': '[Duncan Cragg](https://twitter.com/duncancragg)',
         'Jimmy Miller': '[Jimmy Miller](https://jimmyhmiller.github.io/)',
         'Gregg Tavares': '[Gregg Tavares](https://gregggman.com)',
-        'Daniel Hines': '[Daniel Hines](https://github.com/d4hines)'
+        'Daniel Hines': '[Daniel Hines](https://github.com/d4hines)',
+        'Spencer Baugh': '[Spencer Baugh](http://github.com/catern)',
+        'Aleks Litynski': '[Aleks Litynski](https://github.com/AleksLitynski)',
       },
       pronouns: {
-        'Chris Martens': 'They/Them'
-      }
+        'Chris Martens': 'They/Them',
+      },
     },
     computed: {
       curAuthorText: function () {
@@ -137,7 +139,7 @@ function main() {
               .split('\n')
               .map((line, _i, _it) => '> ' + line)
               .join('\n\n');
-      }
+      },
     },
 
     methods: {
@@ -179,8 +181,8 @@ function main() {
         this.clearSlackThread();
         this.clearUrl();
         this.clearQuotes();
-      }
-    }
+      },
+    },
   });
 
   window.copyInnerContent = function (e) {
