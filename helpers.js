@@ -96,6 +96,8 @@ function main() {
         'Daniel Hines': '[Daniel Hines](https://github.com/d4hines)',
         'Spencer Baugh': '[Spencer Baugh](http://github.com/catern)',
         'Aleks Litynski': '[Aleks Litynski](https://github.com/AleksLitynski)',
+        'Srini Kadamati': '[Srini Kadamati](https://twitter.com/SriniKadamati)',
+        'Eddy Parkinson': '[Eddy Parkinson](http://www.cellmaster.com.au/)',
       },
       pronouns: {
         'Chris Martens': 'They/Them',
