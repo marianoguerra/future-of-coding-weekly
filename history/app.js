@@ -267,8 +267,10 @@ function nodeToMd(node, args) {
     }
     case 'link':
       return mdLink(node.url, node.name || node.url);
-    case 'emoji':
-      return textFromCode(EMOJI_NAME_TO_CODE[node.name]);
+    case 'emoji': {
+      const code = EMOJI_NAME_TO_CODE[node.name];
+      return code ? textFromCode(code) : `:${node.name}:`;
+    }
     case 'channel':
       return mdChannel(node.channel_id, args.channels);
     case 'user':
