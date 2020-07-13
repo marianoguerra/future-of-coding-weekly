@@ -78,6 +78,8 @@ const AUTHORS = {
   'Srini Kadamati': '[Srini Kadamati](https://twitter.com/SriniKadamati)',
   'Eddy Parkinson': '[Eddy Parkinson](http://www.cellmaster.com.au/)',
   'Robert Butler': '[Robert Butler](https://github.com/grokthis)',
+  Ope: '[Ope](https://twitter.com/opeispo)',
+  'Harry Brundage': '[Harry Brundage](https://twitter.com/harrybrundage)',
 };
 
 export {AUTHORS};

@@ -129,12 +129,8 @@ const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'},
   EMOJI_REF_REGEX_TEXT =
     ':(' + Object.keys(EMOJI_NAME_TO_CODE).join('|').replace('+', '\\+') + '):',
   EMOJI_REF_REGEX = new RegExp(EMOJI_REF_REGEX_TEXT, 'g');
-function enrichMessage(msg, users) {
-  const date = new Date(+msg.ts * 1000),
-    {user} = msg;
-
-  msg.$date = date;
-  msg.$text = msg.text
+function parseMsgText(msg, users) {
+  return msg.text
     .replace(URL_LABEL_REF_REGEX, (_, url, label) => `[${label}](${url})`)
     .replace(USER_REF_REGEX, (_, username) => getRealName(username, users))
     .replace(
@@ -153,6 +149,17 @@ function enrichMessage(msg, users) {
     .replace(SKIN_REF_REGEX, (_, skinCode) =>
       textFromCode(skinIdsToCodes[skinCode])
     );
+}
+
+//const types = {};
+function enrichMessage(msg, args) {
+  const {users} = args,
+    date = new Date(+msg.ts * 1000),
+    {user} = msg;
+
+  msg.$date = date;
+  msg.$text = msgBlocksToMd(msg, args);
+  //msg.$text = parseMsgText(msg, users);
   msg.$html = mdToHTML(msg.$text);
   const atts = msg.attachments;
   if (atts) {
@@ -172,10 +179,106 @@ function enrichMessage(msg, users) {
   msg.$userName = msg.$user.real_name;
   msg.$filterText = (msg.$dateStrISO + msg.$userName + msg.$text).toLowerCase();
 
+  /*const blocks = msg.blocks || [];
+  for (let i = 0, len = blocks.length; i < len; i += 1) {
+    const block = blocks[i],
+      subTypes = types[block.type] || {};
+
+    types[block.type] = subTypes;
+    const elems = block.elements || [];
+    for (let j = 0, len = elems.length; j < len; j += 1) {
+      const elem = elems[j],
+        subSubType = subTypes[elem.type] || {};
+
+      subTypes[elem.type] = subSubType;
+
+      const subElems = elem.elements || [];
+      for (let k = 0, len = subElems.length; k < len; k += 1) {
+        const subElem = subElems[k];
+        subSubType[subElem.type] = JSON.parse(JSON.stringify(subElem));
+      }
+    }
+  }
+  console.log(types);*/
+
   return msg;
 }
 
-function parseHistoryChannelData(data, users, msgByTs, msgOrder) {
+function msgBlocksToMd(msg, args) {
+  return (msg.blocks || [])
+    .map((block, _i, _it) => blockToMd(block, args))
+    .join('\n\n');
+}
+
+function mapElements(o, fn, args, joinStr) {
+  return (o.elements || [])
+    .map((element, _i, _it) => fn(element, args))
+    .join(joinStr);
+}
+
+function blockToMd(block, args) {
+  switch (block.type) {
+    case 'rich_text':
+      return mapElements(block, elementToMd, args, '');
+    default:
+      console.warn('Unknown type', block.type, block);
+      return `Unknown type ${block.type}`;
+  }
+}
+
+function elementToMd(element, args) {
+  switch (element.type) {
+    case 'rich_text_list':
+      return '\n* ' + mapElements(element, nodeToMd, args, '\n* ');
+    case 'rich_text_preformatted':
+      return '\n```\n' + mapElements(element, nodeToMd, args, '') + '\n```\n\n';
+    case 'rich_text_quote':
+      return '\n> ' + mapElements(element, nodeToMd, args, '> ');
+    case 'rich_text_section':
+      return mapElements(element, nodeToMd, args, '');
+    default:
+      console.warn('Unknown type', element.type, element);
+      return `Unknown type ${element.type}`;
+  }
+}
+
+function mdChannel(id, channels) {
+  const channel = channels[id],
+    name = channel ? channel.name : id;
+  return `**#${name}**`;
+}
+
+function mdUser(id, {users}) {
+  const user = users[id],
+    name = user ? user.real_name : id;
+
+  return AUTHORS[name] || `**@${name}**`;
+}
+
+function nodeToMd(node, args) {
+  switch (node.type) {
+    case 'text': {
+      const {style} = node;
+      if (style && style.code) {
+        return '`' + node.text + '`';
+      } else {
+        return node.text.replace(/\n/g, '\n\n');
+      }
+    }
+    case 'link':
+      return mdLink(node.url, node.name || node.url);
+    case 'emoji':
+      return textFromCode(EMOJI_NAME_TO_CODE[node.name]);
+    case 'channel':
+      return mdChannel(node.channel_id, args.channels);
+    case 'user':
+      return mdUser(node.user_id, args);
+    default:
+      return elementToMd(node);
+  }
+}
+
+function parseHistoryChannelData(data, users, channels, msgByTs, msgOrder) {
   for (let i = 0, len = data.length; i < len; i += 1) {
     const msg = data[i];
 
@@ -202,7 +305,7 @@ function parseHistoryChannelData(data, users, msgByTs, msgOrder) {
       }
     }
 
-    enrichMessage(msg, users);
+    enrichMessage(msg, {users, channels});
     const isParent = ts === thread_ts;
 
     if (isParent) {
@@ -224,7 +327,7 @@ function parseHistoryChannelData(data, users, msgByTs, msgOrder) {
             WHAT_IS_THIS:
               'a dummy message to attach thread messages to a parent that is not on this file',
           },
-          users
+          {users, channels}
         );
         msgOrder.push(parentMsg);
         msgByTs[thread_ts] = parentMsg;
@@ -243,6 +346,19 @@ function usersToUsersById(users) {
       {id} = user;
 
     result[id] = user;
+  }
+
+  return result;
+}
+
+function channelsToChannelsById(channels) {
+  const result = {};
+
+  for (let i = 0, len = channels.length; i < len; i += 1) {
+    const channel = channels[i],
+      {id} = channel;
+
+    result[id] = channel;
   }
 
   return result;
@@ -322,6 +438,13 @@ function main() {
               this.users = usersToUsersById(usersData);
             });
         },
+        loadChannels: function () {
+          return fetch('channels.json')
+            .then((resp) => resp.json())
+            .then((data) => {
+              this.channels = channelsToChannelsById(data);
+            });
+        },
         loadChannelDate(channel, fromDate, toDate, toDateFinal) {
           if (dateIsLessThanDate(fromDate, toDateFinal)) {
             const [year, month, day] = dateParts(fromDate),
@@ -335,6 +458,7 @@ function main() {
                   parseHistoryChannelData(
                     data,
                     this.users,
+                    this.channels,
                     this.history.msgsByTs,
                     this.history.msgs
                   );
@@ -453,7 +577,7 @@ function main() {
       },
     });
 
-  const userProm = app.loadUsers();
+  const infoProm = app.loadUsers().then((_) => app.loadChannels());
   let someParam = false;
   if (query.fromDate) {
     app.fromDate = query.fromDate;
@@ -477,7 +601,7 @@ function main() {
 
   app.updateQueryLink();
   if (someParam) {
-    userProm.then((_) => app.loadSelected());
+    infoProm.then((_) => app.loadSelected());
   }
 
   window.focApp = app;
@@ -515,7 +639,8 @@ const EXPORT_HTML_PREFIX = `
 </html>
 `;
 
-const defaultRules = SimpleMarkdown.defaultRules;
+const defaultRules = Object.assign({}, SimpleMarkdown.defaultRules);
+delete defaultRules.reflink;
 
 function overrideDefaultHtml(ruleName, overrideFn) {
   return Object.assign({}, defaultRules[ruleName], {html: overrideFn});
