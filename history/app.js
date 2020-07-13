@@ -75,7 +75,7 @@ function msgToMdNL(msg, linkPrefix) {
 }
 
 function msgToMd(msg) {
-  const base = `*[${msg.$dateStr}]* **${msg.$userName}**:\n\n${msg.$text}`;
+  const base = `_[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}`;
   if (msg.responses.length === 0) {
     return base;
   } else {
@@ -84,7 +84,7 @@ function msgToMd(msg) {
       '\n\n\n' +
       msg.responses
         .map(
-          (msg) => `> *[${msg.$dateStr}]* **${msg.$userName}**:\n\n${msg.$text}`
+          (msg) => `> _[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}`
         )
         .join('\n\n\n')
     );
