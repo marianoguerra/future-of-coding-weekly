@@ -32,7 +32,7 @@ const AUTHORS = {
   'Aria Minaei': '[Aria Minaei](https://twitter.com/ariaminaei)',
   'Stefan Lesser': '[Stefan Lesser](https://twitter.com/stefanlesser)',
   'Paul Biggar': '[Paul Biggar](https://twitter.com/paulbiggar)',
-  'Chris Maughan': '[Chris Maughan](https://twitter.com/cmaughan)',
+  'Chris Maughan': '[Chris Maughan](http://www.chrismaughan.com/)',
   'Yair Chuchem': '[Yair Chuchem](https://twitter.com/yairchu)',
   'Jacob Chapman': '[Jacob Chapman](https://unli.xyz/)',
   Justin: '[Justin](https://twitter.com/newplagiarist)',
