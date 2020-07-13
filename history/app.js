@@ -1,6 +1,7 @@
 //@format
 /*globals Vue, SimpleMarkdown*/
 import {getNameToCode, textFromCode, skinIdsToCodes} from './emoji.js';
+import {AUTHORS} from '../common.js';
 
 function msgMatchesFilter(msg, filter) {
   const matches = msg.$filterText.indexOf(filter) !== -1;
@@ -20,6 +21,57 @@ function downloadAs(exportObj, exportName, contentType) {
     link.click();
     document.body.removeChild(link);
   }
+}
+
+function mdLink(label, url) {
+  return `[${label}](${url})`;
+}
+
+const EMPTY_LINK = mdLink('', '');
+function findFirstLink({blocks}) {
+  if (!blocks) {
+    return EMPTY_LINK;
+  }
+
+  for (let i = 0, len = blocks.length; i < len; i += 1) {
+    const block = blocks[i];
+    if (block.type === 'rich_text') {
+      const elems = block.elements;
+      for (let j = 0, len = elems.length; j < len; j += 1) {
+        const elem = elems[j];
+        if (
+          elem.type === 'rich_text_section' ||
+          elem.type === 'rich_text_quote'
+        ) {
+          const subElems = elem.elements;
+          for (let k = 0, len = subElems.length; k < len; k += 1) {
+            const subElem = subElems[k];
+            if (subElem.type === 'link') {
+              const {url, text} = subElem,
+                label = text || url;
+
+              return mdLink(label, url);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return EMPTY_LINK;
+}
+
+function msgToMdNL(msg, linkPrefix) {
+  const userLink = AUTHORS[msg.$userName],
+    userText = userLink || `**${msg.$userName}**`,
+    conversationLink = mdLink(
+      '🧵conversation',
+      `${linkPrefix}#${msg.$dateStrISO}`
+    ),
+    resourceLink = findFirstLink(msg),
+    base = `x ${resourceLink} via ${userText} ${conversationLink}\n\n${msg.$text}`;
+
+  return base;
 }
 
 function msgToMd(msg) {
@@ -382,6 +434,15 @@ function main() {
             .join('\n\n---\n\n');
           downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
         },
+        exportAsNewsletter: function (linkSuffix) {
+          const linkPrefix =
+              'https://marianoguerra.github.io/future-of-coding-weekly/history/weekly/2020/' +
+              linkSuffix,
+            txt = this.history.msgs
+              .map((msg) => msgToMdNL(msg, linkPrefix))
+              .join('\n\n---\n\n');
+          downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
+        },
         exportAsHTML: function () {
           const msgsOutputNode = document.getElementById('msgs-output'),
             msgsOutput = msgsOutputNode.innerHTML,
@@ -418,6 +479,8 @@ function main() {
   if (someParam) {
     app.loadSelected();
   }
+
+  window.focApp = app;
 }
 
 const EXPORT_HTML_PREFIX = `
