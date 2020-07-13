@@ -316,7 +316,7 @@ function main() {
       },
       methods: {
         loadUsers: function () {
-          fetch('users.json')
+          return fetch('users.json')
             .then((resp) => resp.json())
             .then((usersData) => {
               this.users = usersToUsersById(usersData);
@@ -453,7 +453,7 @@ function main() {
       },
     });
 
-  app.loadUsers();
+  const userProm = app.loadUsers();
   let someParam = false;
   if (query.fromDate) {
     app.fromDate = query.fromDate;
@@ -477,7 +477,7 @@ function main() {
 
   app.updateQueryLink();
   if (someParam) {
-    app.loadSelected();
+    userProm.then((_) => app.loadSelected());
   }
 
   window.focApp = app;

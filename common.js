@@ -77,6 +77,7 @@ const AUTHORS = {
   'Aleks Litynski': '[Aleks Litynski](https://github.com/AleksLitynski)',
   'Srini Kadamati': '[Srini Kadamati](https://twitter.com/SriniKadamati)',
   'Eddy Parkinson': '[Eddy Parkinson](http://www.cellmaster.com.au/)',
+  'Robert Butler': '[Robert Butler](https://github.com/grokthis)',
 };
 
 export {AUTHORS};
