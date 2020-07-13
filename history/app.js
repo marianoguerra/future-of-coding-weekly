@@ -274,7 +274,7 @@ function nodeToMd(node, args) {
     case 'user':
       return mdUser(node.user_id, args);
     default:
-      return elementToMd(node);
+      return elementToMd(node, args);
   }
 }
 
