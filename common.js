@@ -5,7 +5,7 @@ const AUTHORS = {
   'Shalabh Chaturvedi':
     '[Shalabh Chaturvedi](https://twitter.com/chatur_shalabh)',
   'Geoffrey Litt': '[Geoffrey Litt](https://twitter.com/geoffreylitt)',
-  'Kartik Agaram': '[Kartik Agaram](http://akkartik.name/about)',
+  'Kartik Agaram': '[Kartik Agaram](https://github.com/akkartik/mu)',
   'Scott Anderson': '[Scott Anderson](https://twitter.com/ImpossibleScott)',
   'Will Crichton': '[Will Crichton](willcrichton.net)',
   'Charlie Roberts': '[Charlie Roberts](https://www.charlie-roberts.com)',
