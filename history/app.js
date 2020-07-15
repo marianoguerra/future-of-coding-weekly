@@ -129,7 +129,7 @@ const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'},
   EMOJI_REF_REGEX_TEXT =
     ':(' + Object.keys(EMOJI_NAME_TO_CODE).join('|').replace('+', '\\+') + '):',
   EMOJI_REF_REGEX = new RegExp(EMOJI_REF_REGEX_TEXT, 'g');
-function parseMsgText(msg, users) {
+function parseMsgText(msg, {users}) {
   return msg.text
     .replace(URL_LABEL_REF_REGEX, (_, url, label) => `[${label}](${url})`)
     .replace(USER_REF_REGEX, (_, username) => getRealName(username, users))
@@ -159,7 +159,6 @@ function enrichMessage(msg, args) {
 
   msg.$date = date;
   msg.$text = msgBlocksToMd(msg, args);
-  //msg.$text = parseMsgText(msg, users);
   msg.$html = mdToHTML(msg.$text);
   const atts = msg.attachments;
   if (atts) {
@@ -205,9 +204,13 @@ function enrichMessage(msg, args) {
 }
 
 function msgBlocksToMd(msg, args) {
-  return (msg.blocks || [])
-    .map((block, _i, _it) => blockToMd(block, args))
-    .join('\n\n');
+  if (msg.blocks) {
+    return msg.blocks
+      .map((block, _i, _it) => blockToMd(block, args))
+      .join('\n\n');
+  } else {
+    return parseMsgText(msg, args);
+  }
 }
 
 function mapElements(o, fn, args, joinStr) {

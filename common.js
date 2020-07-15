@@ -18,7 +18,7 @@ const AUTHORS = {
   'Michael Mamic': '[Michael Mamic](https://twitter.com/mchlmmc)',
   'Christopher Galtenberg':
     '[Christopher Galtenberg](https://twitter.com/galtenberg)',
-  'Edward de Jong': '[Edward de Jong](http://beadslang.com/)',
+  'Edward de Jong': '[Edward de Jong](http://beadslang.org/)',
   Karki: '[Karki](https://github.com/deepakkarki)',
   Brent: '[Brent](https://www.linkedin.com/in/brentgracey/)',
   'Steve Peak': '[Steve Peak](https://twitter.com/iopeak)',
@@ -80,6 +80,8 @@ const AUTHORS = {
   'Robert Butler': '[Robert Butler](https://github.com/grokthis)',
   Ope: '[Ope](https://twitter.com/opeispo)',
   'Harry Brundage': '[Harry Brundage](https://twitter.com/harrybrundage)',
+  'Konrad Hinsen': '[Konrad Hinsen](https://khinsen.net/)',
+  'Xandor Schiefer': '[Xandor Schiefer](https://twitter.com/zeorin)',
 };
 
 export {AUTHORS};
