@@ -1,1 +1,53 @@
-hello
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Future of Coding History Search</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="app" v-cloak>
+
+      <div id="ui">
+
+        <a id="logo" href="https://futureofcoding.org">
+          <img src="logo.svg" alt="Future of Coding History Search">
+        </a>
+
+        <div id="small-logo">
+          <a href="https://futureofcoding.org">Future of Coding</a> History Search
+        </div>
+
+        <div id="center">
+          <div id="query">
+            <div>
+              <div class="field">
+                <label>Search</label>
+                <input type="search" v-model="search">
+              </div>
+
+              <div class="field">
+                <label>Channel</label>
+                <select v-model="channel">
+                  <option value="general">#general</option>
+                  <option value="feedback">#feedback</option>
+                  <option value="two-minute-week">#two-minute-week</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="load" v-on:click="doSearch()">Search</button>
+          </div>
+        </div>
+      </div>
+
+      <ul class="results" style="margin:2em">
+        <li v-for="item in items"><a :href="item.url" target="_blank">{{item.from}}</a></li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
+
