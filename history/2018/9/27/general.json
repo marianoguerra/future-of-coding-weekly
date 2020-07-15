@@ -1,0 +1,691 @@
+[
+    {
+        "client_msg_id": "8535a5cb-2fa6-43bb-832d-ca45d6c47a79",
+        "type": "message",
+        "text": "<@UCGAK10LS> the use cases I'm thinking of are one C++ binary talking to another C++ binary via a socket or opening a file and reading it, expecting a specific format. What kind of validation happens in either case? Do we just see if the bits 'look good'? Sounds an awful lot like dynamic typing! Now from the 'program perspective' there is no problem here because you have 'compile time' and 'run time' and these are distinct phases - static type checking only happens during compilation. But from the 'system perspective', *it is always run time*. If you look at any running system, you have parts that come together, 'compose' to form larger parts and then work together - and this happens on an ongoing, continuous basis at different scales. E.g. at some point the programmer composes some 'function parts', some 'type parts' together into a 'program part', stamped 'verified OK' by some checker. Then we go on to compose multiple 'program parts' into a service and there is no verification and thats ok? By 'bind time' I meant we need introduce the idea that whenever a coupling is introduced between one part' and another part, there is some verification that happens to ensure these two work well together. This could be used both 'in the small' - i.e. when building a program-like entity - and 'in the large'. The usual static typing model doesn't scale because you cannot build or deploy large system in one shot! You always have sub parts that are replaced\/updated while the rest of the system remains intact.",
+        "user": "U8A5MS6R1",
+        "ts": "1538032552.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCKRZS3DZ",
+                    "UCQ4BBFQ9"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "66e98abf-4ae9-4647-9a44-5f872a45f059",
+        "type": "message",
+        "text": "&gt; You want a way to transition old data to new schema\nAbsolutely. Holding onto older schemas is useful because it maintains the knowledge that 'data object `d` was created with schema `S@1`'. So when a new version of the schema `S@2` is introduced it is treated effectively as a different type and any operations on `S@2` do not work with the object `d`. Also you could provide a transition function `f: S@1 -&gt; S@2` which the system can apply opportunistically to upgrade the data objects. In theory you don't need any structural compatibility between `S@1` and `S@2` as long as you implement the transition function. Most dbs provide limited evolution paths and invariably need major refactoring of the schema at some point.",
+        "user": "U8A5MS6R1",
+        "ts": "1538033127.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537968544.000100",
+        "parent_user_id": "UA14TGLTC"
+    },
+    {
+        "client_msg_id": "d803728d-9323-4c6b-8caf-f59cbff421c4",
+        "type": "message",
+        "text": "<@U8A5MS6R1> Again, it turns out that serialisation and de-serialisation doesn’t need to be done in a dynamically-typed context. In statically typed languages like Elm (or Haskell), you use “encoders” and “decoders” respectively. A decoder is built according to an expected data format and is equipped with plans B and C if the format doesn’t match (e.g. filling in default values, or returning a predetermined error value). Basically, it’s run-time error handling that is statically guaranteed to work as expected (and never crash).\n\nSince all communication between programs can be boiled down to binary data, we have access to a foolproof way to never crash: we just use a binary decoder and explicitly specify how to handle all possible errors in advance. Of course, this isn’t ideal. Usually you can safely presume the data format is something better than binary, for example JSON, in which case you use JSON-specific decoders. If you need better guarantees than that (i.e. you want to be able to presume that the data will be precisely a list of three integers), then you’re right, suddenly you need the kind of “bind-time checking” you refer to, which happens when you plug programs together.\n\nIt’s definitely a topic worthy of research. I’d like to know if this kind of type checking exists! In summary though, I still disagree that any of the issues that arise when composing programs into systems has to do with static typing in particular. On the contrary, it’s a good step above dynamic typing in terms of guarantees.",
+        "user": "UCGAK10LS",
+        "ts": "1538033853.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1538039004.000000"
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "ec52a244-b47a-459f-ba32-14dd8081b3ba",
+        "type": "message",
+        "text": "Suppose that a sequence of actions `as` lead to `d` in the first place.  We could say `S@1 as = d`.  I often curious about the \"orphan\" question of whether this square commutes `S@2 as = f d`.  In other words, I got `d` from doing something, will I get `f d` if I do the same thing in the new version?",
+        "user": "UA14TGLTC",
+        "ts": "1538034293.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537968544.000100",
+        "parent_user_id": "UA14TGLTC"
+    },
+    {
+        "client_msg_id": "810301a3-1669-4790-ad8b-e1afedb92b46",
+        "type": "message",
+        "text": "<!here> would love to see any women\/nonbinary engineers at our Velocity happy hour here at Work-Bench this coming Monday! We're convening a great group of women+ including Velocity speakers &amp; attendees in from out of town. Please pass on to any other women\/nb devs in your network as well!!\n\n<https:\/\/www.eventbrite.com\/e\/women-devs-velocity-happy-hour-tickets-50459804634>",
+        "user": "UB57GEDGC",
+        "ts": "1538056712.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g974b5c5b11f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/d974b5c5b11fa0b8a10196b9898f1f34.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Kelley Henry",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "kell",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Eventbrite",
+                "title": "Women+ Devs Velocity Happy Hour",
+                "title_link": "https:\/\/www.eventbrite.com\/e\/women-devs-velocity-happy-hour-tickets-50459804634",
+                "text": "On behalf of Datadog, NS1, and Work-Bench, you are invited to join our Women+ Devs Velocity Happy Hour on Monday, October 1st at 6PM. With so many amazing women and nonbinary speakers, attendees, and engineers participating in the Velocity Conference here in NYC, it's the perfect time to convene and connect the amazing women and nonbinary developer community. Please RSVP! Hosted by Renee Orser (NS1), Ashley Miller (Datadog), Jessica Lin (Work-Bench), &amp; Kelley Henry (Work-Bench) --This event is intended to serve women and nonbinary people and we ask that you RSVP only if you identify as a woman or nonbinary developer. We do not condone harassment or offensive behavior, at our event venues, on social media, or in general. We unequivocally believe that as we change the narrative for women+ in enterprise tech, it is paramount to have safe spaces to do so. We reserve the right to ask anyone to leave if acting inappropriately.",
+                "fallback": "Eventbrite: Women+ Devs Velocity Happy Hour",
+                "image_url": "https:\/\/img.evbuc.com\/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F50136844%2F243444208615%2F1%2Foriginal.jpg?w=1000&auto=compress&rect=0%2C8%2C600%2C300&s=de8211b1536e505c27ead93bd04af99d",
+                "fields": [
+                    {
+                        "title": "Where",
+                        "value": "New York, NY",
+                        "short": true
+                    },
+                    {
+                        "title": "When",
+                        "value": "Mon, Oct 1, 2018 at 6:00 PM",
+                        "short": true
+                    }
+                ],
+                "from_url": "https:\/\/www.eventbrite.com\/e\/women-devs-velocity-happy-hour-tickets-50459804634",
+                "image_width": 500,
+                "image_height": 250,
+                "image_bytes": 91108,
+                "service_icon": "https:\/\/cdn.evbstatic.com\/s3-build\/perm_001\/1d8fef\/django\/images\/touch_icons\/apple-touch-icon-180x180.png",
+                "id": 1,
+                "original_url": "https:\/\/www.eventbrite.com\/e\/women-devs-velocity-happy-hour-tickets-50459804634"
+            }
+        ],
+        "thread_ts": "1538056712.000100",
+        "reply_count": 13,
+        "reply_users_count": 5,
+        "latest_reply": "1538130664.000100",
+        "reply_users": [
+            "UCKRZS3DZ",
+            "U5TCAFTD3",
+            "UA14TGLTC",
+            "UCGAK10LS",
+            "U5STGTB3J"
+        ],
+        "replies": [
+            {
+                "user": "UCKRZS3DZ",
+                "ts": "1538057180.000100"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1538070631.000100"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1538095396.000100"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1538097971.000100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1538129655.000100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1538129736.000100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1538129830.000100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1538129876.000100"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1538129968.000100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1538129970.000100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1538130050.000100"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1538130509.000100"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1538130664.000100"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1538133289.968655"
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "Should we consider this as spam? Looks unrelated to the purpose of this chat, as far as I understand.",
+        "user": "UCKRZS3DZ",
+        "ts": "1538057180.000100",
+        "thread_ts": "1538056712.000100",
+        "root": {
+            "client_msg_id": "810301a3-1669-4790-ad8b-e1afedb92b46",
+            "type": "message",
+            "text": "<!here> would love to see any women\/nonbinary engineers at our Velocity happy hour here at Work-Bench this coming Monday! We're convening a great group of women+ including Velocity speakers &amp; attendees in from out of town. Please pass on to any other women\/nb devs in your network as well!!\n\n<https:\/\/www.eventbrite.com\/e\/women-devs-velocity-happy-hour-tickets-50459804634>",
+            "user": "UB57GEDGC",
+            "ts": "1538056712.000100",
+            "team": "T5TCAFTA9",
+            "attachments": [
+                {
+                    "service_name": "Eventbrite",
+                    "title": "Women+ Devs Velocity Happy Hour",
+                    "title_link": "https:\/\/www.eventbrite.com\/e\/women-devs-velocity-happy-hour-tickets-50459804634",
+                    "text": "On behalf of Datadog, NS1, and Work-Bench, you are invited to join our Women+ Devs Velocity Happy Hour on Monday, October 1st at 6PM. With so many amazing women and nonbinary speakers, attendees, and engineers participating in the Velocity Conference here in NYC, it's the perfect time to convene and connect the amazing women and nonbinary developer community. Please RSVP! Hosted by Renee Orser (NS1), Ashley Miller (Datadog), Jessica Lin (Work-Bench), &amp; Kelley Henry (Work-Bench) --This event is intended to serve women and nonbinary people and we ask that you RSVP only if you identify as a woman or nonbinary developer. We do not condone harassment or offensive behavior, at our event venues, on social media, or in general. We unequivocally believe that as we change the narrative for women+ in enterprise tech, it is paramount to have safe spaces to do so. We reserve the right to ask anyone to leave if acting inappropriately.",
+                    "fallback": "Eventbrite: Women+ Devs Velocity Happy Hour",
+                    "image_url": "https:\/\/img.evbuc.com\/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F50136844%2F243444208615%2F1%2Foriginal.jpg?w=1000&auto=compress&rect=0%2C8%2C600%2C300&s=de8211b1536e505c27ead93bd04af99d",
+                    "fields": [
+                        {
+                            "title": "Where",
+                            "value": "New York, NY",
+                            "short": true
+                        },
+                        {
+                            "title": "When",
+                            "value": "Mon, Oct 1, 2018 at 6:00 PM",
+                            "short": true
+                        }
+                    ],
+                    "from_url": "https:\/\/www.eventbrite.com\/e\/women-devs-velocity-happy-hour-tickets-50459804634",
+                    "image_width": 500,
+                    "image_height": 250,
+                    "image_bytes": 91108,
+                    "service_icon": "https:\/\/cdn.evbstatic.com\/s3-build\/perm_001\/1d8fef\/django\/images\/touch_icons\/apple-touch-icon-180x180.png",
+                    "id": 1,
+                    "original_url": "https:\/\/www.eventbrite.com\/e\/women-devs-velocity-happy-hour-tickets-50459804634"
+                }
+            ],
+            "thread_ts": "1538056712.000100",
+            "reply_count": 13,
+            "reply_users_count": 5,
+            "latest_reply": "1538130664.000100",
+            "reply_users": [
+                "UCKRZS3DZ",
+                "U5TCAFTD3",
+                "UA14TGLTC",
+                "UCGAK10LS",
+                "U5STGTB3J"
+            ],
+            "subscribed": true,
+            "last_read": "1538133289.968655"
+        },
+        "client_msg_id": "abcf9132-45ea-4806-934a-fc6c55a40686",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a1794e1a-a904-43db-9099-65fea9fd098d",
+        "type": "message",
+        "text": "<@UCGAK10LS> - I feel we are talking about different things :smile:. The decoders etc. sound useful and I am not against static typing.\n&gt;  I still disagree that any of the issues that arise when composing programs into systems has to do with static typing in particular.\nI'm not saying this at all. It's not that static typing causes problems, its that it doesn't solve the more general problems of composing programs into systems. IOW, the current static typing methods only apply 'within the program' and these ideas don't extend beyond the program boundary. In fact the 'program concept' itself - a fully fleshed out, static construct - is *essential* in this model. It is the thing being 'verified'. But systems are not programs - they are not 'static' - how do we start to think about verifying these? We build these little bundles we call 'executables' which may internally be statically verified and what not, but then we wire them up with very dynamic mechanisms because the models we use for building 'executables' don't work for building systems. The deeper idea I'm trying to challenge is the dominant paradigm which considers in-program composition a very different thing than cross-program composition.",
+        "user": "U8A5MS6R1",
+        "ts": "1538069872.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "636c2beb-10ff-4d52-a7c4-bcffecb61a7a",
+        "type": "message",
+        "text": "What if we start with system composition first? In the system model there are no 'compile time' or 'run time' phases - a system is always live. You want to be able to pull out a part - could be large or small - tweak it and put it back. Or you want to fiddle with something in place. In each case you want to verify that certain consistency\/correctness is preserved. How should these be specified? Maybe there is a whole range of consistency checks starting from the whole system to subsystems all the way down to small components (This unifies integration tests, unit tests and type checking into one general notion of consistency checking). If the general problem is solved well, do we need the current static typing models? Do we even need the program\/executable concept? Can a general, recursive model provide a better, live, programming experience?",
+        "user": "U8A5MS6R1",
+        "ts": "1538069873.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1538072973.000000"
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "00CE3488-8717-4B14-89B0-518C05D7C6F3",
+        "type": "message",
+        "text": "That’s a good question. It’s not spam in this case because they checked with me beforehand. work-bench has been great about giving us space for NYC meetups so I wanted to give them an opportunity to post here. The <#CBC968C1M|nyc> channel would’ve been a better place for this though",
+        "user": "U5TCAFTD3",
+        "ts": "1538070631.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538056712.000100",
+        "parent_user_id": "UB57GEDGC",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UB57GEDGC",
+                    "UC2A2ARPT",
+                    "UBSMEUXAA",
+                    "UCKRZS3DZ",
+                    "UA14TGLTC",
+                    "U5STGTB3J",
+                    "UCXR52MU2"
+                ],
+                "count": 7
+            },
+            {
+                "name": "100",
+                "users": [
+                    "UB57GEDGC",
+                    "U5STGTB3J"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f9fdf288-55e3-4993-a2a4-b9b8fe90ff18",
+        "type": "message",
+        "text": "&gt; In the system model there are no 'compile time' or 'run time' phases - a system is always live. You want to be able to pull out a part - could be large or small - tweak it and put it back.\n\nI follow this thread with great interest.",
+        "user": "UCKRZS3DZ",
+        "ts": "1538082273.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "827a3e35-4c2b-4305-90c6-c117078a4e69",
+        "type": "message",
+        "text": "Ah, interesting question. In my mind the sequence `as` may not be possible in a world where `S@2` exists. For instance if the sequence of actions is `1. user provides first name, 2. user provides last name`. The schema `S@1` is `firstname: string, lastname: string`. The new version `S@2` however is just `fullname: string`. We can still implement `f`, however the events don't make sense in the 'new world', we cannot just do the same thing.\n\nFor situations that seem compatible (say we only added an optional `dob: date` field but didn't modify existing fields), I'm not sure. It seems `S@2 as = f d` *should hold* but how do we ensure this? Maybe the only way to create `S@2` objects should be to create `S@0` objects and run them through the transitions `S@0 -&gt; S@1 -&gt; S@2`.",
+        "user": "U8A5MS6R1",
+        "ts": "1538085672.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1538085704.000000"
+        },
+        "thread_ts": "1537968544.000100",
+        "parent_user_id": "UA14TGLTC"
+    },
+    {
+        "client_msg_id": "5d080924-eed5-441c-b52e-82baa1df0f63",
+        "type": "message",
+        "text": "An interesting paper that touches on this (and other strong and abiding beliefs we tend to hold around programming) is <https:\/\/www.shift-society.org\/salon\/papers\/2018\/preprints\/semprola.pdf>. Excerpt:\n&gt; Another traditional choice is to view a program as an isolated mathematical or otherwise formal construct whose semantics is mostly determined at compile time in reference to itself and its imported libraries. And it makes a lot of sense that we’ve inherited this view given the history of programming, but today many ‘programs’ are really just small parts of a greater, ‘living’ network of programs and services that are each being updated at their own pace. Therefore there is no single moment of compilation and the semantics of one part in relation to the whole can be updated even if that part isn’t being changed.",
+        "user": "U8A5MS6R1",
+        "ts": "1538090450.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "6667a04a-7a46-4743-8d13-76bfd55d3d05",
+        "type": "message",
+        "text": "Double exclamation points certainly match the filter.  :smile:",
+        "user": "UA14TGLTC",
+        "ts": "1538095396.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538056712.000100",
+        "parent_user_id": "UB57GEDGC"
+    },
+    {
+        "client_msg_id": "564619de-0d69-4413-bf9c-4dc617512411",
+        "type": "message",
+        "text": "I live in Melbourne, Australia, so I'd certainly consider it spam. It's good to provide people with a means of outreach but it should probably be more targeted.",
+        "user": "UCGAK10LS",
+        "ts": "1538097971.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538056712.000100",
+        "parent_user_id": "UB57GEDGC"
+    },
+    {
+        "client_msg_id": "dbfb85ec-2dc5-4805-aa5a-7cded8549dc4",
+        "type": "message",
+        "text": "<@U8A5MS6R1> Yeah, I'd started to suspect we were talking past each other. Sorry if I started on irrelevant tangents.\n\nI think your description of the nature and challenges of developing systems is pretty accurate, and it's definitely a problem we need to solve. I'm sure relevant theories exist, but I don't know much about them yet.\n\nOne thing I think is true: Because parts of a system will inevitably be developed using different programming languages or frameworks, any kind of verification has to be done in a language-independent way. This means parts of a system need a common means to \"advertise\" how they behave to one another. There's a concept that already exists for this: Interface Description Languages (<https:\/\/bit.ly\/2ImaUf7>). Huge companies like Google and Facebook are using these languages to bolt their systems together already. Some of these languages, like ProtoBuf, have a way to specify forwards and backwards compatibility so that you can upgrade pieces of a system without the other pieces breaking.",
+        "user": "UCGAK10LS",
+        "ts": "1538099754.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "74bf3870-94d9-45c9-99e8-e364a2c4d987",
+        "type": "message",
+        "text": "There's also OpenAPI too (<https:\/\/bit.ly\/2OVAcDw>) but I'm yet to fully understand it.",
+        "user": "UCGAK10LS",
+        "ts": "1538100913.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1538100921.000000"
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "a14eb545-78ce-4bfb-a444-7e70c5e2dd34",
+        "type": "message",
+        "text": "This is why the problem is nuanced.",
+        "user": "UA14TGLTC",
+        "ts": "1538102111.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537968544.000100",
+        "parent_user_id": "UA14TGLTC",
+        "reactions": [
+            {
+                "name": "point_up",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "58f5a057-94ec-480a-8e74-0df1ed1b7fa0",
+        "type": "message",
+        "text": "I don't think there's anything irrelevant in the above conversation, it's more about settling on a shared context. (If anything I took your original thread and threw in a different context.)\n\nThe solutions like protobuf, thrift, avro, etc. are good engineering solutions and they *build up* from the existing foundations. My belief (shared with some others here I think) is that the foundations themselves could use some rethinking. This means questioning some well established, fundamental ideas such as what is an OS? Do we need one? What belongs in an OS? E.g. should it provide a richer communication mechanism than 'byte streams'? Should it provide a richer persistence model than 'files'? Should it include a type system? Could it be distributed by default? Should it be virutalized by default? If we change the foundational substrate, it is possible the structures we build with it (our programming languages+environments, build systems, applications, runtimes, package systems, databases...) also look very different. Perhaps some problems that we solve in the higher layers and introduce complexity, could end up being very easy in this imaginary world. That said, it is extremely useful to invent and explore on top the existing foundations as well, to find the 'good ideas'. So there's a lot of avenues to explore wrt 'future of programming'.",
+        "user": "U8A5MS6R1",
+        "ts": "1538102432.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "3bcd868a-b20d-4799-ab49-dcd2538d5245",
+        "type": "message",
+        "text": "&gt; What belongs in an OS? E.g. should it provide a richer communication mechanism than 'byte streams'? Should it provide a richer persistence model than 'files'?\n\nI agree re-thinking some fundamentals can be necessary. I think this challenge is better phrased as a problem of _abstractions_ though. For example, all of computing comes down to bytes, but abstractions like files, data types, and interface description languages make thinking about bytes unnecessary. I think the \"future of programming\" is about finding the best set of paradigms and abstractions for building systems.\n\n(Thinking too much about reinventing _operating systems_ can be dangerous. Operating systems are low-level behemoths, and realistically we don't have the resources, community, or industry agreement that is necessary for doing that kind of work. The right set of abstractions will be able to run atop any existing operating system and computer hardware.)",
+        "user": "UCGAK10LS",
+        "ts": "1538106952.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0e555d35-4a7e-4445-aa82-4bece6a5ad8c",
+        "type": "message",
+        "text": "Agree 100% with your comment about this being a problem of finding the best set of abstractions. Yes there's a risk in reinventing things too. If we build a new substrate, it should be widely portable and should run atop the existing behemoths. Then when everyone is on the new stuff, we switch out the behemoths underneath with something compact :wink:.",
+        "user": "U8A5MS6R1",
+        "ts": "1538112212.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "3cd234ee-cf3a-4367-aa76-4438c2a260b9",
+        "type": "message",
+        "text": "Exactly :grinning:",
+        "user": "UCGAK10LS",
+        "ts": "1538112349.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537948820.000100",
+        "parent_user_id": "UCGAK10LS"
+    }
+]

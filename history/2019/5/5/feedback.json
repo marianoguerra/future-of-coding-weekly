@@ -1,0 +1,352 @@
+[
+    {
+        "client_msg_id": "07ed7f36-2604-46e6-8204-e6406275d257",
+        "type": "message",
+        "text": "\"you declare an object with the `struct` keyword instead of the usual `class`\" BTW I've found it also useful to be able to allocate and use structs directly on the heap, and I prefer 'struct' unless there's some reason it must always be on the heap. To this end, in C# I've sometimes defined a struct version of something with a corresponding class wrapper that contains all the same methods, e.g. DList&lt;T&gt; and InternalDList&lt;T&gt;: <http:\/\/core.loyc.net\/collections\/dlist.html>",
+        "user": "UD6EXQVM0",
+        "ts": "1557075269.022400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "9d8ef2dd-8df9-43d3-9208-4f6c7737c638",
+        "type": "message",
+        "text": "Note that `struct InternalDList` also handles errors slightly differently, which reminds me of another design choice I intend to include in my next language design - a different flavor of generics in which modules, not classes, are parameterized. In particular I imagine enumerated options as part of module instantiations that could select at compile time among options like error-handling strategies (or memory management strategies, or whatever). The idea is to boost reusability by punting choices to a higher level (without the performance penalty associated with a dependency-injected `interface`). And parameterizing modules is simply easier for the programmer than separately parameterizing every class and function in a module (though the language would also support traditional type\/function generics). In particular it is easier for consumers, not just producers, if you can mention a parameter once on the `ìmport` statement rather than _every time the type is mentioned_.",
+        "user": "UD6EXQVM0",
+        "ts": "1557075604.022600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1557076417.000000"
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "048c56d9-5159-4e90-82cf-148c30407a97",
+        "type": "message",
+        "text": "so far I haven't had the need to dynamically allocate an existing struct, but I can imagine it being useful.. that's what you get in C++ with its inlining per use",
+        "user": "UHDQ62M4P",
+        "ts": "1557078110.023500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "b05ebe4e-e140-4876-9ee4-e9c31971299f",
+        "type": "message",
+        "text": "as for module parametrization.. that maybe cuts down on the amount of type parameters, but to me the real solution is to have most\/all type parameters inferred. Lobster doesn't even have a way to specify a type parameter on a function, it is always automatic",
+        "user": "UHDQ62M4P",
+        "ts": "1557078182.023700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "4cbf7935-6a43-4cfd-89c2-80a0a90adc55",
+        "type": "message",
+        "text": "Er... hum.",
+        "user": "UD6EXQVM0",
+        "ts": "1557078964.023900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "5d161c05-6be6-4690-89e1-0b7e45c041c6",
+        "type": "message",
+        "text": "Parameterized modules like in ocaml? <https:\/\/ocaml.org\/learn\/tutorials\/modules.html>",
+        "user": "U8A5MS6R1",
+        "ts": "1557079074.024100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "d19c3012-39b0-4686-811e-bddd01b93e79",
+        "type": "message",
+        "text": "I was surprised by the question \"Can structs contain pointers to heap allocations?\" because the answer seems trivially yes - for those using using C# anyway. The really interesting question is the extent to which you can have references to structs. (The CLR's answer, IIUC, is that references to structs can only exist on the stack, but you can have references to any struct whether it exists on the stack or heap. I _think_ you can now put references to structs inside other structs, but then cannot put those structs on the heap... or maybe that's just a special thing that only built-in types can do)",
+        "user": "UD6EXQVM0",
+        "ts": "1557079122.024300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1557079226.000000"
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "b7dc10b3-4e25-4f5f-9846-e290ba70548e",
+        "type": "message",
+        "text": "I quite like the fully inferred model, but it would be really nice if the compiler can be introspected to determine the types of parameters in a specific context, and text editors could overlay this useful info if they choose.",
+        "user": "U8A5MS6R1",
+        "ts": "1557079139.024500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "1f350e24-63d6-41e2-9954-ebaa50f2ca14",
+        "type": "message",
+        "text": "(in addition to introspecting the static call paths, etc. which the compiler has already determined). Really one advantage of manifest typing is just quick documentation, and while inference ensure correct use, it could really benefit from some introspection system.",
+        "user": "U8A5MS6R1",
+        "ts": "1557079360.024900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "e55126c8-51e1-4e99-8172-b85b3b15aa68",
+        "type": "message",
+        "text": "<@UD6EXQVM0> looks like structs cannot contain references to other structs: <https:\/\/blogs.msdn.microsoft.com\/mazhou\/2018\/03\/02\/c-7-series-part-9-ref-structs>\n\nC# is interesting for having several ideas I considered and then went, “nah, nobody could possibly use this correctly”. Have any other languages adopted ideas like value types and stack-only references?",
+        "user": "UCUSW7WVD",
+        "ts": "1557080790.025100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Mark Zhou's Tech Blog",
+                "title": "C# 7 Series, Part 9: ref structs",
+                "title_link": "https:\/\/blogs.msdn.microsoft.com\/mazhou\/2018\/03\/02\/c-7-series-part-9-ref-structs",
+                "text": "Part 1: Value TuplesPart 2: Async MainPart 3: Default LiteralsPart 4: DiscardsPart 5: Private ProtectedPart 6: Read-only structsPart 7: Ref ReturnsPart 8: “in” ParametersPart 9: (This post) ref structs Background In the previous posts, I have explained many new C# features, each of the feature is introduced to either enhance the language, or solve issues....",
+                "fallback": "Mark Zhou's Tech Blog: C# 7 Series, Part 9: ref structs",
+                "thumb_url": "https:\/\/msdnshared.blob.core.windows.net\/media\/2018\/03\/image_thumb2.png",
+                "from_url": "https:\/\/blogs.msdn.microsoft.com\/mazhou\/2018\/03\/02\/c-7-series-part-9-ref-structs",
+                "thumb_width": 671,
+                "thumb_height": 296,
+                "service_icon": "https:\/\/blogs.msdn.microsoft.com\/mazhou\/wp-content\/themes\/microsoft-msdn\/images\/favicon-msdn.png",
+                "id": 1,
+                "original_url": "https:\/\/blogs.msdn.microsoft.com\/mazhou\/2018\/03\/02\/c-7-series-part-9-ref-structs"
+            }
+        ],
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "a6f29f1d-24da-4ac3-b9a0-d9da1d4066d3",
+        "type": "message",
+        "text": "Lobster doesn't allow references to structs.. they are always copied",
+        "user": "UHDQ62M4P",
+        "ts": "1557081549.025400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "9be075dd-f124-4dfe-b8db-2d643b08dff9",
+        "type": "message",
+        "text": "<@U8A5MS6R1> yup, showing inferred types on hover over would be cool. One huge complication is that it depends on context for many functions.",
+        "user": "UHDQ62M4P",
+        "ts": "1557081660.025600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "81598569-ad48-437d-aa3f-62a3dbb68079",
+        "type": "message",
+        "text": "That's understood. I was thinking you would set your entry functions (main, tests, etc.) and you'd be able to see types in that context. Unused code would be obvious too.",
+        "user": "U8A5MS6R1",
+        "ts": "1557083533.025800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "8cdf075c-2f55-4cc7-8c5f-7d9cf25895e9",
+        "type": "message",
+        "text": "<@UCUSW7WVD> Ref structs can evidently contain managed pointers, which are basically references to structs, but this functionality of the CLR is not exposed by C#, likely due to the difficulty of ensuring a reference does not outlive a stack variable to which it points: <http:\/\/tooslowexception.com\/ref-struct-byref-like-type-and-byreference-byref-like-instance-field\/>",
+        "user": "UD6EXQVM0",
+        "ts": "1557095894.026000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1557095932.000000"
+        },
+        "thread_ts": "1556901860.014800",
+        "parent_user_id": "UHDQ62M4P"
+    }
+]

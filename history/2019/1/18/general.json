@@ -1,0 +1,525 @@
+[
+    {
+        "client_msg_id": "AB20934A-7B95-467F-95F1-C73E3F06EFEB",
+        "type": "message",
+        "text": "If performance is what you’re after and the naive implementation doesn’t deliver on that, I’d suspect that it’s a combination of dealing with the large dataset as a whole plus working with image data. In a responsive implementation I’d expect the user interface determining (and drastically limiting) the amount of computation that is needed. \n\nPart of that would be a step where the data source of 250k images is filtered for just the images that are currently displayed, plus a few rows before and after what’s visible currently, if you’re going for buttery-smooth scrolling. Coming from native mobile development, I’d also expect a custom rendering step that performs a downscaling operation to thumbnail-sized images so that only the pixels that are actually rendered are copied into memory; most frameworks take advantage of on-the-fly scaling of images but still copy the much bigger source image into memory and decoding and copying many large images into memory will reduce performance significantly. \n\nBoth filtering and scaling \/ thumbnail creation could be implemented as sequential operations on a source stream of images. The tricky part is that you do need in fact additional data for those operations that originate in the current view state, mainly the scroll view content offset to determine which images to display, and the current view size plus some configuration values to know what size the thumbnails should be. \n\nAs far as I understand reactive libraries, there should be primitives to combine your image source stream with a stream that supplies scroll view offset and another one that supplies view size changes, so that you have everything you need to implement the filtering and scaling steps, so that everything updates correctly as soon as one of the parameters changes.",
+        "user": "U5STGTB3J",
+        "ts": "1547817554.357100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U5STGTB3J",
+            "ts": "1547817635.000000"
+        },
+        "thread_ts": "1547785034.337600",
+        "parent_user_id": "UC6997THT"
+    },
+    {
+        "client_msg_id": "cb510756-894b-49cd-8b3e-808190408b5f",
+        "type": "message",
+        "text": "Certainly, any given reactive implementation is going to grief you in one way or another.  (Cross out \"reactive\" and the sentence is likely still true,)  Moreover, naive implementations usually do trade simplicity for non-specific scalability limits.  (Probably can cross out \"naive\".)  Still, reactive under your own definition <@UC6997THT> gives you options, \"a reactive system is one in which a change to state triggers a change to all views of that state in *some* automated way.\"  It's the flexibility of some that gives you potential power.  As <@U5STGTB3J> went into details, but one classic idea is separating *what* you want to show from *when* you calculate it.  The pattern has been around for as long as there have been list views.  I suppose a system is more reactive when dependent calculations are handled in a principled way rather than a case-by-case textForRowAtIndex: implementation.",
+        "user": "UA14TGLTC",
+        "ts": "1547830152.357600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547785034.337600",
+        "parent_user_id": "UC6997THT"
+    },
+    {
+        "client_msg_id": "f1173719-827b-4811-9de7-4b5cc8543333",
+        "type": "message",
+        "text": "What would those 50 engineers be doing?",
+        "user": "UC2A2ARPT",
+        "ts": "1547833695.357800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547649655.328500",
+        "parent_user_id": "U85MWBKEY"
+    },
+    {
+        "client_msg_id": "cb99d674-435c-4530-98be-5da4354015d9",
+        "type": "message",
+        "text": "Writing code to integrate with the plethora of AWS syste... oh I see what you are saying.",
+        "user": "U8A5MS6R1",
+        "ts": "1547835119.358000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547649655.328500",
+        "parent_user_id": "U85MWBKEY"
+    },
+    {
+        "client_msg_id": "c079034d-2245-439d-992b-034af8b69374",
+        "type": "message",
+        "text": "BTW, retro-fitting 'low code' layers on top of code heavy systems tend to have very hard limits. It's got to be designed in from the start.",
+        "user": "U8A5MS6R1",
+        "ts": "1547835244.358200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547649655.328500",
+        "parent_user_id": "U85MWBKEY"
+    },
+    {
+        "client_msg_id": "d1c1ca27-2b35-4e37-8d72-693b9c852953",
+        "type": "message",
+        "text": "What makes programming hard? What makes building systems hard?\n\nI think we all have some of the \"obvious\" answers in our minds but I've never seen a list all in one place. I'm interested in hearing everyone's perspectives. Humour me! :innocent:",
+        "user": "UCGAK10LS",
+        "ts": "1547862690.360400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1547862784.000000"
+        },
+        "thread_ts": "1547862690.360400",
+        "reply_count": 19,
+        "reply_users_count": 6,
+        "latest_reply": "1548229993.473500",
+        "reply_users": [
+            "UCGAK10LS",
+            "UCUSW7WVD",
+            "U79HM6726",
+            "U85HCL7JP",
+            "UFB8STN7K",
+            "UEQ6M68H0"
+        ],
+        "replies": [
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547863038.360600"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547863196.360800"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547863246.361000"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547863273.361200"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1547874166.368000"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547875052.368300"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547875235.368500"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1547878327.368900"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1547880807.369300"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547886801.370000"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547887075.370400"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1547887171.370700"
+            },
+            {
+                "user": "U79HM6726",
+                "ts": "1547907310.372300"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1547914727.372900"
+            },
+            {
+                "user": "U85HCL7JP",
+                "ts": "1547927323.375000"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1548014530.376500"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1548014640.376700"
+            },
+            {
+                "user": "UCGAK10LS",
+                "ts": "1548028182.386400"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1548229993.473500"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "U8A5MS6R1",
+                    "UA14TGLTC"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "78fcdfba-98d6-4b67-a4c7-85982f002bc2",
+        "type": "message",
+        "text": "I'll start.\nAssertion: A lack of feedback (or an \"immediate connection\", as Bret Victor would say) makes it difficult to reason about how a program will behave as it is being written or changed.",
+        "user": "UCGAK10LS",
+        "ts": "1547863038.360600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1547874445.000000"
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "fe10de34-779b-486e-9f68-19c4a8afa693",
+        "type": "message",
+        "text": "Assertion: Most programming languages give users too much \"freedom\" over how a program can be architected, and when many poor choices are possible, poor decisions are easily made.",
+        "user": "UCGAK10LS",
+        "ts": "1547863196.360800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1547867463.000000"
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "eddddfab-5bc1-401d-b8cf-a64d39225563",
+        "type": "message",
+        "text": "Assertion: Text-based programming tools are an inappropriate foundation for the kinds of GUI apps that people often need to write!",
+        "user": "UCGAK10LS",
+        "ts": "1547863246.361000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1547867456.000000"
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "3834e983-03ed-4a49-8e5a-c24a468e294c",
+        "type": "message",
+        "text": "Etc. Feel free to challenge any of these assertions or add your own.",
+        "user": "UCGAK10LS",
+        "ts": "1547863273.361200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "465FE804-4104-48A2-B785-2CF4AF87BEAA",
+        "type": "message",
+        "text": "wrt your asterisk, Google Keep doesn’t bother calculating positions accurately. If you’re near the bottom of a long list of notes and scroll up to the top, it will just reposition things when you get there if its guess was wrong. I think Kindle does this too if you jump to a section late in the book, then start paging backward.",
+        "user": "UFEQUBNNT",
+        "ts": "1547865439.365700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547785034.337600",
+        "parent_user_id": "UC6997THT"
+    },
+    {
+        "client_msg_id": "026C0BA7-BED5-439B-888E-A7B1672B258C",
+        "type": "message",
+        "text": "Is your performance hit because all of the photos being displayed get the setting change signals independently, then they all independently trigger a relayout?",
+        "user": "UFEQUBNNT",
+        "ts": "1547868637.367700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547785034.337600",
+        "parent_user_id": "UC6997THT"
+    },
+    {
+        "client_msg_id": "0864a6dc-ff61-42cd-b86c-48844e812992",
+        "type": "message",
+        "text": "It depends on what kinds of programming. For infrastructure the world relies on, I think your assertions are \"first world problems\". A more urgent list: <http:\/\/akkartik.name\/about>",
+        "user": "UCUSW7WVD",
+        "ts": "1547874166.368000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "8c3c6da3-bc80-478f-9f90-f36515800126",
+        "type": "message",
+        "text": "The problems listed on your site seem to be centred around making programs easy to understand, and easy to change. So are the ones I listed. I'd say they fit into the same picture :shrug:",
+        "user": "UCGAK10LS",
+        "ts": "1547875052.368300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "8b68a392-1baa-4d56-b9bf-8c93a2070dfa",
+        "type": "message",
+        "text": "and I do agree with the significance of the problems you've listed",
+        "user": "UCGAK10LS",
+        "ts": "1547875235.368500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1547886097.000000"
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "60636c3a-ac1a-4c89-b594-10d5f60cc0c3",
+        "type": "message",
+        "text": "Yeah I think we have the same intent. My claim is that my focus is a bit tighter :innocent:\n\nFor example, Bret Victor style immediate feedback would be very nice to have if that UI didn't cost any code itself. But it seems more cost-effective to just use traces and provide some simple tools[1][2] to make browsing traces a little nice. Nowhere near the ergonomics of Bret Victor demos, but still huge power\/weight ratio. In similar vein, a compile\/debug cycle is totally fine. Text is totally fine.\n\nI still hanker after Bret Victor's ideas. And visual programming may well be the way of the future. But I think there's lots of low-hanging fruit that can provide more immediate gains and prepare the ground (for someone else, most likely) to build those great programming interfaces.\n\nYour point about 'freedom' I feel philosophically diametrically opposed to. I think languages and their eco-systems _take away_ too much freedom these days. Freedom to modify the language, the compiler, to fork libraries in incompatible ways. Yes, if we give more freedom people will make more bad decisions. But I believe they'll also learn from those bad decisions, and so the average programmer will be stronger. Even better, their sense of taste will be grounded in real experience rather than cargo-culted rules about what not to do.\n\n[1] <https:\/\/news.ycombinator.com\/item?id=11854319#11855294>\n[2] <https:\/\/mastodon.social\/@akkartik\/101401162367985540>",
+        "user": "UCUSW7WVD",
+        "ts": "1547878327.368900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1547878425.000000"
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "14c84310-3f1d-4723-8a01-773ae2afbf3b",
+        "type": "message",
+        "text": "_Draft #2 of my argument_\n\n1. The way programs are written affects their trajectory as projects. If they're written poorly then they die sooner, or at least they grow senescent sooner, unable to react quickly in response to changes in their environment. (People who disagree with this will assume everything we talk about is just pointless yak-shaving.)\n2. If you want to come up with a new way to write programs that gives them better trajectories, it still has to be written in today's context. So it doesn't have access to itself. So it is liable to turn into a mess itself, to not last long enough to change people's minds. (Because changing people's minds will take time. Maybe a generation.)\n\nAs a consequence of these two assertions, I think before we can run we need to take some baby steps. We need to gradually minimize our dependency on -- and eventually wean ourselves from -- the current stack. We have to keep our new stack easy to rewrite. Keeping it rewrite-friendly requires first that we encode all design choices, so we (or those following us) are never wondering what will break if they change _this_ into _that_. This seems far more important than whether they get immediate feedback on making the change once they've decided it's worth doing.\n\n_Once_ we have a stack that is supple and rewrite-friendly arbitrarily deep into its life, I think it'll be far easier to layer on new interfaces that give us immediate feedback, try to move past text, and so on. It'll still take a lot of code, but we'll have the primitives to do a far better job managing large codebases.\n\n(Every month or two I daydream about an immediate-feedback text-mode UI for developing both an OS and an application atop it. So far I've successfully resisted the temptation to get side-tracked into that project.)",
+        "user": "UCUSW7WVD",
+        "ts": "1547880807.369300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1547880909.000000"
+        },
+        "thread_ts": "1547862690.360400",
+        "parent_user_id": "UCGAK10LS"
+    }
+]

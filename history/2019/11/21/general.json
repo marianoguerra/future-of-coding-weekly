@@ -1,102 +1,34 @@
 [
     {
-        "client_msg_id": "f2545e3c-e205-4050-8457-9b3e3d054af1",
-        "type": "message",
-        "text": "<https://blog.acolyer.org/2019/11/20/local-first-software/> (on HN right now)",
-        "user": "U8A5MS6R1",
-        "ts": "1574295815.087400",
-        "team": "T5TCAFTA9",
-        "attachments": [
-            {
-                "service_name": "the morning paper",
-                "service_url": "http://blog.acolyer.org",
-                "title": "Local-first software: you own your data, in spite of the\u00a0cloud",
-                "title_link": "https://blog.acolyer.org/2019/11/20/local-first-software/",
-                "author_name": "adriancolyer",
-                "author_link": "https://blog.acolyer.org/author/adriancolyer/",
-                "thumb_url": "https://adriancolyer.files.wordpress.com/2019/11/localfirst-table-1.jpeg?w=640&fit=200%2C150",
-                "thumb_width": 200,
-                "thumb_height": 117,
-                "text": "Local-first software: you own your data, in spite of the cloud Kleppmann et al., Onward! &rsquo;19\nWatch out! If you start reading this paper you could be lost for hours following all the interesting links and ideas, and end up even more dissatisfied than you already are with the state of software today. You might also be inspired to help work towards a better future. I&rsquo;m all in :).\nThe rock or the hard place?\nOn the one-hand we have &lsquo;cloud apps&rsquo; which make it easy to access our work from multiple devices and to collaborate online with others (e.g. Google Docs, Trello, &hellip;). On the other hand we have good old-fashioned native apps that you install on your operating system (a dying breed? See e.g. Brendan Burns&rsquo; recent tweet). Somewhere in the middle, but not-quite perfect, are online (browser-based) apps with offline support.\nThe primary issue with cloud apps (the SaaS model) is ownership of the data.\nUnfortunately, cloud apps are problematic in this regard. Although they let you access your data anywhere, all data access must go via the server, and you can only do the things that the server will let you do. In a sense, you don&rsquo;t have full ownership of that data&mdash; the cloud provider does.\nServices do get shut down1, or pricing may change to your disadvantage, or the features evolve in a way you don&rsquo;t like and there&rsquo;s no way to keep using an older version.\nWith a traditional OS app2 you have much more control over the data (the files on your file system at least, which if you&rsquo;re lucky might even be in an open format). But you have other problems, such as easy access across all of your devices, and the ability to collaborate with others.\nLocal-first software ideals\nThe authors coin the phrase &ldquo;local-first software&rdquo; to describe software that retains the ownership properties of old-fashioned applications, with the sharing and collaboration properties of cloud applications.\nIn local-first applications&hellip; we treat the copy of the data on your local device &mdash; your laptop, tablet, or phone &mdash; as the primary copy. Servers still exist, but they hold secondary copies of your data in order to assist with access from multiple devices. As we shall see, this change in perspective has profound implications&hellip;\nGreat local-first software should have seven key properties.\nIt should be fast. We don&rsquo;t want to make round-trips to a server to interact with the application. Operations can be handled by reading and writing to the local file system, with data synchronisation happening in the background.\nIt should work across multiple devices. Local-first apps keep their data in local storage on each device, but the data is also synchronised across all the devices on which a user works.\nIt should work without a network. This follows from reading and writing to the local file system, with data synchronisation happening in the background when a connection is available. That connection could be peer-to-peer across devices, and doesn&rsquo;t have to be over the Internet.\nIt should support collaboration. &ldquo;In local-first apps, our ideal is to support real-time collaboration that is on par with the best cloud apps today, or better. Achieving this goal is one of the biggest challenges in realizing local-first software, but we believe it is possible.&ldquo;\nIt should support data access for all time. On one level you get this if you retain a copy of the original application (and an environment capable of executing it). Even better is if the local app using open / long lasting file formats. See e.g. the Library of Congress recommended archival formats.\nIt should be secure and private by default. &ldquo;Local-first apps can use end-to-end encryption so that any servers that store a copy of your files only hold encrypted data they cannot read.&rdquo;\nIt should give the user full ownership and control of their data. &ldquo;&hellip;we mean ownership in the sense of user agency, autonomy, and control over data. You should be able to copy and modify data in any way, write down any thought, and no company should restrict what you are allowed to do.&ldquo;\nHow close can we get today?\nSection 3 in the paper shows how a variety of different apps/technologies stack up against the local-first ideals.\n\nThe combination of Git and GitHub gets closest, but nothing meets the bar across the board.\n&hellip; we speculate that web apps will never be able to provide all the local-first properties we are looking for, due to the fundamental thin-client nature of the platform. By choosing to build a web app, you are choosing the path of data belonging to you and your company, not to your users.\nMobile apps that use local storage combined with a backend service such as Firebase and its Cloud Firestore take us closer to the local-first ideal, depending on the way the local data is treated by the application. CouchDB also gets an honourable mention in this part of the paper, only being let down by the difficulty of getting application-level conflict resolution right.\nCRDTs to the rescue?\nWe have found some technologies that appear to be promising foundations for local-first ideals. Most notably the family of distributed systems algorithms called Conflict-free Replicated Data Types (CRDTs)&hellip; the special thing about them is that they are multi-user from the ground up&hellip; CRDTs have some similarity to version control systems like Git, except that they operate on richer data types than text files.\nWhile most industrial usage of CRDTs has been in server-centric computing, the Ink &amp; Switch research lab have been exploring how to build collaborative local-first client applications built on top of CRDTs. One of the fruits of this work is an open-source JavaScript CDRT implementation called Automerge which brings CRDT-style merge operations to JSON documents. Used in conjunction with the dat:// networking stack the result is Hypermerge.\nJust as packet switching was an enabling technology for the Internet and the web, or as capacitive touchscreens were an enabling technology for smart phones, so we think CRDTs may be the foundation for collaborative software that gives users full ownership of their data.\nThe brave new world\nThe authors built three (fairly advanced) prototypes using this CRDT stack: a Trello clone called Trellis, a collaborative drawing program, and a &lsquo;mixed-media workspace&rsquo; called PushPin (Evernote meets Pinterest&hellip;).\nIf you have 2 minutes and 10 seconds available, it&rsquo;s well worth watching this short video showing Trellis in action. It really brings the vision to life.\nIn section 4.2.4 of the paper the authors share a number of their learnings from building these systems:\nCRDT technology works &ndash; the Automerge library did a great job and was easy to use.\nThe user experience with offline work is splendid.\nCRDTs combine well with reactive programming to give a good developer experience. &ldquo;The result of [this combination] was that all of our prototypes realized real-time collaboration and full offline capability with little effort from the application developer.&rdquo;\nIn practice, conflicts are not as significant a problem as we feared. Conflicts are mitigated on two levels: first, Automerge tracks changes at a fine-grained level, and second, &ldquo;users have an intuitive sense of human collaboration and avoid creating conflicts with their collaborators.&rdquo;\nVisualising document history is important (see the Trellis video!).\nURLs are a good mechanism for sharing\nCloud servers still have their place for discovery, backup, and burst compute.\nSome challenges:\nIt can be hard to reason about how data moves between peers.\nCRDTs accumulate a large change history, which creates performance problems. (This is an issue with state-based CRDTs, as opposed to operation-based CRDTs).\nPerformance and memory/disk usage quickly became a problem because CRDTs store all hist\u2026",
-                "fallback": "the morning paper Link: Local-first software: you own your data, in spite of the&nbsp;cloud",
-                "from_url": "https://blog.acolyer.org/2019/11/20/local-first-software/",
-                "service_icon": "https://secure.gravatar.com/blavatar/09326a066a08237015d6b84f026d36ae?s=114",
-                "id": 1,
-                "original_url": "https://blog.acolyer.org/2019/11/20/local-first-software/"
-            }
-        ],
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "D5mX",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "link",
-                                "url": "https://blog.acolyer.org/2019/11/20/local-first-software/"
-                            },
-                            {
-                                "type": "text",
-                                "text": " (on HN right now)"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1574295815.087400",
-        "reply_count": 1,
-        "reply_users_count": 1,
-        "latest_reply": "1576732055.000800",
-        "reply_users": [
-            "UKQT95T1V"
-        ],
-        "subscribed": false,
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UMVFWPZ36",
-                    "UA14TGLTC",
-                    "UJVEPCVT6",
-                    "UE1JQM9HQ",
-                    "UPVBV34EL",
-                    "UJ6LDMMN0",
-                    "UJBAJNFLK",
-                    "UHWC9PXBL",
-                    "UPHDH2F0C",
-                    "UML4ZEKDK"
-                ],
-                "count": 10
-            },
-            {
-                "name": "heart",
-                "users": [
-                    "UJ6LDMMN0"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
         "client_msg_id": "28cf5b6e-e7f3-4586-9abf-251fe6813f66",
         "type": "message",
-        "text": "This article speaks to the idea that it should not look or feel like the tools the pros use because they will reject it\n\n<https://mkremins.github.io/blog/creative-tools-non-creators/>",
+        "text": "This article speaks to the idea that it should not look or feel like the tools the pros use because they will reject it\n\n<https:\/\/mkremins.github.io\/blog\/creative-tools-non-creators\/>",
         "user": "UHZNB3HRP",
         "ts": "1574345801.089100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g1e605c7d8c8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/91e605c7d8c807d1a07fb13a73ff8e06.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Greg",
+            "real_name": "Greg Jarmiolowski",
+            "display_name": "Greg Jarmiolowski",
+            "team": "T5TCAFTA9",
+            "name": "greg",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "title": "Creative tools for non-creators",
-                "title_link": "https://mkremins.github.io/blog/creative-tools-non-creators/",
-                "text": "I keep coming back to the idea of tools that unlock creativity in people who don\u2019t ordinarily think of themselves as creative. Yesterday, some of my scattered thoughts on the subject spontaneously crystallized into something resembling a coherent ...",
+                "title_link": "https:\/\/mkremins.github.io\/blog\/creative-tools-non-creators\/",
+                "text": "I keep coming back to the idea of tools that unlock creativity in people who don’t ordinarily think of themselves as creative. Yesterday, some of my scattered thoughts on the subject spontaneously crystallized into something resembling a coherent ...",
                 "fallback": "Creative tools for non-creators",
-                "from_url": "https://mkremins.github.io/blog/creative-tools-non-creators/",
+                "from_url": "https:\/\/mkremins.github.io\/blog\/creative-tools-non-creators\/",
                 "service_name": "mkremins.github.io",
                 "id": 1,
-                "original_url": "https://mkremins.github.io/blog/creative-tools-non-creators/"
+                "original_url": "https:\/\/mkremins.github.io\/blog\/creative-tools-non-creators\/"
             }
         ],
         "blocks": [
@@ -113,7 +45,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://mkremins.github.io/blog/creative-tools-non-creators/"
+                                "url": "https:\/\/mkremins.github.io\/blog\/creative-tools-non-creators\/"
                             }
                         ]
                     }
@@ -126,10 +58,23 @@
     {
         "client_msg_id": "c7f208af-1bae-4ba7-8e81-79f1aa267a0f",
         "type": "message",
-        "text": "What guides your choice of FoC project direction? For example, are you scratching an itch, or trying to maximize global creator productivity? I\u2019m guessing those result in very different (at least initial) directions, though we tend to assume the former will result in the later.\n\nFor example, I\u2019m a big fan of structured code editors and it was one of the first things I worked on, but in retrospect I\u2019d put them low on the list of things that could significantly increase creator productivity. I chose it because it was new and neat, not because it was particularly helpful.",
+        "text": "What guides your choice of FoC project direction? For example, are you scratching an itch, or trying to maximize global creator productivity? I’m guessing those result in very different (at least initial) directions, though we tend to assume the former will result in the later.\n\nFor example, I’m a big fan of structured code editors and it was one of the first things I worked on, but in retrospect I’d put them low on the list of things that could significantly increase creator productivity. I chose it because it was new and neat, not because it was particularly helpful.",
         "user": "ULM3U6275",
         "ts": "1574358709.093500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "ULM3U6275",
             "ts": "1574369845.000000"
@@ -144,7 +89,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "What guides your choice of FoC project direction? For example, are you scratching an itch, or trying to maximize global creator productivity? I\u2019m guessing those result in very different (at least initial) directions, though we tend to assume the former will result in the later.\n\nFor example, I\u2019m a big fan of structured code editors and it was one of the first things I worked on, but in retrospect I\u2019d put them low on the list of things that could significantly increase creator productivity. I chose it because it was new and neat, not because it was particularly helpful."
+                                "text": "What guides your choice of FoC project direction? For example, are you scratching an itch, or trying to maximize global creator productivity? I’m guessing those result in very different (at least initial) directions, though we tend to assume the former will result in the later.\n\nFor example, I’m a big fan of structured code editors and it was one of the first things I worked on, but in retrospect I’d put them low on the list of things that could significantly increase creator productivity. I chose it because it was new and neat, not because it was particularly helpful."
                             }
                         ]
                     }
@@ -165,6 +110,68 @@
             "U5STGTB3J",
             "UJ6LDMMN0"
         ],
+        "replies": [
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1574359504.094500"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1574367273.095100"
+            },
+            {
+                "user": "UNBPP291C",
+                "ts": "1574367648.095300"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1574375253.096800"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1574382019.097000"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1574382585.097200"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1574384560.097600"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1574389443.103400"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1574390086.103800"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1574396682.104100"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1574396863.104400"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1574431707.106500"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1574443844.108000"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1574447642.108500"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1574531934.113100"
+            }
+        ],
         "subscribed": false,
         "reactions": [
             {
@@ -181,10 +188,23 @@
     {
         "client_msg_id": "bd0efd3c-dcc3-4665-815c-f319fdc6c4ec",
         "type": "message",
-        "text": "For me (making Hest), it's 1/3rd \"This is what my company needs to solve a business problem\", 1/3rd \"I see an obvious shortcoming in existing tools\", 1/3rd \"Making the tool I wish I already had\".",
+        "text": "For me (making Hest), it's 1\/3rd \"This is what my company needs to solve a business problem\", 1\/3rd \"I see an obvious shortcoming in existing tools\", 1\/3rd \"Making the tool I wish I already had\".",
         "user": "UC2A2ARPT",
         "ts": "1574359504.094500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -195,7 +215,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "For me (making Hest), it's 1/3rd \"This is what my company needs to solve a business problem\", 1/3rd \"I see an obvious shortcoming in existing tools\", 1/3rd \"Making the tool I wish I already had\"."
+                                "text": "For me (making Hest), it's 1\/3rd \"This is what my company needs to solve a business problem\", 1\/3rd \"I see an obvious shortcoming in existing tools\", 1\/3rd \"Making the tool I wish I already had\"."
                             }
                         ]
                     }
@@ -225,6 +245,19 @@
         "user": "UJN1TAYEQ",
         "ts": "1574367273.095100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -259,10 +292,23 @@
     {
         "client_msg_id": "aa20716f-2892-4e1e-9c59-79ff7cbcfc9c",
         "type": "message",
-        "text": "Honestly?\n\nLaziness and annoyance.\nI\u2019m lazy. I don\u2019t wanna do in 7 clicks or 20 commands what should be done in 3 - both as a user and developer.  I don\u2019t wanna fight configurations and toolings, I want to express my ideas as I create them in my head, not as someone else imagined them. I\u2019m annoyed when I see the huge amount of boilerplate and configuration that goes into making even the most basic thing, like who the fuck thinks this is a good path for software development culture? I  don\u2019t want to spend half of my day trying to set up the proper configs so I can start working, I don\u2019t wanna spend half of my day rewriting the same models the backend developers have or just connect UI to REST and call it software development. Software costs a ton because we keep writing the same boilerplate over and over again on each side that\u2019s involved into the process.\n\nI\u2019m terribly annoyed that instead of seeing development culture evolve, it\u2019s just rehashing and selling same old shit under new guises. Instead of focusing on developing, I\u2019d say 50% of the development community is focused on self-promotion and \u201coh look at us we\u2019re experts because we write boilerplate\u201d. I hate going to conferences now because they\u2019re so full of marketing, boilerplate and blatant self-promotion instead of being about code and ideas.\n\nThis culture is forcing talented developers into highly specialized factory workers that work with only specific frameworks and can\u2019t see out of their own framework\u2019s comfort zone.  I don\u2019t like that. I want to unbox everyone from that box.\n\nSo I let the laziness and annoyance guide me - I see what I don\u2019t like and think should be done in a better way and the annoyance with current culture drives me forward to change it and make a tool that\u2019s not gonna be a specialized tool for a special subset of people, but something that everyone can use, no matter what their development domain is.",
+        "text": "Honestly?\n\nLaziness and annoyance.\nI’m lazy. I don’t wanna do in 7 clicks or 20 commands what should be done in 3 - both as a user and developer.  I don’t wanna fight configurations and toolings, I want to express my ideas as I create them in my head, not as someone else imagined them. I’m annoyed when I see the huge amount of boilerplate and configuration that goes into making even the most basic thing, like who the fuck thinks this is a good path for software development culture? I  don’t want to spend half of my day trying to set up the proper configs so I can start working, I don’t wanna spend half of my day rewriting the same models the backend developers have or just connect UI to REST and call it software development. Software costs a ton because we keep writing the same boilerplate over and over again on each side that’s involved into the process.\n\nI’m terribly annoyed that instead of seeing development culture evolve, it’s just rehashing and selling same old shit under new guises. Instead of focusing on developing, I’d say 50% of the development community is focused on self-promotion and “oh look at us we’re experts because we write boilerplate”. I hate going to conferences now because they’re so full of marketing, boilerplate and blatant self-promotion instead of being about code and ideas.\n\nThis culture is forcing talented developers into highly specialized factory workers that work with only specific frameworks and can’t see out of their own framework’s comfort zone.  I don’t like that. I want to unbox everyone from that box.\n\nSo I let the laziness and annoyance guide me - I see what I don’t like and think should be done in a better way and the annoyance with current culture drives me forward to change it and make a tool that’s not gonna be a specialized tool for a special subset of people, but something that everyone can use, no matter what their development domain is.",
         "user": "UNBPP291C",
         "ts": "1574367648.095300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gcf29e340a09",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/cf29e340a09ac08ae262632ef9101046.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Ian Rumac",
+            "display_name": "Ian Rumac",
+            "team": "T5TCAFTA9",
+            "name": "ian.rumac",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UNBPP291C",
             "ts": "1574367827.000000"
@@ -277,7 +323,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "Honestly?\n\nLaziness and annoyance.\nI\u2019m lazy. I don\u2019t wanna do in 7 clicks or 20 commands what should be done in 3 - both as a user and developer.  I don\u2019t wanna fight configurations and toolings, I want to express my ideas as I create them in my head, not as someone else imagined them. I\u2019m annoyed when I see the huge amount of boilerplate and configuration that goes into making even the most basic thing, like who the fuck thinks this is a good path for software development culture? I  don\u2019t want to spend half of my day trying to set up the proper configs so I can start working, I don\u2019t wanna spend half of my day rewriting the same models the backend developers have or just connect UI to REST and call it software development. Software costs a ton because we keep writing the same boilerplate over and over again on each side that\u2019s involved into the process.\n\nI\u2019m terribly annoyed that instead of seeing development culture evolve, it\u2019s just rehashing and selling same old shit under new guises. Instead of focusing on developing, I\u2019d say 50% of the development community is focused on self-promotion and \u201coh look at us we\u2019re experts because we write boilerplate\u201d. I hate going to conferences now because they\u2019re so full of marketing, boilerplate and blatant self-promotion instead of being about code and ideas.\n\nThis culture is forcing talented developers into highly specialized factory workers that work with only specific frameworks and can\u2019t see out of their own framework\u2019s comfort zone.  I don\u2019t like that. I want to unbox everyone from that box.\n\nSo I let the laziness and annoyance guide me - I see what I don\u2019t like and think should be done in a better way and the annoyance with current culture drives me forward to change it and make a tool that\u2019s not gonna be a specialized tool for a special subset of people, but something that everyone can use, no matter what their development domain is."
+                                "text": "Honestly?\n\nLaziness and annoyance.\nI’m lazy. I don’t wanna do in 7 clicks or 20 commands what should be done in 3 - both as a user and developer.  I don’t wanna fight configurations and toolings, I want to express my ideas as I create them in my head, not as someone else imagined them. I’m annoyed when I see the huge amount of boilerplate and configuration that goes into making even the most basic thing, like who the fuck thinks this is a good path for software development culture? I  don’t want to spend half of my day trying to set up the proper configs so I can start working, I don’t wanna spend half of my day rewriting the same models the backend developers have or just connect UI to REST and call it software development. Software costs a ton because we keep writing the same boilerplate over and over again on each side that’s involved into the process.\n\nI’m terribly annoyed that instead of seeing development culture evolve, it’s just rehashing and selling same old shit under new guises. Instead of focusing on developing, I’d say 50% of the development community is focused on self-promotion and “oh look at us we’re experts because we write boilerplate”. I hate going to conferences now because they’re so full of marketing, boilerplate and blatant self-promotion instead of being about code and ideas.\n\nThis culture is forcing talented developers into highly specialized factory workers that work with only specific frameworks and can’t see out of their own framework’s comfort zone.  I don’t like that. I want to unbox everyone from that box.\n\nSo I let the laziness and annoyance guide me - I see what I don’t like and think should be done in a better way and the annoyance with current culture drives me forward to change it and make a tool that’s not gonna be a specialized tool for a special subset of people, but something that everyone can use, no matter what their development domain is."
                             }
                         ]
                     }
@@ -307,6 +353,344 @@
         "user": "UCUSW7WVD",
         "ts": "1574375253.096800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1574358709.093500",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "c5b05651-c647-4995-8f16-97f20e5a2d48",
+        "type": "message",
+        "text": "I disagree — I am absolutely not interested my project doing anything resembling \"maximizing global creator productivity.\" In the place of that, I'd say I'm only interested in my project helping six of my coworkers solve a specific problem they face.\n\nI very specifically do not want global productivity to be improved. I want productivity _reduced_. I want more global leisure time instead, and I don't believe that'll come about from improved productivity unless we first dismantle capitalism, which is a whole other battle I'm not going to fight.... here, today. :slightly_smiling_face:",
+        "user": "UC2A2ARPT",
+        "ts": "1574382019.097000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "09tN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I disagree — I am absolutely not interested my project doing anything resembling \"maximizing global creator productivity.\" In the place of that, I'd say I'm only interested in my project helping six of my coworkers solve a specific problem they face.\n\nI very specifically do not want global productivity to be improved. I want productivity "
+                            },
+                            {
+                                "type": "text",
+                                "text": "reduced",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". I want more global leisure time instead, and I don't believe that'll come about from improved productivity unless we first dismantle capitalism, which is a whole other battle I'm not going to fight.... here, today. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574358709.093500",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UHWC9PXBL",
+                    "UML4ZEKDK"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9593d04b-eb12-40fd-8c75-2ef173777b62",
+        "type": "message",
+        "text": "&gt; I want more global leisure time..\n\nI agree with that! But it's not quite what was said? Productivity is usually defined as efficiency of production (<https:\/\/en.wikipedia.org\/wiki\/Productivity>). So it takes you less some to do something. What you do with the time you saved is not dictated here, whether you choose to do more things or go chill.\n\nIn any case, I admit I wasn't attending that closely to the wording, just the dichotomy between scratching your own itch and building something others would use. Now that I think about it, even there I'm not airtight. I'm sure there are people who just want to scratch their own itch. But I think anybody trying to build something for others here is _also_ trying to scratch their own itch.",
+        "user": "UCUSW7WVD",
+        "ts": "1574382585.097200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1574384913.000000"
+        },
+        "thread_ts": "1574358709.093500",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "ULM3U6275",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f2b2bb8a-7669-4628-986b-a61e66c65faa",
+        "type": "message",
+        "text": "Good catch — I do mean that I want _emphasis on productivity_ reduced, not actual productivity itself.",
+        "user": "UC2A2ARPT",
+        "ts": "1574384560.097600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dfs",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Good catch — I do mean that I want "
+                            },
+                            {
+                                "type": "text",
+                                "text": "emphasis on productivity",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " reduced, not actual productivity itself."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574358709.093500",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "d463a5fa-a718-4235-a417-f73864908468",
+        "type": "message",
+        "text": "```I want productivity reduced. I want more global leisure time ... we first dismantle capitalism```\nThis is a noble goal. Nothing in the Curv project is meant to go against this. By \"increase my productivity\", I merely meant that I'd like to make cool things in less time. Although in retrospect, inventing a new programming language was an odd way to go about increasing my productivity.\n\nI think that the real story is: I was looking for an interesting and challenging new project, right at the limits of my ability to accomplish it, because I hate being bored. I also wanted something tangible to show for all my efforts at the end, so downloading and playing videogames was ruled out.",
+        "user": "UJN1TAYEQ",
+        "ts": "1574389443.103400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJN1TAYEQ",
+            "ts": "1574389812.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "i8I",
+                "elements": [
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I want productivity reduced. I want more global leisure time ... we first dismantle capitalism"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is a noble goal. Nothing in the Curv project is meant to go against this. By \"increase my productivity\", I merely meant that I'd like to make cool things in less time. Although in retrospect, inventing a new programming language was an odd way to go about increasing my productivity.\n\nI think that the real story is: I was looking for an interesting and challenging new project, right at the limits of my ability to accomplish it, because I hate being bored. I also wanted something tangible to show for all my efforts at the end, so downloading and playing videogames was ruled out."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574358709.093500",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "b7aa7a96-563a-48e7-9731-e86075e113da",
+        "type": "message",
+        "text": "By “maximize global creator productivity” I meant enabling lots of creators to create more with less effort, as opposed to other motivations. That is, 1) helping lots of folks do things they’d like to vs 2) helping oneself or a few to vs 3) exploring ideas mainly for reasons other than usefulness, such as novelty. Though we tend to talk about the differences between 1 &amp; 2, I suspect it’s not uncommon to find oneself (as I did) doing 3.",
+        "user": "ULM3U6275",
+        "ts": "1574390086.103800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "ULM3U6275",
+            "ts": "1574393036.000000"
+        },
+        "thread_ts": "1574358709.093500",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT",
+                    "UA14TGLTC",
+                    "UHWC9PXBL"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d01bf951-5644-46ca-acc7-10950346f0ed",
+        "type": "message",
+        "text": "In my case, i was wanting to make both web apps, mobile apps, and desktop versions of software, and was faced with either learning multiple systems for each platform, or using a cross-platform framework. I wasn't happy with the complexity and opaqueness of the frameworks, and particularly unhappy with the languages that one has to use with those frameworks. So thought, why not throw away the entire computational stack, and start with a clean sheet approach?  I knew that one of the biggest problems facing software today is the inability of large projects to stabilize, and that end user errors are not being fixed promptly at all by most companies. Typically now large companies like Apple are using their customer bases as their unpaid QA dept., and only the errors reported by the largest number of users are investigated, the rest ignored. So i reverse engineered the design starting from the feature of being able to reproduce every customer error at HQ. I am going for robustness and minimum error rate. Basically the tool i wish i had had all those years ago.",
+        "user": "UEQ6M68H0",
+        "ts": "1574396682.104100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7W3cM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In my case, i was wanting to make both web apps, mobile apps, and desktop versions of software, and was faced with either learning multiple systems for each platform, or using a cross-platform framework. I wasn't happy with the complexity and opaqueness of the frameworks, and particularly unhappy with the languages that one has to use with those frameworks. So thought, why not throw away the entire computational stack, and start with a clean sheet approach?  I knew that one of the biggest problems facing software today is the inability of large projects to stabilize, and that end user errors are not being fixed promptly at all by most companies. Typically now large companies like Apple are using their customer bases as their unpaid QA dept., and only the errors reported by the largest number of users are investigated, the rest ignored. So i reverse engineered the design starting from the feature of being able to reproduce every customer error at HQ. I am going for robustness and minimum error rate. Basically the tool i wish i had had all those years ago."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574358709.093500",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "muscle",
+                "users": [
+                    "UNBPP291C",
+                    "UA14TGLTC",
+                    "UHWC9PXBL"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "76bd94b8-084d-4164-bcef-b61c48490cb3",
+        "type": "message",
+        "text": "Wow, Edward, have you talked about the telemetry aspect of your project here before?! First I've heard of it.",
+        "user": "UCUSW7WVD",
+        "ts": "1574396863.104400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1574358709.093500",
         "parent_user_id": "ULM3U6275"
     }

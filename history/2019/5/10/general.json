@@ -1,0 +1,650 @@
+[
+    {
+        "client_msg_id": "FA4BE852-68AE-40C3-BB48-11ABEF2C9581",
+        "type": "message",
+        "text": "This reminds me of a paper I read a while ago, which I unfortunately don’t remember the title of, but which was arguing for — if I remember correctly — a separation into a language for computation and a language for coordination. \n\nThe _computation_ language is optimized for expressing algorithms in an easy to comprehend way making assumptions like local data, single thread, etc. That could basically be almost every generic PL, doesn’t even matter if imperative, functional, or whatever.\n\nThe _coordination_ language then takes care of distributing data and\/or computation on different machines, which can also apply to a single physical machine due to virtualization, threading, or preparation for computation on different cores on C or G or TPUs.",
+        "user": "U5STGTB3J",
+        "ts": "1557476722.303500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "1715a1a6-20ba-455d-92b8-dcf3778a449f",
+        "type": "message",
+        "text": "That roughly _is_ the Haskell\/monadic IO\/effect model. The core language is effect-free and effects are reified as values of an algebraic data type (which is typically a monad) which is then interpreted \"at the end of the world\". The ADT typically has enough structure that it can be considered as an embedded language for describing effects.",
+        "user": "UF71PR58X",
+        "ts": "1557477052.306600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga7e159fad28",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8a7e159fad28f672ca794fb7f2bf7f0f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Miles Sabin",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "miles",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "F8190172-EBD0-44E6-8CF3-22E4EDB304C9",
+        "type": "message",
+        "text": "<@UF71PR58X> That’s an interesting connection I hadn’t made (and definitely didn’t mean). Although I’d say it the other way round: the mathematical \/ category theory principles Haskell’s IO Monad builds on, could probably also be used as effectively to separate computation from coordination in distributed systems programming.",
+        "user": "U5STGTB3J",
+        "ts": "1557477442.312100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "28359E58-FB75-401A-92ED-242CA2106F35",
+        "type": "message",
+        "text": "I’ve now successfully nerd-snipes myself and try to figure out which paper I’m remembering, and I believe it was related to LINDA <http:\/\/worrydream.com\/refs\/Carriero%20-%20Linda%20in%20Context.pdf>, but this article is not the paper I meant and it’s not in the references either… :thinking_face:",
+        "user": "U5STGTB3J",
+        "ts": "1557477470.312600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "EE54D2BC-159F-4AF0-913D-FEFD3B04AC42",
+        "type": "message",
+        "text": "Found it: Coordination Languages and their Significance\n<http:\/\/worrydream.com\/refs\/Gelernter%20-%20Coordination%20Languages%20and%20their%20Significance.pdf>",
+        "user": "U5STGTB3J",
+        "ts": "1557477941.314000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557477941.314000",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1557514679.326100",
+        "reply_users": [
+            "UJKC8B0QN"
+        ],
+        "replies": [
+            {
+                "user": "UJKC8B0QN",
+                "ts": "1557514679.326100"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UDQBTJ211"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UJKC8B0QN",
+                    "UFEQUBNNT"
+                ],
+                "count": 2
+            },
+            {
+                "name": "100",
+                "users": [
+                    "UJKC8B0QN"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f45c6cbf-a256-4721-b9e8-97def0f78121",
+        "type": "message",
+        "text": "Right, \"coordination languages\" were a thing IIRC in the late 90's early 00's?",
+        "user": "UF71PR58X",
+        "ts": "1557478271.314700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga7e159fad28",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8a7e159fad28f672ca794fb7f2bf7f0f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Miles Sabin",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "miles",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "03532898-1313-48a9-8876-d2fa044f032b",
+        "type": "message",
+        "text": "I remember eg. <https:\/\/en.wikipedia.org\/wiki\/Obliq.>",
+        "user": "UF71PR58X",
+        "ts": "1557478328.315000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga7e159fad28",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8a7e159fad28f672ca794fb7f2bf7f0f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Miles Sabin",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "miles",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "b43c43ea-559b-45f2-a586-59157d29a669",
+        "type": "message",
+        "text": "<http:\/\/lucacardelli.name\/Papers\/Obliq.A4.pdf>.",
+        "user": "UF71PR58X",
+        "ts": "1557478409.315200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga7e159fad28",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8a7e159fad28f672ca794fb7f2bf7f0f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Miles Sabin",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "miles",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "d2ec2e4d-9c9e-463a-b7ec-3172b53130bf",
+        "type": "message",
+        "text": "In the research community at least, a lot of that stuff disappeared in favour of work on mobile calculii of various sorts, pi\/ambient calculus, petri nets that sort of thing.",
+        "user": "UF71PR58X",
+        "ts": "1557478474.316400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga7e159fad28",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8a7e159fad28f672ca794fb7f2bf7f0f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Miles Sabin",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "miles",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557478474.316400",
+        "reply_count": 3,
+        "reply_users_count": 1,
+        "latest_reply": "1557909925.423900",
+        "reply_users": [
+            "UJFN50C00"
+        ],
+        "replies": [
+            {
+                "user": "UJFN50C00",
+                "ts": "1557909683.423500"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1557909788.423700"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1557909925.423900"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "73a098af-2dc9-433a-8454-8453c2bb7e51",
+        "type": "message",
+        "text": "You might want to dig in to \"session types\".",
+        "user": "UF71PR58X",
+        "ts": "1557478540.317000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga7e159fad28",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8a7e159fad28f672ca794fb7f2bf7f0f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Miles Sabin",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "miles",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "40b6e90c-ebd3-4513-a448-8a0c06f983ef",
+        "type": "message",
+        "text": "Erlang\/OTP can be tought of a coordination language on top of \"sequential erlang\", there's even an alternative being developed called partisan <https:\/\/codesync.global\/media\/partisan-testable-high-performance-large-scale-distributed-erlang\/>",
+        "user": "UBN9AFS0N",
+        "ts": "1557478904.317700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Code Sync",
+                "title": "Partisan: testable, high performance, large scale distributed Erlang",
+                "title_link": "https:\/\/codesync.global\/media\/partisan-testable-high-performance-large-scale-distributed-erlang\/",
+                "text": "In this talk, Christopher will present the design of an alternative runtime system for improved scalability and reduced latency in distributed actor applications called Partisan.",
+                "fallback": "Code Sync: Partisan: testable, high performance, large scale distributed Erlang",
+                "image_url": "http:\/\/codesync.global\/uploads\/media\/articles\/0001\/01\/thumb_866_reference.jpg",
+                "ts": 1553771400,
+                "from_url": "https:\/\/codesync.global\/media\/partisan-testable-high-performance-large-scale-distributed-erlang\/",
+                "image_width": 333,
+                "image_height": 250,
+                "image_bytes": 15705,
+                "service_icon": "https:\/\/codesync.global\/assets\/img\/favicon.png",
+                "id": 1,
+                "original_url": "https:\/\/codesync.global\/media\/partisan-testable-high-performance-large-scale-distributed-erlang\/"
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1b3a367c-59a3-4034-b8d9-cff4b5b8b957",
+        "type": "message",
+        "text": "also Orleans for .net <https:\/\/dotnet.github.io\/orleans\/>",
+        "user": "UBN9AFS0N",
+        "ts": "1557478935.318200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "023641bf-5f4d-484c-b84c-66d7564a447f",
+        "type": "message",
+        "text": "both share the actor model as foundation, the ideas of virtual actors in orleans are really interesting",
+        "user": "UBN9AFS0N",
+        "ts": "1557478958.318700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "42621fd2-bbdc-4f78-9c85-52e67dfce2aa",
+        "type": "message",
+        "text": "Oh, you guys might want to look at MPL. The concurrent part of MPL is like session types, probably isomorphic, but it seemed more intuitive to me than session types. Not that it was easy to learn about - MPL is an idea from my professor who has poor communication skills... it took me four months to figure out what he was talking about, but once I figured it out I wrote this document: <http:\/\/loyc.net\/2015\/mpl.html>",
+        "user": "UD6EXQVM0",
+        "ts": "1557498471.322100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1557498545.000000"
+        }
+    },
+    {
+        "client_msg_id": "0d5e7d20-327e-4229-acab-ba47ea5c289c",
+        "type": "message",
+        "text": "or pony <https:\/\/www.ponylang.io\/>",
+        "user": "UBN9AFS0N",
+        "ts": "1557498745.322400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Pony",
+                "title_link": "https:\/\/www.ponylang.io\/",
+                "text": "Pony - High Performance Actor Programming",
+                "fallback": "Pony",
+                "from_url": "https:\/\/www.ponylang.io\/",
+                "thumb_url": "https:\/\/www.ponylang.io\/images\/logo.png",
+                "thumb_width": 128,
+                "thumb_height": 128,
+                "service_icon": "https:\/\/www.ponylang.io\/images\/favicon.ico",
+                "service_name": "ponylang.io",
+                "id": 1,
+                "original_url": "https:\/\/www.ponylang.io\/"
+            }
+        ]
+    },
+    {
+        "client_msg_id": "49420384-b4b3-49bf-ba89-9581a25ff0d4",
+        "type": "message",
+        "text": "```What makes Pony different?\n\nPony is type safe: Really type safe. There’s a mathematical proof and everything.\nPony is memory safe: There are no dangling pointers and no buffer overruns. The language doesn’t even have the concept of null!\nException-Safe: There are no runtime exceptions. All exceptions have defined semantics, and they are always caught.\nData-race Free: Pony doesn’t have locks nor atomic operations or anything like that. Instead, the type system ensures at compile time that your concurrent program can never have data races. So you can write highly concurrent code and never get it wrong.\nDeadlock-Free: This one is easy because Pony has no locks at all! So they definitely don’t deadlock, because they don’t exist!\nNative Code: Pony is an ahead-of-time (AOT) compiled language. There is no interpreter nor virtual machine.\nCompatible with C: Pony programs can natively call C libraries. Our compiler is able to generate a C-header file for Pony libraries. Consequently, C\/C++ programs can natively call Pony programs!\n```",
+        "user": "UBN9AFS0N",
+        "ts": "1557498834.323500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "34f6105c-5b3e-4f2a-85e3-847996c3dc82",
+        "type": "message",
+        "text": "<@UCGAK10LS> Reasoning about side effects is kind of second thought. Primarily it's meant to be able to write side-effect like code while it's actually pure.\n\nIdea is motivated by experience I have got when doing purish F#: ~every time you get new random business requirement (\"hey when A is X we want completely unrelated B to be Y\") you have to refactor part of your application. Kind of \"renormalize\" it. Somebody might say that this idea make easier to take technical debt which gives you more productivity but indeed if you take too much of...\n\nI imagine that outcome could finally be something like that if you have zero tooling it just give somekind of \"side effect\" ability and if you can live with them in JS you should be able to live with those things too. And in opposite direction where compiler\/IDE can visualize  parameters well it's just regular pure code only with less writing.\n\nSo I don't know is this any game changer but I would like to try programming with such thing myself.",
+        "user": "U7C7B75R6",
+        "ts": "1557500088.323600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "be27878783b4",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-10\/604262911488_be27878783b4b23a5ed4_72.png",
+            "first_name": "",
+            "real_name": "Niko Autio",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "niko.elmari",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557428080.241200",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "64dc320b-6567-41dc-b426-72f828ef3142",
+        "type": "message",
+        "text": "However I do believe that on high level future of programming should less write &amp; verify but more like dialogue. So if compiler cannot solve something it's kind of the point. Compiler is there to point out next issue for me.",
+        "user": "U7C7B75R6",
+        "ts": "1557500415.323800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "be27878783b4",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-10\/604262911488_be27878783b4b23a5ed4_72.png",
+            "first_name": "",
+            "real_name": "Niko Autio",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "niko.elmari",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557428080.241200",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "3a1709a4-c627-4608-9295-200d42a2e906",
+        "type": "message",
+        "text": "How is Lingo anything like ActionScript? As far as I can recall from having used Director back in the 90s, and from what I can glean looking around online, Lingo is more like HyperTalk or AppleScript in terms of syntax, and more like an actions\/macro system in terms of semantics (like the \"behaviours\" in early Flash, which I believe were adapted from Director), whereas ActionScript is a full Turing-complete language.",
+        "user": "UC2A2ARPT",
+        "ts": "1557500710.324000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1557500853.000000"
+        },
+        "thread_ts": "1557290857.200100",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "c82cda7b-b87a-4a09-b6d0-ee016fd8d2b0",
+        "type": "message",
+        "text": "Also, I'd contend that shell scripting is the \"grandaddy\" of all scripting languages, but I'm probably unaware of significant contemporaries and predecessors because I wasn't around back then.",
+        "user": "UC2A2ARPT",
+        "ts": "1557500792.324200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1557501067.000000"
+        },
+        "thread_ts": "1557290857.200100",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "8423b3f7-6742-4231-b70e-0a5cb8879244",
+        "type": "message",
+        "text": "&gt; <@U8A5MS6R1> How would you start?  With a top-down language and follow up with the nitty-gritty bits?\n<@UJKC8B0QN> yes something like that. I feel distribution is just and implementation detail and there's a larger algorithm\/process that may be described without coupling to the distribution mechanism details. It could then be refined by layering on details, perhaps in a separate code artifact. This is a little bit like generic programming, but at the system level. E.g. I code to the List API but then make a separate choice about which specific implementation is used. At a system level I'd describe higher level processes that the entire cluster should implement, and separately define how it maps onto the machines.\n\nBTW, I already was intrigued by strat.world when you posted your intro as I'm interested in this space (see also darklang, you might also like the book Vertically Integrated Architectures (Jos Jong)).\n\n&gt; End result: hundreds of lines of yaml, framework code, tooling, etc. to host 10 LOC of business logic in a distributed system\n\nYes, and the logic is tightly couple to the distribution topology as well. This is actually also a problem with single process languages, but less pronounced. E.g. if I change the threading model or persistence strategy (nothing to do with business logic), I still have to fiddle with the business logic bits.",
+        "user": "U8A5MS6R1",
+        "ts": "1557506419.325200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557434052.245400",
+        "parent_user_id": "UJKC8B0QN"
+    },
+    {
+        "client_msg_id": "9d33ed80-9e21-4ce7-a3aa-6980c760f684",
+        "type": "message",
+        "text": "I find the infrastructure\/language separation not particularly useful. I think the problem is a 'system problem' - which doesn't say much but at least does not start by splitting up the system into infra and language. In a sense this infra\/language divide is similar to the language\/ide divide. We can choose to adopt this POV but will never think of things like Excel. This is a framing of the problem that I think hides other insights.\n\nIn the broad sense all you have is 'the system'.  One machine or multi doesn't matter. And what you are doing is 'negotiating with the system' to have it behave how you want. All negotiation is via back-and-forth messaging. One pattern that emerges is you write these static descriptions of little processes called programs in programming languages and send them off, as one message at a time, into the system. Then separately you send other messages to control (start\/stop) the previously defined programs, and yet other messages (yaml etc.) to wire them up. Each of your processes only run on one machine, but the larger logical process (which you never wrote down as a single program) is emergent behavior.  Almost all current improvements are trying to incrementally optimize this pattern.\n\nAre there other patterns that can be explored instead?",
+        "user": "U8A5MS6R1",
+        "ts": "1557508482.325700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1557508494.000000"
+        },
+        "thread_ts": "1557447597.287300",
+        "parent_user_id": "UJKC8B0QN"
+    },
+    {
+        "client_msg_id": "acb87f1c-5237-41b5-99ad-a1f5ba6123fa",
+        "type": "message",
+        "text": "This is fantastic, thanks for sharing!",
+        "user": "UJKC8B0QN",
+        "ts": "1557514679.326100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g73561dd6586",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/373561dd658617ebf8d413eb95361c0d.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Charlie",
+            "display_name": "Charlie",
+            "team": "T5TCAFTA9",
+            "name": "ccg",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557477941.314000",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "371e626c-5ff7-422d-9f07-9cf36d20b2d0",
+        "type": "message",
+        "text": "i had an early copy of Macromedia director. It was like $700 back then, came in a huge colorful box designed by Clement Mok who did some great packaging back in the day when things had physical boxes and were sold shrunkwrapped. He was a designer at Apple in the very early days. There were a lot of great products at Macromedia. they had an vector drawing program called Freehand that was better than Illustrator to most people, and they had a video editor called Premiere which was amazingly written by Randy Ubillos who later wrote Final cut for apple! so two of the top 3 video editors were originated by the same guy! A lot of great products got bought and buried when Adobe took over Macromedia. Buy and bury was Microsoft's favorite trick; i once was at a bathroom stall at Comdex with a guy who had built an unbelievable windowed DOS-era multithreaded graphical operating system, needless to say MS bought that quick and killed it off so Windows could launch. It is often much cheaper to buy and bury the competition than to run harder in the race (and that happens in other industries as well). We live in a world of oligopolies, where a few companies control it all. You see it in cloud services, you see it in mobile OS, inkjet printers, memory chips, hard drives, you name it, it usually boils down to just a few big companies. Makes it so hard for small guys to get into the game.",
+        "user": "UEQ6M68H0",
+        "ts": "1557555865.326700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557290857.200100",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

@@ -1,0 +1,2413 @@
+[
+    {
+        "client_msg_id": "a6e17ae1-e4fe-4cba-a557-90a98b563150",
+        "type": "message",
+        "text": "<@UCGAK10LS> - Great point about abstraction! Unfortunately, many devs unknowingly confuse \"abstraction\" with other things. So here's a bit on that to help Nick's point get across more clearly:\n\nProgrammers often call it \"abstraction\" when a placeholder is used to refer to something specified or defined elsewhere. But that's not abstraction, it's indirection. And if the idea is for various different entities (or different implementations) to fill that placeholder, then that's *composition*.\n\nAbstraction means throwing out unimportant \/ irrelevant details -- not hiding or separating them, but excluding them altogether.\n\nThis is especially confusing in class-based languages wherein classes and methods are labeled \"abstract\" when they lack a (default) implementation.\n\nFor example, consider an \"abstract class\" C with members X Y Z. What makes it abstract is not that X Y Z are implemented elsewhere, but that sub-class S may *also* define A B C. So the code can say \"give me a C\" (something with X Y Z), but you can give it an S (i.e something with A B C X Y Z) without it knowing that A B C even exist. Class C is only marked as \"abstract\" because it is *only* an abstraction for other things (rather than a concrete thing itself)\n\n\"Abstract\" *methods* are even more misleading, because they imply that abstract means \"implemented elsewhere\". However, \"abstract\" here does not mean that the method *itself* is abstract, but that it is *only* (a *concrete*) part of the definition of the enclosing \"abstract *class*\" (e.g. \"some object with an X Y Z location in 3D space\").\n\nAbstraction is when you draw a circle and say \"this is my car\", when in reality a car has many moving parts &amp; behaviors. In a program, it's representing your car as a few numbers (as part of a class or otherwise) because your program is only concerned with the car's position and speed.",
+        "user": "UAVCC2X70",
+        "ts": "1556780597.075900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d710c9e8-56c2-48ca-815c-f095a796d240",
+        "type": "message",
+        "text": "I've heard devs say \"I abstracted it out\" instead of \"(re)factored it out\", again confusing indirection or stratification with abstraction",
+        "user": "UAVCC2X70",
+        "ts": "1556780744.078400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "a2b66aa1-55a5-4c36-b66f-d54da4dd0bdb",
+        "type": "message",
+        "text": "<@UAVCC2X70> good points on abstraction vs indirection\/composition vs abstract.",
+        "user": "UA14TGLTC",
+        "ts": "1556785078.079100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "465e458a-b4fb-4eee-86ab-58f67912599b",
+        "type": "message",
+        "text": "<@UAVCC2X70>  There are many possible usage of the term abstraction that it is probably best to specify what one means before making a point. I accept all the following definitions for example:\n\n1. Abstraction as naming (what you call indirection). This is a tool to manage complexity. This is how Sussman and Abelson uses the term in SICP. This is an abstraction because it hides the implementation details.\n\n2. Abstraction as \"abstract\" (or not realized). This is the definition used for ADTs and abstract classes for example.\n\n3. Abstraction as uniform interface. Some people are uncomfortable using abstraction for everything in (1) and (2) and prefer to reserve usage of the term for \"good abstractions\". Abstractions obtained by applying the process of abstraction and that are generic enough to be useful in multiple places.\n\n4. Abstraction as model. This is your definition I believe. It is about removing the details of reality you don't care about.",
+        "user": "UHZUS56SV",
+        "ts": "1556798940.082900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga164d5ab3ff",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0a164d5ab3ffe877513fe9c400908eaa.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "Benoît Fleury",
+            "display_name": "Benoît Fleury",
+            "team": "T5TCAFTA9",
+            "name": "me1796",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556798940.082900",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1556815006.111600",
+        "reply_users": [
+            "U79HM6726"
+        ],
+        "replies": [
+            {
+                "user": "U79HM6726",
+                "ts": "1556815006.111600"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heavy_check_mark",
+                "users": [
+                    "UFZFETUH1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6142a8ce-f864-485e-a818-ddfbf4b74a07",
+        "type": "message",
+        "text": "Very excited to dig into this! You Ink &amp; Switch folks know how to publish long articles... Will find time for it soon",
+        "user": "U5TCAFTD3",
+        "ts": "1556800201.083900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "7ba0af91-4b0e-4eb9-bf98-2324bddfdf21",
+        "type": "message",
+        "text": "I've also heard people use 'abstraction' when they mean 'division of labor'. Like a library or compiler or other interface. Compatibility as 'preserving an abstraction for our customers'. Ugh. Discussions like this are why I avoid the term altogether.",
+        "user": "UCUSW7WVD",
+        "ts": "1556806576.088500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "55aed72d-3027-4b9f-b8e1-50a9131b13fa",
+        "type": "message",
+        "text": "Great write-up! Captures particularly well what we lost with moving to the cloud. I hope for a future where not just data but also the tools that we use to view and manipulate data as well as the 'sources' live interlinked in the same underlying distributed system.\n\n&gt; With the Kanban app, for example, one user could post a comment on a card and another could move it to another column, and the merged result will reflect both of these changes.\n\nWant this, extrapolated to 'code'.",
+        "user": "U8A5MS6R1",
+        "ts": "1556808665.088700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "cc65d854-eb77-442c-a622-629ead926d25",
+        "type": "message",
+        "text": "This is one of my favorite articles in recent memory, thanks for sharing it and to everyone who put it together! The burning question to me is whether market forces will force cloud\/web application developers to support local data storage? I tend to think not, that larger companies, who are the main drivers in funding software development, will choose collaboration features over local data storage features. And I'd even go further and say removing local data storage is probably a benefit because it helps protect intellectual property.",
+        "user": "UE0ETTCG7",
+        "ts": "1556809715.089000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "c9565412-f04b-456a-8322-57ea4f5e857d",
+        "type": "message",
+        "text": "A simple thought experiment that shows how difficult it is to combine collaboration and local data storage: 1. I have a file and URL that anyone can use to edit it, 2. I edit that same file myself offline, 3. Someone else deletes that file online, 4. I go online and the file gets deleted locally via sync, 5. Without going back online, how do I get the version of that file back with my changes?\n\nI'd argue until there's an answer to that question, that's not an adequate local data storage solution. (If the paper has a solution that I missed please point it out!)",
+        "user": "UE0ETTCG7",
+        "ts": "1556810021.089200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "e6898059-c865-46b1-a435-caf3ed1ef5c9",
+        "type": "message",
+        "text": "Just to be crystal clear about why that's so important: If I can't do that then the data can be deleted out from under my nose (via sync), and I have no reliable way to get it back (because being able to access an older online version isn't something I have full control over). The only local data storage solution I care about is when I have 100% control over whether I can access the data, whenever I want, forever.",
+        "user": "UE0ETTCG7",
+        "ts": "1556810301.089400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "25ca7117-6938-4570-8eeb-b7424944f534",
+        "type": "message",
+        "text": "If we're keeping the entire history (like git), recovering the file might not bee too hard? The article talks about multiple parallel versions and you being able to reject incoming changes. <https:\/\/hyp.is\/cxLjzmztEem5O6v508vzkw\/www.inkandswitch.com\/local-first.html>",
+        "user": "U8A5MS6R1",
+        "ts": "1556810304.089600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "b062dea5-c648-4c5d-aef0-260cc1825d3c",
+        "type": "message",
+        "text": "This is also highlighted as a problem needing more research in the HCI section. If a document doesn't have one authoritative version, what does it mean?",
+        "user": "U8A5MS6R1",
+        "ts": "1556810464.089800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "aeae1165-a290-4bc1-aa5c-9f5452b660c6",
+        "type": "message",
+        "text": "Yeah I guess an automatically sync'd git repo is probably the best solution we currently have. That works decently well, but surfaces a needle in the haystack problem. It's hard enough to find the version of a file you're looking for with good clean commit messages written by a human, it'll be even harder with automatically generated ones.",
+        "user": "UE0ETTCG7",
+        "ts": "1556810680.090000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "a3b9fdd5-8fe6-44b6-bb7e-6e865ea76312",
+        "type": "message",
+        "text": "If I squint a bit the model this leads to looks like an append-only log of all changes. Each person has their own local logs, which they can replicate, backup any way they choose. Other artifacts such as 'documents' are just materialized views of a subset of merged logs from different persons. In this way different versions of a doc are views that select different trails (transclusions?).",
+        "user": "U8A5MS6R1",
+        "ts": "1556810716.090200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1556811612.000000"
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UFXFB1RK8"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1181ce3a-a9d5-4d44-8c7f-460585b191e8",
+        "type": "message",
+        "text": "(PS I couldn't see the annotation here, it says I have to be logged in?  <https:\/\/via.hypothes.is\/https:\/\/www.inkandswitch.com\/local-first.html#annotations:cxLjzmztEem5O6v508vzkw>)",
+        "user": "UE0ETTCG7",
+        "ts": "1556810727.090400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE0ETTCG7",
+            "ts": "1556810737.000000"
+        },
+        "attachments": [
+            {
+                "title": "Local-first software: You own your data, in spite of the cloud",
+                "title_link": "https:\/\/via.hypothes.is\/https:\/\/www.inkandswitch.com\/local-first.html#annotations:cxLjzmztEem5O6v508vzkw",
+                "text": "A new generation of collaborative software that allows users to retain ownership of their data.",
+                "fallback": "Local-first software: You own your data, in spite of the cloud",
+                "image_url": "https:\/\/www.inkandswitch.com\/media\/local-first\/cuneiform.jpg",
+                "from_url": "https:\/\/via.hypothes.is\/https:\/\/www.inkandswitch.com\/local-first.html#annotations:cxLjzmztEem5O6v508vzkw",
+                "image_width": 326,
+                "image_height": 250,
+                "image_bytes": 67054,
+                "service_icon": "https:\/\/via.hypothes.is\/oe_\/https:\/\/www.inkandswitch.com\/assets\/logo-favicon-apple-touch.png",
+                "service_name": "via.hypothes.is",
+                "id": 1,
+                "original_url": "https:\/\/via.hypothes.is\/https:\/\/www.inkandswitch.com\/local-first.html#annotations:cxLjzmztEem5O6v508vzkw"
+            }
+        ],
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "1077651d-1e40-4ae5-bae4-77f5b180b823",
+        "type": "message",
+        "text": "Sorry, it's just a highlight, not any other annotation. Highlights the paragraph \"Most CRDT research...\"",
+        "user": "U8A5MS6R1",
+        "ts": "1556810851.090800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8",
+        "reactions": [
+            {
+                "name": "pray",
+                "users": [
+                    "UE0ETTCG7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "8a6624d6-98d4-49cf-ab29-dbe2d40b2c2d",
+        "type": "message",
+        "text": "Google doc edits have zero commit messages. Yes I can 'view history' and see who changed what part of the text. I don't think this is too bad. Larger changes being grouped under a commit message definitely seems useful though.",
+        "user": "U8A5MS6R1",
+        "ts": "1556810909.091000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "d5ef5dad-a833-43dc-843e-b3ab20b3b0a5",
+        "type": "message",
+        "text": "Yeah, I think there are two competing ideas here: Collaboration and local data storage. The Google Docs model is great for collaboration (everyone always sees the most up-to-date document) but bad for data storage (someone can just delete something that's important to me). I'm trying to figure out if there's a solution that solves both of these well.",
+        "user": "UE0ETTCG7",
+        "ts": "1556811037.091300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "ce5b9ad9-84d6-40ca-b4b7-e85ea3ae1a80",
+        "type": "message",
+        "text": "Personally I prefer the git model to the Google Docs model, e.g., when and how I sync is entirely up to me. Which is a model that prioritizes local data storage. But the obvious problem with git and other version control systems is that they are hard to use, and probably only really viable for programmers.",
+        "user": "UE0ETTCG7",
+        "ts": "1556811104.091600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "5153aa88-a459-48d0-aa46-4dfce6d4c508",
+        "type": "message",
+        "text": "I like git\/hg but the manual work required often gets to me. I work on two machines and every time I switch there's some pull\/push tedium.",
+        "user": "U8A5MS6R1",
+        "ts": "1556811669.099900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "6a6c4de4-a054-4620-b00f-697abc385e46",
+        "type": "message",
+        "text": "I'd also like to keep many changes private, only publishing the 'rolled-up' change as a unit - can't do that.",
+        "user": "U8A5MS6R1",
+        "ts": "1556811719.101000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "855640ee-a577-47fb-8730-01d34b26e69f",
+        "type": "message",
+        "text": "Technically, any code is full of abstraction: any name is a stand-in for something more complex elsewhere. But at that (e.g. symbolic abstraction) level the whole program is an abstraction. So it's hard to have any meaningful discussion about abstraction, unless you cut that level out as a given and assume that we're taking about the model (of data and\/or behavior).\n\nBut like Kartik says, it's difficult to have meaningful discussion at all about something that people use in so many different ways. It's the same thing with TDD, architecture, abstraction, etc.\n\nI suppose we cannot disagree about clarification needed per context!",
+        "user": "UAVCC2X70",
+        "ts": "1556812170.108300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCSJ44X1S"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1f598e98-d910-4a5e-8b61-bf4602ee6d6e",
+        "type": "message",
+        "text": "Yeah agree 100% about all the manual work. I mediate this by having tons of tiny scripts to automatically do some repo maintenance, but 1. asking most people to do this is ridiculous, and 2. even with the scripts it's still a PITA",
+        "user": "UE0ETTCG7",
+        "ts": "1556812180.108600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "b98784ea-fdab-4b8b-bc08-347733b21fed",
+        "type": "message",
+        "text": "Funny how we are collectively interested in fixing programming, and here we find that even the language *about* programming is confusingly overloaded and inconsistent",
+        "user": "UAVCC2X70",
+        "ts": "1556812242.110000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCSJ44X1S",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "5602e0df-6240-4780-9aa5-5389f4688e0d",
+        "type": "message",
+        "text": "Practically the git model just doesn't scale for most people beyond the handful of things they primarily work on. E.g., asking people to manage their whole hard drive via git would be insane, that illustrate flaws in the scalability of the system.",
+        "user": "UE0ETTCG7",
+        "ts": "1556812267.110100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "4c49d342-b35e-4bf6-9d9e-a7f7fe15cc45",
+        "type": "message",
+        "text": "(Side note, not 100% sure what you mean by keeping some changes private: But a combination of local branches and re-writing history seems like it would solve that?)",
+        "user": "UE0ETTCG7",
+        "ts": "1556812312.110300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "fee4f58f-0637-4ec0-9733-2050aa6eb6c9",
+        "type": "message",
+        "text": "If I make a very large number of very small commits for my own sake, it may not be useful to publish them as is but rather roll them up into one large change. Yet I don't want to lose the little changes I made. Private is perhaps not the word I should use. Rather, we want to view and publish the change history with different levels of granularity depending on context. From my perspective, local editor undo history is just a special case of change history and should also be synced between *my* devices.",
+        "user": "U8A5MS6R1",
+        "ts": "1556813311.110900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1556813360.000000"
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "c75db7a8-232b-463d-b93c-6b13ffd09beb",
+        "type": "message",
+        "text": "How does `git merge --squash` fall short for this?",
+        "user": "UE0ETTCG7",
+        "ts": "1556813744.111400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "7a039227-e5f2-4fcf-b3aa-473217ab7fdd",
+        "type": "message",
+        "text": "4. Defining functions is called “abstraction” in Lambda calculus! (but perhaps only when using lambda and not via combinators)\n\n<https:\/\/en.wikipedia.org\/wiki\/Lambda_calculus>",
+        "user": "U79HM6726",
+        "ts": "1556815006.111600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4ac39488e9c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/24ac39488e9c4f2833d087a1343707dc.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Yair Chuchem",
+            "display_name": "yairchu",
+            "team": "T5TCAFTA9",
+            "name": "yairchu",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U79HM6726",
+            "ts": "1556815014.000000"
+        },
+        "thread_ts": "1556798940.082900",
+        "parent_user_id": "UHZUS56SV",
+        "reactions": [
+            {
+                "name": "open_mouth",
+                "users": [
+                    "UJZS8UUJV"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d90c8a32-42f7-4863-820a-6cbcf53c9351",
+        "type": "message",
+        "text": "I meant that you cannot invent a paintbrush so good that it changes how good a person is at painting, just by their choice to use it, or that the same painting is somehow automatically better.\n\nEspecially if paint is only the best medium 10% of the time, then improving the brush doesn't really fix anything. (That's also my sentiment towards most programming language development).\n\nBut making it easier to use or identify (or create) the right tools for the right job, and fostering the practice and ability of doing so -- I think that's a real game-changer.\n\nI think you (Tudor) &amp; I are on the same page in that view.",
+        "user": "UAVCC2X70",
+        "ts": "1556816450.112200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1556817367.000000"
+        },
+        "thread_ts": "1556460551.243800",
+        "parent_user_id": "U5STGTB3J",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UE1JQM9HQ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "Is anyone else exploring \"moldable development\" (i.e. tools or languages that can be molded by the thing that they operate on)?",
+        "user": "UAVCC2X70",
+        "ts": "1556817457.112500",
+        "thread_ts": "1556460551.243800",
+        "root": {
+            "client_msg_id": "11657826-6ABF-4731-8032-76237CC4A685",
+            "type": "message",
+            "text": "The more I think about it, the more I feel like replacing text with another form of visualization isn’t going to be the solution. Text-based programming is better with an IDE that offers different visualizations for different tasks\/contexts (hat tip to <@UE1JQM9HQ>). So I think the question is not “What will replace text-based programming?” and instead “Which visualizations will enhance programming so much that we find ourselves preferring those over text in specific contexts?”",
+            "user": "U5STGTB3J",
+            "ts": "1556460551.243800",
+            "team": "T5TCAFTA9",
+            "thread_ts": "1556460551.243800",
+            "reply_count": 31,
+            "reply_users_count": 7,
+            "latest_reply": "1556879501.145600",
+            "reply_users": [
+                "UJ6LDMMN0",
+                "UA14TGLTC",
+                "UE1JQM9HQ",
+                "U7C7B75R6",
+                "UAVCC2X70",
+                "UHZNB3HRP",
+                "UC2A2ARPT"
+            ],
+            "subscribed": false
+        },
+        "client_msg_id": "2d03074c-9a5e-411a-9b5b-013110115655"
+    },
+    {
+        "client_msg_id": "4f9224f3-5976-47cf-b52f-1b8006e1d629",
+        "type": "message",
+        "text": "Technically this seems possible with git but consider the work needed to switch from the squashed to the unsquashed view of the same stream of changes.",
+        "user": "U8A5MS6R1",
+        "ts": "1556817852.112800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UE0ETTCG7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c603d3ac-5e2d-419c-9b90-a7c2354e034a",
+        "type": "message",
+        "text": "I am not exploring it right now, but I agree 100% with you. I like the idea that a \"crafting system\" can be used to craft itself and think it is the way to go.",
+        "user": "UJ6LDMMN0",
+        "ts": "1556817870.113000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "426cd5067da7",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-26\/607834329346_426cd5067da7fc8c6933_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJ6LDMMN0",
+            "ts": "1556822395.000000"
+        },
+        "thread_ts": "1556460551.243800",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "0422151f-6f0e-4282-80b0-9c0871fa532c",
+        "type": "message",
+        "text": "Yup makes sense. I actually don't even know how to do that :upside_down_face: (never had a reason to). But I know it's supposed to be possible.",
+        "user": "UE0ETTCG7",
+        "ts": "1556818854.113300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2d5718395ee3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-08\/475666469605_2d5718395ee31c13bb5d_72.png",
+            "first_name": "Roben",
+            "real_name": "Roben Kleene",
+            "display_name": "robenkleene",
+            "team": "T5TCAFTA9",
+            "name": "services",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "8a90d341-2e43-459c-ae59-c940870ed7e1",
+        "type": "message",
+        "text": "Oh, just catching up from this morning. <@U8A5MS6R1>, we have put code into this system. it's called farm. a report is forthcoming.",
+        "user": "UFXFB1RK8",
+        "ts": "1556819329.113500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1208b565-318b-4f67-a0d1-c05f62d3fb78",
+        "type": "message",
+        "text": "All work in Pushpin \/ Farm is stored in append-only logs of your own work. For the same reason Git rebase is something you can only do before you publish commits we haven't got a solution for \"repackaging\" work into cleaned up commits. I think this is an interesting problem that none of us at the lab have a strong conceptual foundation around.",
+        "user": "UFXFB1RK8",
+        "ts": "1556819391.113700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "8d9ff5e4-d836-48bb-836a-bafcd0f2efea",
+        "type": "message",
+        "text": "As for \"deletion\", every document in our system (which we call hypermerge) is produced by using automerge to combine append-only hypercore logs which we then distribute by various mechanisms. You always have the full history over everything.",
+        "user": "UFXFB1RK8",
+        "ts": "1556819447.114100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "8b441179-da6a-4e1b-92f6-d61c53a78f61",
+        "type": "message",
+        "text": "Our current implementation \"greedily\" applies all changes it can find from all users to every document -- that's fine for a research prototype, but what we really want is more sophisticated control over when and how you adopt \"work\" shared with you by other users.",
+        "user": "UFXFB1RK8",
+        "ts": "1556819492.114300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "b3424ef3-ce97-4e4c-9aa8-955c1cabe967",
+        "type": "message",
+        "text": "We've done a bit of experimentation in the pixelpusher project around that (<http:\/\/inkandswitch.com\/pixelpusher.html|inkandswitch.com\/pixelpusher.html>) but there's a lot more to do there.",
+        "user": "UFXFB1RK8",
+        "ts": "1556819507.114500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "6cfcc613-ba1b-4689-904e-dd272cdd5bb8",
+        "type": "message",
+        "text": "All our code &amp; projects are BSD licensed and available on GitHub and I'd be happy to orient anyone interested in exploring it.",
+        "user": "UFXFB1RK8",
+        "ts": "1556819552.114700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFXFB1RK8",
+            "ts": "1556819558.000000"
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "f96ece58-a0ce-4b02-ad34-0e0f3303ff41",
+        "type": "message",
+        "text": "Oh, I should note WRT code that I think the U of C work going on under Ravi Chugh's group is very exciting -- I can't wait to represent code via mutation operations over ASTs instead of text operations on a string of bytes.",
+        "user": "UFXFB1RK8",
+        "ts": "1556819621.115100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "9e3d24d0-f972-468b-b4fc-c30a667e7f99",
+        "type": "message",
+        "text": "I'm hopeful our work and theirs will eventually find a way to link up.",
+        "user": "UFXFB1RK8",
+        "ts": "1556819633.115300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "0636ed26-2487-4846-8064-afdc0c56875a",
+        "type": "message",
+        "text": "If any of you are interested in a demo of Glamorous Toolkit, I’d be happy to show you what we mean by moldable development.",
+        "user": "UE1JQM9HQ",
+        "ts": "1556820082.115700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556460551.243800",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "d78da318-a92e-4a13-8560-6804392d4b60",
+        "type": "message",
+        "text": "Yes structured editing seems to fit in with the hypermerge ideas (where 'structure' implies elements higher level than characters and lines). I think there are very interesting directions to explore here that move way from files. E.g. if you could write function definitions without files:  a function body it would link to other function objects in the history directly, rather than using unresolved names that get bound later. This ties into the idea from Joe Armstrong about 'all functions global searchable key\/value database'.",
+        "user": "U8A5MS6R1",
+        "ts": "1556820542.116000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "e33c4078-38bf-4ab7-a804-3c56f4a63b64",
+        "type": "message",
+        "text": "It's my plan tonight to finish watching all of your videos for Glamorous.",
+        "user": "UHZNB3HRP",
+        "ts": "1556820746.116200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g1e605c7d8c8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/91e605c7d8c807d1a07fb13a73ff8e06.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Greg",
+            "real_name": "Greg Jarmiolowski",
+            "display_name": "Greg Jarmiolowski",
+            "team": "T5TCAFTA9",
+            "name": "greg",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556460551.243800",
+        "parent_user_id": "U5STGTB3J",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UE1JQM9HQ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0efbf6a5-1966-4a30-8cb4-a04b9a6fe74d",
+        "type": "message",
+        "text": "Have there been any discussions on newer memory models like rusts borrowing opposed to RC\/GC?",
+        "user": "UJCQYPLMN",
+        "ts": "1556821342.118200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g29c9a0f71d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/729c9a0f71d1cfcdcb30efa28a8f46d2.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-72.png",
+            "first_name": "",
+            "real_name": "Carlo Kok",
+            "display_name": "Carlo Kok",
+            "team": "T5TCAFTA9",
+            "name": "carlokok",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "reply_count": 35,
+        "reply_users_count": 5,
+        "latest_reply": "1556909235.150400",
+        "reply_users": [
+            "U8A5MS6R1",
+            "UFB8STN7K",
+            "UJ6LDMMN0",
+            "UHDQ62M4P",
+            "UJCQYPLMN"
+        ],
+        "replies": [
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1556821906.118800"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556823646.119600"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1556829378.121900"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1556829544.122100"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556853138.138700"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556853159.138900"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556853367.139100"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556855780.139400"
+            },
+            {
+                "user": "UJCQYPLMN",
+                "ts": "1556858999.139600"
+            },
+            {
+                "user": "UJCQYPLMN",
+                "ts": "1556859064.139800"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556859513.140000"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556859884.140200"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556860040.140400"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556861815.141100"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556861918.141300"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556862007.141500"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556862101.141700"
+            },
+            {
+                "user": "UJCQYPLMN",
+                "ts": "1556871102.143000"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556892472.147000"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556893490.147200"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556893570.147400"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556893658.147600"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556893720.147800"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556893842.148000"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556894257.148200"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556894344.148400"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556899016.148600"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556899390.148800"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556899471.149000"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556899553.149200"
+            },
+            {
+                "user": "UFB8STN7K",
+                "ts": "1556899578.149400"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556900082.149600"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556900100.149800"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1556908431.150200"
+            },
+            {
+                "user": "UHDQ62M4P",
+                "ts": "1556909235.150400"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "79de763e-70c9-4f93-bdda-3414debd3499",
+        "type": "message",
+        "text": "Well, everyone's excitement here is good motivation to keep editing the other posts and get them into publication shape.",
+        "user": "UFXFB1RK8",
+        "ts": "1556821526.118400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3ffd374deb8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53ffd374deb821ab07cdef9f7e321364.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Peter van Hardenberg",
+            "display_name": "Peter van Hardenberg",
+            "team": "T5TCAFTA9",
+            "name": "pvh",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "722a9ee3-082e-4a63-808d-c018a51fe54f",
+        "type": "message",
+        "text": ":thumbsup: Looking forward to the farm report. I did star the github project last time I heard about it (when your previous article came out, I think). I think a hypermerge like substrate could solve 'the problem' quite well, as opposed to git, dropbox, gdrive etc. which are ad hoc and only solve part of the problem.",
+        "user": "U8A5MS6R1",
+        "ts": "1556821822.118600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556770732.488500",
+        "parent_user_id": "UFXFB1RK8"
+    },
+    {
+        "client_msg_id": "7e8df32f-2bcf-4a4d-9c7b-19fb9aca3a74",
+        "type": "message",
+        "text": "I don't know of any discussion but <@UHDQ62M4P> mentioned his language Lobster does borrow checking now too. (<http:\/\/aardappel.github.io\/lobster\/memory_management.html>)",
+        "user": "U8A5MS6R1",
+        "ts": "1556821906.118800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJCQYPLMN",
+                    "UJ6LDMMN0",
+                    "UBSMEUXAA"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7a8d92bf-63a7-4021-aa94-bd65b89b70e4",
+        "type": "message",
+        "text": "Can somebody remind me why software must be maintained forever and it's never ready?\n\nWhy users cannot compose different existing solutions and instead every application must solve every distantly related problem (poorly)?",
+        "user": "U7C7B75R6",
+        "ts": "1556823193.119300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "be27878783b4",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-10\/604262911488_be27878783b4b23a5ed4_72.png",
+            "first_name": "",
+            "real_name": "Niko Autio",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "niko.elmari",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "reply_count": 13,
+        "reply_users_count": 8,
+        "latest_reply": "1556878680.144000",
+        "reply_users": [
+            "U8A5MS6R1",
+            "UBN9AFS0N",
+            "U7C7B75R6",
+            "UCUSW7WVD",
+            "UEQ7QL15F",
+            "UEQ6M68H0",
+            "UJ6LDMMN0",
+            "UA14TGLTC"
+        ],
+        "replies": [
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1556823668.120100"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1556823687.120500"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1556823716.120700"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1556823876.121100"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1556824094.121300"
+            },
+            {
+                "user": "U7C7B75R6",
+                "ts": "1556825464.121600"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1556829802.122300"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1556831787.122700"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1556832036.122900"
+            },
+            {
+                "user": "UEQ7QL15F",
+                "ts": "1556863928.142300"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1556865084.142800"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1556873659.143300"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1556878680.144000"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "upside_down_face",
+                "users": [
+                    "U8A5MS6R1",
+                    "UEQ7QL15F"
+                ],
+                "count": 2
+            },
+            {
+                "name": "joy",
+                "users": [
+                    "UJC8ZDSTX"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "04db34a2-9661-4ac0-b11b-6d656c074133",
+        "type": "message",
+        "text": "I’ve written a fair amount about Rust.\n\nExplaining the memory model: <http:\/\/cs242.stanford.edu\/f18\/lectures\/05-1-rust-memory-safety.html> and <http:\/\/cs242.stanford.edu\/f18\/lectures\/06-1-smart-pointers.html>\n\nReplacing LLVM with Rust: <http:\/\/willcrichton.net\/notes\/rust-the-new-llvm\/>\n\nUsability issues with the borrow checker: <https:\/\/arxiv.org\/abs\/1901.01001>\n\nTeaching PL theory with Rust: <https:\/\/arxiv.org\/abs\/1904.06750>\n\nJon Goodwin, who works on the Cone language, has also thought about this a lot: <http:\/\/jondgoodwin.com\/pling\/gmm.pdf>",
+        "user": "UFB8STN7K",
+        "ts": "1556823646.119600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJCQYPLMN",
+                    "UJ6LDMMN0",
+                    "UHZNB3HRP"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6e0c623b-3347-41a6-ae8e-c3ce8c67af05",
+        "type": "message",
+        "text": "Really good questions! I believe it's because our software composition methods are really poor. We live in a world of pervasive reimplementation and yet it seems that's the best we have.",
+        "user": "U8A5MS6R1",
+        "ts": "1556823668.120100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UEQ7QL15F",
+                    "UJCHWTMH6"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0ac4dc4d-1e5f-441e-90e4-6c8cd696e38c",
+        "type": "message",
+        "text": "because we don't know how to compose, and we haven't agreed on APIs and data representation across languages that can capture all cases (I guess)",
+        "user": "UBN9AFS0N",
+        "ts": "1556823687.120500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "568fb12f-3995-447f-9810-a3ded9b868a7",
+        "type": "message",
+        "text": "so we get the common denominator, which now seems to be JSON",
+        "user": "UBN9AFS0N",
+        "ts": "1556823716.120700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "9f3e4084-bd60-4171-8f1c-746905b3994d",
+        "type": "message",
+        "text": "Yes, and bytestream pipes, and the C ABI.",
+        "user": "U8A5MS6R1",
+        "ts": "1556823876.121100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "d83db5cb-ef1f-4c33-8e7f-ea7e2c1ba0ed",
+        "type": "message",
+        "text": "Really I think there's a missing aspect of composition. As long as we have separate processes implemented in distinct languages where the only integration is over API like boundaries, implemented by shuffling data around, we will end up with suboptimal composition. I'm not quite sure what the alternative looks like, but consider that within one language\/framework, there is hardly any duplication, and it is relatively easy to spot and eliminate.",
+        "user": "U8A5MS6R1",
+        "ts": "1556824094.121300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "8b011c85-63ff-4cf1-8d49-4f783304a964",
+        "type": "message",
+        "text": "Noticed (read: remembered again) today that one our product which has taken ~10 man years have unique business logic maybe about 1w. Smaller 6 month project have zero, it should be just \"basic usage of computer\".",
+        "user": "U7C7B75R6",
+        "ts": "1556825464.121600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "be27878783b4",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-10\/604262911488_be27878783b4b23a5ed4_72.png",
+            "first_name": "",
+            "real_name": "Niko Autio",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "niko.elmari",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "a9f77b54-362d-4ed0-aae8-2d1346ccde91",
+        "type": "message",
+        "text": "<@UFB8STN7K> thanks for sharing. Your teaching looks very intersting, I wish I could have followed your course! (but I am both too old and too far...)",
+        "user": "UJ6LDMMN0",
+        "ts": "1556829378.121900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "426cd5067da7",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-26\/607834329346_426cd5067da7fc8c6933_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN",
+        "reactions": [
+            {
+                "name": "hugging_face",
+                "users": [
+                    "UFB8STN7K"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4879ea26-f201-4687-9baf-4753a5d13a85",
+        "type": "message",
+        "text": "<@UJCQYPLMN> and <@U8A5MS6R1>, I found this page in the Lobster's documentation, that contains a short list of languages that follow the path of ownership models: <http:\/\/aardappel.github.io\/lobster\/memory_management.html>",
+        "user": "UJ6LDMMN0",
+        "ts": "1556829544.122100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "426cd5067da7",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-26\/607834329346_426cd5067da7fc8c6933_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "721c6bf2-487e-4043-b0e4-9123e11f17c6",
+        "type": "message",
+        "text": "I think the answer is our cargo-culted notion of a ‘user’ that we never go back and question:\n• Users use the ‘same’ program.\n• Changes to the program go out to ‘all’ users.\n• Nobody knows how many users some aspect or feature of a program has. Including the authors!\n• Understanding of how people use a program is poor.\n• Users can only use programs, not modify them locally. At best they can suggest changes (including code), but the authors control when changes get ‘merged’.\n• Programs have to be ‘compatible’ and not break existing users. This creates an implicit incumbency advantage where existing users get to lord it over future users. Even if they’re outnumbered by many orders of magnitude! We forget that potential is always greater than reality.\n\nSo even if you as a single user of a programmer have all your needs met, if somebody else has a feature request, and it’s accepted, you face ‘peer pressure’ to incorporate this feature in your local deployment of the program.\n\nCoda or bonus: paying for software doesn’t help much with these questions.\n\nMuch of what I do involves questioning this social contract. Unfortunately all existing software is governed with this contract, so solving the social problem seems to involve a technical sub-goal. Or maybe that’s fortunate, since I am better at writing code than solving social problems. Maybe I just feel more useful\/effective this way? :thinking_face:",
+        "user": "UCUSW7WVD",
+        "ts": "1556829802.122300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "06b21e1e-ad73-4e6c-b6ce-1714d1216e12",
+        "type": "message",
+        "text": "&gt; Users use the ‘same’ program.\n\nDeep. What if could just transclude only the features we want into our personal bundle of 'the program'. And then remix with our own features. Definitely opens up a whole new direction to explore 'composition'. This is OAP?",
+        "user": "U8A5MS6R1",
+        "ts": "1556831787.122700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "366ae600-2958-409d-9a7c-387dabd849ee",
+        "type": "message",
+        "text": "This is partly why I’m interested in designing programs to be subsettable. It’s not adding features, it’s the _removing_ of features that’s the interesting question.\n\nOur programs all show this complexity ratchet: complexity goes up monotonically over time. But if we forked programs more, and if we deleted features in many forks, that would help a lot in controlling complexity.",
+        "user": "UCUSW7WVD",
+        "ts": "1556832036.122900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "03f12d70-2566-4abb-b2aa-9b1e9ef7eb10",
+        "type": "message",
+        "text": "<@UAVCC2X70> The better paintbrush changes the painter?",
+        "user": "UA14TGLTC",
+        "ts": "1556843288.127600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556460551.243800",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "40466428-5B1E-4DCF-94F3-A09781118DD2",
+        "type": "message",
+        "text": "big forth\/concatenative langs fan logging on—I think it's underestimated on a few levels:\n\n1. amenability to visual programming (random example) <https:\/\/youtu.be\/R3MNcA2dpts>\n\n2. extensibility: <https:\/\/youtu.be\/f_0QlhYlS8g> factor was a programming language and environment built mostly by one person in a relatively short amount of time that managed to incorporate a CLOS-style object system, novel compilation, a graphical interface and smalltalk-esque code browser\n\n3. begins with data: if you imagine an alternative visualization of stacks, you shove example data onto a kind of workbench and then do a bunch of transformations to it. this is analogous to example based programming if you squint\n\n4. incremental interpretation\/composition—since every use of a forth \"word\" is point-free and describes a transformation from one stack to another, the difference between a space (function composition in forth IIRC) and a line break is basically zero, so your programs end up very modular and tracking reflective program information like what actions have been done on the data is decomplected by default\n\n5. an alternative to the lambda calculus: <https:\/\/youtu.be\/_IgqJr8jG8M> \n\n\nsorry if this is a bit of a dump I'm on mobile and organization is hard",
+        "user": "UHWC9PXBL",
+        "ts": "1556843794.136800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "\"Brief\" Concatenative Programming Language Demo",
+                "title_link": "https:\/\/youtu.be\/R3MNcA2dpts",
+                "author_name": "Ashley Feniello",
+                "author_link": "https:\/\/www.youtube.com\/user\/AshLeaFen",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/R3MNcA2dpts\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: \"Brief\" Concatenative Programming Language Demo",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https:\/\/www.youtube.com\/embed\/R3MNcA2dpts?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 300,
+                "from_url": "https:\/\/youtu.be\/R3MNcA2dpts",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/R3MNcA2dpts"
+            },
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Factor: an extensible interactive language",
+                "title_link": "https:\/\/youtu.be\/f_0QlhYlS8g",
+                "author_name": "GoogleTechTalks",
+                "author_link": "https:\/\/www.youtube.com\/user\/GoogleTechTalks",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/f_0QlhYlS8g\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Factor: an extensible interactive language",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https:\/\/www.youtube.com\/embed\/f_0QlhYlS8g?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 300,
+                "from_url": "https:\/\/youtu.be\/f_0QlhYlS8g",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 2,
+                "original_url": "https:\/\/youtu.be\/f_0QlhYlS8g"
+            },
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Stanford Seminar - Concatenative Programming: From Ivory to Metal",
+                "title_link": "https:\/\/youtu.be\/_IgqJr8jG8M",
+                "author_name": "stanfordonline",
+                "author_link": "https:\/\/www.youtube.com\/user\/stanfordonline",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/_IgqJr8jG8M\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Stanford Seminar - Concatenative Programming: From Ivory to Metal",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/_IgqJr8jG8M?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/_IgqJr8jG8M",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 3,
+                "original_url": "https:\/\/youtu.be\/_IgqJr8jG8M"
+            }
+        ],
+        "thread_ts": "1556655545.323500",
+        "parent_user_id": "UE6EFEPTQ",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "86CEC119-EDDE-4BC5-9F60-97A4620EF181",
+        "type": "message",
+        "text": "also the jQuery monad was super productive for a lot of people for a long time in software years!",
+        "user": "UHWC9PXBL",
+        "ts": "1556843877.138300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556655545.323500",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "5e366549-2863-41e4-a0b1-a70caea6b510",
+        "type": "message",
+        "text": "<@U8A5MS6R1> <@UJ6LDMMN0> thanks for linking my doc :slightly_smiling_face:",
+        "user": "UHDQ62M4P",
+        "ts": "1556853138.138700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "e713577d-eb86-4756-a803-d5983ea6aeb6",
+        "type": "message",
+        "text": "<@UFB8STN7K> that looks cool, will have to check those out",
+        "user": "UHDQ62M4P",
+        "ts": "1556853159.138900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "77f46cc9-b9d2-48a7-b9e5-939a73675b23",
+        "type": "message",
+        "text": "Using Rust as a backend for languages sounds.. difficult.. if the new language doesn't map closely to Rust. You'll end up emulating an unrelated memory model in an array and it will neither be very typesafe nor efficient (compared to C)",
+        "user": "UHDQ62M4P",
+        "ts": "1556853367.139100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "8364ddaf-1cef-4fce-9b80-c6ce9a0be6c2",
+        "type": "message",
+        "text": "What would you say is an example of a language that wouldn’t map closely to Rust?",
+        "user": "UFB8STN7K",
+        "ts": "1556855780.139400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "a85da37e-1b18-4347-b3a1-21af4e0d7a4e",
+        "type": "message",
+        "text": "<@UFB8STN7K> Not the person you answered to; but really any OOP language wouldn't easily map to Rust?",
+        "user": "UJCQYPLMN",
+        "ts": "1556858999.139600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g29c9a0f71d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/729c9a0f71d1cfcdcb30efa28a8f46d2.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-72.png",
+            "first_name": "",
+            "real_name": "Carlo Kok",
+            "display_name": "Carlo Kok",
+            "team": "T5TCAFTA9",
+            "name": "carlokok",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "9acfe174-015c-428d-8c05-b80aa5142f07",
+        "type": "message",
+        "text": "I do quite like the ownership model of rust; it's something I want in my languages too, though the way rust enforces it is a bit too invasive to tackle on now (the compiler has been around for a few years and this would be fairly breaking)",
+        "user": "UJCQYPLMN",
+        "ts": "1556859064.139800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g29c9a0f71d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/729c9a0f71d1cfcdcb30efa28a8f46d2.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-72.png",
+            "first_name": "",
+            "real_name": "Carlo Kok",
+            "display_name": "Carlo Kok",
+            "team": "T5TCAFTA9",
+            "name": "carlokok",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "591f5571-7347-4e11-92b6-b30b34110cc7",
+        "type": "message",
+        "text": "<@UFB8STN7K> almost all of them. A language that also has ownership might map well, but Rust wants this done statically, so the semantics would have to map almost 1:1 for this to work. Beyond that, you are in the territory of emulating things. A reference counted language would work decently well for Rust. Most dynamically typed languages, or GC languages, are so far removed from Rust that there's no meaningfull advantage to Rust's type safety and ownership anymore. Some dynamically typed languages could be implemented directly using a Rust enum, but if you look at the crazy shit many language implementations do with memory, you'll end up with.. the array of bytes as the only translation mechanism. And random access arrays in Rust will not compete with C because of bounds checking, correct me if I am wrong.",
+        "user": "UHDQ62M4P",
+        "ts": "1556859513.140000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "6a8d8189-0370-4548-a20f-142e046e9f44",
+        "type": "message",
+        "text": "Or let me put it this way: take the 100 most popular or well known programming languages, and their most well known implementation, 99% or which will be in C\/C++, and try and translate them to Rust. You'll a) be in a world of pain trying to find a mapping, assuming you don't default to \"array of bytes\", b) be less efficient, and c) for at least 90% of them, don't gain any of the safety and other benefits of Rust you claim in your article",
+        "user": "UHDQ62M4P",
+        "ts": "1556859884.140200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "0657e331-3ddf-431f-b1d3-2e2361c1db11",
+        "type": "message",
+        "text": "And I say that as a total fanboy of Rust, who wishes he could wave a magic wand and have all the piles of C++ he has to work every day with translated into Rust. I just don't see how it is a good target for codegen or runtimes, compared to C\/C++, llvm IR or x86\/arm :slightly_smiling_face:",
+        "user": "UHDQ62M4P",
+        "ts": "1556860040.140400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "d833badc-8d38-44ac-9c63-27b627da8f98",
+        "type": "message",
+        "text": "No it does not, and that was my point. There's so much broken and unmastered in most software, and it's not going to be fixed with (for example) another new programming language. Most languages already offer sufficient tools for sane programming (i.e. proper use of abstraction and composition, etc.).\n\nBut it's hard to see (or show) that working with just text, which is why we need better tools to make that more visible.\n\nIt's confusing: tools won't fix the problems, but we need better tools to be able to see and address the real problems.",
+        "user": "UAVCC2X70",
+        "ts": "1556861337.140700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1557418978.000000"
+        },
+        "thread_ts": "1556460551.243800",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "1b7f5bf4-2820-40b5-9a52-9b91fcf17181",
+        "type": "message",
+        "text": "I don’t think I buy “so far removed from Rust that there’s no meaningfull advantage to Rust’s type safety and ownership anymore”. If you’re implementing a statically typed language, you get the type system. If you’re implementing a dynamically typed language, you get both a safe interpreter implementation and simple type-level interop to Rust. And GC can work with Rust, although that is an active area of work.",
+        "user": "UFB8STN7K",
+        "ts": "1556861815.141100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "b279ca2b-6e27-4928-9998-77302592e149",
+        "type": "message",
+        "text": "The main point there is that if you have a struct in your higher-level language, then you get a struct at the Rust-level, just wrapped in a smart pointer. That’s the dream.",
+        "user": "UFB8STN7K",
+        "ts": "1556861918.141300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "bebcdcdc-35ca-4f56-9018-dc7c4dd18939",
+        "type": "message",
+        "text": "And that smart pointer might be extremely complicated depending on the complexity of the high-level language runtime, but at least Rust can understand the type at some level above `u8*`.",
+        "user": "UFB8STN7K",
+        "ts": "1556862007.141500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "13fa745e-5f97-4cdb-821a-17c5e36520ea",
+        "type": "message",
+        "text": "That said, I understand that the vision in that blog post is very much a pie-in-the-sky kind of idea. It’s less a “we can go out and literally convert every language today” and more a vision statement on the possibilities for more deeply integrating the target language with the host language in a compiler\/runtime, and what opportunities that affords.",
+        "user": "UFB8STN7K",
+        "ts": "1556862101.141700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556821342.118200",
+        "parent_user_id": "UJCQYPLMN"
+    },
+    {
+        "client_msg_id": "457d3171-1e3d-4e68-8fca-f06c31a21af3",
+        "type": "message",
+        "text": "Good points.\n\nI’m not too worried about unemployment for programmers because of this lack of abstraction and reusability — both in code and in user interfaces\/experiences.\n\nAnd the opposite: I think that better abstractions and reusability could bring huge gains in productivity.",
+        "user": "UEQ7QL15F",
+        "ts": "1556863928.142300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g52d221ae708",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/a52d221ae708f36674644a348005633a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Janne",
+            "real_name": "Janne Aukia",
+            "display_name": "jaukia",
+            "team": "T5TCAFTA9",
+            "name": "janne.aukia",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6"
+    },
+    {
+        "client_msg_id": "3c3099df-efcb-4100-aeab-cbdb4b078771",
+        "type": "message",
+        "text": "According to Marshall McLuhan, “we shape our tools and thereafter our tools shape us”. This implies that the tool does change the behavior. For example, did you check your phone this morning within 10 minutes of waking up? Many people do, yet this behavior did not exist 12 years ago because the tool was not around. So, we can look at it and say that the tool manufactured the need.\n\nI very much adhere to this school of thought. And I believe that we should choose consciously the kinds of tools we expose ourselves to. This also means that the characteristics of the tools are more important then their concrete features.",
+        "user": "UE1JQM9HQ",
+        "ts": "1556864468.142500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE1JQM9HQ",
+            "ts": "1556864526.000000"
+        },
+        "thread_ts": "1556460551.243800",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "f42b7aea-5d2b-4a25-8b5d-c01e8c57e820",
+        "type": "message",
+        "text": "i would like to remind the readers of this group that there is a core group of programmers are committed to increasing billable hours and have negative interest (i.e. hostility) towards any improvement in productivity. In the history of computers, at each junction point where a simpler, more productive tool or OS was presented, it was rejected in favor of an inferior choice which produced higher billings. CM\/CMS (VMware for mainframes) was rejected in favor of the vastly inferior TSO, COBOL beat FORTRAN, DOS beat the USCD P-system, etc.  Anything sufficiently radical will encounter stiff resistance. The users and managers of programmers think differently, but job protection is paramount to many unfortunately.",
+        "user": "UEQ6M68H0",
+        "ts": "1556865084.142800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1556823193.119300",
+        "parent_user_id": "U7C7B75R6",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UHZNB3HRP"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

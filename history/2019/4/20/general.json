@@ -1,0 +1,654 @@
+[
+    {
+        "client_msg_id": "087ffd2b-7818-4199-82a6-19b62e649dcb",
+        "type": "message",
+        "text": "Depending on the audience (certainly this audience), it's best to say what's new because of course every programming language is going to need a bunch on standard equipment (or not so standard but at least existing).",
+        "user": "UA14TGLTC",
+        "ts": "1555745018.070600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "f61e2352-90b7-4ca2-958c-dc36c8afa20c",
+        "type": "message",
+        "text": "In my company one of the ways to be fired for sure is to refuse to document your work so it can be transferred to others. Our guiding principle is that every key system has at least 3 people that know it, so that if someone is on vacation or getting married or sick we have coverage. Achieving 24\/7 uptime only happens with multiple people \"in the know\".  Having to repair and improve other people's code, and also working in team environments on large commercial products builds a certain discipline. Just picking good names for functions and variables is a big part of making code easier to understand for others. It is actually one of the tests that i am doing which is to take a program, give it to someone other than the author, and have them make some specific improvement or fix. You can measure this, and see how many hours it takes to accomplish the task for the new person and how much damage if any was created by the changes. The priesthood of programming has been kept in place through intentional obscurity, and companies greatly fear losing authors because often bad breakage occurs on transfer to a new person. Case in point: Apple broke printing in OSX 10.13.0, and didn't have it repaired until 10.13.4, and then broke it again in 10.14.0, and got it fixed in 10.14.2. Printing is a rather fundamental activity in a desktop computer, and you know it was all due to different people doing changes. Avoiding deep interconnections is the key factor in achieving interchangeable parts; gotta keep the linkages shallow and easy to perceive. Nothing more non-interchangeable than a 50 level deep call chain which is so common in Java programs. I consider Java one of the worst languages ever designed because of this extreme depth, and the use of OOP which creates islands of state which are un-knowable from examining the code.",
+        "user": "UEQ6M68H0",
+        "ts": "1555746875.070700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555663464.061800",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBSMEUXAA",
+                    "UD43R8ZFV",
+                    "UHZNB3HRP"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4a016318-bc23-49fc-8c71-cb88e9b90be1",
+        "type": "message",
+        "text": "Here’s my summary. The language in the paper is grandiose, which I found off-putting. If you wade through that, here’s what you find Bosque contains, in some rough order of goodness\/novelty (most to least):\n\n1. Primitives for collection operations (`map`, `filter`, `fold` etc)—no looping constructs. (Recursion is allowed but discouraged—you have to mark _callsites_ to recursive functions with `rec`.)\n2. Those collection primitives are packaged with pre- and post- conditions to ease verification. (The verification story is a bit hand-wavy though.)\n3. Execution produces deterministic results, but there’s no guarantees on intermediate execution order. If a piece of code throws errors in parallel, which error is thrown may be non-deterministic, but that *some* error is thrown is deterministic.\n4. Function arguments are (apparently) matched by name and by type first, and then by position. This is an idea I’ve wanted to explore because it’s superficially more ergonomic but there may be some tricky downsides (e.g. with complicated arg matching rules, how do you determine if an API change breaks existing code?).\n5. There’s special syntax for denoting optional values that can be `none`, and syntax for allowing method calls on `none` to return `none` instead of crashing.\n\nThe following ideas are extolled in the paper but I don’t think they are quite so novel or worthy:\n\n1. Local multiple assignments to the same variable are not actually mutations of the same memory location. I’ve thought about this before: the naive version doesn’t work work all the time because where you want multiple assignment is in folds and the above semantics doesn’t work there.\n2. All objects support record update syntax and record merge syntax. What’s novel here is applying this to a more traditional OO model; but its core is just plain old functional record update syntax. There’s also a field projection syntax, which is handy.\n3. Well defined interface to the outside world. It’s a good idea to have an API to the OS, but the writeup makes it sound like this solves all the messy IO system call stuff when really it just pushes that mess out of scope of the language. You’ll still have to deal with it sometime.\n\nIdeas perhaps worth discarding:\n\n1. No referential equality (that’s fine) but to support custom equality measures you simply define a field named `key` on your objects\/records. You only get one of these: now you’re toast if you want a different equality metric or your equality metric wasn’t precise enough.\n2. No logging. (Stated justification: when your language is deterministic you don’t need logging.)",
+        "user": "UC21F8Q48",
+        "ts": "1555772928.070900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "d79ba47b2952",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-03\/410049852848_d79ba47b2952e74a99d9_72.jpg",
+            "first_name": "Brian",
+            "real_name": "Brian Hempel",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "brianhempel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC21F8Q48",
+            "ts": "1555944332.000000"
+        },
+        "thread_ts": "1555660747.055600",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "pray",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UD6EXQVM0"
+                ],
+                "count": 1
+            },
+            {
+                "name": "rolling_on_the_floor_laughing",
+                "users": [
+                    "UC6997THT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0a30987b-7714-4687-8c43-585075ade801",
+        "type": "message",
+        "text": "I mostly agree with Nick and Wouter. The initial claims sounds amazing, and then it's a nothing really new and ugly syntax. I don't think the (confusing) blend between classes and ad-hoc objects is user friendly, and seems more computer-minded than human-minded (which is contradictory to one of its claims)",
+        "user": "UAVCC2X70",
+        "ts": "1555778707.074800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1555783054.000000"
+        }
+    },
+    {
+        "client_msg_id": "17f549c8-3991-43a0-8f6e-c6e743d2e55d",
+        "type": "message",
+        "text": "If there any real innovation to come in the form of programming languages, I think it has to be something a lot closer to human models, and\/or makes code significantly simpler to express &amp; read, a\/o is much higher level (e.g. taking what normally would need to be many components on different layers\/systems, and making it trivially expressible ... like Dark or Webflow)",
+        "user": "UAVCC2X70",
+        "ts": "1555779060.081300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U9C92716C"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "b9fe21d1-0e08-47d9-8152-99d0de7d68f5",
+        "type": "message",
+        "text": "Until one of y'all makes a breakthrough with a graphical\/by-example\/end-user\/whatever language, we still need innovation in traditional\/text-only\/for-professional-programmers languages to happen as well, as it is what 99.999% of this world is churning on, and won't go away overnight, or maybe even ever. Any progress there is super valuable too. Just Bosque aint it. Myself, I am still trying to fix things as low level as type systems and memory management :slightly_smiling_face:",
+        "user": "UHDQ62M4P",
+        "ts": "1555779669.084300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBSMEUXAA",
+                    "UE0ETTCG7",
+                    "UD6EXQVM0"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3b99c09b-0900-4032-bb59-d5e8a1cff98b",
+        "type": "message",
+        "text": "I don't disagree, and I see a lot of promise in things like functional programming (e.g. lambdas, map\/reduce), classless objects, type inference, triats \/ implicit interfaces (e.g. go-lang).",
+        "user": "UAVCC2X70",
+        "ts": "1555783422.090700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "66c6c454-1452-455b-8406-9bd2413620e7",
+        "type": "message",
+        "text": "Nevertheless, I am also quite convinced that an enormous amount of complexity is software is (in many cases) simply due to poor practices or a fundamental lack of understanding (or proper application) of basic things like proper composition\/decomposition\/factoring of code, choosing more complex paradigms due to bias or hype, etc.\n\nIf that could *somehow* be fixed (which may only be possible on a small scale, e.g. individually or on small team), I think that would do more for software than any new language could -- unless it truly was something fundamentally different than a traditional language",
+        "user": "UAVCC2X70",
+        "ts": "1555784496.099100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1555784682.000000"
+        },
+        "thread_ts": "1555784496.099100",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1555839005.129200",
+        "reply_users": [
+            "U8A5MS6R1"
+        ],
+        "replies": [
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1555839005.129200"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UD6EXQVM0"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "82202aa2-b6a5-457d-bac2-20c137b3af2e",
+        "type": "message",
+        "text": "Example of bad naming: <https:\/\/images.app.goo.gl\/EviACDgva3xHbgm28>",
+        "user": "UAVCC2X70",
+        "ts": "1555784978.103100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1555785015.000000"
+        },
+        "thread_ts": "1555663464.061800",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "joy",
+                "users": [
+                    "UBSMEUXAA",
+                    "UD43R8ZFV"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9529dcd1-b26b-457b-b4f2-335b2cdeb27b",
+        "type": "message",
+        "text": "<@UAVCC2X70> interesting observation. I believe that we can improve dramatically our ability to assess our own systems. I can back this claim with a decade worth of case studies.",
+        "user": "UE1JQM9HQ",
+        "ts": "1555785449.104900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UAVCC2X70"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "786853a6-0ce4-4cf0-b3cf-1f70d7d192cb",
+        "type": "message",
+        "text": "Another perspective: Maybe we're still in the \"dark ages\", and programming will evolve to something being our imagination in a couple hundred years.\n\nA more positive perspective on that perspective: How exciting to get to be here at the start of it all, shaping the future!",
+        "user": "UAVCC2X70",
+        "ts": "1555785758.109500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT",
+                    "U8A5MS6R1",
+                    "UA14TGLTC"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "eccc175d-0a16-4f4e-94f5-76cddbd5d6b4",
+        "type": "message",
+        "text": "I agree. However, I still believe we are in a crisis of great proportions (I call it software environmentalism crisis): we are creating software at a much higher pace than we are able to recycle. We are essentially drowning in software we are not able to move anymore. So, if we are to create a sustainable future, it must be one in which an old system is kept around because of its value and fitness not because of the impossibility to remove. I believe this is essential.",
+        "user": "UE1JQM9HQ",
+        "ts": "1555785925.112000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE1JQM9HQ",
+            "ts": "1555785943.000000"
+        },
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UAVCC2X70",
+                    "UAL7940NM",
+                    "U7C7B75R6"
+                ],
+                "count": 3
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UAVCC2X70",
+                    "UCUSW7WVD",
+                    "UA14TGLTC",
+                    "UAJ9DV971"
+                ],
+                "count": 4
+            },
+            {
+                "name": "fire",
+                "users": [
+                    "U9C92716C"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a6dd3938-9f3f-4bbb-ae70-c8ae0f2401cb",
+        "type": "message",
+        "text": "we can only recycle\/abandon once the number of users (or number of users willing to pay for its maintenance) drops to 0, which rarely happens.. so yes, we have mountains of crap code that users who are stuck with using it are going to end up paying for it to be maintained. Or put differently, the more software gets created, the more we need endless amount of programmers.. so its a crisis of programmers more than of software :slightly_smiling_face:",
+        "user": "UHDQ62M4P",
+        "ts": "1555787215.115100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "4efabb1e-a5ac-4413-a9b3-10af5b4f2954",
+        "type": "message",
+        "text": "Or we need to get better at moving users to better software.. good luck",
+        "user": "UHDQ62M4P",
+        "ts": "1555787268.115600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "fce8b699-6153-4fb3-933e-8329ef6bdca3",
+        "type": "message",
+        "text": "Not great for programmers either, as an ever larger percentage is going to be maintaining crap just because someone still needs it",
+        "user": "UHDQ62M4P",
+        "ts": "1555787347.116400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "f4c7fac2-86e6-44e3-a0a5-bc5d6aa18e23",
+        "type": "message",
+        "text": "Oh software.. so much fun, so much pain..",
+        "user": "UHDQ62M4P",
+        "ts": "1555787361.116700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "c276091e-3081-4f12-9bd8-9dfbcc2c76c6",
+        "type": "message",
+        "text": "<@UHDQ62M4P> By recycling I mean the following: a system runs as long as its valuable, but when the environment changes (due to new situations, new laws, more\/less\/different users etc) the system should change with it. In other words, we should reuse the parts we want, but get rid of the others and refurbish them for new purposes. I have met many companies that would choose to not have their systems, or at least have them in a different shape. This is not sustainable.",
+        "user": "UE1JQM9HQ",
+        "ts": "1555787767.121300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE1JQM9HQ",
+            "ts": "1555788089.000000"
+        }
+    },
+    {
+        "client_msg_id": "45879823-a6fe-420a-94a0-09e35af3e213",
+        "type": "message",
+        "text": "When you go inside those companies, they feel this problem quite intensely. I believe we did not feel this crisis more broadly because we were able to grow the developer population exponentially. However, as that growth slows down (and it already does) this effect will be more evident.",
+        "user": "UE1JQM9HQ",
+        "ts": "1555788226.123300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "47db062e-b9a4-46e8-94ca-dcb08b007509",
+        "type": "message",
+        "text": "yes, that's what I alluded to.. we can't just simply make the whole population of earth into programmers :slightly_smiling_face:",
+        "user": "UHDQ62M4P",
+        "ts": "1555789094.123900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "fe03c55f-f1c6-4175-80d3-6875339c96c5",
+        "type": "message",
+        "text": "the special-purposeness of software is also a problem.. sometimes it seems like the amount of software systems is almost proportional to the amount of users..",
+        "user": "UHDQ62M4P",
+        "ts": "1555789182.125100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "11637aec-5e49-41bb-9dc7-0aada6ba0952",
+        "type": "message",
+        "text": "&gt; we can’t just simply make the whole population of earth into programmers\n\nSure you can, we all know algebra, and CS is getting taught in grade school. This is just literacy",
+        "user": "UHS9K1N6A",
+        "ts": "1555790526.125500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gc8dd2e41a62",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8c8dd2e41a62328fe8502000bc5a45ca.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+            "first_name": "Dustin",
+            "real_name": "Dustin Getz",
+            "display_name": "Dustin Getz",
+            "team": "T5TCAFTA9",
+            "name": "dustin.getz",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UHS9K1N6A",
+            "ts": "1555790569.000000"
+        }
+    },
+    {
+        "client_msg_id": "ba2dd7a2-427a-4699-a3ef-a8422a46a9d4",
+        "type": "message",
+        "text": "We can make the whole planet into doctors too. Everyone has applied a bandaid. It's just literacy.",
+        "user": "UHDQ62M4P",
+        "ts": "1555791346.127300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "dffc2a15-e15a-407a-a7ba-99d13cfb20e5",
+        "type": "message",
+        "text": "Either way, my above statement was about Tudor's crisis of existing software, I wasn't claiming that end user programming isn't possible, or however you interpreted it.",
+        "user": "UHDQ62M4P",
+        "ts": "1555791532.128600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]

@@ -1,112 +1,23 @@
 [
     {
-        "client_msg_id": "A1FB0F70-B22E-4E91-A00E-EBCCF2311BD6",
         "type": "message",
-        "text": "I'd love to read more about metaprogramming  and dynamism here because those are what seem to separate this from data flow + time. What else can happen at every evaltime, and why that is powerful would help me because the data flow systems I'm familiar with require transformation of code via a black box compiler.",
-        "user": "UE3KC0VK6",
-        "ts": "1582960401.024900",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "g/L",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I'd love to read more about metaprogramming  and dynamism here because those are what seem to separate this from data flow + time. What else can happen at every evaltime, and why that is powerful would help me because the data flow systems I'm familiar with require transformation of code via a black box compiler."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1582737045.011100",
-        "parent_user_id": "UNGNT3BKR"
-    },
-    {
-        "client_msg_id": "AA2AD17F-2B2B-453C-9C10-FA3BD372991F",
-        "type": "message",
-        "text": "(I'm thinking of Observable, which compiles JavaScript to build the expression tree. This sounds more powerful, and I want to understand how.)",
-        "user": "UE3KC0VK6",
-        "ts": "1582960498.027200",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UE3KC0VK6",
-            "ts": "1582960514.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "AZnk",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "(I'm thinking of Observable, which compiles JavaScript to build the expression tree. This sounds more powerful, and I want to understand how.)"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1582737045.011100",
-        "parent_user_id": "UNGNT3BKR"
-    },
-    {
-        "client_msg_id": "9b2b1f9b-1db8-414c-804f-b66c7a9130ba",
-        "type": "message",
-        "text": "One minor PR, <@UNGNT3BKR>:\n\n```diff --git a/root/research/alivecoding/text$markdown+sidenotes.md b/root/research/alivecoding/text$markdown+sidenotes.md\nindex 0ba9c62..ce40193 100644\n--- a/root/research/alivecoding/text$markdown+sidenotes.md\n+++ b/root/research/alivecoding/text$markdown+sidenotes.md\n@@ -1,5 +1,5 @@\n # alivecoding: &lt;mmm-embed wrap=\"raw\" facet=\"description\"&gt;&lt;/mmm-embed&gt;\n-Peristant expressions are an approach to livecoding that unifies direct\n+Persistent expressions are an approach to livecoding that unifies direct\n manipulation of a dataflow engine with a textual representation and\n lisp-based programming language.```",
-        "user": "UCUSW7WVD",
-        "ts": "1582960707.027500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "2Ucj",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "One minor PR, "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UNGNT3BKR"
-                            },
-                            {
-                                "type": "text",
-                                "text": ":\n\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_preformatted",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "diff --git a/root/research/alivecoding/text$markdown+sidenotes.md b/root/research/alivecoding/text$markdown+sidenotes.md\nindex 0ba9c62..ce40193 100644\n--- a/root/research/alivecoding/text$markdown+sidenotes.md\n+++ b/root/research/alivecoding/text$markdown+sidenotes.md\n@@ -1,5 +1,5 @@\n # alivecoding: <mmm-embed wrap=\"raw\" facet=\"description\"></mmm-embed>\n-Peristant expressions are an approach to livecoding that unifies direct\n+Persistent expressions are an approach to livecoding that unifies direct\n manipulation of a dataflow engine with a textual representation and\n lisp-based programming language."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1582737045.011100",
-        "parent_user_id": "UNGNT3BKR"
-    },
-    {
-        "type": "message",
-        "text": "<@UCUSW7WVD> thanks, will apply :)\n\n<@UE3KC0VK6>: It might be more powerful, but I don't think in metaprogramming: as I understand, RxJS *runs* JS to create the expression tree. So basically you have a turing-complete preprocessor. I don't have enough primitives for eval-time turing completeness, but that should just be a matter of time as far as I can tell. The differences to Obervable as far as I can tell are two:\n\n1.) My language has explicitly defined semantics and UX for updating the graph at runtime. This is the main contribution I think, I'm not expecting to come up with a better general purpose FRP language here.\n2.) The metaprogramming and flowbased logic have the same syntax and share some semantics. The metaprogramming only runs at eval-time, but at eval-time a single tick of flow-logic is also executed incrementally as the tree is built. Due to the dependency tracking, it is also known whether values are dependent on the root event or not. Based on this, the metaprogramming operations can access computation results, and determine whether values are subject to future changes or not. So (+ 3 3) is an eval-time constant, while (+ 3 (time/count 1)) is not (time/count has an implicit  dependency on the root event). It's essentially constant folding.",
+        "text": "<@UCUSW7WVD> thanks, will apply :)\n\n<@UE3KC0VK6>: It might be more powerful, but I don't think in metaprogramming: as I understand, RxJS *runs* JS to create the expression tree. So basically you have a turing-complete preprocessor. I don't have enough primitives for eval-time turing completeness, but that should just be a matter of time as far as I can tell. The differences to Obervable as far as I can tell are two:\n\n1.) My language has explicitly defined semantics and UX for updating the graph at runtime. This is the main contribution I think, I'm not expecting to come up with a better general purpose FRP language here.\n2.) The metaprogramming and flowbased logic have the same syntax and share some semantics. The metaprogramming only runs at eval-time, but at eval-time a single tick of flow-logic is also executed incrementally as the tree is built. Due to the dependency tracking, it is also known whether values are dependent on the root event or not. Based on this, the metaprogramming operations can access computation results, and determine whether values are subject to future changes or not. So (+ 3 3) is an eval-time constant, while (+ 3 (time\/count 1)) is not (time\/count has an implicit  dependency on the root event). It's essentially constant folding.",
         "user": "UNGNT3BKR",
         "ts": "1582973702.027700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UNGNT3BKR",
             "ts": "1582973909.000000"
@@ -117,10 +28,23 @@
     {
         "client_msg_id": "7D189D13-A9DE-4942-B3CC-2EDFE33EE419",
         "type": "message",
-        "text": "Sorry to be unclear, I meant <http://observablehq.com|observablehq.com>, not RxJS \u2014 but I think this explanation still applies and is helpful!",
+        "text": "Sorry to be unclear, I meant <http:\/\/observablehq.com|observablehq.com>, not RxJS — but I think this explanation still applies and is helpful!",
         "user": "UE3KC0VK6",
         "ts": "1582988270.030700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -135,12 +59,12 @@
                             },
                             {
                                 "type": "link",
-                                "url": "http://observablehq.com",
+                                "url": "http:\/\/observablehq.com",
                                 "text": "observablehq.com"
                             },
                             {
                                 "type": "text",
-                                "text": ", not RxJS \u2014 but I think this explanation still applies and is helpful!"
+                                "text": ", not RxJS — but I think this explanation still applies and is helpful!"
                             }
                         ]
                     }
@@ -157,6 +81,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582988538.032200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -183,6 +120,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582988686.032400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -193,6 +143,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582988957.037100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -219,6 +182,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582989164.037300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -228,6 +204,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582989263.038200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -238,6 +227,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582989475.039500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -260,29 +262,42 @@
     },
     {
         "type": "message",
-        "text": "<@UE3KC0VK6> <https://youtu.be/ZXqgFb1U7q0?t=276> , pay attention to the transitions when changes are made: the lfo operator is not recreated when its parameters change, it keeps running from its last position. It is not recreated because it has a continous identity across reevaluations, and therefore it can hold on to its local state (the phase of the oscillation) as well.",
+        "text": "<@UE3KC0VK6> <https:\/\/youtu.be\/ZXqgFb1U7q0?t=276> , pay attention to the transitions when changes are made: the lfo operator is not recreated when its parameters change, it keeps running from its last position. It is not recreated because it has a continous identity across reevaluations, and therefore it can hold on to its local state (the phase of the oscillation) as well.",
         "user": "UNGNT3BKR",
         "ts": "1582989674.041000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "service_name": "YouTube",
-                "service_url": "https://www.youtube.com/",
+                "service_url": "https:\/\/www.youtube.com\/",
                 "title": "Proof of Concept: \"alivecoding\" - livecoding with persistent expressions",
-                "title_link": "https://youtu.be/ZXqgFb1U7q0?t=276",
+                "title_link": "https:\/\/youtu.be\/ZXqgFb1U7q0?t=276",
                 "author_name": "s-ol",
-                "author_link": "https://www.youtube.com/user/S0lll0sSOL",
-                "thumb_url": "https://i.ytimg.com/vi/ZXqgFb1U7q0/hqdefault.jpg",
+                "author_link": "https:\/\/www.youtube.com\/user\/S0lll0sSOL",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/ZXqgFb1U7q0\/hqdefault.jpg",
                 "thumb_width": 480,
                 "thumb_height": 360,
                 "fallback": "YouTube Video: Proof of Concept: \"alivecoding\" - livecoding with persistent expressions",
-                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/ZXqgFb1U7q0?start=276&feature=oembed&start=276&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/ZXqgFb1U7q0?start=276&feature=oembed&start=276&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
                 "video_html_width": 400,
                 "video_html_height": 225,
-                "from_url": "https://youtu.be/ZXqgFb1U7q0?t=276",
-                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "from_url": "https:\/\/youtu.be\/ZXqgFb1U7q0?t=276",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
                 "id": 1,
-                "original_url": "https://youtu.be/ZXqgFb1U7q0?t=276"
+                "original_url": "https:\/\/youtu.be\/ZXqgFb1U7q0?t=276"
             }
         ],
         "thread_ts": "1582737045.011100",
@@ -295,6 +310,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582989900.042900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -321,6 +349,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582989983.043100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -331,6 +372,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582990424.043800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -366,6 +420,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582990486.045300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -376,6 +443,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582990513.046200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -402,6 +482,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582990596.047700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -412,6 +505,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582990607.047900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -439,6 +545,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582990611.048200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UE3KC0VK6",
             "ts": "1582990697.000000"
@@ -465,10 +584,23 @@
     },
     {
         "type": "message",
-        "text": "I'm working on different ways to make this interface easier to implement in the various cases - notably the 'simple' case of a pure functional operator like (+ 1 2), which doesn't need any state. It's also about making a nice interface to perform argument type validation/matching",
+        "text": "I'm working on different ways to make this interface easier to implement in the various cases - notably the 'simple' case of a pure functional operator like (+ 1 2), which doesn't need any state. It's also about making a nice interface to perform argument type validation\/matching",
         "user": "UNGNT3BKR",
         "ts": "1582990679.048700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UNGNT3BKR",
             "ts": "1582990722.000000"
@@ -483,6 +615,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582990792.051000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -510,6 +655,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582990843.052700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UE3KC0VK6",
             "ts": "1582990962.000000"
@@ -551,6 +709,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582990924.053800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -577,6 +748,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582991037.054200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -586,6 +770,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582991140.054400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR",
         "reactions": [
@@ -604,6 +801,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582991254.054600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -614,6 +824,19 @@
         "user": "UCUSW7WVD",
         "ts": "1582991409.054900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UCUSW7WVD",
             "ts": "1582991417.000000"
@@ -644,15 +867,41 @@
         "user": "UNGNT3BKR",
         "ts": "1582991497.055200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
     {
         "type": "message",
-        "text": "<https://tidalcycles.org/index.php/What_is_a_pattern%3F> confirmed my understanding of these two being different (here considered 'digital' and 'analog'  streams), and also let me notice that I do need ('digital') event-streams to be able to carry multiple events in a single frame",
+        "text": "<https:\/\/tidalcycles.org\/index.php\/What_is_a_pattern%3F> confirmed my understanding of these two being different (here considered 'digital' and 'analog'  streams), and also let me notice that I do need ('digital') event-streams to be able to carry multiple events in a single frame",
         "user": "UNGNT3BKR",
         "ts": "1582991564.055400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -663,6 +912,19 @@
         "user": "UCUSW7WVD",
         "ts": "1582991745.055600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -685,10 +947,23 @@
     },
     {
         "type": "message",
-        "text": "<@UCUSW7WVD> a frame of the event loop / one tick of the root event.",
+        "text": "<@UCUSW7WVD> a frame of the event loop \/ one tick of the root event.",
         "user": "UNGNT3BKR",
         "ts": "1582991826.055800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -699,6 +974,19 @@
         "user": "UCUSW7WVD",
         "ts": "1582991878.056100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -725,6 +1013,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582991943.056400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -734,6 +1035,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582992006.056600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -744,6 +1058,19 @@
         "user": "UCUSW7WVD",
         "ts": "1582992018.056800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -770,6 +1097,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582992038.057000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -780,6 +1120,19 @@
         "user": "UCUSW7WVD",
         "ts": "1582992072.057200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UCUSW7WVD",
             "ts": "1582992084.000000"
@@ -806,10 +1159,23 @@
     },
     {
         "type": "message",
-        "text": "what do you mean by peripheral? The \"play a note operator\" / whatever it talks to?",
+        "text": "what do you mean by peripheral? The \"play a note operator\" \/ whatever it talks to?",
         "user": "UNGNT3BKR",
         "ts": "1582992137.057500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -819,6 +1185,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582992182.057700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -828,6 +1207,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582992955.057900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -838,6 +1230,19 @@
         "user": "UCUSW7WVD",
         "ts": "1582993058.058100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -864,6 +1269,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582993284.058300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     },
@@ -873,6 +1291,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582993424.058500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR",
         "reactions": [
@@ -892,6 +1323,19 @@
         "user": "UE3KC0VK6",
         "ts": "1582994740.062500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -918,6 +1362,19 @@
         "user": "UNGNT3BKR",
         "ts": "1582996445.062700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "thread_ts": "1582737045.011100",
         "parent_user_id": "UNGNT3BKR"
     }

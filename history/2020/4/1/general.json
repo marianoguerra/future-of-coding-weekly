@@ -1,204 +1,24 @@
 [
     {
-        "client_msg_id": "be3c1521-d70a-429f-8ddc-a1fac5e4db2b",
-        "type": "message",
-        "text": "How does SIMD offer an alternative to call return? I'm confused.. and MLIR improves on the generality of the IR representation, it doesn't necessarily change anything about the computational model it represents",
-        "user": "UHDQ62M4P",
-        "ts": "1585694955.059400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "s34F",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "How does SIMD offer an alternative to call return? I'm confused.. and MLIR improves on the generality of the IR representation, it doesn't necessarily change anything about the computational model it represents"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1585420887.013400",
-        "parent_user_id": "U8A5MS6R1"
-    },
-    {
-        "client_msg_id": "ddad20c8-77b9-47be-ad25-8541511f60af",
-        "type": "message",
-        "text": "SIMD offers an alternative to the perf hit of not aligning with LLVM \u2014\u00a0if your new language primitive can be expressed efficiently in terms of SIMD, then missing out on the LLVM optimizations doesn't matter to you.\n\nThis is of course just a theory. For one, I don't have any particular primitive in mind. For two, I don't know enough about LLVM \u2014\u00a0perhaps there is, in fact, no computation that can be accelerated by SIMD that wouldn't be meaningfully slowed for lack of compiler optimizations.",
-        "user": "UC2A2ARPT",
-        "ts": "1585701826.059700",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UC2A2ARPT",
-            "ts": "1585702241.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "tPEA",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "SIMD offers an alternative to the perf hit of not aligning with LLVM \u2014\u00a0if your new language primitive can be expressed efficiently in terms of SIMD, then missing out on the LLVM optimizations doesn't matter to you.\n\nThis is of course just a theory. For one, I don't have any particular primitive in mind. For two, I don't know enough about LLVM \u2014\u00a0perhaps there is, in fact, no computation that can be accelerated by SIMD that wouldn't be meaningfully slowed for lack of compiler optimizations."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1585420887.013400",
-        "parent_user_id": "U8A5MS6R1"
-    },
-    {
-        "client_msg_id": "77c40a40-ddd5-443a-b2af-5fc2e1e4ac0e",
-        "type": "message",
-        "text": "Also I'll just point out that I'm getting a vibe from a lot of people that their \"future of coding\" involves C-like performance. Most applications aren't limited by operations per second... so I'm puzzled by why people are limiting their visions to ones with a clear mapping to C-like constructs. Only asymptotic complexity matters broadly, since that is what separates the possible from the impossible.",
-        "user": "UCGAK10LS",
-        "ts": "1585702390.060400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Ltc",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Also I'll just point out that I'm getting a vibe from a lot of people that their \"future of coding\" involves C-like performance. Most applications aren't limited by operations per second... so I'm puzzled by why people are limiting their visions to ones with a clear mapping to C-like constructs. Only asymptotic complexity matters broadly, since that is what separates the possible from the impossible."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1585420887.013400",
-        "parent_user_id": "U8A5MS6R1",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UC2A2ARPT",
-                    "U8A5MS6R1",
-                    "UJ6LDMMN0",
-                    "UHWC9PXBL"
-                ],
-                "count": 4
-            }
-        ]
-    },
-    {
-        "client_msg_id": "52ba3807-7924-4b52-bfcd-097eadb3bf83",
-        "type": "message",
-        "text": "LLVM and its gigantic array of optimizations, is insanely complex, with diminishing benefits for ordinary programs. I once did a test of a huge program and compiled it with lots of optimizations, and then compiled down to 486 era only instructions. About 1% difference. The sad truth is that CPU's are so fast now that both sides of a branch are executed, and many things that used to cost don't; but what determines your overall performance is how you have your data arranged in memory. If you can keep from hopping around RAM and stay in the caches your program runs like the wind. That's why some of the C programs are so fast, is that they were laid out very carefully from a data structure point of view, and why Java is notorious slow, because it sprays objects all over the heap. 99% of computers are idle nowadays; outside of big data and very specialized applications performance is really the last place to put your effort. Ease of maintenance trumps CPU costs in the vast majority of applications. That being said, there is no excuse for the sweathogs that we see today, where hundreds of megabytes are used to draw a single tab  window in Chrome, etc.\n\nIt is also true that CPU's are often advertised as being much faster than they really are. I once did a benchmark on a fairly CPU intensive app, and found that an e3 was faster than a far more expensive Xeon processor with many cores, because this was a mostly single threaded program, and adding all the cores trades off performance for single threaded. Also i discovered that some programs are faster with hyperthreading turned off, particularly those that do lots of interrupts because pretending you have more cores than you really do entails tradeoffs as well. Intel's product line is bewildering and a lot of products are sold for huge premiums just because they have some super rare instructions that spy agencies want. There's lots of nonsense out there. Intel hasn't added a useful instruction since they added true random numbers; most of the new ones are crazy; designed primarily to waste the engineering time of the cloners in China.",
-        "user": "UEQ6M68H0",
-        "ts": "1585712805.061200",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UEQ6M68H0",
-            "ts": "1585714485.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "YQgI",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "LLVM and its gigantic array of optimizations, is insanely complex, with diminishing benefits for ordinary programs. I once did a test of a huge program and compiled it with lots of optimizations, and then compiled down to 486 era only instructions. About 1% difference. The sad truth is that CPU's are so fast now that both sides of a branch are executed, and many things that used to cost don't; but what determines your overall performance is how you have your data arranged in memory. If you can keep from hopping around RAM and stay in the caches your program runs like the wind. That's why some of the C programs are so fast, is that they were laid out very carefully from a data structure point of view, and why Java is notorious slow, because it sprays objects all over the heap. 99% of computers are idle nowadays; outside of big data and very specialized applications performance is really the last place to put your effort. Ease of maintenance trumps CPU costs in the vast majority of applications. That being said, there is no excuse for the sweathogs that we see today, where hundreds of megabytes are used to draw a single tab  window in Chrome, etc.\n\nIt is also true that CPU's are often advertised as being much faster than they really are. I once did a benchmark on a fairly CPU intensive app, and found that an e3 was faster than a far more expensive Xeon processor with many cores, because this was a mostly single threaded program, and adding all the cores trades off performance for single threaded. Also i discovered that some programs are faster with hyperthreading turned off, particularly those that do lots of interrupts because pretending you have more cores than you really do entails tradeoffs as well. Intel's product line is bewildering and a lot of products are sold for huge premiums just because they have some super rare instructions that spy agencies want. There's lots of nonsense out there. Intel hasn't added a useful instruction since they added true random numbers; most of the new ones are crazy; designed primarily to waste the engineering time of the cloners in China."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1585420887.013400",
-        "parent_user_id": "U8A5MS6R1"
-    },
-    {
-        "client_msg_id": "d6b21782-bcfb-44c0-81a2-6c2e5d931551",
-        "type": "message",
-        "text": "Reminds me of a Ruby interpreter story from a while back.  (I forget the details.)  But the gist is that the struct for a Ruby object is generally five words in size.  *Padding* the size to eight words yielded a performance improvement from lining up better CPU caches.",
-        "user": "UA14TGLTC",
-        "ts": "1585716111.061600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "mI9D",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Reminds me of a Ruby interpreter story from a while back.  (I forget the details.)  But the gist is that the struct for a Ruby object is generally five words in size.  "
-                            },
-                            {
-                                "type": "text",
-                                "text": "Padding ",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "the size to eight words yielded a performance improvement from lining up better CPU caches."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1585420887.013400",
-        "parent_user_id": "U8A5MS6R1"
-    },
-    {
-        "client_msg_id": "c21bf7e9-3263-4af6-ae05-0d900b4ba8d9",
-        "type": "message",
-        "text": "Alignment used to matter quite a bit. I don't think so any more, because so much pipelining is happening. They have so many billions of transistors to throw around, but RAM is holding the whole thing back. RAM speeds have only slightly increased compared to CPU power; billions awaits to the company that creates a breakthrough. DRAM has hardly changed. And is the main cost in servers. A few years ago, Samsung had a terrible recall for the Note cellphones that caught on fire; they lost billions and made it up by tripling RAM prices, and then everyone else raised their prices. Took years to come back down again. There is a revolution coming where the RAM will no longer be volatile. That is a very interesting change that i have planned for in my Beads system. Writing to the disk will be a thing of the past.",
-        "user": "UEQ6M68H0",
-        "ts": "1585720719.061800",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "zS/",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Alignment used to matter quite a bit. I don't think so any more, because so much pipelining is happening. They have so many billions of transistors to throw around, but RAM is holding the whole thing back. RAM speeds have only slightly increased compared to CPU power; billions awaits to the company that creates a breakthrough. DRAM has hardly changed. And is the main cost in servers. A few years ago, Samsung had a terrible recall for the Note cellphones that caught on fire; they lost billions and made it up by tripling RAM prices, and then everyone else raised their prices. Took years to come back down again. There is a revolution coming where the RAM will no longer be volatile. That is a very interesting change that i have planned for in my Beads system. Writing to the disk will be a thing of the past."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1585420887.013400",
-        "parent_user_id": "U8A5MS6R1"
-    },
-    {
         "client_msg_id": "59a549d8-6b0a-437b-8575-bad6e06c506d",
         "type": "message",
         "text": "&gt; Also I'll just point out that I'm getting a vibe from a lot of people that their \"future of coding\" involves C-like performance. Most applications aren't limited by operations per second... so I'm puzzled by why people are limiting their visions to ones with a clear mapping to C-like constructs. Only asymptotic complexity matters broadly, since that is what separates the possible from the impossible.\nI didn't mean to suggest that C like performance is necessary. In fact I think optimising compilers are very bad for understanding. The examples I gave were cases of asymptotic complexity being different, and in high level languages. Shalabh's async track trace example is one that has nothing to do with performance.\n\nFor me it's not about the performance so much as the tension of presenting a model of computation that is fundamentally at odds with reality. The disagreement is whether or not this matters. The answer to this question basically comes down to how airtight your abstractions are. My main point is these issues can be avoided if you just make it possible to draw back the curtain.\n\nIf your abstraction is blocking my understanding, let me easily remove it. If your abstraction is *not* blocking my understanding, whether or not I can remove it is moot because I won't want to.",
         "user": "UDQBTJ211",
         "ts": "1585727606.062000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -246,6 +66,19 @@
         "user": "UCGAK10LS",
         "ts": "1585729956.062200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -284,10 +117,23 @@
         "user": "UDQBTJ211",
         "ts": "1585730448.062400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
-                "block_id": "tCN/y",
+                "block_id": "tCN\/y",
                 "elements": [
                     {
                         "type": "rich_text_section",
@@ -311,6 +157,19 @@
         "user": "UCGAK10LS",
         "ts": "1585731763.062600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -338,6 +197,19 @@
         "user": "UCGAK10LS",
         "ts": "1585731970.062800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -365,6 +237,19 @@
         "user": "UDQBTJ211",
         "ts": "1585732829.063000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -388,10 +273,23 @@
     {
         "client_msg_id": "DAF37581-6A6D-491B-86F5-AC65420F4C6F",
         "type": "message",
-        "text": "I\u2019ll ask you the same question: how do you measure operations in a C program? An x86 program? How useful is that measure? Whatever measure I choose would be no worse.",
+        "text": "I’ll ask you the same question: how do you measure operations in a C program? An x86 program? How useful is that measure? Whatever measure I choose would be no worse.",
         "user": "UCGAK10LS",
         "ts": "1585733107.064700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -402,7 +300,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "I\u2019ll ask you the same question: how do you measure operations in a C program? An x86 program? How useful is that measure? Whatever measure I choose would be no worse."
+                                "text": "I’ll ask you the same question: how do you measure operations in a C program? An x86 program? How useful is that measure? Whatever measure I choose would be no worse."
                             }
                         ]
                     }
@@ -415,10 +313,23 @@
     {
         "client_msg_id": "17631561-F917-46BE-B77C-CB7BF4E46042",
         "type": "message",
-        "text": "For that reason, I\u2019m not going to tell users how long a program did/might run by operation count, like \u201c173\u201d. It\u2019s not useful. I could tell them the runtime in seconds, if they need to benchmark.",
+        "text": "For that reason, I’m not going to tell users how long a program did\/might run by operation count, like “173”. It’s not useful. I could tell them the runtime in seconds, if they need to benchmark.",
         "user": "UCGAK10LS",
         "ts": "1585733238.066800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UCGAK10LS",
             "ts": "1585733967.000000"
@@ -433,7 +344,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "For that reason, I\u2019m not going to tell users how long a program did/might run by operation count, like \u201c173\u201d. It\u2019s not useful. I could tell them the runtime in seconds, if they need to benchmark."
+                                "text": "For that reason, I’m not going to tell users how long a program did\/might run by operation count, like “173”. It’s not useful. I could tell them the runtime in seconds, if they need to benchmark."
                             }
                         ]
                     }
@@ -446,10 +357,23 @@
     {
         "client_msg_id": "3FCB6B91-237C-4A60-BE7C-3622B3B2F212",
         "type": "message",
-        "text": "(Spoiler: you can\u2019t specify how long an instruction is going to take across all CPUs, not even all x86 CPUs, nor all Intel x86 CPUs. It varies by model. You also can\u2019t predict how long any memory access is going to take in any multi-threaded or multi-process system, which is all consumer systems). ",
+        "text": "(Spoiler: you can’t specify how long an instruction is going to take across all CPUs, not even all x86 CPUs, nor all Intel x86 CPUs. It varies by model. You also can’t predict how long any memory access is going to take in any multi-threaded or multi-process system, which is all consumer systems). ",
         "user": "UCGAK10LS",
         "ts": "1585733499.071200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -460,7 +384,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "(Spoiler: you can\u2019t specify how long an instruction is going to take across all CPUs, not even all x86 CPUs, nor all Intel x86 CPUs. It varies by model. You also can\u2019t predict how long any memory access is going to take in any multi-threaded or multi-process system, which is all consumer systems). "
+                                "text": "(Spoiler: you can’t specify how long an instruction is going to take across all CPUs, not even all x86 CPUs, nor all Intel x86 CPUs. It varies by model. You also can’t predict how long any memory access is going to take in any multi-threaded or multi-process system, which is all consumer systems). "
                             }
                         ]
                     }
@@ -477,6 +401,19 @@
         "user": "UDQBTJ211",
         "ts": "1585733838.071400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -524,6 +461,19 @@
         "user": "UDQBTJ211",
         "ts": "1585733870.071600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -547,10 +497,23 @@
     {
         "client_msg_id": "A71F41D3-92B4-4A48-A625-55D010015991",
         "type": "message",
-        "text": "You could, but I\u2019m talking distant future. Designing a programming language by oneself is a Herculean effort. By that sentence, I mean literally O(n), O(nlogn) etc, but with a better syntax, not math notation.",
+        "text": "You could, but I’m talking distant future. Designing a programming language by oneself is a Herculean effort. By that sentence, I mean literally O(n), O(nlogn) etc, but with a better syntax, not math notation.",
         "user": "UCGAK10LS",
         "ts": "1585734121.074900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -561,7 +524,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "You could, but I\u2019m talking distant future. Designing a programming language by oneself is a Herculean effort. By that sentence, I mean literally O(n), O(nlogn) etc, but with a better syntax, not math notation."
+                                "text": "You could, but I’m talking distant future. Designing a programming language by oneself is a Herculean effort. By that sentence, I mean literally O(n), O(nlogn) etc, but with a better syntax, not math notation."
                             }
                         ]
                     }
@@ -574,14 +537,27 @@
     {
         "client_msg_id": "3ed0a2eb-b42d-42f6-8d2a-d5e15b1d3805",
         "type": "message",
-        "text": "<@UFB8STN7K> re: #4 - he does make an argument - if you look around in the tech/dev community, you will see a lot of focus has shifted from \u201chey I had an idea so i hacked it up and i think this might be a good product\u201d to \u201chey lets make a todo list app and ship it and call ourselves entrepeneur makers and focus on pumping out same old just to ship stuff\u201d",
+        "text": "<@UFB8STN7K> re: #4 - he does make an argument - if you look around in the tech\/dev community, you will see a lot of focus has shifted from “hey I had an idea so i hacked it up and i think this might be a good product” to “hey lets make a todo list app and ship it and call ourselves entrepeneur makers and focus on pumping out same old just to ship stuff”",
         "user": "UNBPP291C",
         "ts": "1585738174.075200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gcf29e340a09",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/cf29e340a09ac08ae262632ef9101046.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Ian Rumac",
+            "display_name": "Ian Rumac",
+            "team": "T5TCAFTA9",
+            "name": "ian.rumac",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
-                "block_id": "W/BwN",
+                "block_id": "W\/BwN",
                 "elements": [
                     {
                         "type": "rich_text_section",
@@ -592,7 +568,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " re: #4 - he does make an argument - if you look around in the tech/dev community, you will see a lot of focus has shifted from \u201chey I had an idea so i hacked it up and i think this might be a good product\u201d to \u201chey lets make a todo list app and ship it and call ourselves entrepeneur makers and focus on pumping out same old just to ship stuff\u201d"
+                                "text": " re: #4 - he does make an argument - if you look around in the tech\/dev community, you will see a lot of focus has shifted from “hey I had an idea so i hacked it up and i think this might be a good product” to “hey lets make a todo list app and ship it and call ourselves entrepeneur makers and focus on pumping out same old just to ship stuff”"
                             }
                         ]
                     }
@@ -605,10 +581,23 @@
     {
         "client_msg_id": "ac71f922-127d-44a1-83f0-bda5b7df5563",
         "type": "message",
-        "text": "the hacker spirit has been replaced by \u201centrepeneur\u201d spirit. even tho I wouldnt say replaced, Id just say the scene has scaled quite a lot and that kind stuff is the stuff that people promote externally while hacker communities promote things internally so it has less visibility",
+        "text": "the hacker spirit has been replaced by “entrepeneur” spirit. even tho I wouldnt say replaced, Id just say the scene has scaled quite a lot and that kind stuff is the stuff that people promote externally while hacker communities promote things internally so it has less visibility",
         "user": "UNBPP291C",
         "ts": "1585738261.075400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gcf29e340a09",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/cf29e340a09ac08ae262632ef9101046.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Ian Rumac",
+            "display_name": "Ian Rumac",
+            "team": "T5TCAFTA9",
+            "name": "ian.rumac",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -619,7 +608,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "the hacker spirit has been replaced by \u201centrepeneur\u201d spirit. even tho I wouldnt say replaced, Id just say the scene has scaled quite a lot and that kind stuff is the stuff that people promote externally while hacker communities promote things internally so it has less visibility"
+                                "text": "the hacker spirit has been replaced by “entrepeneur” spirit. even tho I wouldnt say replaced, Id just say the scene has scaled quite a lot and that kind stuff is the stuff that people promote externally while hacker communities promote things internally so it has less visibility"
                             }
                         ]
                     }
@@ -628,5 +617,45 @@
         ],
         "thread_ts": "1585616341.042100",
         "parent_user_id": "UBSMEUXAA"
+    },
+    {
+        "client_msg_id": "23401de5-9182-4c73-b0b1-ad3ce1f00fde",
+        "type": "message",
+        "text": "You made a nice start on your editor. However, you haven't considered one of the crucial problems that will come up, which is what happens when the width of your display is wider than the screen, and the content is taller. At that point you are now looking through a porthole into misc. data, and the user will be completely lost. Spreadsheets alleviate this through a split screen approach, and supporting fixing in place header rows so context isn't lost. There is a lot of ergonomics in doing this kind of graphical approach properly, and if you haven't addressed the core problems, your prototype is like putting frosting without the cake. So my suggestion is to take a much larger example and see how you would edit that. This loss of context problem is what is killing the node-and-wire projects like Luna. It immediately turns into pure wires once you hit a complex enough problem. I'm not saying it isn't solvable, but that the reason so many people fail is they pick their own examples to build around. Take my chess program; that will not fit under any circumstances on a single screen, and one will have to navigate around.\n\nIf you are interested in the theory behind this, i can recommend \"Platform for change\" by Stafford Beer, who was invited by Salvador Allende to automate chile, and is one of the pioneers of systems theory. Really brilliant man, and in that book he talks about Ashby's law of requisite variety. If more people were familiar with that law they wouldn't be so gung ho on no code approaches which usually try to break this law of information theory.",
+        "user": "UEQ6M68H0",
+        "ts": "1585808824.076200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "I2zJ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You made a nice start on your editor. However, you haven't considered one of the crucial problems that will come up, which is what happens when the width of your display is wider than the screen, and the content is taller. At that point you are now looking through a porthole into misc. data, and the user will be completely lost. Spreadsheets alleviate this through a split screen approach, and supporting fixing in place header rows so context isn't lost. There is a lot of ergonomics in doing this kind of graphical approach properly, and if you haven't addressed the core problems, your prototype is like putting frosting without the cake. So my suggestion is to take a much larger example and see how you would edit that. This loss of context problem is what is killing the node-and-wire projects like Luna. It immediately turns into pure wires once you hit a complex enough problem. I'm not saying it isn't solvable, but that the reason so many people fail is they pick their own examples to build around. Take my chess program; that will not fit under any circumstances on a single screen, and one will have to navigate around.\n\nIf you are interested in the theory behind this, i can recommend \"Platform for change\" by Stafford Beer, who was invited by Salvador Allende to automate chile, and is one of the pioneers of systems theory. Really brilliant man, and in that book he talks about Ashby's law of requisite variety. If more people were familiar with that law they wouldn't be so gung ho on no code approaches which usually try to break this law of information theory."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585588913.032700",
+        "parent_user_id": "UCKRZS3DZ"
     }
 ]

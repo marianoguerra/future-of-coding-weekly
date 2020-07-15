@@ -1,0 +1,1697 @@
+[
+    {
+        "client_msg_id": "90335ada-5dab-4b07-a0ae-5e3e03051273",
+        "type": "message",
+        "text": "Have people here given much consideration to structured concurrency? I haven't spent a huge amount of time writing multithreaded\/async code, and so hadn't given it much thought. I apologise if this is all old news to many of you...\n\nI came across this article that makes a strong case that most of our current primitives have a similar effect on flow control to `goto`. It then presents the analogous solution. (N.B. others have named the same concept different things - `bundle`, `scope`, `nursery`, maybe others...). Notably this approach would seem to map to visual representation far more easily than promises\/arbitrary thread spawning\/...\n\n<https:\/\/vorpus.org\/blog\/notes-on-structured-concurrency-or-go-statement-considered-harmful>\n\nFor related links, including to videos on the topic, see <http:\/\/250bpm.com\/blog:137>\n\nAside: the term 'structured' seems too generic for what people actually mean. AFAICT, in the context here\/of `goto`s, 'structured' always means 'hierarchically structured', despite other types of structure existing.",
+        "user": "UEDDR6L5Q",
+        "ts": "1545387390.005400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEDDR6L5Q",
+            "ts": "1545389607.000000"
+        },
+        "thread_ts": "1545387390.005400",
+        "reply_count": 34,
+        "reply_users_count": 9,
+        "latest_reply": "1546870511.277000",
+        "reply_users": [
+            "U5TCAFTD3",
+            "UEDDR6L5Q",
+            "UA14TGLTC",
+            "UCUSW7WVD",
+            "UC21F8Q48",
+            "U6KQ2S410",
+            "U8A5MS6R1",
+            "UEH6T3RJB",
+            "UC2A2ARPT"
+        ],
+        "replies": [
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1545389544.008600"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545391051.009100"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545391467.009400"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545392205.010700"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545406255.014400"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545406303.014600"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1545407337.014900"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545407597.015100"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1545408888.015800"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1545411249.016400"
+            },
+            {
+                "user": "UC21F8Q48",
+                "ts": "1545411748.016700"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1545412360.017100"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1545412653.017300"
+            },
+            {
+                "user": "UC21F8Q48",
+                "ts": "1545412867.017500"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1545415061.018000"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1545416565.019000"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1545425345.020700"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1545426587.021100"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1545427721.022100"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1545429790.023400"
+            },
+            {
+                "user": "UC21F8Q48",
+                "ts": "1545431418.024200"
+            },
+            {
+                "user": "UEH6T3RJB",
+                "ts": "1545432761.024800"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1545434594.025200"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1545441860.025700"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1545454520.026400"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545518721.029800"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1545547365.031100"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1545560064.031400"
+            },
+            {
+                "user": "UEH6T3RJB",
+                "ts": "1545565826.031800"
+            },
+            {
+                "user": "UEH6T3RJB",
+                "ts": "1545566669.032000"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1545591624.032600"
+            },
+            {
+                "user": "UEH6T3RJB",
+                "ts": "1545607917.033000"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1545612357.033200"
+            },
+            {
+                "user": "UC21F8Q48",
+                "ts": "1546870511.277000"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1546870511.277000",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7d45261b-0747-4549-9fc9-a0ae8fda0352",
+        "type": "message",
+        "text": "As a side note, the author talks about exceptions as though they are a Good Thing (TM). I'm not sure if other languages have somehow fixed the issues with them, but I tend to agree with Raymond Chen's analysis here - exceptions are too difficult to handle or recognize when poorly handled: <https:\/\/blogs.msdn.microsoft.com\/oldnewthing\/20050114-00\/?p=36693\/>",
+        "user": "UEDDR6L5Q",
+        "ts": "1545388765.008300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "The Old New Thing",
+                "title": "Cleaner, more elegant, and harder to recognize",
+                "title_link": "https:\/\/blogs.msdn.microsoft.com\/oldnewthing\/20050114-00\/?p=36693\/",
+                "text": "It appears that some people interpreted the title of one of my rants from many months ago, “Cleaner, more elegant, and wrong”, to be a reference to exceptions in general. (See bibliography reference [35]; observe that the citer even changed the title of my article for me!) The title of the article was a reference...",
+                "fallback": "The Old New Thing: Cleaner, more elegant, and harder to recognize",
+                "from_url": "https:\/\/blogs.msdn.microsoft.com\/oldnewthing\/20050114-00\/?p=36693\/",
+                "service_icon": "https:\/\/blogs.msdn.microsoft.com\/oldnewthing\/wp-content\/themes\/microsoft-msdn\/images\/favicon-msdn.png",
+                "id": 1,
+                "original_url": "https:\/\/blogs.msdn.microsoft.com\/oldnewthing\/20050114-00\/?p=36693\/"
+            }
+        ],
+        "thread_ts": "1545388765.008300",
+        "reply_count": 5,
+        "reply_users_count": 3,
+        "latest_reply": "1545414663.017700",
+        "reply_users": [
+            "U5TCAFTD3",
+            "UEDDR6L5Q",
+            "UA14TGLTC"
+        ],
+        "replies": [
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1545389642.008900"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545391955.009600"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1545408325.015300"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1545408468.015500"
+            },
+            {
+                "user": "UEDDR6L5Q",
+                "ts": "1545414663.017700"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1545414663.017700"
+    },
+    {
+        "client_msg_id": "e2c80d33-a2bf-42b0-aadd-07969a96c65e",
+        "type": "message",
+        "text": "Cool! I have a similar albeit stronger aversion to goto. In fact I would like to ban the idea of control flow entirely. We should not be telling the computer what order to do things. Way to low level. One clear reason it's bad is that we over specify the problem:\n\n```\na=6+7\nb=1+4\n```\n\nClearly the computer should automatically do these statements in parallel because they have nothing to do with each other. But in imperitive languages it defaults to one after another unless you manually specify concurrency",
+        "user": "U5TCAFTD3",
+        "ts": "1545389544.008600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "38d8dd94-1229-4894-82f7-edb19231a6fb",
+        "type": "message",
+        "text": "Agreed, exceptions seem wonky to me as well but I'm not sure what'd be better",
+        "user": "U5TCAFTD3",
+        "ts": "1545389642.008900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545388765.008300",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "1e0162a2-8e95-4053-a268-0501b7010c9e",
+        "type": "message",
+        "text": "I won't dispute that there exists a certain class of problem where a high-level approach like that is viable\/preferable. Even at the lowest level no modern CPU executes instructions in order (but they provide the abstraction that you can normally treat it as such). Some compilers would auto-parallelize (via SIMD\/SSE) the statements in your example, as it's trivially provable that they are order-independent.\n\nMore complex sections of code may not be so trivial to prove, for which better language constructs may provide a solution. e.g. functions that are known to be pure can be more aggressively optimised than procedures with side effects.\n\nThat said, I am yet to be convinced that 'low-level' concerns such as ordering will be made completely obsolete. At the very least they will be needed in the implementation of higher-level languages, and for the foreseeable future in performance-heavy applications, where the programmer's domain-specific knowledge allows them to optimise by not having to provide for the general case.\n\nA completely order-independent language would certainly provide benefits, but there are also costs to losing access to the low-level. The benefits may well outweigh the costs for many use-cases, but the costs should be considered as well.\n\nJonathan Blow, re his language JAI, talks about how he wants it to reach for the stars (allow high level), while keeping its feet on the ground (allow low-level).\n\nThe threading approach in the linked article seems to be a case of 'better abstraction', rather than 'more abstraction' - you get the benefits without losing your previous level of control. These are the types of approach that I am most hopeful for.",
+        "user": "UEDDR6L5Q",
+        "ts": "1545391051.009100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEDDR6L5Q",
+            "ts": "1545391442.000000"
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "169c7e77-b46a-4ade-88ce-cc29abbff2d8",
+        "type": "message",
+        "text": "(sorry for the wall of text :stuck_out_tongue: )",
+        "user": "UEDDR6L5Q",
+        "ts": "1545391467.009400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "78c7aca6-c6ea-488d-a31c-42b24cb05da1",
+        "type": "message",
+        "text": "My current preference is to treat errors as just other valid return values\/states to be dealt with (assuming they're recoverable)... There may well be better ways.\nThe erlang model of restarting services [terminology?] sounds promising for a large number of scenarios, and the `nursery`\/`bundle` approach linked in my previous OP would seem to allow this in even low-level languages... something to experiment with! :slightly_smiling_face:",
+        "user": "UEDDR6L5Q",
+        "ts": "1545391955.009600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEDDR6L5Q",
+            "ts": "1545391967.000000"
+        },
+        "thread_ts": "1545388765.008300",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "This is starting to go OT (hence moving to a new topic as well), but this talk has informed a lot of the way I think about APIs. It's aimed at library APIs, but I don't see there being a large conceptual chasm between library interfaces and language interfaces.\n\nA couple of key takeaways for me:\n- interfaces can be evaluated on at least 5 metrics (granularity, redundancy, coupling, retention, flow control), which may structure thinking more productively than the single axis of low\/high-level\n- given the iterative nature of design in general, and software design in particular, it is useful to provide different levels of granularity (less work to implement, allowing broad strokes -&gt; more work to implement, but with more precise control)\n    - there should generally not be a large discontinuity  in terms of the amount more work needed to achieve the next level of granularity\n\n<https:\/\/www.youtube.com\/watch?v=ZQ5_u8Lgvyk>",
+        "user": "UEDDR6L5Q",
+        "ts": "1545392205.010700",
+        "thread_ts": "1545387390.005400",
+        "root": {
+            "client_msg_id": "90335ada-5dab-4b07-a0ae-5e3e03051273",
+            "type": "message",
+            "text": "Have people here given much consideration to structured concurrency? I haven't spent a huge amount of time writing multithreaded\/async code, and so hadn't given it much thought. I apologise if this is all old news to many of you...\n\nI came across this article that makes a strong case that most of our current primitives have a similar effect on flow control to `goto`. It then presents the analogous solution. (N.B. others have named the same concept different things - `bundle`, `scope`, `nursery`, maybe others...). Notably this approach would seem to map to visual representation far more easily than promises\/arbitrary thread spawning\/...\n\n<https:\/\/vorpus.org\/blog\/notes-on-structured-concurrency-or-go-statement-considered-harmful>\n\nFor related links, including to videos on the topic, see <http:\/\/250bpm.com\/blog:137>\n\nAside: the term 'structured' seems too generic for what people actually mean. AFAICT, in the context here\/of `goto`s, 'structured' always means 'hierarchically structured', despite other types of structure existing.",
+            "user": "UEDDR6L5Q",
+            "ts": "1545387390.005400",
+            "team": "T5TCAFTA9",
+            "edited": {
+                "user": "UEDDR6L5Q",
+                "ts": "1545389607.000000"
+            },
+            "thread_ts": "1545387390.005400",
+            "reply_count": 34,
+            "reply_users_count": 9,
+            "latest_reply": "1546870511.277000",
+            "reply_users": [
+                "U5TCAFTD3",
+                "UEDDR6L5Q",
+                "UA14TGLTC",
+                "UCUSW7WVD",
+                "UC21F8Q48",
+                "U6KQ2S410",
+                "U8A5MS6R1",
+                "UEH6T3RJB",
+                "UC2A2ARPT"
+            ],
+            "subscribed": true,
+            "last_read": "1546870511.277000"
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Designing and Evaluating Reusable Components - 2004",
+                "title_link": "https:\/\/www.youtube.com\/watch?v=ZQ5_u8Lgvyk",
+                "author_name": "Casey Muratori",
+                "author_link": "https:\/\/www.youtube.com\/user\/caseymuratori",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/ZQ5_u8Lgvyk\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Designing and Evaluating Reusable Components - 2004",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https:\/\/www.youtube.com\/embed\/ZQ5_u8Lgvyk?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 300,
+                "from_url": "https:\/\/www.youtube.com\/watch?v=ZQ5_u8Lgvyk",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/www.youtube.com\/watch?v=ZQ5_u8Lgvyk"
+            }
+        ],
+        "client_msg_id": "123069e5-a184-469a-88ba-542a99f2e5fb"
+    },
+    {
+        "client_msg_id": "8249d2e5-9207-4921-87f7-8411a042c7b7",
+        "type": "message",
+        "text": "*Announcement:* Just changed the name of the Slack to \"Future of Coding\" because it was a slightly awkward accident of history that it had an ever-so-slightly different name. The old urls should still work for a while via redirect",
+        "user": "U5TCAFTD3",
+        "ts": "1545392256.012000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "reply_count": 11,
+        "reply_users_count": 6,
+        "latest_reply": "1545461183.027600",
+        "reply_users": [
+            "UEKEQGB9C",
+            "UA14TGLTC",
+            "U5TCAFTD3",
+            "U6KQ2S410",
+            "UE6EFEPTQ",
+            "U8A5MS6R1"
+        ],
+        "replies": [
+            {
+                "user": "UEKEQGB9C",
+                "ts": "1545392572.012600"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1545408973.016100"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1545418758.019600"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1545423242.020200"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1545424971.020500"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1545426786.021300"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1545427202.021900"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1545428633.022300"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1545430377.023900"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1545431983.024400"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1545461183.027600"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1545461183.027600",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UEDDR6L5Q",
+                    "UA14TGLTC",
+                    "UCSJ44X1S",
+                    "UDYGH7K8V",
+                    "UEQG5HC1W",
+                    "UCZ68HXUL"
+                ],
+                "count": 6
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3688e1ad-41aa-445c-8891-cda67230659e",
+        "type": "message",
+        "text": "Really? I quite liked the idea of the focus on programming ...",
+        "user": "UEKEQGB9C",
+        "ts": "1545392572.012600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48a3c4ba8f2",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/248a3c4ba8f2972427222d46954f9c1c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "Phil Jones",
+            "display_name": "interstar",
+            "team": "T5TCAFTA9",
+            "name": "interstar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3",
+        "reactions": [
+            {
+                "name": "+1::skin-tone-3",
+                "users": [
+                    "UE6EFEPTQ",
+                    "UD98CHSLS"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "275cdb4e-16e4-4ccc-90eb-ac46519dbbae",
+        "type": "message",
+        "text": "certainly a music programming channel for those of us who do livecoding and other music related computing",
+        "user": "UEKEQGB9C",
+        "ts": "1545392687.012800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48a3c4ba8f2",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/248a3c4ba8f2972427222d46954f9c1c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "Phil Jones",
+            "display_name": "interstar",
+            "team": "T5TCAFTA9",
+            "name": "interstar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545303787.429400",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "3eede3aa-800d-4e42-8fdf-610237cbff5e",
+        "type": "message",
+        "text": "Great, it exists now! And I invited everyone who I tagged or gave it a thumbs up",
+        "user": "U5TCAFTD3",
+        "ts": "1545392815.013000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545303787.429400",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "99592642-0c53-437a-a650-39ce206b49a3",
+        "type": "message",
+        "text": "Hmm, rereading, I think we may have slightly diverging conceptions of flow control.\nWhat sort of thing are you including in your ban on flow control <@U5TCAFTD3>? any order whatsoever? conditionals? loops? functions? :wink:",
+        "user": "UEDDR6L5Q",
+        "ts": "1545406255.014400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "62979a68-5739-4291-8bd6-455ee764d256",
+        "type": "message",
+        "text": "I suppose one option if you wanted to discourage explicit ordering would be to make it something you have to actively opt into, as rust does with `mut` for mutable data",
+        "user": "UEDDR6L5Q",
+        "ts": "1545406303.014600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEDDR6L5Q",
+            "ts": "1545406311.000000"
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "1eb725de-4123-4b62-a0e8-04540cc6bc87",
+        "type": "message",
+        "text": "I'm against statements of any kind, really. I want a language only of expressions",
+        "user": "U5TCAFTD3",
+        "ts": "1545407337.014900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "96cdfb99-6a83-4133-915c-6ffa0eb166ff",
+        "type": "message",
+        "text": "ahh ok. This is something I know very little about...\n1) are there any languages that do\/approach this?\n2) what are the implications of this? (any resources you can point me towards?)",
+        "user": "UEDDR6L5Q",
+        "ts": "1545407597.015100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "81cef7a2-c827-412c-8d81-0e442cadaea9",
+        "type": "message",
+        "text": "Exceptions as such conflate error handling with jumping up the stack.  Lisp's condition system is the closest sane alternative I've used <http:\/\/www.gigamonkeys.com\/book\/beyond-exception-handling-conditions-and-restarts.html>.",
+        "user": "UA14TGLTC",
+        "ts": "1545408325.015300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545388765.008300",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "a296e600-a97a-40b1-a0f7-0e4be59e5cd3",
+        "type": "message",
+        "text": "Instead of recovering somewhere up the stack, install continuations going down the stack.  It's most useful for debugging.  With Exceptions, the common practice of breaking when they are thrown should be a red flag that the behavior of walking up the stack shouldn't be the default.",
+        "user": "UA14TGLTC",
+        "ts": "1545408468.015500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545388765.008300",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "U6KQ2S410"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c1b99f66-83b6-49ed-81ae-c05695a6ad63",
+        "type": "message",
+        "text": "The whole branch of non-strict (lazy) functional languages try to explore what you can do when execution order is less well specified.  Certainly some parts of such programs have a composed step 1, step 2, step 3 structure (using applicatives, monads or what have you).  What it boils down to is that often you don't care when *exactly* a computation happens and so it's nice having a system that lets you honestly mostly ignore the details.  (After all the a sufficiently smart compiler is going to reorder and branch predict for you anyway.  Why use \"portable assembly\" for 1970s hardware when you don't have to.",
+        "user": "UA14TGLTC",
+        "ts": "1545408888.015800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "4e9c0b37-a8f5-4008-8d21-c4c4ce1b9564",
+        "type": "message",
+        "text": "I think \"coding\" is just the word the youngins use.",
+        "user": "UA14TGLTC",
+        "ts": "1545408973.016100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "a87cb5ac-8069-4de1-b099-13fa68bcf168",
+        "type": "message",
+        "text": "Lisp is also all expressions, while not functional. Expressions vs statements feels like a purely syntactic thing. Having made both an expression-only and statement-only language, I don't think it matters much which you choose. But probably not worth mixing the two.",
+        "user": "UCUSW7WVD",
+        "ts": "1545411249.016400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1545411796.000000"
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "811ac3be-a1d5-4e57-a917-99e92850cc78",
+        "type": "message",
+        "text": "&gt; 1) are there any languages that do\/approach this?\nPretty much any ML-style functional language spiritually descended from the lambda calculus—which itself is only expressions. That is, Standard ML, OCaml (and its ReasonML reskinning), Haskell, Elm, etc.\n&gt; 2) what are the implications of this? (any resources you can point me towards?)\nExpression oriented functional programming discourages (or completely disallows) using mutation, which anecdotally seems to reduce bugs because at any place in your code mutation\/statefulness means that the things you are working with now may not be what they said there were when you started working with them, which is an opportunity for bugs. In expression-oriented functional programming, what you gain in confidence comes at the cost that you have to write lots of recursive code. While lots of common code is just as easy or easier to write, a few particular patterns become _a lot_ harder, namely traversing a large data structure and gathering some order-dependent information about it (which is why I gave up and hacked mutation into Elm for our project :smile: but then it’s also caused me lots of headaches, within the last week I spent half a day tracking down a bug that turned out to be because I accidentally mutated an input to a function).\n\nI realize the question was about expressions (code pieces that have a return value) vs. statements  (code pieces that do not), but the fundamental difference is mutation. Pure expressions communicate their computational result by traditional return—the expression itself evaluates to the result. Statements do not return anything, so they must communicate their result by mutation of some local or global state. So it is about mutation at the end of the day.",
+        "user": "UC21F8Q48",
+        "ts": "1545411748.016700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "d79ba47b2952",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-03\/410049852848_d79ba47b2952e74a99d9_72.jpg",
+            "first_name": "Brian",
+            "real_name": "Brian Hempel",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "brianhempel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC21F8Q48",
+            "ts": "1545412204.000000"
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U5TCAFTD3",
+                    "UEDDR6L5Q",
+                    "U8A5MS6R1",
+                    "UC25BN0RW"
+                ],
+                "count": 4
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d8507f7d-8f0c-403b-9c86-4ff95af2a4db",
+        "type": "message",
+        "text": "<@U5TCAFTD3> I think it's worth thinking through the implications of only wanting to democratize high-level programs. Since we don't really have a good way to build hardware that can execute recursively nested expressions, the lowest level will always execute statements that are connected by named locations. So by saying you don't want people to have to think about statements, you're asking for the lowest levels to just be \"handled\" for you. That's basically just the same priesthood arrangement we're trying to get away from, and we end up with the same questions about who watches the watchers, and so on.\n\nDemocratization is primarily a political activity, even if it happens to have some technical prerequisites that preoccupy us at the moment. Any major chasms between the front end and back end of programming lose us most of the benefit.\n\nSo you have to want people to be able to handle both statements and expressions. And compilers and OS and web frameworks and mobile apps. Luckily we can pick things up on an on-demand basis, and record the 'curriculum' in the software itself. So it's a bigger problem than you think, but not insurmountable. Except for backdoors in our processors. I have no idea how to attack _that_ problem :smile:",
+        "user": "UCUSW7WVD",
+        "ts": "1545412360.017100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UEU7YT2UR"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7ac42d49-86b9-4fd8-975f-004f09b3b8cf",
+        "type": "message",
+        "text": "<@UC21F8Q48> we already have the terms 'pure functional' and 'imperative' for what you're describing, so there's no point in twisting expressions and statements to mean the same thing.\n\nStatements have to be imperative, yes. But expressions can be either, as Lisps show. And there's no such thing as a 'pure expression' :slightly_smiling_face:",
+        "user": "UCUSW7WVD",
+        "ts": "1545412653.017300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "9feefde9-a909-42c2-b2d7-457b9bfc3ffc",
+        "type": "message",
+        "text": "<@UCUSW7WVD> Gotta pick and choose your battles. Complexity is antidemocratic—if you define “democratic” as “understandable+manipulable to a wide range of people”. But if you want fast computers, then there’s going to be serious complexity in the technology stack. Because Physics Doesn’t Care™ and so CPUs &amp; computer architectures become super complicated. So you can’t have both a fast computational stack and a fully comprehensible tech stack. I’m okay with that.",
+        "user": "UC21F8Q48",
+        "ts": "1545412867.017500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "d79ba47b2952",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-03\/410049852848_d79ba47b2952e74a99d9_72.jpg",
+            "first_name": "Brian",
+            "real_name": "Brian Hempel",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "brianhempel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "ca2e4e24-6440-4bab-9889-ca33c6a4f6dc",
+        "type": "message",
+        "text": "Thanks for that <@UA14TGLTC>. I'm not fluent in LISP, so there was a bit of a language barrier!\nI've internally translated into C to try to evaluate it. I'm not sure this is quite right, so please correct me where I'm wrong... It seems like an expansion of the fairly common pattern of proving a function pointer to handle errors:\nInstead of a single handler, you provide\/build a list\/stack of error 'restarts' and another 'handler' that chooses the appropriate restart to use.\nThis certainly seems like it could a useful technique. It's hard to see a priori where the benefits\/drawbacks would be. I'll have to try it out and see!",
+        "user": "UEDDR6L5Q",
+        "ts": "1545414663.017700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge102afcfde7",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e102afcfde7b6fee8b2d4ca2ed87ba5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Andrew Reece",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "azmreece",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545388765.008300",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "f72861e9-f2e5-469d-8839-8c5b22e865fa",
+        "type": "message",
+        "text": "Yes, you absolutely have to pick your battles. But heed also the danger of winning the battle while losing the war. Design is about working with non-linear components, so there's an ever-present danger of sub-problems being solved in unproductive ways when you return to the big picture.\n\nI'm not sure what to make of \"complexity is anti-democratic\". Feels like mixing metaphors. Complexity is far more fundamental than people or democracies. We know how to manage complexity to the extent of human needs: with hierarchy and abstraction. The way we do that isn't particularly accessible to some people over others. Hierarchy is only needed in the design, not in the organization of people working with the design. No matter what Conway's Law says.\n\nIn the end I'm not in the business of complexity for its own sake. Designing computers is a human activity for humans. If it turns out that it's bad for society to make computers faster than some threshold or miniaturized beyond some threshold that's easily verified by small groups of people -- that seems like a reason to avoid overly fast or small computers. Maybe that makes me Amish :slightly_smiling_face:\n\nI think we haven't yet seen the worst effects on society of parasitism by small groups of influential people. In nature parasites cause evolution to prefer a variety of individuals with diverse genomes. Large swathes of uniformity can seem to win for long periods but not last. That may yet happen with software.",
+        "user": "UCUSW7WVD",
+        "ts": "1545415061.018000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1545415930.000000"
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "19a0bd71-0735-42e0-a2e1-01326b061721",
+        "type": "message",
+        "text": "Hmm, my comment above may be unclear. A couple of links into my belief system:\n• I updated my intro on Mastodon last evening: <https:\/\/mastodon.social\/@akkartik\/101276175243395515>\n• Longer intro from a year ago: <http:\/\/akkartik.name\/about>\n• My intro here from September: <https:\/\/futureofcoding.slack.com\/archives\/CC2JRGVLK\/p1536962970000100>\n\nAlso, <@U5TCAFTD3> and I did a recorded-videochat thing last month: <https:\/\/futureofcoding.slack.com\/archives\/CCL5VVBAN\/p1543012054056800>. Steve, I've been thinking about your one-sentence mission:\n\n&gt; Enable all people to modify the software they use in the course of using it. (<https:\/\/futureofcoding.org\/episodes\/033>)\n\nI think the place where we diverge is the `in the course of using it` part. Or at least that seems like a much lower priority to me. If you try to attack both halves at once (`allow modification` and `in the course of using it`) you're liable to add features at the product\/UI level to help with the latter that make certain kinds of modification harder. But then I (still) don't really understand Smalltalk yet..",
+        "user": "UCUSW7WVD",
+        "ts": "1545416565.019000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1545420485.000000"
+        },
+        "attachments": [
+            {
+                "service_name": "Mastodon",
+                "title": "Kartik Agaram (@akkartik@mastodon.social)",
+                "title_link": "https:\/\/mastodon.social\/@akkartik\/101276175243395515",
+                "text": "#introductions Researching new ways to write software that make it easier for newcomers to understand rather than for insiders to maintain. Systems that build easy, reward curiosity, encourage lots of forks, encourage deleting unused features, make society more anti-fragile. <http:\/\/akkartik.name\/about> Current project: a zero-dependency Assembly language for x86; Linux without GNU. <https:\/\/github.com\/akkartik\/mu\/blob\/master\/subx\/Readme.md> (Previous intro: <https:\/\/mastodon.social\/@akkartik\/99088307836858546>)",
+                "fallback": "Mastodon: Kartik Agaram (@akkartik@mastodon.social)",
+                "thumb_url": "https:\/\/files.mastodon.social\/accounts\/avatars\/000\/255\/426\/original\/54fb6ac315fb23ca.jpeg",
+                "from_url": "https:\/\/mastodon.social\/@akkartik\/101276175243395515",
+                "thumb_width": 120,
+                "thumb_height": 120,
+                "service_icon": "https:\/\/mastodon.social\/favicon.ico",
+                "id": 1,
+                "original_url": "https:\/\/mastodon.social\/@akkartik\/101276175243395515"
+            }
+        ],
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "f7a1a6fd-43df-41a1-aa7f-969af2b9bc4f",
+        "type": "message",
+        "text": "I use the words mostly interchangeably. Words are hard. Definitions are blurry. English, you know?",
+        "user": "U5TCAFTD3",
+        "ts": "1545418758.019600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "d32b66e4-b90a-4758-8be2-3fd5a3007e80",
+        "type": "message",
+        "text": "I think at this point “coding” has seeped into the culture enough that everyone knows what it means. It does have an unfortunate connotation of opaqueness and secrecy. Many of us trying to broaden programming have wanted to come up with a less intimidating name without much luck. I’ve been using “development” lately.",
+        "user": "U6KQ2S410",
+        "ts": "1545423242.020200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3",
+        "reactions": [
+            {
+                "name": "+1::skin-tone-3",
+                "users": [
+                    "UE6EFEPTQ",
+                    "UEH6T3RJB",
+                    "UA14TGLTC"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d9860d75-c192-40a5-b8d9-304f5ea5a4e7",
+        "type": "message",
+        "text": "Let's democratize fundraising!",
+        "user": "U5TCAFTD3",
+        "ts": "1545424971.020500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "<@UC21F8Q48> I’m intrigued that you hacked mutation into Elm (presumably ref cells?). If you were starting over would you use ReasonML or F# instead?",
+        "user": "U6KQ2S410",
+        "ts": "1545425345.020700",
+        "thread_ts": "1545387390.005400",
+        "root": {
+            "client_msg_id": "90335ada-5dab-4b07-a0ae-5e3e03051273",
+            "type": "message",
+            "text": "Have people here given much consideration to structured concurrency? I haven't spent a huge amount of time writing multithreaded\/async code, and so hadn't given it much thought. I apologise if this is all old news to many of you...\n\nI came across this article that makes a strong case that most of our current primitives have a similar effect on flow control to `goto`. It then presents the analogous solution. (N.B. others have named the same concept different things - `bundle`, `scope`, `nursery`, maybe others...). Notably this approach would seem to map to visual representation far more easily than promises\/arbitrary thread spawning\/...\n\n<https:\/\/vorpus.org\/blog\/notes-on-structured-concurrency-or-go-statement-considered-harmful>\n\nFor related links, including to videos on the topic, see <http:\/\/250bpm.com\/blog:137>\n\nAside: the term 'structured' seems too generic for what people actually mean. AFAICT, in the context here\/of `goto`s, 'structured' always means 'hierarchically structured', despite other types of structure existing.",
+            "user": "UEDDR6L5Q",
+            "ts": "1545387390.005400",
+            "team": "T5TCAFTA9",
+            "edited": {
+                "user": "UEDDR6L5Q",
+                "ts": "1545389607.000000"
+            },
+            "thread_ts": "1545387390.005400",
+            "reply_count": 34,
+            "reply_users_count": 9,
+            "latest_reply": "1546870511.277000",
+            "reply_users": [
+                "U5TCAFTD3",
+                "UEDDR6L5Q",
+                "UA14TGLTC",
+                "UCUSW7WVD",
+                "UC21F8Q48",
+                "U6KQ2S410",
+                "U8A5MS6R1",
+                "UEH6T3RJB",
+                "UC2A2ARPT"
+            ],
+            "subscribed": true,
+            "last_read": "1546870511.277000"
+        },
+        "client_msg_id": "7ad497e0-2548-4e3a-88e0-b0cdcbe9665d"
+    },
+    {
+        "client_msg_id": "d07fb82a-903e-4f7b-825a-224843b3963f",
+        "type": "message",
+        "text": "A famous programming language designer who I am not free to quote recently told me that we made a big mistake when we threw out GOTO. They said that beginners find it easier to understand than all the fancy stuff we replaced it with. Just throwing this out there to upset you :wink:",
+        "user": "U6KQ2S410",
+        "ts": "1545426587.021100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "UBAP530VB"
+                ],
+                "count": 2
+            },
+            {
+                "name": "smile",
+                "users": [
+                    "U8A5MS6R1",
+                    "UA14TGLTC",
+                    "UD512T5AT",
+                    "UC25BN0RW"
+                ],
+                "count": 4
+            }
+        ]
+    },
+    {
+        "client_msg_id": "42406b67-8541-43f1-b962-8974a3ef3303",
+        "type": "message",
+        "text": "I feel that the word \"coding\", with its sense of occult skill and textual codes, plants the scope of this forum squarely in the camp of \"the future world for techies, academics or other specialists\".\n\nHowever, according to a recent poll, only 9 out of 42 members are focusing exclusively on \"Live coding, IDEs, languages, etc, for techies\".\n\nI personally am in the \"Programming languages or environments for everyone\" camp, along with the majority of forum members here.\n\nSo I believe that the renaming is mistaken, and should be put to another poll! =0)",
+        "user": "UE6EFEPTQ",
+        "ts": "1545426786.021300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE6EFEPTQ",
+            "ts": "1545426846.000000"
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "c650df54-23f1-449b-9df3-0637da12a5d6",
+        "type": "message",
+        "text": "I would never tell anyone that my personal project is to enable everyone to code!  :scream:",
+        "user": "UE6EFEPTQ",
+        "ts": "1545427202.021900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "641e71d1-e73e-4722-b811-f71457c47a2f",
+        "type": "message",
+        "text": "&gt; Have people here given much consideration to structured concurrency?\n\nYes - I'm also familiar with Nathaniel's Trio you linked to. I think that's an (incremental) step in the right direction, if we were to stick with coroutines. Another interesting language in this space is <http:\/\/www.ceu-lang.org\/>.\n\nI think concurrency shouldn't be a library or afterthought but has to be part of the system design from the very beginning. After all, all state is 'concurrent' if you consider all values present in any program or system all exist at the same time in different places.",
+        "user": "U8A5MS6R1",
+        "ts": "1545427721.022100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UEDDR6L5Q"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9a2bf413-9683-4aa2-af74-a680a4a7939b",
+        "type": "message",
+        "text": "I agree with <@UE6EFEPTQ> but I defer to <@U5TCAFTD3> on these issues of online community building &lt;insert Millenial joke here&gt;. And he is our moderator. I would like to create a channel for End User Development but I’m hoping we can get off Slack first.",
+        "user": "U6KQ2S410",
+        "ts": "1545428633.022300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "038ff1f4-5f83-4879-b0e1-0847ebd6a619",
+        "type": "message",
+        "text": "<@U6KQ2S410> I kinda speculated in similar vein at <http:\/\/akkartik.name\/post\/mu> (section _\"discerning structure and patterns\"_) so that's super interesting to hear.",
+        "user": "UCUSW7WVD",
+        "ts": "1545429790.023400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "59897efa-1d17-4cd4-abde-429d9c170933",
+        "type": "message",
+        "text": "Does anyone know how note sharing in Apple’s Notes app is implemented? Does it use operational transform? CRDTs?",
+        "user": "UD3AK9JRF",
+        "ts": "1545429792.023600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545429792.023600",
+        "reply_count": 5,
+        "reply_users_count": 3,
+        "latest_reply": "1545526539.030800",
+        "reply_users": [
+            "UC2A2ARPT",
+            "UD3AK9JRF",
+            "UEZE9M2TU"
+        ],
+        "replies": [
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1545454988.026900"
+            },
+            {
+                "user": "UD3AK9JRF",
+                "ts": "1545465209.027800"
+            },
+            {
+                "user": "UEZE9M2TU",
+                "ts": "1545467751.028600"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1545509426.029000"
+            },
+            {
+                "user": "UD3AK9JRF",
+                "ts": "1545526539.030800"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "69b4886f-48bb-4709-b06b-5983ee6b3f2e",
+        "type": "message",
+        "text": "Not a fan of of the term 'coding' either (what if the future of programming is not coding?) - but does it really matter if the content of the slack remains the same?",
+        "user": "U8A5MS6R1",
+        "ts": "1545430377.023900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U5TCAFTD3"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7b62bb4d-5b3e-41bd-b71c-f743e7a1e613",
+        "type": "message",
+        "text": "<@U6KQ2S410> Yes, ref cells (i.e. “change this field of this Javascript object”). Elm has gotten us really far. The big change that made the language nicer to use was not mutation, but hacking the core library so that any arbitrary ADT could be used inside sets or as dictionary keys—vanilla Elm artificially limits sets\/dicts to a built-in concept of “comparable” types of which your ADTs are not. And yeah, I hacked exceptions in as well for a couple special cases.\n\nBut the big consideration for starting over would not be mutation (’cuz we’ve got it now :D) but performance and tooling. I’m not sure any of the functional languages have super-great tooling, but some of them for sure have better performance than Elm. And for certain features (program synthesis search) you want the cycles. Also it’d be nice to target something other than the browser. Most likely we’ll stick with Elm but I keep contemplating starting over.\n\nRegarding GOTO: I’ve used GOTO. Good riddance. I’m sure there’s better ways to smooth out the learning curve of programming.",
+        "user": "UC21F8Q48",
+        "ts": "1545431418.024200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "d79ba47b2952",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-03\/410049852848_d79ba47b2952e74a99d9_72.jpg",
+            "first_name": "Brian",
+            "real_name": "Brian Hempel",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "brianhempel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "7703bf42-668b-42e4-abd8-fe1599538a72",
+        "type": "message",
+        "text": "We could rename it Future of Bananas then :smile: - solved at a stroke!",
+        "user": "UE6EFEPTQ",
+        "ts": "1545431983.024400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3",
+        "reactions": [
+            {
+                "name": "heart_eyes",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "bd15d625-3cc7-44ca-adb4-5659872044a0",
+        "type": "message",
+        "text": "So many things it would be nice to reply to directly in this thread, but largely impossible since Slack threads are flat. All I will observe is, in an environment where the instruction pointer is materialised, GOTO counts as tangible programming :slightly_smiling_face: And on the other side, I have described the issue <@U5TCAFTD3> illustrates earlier as the \"excess sequential intention\" of imperative programming. This may sound like I am trying to talk out of both sides of my mouth, but I do believe these two points of view are actually compatible.",
+        "user": "UEH6T3RJB",
+        "ts": "1545432761.024800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g5184556fcf3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/75184556fcf3aa660f5e56b8e5bdd46d.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0021-72.png",
+            "first_name": "",
+            "real_name": "Antranig Basman",
+            "display_name": "Bosmon",
+            "team": "T5TCAFTA9",
+            "name": "amb26slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U8A5MS6R1",
+                    "UCUSW7WVD",
+                    "U6KQ2S410",
+                    "UC2A2ARPT",
+                    "UA14TGLTC"
+                ],
+                "count": 5
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0f531cc4-c371-400b-ab77-32527d6475c4",
+        "type": "message",
+        "text": "Great point about instruction pointer - GOTO doesn't make sense in Excel (another beginner friendly system).  Also agree that the different points of view could be compatible - we don't want to take a restrictive ideological stance up front, but want the ability to specify desirable system behavior using different perspectives, while minimizing over-specification.",
+        "user": "U8A5MS6R1",
+        "ts": "1545434594.025200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1545434609.000000"
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "89d050a7-87a4-42f3-95ad-43b137cf8e42",
+        "type": "message",
+        "text": "<@UEH6T3RJB> I hypothesize that the “actual sequential intention” is a partial ordering of statements describing the intended causality of side-effects. The problem is we don’t know a convenient way to represent this syntactically or graphically. That was going to be my next experiment.",
+        "user": "U6KQ2S410",
+        "ts": "1545441860.025700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "b7b3b94d-c89b-4e76-ae33-06f44d55286b",
+        "type": "message",
+        "text": "<@UEH6T3RJB>\n&gt; in an environment where the instruction pointer is materialised\nCan you link me to some of those, or drop names? This is an area of active research for me, and I'm very eager to see any and all examples of materalized \/ visible \/ tangible \/ explicit instruction pointers.",
+        "user": "UC2A2ARPT",
+        "ts": "1545454520.026400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1545454610.000000"
+        },
+        "thread_ts": "1545387390.005400",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "ffd78025-b921-4767-bb8b-cf477bfe10b4",
+        "type": "message",
+        "text": "(WARNING: Wild conjecture based on half-remembered things said out of the side of peoples' mouths via tin cans. I am eager to be corrected if more direct, or current, knowledge appears.)\n\nI think it's just LWW. In order to use a CRDT they'd need a finer-grained notion of the structure of their notes. I don't believe they've got that.\n\nAnd.. did any major project other than Google Wave use OTs? I thought that was the beginning and end of OT's time in the spotlight.",
+        "user": "UC2A2ARPT",
+        "ts": "1545454988.026900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1545455108.000000"
+        },
+        "thread_ts": "1545429792.023600",
+        "parent_user_id": "UD3AK9JRF"
+    },
+    {
+        "client_msg_id": "bf324ae7-03d8-4bba-ace8-a08f9f8271b8",
+        "type": "message",
+        "text": "Let us claim \"coding\" for our own!  :zany_face:  As a word, it's nice and short.  For me coding has strong textual connotation as well as casual in not carelessness to it.  I've noticed it become increasingly popular, perhaps just being in Asia.  Can't say I'd ever call myself a coder.",
+        "user": "UA14TGLTC",
+        "ts": "1545461183.027600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545392256.012000",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "3e3528b9-2f82-4d14-ae46-ea4c5e656598",
+        "type": "message",
+        "text": "I think ProseMirror uses something like OT. My understanding is that OT is very hard to implement well, so not many people have done it. I don’t know how old Notes or note sharing are.",
+        "user": "UD3AK9JRF",
+        "ts": "1545465209.027800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545429792.023600",
+        "parent_user_id": "UD3AK9JRF"
+    }
+]

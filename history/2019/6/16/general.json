@@ -1,0 +1,371 @@
+[
+    {
+        "client_msg_id": "af1c7d48-c295-475f-84d5-5d8a2c0d33ed",
+        "type": "message",
+        "text": "Has anyone ever attempted to describe a whole system (equivalent to a computer, with user interaction, network communication, etc.) without explicit mutable shared state? My impression is that functional programming has been most succesfull in the small, at the level of well-defined abstractions close to mathematics. At the systems level, there's functional reactive programming for user interfaces, but it's much less mainstream. It doesn't sound impossible to extend this idea to a complete system, but has it been done?",
+        "user": "UJBAJNFLK",
+        "ts": "1560682792.403300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "8329e12e-9f52-48cf-ae98-a5cdb4082eb9",
+        "type": "message",
+        "text": "<@UE6EFEPTQ> said \"Clearly shared mutable state is not even negotiable in programming, otherwise we'd have no GUIs\"\n\n\"Shared mutable state\" is a paradigm that many, but not all, programming languages are based on. You are saying that GUIs cannot be programmed in a language that does not support shared mutable state. Elm is a pure functional language for building GUIs. You are saying that Elm cannot exist. I don't think you believe it, but you keep saying it. So there must be a communication breakdown in this thread, or a misunderstanding somewhere.",
+        "user": "UJN1TAYEQ",
+        "ts": "1560687486.403500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "633e59c7-f530-4e29-808c-cc31d99baf9d",
+        "type": "message",
+        "text": "I'm not familiar with Elm but from scanning this TODO MVC <https:\/\/github.com\/evancz\/elm-todomvc\/blob\/master\/src\/Main.elm#L121> it appears to use the paradigm of passing a 'model' object to an 'update' function which could be argued essentially introduces state. If two calls to 'update' can be run concurrently (i.e. called with the same input model) it seems one of them will essentially be ignored, no? (I'm assuming Elm is actually single threaded?)",
+        "user": "UDQBTJ211",
+        "ts": "1560689033.403700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UDQBTJ211",
+            "ts": "1560689059.000000"
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "6809e666-b2c3-4ae4-9ba2-aa5629734994",
+        "type": "message",
+        "text": "In shared-mutable-state languages, functions can have side effects. What this means is: there is a global pool of shared mutable state, and any function call can implicitly modify any part of the global state. The key is \"implicitly\". This behaviour doesn't have to be encoded in the function's type, and you are not required to pass an argument to the function indicating what state it has access to.\n\nIn a pure functional language, there are no side effects. Instead, all data dependencies are explicit. To transform a piece of state, you pass the state as an argument to a function, it transforms the state, and returns the modified state as a result. (As <@UE6EFEPTQ> mentioned a few posts ago.)\n\n<@UJBAJNFLK>: I haven't researched pure functional operating systems. However, I think they would be based on [capabilities](<https:\/\/en.wikipedia.org\/wiki\/Capability-based_security>). You don't want to put all of your operating system state into a single undifferentiated pool. You want to partition this state into small pieces, and reference them using capabilities. The functional equivalent of a system call would consume one or more capabilities as arguments, modify state referenced by those capabilities, then return zero or more capabilities as results. By \"consume\", I mean that capabilities would be non-copyable, and once a capability is consumed, the program no longer has access to it. A typical system call would consume a capability, modify the state referenced by the capability, then return a new capability that references the updated state.",
+        "user": "UJN1TAYEQ",
+        "ts": "1560689039.403900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJN1TAYEQ",
+            "ts": "1560710059.000000"
+        },
+        "attachments": [
+            {
+                "title": "Capability-based security",
+                "title_link": "https:\/\/en.wikipedia.org\/wiki\/Capability-based_security",
+                "from_url": "https:\/\/en.wikipedia.org\/wiki\/Capability-based_security",
+                "author_name": "Wikipedia",
+                "author_link": "https:\/\/en.wikipedia.org\/",
+                "text": "Capability-based security is a concept in the design of secure computing systems, one of the existing security models. A capability (known in some systems as a key) is a communicable, unforgeable token of authority. It refers to a value that references an object along with an associated set of access rights. A user program on a capability-based operating system must use a capability to access an object. Capability-based security refers to the principle of designing user programs such that they directly share capabilities with each other according to the principle of least privilege, and to the operating system infrastructure necessary to make such transactions efficient and secure. Capability-based security is to be contrasted with an approach that uses hierarchical protection domains.\nAlthough most operating systems implement a facility which resembles capabilities, they typically do not provide enough support to allow for the exchange of capabilities among possibly mutually untrusting entities to be the primary means of granting and distributing access rights throughout the system. A capability-based system, in contrast, is designed with that goal in mind.\nCapabilities as discussed in this article should not be confused with POSIX 1e\/2c \"Capabilities\". The latter are coarse-grained privileges that cannot be transferred between processes.",
+                "fallback": "wikipedia: Capability-based security",
+                "service_icon": "https:\/\/a.slack-edge.com\/bfaba\/img\/unfurl_icons\/wikipedia.png",
+                "id": 1,
+                "original_url": "https:\/\/en.wikipedia.org\/wiki\/Capability-based_security"
+            }
+        ],
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "06e47b5f-2af8-4c8b-9144-e6485337cf10",
+        "type": "message",
+        "text": "In a capability based operating system, a program can't do i\/o or modify any system state unless it holds a capability that enables it to do so. When a program is invoked, it is passed a set of capabilities. For good security, a program should only be given the capabilities it needs to do its job, and a program should destroy any capabilities that it no longer needs. In a pure functional language, a function cannot access or modify state unless it is passed that state as an argument. In both paradigms, all data dependencies are explicit.",
+        "user": "UJN1TAYEQ",
+        "ts": "1560691980.404700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJN1TAYEQ",
+            "ts": "1560692036.000000"
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "57D09ADE-7D08-404D-AEF0-8E56C0477145",
+        "type": "message",
+        "text": "I obsess about this a lot, and right now I’m doing a lot of saving of PDFs (including archiving web content as link-preserving PDFs) and plain text file notes. I’d love some tools that made it easy to semantically link my notes with the Kindle book, PDF, or website that they relate to, but right now I haven’t found anything that I trust to be easily usable 10 years from now.\n\nI’ll definitely have to investigate GToolkit now.",
+        "user": "UDJ2TKB99",
+        "ts": "1560695284.411400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3553423c24b",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53553423c24bc737c5d25f9363af2f5f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+            "first_name": "",
+            "real_name": "Joe Hughes",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "joe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559842449.041100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "16948709-E132-446A-B95A-E764D23C6D34",
+        "type": "message",
+        "text": "I am keeping an eye on the <https:\/\/worldbrain.io> Memex project, as their apparent philosophy and organizational\/funding structure feels more workable\/sustainable than most, even if it’s not far enough along for me just yet",
+        "user": "UDJ2TKB99",
+        "ts": "1560695715.415100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3553423c24b",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53553423c24bc737c5d25f9363af2f5f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+            "first_name": "",
+            "real_name": "Joe Hughes",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "joe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Memex by worldbrain.io",
+                "title": "Memex | The Power Upgrade for your Browser",
+                "title_link": "https:\/\/worldbrain.io\/",
+                "text": "Eliminate time spent bookmarking, retracing steps to recall a webpage, or copy-pasting notes into scattered documents.",
+                "fallback": "Memex by worldbrain.io: Memex | The Power Upgrade for your Browser",
+                "image_url": "https:\/\/worldbrain.io\/wp-content\/uploads\/2019\/04\/social-preview2.png",
+                "image_width": 476,
+                "image_height": 250,
+                "from_url": "https:\/\/worldbrain.io\/",
+                "image_bytes": 211974,
+                "service_icon": "https:\/\/worldbrain.io\/wp-content\/uploads\/2019\/04\/cropped-logo_squared_favicon-180x180.png",
+                "id": 1,
+                "original_url": "https:\/\/worldbrain.io"
+            }
+        ],
+        "thread_ts": "1559842449.041100",
+        "parent_user_id": "UHWC9PXBL",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "36355ece-d44a-4574-aea2-8904fc74dcfc",
+        "type": "message",
+        "text": "Funding structure details for <http:\/\/worldbrain.io|worldbrain.io>: section 4 of <https:\/\/medium.com\/@WorldBrain\/where-we-are-heading-with-worldbrain-65f244f540b8>",
+        "user": "UCUSW7WVD",
+        "ts": "1560696101.415600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559842449.041100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "C9288E1F-BE11-4F9B-8D7C-E6739EAC3ED8",
+        "type": "message",
+        "text": "hey fellow concatenative nerds—have any of you played with ait? <https:\/\/functional-art.org\/2017\/ait>",
+        "user": "UHWC9PXBL",
+        "ts": "1560712661.419800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "34a7359f-bba4-49fe-9ca8-45e1d8ed2f0e",
+        "type": "message",
+        "text": "<@UDJ2TKB99> Please let me know if you need a tour of GToolkit.",
+        "user": "UE1JQM9HQ",
+        "ts": "1560713817.419900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559842449.041100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "d272fbb3-64ce-4565-86b0-024d37f9ceff",
+        "type": "message",
+        "text": "<@UE1JQM9HQ> do a screencast with a wiki focus. May well be your killer app or gateway drug.",
+        "user": "UCUSW7WVD",
+        "ts": "1560714894.420100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559842449.041100",
+        "parent_user_id": "UHWC9PXBL",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UHWC9PXBL",
+                    "UDJ2TKB99",
+                    "UE1JQM9HQ"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "F328C7D5-38ED-47D3-A256-B90847A63C32",
+        "type": "message",
+        "text": "memex looks really cool!",
+        "user": "UHWC9PXBL",
+        "ts": "1560717329.420800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559842449.041100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "0858FE8C-9C52-415B-ABC8-EF2FA539ED2F",
+        "type": "message",
+        "text": "Thanks <@UE1JQM9HQ>, I hope to have a bit more time to poke at things next month",
+        "user": "UDJ2TKB99",
+        "ts": "1560718882.421800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3553423c24b",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/53553423c24bc737c5d25f9363af2f5f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+            "first_name": "",
+            "real_name": "Joe Hughes",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "joe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559842449.041100",
+        "parent_user_id": "UHWC9PXBL",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UE1JQM9HQ"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

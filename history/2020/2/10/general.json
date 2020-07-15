@@ -1,284 +1,46 @@
 [
     {
-        "client_msg_id": "8b9bd5ad-c319-4118-84c2-bd36450a3e68",
-        "type": "message",
-        "text": "There's an interesting connection betwen BP and <http://people.csail.mit.edu/brooks/papers/AIM-864.pdf>",
-        "user": "UCUSW7WVD",
-        "ts": "1581289273.060800",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "3WF",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "There's an interesting connection betwen BP and "
-                            },
-                            {
-                                "type": "link",
-                                "url": "http://people.csail.mit.edu/brooks/papers/AIM-864.pdf"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1580955499.046800",
-        "parent_user_id": "USUMN6XLH"
-    },
-    {
-        "client_msg_id": "b2b6fda0-cb46-41ff-b129-95ac3f699695",
-        "type": "message",
-        "text": "Imperative programming is concerned with the order in which things happen.\n\nFunctional programming tries to make things as atemporal as possible, robust to multiple orderings of operations.\n\nOP shows how to write unordered behaviors -- but rely on the operations happening in just the right order. (at time 9:30) I don't understand why this is a good thing! It seems to be the worst of both worlds. I still have to think about the order in which I want things to happen, but now I can't just describe the order directly. I have to arrange behaviors to make that order emergently occur. And now readers can't just read behaviors and understand their purpose. They have to _simulate_ them to understand implications. Why is this an improvement on just regular much-maligned imperative programming?\n\nIn fairness, OP is not by the creator of BP. But it doesn't seem like a strong case.",
-        "user": "UCUSW7WVD",
-        "ts": "1581289598.061000",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "WGBHK",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Imperative programming is concerned with the order in which things happen.\n\nFunctional programming tries to make things as atemporal as possible, robust to multiple orderings of operations.\n\nOP shows how to write unordered behaviors -- but rely on the operations happening in just the right order. (at time 9:30) I don't understand why this is a good thing! It seems to be the worst of both worlds. I still have to think about the order in which I want things to happen, but now I can't just describe the order directly. I have to arrange behaviors to make that order emergently occur. And now readers can't just read behaviors and understand their purpose. They have to "
-                            },
-                            {
-                                "type": "text",
-                                "text": "simulate",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " them to understand implications. Why is this an improvement on just regular much-maligned imperative programming?\n\nIn fairness, OP is not by the creator of BP. But it doesn't seem like a strong case."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1580955499.046800",
-        "parent_user_id": "USUMN6XLH"
-    },
-    {
-        "client_msg_id": "5b362a56-29ca-4713-81cd-f1410bce6902",
-        "type": "message",
-        "text": "I'm at 12 minutes now, and OP is talking about modifying a program based on just reading an event trace. I _love_ traces, and I _want_ to nod along. But wait a minute, what if a program needed events to happen in different orders in two different scenarios? Most real-world programs have many many scenarios they need to work in. Never allowing ourselves to touch existing parts of the program seems like a bad way to reliably get the desired effect.\n\nIt's not clear to me how this block means \"block loadingAccount until adShown\":\n```yield {\n  wait: 'adShown'\n  block: 'loadingAccount'\n}```\nCan somebody explain this? Is it assuming there's another b-thread somewhere pumping out 'loadingAccount' events _ad infinitum_?",
-        "user": "UCUSW7WVD",
-        "ts": "1581290295.061600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "4wSAy",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I'm at 12 minutes now, and OP is talking about modifying a program based on just reading an event trace. I "
-                            },
-                            {
-                                "type": "text",
-                                "text": "love",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " traces, and I "
-                            },
-                            {
-                                "type": "text",
-                                "text": "want",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " to nod along. But wait a minute, what if a program needed events to happen in different orders in two different scenarios? Most real-world programs have many many scenarios they need to work in. Never allowing ourselves to touch existing parts of the program seems like a bad way to reliably get the desired effect.\n\nIt's not clear to me how this block means \"block loadingAccount until adShown\":\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_preformatted",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "yield {\n  wait: 'adShown'\n  block: 'loadingAccount'\n}"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\nCan somebody explain this? Is it assuming there's another b-thread somewhere pumping out 'loadingAccount' events "
-                            },
-                            {
-                                "type": "text",
-                                "text": "ad infinitum",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "?"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1580955499.046800",
-        "parent_user_id": "USUMN6XLH"
-    },
-    {
-        "client_msg_id": "ec4d5d1b-b17d-4cfa-b78a-60d8d518e44b",
-        "type": "message",
-        "text": "The animations suggest that b-threads run in lock step, each `yield` in them taking equal time. Is this true? Certainly the examples here would have wildly different behavior for different relative timings. Being this sensitive to timing seems really bad. It gives me flashbacks to writing Verilog code and running into bugs from signals not getting to a latch in time for the next clock cycle.\n\nOk, I'll stop spamming this thread. Summary: I have been slowly thinking about BP over 1.5 years now, and my opinion is slowly crystallizing to opposition. OP seems like a poor advertisement for BP. Either it's misunderstanding BP or it's making certain drawbacks very obvious but not self-aware of doing so.",
-        "user": "UCUSW7WVD",
-        "ts": "1581290720.061800",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "dJXEQ",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "The animations suggest that b-threads run in lock step, each "
-                            },
-                            {
-                                "type": "text",
-                                "text": "yield",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " in them taking equal time. Is this true? Certainly the examples here would have wildly different behavior for different relative timings. Being this sensitive to timing seems really bad. It gives me flashbacks to writing Verilog code and running into bugs from signals not getting to a latch in time for the next clock cycle.\n\nOk, I'll stop spamming this thread. Summary: I have been slowly thinking about BP over 1.5 years now, and my opinion is slowly crystallizing to opposition. OP seems like a poor advertisement for BP. Either it's misunderstanding BP or it's making certain drawbacks very obvious but not self-aware of doing so."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1580955499.046800",
-        "parent_user_id": "USUMN6XLH"
-    },
-    {
-        "client_msg_id": "2bcb4d41-2e1b-4457-9c31-c22f66568e75",
-        "type": "message",
-        "text": "Ah, I see that <http://www.wisdom.weizmann.ac.il/~amarron/BP%20-%20CACM%20-%20Author%20version.pdf> (the original BP paper?) admits the possibility of conflicting b-threads in Section 5.1. They point out that:\n\n* Conflicts can be resolved using priorities. Which absolutely requires new b-threads to be aware of what older b-threads exist.\n* A model-checker is required to warn programmers when conflict may arise.\n\nUsing BP in React seems like a recipe for spaghetti until React gains a model-checker. Is there one in development somewhere?",
-        "user": "UCUSW7WVD",
-        "ts": "1581292548.062100",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "vh7",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Ah, I see that "
-                            },
-                            {
-                                "type": "link",
-                                "url": "http://www.wisdom.weizmann.ac.il/~amarron/BP%20-%20CACM%20-%20Author%20version.pdf"
-                            },
-                            {
-                                "type": "text",
-                                "text": " (the original BP paper?) admits the possibility of conflicting b-threads in Section 5.1. They point out that:\n\n* Conflicts can be resolved using priorities. Which absolutely requires new b-threads to be aware of what older b-threads exist.\n* A model-checker is required to warn programmers when conflict may arise.\n\nUsing BP in React seems like a recipe for spaghetti until React gains a model-checker. Is there one in development somewhere?"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1580955499.046800",
-        "parent_user_id": "USUMN6XLH"
-    },
-    {
-        "client_msg_id": "72790792-68ea-4bac-b517-5c972894cf9b",
-        "type": "message",
-        "text": "Actually the deduction of what sections of the screen drawing functions need to be executed again is predicate logic, where logical implication is being calculated automatically. This saves you the trouble of writing all the implication rules for every microscopic change in your model. As the number of controls grows on the screen, the number of interactions between the widgets on the screen can grow exponentially. This is a feature directly borrowed from PROLOG and it is not common.  The Unix  Make build tool language uses an explicit predicate logic for example, and another example of automatic predicate logic in Beads is the compiler's module system which is borrowed from Modula-2 whereby you can specify imports very simply and it builds the total list of modules to compile, and does them in the correct order. The key thing with predicate logic is to try and avoid having users write the predicates explicitly, because they are not easy to construct. The average programmer knows simple boolean logic but long predicate chains are downright opaque to most. One should always keep in mind the example  of Principia Mathematica by Russell &amp; Whitehead, which took something on the order of 100 pages of gibberish to prove 1+1 = 2. Logical purity is an altar on which you can sacrifice all productivity.",
-        "user": "UEQ6M68H0",
-        "ts": "1581317344.062600",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UEQ6M68H0",
-            "ts": "1581317390.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Ln6Zi",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Actually the deduction of what sections of the screen drawing functions need to be executed again is predicate logic, where logical implication is being calculated automatically. This saves you the trouble of writing all the implication rules for every microscopic change in your model. As the number of controls grows on the screen, the number of interactions between the widgets on the screen can grow exponentially. This is a feature directly borrowed from PROLOG and it is not common.  The Unix  Make build tool language uses an explicit predicate logic for example, and another example of automatic predicate logic in Beads is the compiler's module system which is borrowed from Modula-2 whereby you can specify imports very simply and it builds the total list of modules to compile, and does them in the correct order. The key thing with predicate logic is to try and avoid having users write the predicates explicitly, because they are not easy to construct. The average programmer knows simple boolean logic but long predicate chains are downright opaque to most. One should always keep in mind the example  of Principia Mathematica by Russell & Whitehead, which took something on the order of 100 pages of gibberish to prove 1+1 = 2. Logical purity is an altar on which you can sacrifice all productivity."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1581027718.051600",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
         "client_msg_id": "5ff00be5-bea8-4df1-a014-2864dd3205e1",
         "type": "message",
-        "text": "Is anyone aware of prior work on languages where:\n\u2022 the program can be modified in-place\n\u2022 variables can be re-bound (i.e. the program has a linear top-to-bottom flow)\n\u2022 updates are patched in so that changes do not cause unnecessary recomputation\nI have a demo of what I'm referring to here: <https://twitter.com/paulgb/status/1226691281184808961>",
+        "text": "Is anyone aware of prior work on languages where:\n• the program can be modified in-place\n• variables can be re-bound (i.e. the program has a linear top-to-bottom flow)\n• updates are patched in so that changes do not cause unnecessary recomputation\nI have a demo of what I'm referring to here: <https:\/\/twitter.com\/paulgb\/status\/1226691281184808961>",
         "user": "UR482RFPY",
         "ts": "1581337872.066300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0c567409952",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0c5674099527c19ca0eccac4f2309515.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0005-72.png",
+            "first_name": "",
+            "real_name": "Paul Butler",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "paulgb",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
-                "fallback": "<https://twitter.com/paulgb|@paulgb>: This is spiritually similar to Dataflow programming, except that variables can be modified. The semantics are the same as if the entire program was rerun top to bottom on every edit.\n\nIf anyone is aware of prior work, I'd love to see it. I'm stumbling in the dark here :slightly_smiling_face: <https://pbs.twimg.com/ext_tw_video_thumb/1226691256002191361/pu/img/aNCkCkwWBAmwwcPj.jpg>",
+                "fallback": "<https:\/\/twitter.com\/paulgb|@paulgb>: This is spiritually similar to Dataflow programming, except that variables can be modified. The semantics are the same as if the entire program was rerun top to bottom on every edit.\n\nIf anyone is aware of prior work, I'd love to see it. I'm stumbling in the dark here :slightly_smiling_face: <https:\/\/pbs.twimg.com\/ext_tw_video_thumb\/1226691256002191361\/pu\/img\/aNCkCkwWBAmwwcPj.jpg>",
                 "ts": 1581300966,
                 "author_name": "Paul Butler",
-                "author_link": "https://twitter.com/paulgb/status/1226691281184808961",
-                "author_icon": "https://pbs.twimg.com/profile_images/804550316901310464/f1tpHoCH_normal.jpg",
+                "author_link": "https:\/\/twitter.com\/paulgb\/status\/1226691281184808961",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/804550316901310464\/f1tpHoCH_normal.jpg",
                 "author_subname": "@paulgb",
                 "text": "This is spiritually similar to Dataflow programming, except that variables can be modified. The semantics are the same as if the entire program was rerun top to bottom on every edit.\n\nIf anyone is aware of prior work, I'd love to see it. I'm stumbling in the dark here :slightly_smiling_face:",
                 "service_name": "twitter",
-                "service_url": "https://twitter.com/",
-                "from_url": "https://twitter.com/paulgb/status/1226691281184808961",
-                "thumb_url": "https://pbs.twimg.com/ext_tw_video_thumb/1226691256002191361/pu/img/aNCkCkwWBAmwwcPj.jpg",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/paulgb\/status\/1226691281184808961",
+                "thumb_url": "https:\/\/pbs.twimg.com\/ext_tw_video_thumb\/1226691256002191361\/pu\/img\/aNCkCkwWBAmwwcPj.jpg",
                 "thumb_width": 960,
                 "thumb_height": 503,
                 "video_html_width": 960,
                 "video_html_height": 503,
-                "video_html": "<video controls poster=\"https://pbs.twimg.com/ext_tw_video_thumb/1226691256002191361/pu/img/aNCkCkwWBAmwwcPj.jpg\" width=\"960\" height=\"503\"><source type=\"video/mp4\" src=\"https://video.twimg.com/ext_tw_video/1226691256002191361/pu/vid/958x502/QNLTFLUjqeqO479k.mp4?tag=10\"></video>",
+                "video_html": "<video controls poster=\"https:\/\/pbs.twimg.com\/ext_tw_video_thumb\/1226691256002191361\/pu\/img\/aNCkCkwWBAmwwcPj.jpg\" width=\"960\" height=\"503\"><source type=\"video\/mp4\" src=\"https:\/\/video.twimg.com\/ext_tw_video\/1226691256002191361\/pu\/vid\/958x502\/QNLTFLUjqeqO479k.mp4?tag=10\"><\/video>",
                 "id": 1,
-                "original_url": "https://twitter.com/paulgb/status/1226691281184808961",
+                "original_url": "https:\/\/twitter.com\/paulgb\/status\/1226691281184808961",
                 "footer": "Twitter",
-                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
             }
         ],
         "blocks": [
@@ -338,7 +100,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://twitter.com/paulgb/status/1226691281184808961"
+                                "url": "https:\/\/twitter.com\/paulgb\/status\/1226691281184808961"
                             }
                         ]
                     }
@@ -362,6 +124,140 @@
             "UJFN50C00",
             "UDQBTJ211"
         ],
+        "replies": [
+            {
+                "user": "UR482RFPY",
+                "ts": "1581337944.066500"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1581338374.066800"
+            },
+            {
+                "user": "UEBG0NPDK",
+                "ts": "1581349264.067700"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1581352947.067900"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1581355634.068700"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1581358006.068900"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1581359421.069200"
+            },
+            {
+                "user": "UR482RFPY",
+                "ts": "1581361831.069400"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1581366497.069800"
+            },
+            {
+                "user": "UR482RFPY",
+                "ts": "1581373831.073800"
+            },
+            {
+                "user": "UR482RFPY",
+                "ts": "1581373875.074100"
+            },
+            {
+                "user": "UGWUJUZHT",
+                "ts": "1581374532.074300"
+            },
+            {
+                "user": "UNCP67JSK",
+                "ts": "1581380057.078700"
+            },
+            {
+                "user": "UGS8TUVK6",
+                "ts": "1581410080.082400"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1581449714.091200"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581452198.096300"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581452227.097300"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1581452917.097500"
+            },
+            {
+                "user": "UDQBTJ211",
+                "ts": "1581454737.097700"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1581455078.098000"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581584332.122600"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581584836.122800"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581584933.123100"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1581664682.148500"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1581664810.148900"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581707011.161500"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581707111.162500"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581707113.162800"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581707277.164000"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581707305.164500"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581707342.164800"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581707416.166400"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1581707505.168900"
+            }
+        ],
         "subscribed": false
     },
     {
@@ -371,6 +267,19 @@
         "user": "UR482RFPY",
         "ts": "1581337944.066500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0c567409952",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0c5674099527c19ca0eccac4f2309515.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0005-72.png",
+            "first_name": "",
+            "real_name": "Paul Butler",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "paulgb",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -398,6 +307,19 @@
         "user": "UA14TGLTC",
         "ts": "1581338374.066800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -425,6 +347,19 @@
         "user": "UEBG0NPDK",
         "ts": "1581349264.067700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9e85c7bdd45b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-25\/487455880658_9e85c7bdd45b1d2d4721_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Granger",
+            "display_name": "ibdknox",
+            "team": "T5TCAFTA9",
+            "name": "ibdknox",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UEBG0NPDK",
             "ts": "1581358470.000000"
@@ -452,10 +387,23 @@
     {
         "client_msg_id": "366fb7e7-0035-4d31-bb29-fa0b14922f1a",
         "type": "message",
-        "text": "One nearby place I'd like to get to is to pick the start and end of a trace for a manual run and interactively turn it into a reproducible test. The tool would say things like, \"Program did a read from disk at this point. Record/edit fake?\"\n\nOr to extract unit tests for a function based on executions seen during a manual run. Or runs.",
+        "text": "One nearby place I'd like to get to is to pick the start and end of a trace for a manual run and interactively turn it into a reproducible test. The tool would say things like, \"Program did a read from disk at this point. Record\/edit fake?\"\n\nOr to extract unit tests for a function based on executions seen during a manual run. Or runs.",
         "user": "UCUSW7WVD",
         "ts": "1581352947.067900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UCUSW7WVD",
             "ts": "1581353062.000000"
@@ -470,7 +418,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "One nearby place I'd like to get to is to pick the start and end of a trace for a manual run and interactively turn it into a reproducible test. The tool would say things like, \"Program did a read from disk at this point. Record/edit fake?\"\n\nOr to extract unit tests for a function based on executions seen during a manual run. Or runs."
+                                "text": "One nearby place I'd like to get to is to pick the start and end of a trace for a manual run and interactively turn it into a reproducible test. The tool would say things like, \"Program did a read from disk at this point. Record\/edit fake?\"\n\nOr to extract unit tests for a function based on executions seen during a manual run. Or runs."
                             }
                         ]
                     }
@@ -487,6 +435,19 @@
         "user": "U5STGTB3J",
         "ts": "1581355634.068700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -514,10 +475,23 @@
     {
         "client_msg_id": "4bbd1343-da3d-45ff-a094-798fa71e5187",
         "type": "message",
-        "text": "well, the notebooks in Mathematica operate exactly like your demo; the program chunks are re-executed from the top on each change.  If you are talking about stopping the program part way and continuing, this goes back to mainframe checkpoint/restart features which were used to allow the user continue a batch program that might have taken days to run from some previously designated checkpoint. The minute you have a change point inside a loop, it then becomes rather ambiguous, if not downright dangerous, to consider restarting partially. The specific example that is the pain point, is if you add an IF statement inside a loop, do you continue at iteration #130 and then add in the IF statement; that really isn't accurate, so you really have to re-run the whole loop. This is the reason why these incremental change systems are fraught with complexity and do not offer the certitude that is the requirement for debugging complex systems. Sure if you are just tweaking a line thickness parameter on which nothing else depends, one can tweak without any harm, but if the branching changes anywhere in a program it could behave dramatically different, and thus requires a complete restart from the beginning.",
+        "text": "well, the notebooks in Mathematica operate exactly like your demo; the program chunks are re-executed from the top on each change.  If you are talking about stopping the program part way and continuing, this goes back to mainframe checkpoint\/restart features which were used to allow the user continue a batch program that might have taken days to run from some previously designated checkpoint. The minute you have a change point inside a loop, it then becomes rather ambiguous, if not downright dangerous, to consider restarting partially. The specific example that is the pain point, is if you add an IF statement inside a loop, do you continue at iteration #130 and then add in the IF statement; that really isn't accurate, so you really have to re-run the whole loop. This is the reason why these incremental change systems are fraught with complexity and do not offer the certitude that is the requirement for debugging complex systems. Sure if you are just tweaking a line thickness parameter on which nothing else depends, one can tweak without any harm, but if the branching changes anywhere in a program it could behave dramatically different, and thus requires a complete restart from the beginning.",
         "user": "UEQ6M68H0",
         "ts": "1581358006.068900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -528,7 +502,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "well, the notebooks in Mathematica operate exactly like your demo; the program chunks are re-executed from the top on each change.  If you are talking about stopping the program part way and continuing, this goes back to mainframe checkpoint/restart features which were used to allow the user continue a batch program that might have taken days to run from some previously designated checkpoint. The minute you have a change point inside a loop, it then becomes rather ambiguous, if not downright dangerous, to consider restarting partially. The specific example that is the pain point, is if you add an IF statement inside a loop, do you continue at iteration #130 and then add in the IF statement; that really isn't accurate, so you really have to re-run the whole loop. This is the reason why these incremental change systems are fraught with complexity and do not offer the certitude that is the requirement for debugging complex systems. Sure if you are just tweaking a line thickness parameter on which nothing else depends, one can tweak without any harm, but if the branching changes anywhere in a program it could behave dramatically different, and thus requires a complete restart from the beginning."
+                                "text": "well, the notebooks in Mathematica operate exactly like your demo; the program chunks are re-executed from the top on each change.  If you are talking about stopping the program part way and continuing, this goes back to mainframe checkpoint\/restart features which were used to allow the user continue a batch program that might have taken days to run from some previously designated checkpoint. The minute you have a change point inside a loop, it then becomes rather ambiguous, if not downright dangerous, to consider restarting partially. The specific example that is the pain point, is if you add an IF statement inside a loop, do you continue at iteration #130 and then add in the IF statement; that really isn't accurate, so you really have to re-run the whole loop. This is the reason why these incremental change systems are fraught with complexity and do not offer the certitude that is the requirement for debugging complex systems. Sure if you are just tweaking a line thickness parameter on which nothing else depends, one can tweak without any harm, but if the branching changes anywhere in a program it could behave dramatically different, and thus requires a complete restart from the beginning."
                             }
                         ]
                     }
@@ -554,6 +528,19 @@
         "user": "UCUSW7WVD",
         "ts": "1581359421.069200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -591,10 +578,23 @@
     {
         "client_msg_id": "883a9c3c-fb48-431a-ba34-815734764437",
         "type": "message",
-        "text": "<@UEQ6M68H0> right, I think a lot of these ideas break down when you are dealing with a complex/stateful codebase. The intended use here is for notebook-style analysis; in particular the dataflow graph is shallow in the sense that it only tracks dependencies between global variables (function calls and control structures are opaque). The semantics are guided by the principal that it should be *as if* you ran top-to-bottom; the live patching is just a sort of optimization.",
+        "text": "<@UEQ6M68H0> right, I think a lot of these ideas break down when you are dealing with a complex\/stateful codebase. The intended use here is for notebook-style analysis; in particular the dataflow graph is shallow in the sense that it only tracks dependencies between global variables (function calls and control structures are opaque). The semantics are guided by the principal that it should be *as if* you ran top-to-bottom; the live patching is just a sort of optimization.",
         "user": "UR482RFPY",
         "ts": "1581361831.069400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0c567409952",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0c5674099527c19ca0eccac4f2309515.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0005-72.png",
+            "first_name": "",
+            "real_name": "Paul Butler",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "paulgb",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -609,7 +609,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " right, I think a lot of these ideas break down when you are dealing with a complex/stateful codebase. The intended use here is for notebook-style analysis; in particular the dataflow graph is shallow in the sense that it only tracks dependencies between global variables (function calls and control structures are opaque). The semantics are guided by the principal that it should be "
+                                "text": " right, I think a lot of these ideas break down when you are dealing with a complex\/stateful codebase. The intended use here is for notebook-style analysis; in particular the dataflow graph is shallow in the sense that it only tracks dependencies between global variables (function calls and control structures are opaque). The semantics are guided by the principal that it should be "
                             },
                             {
                                 "type": "text",
@@ -637,6 +637,19 @@
         "user": "UEQ6M68H0",
         "ts": "1581366497.069800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -660,26 +673,39 @@
     {
         "client_msg_id": "a5619261-711d-4eb3-b146-a98670699f2f",
         "type": "message",
-        "text": "<https://twitter.com/jasonlaster11/status/1226965515144482827>",
+        "text": "<https:\/\/twitter.com\/jasonlaster11\/status\/1226965515144482827>",
         "user": "UN9R2KEUE",
         "ts": "1581367691.070100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gc23e230acc1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c23e230acc1f73990d92f810871e4cde.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Jason",
+            "real_name": "Jason Laster",
+            "display_name": "Jason Laster",
+            "team": "T5TCAFTA9",
+            "name": "jason.laster.11",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
-                "fallback": "<https://twitter.com/jasonlaster11|@jasonlaster11>: The gods have a sense of humor.  \n\nOf course Web Replay launches on the same day that Replay is removed from Firefox's UI. \n\nNOTE:  it was not planned this way\n\n:zap:  <https://webreplay.io/>\n:thinking_face:  <https://phabricator.services.mozilla.com/D60679>",
+                "fallback": "<https:\/\/twitter.com\/jasonlaster11|@jasonlaster11>: The gods have a sense of humor.  \n\nOf course Web Replay launches on the same day that Replay is removed from Firefox's UI. \n\nNOTE:  it was not planned this way\n\n:zap:  <https:\/\/webreplay.io\/>\n:thinking_face:  <https:\/\/phabricator.services.mozilla.com\/D60679>",
                 "ts": 1581366349,
                 "author_name": "Jason Laster",
-                "author_link": "https://twitter.com/jasonlaster11/status/1226965515144482827",
-                "author_icon": "https://pbs.twimg.com/profile_images/3188722524/5790e7b88809e42d6e02e2120189aaf2_normal.jpeg",
+                "author_link": "https:\/\/twitter.com\/jasonlaster11\/status\/1226965515144482827",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/3188722524\/5790e7b88809e42d6e02e2120189aaf2_normal.jpeg",
                 "author_subname": "@jasonlaster11",
-                "text": "The gods have a sense of humor.  \n\nOf course Web Replay launches on the same day that Replay is removed from Firefox's UI. \n\nNOTE:  it was not planned this way\n\n:zap:  <https://webreplay.io/>\n:thinking_face:  <https://phabricator.services.mozilla.com/D60679>",
+                "text": "The gods have a sense of humor.  \n\nOf course Web Replay launches on the same day that Replay is removed from Firefox's UI. \n\nNOTE:  it was not planned this way\n\n:zap:  <https:\/\/webreplay.io\/>\n:thinking_face:  <https:\/\/phabricator.services.mozilla.com\/D60679>",
                 "service_name": "twitter",
-                "service_url": "https://twitter.com/",
-                "from_url": "https://twitter.com/jasonlaster11/status/1226965515144482827",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/jasonlaster11\/status\/1226965515144482827",
                 "id": 1,
-                "original_url": "https://twitter.com/jasonlaster11/status/1226965515144482827",
+                "original_url": "https:\/\/twitter.com\/jasonlaster11\/status\/1226965515144482827",
                 "footer": "Twitter",
-                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
             }
         ],
         "blocks": [
@@ -692,7 +718,7 @@
                         "elements": [
                             {
                                 "type": "link",
-                                "url": "https://twitter.com/jasonlaster11/status/1226965515144482827"
+                                "url": "https:\/\/twitter.com\/jasonlaster11\/status\/1226965515144482827"
                             }
                         ]
                     }
@@ -716,6 +742,19 @@
         "user": "UN9R2KEUE",
         "ts": "1581367713.070600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gc23e230acc1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c23e230acc1f73990d92f810871e4cde.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Jason",
+            "real_name": "Jason Laster",
+            "display_name": "Jason Laster",
+            "team": "T5TCAFTA9",
+            "name": "jason.laster.11",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -741,6 +780,19 @@
         "user": "UN9R2KEUE",
         "ts": "1581367747.071100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gc23e230acc1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c23e230acc1f73990d92f810871e4cde.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Jason",
+            "real_name": "Jason Laster",
+            "display_name": "Jason Laster",
+            "team": "T5TCAFTA9",
+            "name": "jason.laster.11",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -785,6 +837,16 @@
         "reply_users": [
             "UML4ZEKDK"
         ],
+        "replies": [
+            {
+                "user": "UML4ZEKDK",
+                "ts": "1581375123.075900"
+            },
+            {
+                "user": "UML4ZEKDK",
+                "ts": "1581375237.076100"
+            }
+        ],
         "subscribed": false
     },
     {
@@ -794,6 +856,19 @@
         "user": "UN9R2KEUE",
         "ts": "1581367813.071600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gc23e230acc1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c23e230acc1f73990d92f810871e4cde.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Jason",
+            "real_name": "Jason Laster",
+            "display_name": "Jason Laster",
+            "team": "T5TCAFTA9",
+            "name": "jason.laster.11",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -867,6 +942,40 @@
             "UN9R2KEUE",
             "UAVCC2X70"
         ],
+        "replies": [
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1581368116.071700"
+            },
+            {
+                "user": "UD3AK9JRF",
+                "ts": "1581374625.075600"
+            },
+            {
+                "user": "U5T9JLUAE",
+                "ts": "1581389544.079700"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1581699972.159700"
+            },
+            {
+                "user": "UN9R2KEUE",
+                "ts": "1581780273.177900"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1583302713.080000"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1583304542.080400"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1583304563.080800"
+            }
+        ],
         "subscribed": false
     },
     {
@@ -876,6 +985,19 @@
         "user": "UC2A2ARPT",
         "ts": "1581368116.071700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -899,10 +1021,23 @@
     {
         "client_msg_id": "84D6D35E-F54E-4A48-A3BC-67F9AE52BF1E",
         "type": "message",
-        "text": "ahh \u201cparticipatory execution\u201d is an absolutely killer way of putting something i\u2019ve long thought about",
+        "text": "ahh “participatory execution” is an absolutely killer way of putting something i’ve long thought about",
         "user": "UHWC9PXBL",
         "ts": "1581368336.072900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -913,7 +1048,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "ahh \u201cparticipatory execution\u201d is an absolutely killer way of putting something i\u2019ve long thought about"
+                                "text": "ahh “participatory execution” is an absolutely killer way of putting something i’ve long thought about"
                             }
                         ]
                     }
@@ -939,6 +1074,19 @@
         "user": "UR482RFPY",
         "ts": "1581373831.073800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0c567409952",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0c5674099527c19ca0eccac4f2309515.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0005-72.png",
+            "first_name": "",
+            "real_name": "Paul Butler",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "paulgb",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1004,6 +1152,19 @@
         "user": "UR482RFPY",
         "ts": "1581373875.074100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0c567409952",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0c5674099527c19ca0eccac4f2309515.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0005-72.png",
+            "first_name": "",
+            "real_name": "Paul Butler",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "paulgb",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1035,6 +1196,19 @@
         "user": "UGWUJUZHT",
         "ts": "1581374532.074300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g222ae5c0173",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8222ae5c01730d4dba6a358e4d5f9031.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Paul Tarvydas",
+            "display_name": "guitarvydas",
+            "team": "T5TCAFTA9",
+            "name": "paultarvydas",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1058,10 +1232,23 @@
     {
         "client_msg_id": "C9F66720-CB39-4E6A-BFEC-2EA1BAD0C837",
         "type": "message",
-        "text": "Likewise, I\u2019m glad to see the release, but I\u2019m not doing anything Web at the moment. ",
+        "text": "Likewise, I’m glad to see the release, but I’m not doing anything Web at the moment. ",
         "user": "UD3AK9JRF",
         "ts": "1581374625.075600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1072,7 +1259,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "Likewise, I\u2019m glad to see the release, but I\u2019m not doing anything Web at the moment. "
+                                "text": "Likewise, I’m glad to see the release, but I’m not doing anything Web at the moment. "
                             }
                         ]
                     }
@@ -1089,6 +1276,19 @@
         "user": "UML4ZEKDK",
         "ts": "1581375123.075900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gda74cfd81f8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/da74cfd81f892e34f7e3926f2c56f908.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "J. Ryan Stinnett",
+            "display_name": "J. Ryan Stinnett",
+            "team": "T5TCAFTA9",
+            "name": "jryans",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1124,6 +1324,19 @@
         "user": "UML4ZEKDK",
         "ts": "1581375237.076100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gda74cfd81f8",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/da74cfd81f892e34f7e3926f2c56f908.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "J. Ryan Stinnett",
+            "display_name": "J. Ryan Stinnett",
+            "team": "T5TCAFTA9",
+            "name": "jryans",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1155,29 +1368,42 @@
     {
         "client_msg_id": "bdb7b689-1d4c-479e-aac0-62a94f190a30",
         "type": "message",
-        "text": "Here's the video on logpoints: <https://www.youtube.com/watch?v=0fCjDThbC_s>\nvia <https://webreplay.io/features/time-travel-debugging.html>\nVery cool indeed. A debugger that speaks to my debug-by-print biases.",
+        "text": "Here's the video on logpoints: <https:\/\/www.youtube.com\/watch?v=0fCjDThbC_s>\nvia <https:\/\/webreplay.io\/features\/time-travel-debugging.html>\nVery cool indeed. A debugger that speaks to my debug-by-print biases.",
         "user": "UCUSW7WVD",
         "ts": "1581375393.077000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "service_name": "YouTube",
-                "service_url": "https://www.youtube.com/",
+                "service_url": "https:\/\/www.youtube.com\/",
                 "title": "Web Replay: Logpoints",
-                "title_link": "https://www.youtube.com/watch?v=0fCjDThbC_s",
+                "title_link": "https:\/\/www.youtube.com\/watch?v=0fCjDThbC_s",
                 "author_name": "Web Replay",
-                "author_link": "https://www.youtube.com/channel/UCKYzCe0O2TiXseLUuT4OVoQ",
-                "thumb_url": "https://i.ytimg.com/vi/0fCjDThbC_s/hqdefault.jpg",
+                "author_link": "https:\/\/www.youtube.com\/channel\/UCKYzCe0O2TiXseLUuT4OVoQ",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/0fCjDThbC_s\/hqdefault.jpg",
                 "thumb_width": 480,
                 "thumb_height": 360,
                 "fallback": "YouTube Video: Web Replay: Logpoints",
-                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https://www.youtube.com/embed/0fCjDThbC_s?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https:\/\/www.youtube.com\/embed\/0fCjDThbC_s?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
                 "video_html_width": 400,
                 "video_html_height": 300,
-                "from_url": "https://www.youtube.com/watch?v=0fCjDThbC_s",
-                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "from_url": "https:\/\/www.youtube.com\/watch?v=0fCjDThbC_s",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
                 "id": 1,
-                "original_url": "https://www.youtube.com/watch?v=0fCjDThbC_s"
+                "original_url": "https:\/\/www.youtube.com\/watch?v=0fCjDThbC_s"
             }
         ],
         "blocks": [
@@ -1194,7 +1420,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://www.youtube.com/watch?v=0fCjDThbC_s"
+                                "url": "https:\/\/www.youtube.com\/watch?v=0fCjDThbC_s"
                             },
                             {
                                 "type": "text",
@@ -1202,7 +1428,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://webreplay.io/features/time-travel-debugging.html"
+                                "url": "https:\/\/webreplay.io\/features\/time-travel-debugging.html"
                             },
                             {
                                 "type": "text",
@@ -1223,6 +1449,48 @@
             "UEQ6M68H0",
             "UHWC9PXBL"
         ],
+        "replies": [
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1581383930.079400"
+            },
+            {
+                "user": "UN9R2KEUE",
+                "ts": "1581434464.089200"
+            },
+            {
+                "user": "UN9R2KEUE",
+                "ts": "1581434481.089400"
+            },
+            {
+                "user": "UN9R2KEUE",
+                "ts": "1581434514.089600"
+            },
+            {
+                "user": "UN9R2KEUE",
+                "ts": "1581434526.089900"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1581538279.108300"
+            },
+            {
+                "user": "UN9R2KEUE",
+                "ts": "1581541879.108900"
+            },
+            {
+                "user": "UN9R2KEUE",
+                "ts": "1581541920.109100"
+            },
+            {
+                "user": "UN9R2KEUE",
+                "ts": "1581542028.109300"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1581698255.150100"
+            }
+        ],
         "subscribed": false,
         "reactions": [
             {
@@ -1242,6 +1510,19 @@
         "user": "UN9R2KEUE",
         "ts": "1581375514.077800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gc23e230acc1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c23e230acc1f73990d92f810871e4cde.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Jason",
+            "real_name": "Jason Laster",
+            "display_name": "Jason Laster",
+            "team": "T5TCAFTA9",
+            "name": "jason.laster.11",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1271,6 +1552,19 @@
         "user": "UN9R2KEUE",
         "ts": "1581375550.078500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gc23e230acc1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c23e230acc1f73990d92f810871e4cde.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Jason",
+            "real_name": "Jason Laster",
+            "display_name": "Jason Laster",
+            "team": "T5TCAFTA9",
+            "name": "jason.laster.11",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1301,5 +1595,258 @@
                 "count": 5
             }
         ]
+    },
+    {
+        "client_msg_id": "dae28bea-0caf-4d87-a362-440414f55810",
+        "type": "message",
+        "text": "Instead of trying to fit imperative code (loses intention details) into a DAG, why not just go full on declarative? I recently finished a declarative-to-imperative code generator which supports your checkpoints, planning on making it a full on visual editor :slightly_smiling_face: <https:\/\/twitter.com\/LeonardPauli\/status\/1227010930657169408>",
+        "user": "UNCP67JSK",
+        "ts": "1581380057.078700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9e950179feb1",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-11\/947800888119_9e950179feb1f81e1123_72.jpg",
+            "first_name": "Leonard",
+            "real_name": "Leonard Pauli",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "leonardpauli",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "fallback": "<https:\/\/twitter.com\/LeonardPauli|@LeonardPauli>: Progress update re the new \"medium for thought\" I'm building: :white_check_mark: Declarative logic graph to executable imperative code achieved! :star-struck: Next up: extend with web DOM nodes, create visual graph editor graph, use editor to edit editor, delete all the JS! :fire:\n<https:\/\/youtu.be\/jFqGNCNy1s0>",
+                "ts": 1581377177,
+                "author_name": "Leonard Pauli",
+                "author_link": "https:\/\/twitter.com\/LeonardPauli\/status\/1227010930657169408",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1047195264908500992\/dYdXd2Cr_normal.jpg",
+                "author_subname": "@LeonardPauli",
+                "text": "Progress update re the new \"medium for thought\" I'm building: :white_check_mark: Declarative logic graph to executable imperative code achieved! :star-struck: Next up: extend with web DOM nodes, create visual graph editor graph, use editor to edit editor, delete all the JS! :fire:\n<https:\/\/youtu.be\/jFqGNCNy1s0>",
+                "service_name": "twitter",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/LeonardPauli\/status\/1227010930657169408",
+                "id": 1,
+                "original_url": "https:\/\/twitter.com\/LeonardPauli\/status\/1227010930657169408",
+                "footer": "Twitter",
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ry1Ry",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Instead of trying to fit imperative code (loses intention details) into a DAG, why not just go full on declarative? I recently finished a declarative-to-imperative code generator which supports your checkpoints, planning on making it a full on visual editor "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/twitter.com\/LeonardPauli\/status\/1227010930657169408"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581337872.066300",
+        "parent_user_id": "UR482RFPY"
+    },
+    {
+        "client_msg_id": "8cddb54a-7e45-4a17-bf22-6fd7886a96fb",
+        "type": "message",
+        "text": "I poked the author on Twitter with these concerns: <https:\/\/twitter.com\/akkartik\/status\/1227025035329703936>",
+        "user": "UCUSW7WVD",
+        "ts": "1581381032.079000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "fallback": "<https:\/\/twitter.com\/akkartik|@akkartik>: <https:\/\/twitter.com\/lmatteis|@lmatteis> I just watched your talk about BP using React (<https:\/\/www.youtube.com\/watch?v=cXuvCMG21Ss>). I have... concerns.\n\n1. Append-only is useful when components can be reasoned about independently. But later threads seem quite reliant on the order of operations in earlier ones. Isn't it fragile?",
+                "ts": 1581380540,
+                "author_name": "Kartik Agaram",
+                "author_link": "https:\/\/twitter.com\/akkartik\/status\/1227025035329703936",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1150566050196381697\/IVAOt5nM_normal.jpg",
+                "author_subname": "@akkartik",
+                "text": "<https:\/\/twitter.com\/lmatteis|@lmatteis> I just watched your talk about BP using React (<https:\/\/www.youtube.com\/watch?v=cXuvCMG21Ss>). I have... concerns.\n\n1. Append-only is useful when components can be reasoned about independently. But later threads seem quite reliant on the order of operations in earlier ones. Isn't it fragile?",
+                "service_name": "twitter",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/akkartik\/status\/1227025035329703936",
+                "id": 1,
+                "original_url": "https:\/\/twitter.com\/akkartik\/status\/1227025035329703936",
+                "footer": "Twitter",
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9xS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I poked the author on Twitter with these concerns: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/twitter.com\/akkartik\/status\/1227025035329703936"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "fa3d63a0-acd6-4742-a17f-5ac1ae57e866",
+        "type": "message",
+        "text": "Very nice. Have you seen the probes and traces in <https:\/\/www.microsoft.com\/en-us\/research\/wp-content\/uploads\/2016\/02\/onward011-mcdirmid.pdf> (Sean McDirmid)?\n\nHere's a video linked from that paper: <https:\/\/www.youtube.com\/watch?v=01Xyoh-G6DE>",
+        "user": "U8A5MS6R1",
+        "ts": "1581383930.079400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "sqrt",
+                "title_link": "https:\/\/www.youtube.com\/watch?v=01Xyoh-G6DE",
+                "author_name": "Sean McDirmid",
+                "author_link": "https:\/\/www.youtube.com\/user\/seanmcdirmid",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/01Xyoh-G6DE\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: sqrt",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/01Xyoh-G6DE?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/www.youtube.com\/watch?v=01Xyoh-G6DE",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/www.youtube.com\/watch?v=01Xyoh-G6DE"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "emSR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Very nice. Have you seen the probes and traces in "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.microsoft.com\/en-us\/research\/wp-content\/uploads\/2016\/02\/onward011-mcdirmid.pdf"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (Sean McDirmid)?\n\nHere's a video linked from that paper: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.youtube.com\/watch?v=01Xyoh-G6DE"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581375393.077000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "00b41d2f-f62b-4fcd-9721-24c36bca41cf",
+        "type": "message",
+        "text": "Happy to help if I can, although the only project I'm working on now is with webxr. I tried following the slack link in your tweet (<https:\/\/join.slack.com\/t\/webreplay\/>), but it ended up at an error page for me.",
+        "user": "U5T9JLUAE",
+        "ts": "1581389544.079700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfc3428127f9",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/5fc3428127f9bf92b1d03f9694617e10.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Irvin",
+            "real_name": "Irvin Hwang",
+            "display_name": "irvin",
+            "team": "T5TCAFTA9",
+            "name": "irvin",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qdscJ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Happy to help if I can, although the only project I'm working on now is with webxr. I tried following the slack link in your tweet ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/join.slack.com\/t\/webreplay\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), but it ended up at an error page for me."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581367813.071600",
+        "parent_user_id": "UN9R2KEUE"
     }
 ]

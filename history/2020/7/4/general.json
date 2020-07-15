@@ -1,503 +1,24 @@
 [
     {
-        "client_msg_id": "b45121a3-65f2-4543-a062-15f1d5712037",
-        "type": "message",
-        "text": "<@UJ6LDMMN0>'s demo today[1] and Avi Bryant's demo a couple of weeks ago[2] has me thinking of this post <@UBN9AFS0N> shared a couple of months ago[3]:\n\n<https://billwadge.wordpress.com/2020/04/20/the-intensional-spreadsheet>\n\n[1] <https://futureofcoding.slack.com/archives/C0120A3L30R/p1593813312058700>\n[2] <https://futureofcoding.slack.com/archives/C5T9GPWFL/p1592347969348200>\n[3] <https://futureofcoding.slack.com/archives/C5T9GPWFL/p1587457167095700>",
-        "user": "UCUSW7WVD",
-        "ts": "1593821658.282200",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCUSW7WVD",
-            "ts": "1593821687.000000"
-        },
-        "attachments": [
-            {
-                "service_name": "Bill Wadge's Blog",
-                "service_url": "http://billwadge.wordpress.com",
-                "title": "The Intensional Spreadsheet",
-                "title_link": "https://billwadge.wordpress.com/2020/04/20/the-intensional-spreadsheet/",
-                "author_name": "Bill Wadge",
-                "author_link": "https://billwadge.wordpress.com/author/billwadge/",
-                "text": "A while back Weichang Du and I designed a spreadsheet based on intensional logic, the&nbsp; logic of values that vary over a coordinate space.\nSpreadsheets are a natural fit for &lsquo;intensifying&rsquo; because a sheet is already a two-dimensional intension, varying over the horizontal (A, B, C, &hellip;) and vertical (1, 2, 3, &hellip;) dimensions. But we can do better than just redo Excel with intensional semantics. Intensionality opens up some interesting possibilities; like user-defined operators, time varying sheets, or nested sheets.\n\nThis post is based on the IEEE Software article Du and I wrote, A Three Dimensional Spreadsheet,&nbsp;but with a different notation (to simplify the presentation).\nThe Fibonacci Numbers\nLet&rsquo;s start with a simple example &ndash; the Fibonacci numbers. Suppose we want to compute them and display them in row 1. In Excel it&rsquo;s easy peasy, we put 0 in cell A1 and 1 in cell B1; then A1+B1 in cell C1, B1+C1 in cell D1, C1+D1 in cell E1, etc. The formulas in the cells are\nA   B     C       D       E      F\n-----------------------------------\n0 | 1 | A1+B1 | B1+C1 | C1+D1 | ...\n\nand the values displayed are\nA   B   C   D   E    F\n-----------------------------------\n0 | 1 | 2 | 3 | 5 | ...\n\nNotice that the formulas in the cells are all different; although if you know Excel, you know that they are all &lsquo;copies&rsquo; of the formula in C2. Not literally copies, but functional copies. The value in cell E1 bears the same relationship to the two values on the left as C1 does to the two values on its left.\nConfused? Never mind, it all works out more simply with the intensional spreadsheet.\nThe basic idea is that we define a sheet (which needs a name, say F) by putting expressions in cells. The difference is that they are in the language of two dimensional intensions. Let&rsquo;s call the horizontal dimension h and the vertical dimension v. We need space versions of the traditional Lucid temporal operators first,&nbsp;next, and fby. (Plus prev).\nLet&rsquo;s call next.h right and prev.h left (for obvious reasons). Then we put the following formulas in the cells A1, B1, C1, &hellip;\nA   B          C                      D                       E                \n------------------------------------------------------------------------------\n0 | 1 | left F + left left F | left F + left left F  | left F + left left F  | ...\n\nThe first thing to notice is that apart from the first two, the formulas are exactly the same. Copying in the intensional spreadsheet is just that.\nAlso evaluation is just that. To get (for example) the numerical value of the cell D1, we evaluate the formula stored in D1. This evaluation will entail evaluating the formulas in C1 and eventually in A1 and B1, the base cases of the recursion. Note that this is eduction (more below).\n[It&rsquo;s been pointed out that you can get something close to this with R1C1 notation. R[-2]C is the cell two columns to the left on the same row. This notation is not as general; for example we can write left(F+left F).]\nAbsolute References\nIt should be clear that most spread sheets are easily formulated in the new notation. The only question is how to do what are known as &lsquo;absolute&nbsp; references&rsquo;, that are not altered by traditional copying. One approach is to use expressions like A2 as absolute coordinates; so that e.g. F.A2 is the contents of exactly the A2 cell of F (in the above, 1) and it gets copied as exactly F.A2.\nAs a special case, we have operators side and top that take us to the side and top of the sheet, respectively. So side F is F.A and top F is F.0.\nDefault Formulas\nThe fact that all but the first two formulas in the Fibonacci sheet are the same suggests some shortcuts. The user interface could allow us to select a set of cells and put a single formula into each of them.\nAnother idea is to allow us to give a default formula for an entire row (or column), with the understanding that putting formulas in individual cells overrides the default.\nAs another example we could define a sheet P by putting 1 in every cell in row 1, 1 in every cell in column A, and the default formula\nleft P + up P\nin all the other cells of P. The result is to make every column a running total of the column to the left. The result is Pascal&rsquo;s triangle (tilted to the left)\n---------------------\n| 1 | 1 | 1 | 1 | 1 ...\n---------------------\n| 1 | 2 | 3 | 4 | 5 \n---------------------\n| 1 | 3 | 6 |10 |15 \n---------------------\n| 1 | 4 |10 |20 |35 \n---------------------\n| 1 | 5 |15 |35 |70\n--------------------- \n\nGlobal Definitions\nOur spreadsheet design allows for definitions that apply globally. For example, if we add the global definition\nF2 = left F + left left F\nthen we can put F2 in cells C1, D1, E1 etc. We can have global user defined functions like\nleft2(X) = left left X\nand define F2 as\nleft F + left2(F)\nFunctions can of course be defined recursively; for example\nleftsum(X,i) = if i eq 0 then 0 else left X + leftsum(left X,i-1) fi\ndefines e.g. leftsum(F,10) to be the sum of the 10 values to the left. If we want to sum all the values to the left we can add the global definition\nleftsumall(X) = leftsum(X,index.h)\nwhere index.d is the coordinate in the d dimension.\nSpreadstreams\nSince we already have dimensions h and v it&rsquo;s no technical problem to allow the traditional Lucid time dimension t. The result is a three-dimensional spreadsheet which could be understood as a time varying two dimensional spreadsheet. For example, a traditional spreadsheet might display sales (S) of car models by salesman. With the time dimension we can do this for every month, starting with (say) January as month 0.\nThen we can have extra cells (along the side and the bottom) which display totals for model and salesman (for the current month). But with the time dimension we can also display percentage change over the&nbsp; last month. For example of D10 displays Bob&rsquo;s total month sales, we can put the formula\n100*(S &ndash; prev S)/(prev S)\nin D11 which will now display the percentage change in Bob&rsquo;s sales.\nAnother example of a time varying spreadsheet is that for the relaxation method. It is used to give approximate solutions to the Poisson equation &nabla;2 P = 0. It is an iterative process where each (interior) cell value is repeatedly replaced by the average of the values above and below and on either side; for example, the value of F8 is replace by the average of the values of F7, F9, E8 and G8.\nWe can program this by placing the formula\nprev (left P + right P + up P + down P)/4\nin all the interior cells.\nNested spreadsheets\nThe intensional approach allows another generalization: nested spreadsheets. By this we mean that any cell of the main sheet can (but not necessarily does) contain a whole sub-spreadsheet. And that any cell of the sub-spreadsheet might contain a sub-sub-spreadsheet, and so on.\nIndexing makes this simple: any cell of the sub-spreadsheet is indexed by two letter-number combinations. For example, if F8 has a sub-sheet, its cells have coordinates&nbsp; like F8.C10 or F8.H7. In the same way a cell in a sub-sub-sheet might have an index F8.H7.K21.\nNested sheets would allow a very natural way of representing hierarchical data. The top row of the main sheet could hold sales per year and month (two dimensions) and each cell could hold data of sales per month/salesperson (two more dimensions).\nWe would need extra intensional operators which take us down one level or across to neighbouring sheets. We haven&rsquo;t worked out the details.\nDemand-driven evaluation\nThis all sounds extremely ambitious and even impractical; and would be if we tried to implement it with conventional techniques. For example, if the user can open sub-sheets on the fly,&nbsp; how do we know how many cells to allocate?\nIt is all made possible by a simple technique for evaluation of intensional systems, namely demand driven (lazy) evaluation; also called eduction.\nBriefly, it \u2026",
-                "fallback": "Bill Wadge's Blog Link: The Intensional Spreadsheet",
-                "from_url": "https://billwadge.wordpress.com/2020/04/20/the-intensional-spreadsheet/",
-                "service_icon": "https://s0.wp.com/i/webclip.png",
-                "id": 4,
-                "original_url": "https://futureofcoding.slack.com/archives/C5T9GPWFL/p1587457167095700"
-            }
-        ],
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Yg9",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UJ6LDMMN0"
-                            },
-                            {
-                                "type": "text",
-                                "text": "'s demo today[1] and Avi Bryant's demo a couple of weeks ago[2] has me thinking of this post "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UBN9AFS0N"
-                            },
-                            {
-                                "type": "text",
-                                "text": " shared a couple of months ago[3]:\n\n"
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://billwadge.wordpress.com/2020/04/20/the-intensional-spreadsheet"
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n\n[1] "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://futureofcoding.slack.com/archives/C0120A3L30R/p1593813312058700"
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n[2] "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://futureofcoding.slack.com/archives/C5T9GPWFL/p1592347969348200"
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n[3] "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://futureofcoding.slack.com/archives/C5T9GPWFL/p1587457167095700"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1593821658.282200",
-        "reply_count": 7,
-        "reply_users_count": 4,
-        "latest_reply": "1593897362.325600",
-        "reply_users": [
-            "UCUSW7WVD",
-            "UEQ6M68H0",
-            "UJ6LDMMN0",
-            "UMH5FAW2Y"
-        ],
-        "subscribed": true,
-        "last_read": "1593897362.325600",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UJ6LDMMN0"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "b736f7b3-9e9b-4bb4-bd55-8454a8ead594",
-        "type": "message",
-        "text": "Another old favorite I'm thinking about: <https://web.archive.org/web/20150905171238/http://www.soe.berkeley.edu/boxer/20reasons.pdf>",
-        "user": "UCUSW7WVD",
-        "ts": "1593822325.282700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "vX1",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Another old favorite I'm thinking about: "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://web.archive.org/web/20150905171238/http://www.soe.berkeley.edu/boxer/20reasons.pdf"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1593821658.282200",
-        "parent_user_id": "UCUSW7WVD"
-    },
-    {
-        "client_msg_id": "c4526968-09c9-4280-984a-0075578197f6",
-        "type": "message",
-        "text": "(Be careful, though, of taking claims of pegagogical efficacy at face value: <https://dl.acm.org/doi/pdf/10.1145/3274287> via <@UFB8STN7K>'s <https://futureofcoding.slack.com/archives/C5T9GPWFL/p1591498636036100>)",
-        "user": "UCUSW7WVD",
-        "ts": "1593822577.282900",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCUSW7WVD",
-            "ts": "1593822599.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "i7q",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "(Be careful, though, of taking claims of pegagogical efficacy at face value: "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://dl.acm.org/doi/pdf/10.1145/3274287"
-                            },
-                            {
-                                "type": "text",
-                                "text": " via "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UFB8STN7K"
-                            },
-                            {
-                                "type": "text",
-                                "text": "'s "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://futureofcoding.slack.com/archives/C5T9GPWFL/p1591498636036100"
-                            },
-                            {
-                                "type": "text",
-                                "text": ")"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1593821658.282200",
-        "parent_user_id": "UCUSW7WVD",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UJ6LDMMN0"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "db47c1c9-49d4-4df5-876d-326d421d2611",
-        "type": "message",
-        "text": "Just saw this. <@UFLN9JFRT> yes they are. We also removed the vesting \u201ccliff\u201d for people who had not been here a year (so eg they\u2019d get 7 months of options if they\u2019d been there 7 months, as opposed to nothing)",
-        "user": "U6BRN7A0Y",
-        "ts": "1593832130.283600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "OFv",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Just saw this. "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UFLN9JFRT"
-                            },
-                            {
-                                "type": "text",
-                                "text": " yes they are. We also removed the vesting \u201ccliff\u201d for people who had not been here a year (so eg they\u2019d get 7 months of options if they\u2019d been there 7 months, as opposed to nothing)"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1592922339.405900",
-        "parent_user_id": "UGLSY9X3J",
-        "reactions": [
-            {
-                "name": "heart",
-                "users": [
-                    "UFLN9JFRT"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "1994d3b9-a0f8-416a-8bad-54a4d25f950d",
-        "type": "message",
-        "text": "<@UHWC9PXBL> what's super interesting about both Minecraft and Hypercard are the strong and unique cultures of amateur remixing that sprung up around them. I don't think this happens just by accident, nor entirely by the creator's intent(Notch was not very supportive of Minecraft mods at first), I think a lot about what conditions foster it.",
-        "user": "UMWF81HTP",
-        "ts": "1593835948.284300",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "sN/+M",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UHWC9PXBL"
-                            },
-                            {
-                                "type": "text",
-                                "text": " what's super interesting about both Minecraft and Hypercard are the strong and unique cultures of amateur remixing that sprung up around them. I don't think this happens just by accident, nor entirely by the creator's intent(Notch was not very supportive of Minecraft mods at first), I think a lot about what conditions foster it."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1593659834.110700",
-        "parent_user_id": "UMWF81HTP",
-        "reactions": [
-            {
-                "name": "thinking_face",
-                "users": [
-                    "UCUSW7WVD",
-                    "UA14TGLTC",
-                    "UML4ZEKDK"
-                ],
-                "count": 3
-            }
-        ]
-    },
-    {
-        "client_msg_id": "6EFEF1C9-AF0D-48EC-A9EE-CA2514EE0D1D",
-        "type": "message",
-        "text": "definitely! both seem to have been limited in scope enough to both require customization/creativity and also limited enough to make that feasible for hobbyists. another thing is that those mods or hypercard stacks ended up being likewise limited enough that they were amenable to further remixing by other hobbyists for like refinements on refinements",
-        "user": "UHWC9PXBL",
-        "ts": "1593836436.287200",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "zNH",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "definitely! both seem to have been limited in scope enough to both require customization/creativity and also limited enough to make that feasible for hobbyists. another thing is that those mods or hypercard stacks ended up being likewise limited enough that they were amenable to further remixing by other hobbyists for like refinements on refinements"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1593659834.110700",
-        "parent_user_id": "UMWF81HTP",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UML4ZEKDK"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "235a1c55-7d6a-49cd-8069-7d6fea1acd83",
-        "type": "message",
-        "text": "<@UKDM3GLAJ> you make a good point.  Far better than help with syntax, a better programming language/tool/environment would help you see the consequences and inconsistencies of your logic.\n\nOn the other hand, it's easy to forget how much basic syntax holds up beginners.  Semantics probably holds them up more, but they don't get that far.",
-        "user": "UA14TGLTC",
-        "ts": "1593843391.287700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Dcx",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UKDM3GLAJ"
-                            },
-                            {
-                                "type": "text",
-                                "text": " you make a good point.  Far better than help with syntax, a better programming language/tool/environment would help you see the consequences and inconsistencies of your logic.\n\nOn the other hand, it's easy to forget how much basic syntax holds up beginners.  Semantics probably holds them up more, but they don't get that far."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1593794600.262800",
-        "parent_user_id": "U0136G8R8KG",
-        "reactions": [
-            {
-                "name": "heart",
-                "users": [
-                    "UPVBV34EL"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "6b61101c-0d7d-4b85-84ed-3a0150ab61b3",
-        "type": "message",
-        "text": "<@U01661S9F34> TabNine is a delightful little assistant for its occasional strokes of genius.  I have a collection of these, all Ruby...\n\nTyping `{\"B1\" =&gt; \"X\", \"B2\" =&gt; \"Y\", \"` gave me the suggested completion `B3\" =&gt; \"Z\"}`.\n\nStarting with `product_demands.map{|` TabNine recommended `|k, v|` then after adding  `\"` it went on with `#{k}=#{v}\"}`.\n\nOr there was the time I got to `bidding_credit_discounted(bidder, [gross - incentive_payment, 0].max)` from typing `b\\t\\t g\\t \\t`.",
-        "user": "UA14TGLTC",
-        "ts": "1593843974.287900",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "fOm",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "U01661S9F34"
-                            },
-                            {
-                                "type": "text",
-                                "text": " TabNine is a delightful little assistant for its occasional strokes of genius.  I have a collection of these, all Ruby...\n\nTyping "
-                            },
-                            {
-                                "type": "text",
-                                "text": "{\"B1\" => \"X\", \"B2\" => \"Y\", \"",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " gave me the suggested completion "
-                            },
-                            {
-                                "type": "text",
-                                "text": "B3\" => \"Z\"}",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ".\n\nStarting with "
-                            },
-                            {
-                                "type": "text",
-                                "text": "product_demands.map{|",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " TabNine recommended "
-                            },
-                            {
-                                "type": "text",
-                                "text": "|k, v|",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " then after adding "
-                            },
-                            {
-                                "type": "text",
-                                "text": " \"",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " it went on with "
-                            },
-                            {
-                                "type": "text",
-                                "text": "#{k}=#{v}\"}",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ".\n\nOr there was the time I got to "
-                            },
-                            {
-                                "type": "text",
-                                "text": "bidding_credit_discounted(bidder, [gross - incentive_payment, 0].max)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " from typing "
-                            },
-                            {
-                                "type": "text",
-                                "text": "b\\t\\t g\\t \\t",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1593794600.262800",
-        "parent_user_id": "U0136G8R8KG",
-        "reactions": [
-            {
-                "name": "heart",
-                "users": [
-                    "U01661S9F34",
-                    "UKP3B2J5D"
-                ],
-                "count": 2
-            }
-        ]
-    },
-    {
         "client_msg_id": "363B6BBB-194B-4EA4-AF8F-8BC25AF17796",
         "type": "message",
-        "text": "<@UHWC9PXBL> I made some cool designs for saving web history that I think you\u2019d like. I\u2019ll have to dig them up later. ",
+        "text": "<@UHWC9PXBL> I made some cool designs for saving web history that I think you’d like. I’ll have to dig them up later. ",
         "user": "UT9TWSZB5",
         "ts": "1593848992.289500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -512,7 +33,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " I made some cool designs for saving web history that I think you\u2019d like. I\u2019ll have to dig them up later. "
+                                "text": " I made some cool designs for saving web history that I think you’d like. I’ll have to dig them up later. "
                             }
                         ]
                     }
@@ -541,10 +62,23 @@
     {
         "client_msg_id": "9F0229F2-A8B5-46EC-A420-25534B76D237",
         "type": "message",
-        "text": "I\u2019m also learning some cool stuff about datalog and want to build a personal database for all this kind of stuff",
+        "text": "I’m also learning some cool stuff about datalog and want to build a personal database for all this kind of stuff",
         "user": "UT9TWSZB5",
         "ts": "1593849048.290700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -555,7 +89,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "I\u2019m also learning some cool stuff about datalog and want to build a personal database for all this kind of stuff"
+                                "text": "I’m also learning some cool stuff about datalog and want to build a personal database for all this kind of stuff"
                             }
                         ]
                     }
@@ -568,10 +102,23 @@
     {
         "client_msg_id": "d56f50af-4d3d-4a66-8448-14a709409da4",
         "type": "message",
-        "text": "Lotus made a spreadsheet called Improv for the NextStep OS that was to my thinking the next evolution of the spreadsheet. Unfortunately when Jobs got rehired by Apple, the Next computer was tossed aside, as he had bigger fish to fry, and the tiny installed base of NextStep programmers were left adrift, teams disbanded, etc.  Then Lotus was sold to IBM which was the final blow because new products have great difficulty escaping the mediocrity machine that is the current IBM. I was around when IBM was the greatest company in the world, with constant breakthroughs of fundamental technologies. As others have pointed out Apple was a harvester of existing technology, but IBM invented things.  They had virtual machines in the 60's (CP/CMS), 30 years before VMware. Too bad they didn't push CP/CMS more, it was better than their lousy TSO time sharing system.",
+        "text": "Lotus made a spreadsheet called Improv for the NextStep OS that was to my thinking the next evolution of the spreadsheet. Unfortunately when Jobs got rehired by Apple, the Next computer was tossed aside, as he had bigger fish to fry, and the tiny installed base of NextStep programmers were left adrift, teams disbanded, etc.  Then Lotus was sold to IBM which was the final blow because new products have great difficulty escaping the mediocrity machine that is the current IBM. I was around when IBM was the greatest company in the world, with constant breakthroughs of fundamental technologies. As others have pointed out Apple was a harvester of existing technology, but IBM invented things.  They had virtual machines in the 60's (CP\/CMS), 30 years before VMware. Too bad they didn't push CP\/CMS more, it was better than their lousy TSO time sharing system.",
         "user": "UEQ6M68H0",
         "ts": "1593849148.290900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -582,7 +129,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "Lotus made a spreadsheet called Improv for the NextStep OS that was to my thinking the next evolution of the spreadsheet. Unfortunately when Jobs got rehired by Apple, the Next computer was tossed aside, as he had bigger fish to fry, and the tiny installed base of NextStep programmers were left adrift, teams disbanded, etc.  Then Lotus was sold to IBM which was the final blow because new products have great difficulty escaping the mediocrity machine that is the current IBM. I was around when IBM was the greatest company in the world, with constant breakthroughs of fundamental technologies. As others have pointed out Apple was a harvester of existing technology, but IBM invented things.  They had virtual machines in the 60's (CP/CMS), 30 years before VMware. Too bad they didn't push CP/CMS more, it was better than their lousy TSO time sharing system."
+                                "text": "Lotus made a spreadsheet called Improv for the NextStep OS that was to my thinking the next evolution of the spreadsheet. Unfortunately when Jobs got rehired by Apple, the Next computer was tossed aside, as he had bigger fish to fry, and the tiny installed base of NextStep programmers were left adrift, teams disbanded, etc.  Then Lotus was sold to IBM which was the final blow because new products have great difficulty escaping the mediocrity machine that is the current IBM. I was around when IBM was the greatest company in the world, with constant breakthroughs of fundamental technologies. As others have pointed out Apple was a harvester of existing technology, but IBM invented things.  They had virtual machines in the 60's (CP\/CMS), 30 years before VMware. Too bad they didn't push CP\/CMS more, it was better than their lousy TSO time sharing system."
                             }
                         ]
                     }
@@ -595,10 +142,23 @@
     {
         "client_msg_id": "91ce4b0f-fc6d-42fa-80e9-a2d29c7a82b9",
         "type": "message",
-        "text": "Most interesting: <https://en.wikipedia.org/wiki/Lotus_Improv|https://en.wikipedia.org/wiki/Lotus_Improv>",
+        "text": "Most interesting: <https:\/\/en.wikipedia.org\/wiki\/Lotus_Improv|https:\/\/en.wikipedia.org\/wiki\/Lotus_Improv>",
         "user": "UCUSW7WVD",
         "ts": "1593850059.291100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -613,8 +173,8 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://en.wikipedia.org/wiki/Lotus_Improv",
-                                "text": "https://en.wikipedia.org/wiki/Lotus_Improv"
+                                "url": "https:\/\/en.wikipedia.org\/wiki\/Lotus_Improv",
+                                "text": "https:\/\/en.wikipedia.org\/wiki\/Lotus_Improv"
                             }
                         ]
                     }
@@ -631,6 +191,19 @@
         "user": "UEQ6M68H0",
         "ts": "1593850887.291300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UEQ6M68H0",
             "ts": "1593850969.000000"
@@ -658,10 +231,23 @@
     {
         "client_msg_id": "a18a516f-6ab8-4bc5-81d8-74b5f032c085",
         "type": "message",
-        "text": "<@UKP3B2J5D> Thanks for nice piece by Dijkstra. Now, I agree with that of course. A formal system and rules to manipulate symbols are the ONLY way you can probably express a concept beyond any doubt and universally. So, as I mentioned, I do not think just naturalness and optimising a particular function is the ultimate answer. We may need to wait for the genius of  someone to come up with a solution to this problem. But the way I see it, this is the only way forward. A little write up by Gary Marcus in this context - <https://arxiv.org/ftp/arxiv/papers/2002/2002.06177.pdf>",
+        "text": "<@UKP3B2J5D> Thanks for nice piece by Dijkstra. Now, I agree with that of course. A formal system and rules to manipulate symbols are the ONLY way you can probably express a concept beyond any doubt and universally. So, as I mentioned, I do not think just naturalness and optimising a particular function is the ultimate answer. We may need to wait for the genius of  someone to come up with a solution to this problem. But the way I see it, this is the only way forward. A little write up by Gary Marcus in this context - <https:\/\/arxiv.org\/ftp\/arxiv\/papers\/2002\/2002.06177.pdf>",
         "user": "UPVBV34EL",
         "ts": "1593857720.291800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "259a1e56ad2e",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-10-28\/811814014976_259a1e56ad2e11fe3d56_72.jpg",
+            "first_name": "",
+            "real_name": "Shubhadeep Roychowdhury",
+            "display_name": "Shubhadeep Roychowdhury",
+            "team": "T5TCAFTA9",
+            "name": "shubhadeeproychowdhur",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -680,7 +266,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://arxiv.org/ftp/arxiv/papers/2002/2002.06177.pdf"
+                                "url": "https:\/\/arxiv.org\/ftp\/arxiv\/papers\/2002\/2002.06177.pdf"
                             }
                         ]
                     }
@@ -693,37 +279,37 @@
     {
         "type": "message",
         "subtype": "thread_broadcast",
-        "text": "Long read so I just skimmed the first 10 pages. What he said about it being reliable reminds me of a talk Gery Sussman gave once. Actually this talk would be relevant to the group - <https://youtu.be/O3tVctB_VSU|https://youtu.be/O3tVctB_VSU> - one of the things he talks about that is important is that these programs should behave reasonably even if they aren\u2019t programmed in detail. ",
+        "text": "Long read so I just skimmed the first 10 pages. What he said about it being reliable reminds me of a talk Gery Sussman gave once. Actually this talk would be relevant to the group - <https:\/\/youtu.be\/O3tVctB_VSU|https:\/\/youtu.be\/O3tVctB_VSU> - one of the things he talks about that is important is that these programs should behave reasonably even if they aren’t programmed in detail. ",
         "user": "UKP3B2J5D",
         "ts": "1593860246.294900",
         "thread_ts": "1593794600.262800",
         "root": {
             "client_msg_id": "38784faf-80e6-4df4-8ea9-38091c104b04",
             "type": "message",
-            "text": "I don't necessarily agree with all the claims, but that's a cool demo: <https://twitter.com/Altimor/status/1278736953836400640?s=19|https://twitter.com/Altimor/status/1278736953836400640?s=19>",
+            "text": "I don't necessarily agree with all the claims, but that's a cool demo: <https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19|https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19>",
             "user": "U0136G8R8KG",
             "ts": "1593794600.262800",
             "team": "T5TCAFTA9",
             "attachments": [
                 {
-                    "fallback": "<https://twitter.com/Altimor|@Altimor>: GPT3 writing code. A compiler from natural language to code.\nPeople don't understand \u2014 this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https://player.vimeo.com/video/426819809> <https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png>",
+                    "fallback": "<https:\/\/twitter.com\/Altimor|@Altimor>: GPT3 writing code. A compiler from natural language to code.\nPeople don't understand — this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https:\/\/player.vimeo.com\/video\/426819809> <https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png>",
                     "ts": 1593709622,
                     "author_name": "Flo Crivello",
-                    "author_link": "https://twitter.com/Altimor/status/1278736953836400640",
-                    "author_icon": "https://pbs.twimg.com/profile_images/1014358626973069313/kuasBCIY_normal.jpg",
+                    "author_link": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640",
+                    "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1014358626973069313\/kuasBCIY_normal.jpg",
                     "author_subname": "@Altimor",
-                    "text": "GPT3 writing code. A compiler from natural language to code.\nPeople don't understand \u2014 this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https://player.vimeo.com/video/426819809> <https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png>",
+                    "text": "GPT3 writing code. A compiler from natural language to code.\nPeople don't understand — this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https:\/\/player.vimeo.com\/video\/426819809> <https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png>",
                     "service_name": "twitter",
-                    "service_url": "https://twitter.com/",
-                    "from_url": "https://twitter.com/Altimor/status/1278736953836400640?s=19",
-                    "image_url": "https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png",
+                    "service_url": "https:\/\/twitter.com\/",
+                    "from_url": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19",
+                    "image_url": "https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png",
                     "image_width": 874,
                     "image_height": 394,
                     "image_bytes": 145239,
                     "id": 1,
-                    "original_url": "https://twitter.com/Altimor/status/1278736953836400640?s=19",
+                    "original_url": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19",
                     "footer": "Twitter",
-                    "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                    "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
                 }
             ],
             "blocks": [
@@ -740,8 +326,8 @@
                                 },
                                 {
                                     "type": "link",
-                                    "url": "https://twitter.com/Altimor/status/1278736953836400640?s=19",
-                                    "text": "https://twitter.com/Altimor/status/1278736953836400640?s=19"
+                                    "url": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19",
+                                    "text": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19"
                                 }
                             ]
                         }
@@ -777,12 +363,12 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://youtu.be/O3tVctB_VSU",
-                                "text": "https://youtu.be/O3tVctB_VSU"
+                                "url": "https:\/\/youtu.be\/O3tVctB_VSU",
+                                "text": "https:\/\/youtu.be\/O3tVctB_VSU"
                             },
                             {
                                 "type": "text",
-                                "text": " - one of the things he talks about that is important is that these programs should behave reasonably even if they aren\u2019t programmed in detail. "
+                                "text": " - one of the things he talks about that is important is that these programs should behave reasonably even if they aren’t programmed in detail. "
                             }
                         ]
                     }
@@ -805,37 +391,37 @@
     {
         "type": "message",
         "subtype": "thread_broadcast",
-        "text": "Also there is this also this - <https://youtu.be/fAY0_pesZ6s|https://youtu.be/fAY0_pesZ6s> . We should probably be moving towards being as precise as we have to be with computers with our language too. In this video, Sussman talks about how Maths notation is horrible - and that's maths. Natural language is worse. He argues that the legacy of programming is teaching us how to think precisely. ",
+        "text": "Also there is this also this - <https:\/\/youtu.be\/fAY0_pesZ6s|https:\/\/youtu.be\/fAY0_pesZ6s> . We should probably be moving towards being as precise as we have to be with computers with our language too. In this video, Sussman talks about how Maths notation is horrible - and that's maths. Natural language is worse. He argues that the legacy of programming is teaching us how to think precisely. ",
         "user": "UKP3B2J5D",
         "ts": "1593862391.299700",
         "thread_ts": "1593794600.262800",
         "root": {
             "client_msg_id": "38784faf-80e6-4df4-8ea9-38091c104b04",
             "type": "message",
-            "text": "I don't necessarily agree with all the claims, but that's a cool demo: <https://twitter.com/Altimor/status/1278736953836400640?s=19|https://twitter.com/Altimor/status/1278736953836400640?s=19>",
+            "text": "I don't necessarily agree with all the claims, but that's a cool demo: <https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19|https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19>",
             "user": "U0136G8R8KG",
             "ts": "1593794600.262800",
             "team": "T5TCAFTA9",
             "attachments": [
                 {
-                    "fallback": "<https://twitter.com/Altimor|@Altimor>: GPT3 writing code. A compiler from natural language to code.\nPeople don't understand \u2014 this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https://player.vimeo.com/video/426819809> <https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png>",
+                    "fallback": "<https:\/\/twitter.com\/Altimor|@Altimor>: GPT3 writing code. A compiler from natural language to code.\nPeople don't understand — this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https:\/\/player.vimeo.com\/video\/426819809> <https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png>",
                     "ts": 1593709622,
                     "author_name": "Flo Crivello",
-                    "author_link": "https://twitter.com/Altimor/status/1278736953836400640",
-                    "author_icon": "https://pbs.twimg.com/profile_images/1014358626973069313/kuasBCIY_normal.jpg",
+                    "author_link": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640",
+                    "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1014358626973069313\/kuasBCIY_normal.jpg",
                     "author_subname": "@Altimor",
-                    "text": "GPT3 writing code. A compiler from natural language to code.\nPeople don't understand \u2014 this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https://player.vimeo.com/video/426819809> <https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png>",
+                    "text": "GPT3 writing code. A compiler from natural language to code.\nPeople don't understand — this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https:\/\/player.vimeo.com\/video\/426819809> <https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png>",
                     "service_name": "twitter",
-                    "service_url": "https://twitter.com/",
-                    "from_url": "https://twitter.com/Altimor/status/1278736953836400640?s=19",
-                    "image_url": "https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png",
+                    "service_url": "https:\/\/twitter.com\/",
+                    "from_url": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19",
+                    "image_url": "https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png",
                     "image_width": 874,
                     "image_height": 394,
                     "image_bytes": 145239,
                     "id": 1,
-                    "original_url": "https://twitter.com/Altimor/status/1278736953836400640?s=19",
+                    "original_url": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19",
                     "footer": "Twitter",
-                    "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                    "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
                 }
             ],
             "blocks": [
@@ -852,8 +438,8 @@
                                 },
                                 {
                                     "type": "link",
-                                    "url": "https://twitter.com/Altimor/status/1278736953836400640?s=19",
-                                    "text": "https://twitter.com/Altimor/status/1278736953836400640?s=19"
+                                    "url": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19",
+                                    "text": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640?s=19"
                                 }
                             ]
                         }
@@ -878,22 +464,22 @@
         "attachments": [
             {
                 "service_name": "YouTube",
-                "service_url": "https://www.youtube.com/",
+                "service_url": "https:\/\/www.youtube.com\/",
                 "title": "Legacy of Computers, Gerry Sussman | Lecture 1 of 1",
-                "title_link": "https://youtu.be/fAY0_pesZ6s",
+                "title_link": "https:\/\/youtu.be\/fAY0_pesZ6s",
                 "author_name": "aoflex",
-                "author_link": "https://www.youtube.com/user/aoflex",
-                "thumb_url": "https://i.ytimg.com/vi/fAY0_pesZ6s/hqdefault.jpg",
+                "author_link": "https:\/\/www.youtube.com\/user\/aoflex",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/fAY0_pesZ6s\/hqdefault.jpg",
                 "thumb_width": 480,
                 "thumb_height": 360,
                 "fallback": "YouTube Video: Legacy of Computers, Gerry Sussman | Lecture 1 of 1",
-                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https://www.youtube.com/embed/fAY0_pesZ6s?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https:\/\/www.youtube.com\/embed\/fAY0_pesZ6s?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
                 "video_html_width": 400,
                 "video_html_height": 300,
-                "from_url": "https://youtu.be/fAY0_pesZ6s",
-                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "from_url": "https:\/\/youtu.be\/fAY0_pesZ6s",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
                 "id": 1,
-                "original_url": "https://youtu.be/fAY0_pesZ6s"
+                "original_url": "https:\/\/youtu.be\/fAY0_pesZ6s"
             }
         ],
         "blocks": [
@@ -910,8 +496,8 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://youtu.be/fAY0_pesZ6s",
-                                "text": "https://youtu.be/fAY0_pesZ6s"
+                                "url": "https:\/\/youtu.be\/fAY0_pesZ6s",
+                                "text": "https:\/\/youtu.be\/fAY0_pesZ6s"
                             },
                             {
                                 "type": "text",
@@ -936,10 +522,23 @@
     {
         "client_msg_id": "61014cea-1f5c-4c1d-acd6-e7aaa38858cf",
         "type": "message",
-        "text": "Just found out about <https://calebporzio.com/sponsorware|Sponsorware>. It\u2019s sort of like MassDrop or Kickstarter but perhaps works better with software. Probably wouldn\u2019t work for every project, but seems like a good balance between openness and value capture",
+        "text": "Just found out about <https:\/\/calebporzio.com\/sponsorware|Sponsorware>. It’s sort of like MassDrop or Kickstarter but perhaps works better with software. Probably wouldn’t work for every project, but seems like a good balance between openness and value capture",
         "user": "UUK6Y29R8",
         "ts": "1593865032.300600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf65725e9d2b",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f65725e9d2b02fbacb71a82b561da43d.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "",
+            "real_name": "jeff tang",
+            "display_name": "jeff tang",
+            "team": "T5TCAFTA9",
+            "name": "tangj1122",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UUK6Y29R8",
             "ts": "1593865055.000000"
@@ -947,20 +546,20 @@
         "attachments": [
             {
                 "title": "Introducing Sponsorware: How A Small Open Source Package Increased My Salary By $11k in Two Days | Caleb Porzio",
-                "title_link": "https://calebporzio.com/sponsorware",
+                "title_link": "https:\/\/calebporzio.com\/sponsorware",
                 "text": "Caleb Porzio is a web developer.",
                 "fallback": "Introducing Sponsorware: How A Small Open Source Package Increased My Salary By $11k in Two Days | Caleb Porzio",
-                "from_url": "https://calebporzio.com/sponsorware",
-                "service_icon": "https://calebporzio.com/favicon-32x32.png",
+                "from_url": "https:\/\/calebporzio.com\/sponsorware",
+                "service_icon": "https:\/\/calebporzio.com\/favicon-32x32.png",
                 "service_name": "calebporzio.com",
                 "id": 1,
-                "original_url": "https://calebporzio.com/sponsorware"
+                "original_url": "https:\/\/calebporzio.com\/sponsorware"
             }
         ],
         "blocks": [
             {
                 "type": "rich_text",
-                "block_id": "5XRK/",
+                "block_id": "5XRK\/",
                 "elements": [
                     {
                         "type": "rich_text_section",
@@ -971,12 +570,12 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://calebporzio.com/sponsorware",
+                                "url": "https:\/\/calebporzio.com\/sponsorware",
                                 "text": "Sponsorware"
                             },
                             {
                                 "type": "text",
-                                "text": ". It\u2019s sort of like MassDrop or Kickstarter but perhaps works better with software. Probably wouldn\u2019t work for every project, but seems like a good balance between openness and value capture"
+                                "text": ". It’s sort of like MassDrop or Kickstarter but perhaps works better with software. Probably wouldn’t work for every project, but seems like a good balance between openness and value capture"
                             }
                         ]
                     }
@@ -996,7 +595,7 @@
                 "timestamp": 1593865736,
                 "name": "Screenshot 2020-07-04 at 13.14.14.png",
                 "title": "Screenshot 2020-07-04 at 13.14.14.png",
-                "mimetype": "image/png",
+                "mimetype": "image\/png",
                 "filetype": "png",
                 "pretty_type": "PNG",
                 "user": "UPVBV34EL",
@@ -1009,22 +608,22 @@
                 "public_url_shared": false,
                 "display_as_bot": false,
                 "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F0163PE1T55/screenshot_2020-07-04_at_13.14.14.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F0163PE1T55/download/screenshot_2020-07-04_at_13.14.14.png",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PE1T55-878cf822ed/screenshot_2020-07-04_at_13.14.14_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PE1T55-878cf822ed/screenshot_2020-07-04_at_13.14.14_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PE1T55-878cf822ed/screenshot_2020-07-04_at_13.14.14_360.png",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F0163PE1T55\/screenshot_2020-07-04_at_13.14.14.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F0163PE1T55\/download\/screenshot_2020-07-04_at_13.14.14.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PE1T55-878cf822ed\/screenshot_2020-07-04_at_13.14.14_64.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PE1T55-878cf822ed\/screenshot_2020-07-04_at_13.14.14_80.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PE1T55-878cf822ed\/screenshot_2020-07-04_at_13.14.14_360.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_360_w": 360,
                 "thumb_360_h": 160,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PE1T55-878cf822ed/screenshot_2020-07-04_at_13.14.14_480.png",
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PE1T55-878cf822ed\/screenshot_2020-07-04_at_13.14.14_480.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_480_w": 480,
                 "thumb_480_h": 213,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PE1T55-878cf822ed/screenshot_2020-07-04_at_13.14.14_160.png",
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PE1T55-878cf822ed\/screenshot_2020-07-04_at_13.14.14_160.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "original_w": 608,
                 "original_h": 270,
-                "thumb_tiny": "AwAVADCiB7ilK+4NIOORRuPqaAEopcn1NJQAUUUUALmlLEjBOabRQApJPWkoooAKKKKAP//Z",
-                "permalink": "https://futureofcoding.slack.com/files/UPVBV34EL/F0163PE1T55/screenshot_2020-07-04_at_13.14.14.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F0163PE1T55-2ba533b054",
+                "thumb_tiny": "AwAVADCiB7ilK+4NIOORRuPqaAEopcn1NJQAUUUUALmlLEjBOabRQApJPWkoooAKKKKAP\/\/Z",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/UPVBV34EL\/F0163PE1T55\/screenshot_2020-07-04_at_13.14.14.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F0163PE1T55-2ba533b054",
                 "is_starred": false,
                 "has_rich_preview": false
             }
@@ -1074,7 +673,7 @@
                 "timestamp": 1593865863,
                 "name": "Screenshot 2020-07-04 at 14.28.19.png",
                 "title": "Screenshot 2020-07-04 at 14.28.19.png",
-                "mimetype": "image/png",
+                "mimetype": "image\/png",
                 "filetype": "png",
                 "pretty_type": "PNG",
                 "user": "UPVBV34EL",
@@ -1087,34 +686,34 @@
                 "public_url_shared": false,
                 "display_as_bot": false,
                 "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F0163PF5CT1/screenshot_2020-07-04_at_14.28.19.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F0163PF5CT1/download/screenshot_2020-07-04_at_14.28.19.png",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_360.png",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F0163PF5CT1\/screenshot_2020-07-04_at_14.28.19.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F0163PF5CT1\/download\/screenshot_2020-07-04_at_14.28.19.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_64.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_80.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_360.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_360_w": 360,
                 "thumb_360_h": 142,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_480.png",
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_480.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_480_w": 480,
                 "thumb_480_h": 189,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_720.png",
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_160.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_720.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_720_w": 720,
                 "thumb_720_h": 284,
-                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_800.png",
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_800.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_800_w": 800,
                 "thumb_800_h": 316,
-                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_960.png",
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_960.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_960_w": 960,
                 "thumb_960_h": 379,
-                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163PF5CT1-efa4db8cd3/screenshot_2020-07-04_at_14.28.19_1024.png",
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163PF5CT1-efa4db8cd3\/screenshot_2020-07-04_at_14.28.19_1024.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_1024_w": 1024,
                 "thumb_1024_h": 404,
                 "original_w": 1454,
                 "original_h": 574,
-                "thumb_tiny": "AwASADCkMkdjSUqkDrSEjNABg0YozSUALijFJRQAUUUUAFFFFABRRRQB/9k=",
-                "permalink": "https://futureofcoding.slack.com/files/UPVBV34EL/F0163PF5CT1/screenshot_2020-07-04_at_14.28.19.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F0163PF5CT1-0c0bfcbb59",
+                "thumb_tiny": "AwASADCkMkdjSUqkDrSEjNABg0YozSUALijFJRQAUUUUAFFFFABRRRQB\/9k=",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/UPVBV34EL\/F0163PF5CT1\/screenshot_2020-07-04_at_14.28.19.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F0163PF5CT1-0c0bfcbb59",
                 "is_starred": false,
                 "has_rich_preview": false
             }
@@ -1129,10 +728,23 @@
     {
         "client_msg_id": "16db5041-5229-4fab-8d27-aa09c760f8fc",
         "type": "message",
-        "text": "awesome! datalog rules\u2014and i think it\u2019s super amenable to graphical user interfaces",
+        "text": "awesome! datalog rules—and i think it’s super amenable to graphical user interfaces",
         "user": "UHWC9PXBL",
         "ts": "1593869769.302000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1143,7 +755,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "awesome! datalog rules\u2014and i think it\u2019s super amenable to graphical user interfaces"
+                                "text": "awesome! datalog rules—and i think it’s super amenable to graphical user interfaces"
                             }
                         ]
                     }
@@ -1156,10 +768,23 @@
     {
         "client_msg_id": "1D2AC6D0-08E2-452C-B9E5-8E572C7FFA84",
         "type": "message",
-        "text": "Yeah. Also seems like a lot of people are fans of tabNine so I\u2019m going to try it out. Advanced autocomplete is pretty cool.",
+        "text": "Yeah. Also seems like a lot of people are fans of tabNine so I’m going to try it out. Advanced autocomplete is pretty cool.",
         "user": "UKP3B2J5D",
         "ts": "1593872496.303700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "4980e1f3e51a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-03\/1220847671058_4980e1f3e51a273b630a_72.png",
+            "first_name": "Ope",
+            "real_name": "Ope",
+            "display_name": "opeispo",
+            "team": "T5TCAFTA9",
+            "name": "ogunks900",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1170,7 +795,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "Yeah. Also seems like a lot of people are fans of tabNine so I\u2019m going to try it out. Advanced autocomplete is pretty cool."
+                                "text": "Yeah. Also seems like a lot of people are fans of tabNine so I’m going to try it out. Advanced autocomplete is pretty cool."
                             }
                         ]
                     }
@@ -1187,6 +812,19 @@
         "user": "UJ6LDMMN0",
         "ts": "1593873937.309500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "426cd5067da7",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-26\/607834329346_426cd5067da7fc8c6933_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UJ6LDMMN0",
             "ts": "1593873968.000000"
@@ -1239,39 +877,52 @@
     {
         "client_msg_id": "2420b5ee-7b87-44c2-b8f6-4f7aaedfd1d9",
         "type": "message",
-        "text": "<https://twitter.com/KevlinHenney/status/1279368060336553985?s=19|https://twitter.com/KevlinHenney/status/1279368060336553985?s=19>",
+        "text": "<https:\/\/twitter.com\/KevlinHenney\/status\/1279368060336553985?s=19|https:\/\/twitter.com\/KevlinHenney\/status\/1279368060336553985?s=19>",
         "user": "U0136G8R8KG",
         "ts": "1593879041.310200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gd2caf630e2e",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/d2caf630e2e75cb2177deb9da5798424.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Xandor Schiefer",
+            "display_name": "Xandor Schiefer",
+            "team": "T5TCAFTA9",
+            "name": "me1539",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
-                "fallback": "<https://twitter.com/KevlinHenney|@KevlinHenney>: This is neat. But people don't understand: this really doesn't change much at all. <https://twitter.com/Altimor/status/1278736953836400640>",
+                "fallback": "<https:\/\/twitter.com\/KevlinHenney|@KevlinHenney>: This is neat. But people don't understand: this really doesn't change much at all. <https:\/\/twitter.com\/Altimor\/status\/1278736953836400640>",
                 "ts": 1593860089,
                 "author_name": "Kevlin Henney",
-                "author_link": "https://twitter.com/KevlinHenney/status/1279368060336553985",
-                "author_icon": "https://pbs.twimg.com/profile_images/1452748283/DSC_0065__Reduced__Cropped__normal.jpg",
+                "author_link": "https:\/\/twitter.com\/KevlinHenney\/status\/1279368060336553985",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1452748283\/DSC_0065__Reduced__Cropped__normal.jpg",
                 "author_subname": "@KevlinHenney",
-                "text": "This is neat. But people don't understand: this really doesn't change much at all. <https://twitter.com/Altimor/status/1278736953836400640>",
+                "text": "This is neat. But people don't understand: this really doesn't change much at all. <https:\/\/twitter.com\/Altimor\/status\/1278736953836400640>",
                 "service_name": "twitter",
-                "service_url": "https://twitter.com/",
-                "from_url": "https://twitter.com/KevlinHenney/status/1279368060336553985?s=19",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/KevlinHenney\/status\/1279368060336553985?s=19",
                 "id": 1,
-                "original_url": "https://twitter.com/KevlinHenney/status/1279368060336553985?s=19",
+                "original_url": "https:\/\/twitter.com\/KevlinHenney\/status\/1279368060336553985?s=19",
                 "footer": "Twitter",
-                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
             },
             {
-                "fallback": "<https://twitter.com/Altimor|@Altimor>: GPT3 writing code. A compiler from natural language to code.\nPeople don't understand \u2014 this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https://player.vimeo.com/video/426819809> <https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png>",
+                "fallback": "<https:\/\/twitter.com\/Altimor|@Altimor>: GPT3 writing code. A compiler from natural language to code.\nPeople don't understand — this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https:\/\/player.vimeo.com\/video\/426819809> <https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png>",
                 "ts": 1593709622,
                 "author_name": "Flo Crivello",
-                "author_link": "https://twitter.com/Altimor/status/1278736953836400640",
-                "author_icon": "https://pbs.twimg.com/profile_images/1014358626973069313/kuasBCIY_normal.jpg",
+                "author_link": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1014358626973069313\/kuasBCIY_normal.jpg",
                 "author_subname": "@Altimor",
-                "text": "GPT3 writing code. A compiler from natural language to code.\nPeople don't understand \u2014 this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https://player.vimeo.com/video/426819809> <https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png>",
+                "text": "GPT3 writing code. A compiler from natural language to code.\nPeople don't understand — this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https:\/\/player.vimeo.com\/video\/426819809> <https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png>",
                 "service_name": "twitter",
-                "service_url": "https://twitter.com/",
-                "from_url": "https://twitter.com/Altimor/status/1278736953836400640",
-                "image_url": "https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640",
+                "image_url": "https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png",
                 "image_width": 874,
                 "image_height": 394,
                 "image_bytes": 145239,
@@ -1279,7 +930,7 @@
                 "color": "32BBF3",
                 "id": 2,
                 "footer": "Twitter",
-                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
             }
         ],
         "blocks": [
@@ -1292,8 +943,8 @@
                         "elements": [
                             {
                                 "type": "link",
-                                "url": "https://twitter.com/KevlinHenney/status/1279368060336553985?s=19",
-                                "text": "https://twitter.com/KevlinHenney/status/1279368060336553985?s=19"
+                                "url": "https:\/\/twitter.com\/KevlinHenney\/status\/1279368060336553985?s=19",
+                                "text": "https:\/\/twitter.com\/KevlinHenney\/status\/1279368060336553985?s=19"
                             }
                         ]
                     }
@@ -1319,6 +970,19 @@
         "user": "UT9TWSZB5",
         "ts": "1593880779.310600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1346,6 +1010,19 @@
         "user": "UT9TWSZB5",
         "ts": "1593880788.311000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1369,10 +1046,23 @@
     {
         "client_msg_id": "3296509f-30d2-46d6-b7aa-d2c7be267794",
         "type": "message",
-        "text": "I\u2019ve played with clojure but not deployed to production",
+        "text": "I’ve played with clojure but not deployed to production",
         "user": "UHWC9PXBL",
         "ts": "1593880826.311200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1383,7 +1073,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "I\u2019ve played with clojure but not deployed to production"
+                                "text": "I’ve played with clojure but not deployed to production"
                             }
                         ]
                     }
@@ -1400,6 +1090,19 @@
         "user": "UHWC9PXBL",
         "ts": "1593880843.311400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1423,10 +1126,23 @@
     {
         "client_msg_id": "F6C17070-4846-4309-9FE6-FECBCDE69348",
         "type": "message",
-        "text": "Yeah, I\u2019ve struggle to get into it. I love rich hickey and his talks though. But getting a full stack dev environment and dealing with the JVM has been a hurdle. Plus I\u2019ve become a TypeScript wizard so it\u2019s hard to walk away from the type system.  ",
+        "text": "Yeah, I’ve struggle to get into it. I love rich hickey and his talks though. But getting a full stack dev environment and dealing with the JVM has been a hurdle. Plus I’ve become a TypeScript wizard so it’s hard to walk away from the type system.  ",
         "user": "UT9TWSZB5",
         "ts": "1593881096.313800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1437,7 +1153,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "Yeah, I\u2019ve struggle to get into it. I love rich hickey and his talks though. But getting a full stack dev environment and dealing with the JVM has been a hurdle. Plus I\u2019ve become a TypeScript wizard so it\u2019s hard to walk away from the type system.  "
+                                "text": "Yeah, I’ve struggle to get into it. I love rich hickey and his talks though. But getting a full stack dev environment and dealing with the JVM has been a hurdle. Plus I’ve become a TypeScript wizard so it’s hard to walk away from the type system.  "
                             }
                         ]
                     }
@@ -1450,10 +1166,23 @@
     {
         "client_msg_id": "52276701-85ad-4574-bb20-0acf5cbc3bda",
         "type": "message",
-        "text": "if you know of any good introductions to typescript i\u2019d love to get into it",
+        "text": "if you know of any good introductions to typescript i’d love to get into it",
         "user": "UHWC9PXBL",
         "ts": "1593881826.314100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1464,7 +1193,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "if you know of any good introductions to typescript i\u2019d love to get into it"
+                                "text": "if you know of any good introductions to typescript i’d love to get into it"
                             }
                         ]
                     }
@@ -1477,10 +1206,23 @@
     {
         "client_msg_id": "4564E18C-0209-4DB5-9E5D-17F3ABD869D5",
         "type": "message",
-        "text": "Oh it\u2019s amazing. Honestly, just read the documentation on the website and start off with all strictness off. Then eventually turn strict null check on and you can learn all the ins and outs at your own pace without holding you back. ",
+        "text": "Oh it’s amazing. Honestly, just read the documentation on the website and start off with all strictness off. Then eventually turn strict null check on and you can learn all the ins and outs at your own pace without holding you back. ",
         "user": "UT9TWSZB5",
         "ts": "1593882114.315800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1491,7 +1233,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "Oh it\u2019s amazing. Honestly, just read the documentation on the website and start off with all strictness off. Then eventually turn strict null check on and you can learn all the ins and outs at your own pace without holding you back. "
+                                "text": "Oh it’s amazing. Honestly, just read the documentation on the website and start off with all strictness off. Then eventually turn strict null check on and you can learn all the ins and outs at your own pace without holding you back. "
                             }
                         ]
                     }
@@ -1508,6 +1250,19 @@
         "user": "UT9TWSZB5",
         "ts": "1593882146.316000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1531,10 +1286,23 @@
     {
         "client_msg_id": "c2528389-67d4-4e41-9683-75c7ecffb7e3",
         "type": "message",
-        "text": "ah thank you! my biggest hurdle has been tooling\u2026 I\u2019ve recently become addicted to writing all of my code interactively in the js console lol",
+        "text": "ah thank you! my biggest hurdle has been tooling… I’ve recently become addicted to writing all of my code interactively in the js console lol",
         "user": "UHWC9PXBL",
         "ts": "1593882751.316200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1545,7 +1313,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "ah thank you! my biggest hurdle has been tooling\u2026 I\u2019ve recently become addicted to writing all of my code interactively in the js console lol"
+                                "text": "ah thank you! my biggest hurdle has been tooling… I’ve recently become addicted to writing all of my code interactively in the js console lol"
                             }
                         ]
                     }
@@ -1562,6 +1330,19 @@
         "user": "UT9TWSZB5",
         "ts": "1593882808.317400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1585,17 +1366,30 @@
     {
         "client_msg_id": "F5ED1210-83BD-431C-8AE8-730B87C48570",
         "type": "message",
-        "text": "Here\u2019s the starter I use: <https://github.com/ccorcos/typescript-boilerplate|https://github.com/ccorcos/typescript-boilerplate>",
+        "text": "Here’s the starter I use: <https:\/\/github.com\/ccorcos\/typescript-boilerplate|https:\/\/github.com\/ccorcos\/typescript-boilerplate>",
         "user": "UT9TWSZB5",
         "ts": "1593882858.317900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
-                "fallback": "ccorcos/typescript-boilerplate",
-                "title": "ccorcos/typescript-boilerplate",
-                "footer": "<https://github.com/ccorcos/typescript-boilerplate|ccorcos/typescript-boilerplate>",
+                "fallback": "ccorcos\/typescript-boilerplate",
+                "title": "ccorcos\/typescript-boilerplate",
+                "footer": "<https:\/\/github.com\/ccorcos\/typescript-boilerplate|ccorcos\/typescript-boilerplate>",
                 "id": 1,
-                "footer_icon": "https://github.githubassets.com/favicon.ico",
+                "footer_icon": "https:\/\/github.githubassets.com\/favicon.ico",
                 "ts": 1488265596,
                 "color": "24292f",
                 "fields": [
@@ -1615,7 +1409,7 @@
                     "fields"
                 ],
                 "bot_id": "B011KHY4N3Y",
-                "app_unfurl_url": "https://github.com/ccorcos/typescript-boilerplate",
+                "app_unfurl_url": "https:\/\/github.com\/ccorcos\/typescript-boilerplate",
                 "is_app_unfurl": true
             }
         ],
@@ -1629,12 +1423,12 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "Here\u2019s the starter I use: "
+                                "text": "Here’s the starter I use: "
                             },
                             {
                                 "type": "link",
-                                "url": "https://github.com/ccorcos/typescript-boilerplate",
-                                "text": "https://github.com/ccorcos/typescript-boilerplate"
+                                "url": "https:\/\/github.com\/ccorcos\/typescript-boilerplate",
+                                "text": "https:\/\/github.com\/ccorcos\/typescript-boilerplate"
                             }
                         ]
                     }
@@ -1656,10 +1450,23 @@
     {
         "client_msg_id": "A8A20995-4931-48FC-BAA0-EE6740110623",
         "type": "message",
-        "text": "It\u2019s pretty simple. No backend. I would open up the tsconfig file and turn off any of the strict flags. And also check if any packages could be upgraded. ",
+        "text": "It’s pretty simple. No backend. I would open up the tsconfig file and turn off any of the strict flags. And also check if any packages could be upgraded. ",
         "user": "UT9TWSZB5",
         "ts": "1593882898.319300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9cb6f99c1d46",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-05\/941640103046_9cb6f99c1d4661569649_72.jpg",
+            "first_name": "",
+            "real_name": "Chet Corcos",
+            "display_name": "Chet Corcos",
+            "team": "T5TCAFTA9",
+            "name": "ccorcos",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1670,7 +1477,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "It\u2019s pretty simple. No backend. I would open up the tsconfig file and turn off any of the strict flags. And also check if any packages could be upgraded. "
+                                "text": "It’s pretty simple. No backend. I would open up the tsconfig file and turn off any of the strict flags. And also check if any packages could be upgraded. "
                             }
                         ]
                     }
@@ -1683,10 +1490,23 @@
     {
         "client_msg_id": "904177d5-6e50-4422-bf81-3a09cfbb4256",
         "type": "message",
-        "text": "can someone explain to me what pragmas are in smalltalk in very concrete terms? I\u2019m trying out gtoolkit",
+        "text": "can someone explain to me what pragmas are in smalltalk in very concrete terms? I’m trying out gtoolkit",
         "user": "UHWC9PXBL",
         "ts": "1593885095.320000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1697,7 +1517,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "can someone explain to me what pragmas are in smalltalk in very concrete terms? I\u2019m trying out gtoolkit"
+                                "text": "can someone explain to me what pragmas are in smalltalk in very concrete terms? I’m trying out gtoolkit"
                             }
                         ]
                     }
@@ -1712,15 +1532,94 @@
             "UHWC9PXBL",
             "UE1JQM9HQ"
         ],
+        "replies": [
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1593885203.320100"
+            },
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1593885331.320300"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1593885443.320800"
+            },
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1593885517.321000"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1593885567.321200"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1593885638.321400"
+            },
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1593885673.321700"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1593885685.321900"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1593885703.322100"
+            },
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1593885706.322300"
+            },
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1593885742.322600"
+            },
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1593885858.322800"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1593886078.323300"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1593886097.323500"
+            },
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1593886943.324100"
+            },
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1593886977.324500"
+            }
+        ],
         "subscribed": false
     },
     {
         "client_msg_id": "0666c650-ddc0-4f5f-8d09-61445da93360",
         "type": "message",
-        "text": "also, <@UE1JQM9HQ> i\u2019d be stoked if you could add control of the slideshow with left and right arrows instead of just mouse. if you wanted, I\u2019d even love to walk through implementing it in a recording for gtoolkit intro materials",
+        "text": "also, <@UE1JQM9HQ> i’d be stoked if you could add control of the slideshow with left and right arrows instead of just mouse. if you wanted, I’d even love to walk through implementing it in a recording for gtoolkit intro materials",
         "user": "UHWC9PXBL",
         "ts": "1593885203.320100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1739,7 +1638,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " i\u2019d be stoked if you could add control of the slideshow with left and right arrows instead of just mouse. if you wanted, I\u2019d even love to walk through implementing it in a recording for gtoolkit intro materials"
+                                "text": " i’d be stoked if you could add control of the slideshow with left and right arrows instead of just mouse. if you wanted, I’d even love to walk through implementing it in a recording for gtoolkit intro materials"
                             }
                         ]
                     }
@@ -1752,10 +1651,23 @@
     {
         "client_msg_id": "3720c56b-5a21-4fea-9354-f7959885a625",
         "type": "message",
-        "text": "<@UHWC9PXBL> pragmas are called annotations in other languages. In Pharo, pragmas can be attached to methods. This paper describes the mechanism in a little more details: <https://hal.inria.fr/hal-01353592/document>.",
+        "text": "<@UHWC9PXBL> pragmas are called annotations in other languages. In Pharo, pragmas can be attached to methods. This paper describes the mechanism in a little more details: <https:\/\/hal.inria.fr\/hal-01353592\/document>.",
         "user": "UE1JQM9HQ",
         "ts": "1593885331.320300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1774,7 +1686,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://hal.inria.fr/hal-01353592/document"
+                                "url": "https:\/\/hal.inria.fr\/hal-01353592\/document"
                             },
                             {
                                 "type": "text",
@@ -1791,39 +1703,52 @@
     {
         "client_msg_id": "8230a5bd-15fa-4131-8057-036fc628d418",
         "type": "message",
-        "text": "Here is my take on it:\n<https://twitter.com/girba/status/1279298566981378048>",
+        "text": "Here is my take on it:\n<https:\/\/twitter.com\/girba\/status\/1279298566981378048>",
         "user": "UE1JQM9HQ",
         "ts": "1593885384.320500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
-                "fallback": "<https://twitter.com/girba|@girba>: This is one impressive demo.\n\nIt should not be judged by the utility of what it can do now, but by how seamless it appears to be already.\n\n1/ <https://twitter.com/Altimor/status/1278736953836400640>",
+                "fallback": "<https:\/\/twitter.com\/girba|@girba>: This is one impressive demo.\n\nIt should not be judged by the utility of what it can do now, but by how seamless it appears to be already.\n\n1\/ <https:\/\/twitter.com\/Altimor\/status\/1278736953836400640>",
                 "ts": 1593843521,
                 "author_name": "Tudor Girba",
-                "author_link": "https://twitter.com/girba/status/1279298566981378048",
-                "author_icon": "https://pbs.twimg.com/profile_images/1370148445/me-closeup-square_normal.jpg",
+                "author_link": "https:\/\/twitter.com\/girba\/status\/1279298566981378048",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1370148445\/me-closeup-square_normal.jpg",
                 "author_subname": "@girba",
-                "text": "This is one impressive demo.\n\nIt should not be judged by the utility of what it can do now, but by how seamless it appears to be already.\n\n1/ <https://twitter.com/Altimor/status/1278736953836400640>",
+                "text": "This is one impressive demo.\n\nIt should not be judged by the utility of what it can do now, but by how seamless it appears to be already.\n\n1\/ <https:\/\/twitter.com\/Altimor\/status\/1278736953836400640>",
                 "service_name": "twitter",
-                "service_url": "https://twitter.com/",
-                "from_url": "https://twitter.com/girba/status/1279298566981378048",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/girba\/status\/1279298566981378048",
                 "id": 1,
-                "original_url": "https://twitter.com/girba/status/1279298566981378048",
+                "original_url": "https:\/\/twitter.com\/girba\/status\/1279298566981378048",
                 "footer": "Twitter",
-                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
             },
             {
-                "fallback": "<https://twitter.com/Altimor|@Altimor>: GPT3 writing code. A compiler from natural language to code.\nPeople don't understand \u2014 this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https://player.vimeo.com/video/426819809> <https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png>",
+                "fallback": "<https:\/\/twitter.com\/Altimor|@Altimor>: GPT3 writing code. A compiler from natural language to code.\nPeople don't understand — this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https:\/\/player.vimeo.com\/video\/426819809> <https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png>",
                 "ts": 1593709622,
                 "author_name": "Flo Crivello",
-                "author_link": "https://twitter.com/Altimor/status/1278736953836400640",
-                "author_icon": "https://pbs.twimg.com/profile_images/1014358626973069313/kuasBCIY_normal.jpg",
+                "author_link": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1014358626973069313\/kuasBCIY_normal.jpg",
                 "author_subname": "@Altimor",
-                "text": "GPT3 writing code. A compiler from natural language to code.\nPeople don't understand \u2014 this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https://player.vimeo.com/video/426819809> <https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png>",
+                "text": "GPT3 writing code. A compiler from natural language to code.\nPeople don't understand — this will change absolutely everything. We're decoupling human horsepower from code production. The intellectual equivalent of the discovery of the engine. <https:\/\/player.vimeo.com\/video\/426819809> <https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png>",
                 "service_name": "twitter",
-                "service_url": "https://twitter.com/",
-                "from_url": "https://twitter.com/Altimor/status/1278736953836400640",
-                "image_url": "https://pbs.twimg.com/media/Eb78a5IUYAAKXMn.png",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/Altimor\/status\/1278736953836400640",
+                "image_url": "https:\/\/pbs.twimg.com\/media\/Eb78a5IUYAAKXMn.png",
                 "image_width": 874,
                 "image_height": 394,
                 "image_bytes": 145239,
@@ -1831,7 +1756,7 @@
                 "color": "32BBF3",
                 "id": 2,
                 "footer": "Twitter",
-                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
             }
         ],
         "blocks": [
@@ -1848,7 +1773,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://twitter.com/girba/status/1279298566981378048"
+                                "url": "https:\/\/twitter.com\/girba\/status\/1279298566981378048"
                             }
                         ]
                     }
@@ -1870,10 +1795,23 @@
     {
         "client_msg_id": "025491b8-b8b5-4502-b18e-9192ded220d6",
         "type": "message",
-        "text": "I waas trying to understand that paper\u2014are they intended purely for smalltalky reflection, eg \u201clist all the methods in the image with the &lt;3d-viewable&gt; pragma\u201d? or does it do other stuff? Do they get evaluated? I understand that they involve message sends, but I\u2019m having trouble wrapping my head around how/why they\u2019re dynamic",
+        "text": "I waas trying to understand that paper—are they intended purely for smalltalky reflection, eg “list all the methods in the image with the &lt;3d-viewable&gt; pragma”? or does it do other stuff? Do they get evaluated? I understand that they involve message sends, but I’m having trouble wrapping my head around how\/why they’re dynamic",
         "user": "UHWC9PXBL",
         "ts": "1593885443.320800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1884,7 +1822,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "I waas trying to understand that paper\u2014are they intended purely for smalltalky reflection, eg \u201clist all the methods in the image with the <3d-viewable> pragma\u201d? or does it do other stuff? Do they get evaluated? I understand that they involve message sends, but I\u2019m having trouble wrapping my head around how/why they\u2019re dynamic"
+                                "text": "I waas trying to understand that paper—are they intended purely for smalltalky reflection, eg “list all the methods in the image with the <3d-viewable> pragma”? or does it do other stuff? Do they get evaluated? I understand that they involve message sends, but I’m having trouble wrapping my head around how\/why they’re dynamic"
                             }
                         ]
                     }
@@ -1901,6 +1839,19 @@
         "user": "UE1JQM9HQ",
         "ts": "1593885517.321000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1924,10 +1875,23 @@
     {
         "client_msg_id": "99a42be9-a60a-4da4-9bed-36c8942b0ec2",
         "type": "message",
-        "text": "eg \u201cit may be queried for senders, executed, etc\u201d\u2014does that mean objects who use the pragmas to query objects in the image, or the objects with the pragmas themselves?",
+        "text": "eg “it may be queried for senders, executed, etc”—does that mean objects who use the pragmas to query objects in the image, or the objects with the pragmas themselves?",
         "user": "UHWC9PXBL",
         "ts": "1593885567.321200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1938,7 +1902,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "eg \u201cit may be queried for senders, executed, etc\u201d\u2014does that mean objects who use the pragmas to query objects in the image, or the objects with the pragmas themselves?"
+                                "text": "eg “it may be queried for senders, executed, etc”—does that mean objects who use the pragmas to query objects in the image, or the objects with the pragmas themselves?"
                             }
                         ]
                     }
@@ -1951,10 +1915,23 @@
     {
         "client_msg_id": "3cb73067-4900-49cb-b0fb-d93bec9bc063",
         "type": "message",
-        "text": "```LargeInteger &gt;&gt; // anInteger\n\n\"Primitive. Divide the receiver by the argument and return the result. Round the result down towards negative infinity to make it a whole integer. Fail if the argument is 0. Fail if either the argument or the result is not a SmallInteger or a LargePositiveInteger less than 2-to-the-30th (1073741824).\"\n\n&lt;primitive: 32&gt;\n^ super // anInteger```\nso\u2026 i get that you\u2019re sending `32` to the object `primitive` \u2026 when does that message send get executed? on instance creation? or just during queries?",
+        "text": "```LargeInteger &gt;&gt; \/\/ anInteger\n\n\"Primitive. Divide the receiver by the argument and return the result. Round the result down towards negative infinity to make it a whole integer. Fail if the argument is 0. Fail if either the argument or the result is not a SmallInteger or a LargePositiveInteger less than 2-to-the-30th (1073741824).\"\n\n&lt;primitive: 32&gt;\n^ super \/\/ anInteger```\nso… i get that you’re sending `32` to the object `primitive` … when does that message send get executed? on instance creation? or just during queries?",
         "user": "UHWC9PXBL",
         "ts": "1593885638.321400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UHWC9PXBL",
             "ts": "1593885659.000000"
@@ -1969,7 +1946,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "LargeInteger >> // anInteger\n\n\"Primitive. Divide the receiver by the argument and return the result. Round the result down towards negative infinity to make it a whole integer. Fail if the argument is 0. Fail if either the argument or the result is not a SmallInteger or a LargePositiveInteger less than 2-to-the-30th (1073741824).\"\n\n<primitive: 32>\n^ super // anInteger"
+                                "text": "LargeInteger >> \/\/ anInteger\n\n\"Primitive. Divide the receiver by the argument and return the result. Round the result down towards negative infinity to make it a whole integer. Fail if the argument is 0. Fail if either the argument or the result is not a SmallInteger or a LargePositiveInteger less than 2-to-the-30th (1073741824).\"\n\n<primitive: 32>\n^ super \/\/ anInteger"
                             }
                         ]
                     },
@@ -1978,7 +1955,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "so\u2026 i get that you\u2019re sending "
+                                "text": "so… i get that you’re sending "
                             },
                             {
                                 "type": "text",
@@ -2000,7 +1977,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " \u2026 when does that message send get executed? on instance creation? or just during queries?"
+                                "text": " … when does that message send get executed? on instance creation? or just during queries?"
                             }
                         ]
                     }
@@ -2017,6 +1994,19 @@
         "user": "UE1JQM9HQ",
         "ts": "1593885673.321700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2062,10 +2052,23 @@
     {
         "client_msg_id": "8bc9cf6d-6bbd-44bd-afe7-2836fa19cdb2",
         "type": "message",
-        "text": "hooo boy i\u2019m very turned around",
+        "text": "hooo boy i’m very turned around",
         "user": "UHWC9PXBL",
         "ts": "1593885685.321900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2076,7 +2079,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "hooo boy i\u2019m very turned around"
+                                "text": "hooo boy i’m very turned around"
                             }
                         ]
                     }
@@ -2093,6 +2096,19 @@
         "user": "UHWC9PXBL",
         "ts": "1593885703.322100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2120,6 +2136,19 @@
         "user": "UE1JQM9HQ",
         "ts": "1593885706.322300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2158,6 +2187,19 @@
         "user": "UE1JQM9HQ",
         "ts": "1593885742.322600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2206,7 +2248,7 @@
                 "timestamp": 1593885854,
                 "name": "Screen Shot 2020-07-04 at 8.03.53 PM.png",
                 "title": "Screen Shot 2020-07-04 at 8.03.53 PM.png",
-                "mimetype": "image/png",
+                "mimetype": "image\/png",
                 "filetype": "png",
                 "pretty_type": "PNG",
                 "user": "UE1JQM9HQ",
@@ -2219,34 +2261,34 @@
                 "public_url_shared": false,
                 "display_as_bot": false,
                 "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F0178FSNFNC/screen_shot_2020-07-04_at_8.03.53_pm.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F0178FSNFNC/download/screen_shot_2020-07-04_at_8.03.53_pm.png",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_360.png",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F0178FSNFNC\/screen_shot_2020-07-04_at_8.03.53_pm.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F0178FSNFNC\/download\/screen_shot_2020-07-04_at_8.03.53_pm.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_64.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_80.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_360.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_360_w": 360,
                 "thumb_360_h": 242,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_480.png",
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_480.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_480_w": 480,
                 "thumb_480_h": 322,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_720.png",
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_160.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_720.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_720_w": 720,
                 "thumb_720_h": 483,
-                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_800.png",
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_800.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_800_w": 800,
                 "thumb_800_h": 537,
-                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_960.png",
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_960.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_960_w": 960,
                 "thumb_960_h": 644,
-                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F0178FSNFNC-51843ade58/screen_shot_2020-07-04_at_8.03.53_pm_1024.png",
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0178FSNFNC-51843ade58\/screen_shot_2020-07-04_at_8.03.53_pm_1024.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_1024_w": 1024,
                 "thumb_1024_h": 687,
                 "original_w": 2784,
                 "original_h": 1868,
-                "thumb_tiny": "AwAgADCSytoZLVGdFLHOSR71P9ig/wCea/lSad/x4x/j/OrNAFf7FB/zzX8qb9kg/wCeI/IVapo4oAg+yQf88h+VQXttFHaOyxgEY5x71fqvqP8Ax4yfh/OgA07/AI8Y/wAf51ZrNs76GG2SNy24Zzge9Tf2nb+rf980AXKbn2qr/adv6t/3zSDUrf1b/vmgC7VXUf8Ajyk/D+dN/tO39W/KoLu+hmtnRC244xke9AH/2Q==",
-                "permalink": "https://futureofcoding.slack.com/files/UE1JQM9HQ/F0178FSNFNC/screen_shot_2020-07-04_at_8.03.53_pm.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F0178FSNFNC-e8028e03fa",
+                "thumb_tiny": "AwAgADCSytoZLVGdFLHOSR71P9ig\/wCea\/lSad\/x4x\/j\/OrNAFf7FB\/zzX8qb9kg\/wCeI\/IVapo4oAg+yQf88h+VQXttFHaOyxgEY5x71fqvqP8Ax4yfh\/OgA07\/AI8Y\/wAf51ZrNs76GG2SNy24Zzge9Tf2nb+rf980AXKbn2qr\/adv6t\/3zSDUrf1b\/vmgC7VXUf8Ajyk\/D+dN\/tO39W\/KoLu+hmtnRC244xke9AH\/2Q==",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/UE1JQM9HQ\/F0178FSNFNC\/screen_shot_2020-07-04_at_8.03.53_pm.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F0178FSNFNC-e8028e03fa",
                 "is_starred": false,
                 "has_rich_preview": false
             }
@@ -2289,10 +2331,23 @@
     {
         "client_msg_id": "6e52049d-e474-4b8b-8c2f-111aced697e4",
         "type": "message",
-        "text": "so in that example, you\u2019re sending the symbol `primitive` the argument `gtPragmas`  and getting a list of all the methods that use primitives?",
+        "text": "so in that example, you’re sending the symbol `primitive` the argument `gtPragmas`  and getting a list of all the methods that use primitives?",
         "user": "UHWC9PXBL",
         "ts": "1593886078.323300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2303,7 +2358,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "so in that example, you\u2019re sending the symbol "
+                                "text": "so in that example, you’re sending the symbol "
                             },
                             {
                                 "type": "text",
@@ -2338,10 +2393,23 @@
     {
         "client_msg_id": "e299d666-203d-44d4-abd3-a7161895edbd",
         "type": "message",
-        "text": "sorry, I need to break stuff down a whole lot in order to make sure i\u2019m not using the wrong schema when i\u2019m trying to learn something at first",
+        "text": "sorry, I need to break stuff down a whole lot in order to make sure i’m not using the wrong schema when i’m trying to learn something at first",
         "user": "UHWC9PXBL",
         "ts": "1593886097.323500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2352,7 +2420,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "sorry, I need to break stuff down a whole lot in order to make sure i\u2019m not using the wrong schema when i\u2019m trying to learn something at first"
+                                "text": "sorry, I need to break stuff down a whole lot in order to make sure i’m not using the wrong schema when i’m trying to learn something at first"
                             }
                         ]
                     }
@@ -2364,7 +2432,7 @@
     },
     {
         "type": "message",
-        "text": "yes. this is a fluent API. In this case, it\u2019s implemented like this:",
+        "text": "yes. this is a fluent API. In this case, it’s implemented like this:",
         "files": [
             {
                 "id": "F0163UEHJ3Z",
@@ -2372,7 +2440,7 @@
                 "timestamp": 1593886934,
                 "name": "Screen Shot 2020-07-04 at 8.22.05 PM.png",
                 "title": "Screen Shot 2020-07-04 at 8.22.05 PM.png",
-                "mimetype": "image/png",
+                "mimetype": "image\/png",
                 "filetype": "png",
                 "pretty_type": "PNG",
                 "user": "UE1JQM9HQ",
@@ -2385,34 +2453,34 @@
                 "public_url_shared": false,
                 "display_as_bot": false,
                 "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F0163UEHJ3Z/screen_shot_2020-07-04_at_8.22.05_pm.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F0163UEHJ3Z/download/screen_shot_2020-07-04_at_8.22.05_pm.png",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_360.png",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F0163UEHJ3Z\/screen_shot_2020-07-04_at_8.22.05_pm.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F0163UEHJ3Z\/download\/screen_shot_2020-07-04_at_8.22.05_pm.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_64.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_80.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_360.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_360_w": 360,
                 "thumb_360_h": 242,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_480.png",
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_480.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_480_w": 480,
                 "thumb_480_h": 322,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_720.png",
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_160.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_720.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_720_w": 720,
                 "thumb_720_h": 483,
-                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_800.png",
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_800.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_800_w": 800,
                 "thumb_800_h": 537,
-                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_960.png",
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_960.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_960_w": 960,
                 "thumb_960_h": 644,
-                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F0163UEHJ3Z-d91c98217a/screen_shot_2020-07-04_at_8.22.05_pm_1024.png",
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F0163UEHJ3Z-d91c98217a\/screen_shot_2020-07-04_at_8.22.05_pm_1024.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
                 "thumb_1024_w": 1024,
                 "thumb_1024_h": 687,
                 "original_w": 2784,
                 "original_h": 1868,
-                "thumb_tiny": "AwAgADB9lbQyWqM8YLHPJHvVj7FB/wA81/KmWGfscePf+dWu1AEH2KD/AJ5r+VJ9kg/55D8qsc0gzk96AIfsUH/PNfyqC9tYo7R2VFBGOce9Xh9Krah/x5S8+n86AEsP+PSLHv8Azq3WZaX0MNuiOWyM5wPep/7Tt/Vv++aALXelAxmqf9pW+erf980v9p2/q3/fNAFyquoDFlJ+H86b/adv6t/3zUN5fQzWzxoW3HGMj3oA/9k=",
-                "permalink": "https://futureofcoding.slack.com/files/UE1JQM9HQ/F0163UEHJ3Z/screen_shot_2020-07-04_at_8.22.05_pm.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F0163UEHJ3Z-7c95d25a9b",
+                "thumb_tiny": "AwAgADB9lbQyWqM8YLHPJHvVj7FB\/wA81\/KmWGfscePf+dWu1AEH2KD\/AJ5r+VJ9kg\/55D8qsc0gzk96AIfsUH\/PNfyqC9tYo7R2VFBGOce9Xh9Krah\/x5S8+n86AEsP+PSLHv8Azq3WZaX0MNuiOWyM5wPep\/7Tt\/Vv++aALXelAxmqf9pW+erf980v9p2\/q3\/fNAFyquoDFlJ+H86b\/adv6t\/3zUN5fQzWzxoW3HGMj3oA\/9k=",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/UE1JQM9HQ\/F0163UEHJ3Z\/screen_shot_2020-07-04_at_8.22.05_pm.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F0163UEHJ3Z-7c95d25a9b",
                 "is_starred": false,
                 "has_rich_preview": false
             }
@@ -2428,7 +2496,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "yes. this is a fluent API. In this case, it\u2019s implemented like this:"
+                                "text": "yes. this is a fluent API. In this case, it’s implemented like this:"
                             }
                         ]
                     }
@@ -2448,6 +2516,19 @@
         "user": "UE1JQM9HQ",
         "ts": "1593886977.324500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2478,10 +2559,23 @@
     {
         "client_msg_id": "71e034aa-c466-4892-851c-c5158dfe0403",
         "type": "message",
-        "text": "A possible issue with such a list is that different people can interpret these items in opposing ways. For example, \u201ccatching problems early\u201d to one person might mean catching *typing* bugs, to which they might propose a strict type system, while to another it might mean catching *design* flaws, which might lead them to favor a more flexible type (dynamic or optional) system.",
+        "text": "A possible issue with such a list is that different people can interpret these items in opposing ways. For example, “catching problems early” to one person might mean catching *typing* bugs, to which they might propose a strict type system, while to another it might mean catching *design* flaws, which might lead them to favor a more flexible type (dynamic or optional) system.",
         "user": "ULM3U6275",
         "ts": "1593897137.325300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "ULM3U6275",
             "ts": "1593897367.000000"
@@ -2496,7 +2590,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "A possible issue with such a list is that different people can interpret these items in opposing ways. For example, \u201ccatching problems early\u201d to one person might mean catching "
+                                "text": "A possible issue with such a list is that different people can interpret these items in opposing ways. For example, “catching problems early” to one person might mean catching "
                             },
                             {
                                 "type": "text",
@@ -2531,21 +2625,32 @@
             {
                 "name": "+1",
                 "users": [
-                    "UCUSW7WVD",
-                    "UN57U8V53",
-                    "UU45NNMHT"
+                    "UCUSW7WVD"
                 ],
-                "count": 3
+                "count": 1
             }
         ]
     },
     {
         "client_msg_id": "9e8dee4b-a0ba-45aa-91a2-248c48a097ff",
         "type": "message",
-        "text": "\"intensional logic, the\u00a0logic of values that vary over a coordinate space.\" Maybe a nitpick, but this feels like a weird definition of intensional logic (here's a <https://plato.stanford.edu/entries/logic-intensional/|better explanation>: intensional logic has to do with words having more meaning than mere reference). I don't think I want actual intensional logic in my sheets; I want referential transparency. I want 1+1 to always equal 2.\n\nBeyond that, I think there are some interesting ideas in the there although it feels like someone who doesn't use spreadsheets trying to fix them: excel has some tools like pivot tables, what-if analysis, and table objects that accomplish a lot some of what the author is asserting spreadsheets can't do...in addition to RC notation, that he admitted not knowing about.",
+        "text": "\"intensional logic, the logic of values that vary over a coordinate space.\" Maybe a nitpick, but this feels like a weird definition of intensional logic (here's a <https:\/\/plato.stanford.edu\/entries\/logic-intensional\/|better explanation>: intensional logic has to do with words having more meaning than mere reference). I don't think I want actual intensional logic in my sheets; I want referential transparency. I want 1+1 to always equal 2.\n\nBeyond that, I think there are some interesting ideas in the there although it feels like someone who doesn't use spreadsheets trying to fix them: excel has some tools like pivot tables, what-if analysis, and table objects that accomplish a lot some of what the author is asserting spreadsheets can't do...in addition to RC notation, that he admitted not knowing about.",
         "user": "UMH5FAW2Y",
         "ts": "1593897362.325600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "051926604c26",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-04\/1216047713558_051926604c2691293aaa_72.png",
+            "first_name": "",
+            "real_name": "Alex Wein",
+            "display_name": "Alex Wein",
+            "team": "T5TCAFTA9",
+            "name": "alexwein",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2556,11 +2661,11 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "\"intensional logic, the\u00a0logic of values that vary over a coordinate space.\" Maybe a nitpick, but this feels like a weird definition of intensional logic (here's a "
+                                "text": "\"intensional logic, the logic of values that vary over a coordinate space.\" Maybe a nitpick, but this feels like a weird definition of intensional logic (here's a "
                             },
                             {
                                 "type": "link",
-                                "url": "https://plato.stanford.edu/entries/logic-intensional/",
+                                "url": "https:\/\/plato.stanford.edu\/entries\/logic-intensional\/",
                                 "text": "better explanation"
                             },
                             {
@@ -2573,6 +2678,130 @@
             }
         ],
         "thread_ts": "1593821658.282200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "c71f4db2-4b78-4a61-af0c-0c5da4851810",
+        "type": "message",
+        "text": "<@ULM3U6275> Yeah, that's becoming clear to me as well. I intended \"controlling evolution over time\" to mean just a low-level sense of tracking the past rather than maintainability in the future. Not that maintainability is unimportant, of course.\n\nYour example is actually not that serious. I was deliberately trying to focus on the shared activities we perform as programmers rather than the diverse tools we may use to help us do them. Things that require manual consideration regardless of what tooling we may use to reduce the effort of acting on this consideration.\n\nBut yeah, it's clearly a question in progress, and I'm failing to articulate boundaries crisply. Basically I'm imagining a series of yes\/no questions of the form \"do you think about ___?\" What would all programmers above some level say yes to that programmers below wouldn't? In what ways does the practice of programming rewire our brains? Quite possible my initial answers don't fit.",
+        "user": "UCUSW7WVD",
+        "ts": "1593901527.326300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lNh22",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "ULM3U6275"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Yeah, that's becoming clear to me as well. I intended \"controlling evolution over time\" to mean just a low-level sense of tracking the past rather than maintainability in the future. Not that maintainability is unimportant, of course.\n\nYour example is actually not that serious. I was deliberately trying to focus on the shared activities we perform as programmers rather than the diverse tools we may use to help us do them. Things that require manual consideration regardless of what tooling we may use to reduce the effort of acting on this consideration.\n\nBut yeah, it's clearly a question in progress, and I'm failing to articulate boundaries crisply. Basically I'm imagining a series of yes\/no questions of the form \"do you think about ___?\" What would all programmers above some level say yes to that programmers below wouldn't? In what ways does the practice of programming rewire our brains? Quite possible my initial answers don't fit."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1593722002.162200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "71996F9C-9B96-45A9-86F6-DCEE94444494",
+        "type": "message",
+        "text": "I’d guess I’d file these under “managing complexity”. The other under appreciated sub-areas I’d add are maintainability, portability, persistence, synchronization, communication, and security.",
+        "user": "ULM3U6275",
+        "ts": "1593905500.333500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iiRC",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I’d guess I’d file these under “managing complexity”. The other under appreciated sub-areas I’d add are maintainability, portability, persistence, synchronization, communication, and security."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1593722002.162200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "66b11ce4-d60a-421d-abbc-59a80de49e16",
+        "type": "message",
+        "text": "I don't have much experience dealing with parallel or distributed computing, and I have zero experience with security. I think portability is irrelevant to 90% of programmers today. So -- to the extent that I'm a programmer -- your list seems quite aspirational.",
+        "user": "UCUSW7WVD",
+        "ts": "1593907634.333700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+UwM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't have much experience dealing with parallel or distributed computing, and I have zero experience with security. I think portability is irrelevant to 90% of programmers today. So -- to the extent that I'm a programmer -- your list seems quite aspirational."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1593722002.162200",
         "parent_user_id": "UCUSW7WVD"
     }
 ]

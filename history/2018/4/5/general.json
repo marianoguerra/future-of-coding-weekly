@@ -1,0 +1,78 @@
+[
+    {
+        "type": "message",
+        "text": "<@UA14TGLTC> Interesting. I only have a cursory familiarity with Eve. Are you familiar with how they were technically implementing the ability to evolve relationships?",
+        "user": "UA08K0M7W",
+        "ts": "1522942607.000219",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfad89693676",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2fad89693676b1f98e227594da1a73a5.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Chancy Kennedy",
+            "display_name": "chancy",
+            "team": "T5TCAFTA9",
+            "name": "chancykennedy",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "type": "message",
+        "text": "Having thought through what I'm about to say, it boils down to whether time is implicit or explicit in the system.  Consider.  Reactive systems generally provide a means to define transformations between categories of data so that when you wiggle one, the connected ones wobble in a corresponding way.  The system has to respond to the action of wiggling, but it doesn't necessarily model wiggling reactively.\n\nLet's look at Idyll.  (It is really nice.)  Their introduction example is quite rich enough <https:\/\/idyll-lang.org\/docs>.  Variables can be numbers –– and most anything else: `func` will work with any function taking a number to a number.  They even have buttons to switch between `Math.sin` and `Math.cos`.  As far as I can tell, the model of time is just that of JavaScript: objects have properties, you can change them.  Idyll does the job of making sure that related properties (the internals of the chart) get updated when you switch the `func`.  It's lovely.\n\nAre there an alternatives to relying on an imperative substrate?  Several.  In Eve, rules can create persistent bindings like Idyll, but rules can also commit something to the future, \"When the 'cos' button is clicked, make it so that in `func = Math.cos` afterwards.\"  In principle, you can ask, \"Why is `func == Math.cos`?\"  And the system can answer, \"it's because someone clicked the 'cos' button a few seconds ago.\"  You can even ask, \"why isn't it `Math.sin` anymore?\"  One answer is to look at all the things that influenced `func` between now and the last time its value was `Math.sin`.  Reactive synchronization across time.",
+        "user": "UA14TGLTC",
+        "ts": "1522985542.000007",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Idyll",
+                "title_link": "https:\/\/idyll-lang.org\/docs",
+                "text": "A markup language for interactive documents.",
+                "fallback": "Idyll",
+                "image_url": "https:\/\/idyll-lang.org\/static\/images\/twitter-share.png",
+                "from_url": "https:\/\/idyll-lang.org\/docs",
+                "image_width": 500,
+                "image_height": 250,
+                "image_bytes": 13234,
+                "service_icon": "https:\/\/idyll-lang.org\/static\/images\/favicon.ico",
+                "service_name": "idyll-lang.org",
+                "id": 1
+            }
+        ]
+    },
+    {
+        "type": "message",
+        "text": "Technically, Eve totally doesn't work this way.  Instead of binding to the future, commits are primitive.  To establish a regular binding, say an Idyll `[derived name: \"x2\" value:`x * x`]`, you basically use two commit rules internally.  You commit `x2` to the value of `x * x`.  This makes it so that as `x` changes with time, `x2` will assume the different squared values.  You also add the commit rule that if `x` doesn't have a value, remove the value of `x2`.  That's the edge case.\n\nBeyond that, Eve commit and bind rules work differently when multiple rules influence a value.  With commits, it's a race.  Whoever updated last wins.  With bindings, we allow for ties.  Suppose that we also cheekily bind `x2` to `x * 2`.  Then `x2` will usually (except at 0 and 2) have two values.  (Variables in Eve are intrinsically multivalued.)  In order to implement the `x2 = x * 2` binding with commits, the positive commit rule needs the side condition that if `x2 != x * 2` the rule should fire again.\n\nI was never particularly satisfied with how Eve resolves these races.  (The answer changed from version to version.)  I doubt there is an universally satisfying answer in principle.  (Kind of like the inheritance diamond problem.)  We are never going to get away from confusing edge cases, better to design ambiguity resolution into our programming systems.",
+        "user": "UA14TGLTC",
+        "ts": "1522986331.000007",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]

@@ -1,0 +1,339 @@
+[
+    {
+        "client_msg_id": "99d5443b-db55-4044-808b-f2a4cde7557d",
+        "type": "message",
+        "text": "&gt; Object based metaphors pop up all over different domains, not just the physical world. Even the final products of any programming - buttons that push, windows that move, pictures that can be cropped, shipped around etc. - are all virtual objects. People don't want pure functions, they want their computers to have state and be able to manipulate it.\n\nPeople also want see changes what is have been made, go back in history and undo things. In general: reason about mutations. It's a bit ironic that systems that are pro mutation have actually much harder time to reason about them. Those aspects are therefore currently under shipped in real world products.",
+        "user": "U7C7B75R6",
+        "ts": "1560585500.398700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "be27878783b4",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-10\/604262911488_be27878783b4b23a5ed4_72.png",
+            "first_name": "",
+            "real_name": "Niko Autio",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "niko.elmari",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U7C7B75R6",
+            "ts": "1560613567.000000"
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "U8A5MS6R1",
+                    "UJUGB1XGD"
+                ],
+                "count": 2
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UEQ7QL15F"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a47f0a38-2a02-48b9-b8c3-248532e48065",
+        "type": "message",
+        "text": "Clearly shared mutable state is not even negotiable in programming, otherwise we'd have no disks, no databases, no GUIs, no 3D worlds, no social media.. basically nothing apart from addition and the like.\n\nBut poor ole' shared mutable state is the victim of two fallacies:\n\n(a) Imperative programming gets messy when trying to do concurrency and several threads of control have access to shared mutable state, giving rise to the fallacy that it's the shared mutable state's fault, not the many threads having write access.\n\n(b) Functional programming is clean and does concurrency in a way you can predict, but it doesn't have a concept of shared mutable state, giving rise to the fallacy that shared mutable state must be bad because FP is clean and doesn't have it.\n\nBut shared mutable state isn't bad: all we need to do is (a) prevent concurrent write access, and (b) combine FP and shared mutable state in a clean model.",
+        "user": "UE6EFEPTQ",
+        "ts": "1560592416.399400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE6EFEPTQ",
+            "ts": "1560592626.000000"
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ",
+        "reactions": [
+            {
+                "name": "point_up",
+                "users": [
+                    "U8A5MS6R1",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            },
+            {
+                "name": "bulb",
+                "users": [
+                    "UDJ2TKB99"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a7ca7fcb-2c77-41b9-a8de-7d96e41d8b43",
+        "type": "message",
+        "text": "&gt; <@UE6EFEPTQ>: Clearly shared mutable state is not even negotiable in programming, otherwise we'd have no disks, no databases, no GUIs, no 3D worlds, no social media.. basically nothing apart from addition and the like.\n\nWhen we say that \"shared mutable state is bad\", we are not _denying the existence of reality_. Far from it. We are taking a position on the semantics of expressions in high level programming languages. I think there might be some confusion around what claims are being made. Maybe the issues can be clarified with a slight change in terminology. How about \"SMS semantics\" or \"SMS expression semantics\" instead. Some researchers making these claims might use the term \"imperative semantics\", but I don't like that, it's too broad. My research project is a pure functional language that supports (a growing subset of) imperative style programming, but doesn't have SMS semantics.\n\nOf course computers and programs have state that changes over time, but languages with SMS semantics are maybe not the best tools for dealing with state. SMS languages are based on an idealized model of computation where computers have a single core, there is a global memory store where all words of memory have the same cost of access, and there is no networking. That worked well in the past, but not today. Once these assumptions are violated, the model breaks down. The canonical example of the failure of SMS semantics is multithreaded programming. The simple, obvious extension of SMS to support concurrency is shared memory with locks, and that is a nightmare to program with. One response is to patch and extend SMS to work around the problems. Rust supports safe concurrent programming, but at a large cost in language complexity. Another response is to look for simpler, more powerful alternatives to SMS, and that's what some of us in the Future Of Coding group are doing.",
+        "user": "UJN1TAYEQ",
+        "ts": "1560613820.400600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "16b4352c-1c4c-47e7-8c58-173c07dfcddc",
+        "type": "message",
+        "text": "Another distinction here is \"multithreaded\" vs \"concurrent\": as you say, ground level reality has shared mutable hard disks, but in common use the disks are partitioned into \"files\" mostly touched by one program at a time. Within any given program, similar issues arise, where even if you are doing things strictly in sequence(a node.js callbacked event loop for instance) having global variables is still a recipe for two independent operations causing havoc upon each other.",
+        "user": "UJUGB1XGD",
+        "ts": "1560617257.400900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2810c79d33a",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f2810c79d33a097f4e0900c9622b5106.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "fyr",
+            "display_name": "fyr",
+            "team": "T5TCAFTA9",
+            "name": "ohaitch",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "b810ec60-ae5d-4dbb-94bc-8cc7c79115d6",
+        "type": "message",
+        "text": "<@UJN1TAYEQ>\n&gt; languages with SMS semantics are maybe not the best tools for dealing with state.\nAs I said, a language that doesn't allow many threads simultaneous write access would presumably still have your \"SMS semantics\" (? not sure what exactly that is?). And why can't you add this \"SMS semantics\" to FP in a clean model?",
+        "user": "UE6EFEPTQ",
+        "ts": "1560619164.401400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "de0ee87e-2e31-46da-a8f5-d20cbc2f9575",
+        "type": "message",
+        "text": "<@UJUGB1XGD> same: don't allow simultaneous write access to multiple threads",
+        "user": "UE6EFEPTQ",
+        "ts": "1560619239.401600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "11871c8e-156b-4940-b618-989dbf469ec3",
+        "type": "message",
+        "text": "it's that that's the issue: not SMS as such, which is unavoidable",
+        "user": "UE6EFEPTQ",
+        "ts": "1560619259.401800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "40600575-5ad9-45f0-9a28-7ac48fc9d700",
+        "type": "message",
+        "text": "if a given chunk of state can only be evolved by one rule\/transformation\/rewrite\/function\/reduction at a time, then SMS can stop being the scapegoat for concurrency issues",
+        "user": "UE6EFEPTQ",
+        "ts": "1560619359.402000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "7b94a510-8e2f-4455-9e11-196a0ed09628",
+        "type": "message",
+        "text": ".. and can be added to FP in a clean model",
+        "user": "UE6EFEPTQ",
+        "ts": "1560619408.402200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "7005b56e-2030-4b85-94b1-89532df27ab4",
+        "type": "message",
+        "text": "Hm, I think if you define \"multiple threads\" as \"in the scope of multiple closures\", then you've just recreated the \"shared\" part of the initial \"shared mutable state is bad\" claim. _Local_ Mutable State is certainly fine!",
+        "user": "UJUGB1XGD",
+        "ts": "1560620122.402400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2810c79d33a",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f2810c79d33a097f4e0900c9622b5106.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "fyr",
+            "display_name": "fyr",
+            "team": "T5TCAFTA9",
+            "name": "ohaitch",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "8821da55-7136-40b7-a18f-31710a8d3d4a",
+        "type": "message",
+        "text": "Sharing is not the problem, consistency is. It's just that many ways that let you share put the full burden of consistency on you. So what are the ideas that let us share but maintain consistency, visibility, introspection, reasoning, etc.",
+        "user": "U8A5MS6R1",
+        "ts": "1560621405.402600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UJUGB1XGD",
+                    "UJNJQD2AC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "59c23dc0-2207-4f93-bd11-80fee23791a2",
+        "type": "message",
+        "text": "Well these ideas go back at least to 1978 with Backus in his Turing Award lecture (<https:\/\/www.thocp.net\/biographies\/papers\/backus_turingaward_lecture.pdf>) in the form of \"Applicative State Transition\". A variant was outlined in \"Out of the Tar Pit\" as \"Functional Relational Programming\".\n\nThe model is incredibly simple: _just take a state and transform it to the next state using a clean declarative rule\/transformation\/rewrite\/function\/reduction_.\n\nThis can be done in parallel as long as you manage partitions of the state per thread.",
+        "user": "UE6EFEPTQ",
+        "ts": "1560637615.402900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559911795.085800",
+        "parent_user_id": "UJN1TAYEQ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBSMEUXAA"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

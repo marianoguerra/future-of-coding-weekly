@@ -1,0 +1,782 @@
+[
+    {
+        "client_msg_id": "9f6720f6-5156-45be-bb4c-803031c605d3",
+        "type": "message",
+        "text": "I think what is desired via mutability is the notion of identity. This is quite easily and directly represented in objects. This can and is simulated in FP as well, but the primary ideas bring up a sense of disembodied values floating around and getting transformed. That is my main criticism of FP.. it doesn't start with a stateful substrate or strong notion of identity.",
+        "user": "U8A5MS6R1",
+        "ts": "1568444713.011600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "+1::skin-tone-3",
+                "users": [
+                    "UE6EFEPTQ"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heavy_check_mark",
+                "users": [
+                    "UE6EFEPTQ"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UL3CJ7YKC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "58d78d47-14b3-4578-85e3-b3180ed5d0fe",
+        "type": "message",
+        "text": "Thus far, we've conjured the following interesting angles of attack:\n\n• [the benefits of FP] apply iff the things that FP language designers regard as incidental complexities are actually incidental\n• some problems are best naturally expressed with mutability\n• For general purpose programming in a pure FP language, that typically requires garbage collection. This has a performance cost\n• [FP] doesn't start with a stateful substrate or strong notion of identity.\n\nWhat other things do you find lacking about FP? Where does FP have room to grow? At the risk of over-anthropomorphizing: what parts of OO should FP envy? _We all know_ that shared mutable state is a double-edged sword — so what parts of FP are surprisingly dull?\n\nIf we can't come up with some _really_ good ones, on par with our total smackdown arguments against OO, what's the more likely reason — that FP is utterly without such shortcomings, or that we just aren't properly seeing them?",
+        "user": "UC2A2ARPT",
+        "ts": "1568445112.011800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "e64d9ce2-2f0c-4e84-bc3b-3dd04ea692c8",
+        "type": "message",
+        "text": "<@U8A5MS6R1> Hmm, at the risk of getting into angels and pinheads, I actually think of FP as providing a stronger sense of identity. Mutation introduces ship-of-theseus effects. Should it be considered the same thing once I've modified it?\n\nConcrete implications:\n* We all know not to modify keys in a hash table.\n* Interning string literals is an abstraction leak you only run into if you ever modify them.",
+        "user": "UCUSW7WVD",
+        "ts": "1568445210.012000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "a27d74ed-76fb-44a6-b382-95fe231e1469",
+        "type": "message",
+        "text": "I heard a good one the other day. Can't remember the source. Here's my bastardized paraphrase:\n\n&gt; Google Search, from the perspective of the web searcher, isn't a pure function — every time you do a Google search for the same term, you get a different result. You could try to model it as a pure function, but that'd require some contortions that are easy to describe (\"Just take the current index as an additional hidden \/ curried argument\") but that fall apart upon further reflection. Google search is actually a _process_, not a function, and rather than trying to model it using the ill-fitting formalisms of math, we can more naturally model it using the formalisms of systems theory.\n\nOO embodies some elements of process \/ systems theory very elegantly. Erlang is probably a great touchstone here. Compare with Milner's π-calculus, a mathematical formalism that encodes some parts of process \/ systems theory, which I find to be not nearly as simple or elegant as the _very OO_ process model in Erlang.\n\n(Hedging against expected counterarguments: Of course, that doesn't mean there _can't_ be a way to encode process \/ systems theory in mathematics that is simple and elegant. But I think it's fair to say that this is a case where _currently_ OO does better than FP.)",
+        "user": "UC2A2ARPT",
+        "ts": "1568446369.012300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1568446665.000000"
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "U8A5MS6R1"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "C1332ABD-AC24-4529-B0BC-1989E5FFD8BA",
+        "type": "message",
+        "text": "all of my feelings are about ergonomics. i don’t have very many feelings about mutability or immutability (i think it’s kind of pushing on the problem of seeing data move through your system without quite addressing it directly). but one example is the degree to which pipe operators end up being used in functional code: it’s really useful to start with data, and then apply operations to it.... almost like asking the data to transform itself",
+        "user": "UHWC9PXBL",
+        "ts": "1568470135.017700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "8416B10C-CFEC-4B8C-9FFF-490245B9C53B",
+        "type": "message",
+        "text": "<https:\/\/youtu.be\/dkZFtimgAcM> monads are better presented as objects argument at timestamp 13:53",
+        "user": "UHWC9PXBL",
+        "ts": "1568470342.018500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UHWC9PXBL",
+            "ts": "1568470351.000000"
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Douglas Crockford: Monads and Gonads (YUIConf Evening Keynote)",
+                "title_link": "https:\/\/youtu.be\/dkZFtimgAcM",
+                "author_name": "YUI Library",
+                "author_link": "https:\/\/www.youtube.com\/user\/yuilibrary",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/dkZFtimgAcM\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Douglas Crockford: Monads and Gonads (YUIConf Evening Keynote)",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/dkZFtimgAcM?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/dkZFtimgAcM",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/dkZFtimgAcM"
+            }
+        ],
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "6376C98E-7F90-413C-BB00-4CB227F0B3BD",
+        "type": "message",
+        "text": "incidentally as i slowly heat up my Hot Take Machine i think javascript proxies are strictly more useful and understandable\/direct than 90% of category theory",
+        "user": "UHWC9PXBL",
+        "ts": "1568470602.020000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UHWC9PXBL",
+            "ts": "1568470613.000000"
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "abeb32cf-07df-4dfe-b9d3-c89d6b80c03c",
+        "type": "message",
+        "text": "<@UCUSW7WVD> We're using very different meanings of 'identity'. For me 'identity' is that very aspect which is preserved while the thing itself changes. _The tree grows_ - is it the same tree tomorrow? There's definitely an aspect of identifying the tree that we wish to preserve even though there are new leaves present.\n\nWhen I drive the car around and the gasoline, temperature and location fluctuate, does it remain the same car every moment or are there monads involved?\n\nThis notion of identity is so deeply ingrained in our interactions that it is almost invisible. Virtual things in computers have identity too. I may regenerate _the file_, move around _the paddle_ to hit _the moving ball_. Even looking at a function pipeline that operates on data, I might track *this data* as it moves through the functions. I'm arguing that everything that is presented to us and all our interaction with computers involve identities of these virtual artifacts. Identities are tracked in FP by various patterns like attaching ids to data, logging, maybe STM and so on. In Excel, for example, I think of location as identity (_this_ cell). By contrast OO tends to lack the 'consistent snapshot' notions represented easily in FP. I don't think there's any dichotomy here btw. I just think it's better to have an OO substrate and then incorporate the notions consistent snapshots and pure transforms.",
+        "user": "U8A5MS6R1",
+        "ts": "1568475761.020300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "clap",
+                "users": [
+                    "UHWC9PXBL",
+                    "UL3CJ7YKC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "87714ff1-a33e-4572-8177-9fea26210a8d",
+        "type": "message",
+        "text": "Can you give an example of a situation where the sameness obviously outweighs the differences? I tend to find that this is one area where bits are not like atoms, and our intuitions about the notion of identity don't really translate. You can't rely on analogies here.\n\nJust this past week I had an incident at work where a pipeline somewhere got wedged and refused to make forward progress. Turned out a user somewhere had changed the name of a record. Then 10 minutes later they changed their mind, reverted the old record, created a new record with the new name. But in the meantime the pipeline had run and the new name was saved downstream. Further updates failed; you couldn't create a new record with the new name because the name already existed.\n\nThe pipeline assumed that only the id of the record decided identity, but the uniqueness constraint meant that the name was also effectively part of the identity of a record. These sorts of subtle bugs are very common, I'm sure you've encountered them. Asking when two values are snapshots of 'the same record' is often intractable. The insight of FP is to encourage architectures that sidestep the question altogether. And if we could resolve the performance problems we'd use this idea exclusively. Mutation should be merely a hack for performance.",
+        "user": "UCUSW7WVD",
+        "ts": "1568484172.021300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1568484367.000000"
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "AAE03AE4-7279-4FEE-90D6-6644AF66A02A",
+        "type": "message",
+        "text": "i’ve been enjoying @hillelogram’s strangeloop livetweets—any other spots i should be following for the conference?",
+        "user": "UHWC9PXBL",
+        "ts": "1568493130.023000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "33E0EC47-5AC2-4AB4-905A-6AE5A0548D36",
+        "type": "message",
+        "text": "nvm the videos are going up crazy fast",
+        "user": "UHWC9PXBL",
+        "ts": "1568494708.023200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "29c5e50d-f3fb-42c9-b112-e1a34b674e44",
+        "type": "message",
+        "text": "It's not the bits themselves but what they mean to us. Identity in part of our conceptual system. If \"a user had changed the name of a record\" - what is the system implementing here if not the mutation of an entity with identity? If it wasn't for the 'sameness' across those different scattered bits, this wouldn't be a bug, would it? :wink: So I think identity should be core in our expressions. Anyway, I think we're talking past each other.\n&gt;  Mutation should be merely a hack for performance\nIf you say at the machine level bits shouldn't be mutated in place except as an optimization, I fully agree. I'm thinking more in terms of higher level processes that we describe - identity and mutation should be part of the language as well as snapshots and consistency..",
+        "user": "U8A5MS6R1",
+        "ts": "1568495046.023300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UHWC9PXBL",
+                    "UL3CJ7YKC"
+                ],
+                "count": 2
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9273aa55-7c33-43e7-b77c-ecc0318c9f3d",
+        "type": "message",
+        "text": "&gt; I'm thinking more in terms of higher level processes that we describe - identity and mutation should be part of the language as well as snapshots and consistency..\n\nThat's definitely a level-up on the rhetoric I've heard so far in favor of state! Great thread.\n\n&gt; If it wasn't for the 'sameness' across those different scattered bits, this wouldn't be a bug, would it? :wink:\n\nThe bug was just that the pipeline was wedged. It really didn't matter whether name `X` got assigned row `m` or `n`. I think that's extremely common. Deep in the guts of our computers, software is often just arcane book-keeping without any meaningful mapping to the real world. And this has been true of bureaucracies long before software existed. Was it a Kafka short story where the guy's record says he's dead and he can't convince the bureaucrat that he's alive? I think focusing on 'identity' risks confusing map for territory.",
+        "user": "UCUSW7WVD",
+        "ts": "1568499274.023700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1568499450.000000"
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "88d65103-6c02-41ab-8dff-38a30637df1c",
+        "type": "message",
+        "text": "To connect up with an old thread (<https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1557860308364300>), I think emphasis on identity is pretty modernist (maybe even AHM: <https:\/\/www.ribbonfarm.com\/2010\/07\/26\/a-big-little-idea-called-legibility>). The post-modernist insight is that the concept is so fuzzy that it'll mislead you just when you need it most. Better to just not rely on it.",
+        "user": "UCUSW7WVD",
+        "ts": "1568499613.024100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1568499719.000000"
+        },
+        "attachments": [
+            {
+                "from_url": "https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1557860308364300",
+                "fallback": "[May 14th, 2019 11:58 AM] ian: Just a random thought: I was looking at Bret Victor’s old Learnable Programming, and it had a little note about how programming consists of decomposing problems, and I realized: that’s not what I do these days. I spend all my time thinking about messaging and communication between systems, and “decomposition” feels like a luxury. I don’t know if that’s a general change in programming, or just the nature of my work or professional stage… but it feels like a real change to me.\n\nThat is, I spend a lot of time thinking about these things:\n1. What are the entities in my system? These could be as simple as objects, but might be remote services, or different processes, browser tabs, etc.\n2. Who knows what?\n3. Who needs to keep track of what?\n4. From any given context, how do I get access to the other entities?\n5. How do I communicate with them? The push\/pull of functions or RPC? Pub\/sub? Some wonky event system?\n6. Where does a particular change originate, and which entities are simply reactive?\n\nThis all is where a lot of modern language development leaves me cold. Types don’t offer much here. Going further, I think there really is a kind of modernist\/postmodernist break here (ala <http:\/\/homepages.mcs.vuw.ac.nz\/~kjx\/papers\/nopp.pdf>): modern approaches attempt to create self-consistent and robust systems, and postmodernist approaches accept that we operate in a diverse systems where a lot of important things happen at the intersection of incompatible modernist systems.\n\nI don’t have any conclusion in mind, but I’d be interested in people’s thoughts.",
+                "ts": "1557860308.364300",
+                "author_id": "UJM9NG84Q",
+                "author_subname": "Ian Bicking",
+                "channel_id": "C5T9GPWFL",
+                "channel_name": "general",
+                "is_msg_unfurl": true,
+                "is_thread_root_unfurl": true,
+                "text": "Just a random thought: I was looking at Bret Victor’s old Learnable Programming, and it had a little note about how programming consists of decomposing problems, and I realized: that’s not what I do these days. I spend all my time thinking about messaging and communication between systems, and “decomposition” feels like a luxury. I don’t know if that’s a general change in programming, or just the nature of my work or professional stage… but it feels like a real change to me.\n\nThat is, I spend a lot of time thinking about these things:\n1. What are the entities in my system? These could be as simple as objects, but might be remote services, or different processes, browser tabs, etc.\n2. Who knows what?\n3. Who needs to keep track of what?\n4. From any given context, how do I get access to the other entities?\n5. How do I communicate with them? The push\/pull of functions or RPC? Pub\/sub? Some wonky event system?\n6. Where does a particular change originate, and which entities are simply reactive?\n\nThis all is where a lot of modern language development leaves me cold. Types don’t offer much here. Going further, I think there really is a kind of modernist\/postmodernist break here (ala <http:\/\/homepages.mcs.vuw.ac.nz\/~kjx\/papers\/nopp.pdf>): modern approaches attempt to create self-consistent and robust systems, and postmodernist approaches accept that we operate in a diverse systems where a lot of important things happen at the intersection of incompatible modernist systems.\n\nI don’t have any conclusion in mind, but I’d be interested in people’s thoughts.",
+                "author_name": "Ian Bicking",
+                "author_link": "https:\/\/futureofcoding.slack.com\/team\/UJM9NG84Q",
+                "author_icon": "https:\/\/secure.gravatar.com\/avatar\/74791f7f49bc26afa271eced90cda37c.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F80588%2Fimg%2Favatars%2Fuser_shapes%2Fava_0010-48.png",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "id": 1,
+                "original_url": "https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1557860308364300",
+                "footer": "Thread in #general"
+            }
+        ],
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UL3CJ7YKC",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7e11e4d3-7952-4243-99b7-8246ff771537",
+        "type": "message",
+        "text": "Haha perhaps. Is static typing authoritarian high-modernism? I'm tweeting that it is :stuck_out_tongue_winking_eye: Thanks for the links - great to re-read those. BTW I realize I'm quite an ad-hoc modernist - want order in some aspects, chaos for others..",
+        "user": "U8A5MS6R1",
+        "ts": "1568507646.028500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fdc35f0c-6a3c-4578-a14c-8d1b6d0b296f",
+        "type": "message",
+        "text": "Following up on <@UC2A2ARPT>’s question about OOP 'envy', I want to propose FP really envies that the computation model inside the OO program is very compatible with the model outside it. In OOP, how do you send a message to another process? Well we've been sending messages to other objects all along so 'very much the same way'.  The models of pure functional code and 'sending a message' are incompatible enough to require a fair bit of algebraic gymnastics. What do you think? Legit criticism?",
+        "user": "U8A5MS6R1",
+        "ts": "1568508425.031800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4BCE56FD-E7F8-4636-A5E8-9D293B8E1D26",
+        "type": "message",
+        "text": "On static vs dynamic types and immutable vs mutable data, I’m reminded of a recent podcast on tight and loose cultures: <https:\/\/podcasts.apple.com\/us\/podcast\/sean-carrolls-mindscape-science-society-philosophy\/id1406534739?i=1000448378141> which makes connections to excessive and insufficient synchrony in mental disorders. The TLDR is that an excess of either produces failure states and some balance of the two is optimal. Could programming cultures unconsciously be dividing themselves on similar biases? ",
+        "user": "ULM3U6275",
+        "ts": "1568509375.042600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Apple Podcasts",
+                "title": "‎Sean Carroll's Mindscape: Science, Society, Philosophy, Culture, Arts, and Ideas: 62 | Michele Gelfand on Tight and Loose Societies and People on Apple Podcasts",
+                "title_link": "https:\/\/podcasts.apple.com\/us\/podcast\/sean-carrolls-mindscape-science-society-philosophy\/id1406534739?i=1000448378141",
+                "text": "‎Show Sean Carroll's Mindscape: Science, Society, Philosophy, Culture, Arts, and Ideas, Ep 62 | Michele Gelfand on Tight and Loose Societies and People - Sep 2, 2019",
+                "fallback": "Apple Podcasts: ‎Sean Carroll's Mindscape: Science, Society, Philosophy, Culture, Arts, and Ideas: 62 | Michele Gelfand on Tight and Loose Societies and People on Apple Podcasts",
+                "image_url": "https:\/\/is4-ssl.mzstatic.com\/image\/thumb\/Podcasts113\/v4\/b0\/7c\/df\/b07cdf51-10e5-3400-4096-e7f13565b650\/mza_1985224805354090935.jpeg\/1200x630wp.png",
+                "image_width": 476,
+                "image_height": 250,
+                "from_url": "https:\/\/podcasts.apple.com\/us\/podcast\/sean-carrolls-mindscape-science-society-philosophy\/id1406534739?i=1000448378141",
+                "image_bytes": 386586,
+                "id": 1,
+                "original_url": "https:\/\/podcasts.apple.com\/us\/podcast\/sean-carrolls-mindscape-science-society-philosophy\/id1406534739?i=1000448378141"
+            }
+        ],
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "C4F8B08A-F75E-4BAD-8A71-18C1A928FC82",
+        "type": "message",
+        "text": "does anyone in this group know any newlisp or picolisp enthusiasts?",
+        "user": "UHWC9PXBL",
+        "ts": "1568511876.062100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "F4C76420-8336-4535-902D-30BFF6988040",
+        "type": "message",
+        "text": "Let me add my intuitions here. I tried to create a coherent argument but I failed. Please help me finding these out:)\n\nSo these are related to the OO substates and mutability vs immutabilty mentioned above, but I'd like just to give some high level thoughts.\n\n1. 0 or 1 ref to a piece of data is no problem for sure, things go crazy above 2+ references to the same piece of data.\n2. A. Multiple (sub)states enable different rate of (state) change in different parts of the system, meaning loose(r) coupling.\n2. B. Multiple (sub)states introduce a syncronization problem\/requirement on a higher level: between the subsystems using the (sub)states.\n3. Using a mutable variable by the reference feels like an implicit subscription \/ an implicit syncronization pattern.\n4. There is too much ideas around time (syncronization and subscription): maybe the idea of state is just too low level to be useful and a state should be viewed as a snapshot in a \"stateStream\" to be even able to reason about?\n5. Immutable data encourages creating new pieces of data (+swapping references) so we end up managing (and syncig) multiple pieces of data like in OO (sub)states.\n6. Virtually everything can be solved purely with mutable\/immutable data with some extra code, so it seems they just have different \"defaults\" in their meaning, requiring different extra pieces of code to mimic the others behaviour.\n7. Immutability and local state feel like a bit like \"locks\". Wat.\n+1: Wtf am I talking about? I mean I can't express these better but it feels really odd.",
+        "user": "UL3CJ7YKC",
+        "ts": "1568512252.068600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "5612322b81b6",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-14\/834114331988_5612322b81b6d142511b_72.jpg",
+            "first_name": "Pezo",
+            "real_name": "Pezo - Zoltan Peto",
+            "display_name": "Pezo - Zoltan Peto",
+            "team": "T5TCAFTA9",
+            "name": "pezo1919",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UL3CJ7YKC",
+            "ts": "1568512658.000000"
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "U8A5MS6R1",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0d59a8a2-59e1-4390-85c3-1f4e8a1f2fac",
+        "type": "message",
+        "text": "&gt; In OOP, how do you send a message to another process? Well we've been sending messages to other objects all along so 'very much the same way'. The models of pure functional code and 'sending a message' are incompatible enough to require a fair bit of algebraic gymnastics.\n\nIn modern languages, \"OOP\" is just classes and inheritance, and \"sending a message\" is just overwrought terminology for indirect function call. Even in Smalltalk, message sends have synchronous function call semantics. Functional languages also have function calls. O'Caml is a pedigreed functional language with OOP (as in: classes and inheritance), so there's no conflict between FP and class based OOP. When you talk about \"sending a message to another process\", it sounds like you are talking about the Actor model. The only Actor language I know is Erlang, which is considered a functional language.",
+        "user": "UJN1TAYEQ",
+        "ts": "1568512393.069000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD",
+                    "UL3CJ7YKC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "F50A1642-CF01-4586-8D65-41B9B5148649",
+        "type": "message",
+        "text": "<@UJN1TAYEQ> Erlang it is considered an FP lang, but there are opinions that it is the \"most OO\" lang considering the \"original\" OO term used by Alan Kay. I coud not find any direct Alan Kay opinion on Erlang. But ofc \"modern OO\" is not even close to either of them.",
+        "user": "UL3CJ7YKC",
+        "ts": "1568513064.073500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "5612322b81b6",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-14\/834114331988_5612322b81b6d142511b_72.jpg",
+            "first_name": "Pezo",
+            "real_name": "Pezo - Zoltan Peto",
+            "display_name": "Pezo - Zoltan Peto",
+            "team": "T5TCAFTA9",
+            "name": "pezo1919",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UL3CJ7YKC",
+            "ts": "1568513124.000000"
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "50d146f1-a429-491d-860c-b58ac689c324",
+        "type": "message",
+        "text": "<@UJN1TAYEQ> Doesn’t Erlang have mutable state within a process and doesn’t it send messages between processes? So at least on the process level, Erlang is about mutable message sending objects?",
+        "user": "ULM3U6275",
+        "ts": "1568513152.074000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "ULM3U6275",
+            "ts": "1568513259.000000"
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "type": "message",
+        "subtype": "me_message",
+        "text": "raises hand at some point in the past.",
+        "user": "UA14TGLTC",
+        "ts": "1568513535.074500"
+    },
+    {
+        "client_msg_id": "bbe4537e-5bf9-4ae2-a0ba-df825a69a54f",
+        "type": "message",
+        "text": "<@ULM3U6275>\n&gt; Doesn’t Erlang have mutable state within a process and doesn’t it send messages between processes? So at least on the process level, Erlang is about mutable message sending objects?\n\nHaskell supports this as well. Every general purpose language has threads and concurrency, and threads are useless unless they can change state in response to messages (or whatever the IPC mechanism is). Haskell has several IPC mechanisms: if you use the Control.Concurrent.Actors library, you can even use the Actor model.\n\nWhat makes Erlang functional is that data structures are immutable values and variables are immutable: they cannot be reassigned once they are bound to a value.\n\nAn Erlang process manages its mutable state using a tail recursive function F that is passed the current process state as an argument. Each time F is called, it receives a message, processes it, then calls itself with its updated state as an argument. This is a functional style, not an OOP style of programming.",
+        "user": "UJN1TAYEQ",
+        "ts": "1568516968.074900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "4f2b3fc2-e770-4064-9b42-d29467c39cad",
+        "type": "message",
+        "text": "<@UL3CJ7YKC> believe it or not what you're saying makes sense to me. What you call stateStream, I call identity. In typical OO an object is always pointing to the latest version of everything else - even if the latest version is only half done for some objects (this is the pitfall of OO). Ideally you want to move your references to the latest version in some organized way. And you never want to be pointing a half-done state of anything. FP typically doesn't have widespread stateStreams (well there's Clojure refs..) and you may have to build these streams yourself if you need from the immutable substrates. I think a more approachable option may to keep the OO model but introduce _deep versioning_ of objects so they can manage their evolution through their stateStream.",
+        "user": "U8A5MS6R1",
+        "ts": "1568524131.075200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567954767.205900",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UL3CJ7YKC"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

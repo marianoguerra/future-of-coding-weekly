@@ -1,0 +1,891 @@
+[
+    {
+        "client_msg_id": "8157b296-80cc-461c-859c-6978de96a3ff",
+        "type": "message",
+        "text": "When I was a student, I read a number of classic texts on programming language design:\n* Peter Landin's 1964 paper on ISWIM, \"The Next 700 Programming Languages\",\n* Tennant's \"Principles of Programming Languages\" (the 1970's),\n* a PhD thesis, \"Abstraction Mechanisms and Programming Language Design\" (the 1980's).\n\nThey all say the same thing. To the greatest extent possible, you should be able to replace any node in an abstract syntax tree with a variable reference, or a function call, or a block (aka let-expression). Privately, I call this \"the principle of abstraction\".\n\nThis leads to things like the Lisp macro system, and staged compilation, and partial evaluation, and dynamic typing.",
+        "user": "UJN1TAYEQ",
+        "ts": "1558776199.044100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "f61767a2-179a-4b90-8dc3-ae7333d2b3df",
+        "type": "message",
+        "text": "Most programming languages seem to be created to satisfy some specific practical need, and aren't explicitly designed to satisfy the Principle of Abstraction. But programmers want to create abstractions, so over time, your language will evolve over time to support an increasingly greater ability to abstract over various kinds of AST nodes. This kind of language evolution can be messy and result in a lot of language complexity.\n\nGilad Bracha wrote a blog post, \"Shadow Domains\", that gives a name to the kind of language complexity that arises. This is where the fundamental abstraction mechanisms (the ability to bind language entities to names, the ability to pass language entities as function arguments and return them as results) are re-invented multiple times within the same language, but within different domains.",
+        "user": "UJN1TAYEQ",
+        "ts": "1558776997.044500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "aa6552c1-4b1a-47ab-8fcb-248eb811e41c",
+        "type": "message",
+        "text": "I think C++ has about 20 different ways to bind a language entity to a name? With more arriving in future language revisions. If you know in advance where this evolutionary process is leading, you can plan for it. You can avoid shadow domains, and try to provide universal abstraction mechanisms, which leads to a simpler and more powerful language.",
+        "user": "UJN1TAYEQ",
+        "ts": "1558777916.044800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558777916.044800",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1558912485.094400",
+        "reply_users": [
+            "UAVCC2X70"
+        ],
+        "replies": [
+            {
+                "user": "UAVCC2X70",
+                "ts": "1558912485.094400"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "FD1F5C6E-98E8-4E0B-AD55-1B65E133124D",
+        "type": "message",
+        "text": "A few people here have been posting about category theory. I’ve been learning category theory for the last few weeks trying a few different approaches and found resources that work well for me. If you’re interested here's my current “curriculum”: <https:\/\/gist.github.com\/stefanlesser\/7f0749b3a38078b3eebe0cc408345e9f>\n\nIs anybody here interested in forming a (virtual?) study group? I noticed how much more effective it is to talk to people about it. Would be great to find people who are actually interested in me explaining it to them. ;-) Obviously, I’d also be very interested in having others explain it to me as well.\n\nPretty open about the structure. Could be sort of a book club working through the resources, weekly video calls to discuss and explain to each other, share exercise results, or even do “pair programming” on the exercises. Whatever you feel comfortable with and are interested in. However, you should be genuinely interested in putting some effort into it, which maybe means you can commit to read a few chapters a week and then meet online to discuss them.\n\nMy goal is to build intuitive understanding for category theory concepts and its applications. I’m less interested in learning all the proofs and more in what it means that for instance natural transformations map to parametric polymorphism and what we can use these kinds of insights for to create better programming languages and environments. I’ve made it far enough to totally believe in but not yet far enough to know how to take advantage of the Eric Weinstein quote:\n&gt;“Theoretical mathematicians are sitting on top of a giant stockpile of intellectual gold. They have so many things that have not been manifested anywhere. You have no idea how much great stuff that these priests have in their monastery.”\nwhich is on the Conexus website that <@UJK8MKYAZ> linked to above. \n\nReply here or DM me.",
+        "user": "U5STGTB3J",
+        "ts": "1558782017.061500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "reply_count": 57,
+        "reply_users_count": 9,
+        "latest_reply": "1561326498.282400",
+        "reply_users": [
+            "U5TCAFTD3",
+            "U5STGTB3J",
+            "UAL7940NM",
+            "UHWC9PXBL",
+            "UJK8MKYAZ",
+            "UJN1TAYEQ",
+            "UA14TGLTC",
+            "UCUSW7WVD",
+            "UJC8ZDSTX"
+        ],
+        "replies": [
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1558782304.061600"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1558783474.063200"
+            },
+            {
+                "user": "UAL7940NM",
+                "ts": "1558784961.063400"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1558793991.067000"
+            },
+            {
+                "user": "UJK8MKYAZ",
+                "ts": "1558795857.067300"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1558796531.067500"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1558798850.069300"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1558798994.069600"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558836393.072300"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558836482.072600"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558836603.072800"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558836795.073100"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558836796.073300"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558836890.073600"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558837138.073800"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558837364.074000"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1558858228.077500"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558858968.077700"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1558956110.107100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1558956174.108200"
+            },
+            {
+                "user": "UAL7940NM",
+                "ts": "1558958600.108400"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1558969601.113900"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1558974355.114400"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1559012678.134600"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1559024561.137600"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1559024668.137800"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1559046611.142800"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1559243279.009600"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560079215.220900"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1560096904.234600"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1560157988.261500"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560268918.270600"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560269253.271000"
+            },
+            {
+                "user": "UJK8MKYAZ",
+                "ts": "1560270605.271700"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1560305615.295000"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560348863.304200"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560348921.305400"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560348960.306200"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560349131.309700"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560349203.310200"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1560352257.310500"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560352455.311600"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1560355404.316100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560360628.318400"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560360741.318700"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1560370495.325500"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1560434815.336800"
+            },
+            {
+                "user": "UJK8MKYAZ",
+                "ts": "1560445082.338800"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560445184.339000"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1560445207.339400"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1560445602.340000"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1560445602.340200"
+            },
+            {
+                "user": "UJK8MKYAZ",
+                "ts": "1560445640.340400"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560445880.340600"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560448491.341100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1560450833.342700"
+            },
+            {
+                "user": "UJC8ZDSTX",
+                "ts": "1561326498.282400"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1561335322.270200"
+    },
+    {
+        "client_msg_id": "f1f39de1-b353-4478-a8e8-5c808ffa70a3",
+        "type": "message",
+        "text": "Count me in! I've been meaning to tackle category theory texts for a whole now",
+        "user": "U5TCAFTD3",
+        "ts": "1558782304.061600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U5STGTB3J"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1FE5C4D3-27D6-4071-9AEF-4C2648C2ECEF",
+        "type": "message",
+        "text": "I’ll give it a few days for others to comment and then will propose some possible format.",
+        "user": "U5STGTB3J",
+        "ts": "1558783474.063200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "94e716ae-c659-409c-9622-1c075e609595",
+        "type": "message",
+        "text": "I'd be interested as well!",
+        "user": "UAL7940NM",
+        "ts": "1558784961.063400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "EC4571D2-B916-404E-BC4D-C42E8A75790E",
+        "type": "message",
+        "text": "I'm in and I have a couple video resources to contribute (on mobile for now so just a few):\n\nandre staltz on profunctor state (less scary than it sounds): <https:\/\/youtu.be\/VdiJ_vgVUgs>\n\nDouglas crockford with a problematic but very clear explanation of monads (and a sneaky good argument for structuring it as an object for learnability): <https:\/\/youtu.be\/dkZFtimgAcM>",
+        "user": "UHWC9PXBL",
+        "ts": "1558793991.067000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Andre Staltz - Profunctor Optics for state management @FrontMania",
+                "title_link": "https:\/\/youtu.be\/VdiJ_vgVUgs",
+                "author_name": "Frontmania Conference",
+                "author_link": "https:\/\/www.youtube.com\/channel\/UCxoPrvkFetPN5cFHZ_Vd6RQ",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/VdiJ_vgVUgs\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Andre Staltz - Profunctor Optics for state management @FrontMania",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/VdiJ_vgVUgs?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/VdiJ_vgVUgs",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/VdiJ_vgVUgs"
+            },
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Douglas Crockford: Monads and Gonads (YUIConf Evening Keynote)",
+                "title_link": "https:\/\/youtu.be\/dkZFtimgAcM",
+                "author_name": "YUI Library",
+                "author_link": "https:\/\/www.youtube.com\/user\/yuilibrary",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/dkZFtimgAcM\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Douglas Crockford: Monads and Gonads (YUIConf Evening Keynote)",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/dkZFtimgAcM?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/dkZFtimgAcM",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 2,
+                "original_url": "https:\/\/youtu.be\/dkZFtimgAcM"
+            }
+        ],
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "d73e50f3-4158-462d-a5cc-7192deca3979",
+        "type": "message",
+        "text": "I can't promise any particular level of dedication, but I'm highly interested in this subject, and would participate how I can.",
+        "user": "UJK8MKYAZ",
+        "ts": "1558795857.067300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g191fa9e3260",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6191fa9e32605141275a68a8bb5f04fa.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Daniel Hines",
+            "display_name": "Daniel Hines",
+            "team": "T5TCAFTA9",
+            "name": "d4hines",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "aafa3d88-6390-4061-958b-f4b5a21150ce",
+        "type": "message",
+        "text": "I am interested. The following is a tutorial that teaches you a visual programming language \/ graphical mathematical notation based on category theory: <https:\/\/graphicallinearalgebra.net\/>",
+        "user": "UJN1TAYEQ",
+        "ts": "1558796531.067500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Graphical Linear Algebra",
+                "service_url": "http:\/\/graphicallinearalgebra.net",
+                "title": "Index",
+                "title_link": "https:\/\/graphicallinearalgebra.net\/",
+                "author_name": "pawel",
+                "author_link": "https:\/\/graphicallinearalgebra.net\/author\/pawelsobocinski\/",
+                "thumb_url": "https:\/\/graphicallinearalgebra.files.wordpress.com\/2015\/04\/dec4.jpg?w=300&fit=200%2C150",
+                "thumb_width": 200,
+                "thumb_height": 39,
+                "text": "Applications are open for the ACT Applied Category Theory Research School 2018!\nAnd because arithmetic science and geometric science are connected, and support one another, the full knowledge of numbers cannot be presented without encountering some geometry, or without seeing that operating in this way on numbers is close to geometry; the method is full of many proofs and demonstrations that are made with geometric figures.\nFibonacci, preface to Liber Abaci\n(first published 1202, 1228 manuscript translated by Lawrence E. Sigler)\n\n\nIf you like this blog, please subscribe to get email updates when new articles are published. You will find a subscription link at the bottom of this page.\nGraphical linear algebra is a work in progress, and there are many open research threads. We are looking for PhD students, so please consider applying!\nThis blog is written in English. To read and contribute to translations (Dutch, French, German,&hellip;) see this page by Vincent Verheyen.\nIntroduction\nEpisode 1&nbsp;&ndash; Mak&eacute;l&eacute;l&eacute; and Linear Algebra\nEpisode 2 &ndash; Methodology, Handwaving and Diagrams\nAdding and Copying\nEpisode 3 &ndash; Adding (Part 1) and Mr Fibonacci\nEpisode 4 &ndash; Dumbing Down and Magic Lego\nEpisode 5 &ndash; Spoilers, Adding (Part 2) and Zero\nEpisode 6 &ndash; Crema di Mascarpone and Diagrammatic Reasoning\nEpisode 7 &ndash; Copying, Discarding and The Slogan\nEpisode 8 &ndash; When Adding met Copying&hellip;\nEpisode 9 &ndash; Natural numbers, diagrammatically\nMatrices and PROPs\nEpisode 10 &ndash; Paths and Matrices\nEpisode 11 &ndash; From Diagrams to Matrices\nEpisode 12 &ndash; Monoidal Categories and PROPs (Part 1)\nEpisode 13 &ndash; PROPs (Part 2) and Permutations\nEpisode 14 &ndash; Homomorphisms of PROPs\nEpisode 15 &ndash; Matrices, diagrammatically\nEpisode 16 &ndash; Trust the Homomorphism, for it is Fully Faithful\nIntegers and Relations\nEpisode 17 &ndash; Maths with Diagrams\nEpisode 18 &ndash; Introducing the Antipode\nEpisode 19 &ndash; Integer matrices\nEpisode 20 &ndash; Causality, Feedback and Relations\nEpisode 21 &ndash; Functions and Relations, diagrammatically\nEpisode 22 &ndash; The Frobenius Equation\nEpisode 23 &ndash; Frobenius Snakes and Spiders\nFractions and Spaces\nEpisode 24 &ndash; Bringing it all together\nEpisode 25 &ndash; Fractions, diagrammatically\nEpisode 26 &ndash; Keep Calm and Divide by Zero\nEpisode 27 &ndash; Linear Relations\nEpisode 28 &ndash; Subspaces, diagrammatically\nEpisode 29 &ndash; Dividing by zero to invert matrices\nEpisode 30 &ndash; The essence of graphical linear algebra\nRedundancy &ndash; A trilogy by Jason Erbele\nEpisode R1 &ndash; Redundancy and Zebra Snakes\n&nbsp;\nInterlude &ndash; string diagrams and resource-sensitive syntax\nWhy string diagrams?\nSequences and Signal Flow Graphs\nEpisode 31 &ndash; Fibonacci and sustainable rabbit farming\n&nbsp;\nOut of order (for now)\nOrthogonality and projections\nEigenstuff, diagrammatically\n&nbsp;\nContributions\nDeterminants and the Lindstr&ouml;m-Gessel-Vienot Lemma &ndash; by Solomon Maina\n&nbsp;\n&nbsp;\nOfftopic\nSometimes this blog actually looks like a blog.\n16 September 2016 &ndash; Leicester and the battle for universities\n16 April 2017 &ndash;&nbsp;&hellip;, a monoid is a category, a category is a monad, a monad is a monoid, &hellip;\n&nbsp;10 May 2017 &ndash;&nbsp;1st Workshop on String Diagrams in Computation, Logic, and Physics\n3 October 2018 &ndash; ACT 2018 &ndash;&nbsp;Applied Category Theory Research&nbsp;School",
+                "fallback": "Graphical Linear Algebra Link: Index",
+                "from_url": "https:\/\/graphicallinearalgebra.net\/",
+                "service_icon": "https:\/\/s2.wp.com\/i\/webclip.png",
+                "id": 1,
+                "original_url": "https:\/\/graphicallinearalgebra.net\/"
+            }
+        ],
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J",
+        "reactions": [
+            {
+                "name": "eyes",
+                "users": [
+                    "UC2A2ARPT",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0915ABB6-78F4-49CD-8369-E034435095BF",
+        "type": "message",
+        "text": "One thing that would help tremendously: please let me know where you are (timezone!) — either by stating it here or by making sure it’s correctly set in your Slack profile.",
+        "user": "U5STGTB3J",
+        "ts": "1558798850.069300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "D66EC4EA-DA7C-4A7A-9B8E-2D6088F37D27",
+        "type": "message",
+        "text": "EST ",
+        "user": "UHWC9PXBL",
+        "ts": "1558798994.069600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "09355819-09ac-4a38-ae0d-af02c0ba59d1",
+        "type": "message",
+        "text": "Here is a great article about how technology changes, and focusing on what's best for humanity (e.g. what will work?) rather than preserving the old or current way of doing things, and the role of experimenting with new things:\n\n<http:\/\/www.shirky.com\/weblog\/2009\/03\/newspapers-and-thinking-the-unthinkable\/>",
+        "user": "UAVCC2X70",
+        "ts": "1558808584.072000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558808584.072000",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1558867014.084800",
+        "reply_users": [
+            "UJFN50C00"
+        ],
+        "replies": [
+            {
+                "user": "UJFN50C00",
+                "ts": "1558867014.084800"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJFN50C00",
+                    "UJVEPCVT6"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "80c306f7-4a9b-4eeb-a440-45d1e5763d4b",
+        "type": "message",
+        "text": "Yes, the Graphical Linear Algebra blog is good fun, but the best ever, but a great idea.  If you read any one post try this one <https:\/\/graphicallinearalgebra.net\/2016\/06\/22\/29-inverting-matrices-and-dividing-by-zero\/>.",
+        "user": "UA14TGLTC",
+        "ts": "1558836393.072300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Graphical Linear Algebra",
+                "service_url": "http:\/\/graphicallinearalgebra.net",
+                "title": "29. Dividing by zero to invert matrices",
+                "title_link": "https:\/\/graphicallinearalgebra.net\/2016\/06\/22\/29-inverting-matrices-and-dividing-by-zero\/",
+                "author_name": "pawel",
+                "author_link": "https:\/\/graphicallinearalgebra.net\/author\/pawelsobocinski\/",
+                "thumb_url": "https:\/\/graphicallinearalgebra.files.wordpress.com\/2016\/06\/paris.jpg?fit=200%2C150",
+                "thumb_width": 113,
+                "thumb_height": 150,
+                "text": "I&rsquo;ve let the blog slide. At the end of this episode I&rsquo;ll write a bit about what I&rsquo;ve been doing in the last few months. For now, let&rsquo;s just jump straight back into graphical linear algebra.\nIn order to motivate myself to get back to&nbsp;writing, I brought forward an episode that I&rsquo;ve been excited about since late last year, when I first did&nbsp;the research.&nbsp;This material is closely linked to Episode 26&nbsp;on division by zero. If you haven&rsquo;t read it, or you have forgotten, it will be useful to take a look before continuing.\n&nbsp;\nEpisode 26 was quite popular &mdash; maybe the clickbait title helped. It did leave some people a bit skeptical: ok, so this guy has derived addition and multiplication tables that seem to say that dividing by zero makes sense. But can this weird idea of dividing by zero actually be useful, or is it merely a curiosity?\nThere are other number systems that, in principle &ldquo;allow&rdquo; you to divide by zero. Many of them work similarly to the IEEE&nbsp;standard for floating point arithmetic, which has an additional entity called NaN (not a number). Roughly speaking, it&rsquo;s the result of all of the calculations that shouldn&rsquo;t&nbsp;make sense, like dividing by zero. Next, if you add and multiply a NaN with anything else, you still have a NaN. So it&rsquo;s kind of like a black hole number: once you get it&nbsp;part way through your calculation you can be pretty sure that something has gone wrong and that the overall result will be a NaN &mdash; no matter what you do, you will never&nbsp;end up with an ordinary number again.\nThis is not the case for&nbsp;the number system from Episode 26. In fact, the three additional&nbsp;elements &infin;, &perp;, &#8868; do show up in calculations. The cool thing is that they are not a sinkhole like NaN: you don&rsquo;t need to panic if you get, say, a&nbsp;&perp; in one of your calculations. It&rsquo;s possible that things will finish well. This episode is entirely devoted to one example: inverting matrices.\n&nbsp;\nWe will need a few definitions.\nAn n&times;m matrix A is said to be invertible&nbsp;when there exists an m&times;n matrix B, such that when you compose in either direction, you get the identity. In diagrams:\nIf such a B exists, we sometimes write A-1 = B. Many matrices are not invertible. One property of those that are is that&nbsp;m=n, that is, invertible matrices are all square; the number of rows is equal to the number of columns.\nActually, it&rsquo;s like this in&nbsp;most PROPs &ndash; you can usually only invert things where the left and the right boundaries have the same size. A useful&nbsp;intuition to keep in mind is that something can only be invertible if it can be undone. And since wires carry information, we can&rsquo;t just throw one away or add a new one and expect to be able to undo it.\nBack to definitions. We will say that an n&times;m matrix A is injective, or mono, when the following is true.\n\nThe backwards facing A is none other than the mirror image symmetry&nbsp;&dagger; that we discussed in Episode 27.\nThe above definition probably&nbsp;seems a bit strange. In most ordinary linear algebra textbooks, the defining property of an injective n&times;m matrix is that it takes &nbsp;different m-vectors to different n-vectors: that is, it&nbsp;is&nbsp;injective as a function. This is actually an equivalent formulation, but we don&rsquo;t think about matrices as functions on this blog.\nOne interesting property of mono matrices is that they are left-cancellable: that is, given two equal-sized matrices B, C for which AB and AC is defined, if AB=AC then B=C. In fact, this is true when B and C are linear relations. Diagrammatically:\n\nimplies that\n\nHere B and C are linear relations, i.e. arbitrary diagrams in IH. This of course includes the case where B and C are matrices.\nActually injectivity and left-cancellability are also equivalent, i.e. assuming one, you can prove the other. I&rsquo;ll leave the proofs as an exercise but I&rsquo;ll give you a hint: it&rsquo;s handy to use the fact, stated in Episode 27, that for any linear relation A, A&dagger; is its weak inverse.\nThe bizarro of injective is&nbsp;surjective. We will also use the word epi. Thus, an n&times;m matrix is surjective when the following is true:\n\nJust as mono matrices are left-cancellable, epi matrices are right-cancellable; given B and C such that BA and CA make sense, if BA=CA then B=C. In terms of ordinary&nbsp;linear algebra, surjective matrices are those that are surjective as functions; for every n-vector b, there exists an m-vector a such that Aa=b.\nThere is one final&nbsp;observation&nbsp;that we will need later: any invertible matrix is both injective and surjective. To keep things moving along, I&rsquo;ll also leave the proof of this as an exercise.\n&nbsp;\nLet&rsquo;s now prove a classic result of linear algebra. It refers to kernels and images, which are linear subspaces that we discussed in the last episode.\nKernel and Image Lemma.&nbsp;Suppose that A is an m&times;n matrix. Then:\nA is injective exactly when it has a null kernel\nA is surjective exactly when it has a full image.\nProof.&nbsp;Properties 1 and 2 are mutually bizarro, so it&rsquo;s enough to prove just one. We will do 1.\nSuppose that A is injective. Then:\n\nWhich means that A has a null kernel.\nSuppose now that A has a null kernel; we want to show that it must be injective.\n\nThat&rsquo;s it, we&rsquo;re done, QED.\n&nbsp;\n&nbsp;\nThe following lemma is very useful because it gives us some useful&nbsp;graphical intuition&nbsp;about invertible matrices.\nInvertible Matrix&nbsp;Lemma\nSuppose that A is a square matrix of size m.&nbsp;Then the following are equivalent\nA has inverse B\nThere exists matrix B such\n\nProof. Let&rsquo;s first show that 1 implies 2. Assuming 1, Suppose that A has inverse B. Since A is invertible, we know that A is injective. So we have the following:\n\nWhich gives us&nbsp;2. In the first step, we used the assumption that B is the inverse of A, and in the second step we used the fact that A is injective.\nWe still need to show that&nbsp;2 implies 1. So, supposing that A is equal to some matrix B heading in the opposite direction, we need to show that B is the inverse of A. To do that, it&rsquo;s useful to show that A must be injective. Here we can use our Kernel and Image Lemma.\n\nSo, by the kernel lemma, A is injective. We can now use this to show that A followed by B is identity.\n\nTo show that B followed by A is also identity, we can do the bizarro thing, first showing that B is surjective.\n&nbsp;\nOur aim is to obtain a formula for the inverse of a matrix, if it exists. The&nbsp;starting point is an arbitrary 2&times;2 matrix, so something like this:\nIf an inverse exists, then we know it&rsquo;s also going to be a 2&times;2 matrix:\nThe tricky part is, how can we calculate&nbsp;a&rsquo;,&nbsp;b&rsquo;,&nbsp;c&rsquo; and d&rsquo;, knowing a,&nbsp;b, c and d? If you remember your linear algebra, maybe you&rsquo;re thinking determinants and adjugate matrices. We will bypass all that and draw some pictures instead.\n&nbsp;\nLet&rsquo;s start by using our Invertible Matrix Lemma. As diagrams in IH, we have:\n\nNow adding a matrix to -1 times itself gives us the zero matrix. Using this trivial observation,&nbsp;we get the following rather complicated looking equation:\n\nWe can extract the formula for each of a&rsquo;, b&rsquo;, c&rsquo; and d&rsquo;&nbsp;by plugging up some of the dangling wires in the above equation. Let&rsquo;s work through the procedure&nbsp;for a&rsquo;.\nThe first step is to plug a zero and a discard at the right places in both sides, like so:\n\nDoing that, we get the first equality below.\nThe second equality follows from the bone equation of bimonoids.\nSo far so good: but now we can drastically simplify the left hand side. Essentially, we&rsquo;ve plugged a white unit into a black comultiplication, and vice versa; usually when that happens, there is…",
+                "fallback": "Graphical Linear Algebra Link: 29. Dividing by zero to invert&nbsp;matrices",
+                "from_url": "https:\/\/graphicallinearalgebra.net\/2016\/06\/22\/29-inverting-matrices-and-dividing-by-zero\/",
+                "service_icon": "https:\/\/s2.wp.com\/i\/webclip.png",
+                "id": 1,
+                "original_url": "https:\/\/graphicallinearalgebra.net\/2016\/06\/22\/29-inverting-matrices-and-dividing-by-zero\/"
+            }
+        ],
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "6cfd75db-6b41-488d-9688-4f92bdf34a67",
+        "type": "message",
+        "text": "Seven Sketches is what I always recommend to people.",
+        "user": "UA14TGLTC",
+        "ts": "1558836482.072600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "0c59d0bd-630f-409a-88e3-8a96b8d39d0d",
+        "type": "message",
+        "text": "Back when I got started Conceptual Mathematics was the best <https:\/\/www.amazon.com\/Conceptual-Mathematics-First-Introduction-Categories\/dp\/052171916X>.  It repeats ideas enough to give a person a good amount of practice with limits.",
+        "user": "UA14TGLTC",
+        "ts": "1558836603.072800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Conceptual Mathematics: A First Introduction to Categories",
+                "title_link": "https:\/\/www.amazon.com\/Conceptual-Mathematics-First-Introduction-Categories\/dp\/052171916X",
+                "text": "In the last 60 years, the use of the notion of category has led to a remarkable unification and simplification of mathematics. Conceptual Mathematics, Second Edition, introduces the concept of 'category' for the learning, development, and use of mathematics, to both beginning students and general...",
+                "fallback": "Conceptual Mathematics: A First Introduction to Categories",
+                "image_url": "https:\/\/images-na.ssl-images-amazon.com\/images\/I\/41bGNcpncPL._SR600%2c315_PIWhiteStrip%2cBottomLeft%2c0%2c35_PIAmznPrime%2cBottomLeft%2c0%2c-5_PIStarRatingFOUR%2cBottomLeft%2c360%2c-6_SR600%2c315_ZA(30%20Reviews)%2c445%2c291%2c400%2c400%2carial%2c12%2c4%2c0%2c0%2c5_SCLZZZZZZZ_.jpg",
+                "from_url": "https:\/\/www.amazon.com\/Conceptual-Mathematics-First-Introduction-Categories\/dp\/052171916X",
+                "image_width": 476,
+                "image_height": 250,
+                "image_bytes": 12727,
+                "service_icon": "https:\/\/www.amazon.com\/favicon.ico",
+                "service_name": "amazon.com",
+                "id": 1,
+                "original_url": "https:\/\/www.amazon.com\/Conceptual-Mathematics-First-Introduction-Categories\/dp\/052171916X"
+            }
+        ],
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "ddeb8968-1056-404f-b360-59d273702bb3",
+        "type": "message",
+        "text": "I learned from Steve Awodey who approaches a category as what you get when you cross a poset with a monoid.",
+        "user": "UA14TGLTC",
+        "ts": "1558836795.073100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "16ac1eaf-babc-4413-a125-2c1303a62c52",
+        "type": "message",
+        "text": "<https:\/\/www.amazon.com\/Category-Theory-Oxford-Logic-Guides\/dp\/0199237182\/ref=pd_bxgy_img_3\/142-3084216-7251701?_encoding=UTF8&amp;pd_rd_i=0199237182&amp;pd_rd_r=1efab95c-7f5b-11e9-9c4a-ff62a9822dac&amp;pd_rd_w=gQDzK&amp;pd_rd_wg=HriuZ&amp;pf_rd_p=a2006322-0bc0-4db9-a08e-d168c18ce6f0&amp;pf_rd_r=PP5Z84CESYKX9JPEG29R&amp;psc=1&amp;refRID=PP5Z84CESYKX9JPEG29R>",
+        "user": "UA14TGLTC",
+        "ts": "1558836796.073300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Category Theory (Oxford Logic Guides)",
+                "title_link": "https:\/\/www.amazon.com\/Category-Theory-Oxford-Logic-Guides\/dp\/0199237182\/ref=pd_bxgy_img_3\/142-3084216-7251701?_encoding=UTF8&pd_rd_i=0199237182&pd_rd_r=1efab95c-7f5b-11e9-9c4a-ff62a9822dac&pd_rd_w=gQDzK&pd_rd_wg=HriuZ&pf_rd_p=a2006322-0bc0-4db9-a08e-d168c18ce6f0&pf_rd_r=PP5Z84CESYKX9JPEG29R&psc=1&refRID=PP5Z84CESYKX9JPEG29R",
+                "text": "Category theory is a branch of abstract algebra with incredibly diverse applications. This text and reference book is aimed not only at mathematicians, but also researchers and students of computer science, logic, linguistics, cognitive science, philosophy, and any of the other fields in which th...",
+                "fallback": "Category Theory (Oxford Logic Guides)",
+                "image_url": "https:\/\/images-na.ssl-images-amazon.com\/images\/I\/41pAXg0Mh8L._SR600%2c315_PIWhiteStrip%2cBottomLeft%2c0%2c35_PIAmznPrime%2cBottomLeft%2c0%2c-5_PIStarRatingFOUR%2cBottomLeft%2c360%2c-6_SR600%2c315_ZA(9%20Reviews)%2c445%2c291%2c400%2c400%2carial%2c12%2c4%2c0%2c0%2c5_SCLZZZZZZZ_.jpg",
+                "from_url": "https:\/\/www.amazon.com\/Category-Theory-Oxford-Logic-Guides\/dp\/0199237182\/ref=pd_bxgy_img_3\/142-3084216-7251701?_encoding=UTF8&pd_rd_i=0199237182&pd_rd_r=1efab95c-7f5b-11e9-9c4a-ff62a9822dac&pd_rd_w=gQDzK&pd_rd_wg=HriuZ&pf_rd_p=a2006322-0bc0-4db9-a08e-d168c18ce6f0&pf_rd_r=PP5Z84CESYKX9JPEG29R&psc=1&refRID=PP5Z84CESYKX9JPEG29R",
+                "image_width": 476,
+                "image_height": 250,
+                "image_bytes": 12670,
+                "service_icon": "https:\/\/www.amazon.com\/favicon.ico",
+                "service_name": "amazon.com",
+                "id": 1,
+                "original_url": "https:\/\/www.amazon.com\/Category-Theory-Oxford-Logic-Guides\/dp\/0199237182\/ref=pd_bxgy_img_3\/142-3084216-7251701?_encoding=UTF8&amp;pd_rd_i=0199237182&amp;pd_rd_r=1efab95c-7f5b-11e9-9c4a-ff62a9822dac&amp;pd_rd_w=gQDzK&amp;pd_rd_wg=HriuZ&amp;pf_rd_p=a2006322-0bc0-4db9-a08e-d168c18ce6f0&amp;pf_rd_r=PP5Z84CESYKX9JPEG29R&amp;psc=1&amp;refRID=PP5Z84CESYKX9JPEG29R"
+            }
+        ],
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "9e90fb04-23ff-496e-8082-2d399ccddf59",
+        "type": "message",
+        "text": "It's a cute idea, but also typifies the problem that treatments of Categories are especially math jargony.",
+        "user": "UA14TGLTC",
+        "ts": "1558836890.073600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "f99e4aef-3cf6-4ef0-bdfa-67266b8fc9aa",
+        "type": "message",
+        "text": "The intrinsic challenge with Categories is the natural abstractness: instead of building a thing out of pieces, you ask how does it relate to all the other things of the same sort.  Then the specific pieces used don't matter allowing you to shift your attention to formal universal properties.",
+        "user": "UA14TGLTC",
+        "ts": "1558837138.073800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "1f3a550c-026b-4e97-8dff-d8aa114957a8",
+        "type": "message",
+        "text": "So then it's really good to ground things in the concrete.  Like, I don't know, anything remote controlled will be a functorish commutative square.  Or, like physical maps.  Pointing at the map, after composition, is like pointing at a place.",
+        "user": "UA14TGLTC",
+        "ts": "1558837364.074000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558782017.061500",
+        "parent_user_id": "U5STGTB3J"
+    }
+]

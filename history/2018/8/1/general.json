@@ -1,0 +1,252 @@
+[
+    {
+        "client_msg_id": "22A01204-FE83-4B55-964E-42B919842C98",
+        "type": "message",
+        "text": "<@U8A5MS6R1> I share your sentiment about files or byte streams somewhat. Constantly I wonder “Really, that is the best we could come up with in half a century?” However, there must be something to it that made the Unix way a successful design. It certainly is simple, yet powerful, and it does have some composition properties with the filter and pipes mechanisms.\n\nWhat I’m most intrigued by though, and what you don’t really talk about in your (otherwise excellent) linked article, is that the amazingly pervasive files metaphor in Unix also enables designing for the future: because you cannot assume anything about a byte stream, you’re encouraged to build your filter or command line utility with the least amount of assumptions on what you will receive, thus avoiding the specific design for a specific data format which will immediately couple your program to a more specific aka limited use case and make many unanticipated use cases impossible.\n\nTherefore I’m not sure I agree that “minimizing pre-shared knowledge [should] be an essential goal of our system design” — I know what you mean and it sure sounds obvious and logical, but I’m just not sure about that anymore.\n\nThere is some clever magic here that I’m still trying to understand and I’m not sure I’m capable of expressing yet, and what Unix does with files, streams, and byte arrays is a beautiful incarnation of that magic for us to look at and figure out the principles behind. It only works well for cases where other important Unix principles are also respected, like files with easy to understand, human-readable formats that have been designed with extensibility in mind.\n\nI do hope that this magic can be lifted from the domain of files and streams to something better… I also think we are ready to leave files behind. I just don’t know exactly what that other, better domain is, yet.",
+        "user": "U5STGTB3J",
+        "ts": "1533107724.000096",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532963038.000621",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "8f80d484-12ff-4b23-baf5-737605557830",
+        "type": "message",
+        "text": "Welcome to the group <@UC0CULEM8>!",
+        "user": "U5TCAFTD3",
+        "ts": "1533136958.000336",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "778c3053-c568-439e-9f46-43738bfb2c70",
+        "type": "message",
+        "text": "<@U5TCAFTD3> thanks! I was invited here by <@U5STGTB3J>. Fascinating subject. Just started listening to your podcast.",
+        "user": "UC0CULEM8",
+        "ts": "1533138050.000122",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gde33fcfde54",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/4de33fcfde5497f49693e16745651641.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0012-72.png",
+            "first_name": "",
+            "real_name": "Norbert Frank",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "norbert",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "pray",
+                "users": [
+                    "U5TCAFTD3"
+                ],
+                "count": 1
+            },
+            {
+                "name": "wave",
+                "users": [
+                    "U6XFQKWFN"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "428114a9-3307-4feb-bd3a-dcade076b732",
+        "type": "message",
+        "text": "The composition of processes via pipes is something I really appreciate. It's got nice properties of encapsulation of each process and as you mention - easy composition. In fact I wish it was easy to do more configurations than a uni-directional pipeline.\n\n&gt; the amazingly pervasive files metaphor in Unix also enables designing for the future: because you cannot assume anything about a byte stream, you’re encouraged to build your filter or command line utility with the least amount of assumptions on what you will receive, thus avoiding the specific design for a specific data format which will immediately couple your program to a more specific aka limited use case and make many unanticipated use cases impossible.\n\nInteresting point. Quite likely there is something you are saying here that I am missing because I would say the opposite :slightly_smiling_face:. Here's my line of thought: dealing directly with byte streams makes you more coupled with the formats where any minor syntax change will break you. Two exceptions I can think of are `tee` (programs that treat the stream as opaque, just pass the bytes uninspected) and `wc` (programs that inspect well known 'standardized' byte markers). Any script that uses `grep` or `awk` is very closely bound to the syntax of the data. If the file format is changed (but semantically identical) all the scripts would have to be rewritten. Ideally it should be possible for the file itself to tell the script how to get the the same information from the new contents and the script should only have to be modified if the same information is not available. One way to do this is to shift the boundary between the tool and the file so the interaction is not 'give me your bytes' but instead 'give me your tokens\/records\/etc' - i.e. concepts at a higher level than 'bytes'. Hmm.. doing this makes it no longer a file, but an encapsulated object. Still early in the process of thinking along these lines.\n\nIt seems 'files with human readable formats' becomes important if 'give my your bytes' is the level of discourse we intend to have. In the encapsulated object scenario, each object has embedded within it an introspectable 'API' and perhaps visual inspector tailored to its purpose.",
+        "user": "U8A5MS6R1",
+        "ts": "1533145287.000408",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532963038.000621",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "DC7A0C90-B811-4DC4-B422-D1975BB14E1F",
+        "type": "message",
+        "text": "<@U8A5MS6R1> Sounds like you just described what XML wanted to be. :-)\n\nWhat I meant is that the design encourages you to write programs that try to be more forgiving precisely because — as a good Unix programmer — you don’t want it to break with every format change, and many conventions have formed over time to help with that in how you format those byte streams (like the different configuration file formats).\n\nIt’s interesting that you jump to “encapsulated objects with introspectable API” directly, which seems to me like the other extreme on a spectrum. Unix shows that you can get quite far with simple (and human-readable, feeling almost natural) conventions like a line is a record, simple chars acting as delimiters, etc. That is all very fuzzy, and can break easily just as you describe, but if you can design your program to rely on as few of these conventions as possible, you can use it in many ways, some of them likely unforeseen. That’s a quality I feel is part of that magic.\n\nAn encapsulated object with schema encourages to just throw an error that the data has a different format now. That’s a “cleaner” design of sorts, as it prevents potentially weird stuff from happening. But it also kills any unintended use cases from appearing.\n\nI’m still not good at making my point here, and it’s just a hunch that there is a quality there we are missing when we try to make everything fail-safe from the beginning, but maybe the idea shines through?\n\nA similar debate that smells like it’s rooted in the same concept is early vs. late binding. Interestingly, I used to be quite strongly on the side of early binding and strong type systems, which corresponds to the “other” side in our conversation, so one could say I’m inconsistent.\n\nAs you can tell, I’m in the middle of forming my opinion about this, and so far I can only conclude that there are good reasons to have both, just not at the same time.\n\nWhen I’m prototyping and don’t really know what the system I’m building should look like, I want flexibility and I don’t want to specify schemas for instance; I want to explore the design space and run into unintended use cases. When the system is finally fleshed out, I want to nail everything down and optimize, so early binding and well-defined schemas and APIs are very useful if not even required.\n\nAm I making any sense at all?",
+        "user": "U5STGTB3J",
+        "ts": "1533149318.000569",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532963038.000621",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "6821e7d0-bc01-4d12-905c-c1348fdcf812",
+        "type": "message",
+        "text": "&gt; Sounds like you just described what XML wanted to be. :-)\nHaha.. oops, not my intention at all. XML provides nothing that different from byte arrays. I jumped to objects because they seems to be the first shift that is qualitatively different. I think the difference comes from considering the boundary between the two entities as a *conversation*. Each entity is dependent on only the messages it sends and receives - it is free to reorganize its internals in any way. One implication is that each entity has an 'inside' and an 'outside' - encapsulation. So in theory you reduce the coupling itself to the bare essential by talking in messages with 'high level' meaning within the domain at hand. Only the meaning of the messages needs to be agreed upon. From this POV, reading an XML file is the conversation between 'tool' and 'file' that goes as follows:\n\n -&gt; read_bytes\n &lt;- here_you_go(bytes)\n\nWhile the meaning of those bytes is then extracted on the 'wrong' side of the boundary. The tool is still tightly coupled to the irrelevant details of mapping bytes to the higher constructs it really wants - say inventory data or user preferences or whatever. A better boundary actually does exists within the implementation of the tool itself - likely as a function or class boundary provided by an embedded parser. This makes it easy to 'change only the one part' of the tool when the format changes - but you still have to recompile and push out this tool everywhere, so where's the win? (edit: hit enter too soon, follow up coming..)",
+        "user": "U8A5MS6R1",
+        "ts": "1533157568.000394",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1533158611.000000"
+        },
+        "thread_ts": "1532963038.000621",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "1c2c5593-0aa4-4c97-b315-8dfa456f14bc",
+        "type": "message",
+        "text": "Welcome <@UC11AF54J> and <@UC0U8RM9A> :tada:",
+        "user": "U5TCAFTD3",
+        "ts": "1533157582.000036",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "7AFA9735-3583-4424-86DC-81CE74BFB4A8",
+        "type": "message",
+        "text": "Thanks. Hello!",
+        "user": "UC0U8RM9A",
+        "ts": "1533157846.000003",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gdd411ef00bb",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/cdd411ef00bbb758e37068e7f9bc112e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-72.png",
+            "first_name": "",
+            "real_name": "Dominik Wagner",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "wagnr",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "ad937b76-7f28-4d38-b8f1-802c499bfb62",
+        "type": "message",
+        "text": "&gt; That is all very fuzzy, and can break easily just as you describe, but if you can design your program to rely on as few of these conventions as possible, you can use it in many ways, some of them likely unforeseen. That’s a quality I feel is part of that magic.\n\nAh right - I think I get what you are saying. There is flexibility and tolerance within the interacting entities in the system? Yes this is a good thing, and I think will transfer to an 'object oriented' OS as well. I'm not really trying to make all interactions fail-safe - you may still have unexpected situations of two objects that try but can't talk to each other - but that failure will be clearer and (speculating here) easier to patch. The main win at the system level is that the mapping between higher level concepts and lower level bytes is hidden within some object, which gives you a bit more flexibility than spreading this mapping around across all the readers.\n\n&gt; I want to explore the design space and run into unintended use cases. When the system is finally fleshed out, I want to nail everything down and optimize\n\nYes this makes complete sense. It's like the strictness should be a knob on different objects within a program - initially we keep stuff loose but as things get clearer we make some\/many of them tighter.",
+        "user": "U8A5MS6R1",
+        "ts": "1533158438.000130",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1533158545.000000"
+        },
+        "thread_ts": "1532963038.000621",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "0dd02a41-476e-466f-99f2-c346c89bc2c1",
+        "type": "message",
+        "text": "<@U5STGTB3J> so I read your reply again and now I think I didn't really get it. Do you have an example of an 'unintended use case'?",
+        "user": "U8A5MS6R1",
+        "ts": "1533164161.000253",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1533164182.000000"
+        },
+        "thread_ts": "1532963038.000621",
+        "parent_user_id": "U5STGTB3J"
+    }
+]
