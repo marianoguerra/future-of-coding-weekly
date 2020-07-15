@@ -84,9 +84,12 @@
                 <p class="tweet"><span class="tweet-icon">🐦</span> <a :href="'https://twitter.com/' + att.author_subname" class="tweet-author">{{att.author_name}}</a>: <span class="tweet-msg" v-html="att.$html"></span>
                 </p>
               </blockquote>
-              <blockquote v-if="att.service_name === 'YouTube'">
+              <blockquote v-else-if="att.service_name === 'YouTube'">
                 <a :href="att.title_link" target="_blank">🎥 {{att.title}}</a>
                 <div class="youtube-video" v-html="att.video_html"></div>
+              </blockquote>
+              <blockquote v-else>
+                <a :href="att.title_link" target="_blank">🔗 {{att.title}}</a>
               </blockquote>
             </div>
           </div>
@@ -110,9 +113,12 @@
                     <p class="tweet"><span class="tweet-icon">🐦</span> <a :href="'https://twitter.com/' + att.author_subname" class="tweet-author">{{att.author_name}}</a>: <span class="tweet-msg" v-html="att.$html"></span>
                     </p>
                   </blockquote>
-                  <blockquote v-if="att.service_name === 'YouTube'">
+                  <blockquote v-else-if="att.service_name === 'YouTube'">
                     <a :href="att.title_link" target="_blank">🎥 {{att.title}}</a>
                     <div class="youtube-video" v-html="att.video_html"></div>
+                  </blockquote>
+                  <blockquote v-else>
+                    <a :href="att.title_link" target="_blank">🔗 {{att.title}}</a>
                   </blockquote>
                 </div>
               </div>
