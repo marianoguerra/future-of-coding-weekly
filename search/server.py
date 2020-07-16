@@ -20,7 +20,7 @@ async def search(channel, term, host='127.0.0.1', port=1491, password='SecretPas
 async def server(request):
   channel = request.args.get('channel', 'general')
   term = request.args.get('query', 'Bret Victor')
-  return json({"ok": True, "items": await search(channel, term)})
+  return json({"ok": True, "result": await search(channel, term)})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
