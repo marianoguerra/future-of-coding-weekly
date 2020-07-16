@@ -73,12 +73,23 @@ apt autoremove -y                                                               
 # for sonic-server build
 apt install -y build-essential clang libclang-dev libc6-dev g++ llvm-dev
 
-cat > /etc/nginx/sites-available/default << EOL
+# EOL quoted to avoid expansion of heredoc variables
+cat > /etc/nginx/sites-available/default << 'EOL'
 server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
+        root /opt/foc/dist/static/;
+
+        index index.html;
+
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript application/pdf;
+
         location / {
+                try_files $uri $uri/ =404;
+        }
+
+        location /search/ {
                 proxy_pass http://127.0.0.1:8080;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
@@ -87,6 +98,7 @@ server {
         }
 }
 EOL
+
 #
 
 systemctl enable nginx
