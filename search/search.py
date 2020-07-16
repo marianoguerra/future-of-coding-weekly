@@ -2,10 +2,8 @@ import sys
 import asyncio
 import datetime
 
-
 from asonic import Client
 from asonic.enums import Channel
-
 
 async def main(channel, term):
   c = Client(host='127.0.0.1', port=1491, password='SecretPassword', max_connections=100)
@@ -22,8 +20,6 @@ async def main(channel, term):
       (from_date, to_date) = dates.split(' ')
       url = "https://marianoguerra.github.io/future-of-coding-weekly/history/?fromDate={}&toDate={}&channel={}&filter=".format(from_date, to_date, channel)
       print(url)
-
-
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
