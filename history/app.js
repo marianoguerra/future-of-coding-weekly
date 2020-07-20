@@ -1,5 +1,5 @@
 //@format
-/*globals Vue, SimpleMarkdown*/
+/*globals Vue, Set, SimpleMarkdown*/
 import {getNameToCode, textFromCode, skinIdsToCodes} from './emoji.js';
 import {AUTHORS} from '../common.js';
 
@@ -93,7 +93,7 @@ function msgToMd(msg) {
 }
 
 function dummyUser(user) {
-  return {user, name: user, real_name: user};
+  return {user, name: user, real_name: user, profile: {real_name: user}};
 }
 
 function getRealName(username, users) {
@@ -162,7 +162,7 @@ function parseMsgText(msg, {users}) {
 }
 
 //const types = {};
-function enrichMessage(msg, args) {
+function enrichMessage(msg, args, isOlder) {
   const {users} = args,
     date = new Date(+msg.ts * 1000),
     {user} = msg;
@@ -221,16 +221,23 @@ function enrichMessage(msg, args) {
   }
 
   try {
+    const datePrefix = isOlder ? '🕰️ ' : '';
     msg.$dateStrISO = date.toISOString();
-    msg.$dateStr = msg.$dateStrISO.replace('T', ' ').slice(0, -5);
+    msg.$dateStr = datePrefix + msg.$dateStrISO.replace('T', ' ').slice(0, -5);
   } catch (error) {
     console.log(date, msg, error);
     msg.$dateStr = 'Invalid Date';
     msg.$dateStrISO = 'Invalid Date';
   }
   msg.$user = users[user] || dummyUser(user);
-  msg.$userName = msg.$user.real_name;
-  msg.$filterText = (msg.$dateStrISO + msg.$userName + msg.$text).toLowerCase();
+  msg.$userName = msg.$user.real_name || msg.$user.profile.real_name || msg.$user.name;
+  msg.$filterText = (
+    msg.$dateStrISO +
+    msg.$userName +
+    msg.$text +
+    msg.$filesText +
+    msg.$attachmentsText
+  ).toLowerCase();
 
   /*const blocks = msg.blocks || [];
   for (let i = 0, len = blocks.length; i < len; i += 1) {
@@ -337,7 +344,14 @@ function nodeToMd(node, args) {
   }
 }
 
-function parseHistoryChannelData(data, users, channels, msgByTs, msgOrder) {
+function parseHistoryChannelData(
+  data,
+  users,
+  channels,
+  msgByTs,
+  msgOrder,
+  olderMessagesToLoad
+) {
   for (let i = 0, len = data.length; i < len; i += 1) {
     const msg = data[i];
 
@@ -364,7 +378,7 @@ function parseHistoryChannelData(data, users, channels, msgByTs, msgOrder) {
       }
     }
 
-    enrichMessage(msg, {users, channels});
+    enrichMessage(msg, {users, channels}, false);
     const isParent = ts === thread_ts;
 
     if (isParent) {
@@ -376,17 +390,18 @@ function parseHistoryChannelData(data, users, channels, msgByTs, msgOrder) {
       if (parentMsg) {
         parentMsg.responses.push(msg);
       } else {
+        olderMessagesToLoad.push(thread_ts);
         const parentMsg = enrichMessage(
           {
             ts: thread_ts,
             thread_ts,
-            user: 'Unknown User',
-            text: 'MSG NOT FOUND',
+            user: '',
+            text: '...',
+            $index: msgOrder.length,
             responses: [msg],
-            WHAT_IS_THIS:
-              'a dummy message to attach thread messages to a parent that is not on this file',
           },
-          {users, channels}
+          {users, channels},
+          true
         );
         msgOrder.push(parentMsg);
         msgByTs[thread_ts] = parentMsg;
@@ -504,7 +519,15 @@ function main() {
               this.channels = channelsToChannelsById(data);
             });
         },
-        loadChannelDate(channel, fromDate, toDate, toDateFinal) {
+
+        loadChannelDate(
+          channel,
+          fromDate,
+          toDate,
+          toDateFinal,
+          olderMessagesToLoad,
+          onFinish
+        ) {
           if (dateIsLessThanDate(fromDate, toDateFinal)) {
             const [year, month, day] = dateParts(fromDate),
               path = `${year}/${month}/${day}/${channel}.json`;
@@ -519,14 +542,17 @@ function main() {
                     this.users,
                     this.channels,
                     this.history.msgsByTs,
-                    this.history.msgs
+                    this.history.msgs,
+                    olderMessagesToLoad
                   );
 
                   this.loadChannelDate(
                     channel,
                     toDate,
                     addDays(toDate, 1),
-                    toDateFinal
+                    toDateFinal,
+                    olderMessagesToLoad,
+                    onFinish
                   );
                 });
               } else {
@@ -534,20 +560,85 @@ function main() {
                   channel,
                   toDate,
                   addDays(toDate, 1),
-                  toDateFinal
+                  toDateFinal,
+                  olderMessagesToLoad,
+                  onFinish
                 );
               }
             });
           } else {
             this.loadingStatus = null;
             this.filterMessages();
+            onFinish({olderMessagesToLoad, channel});
           }
         },
         loadChannelDateRange: function (channel, fromDateBase, toDateFinal) {
-          let fromDate = cloneDate(fromDateBase),
-            toDate = addDays(fromDate, 1);
+          const fromDate = cloneDate(fromDateBase),
+            toDate = addDays(fromDate, 1),
+            olderMessagesToLoad = [];
 
-          this.loadChannelDate(channel, fromDate, toDate, toDateFinal);
+          this.loadChannelDate(
+            channel,
+            fromDate,
+            toDate,
+            toDateFinal,
+            olderMessagesToLoad,
+            (info) => this.onLoadChannelDateRangeFinished(info)
+          );
+        },
+        onLoadChannelDateRangeFinished: function ({
+          olderMessagesToLoad,
+          channel,
+        }) {
+          const pathSet = new Set(),
+            messagesToLoadByPath = {};
+          for (let i = 0, len = olderMessagesToLoad.length; i < len; i += 1) {
+            const ts = olderMessagesToLoad[i],
+              date = new Date(+ts * 1000),
+              [year, month, day] = dateParts(date),
+              path = `${year}/${month}/${day}/${channel}.json`;
+            pathSet.add(path);
+
+            let msgsForPath = messagesToLoadByPath[path];
+
+            if (!msgsForPath) {
+              msgsForPath = {};
+              messagesToLoadByPath[path] = msgsForPath;
+            }
+
+            msgsForPath[ts] = true;
+          }
+          const paths = Array.from(pathSet);
+          paths.sort();
+          this.loadOlderMessages(paths, 0, messagesToLoadByPath);
+        },
+        loadOlderMessages: function (paths, i, messagesToLoadByPath) {
+          const path = paths[i],
+            enrichArgs = {users: this.users, channels: this.channels},
+            msgsByTs = this.history.msgsByTs;
+
+          if (path) {
+            fetch(path).then((res) => {
+              if (res.status === 200) {
+                res.json().then((msgs) => {
+                  const msgsForPath = messagesToLoadByPath[path];
+                  for (let i = 0, len = msgs.length; i < len; i += 1) {
+                    const msg = msgs[i];
+                    if (msgsForPath[msg.ts]) {
+                      const dummyMsg = msgsByTs[msg.ts],
+                        index = dummyMsg.$index;
+                      enrichMessage(msg, enrichArgs, true);
+                      msg.responses = dummyMsg.responses;
+                      this.history.msgs[index] = msg;
+                    }
+                  }
+                  this.loadOlderMessages(paths, i + 1, messagesToLoadByPath);
+                });
+              }
+            });
+          } else {
+            this.filterMessages();
+          }
         },
         loadSelected: function () {
           const fromDate = new Date(this.fromDate),
