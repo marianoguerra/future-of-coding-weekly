@@ -1,0 +1,27 @@
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+	root /opt/foc/future-of-coding-weekly/search/server/foc-search-server/static/;
+
+	index index.html;
+
+	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript application/pdf;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	location /history/ {
+		alias /opt/foc/future-of-coding-weekly/history/;
+		try_files $uri $uri/ index.html;
+	}
+
+        location /search/ {
+                proxy_pass http://127.0.0.1:8080;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_set_header Host $host;
+        }
+}
