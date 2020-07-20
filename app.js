@@ -62,7 +62,7 @@ function onCommentsFinished(_contributors, authors) {
     ce('hr', {style: 'border:0;border-top:1px solid #cccccc'})
   );
 
-  console.log(authorsSorted.map(name => '@' + name).join(' '));
+  console.log(authorsSorted.map((name) => '@' + name).join(' '));
 
   outputNode.appendChild(
     ce(
@@ -96,8 +96,8 @@ function onCommentsFinished(_contributors, authors) {
   ).textContent = outputNode.innerHTML.replace(/<p>/g, '\n\n<p>').trim();
 }
 
-function addCommentSeparator(outputNode) {
-  outputNode.appendChild(ce('p', {style: 'text-align:center'}, '🚥'));
+function addCommentSeparator(_outputNode) {
+  //outputNode.appendChild(ce('p', {style: 'text-align:center'}, '🚥'));
 }
 
 function onComments(comments, baseUrl, count, contributors, authors) {
@@ -120,7 +120,7 @@ function onComments(comments, baseUrl, count, contributors, authors) {
 }
 
 function loadCommentsPage(baseUrl, count, contributors, authors, callback) {
-  fetchJson(baseUrl + count, comments =>
+  fetchJson(baseUrl + count, (comments) =>
     callback(comments, baseUrl, count + 1, contributors, authors)
   );
 }
@@ -157,7 +157,7 @@ function moreThanOneIssueOpen() {
 
 function handleIssues(data) {
   const openIssues = data
-    .filter(issue => issue.state === 'open')
+    .filter((issue) => issue.state === 'open')
     .sort((issueA, issueB) => issueA.number - issueB.number);
 
   if (openIssues.length === 0) {
@@ -173,7 +173,7 @@ function handleIssues(data) {
 
 function fetchJson(url, onData) {
   return fetch(url)
-    .then(res => res.json())
+    .then((res) => res.json())
     .then(onData);
 }
 
@@ -202,7 +202,7 @@ const customRules = {
         output(node.content, state) +
         '</blockquote>\n'
       );
-    })
+    }),
   },
   rules = Object.assign({}, defaultRules, customRules),
   rawBuiltParser = SimpleMarkdown.parserFor(rules),
