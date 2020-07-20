@@ -27,10 +27,9 @@ function mdLink(label, url) {
   return `[${label}](${url})`;
 }
 
-const EMPTY_LINK = mdLink('', '');
 function findFirstLink({blocks}) {
   if (!blocks) {
-    return EMPTY_LINK;
+    return null;
   }
 
   for (let i = 0, len = blocks.length; i < len; i += 1) {
@@ -58,18 +57,19 @@ function findFirstLink({blocks}) {
     }
   }
 
-  return EMPTY_LINK;
+  return null;
 }
 
 function msgToMdNL(msg, linkPrefix) {
   const userLink = AUTHORS[msg.$userName],
     userText = userLink || `**${msg.$userName}**`,
     conversationLink = mdLink(
-      '🧵conversation',
+      '🧵 conversation',
       `${linkPrefix}#${msg.$dateStrISO}`
     ),
     resourceLink = findFirstLink(msg),
-    base = `x ${resourceLink} via ${userText} ${conversationLink}\n\n${msg.$text}`;
+    resourceText = resourceLink ? `📝 ${resourceLink} via ` : '💬 ',
+    base = `${resourceText}${userText}\n\n${conversationLink}\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
 
   return base;
 }
@@ -117,10 +117,12 @@ function enrichAttachment(att) {
     att.$text = `> 🎥 [${att.title}](${att.title_link})`;
   } else if (att.title && att.title_link) {
     att.$text = `> 🔗 [${att.title}](${att.title_link})`;
+  } else if (att.image_url) {
+    att.$text = `> 📷 [${att.fallback || att.image_url}](${att.image_url})`;
   } else if (att.fallback) {
     att.$text = '> ' + att.fallback.replace(/\n/g, '\n> ');
   } else {
-      att.$text = '';
+    att.$text = '';
   }
 }
 
