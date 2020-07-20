@@ -75,7 +75,7 @@ function msgToMdNL(msg, linkPrefix) {
 }
 
 function msgToMd(msg) {
-  const base = `_[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}`;
+  const base = `_[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
   if (msg.responses.length === 0) {
     return base;
   } else {
@@ -84,7 +84,8 @@ function msgToMd(msg) {
       '\n\n\n' +
       msg.responses
         .map(
-          (msg) => `> _[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}`
+          (msg) =>
+            `> _[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`
         )
         .join('\n\n\n')
     );
@@ -104,15 +105,22 @@ const TW_URL_REF_REGEX = /<(https?:\/\/.*?)>/g,
   TW_MENTION_REF_REGEX = /<(https?:\/\/.*?)\|(@.*?)>/g;
 function enrichAttachment(att) {
   if (att.service_name === 'twitter') {
-    att.$html = att.text
-      .replace(
-        TW_MENTION_REF_REGEX,
-        (_, url, handle) => `<a href="${url}">${handle}</a>`
-      )
-      .replace(TW_URL_REF_REGEX, (_, url) => `<a href="${url}">${url}</a>`)
+    const text = att.text
+      .replace(TW_MENTION_REF_REGEX, (_, url, handle) => `[${handle}](${url})`)
+      .replace(TW_URL_REF_REGEX, (_, url) => url)
       .replace(EMOJI_REF_REGEX, (_, emojiCode) =>
         textFromCode(EMOJI_NAME_TO_CODE[emojiCode])
-      );
+      )
+      .replace(/\n/g, '\n> ');
+    att.$text = `> 🐦 [${att.author_name}](https://twitter.com/${att.author_subname}): ${text}`;
+  } else if (att.service_name === 'YouTube') {
+    att.$text = `> 🎥 [${att.title}](${att.title_link})`;
+  } else if (att.title && att.title_link) {
+    att.$text = `> 🔗 [${att.title}](${att.title_link})`;
+  } else if (att.fallback) {
+    att.$text = '> ' + att.fallback.replace(/\n/g, '\n> ');
+  } else {
+      att.$text = '';
   }
 }
 
@@ -162,10 +170,54 @@ function enrichMessage(msg, args) {
   msg.$html = mdToHTML(msg.$text);
   const atts = msg.attachments;
   if (atts) {
+    let accum = '';
     for (let i = 0, len = atts.length; i < len; i += 1) {
-      enrichAttachment(atts[i]);
+      if (i !== 0) {
+        accum += '\n\n';
+      }
+      const att = atts[i];
+      enrichAttachment(att);
+      accum += att.$text;
     }
+
+    msg.$attachmentsText = accum + '\n';
+    msg.$attachmentsHtml = mdToHTML(accum);
+  } else {
+    msg.$attachmentsText = '';
   }
+
+  const files = msg.files;
+  if (files) {
+    let accum = '';
+    for (let i = 0, len = files.length; i < len; i += 1) {
+      if (i !== 0) {
+        accum += '\n\n';
+      }
+
+      const file = files[i];
+      let icon = '🔗';
+      if (file.mimetype.startsWith('video/')) {
+        icon = '🎥';
+      } else if (file.mimetype.startsWith('image/')) {
+        icon = '📷';
+      } else if (file.mimetype.startsWith('application/')) {
+        icon = '📄';
+      } else if (file.mimetype.startsWith('text/')) {
+        icon = '🗒️';
+      }
+
+      if (file.title) {
+        file.$text = `> ${icon} [${file.title}](${file.url_private})`;
+        accum += file.$text;
+      }
+    }
+
+    msg.$filesText = accum + '\n';
+    msg.$filesHtml = mdToHTML(accum);
+  } else {
+    msg.$filesText = '';
+  }
+
   try {
     msg.$dateStrISO = date.toISOString();
     msg.$dateStr = msg.$dateStrISO.replace('T', ' ').slice(0, -5);
@@ -253,7 +305,7 @@ function mdChannel(id, channels) {
 
 function mdUser(id, {users}) {
   const user = users[id],
-    name = user ? user.real_name : id;
+    name = user && user.profile ? user.profile.real_name : id;
 
   return AUTHORS[name] || `**@${name}**`;
 }
