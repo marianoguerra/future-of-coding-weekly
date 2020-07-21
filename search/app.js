@@ -47,6 +47,9 @@ function main() {
         }
       },
       doSearch: function () {
+        this.msgs = [];
+        this.allMsgs = [];
+        this.msgsByTs = {};
         fetch(`search/?query=${this.search}&channel=${this.channel}`)
           .then((r) => r.json())
           .then((data) => {
@@ -77,7 +80,6 @@ function main() {
 
                 msgsForDay.push([tsStr, dateFromStr, dateToStr]);
               });
-
 
               const daysToLoad = Object.keys(msgsByDay);
               daysToLoad.sort();
@@ -120,7 +122,7 @@ function main() {
                 msg = this.msgsByTs[msgTs];
 
               if (msg) {
-                  msg.$searchURL = `https://marianoguerra.github.io/future-of-coding-weekly/history/?fromDate=${fromDate}&toDate=${toDate}&channel=${channel}`;
+                msg.$searchURL = `https://marianoguerra.github.io/future-of-coding-weekly/history/?fromDate=${fromDate}&toDate=${toDate}&channel=${channel}`;
                 this.msgs.push(msg);
               } else {
                 console.log(
