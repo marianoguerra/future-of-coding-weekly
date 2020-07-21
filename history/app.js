@@ -18,8 +18,10 @@ import {
   parseQuery,
   EXPORT_HTML_PREFIX,
   EXPORT_HTML_SUFFIX,
+  setHistoryPathBase,
 } from './history.js';
 
+setHistoryPathBase('.');
 function getBaseUrl() {
   const {origin, pathname} = location;
   return origin + pathname;

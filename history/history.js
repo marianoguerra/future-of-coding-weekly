@@ -5,6 +5,10 @@ import {AUTHORS} from './common.js';
 
 let historyPathBase = '/history';
 
+function setHistoryPathBase(v) {
+  historyPathBase = v;
+}
+
 function zeroUnpad(v) {
   return v.replace(/^0+/g, '');
 }
@@ -645,4 +649,5 @@ export {
   loadMsgsForDay,
   EXPORT_HTML_PREFIX,
   EXPORT_HTML_SUFFIX,
+  setHistoryPathBase,
 };
