@@ -9,6 +9,8 @@ from asonic import Client
 from asonic.enums import Channel
 
 app = Sanic("FoC Search Server")
+app.static('/history/', './history/')
+app.static('/', './search')
 
 async def search(channel, term, host='127.0.0.1', port=1491, password='SecretPassword'):
   c = Client(host=host, port=port, password=password, max_connections=100)

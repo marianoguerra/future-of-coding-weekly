@@ -15,17 +15,25 @@ async def main(history_glob):
   count = 0
   errors = 0
   for base_path in glob.glob(history_glob):
+    year_dir = os.path.basename(base_path)
     for (dirpath, dirnames, _filenames) in os.walk(base_path):
       for month_dir in dirnames:
         month_dir_path = os.path.join(base_path, month_dir)
         for (dirpath, dirnames, _filenames) in os.walk(month_dir_path):
           for day_dir in dirnames:
             day_dir_path = os.path.join(month_dir_path, day_dir)
+            msg_date = year_dir + '-' + month_dir + '-' + day_dir
             for channel_filename in glob.glob(os.path.join(day_dir_path, '*.json')):
               channel_name = os.path.basename(channel_filename).split('.')[0]
               for item in json.load(open(channel_filename, 'r')):
                 text = item.get('text', '').replace('\n', '')
-                key = item.get('ts', '')
+                # it seems that messages are either stored in the day thread_ts falls
+                # or the day that ts falls, just in case we store both and the
+                # date of the file as key
+                ts = item.get('ts', '0')
+                thread_ts = item.get('thread_ts', ts)
+                key =  ts + ':' + thread_ts + ':' + msg_date
+
                 if text:
                   try:
                     await c.push('messages', channel_name, key, text, 'eng')

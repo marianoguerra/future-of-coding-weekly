@@ -41,12 +41,31 @@
         </div>
       </div>
 
-      <ul class="results" style="margin:2em">
-        <li v-for="item in items"><a :href="item.url" target="_blank">{{item.from}}</a></li>
-      </ul>
+      <div id="msgs-output">
+        <div class="post" v-for="msg in msgs" :key="msg.ts" :id="msg.$dateStrISO">
+          <span class="user">{{msg.$userName}}</span>
+          <a class="date" :href="msg.$searchURL" target="_blank">{{msg.$dateStr}}</a>
+          <span v-if="!msg.$isParent" title="click on the date to search for context" style="font-size:0.8em;color:#cc3333;float:right">thread reply</span>
+          <div class="message" v-html="msg.$html"></div>
+          <div class="attachments" v-html="msg.$attachmentsHtml"></div>
+          <div class="files" v-html="msg.$filesHtml"></div>
+
+          <div class="replies">
+            <div class="reply" v-for="resp in msg.responses" :key="resp.ts" :id="resp.$dateStrISO">
+              <span class="user">{{resp.$userName}}</span>
+              <a class="date" :href="'#' + resp.$dateStrISO">{{resp.$dateStr}}</a>
+              <div class="message" v-html="resp.$html"></div>
+              <div class="attachments" v-html="resp.$attachmentsHtml"></div>
+              <div class="files" v-html="resp.$filesHtml"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/history/lib/simple-markdown.js"></script>
     <script type="module" src="app.js"></script>
   </body>
 </html>
