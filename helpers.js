@@ -1,6 +1,6 @@
 //@format
 /*globals Vue*/
-import {AUTHORS} from './common.js';
+import {AUTHORS} from './history/common.js';
 
 function main() {
   const app = new Vue({
