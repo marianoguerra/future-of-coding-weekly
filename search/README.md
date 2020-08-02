@@ -9,7 +9,7 @@ https://github.com/valeriansaliou/sonic
 ### Start it
 
 ```
-sonic -c config.cfg
+sonic -c search/sonic/config.cfg
 ```
 
 ### Ingest data
@@ -17,18 +17,22 @@ sonic -c config.cfg
 Install dependencies:
 
 ```
-pip3 install asonic
+pip3 install asonic sanic
 ```
 
-Clone history repo:
+Ingest:
 
 ```
-git clone -b gh-pages --depth=1 https://github.com/marianoguerra/future-of-coding-weekly.git
+python3 search/tools/ingest.py 'history/20*'
 ```
 
+### Start Local Server
+
 ```
-python3 ingest.py '../history/20*'
+python3 search/server.py
 ```
+
+Open http://localhost:8080/index.html
 
 ### Search
 
@@ -111,20 +115,4 @@ As foc user once:
 pip3 install asonic sanic
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install sonic-server
-```
-
-to import all history:
-
-```
-rm -rf future-of-coding-weekly
-git clone -b gh-pages --depth=1 https://github.com/marianoguerra/future-of-coding-weekly.git
-cd future-of-coding-weekly/search
-python3 ingest.py '../history/20*'
-```
-
-To run:
-
-```
-./sonic -c config.cfg
-FOC_HTTP_HOST=0.0.0.0 ./foc-search-server
 ```
