@@ -1,0 +1,141 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2020-07-25T00:24:47.411Z" class="post"><span class="user">Will Crichton</span> <a href="#2020-07-25T00:24:47.411Z" class="date">🕰️ 2020-07-25 00:24:47</a> <div class="message"><p>I’m writing a paper for the Human Aspects of Types and Reasoning Assistants workshop (<a href="https://2020.splashcon.org/home/hatra-2020#Call-for-Papers"></a><a href="https://2020.splashcon.org/home/hatra-2020#Call-for-Papers">https://2020.splashcon.org/home/hatra-2020#Call-for-Papers</a>) about what makes ownership in Rust challenging to use. For example, how incompleteness of static analysis makes it hard to interpret type errors as the fault of the user or the compiler. I’d love to get feedback on:</p>
+<ul><li>Does the process of interpreting a type error make sense? Does it ring true to your own experience (in Rust or other languages?)</li><li>Did you learn something new? Does this paper help you understand/frame the usability challenges about Rust specifically, or potentially a different language?</li></ul></div> <div class="attachments"></div> <div class="files"><blockquote><p>📄 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F0179JPB77Z/usability_of_ownership_draft.pdf">usability_of_ownership_draft.pdf</a></p>
+</blockquote>
+</div> <div class="replies"><div id="2020-07-26T23:18:51.423Z" class="reply"><span class="user">Will Crichton</span> <a href="#2020-07-26T23:18:51.423Z" class="date">2020-07-26 23:18:51</a> <div class="message"><p><a href="https://github.com/akkartik/mu">Kartik Agaram</a> great! Were there any points that really stuck? Or warrant further explanation?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-27T00:33:40.423Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-07-27T00:33:40.423Z" class="date">2020-07-27 00:33:40</a> <div class="message"><p>Aha's for me:</p>
+<ul><li><p>the borrow checker is incomplete</p>
+</li><li><p>It conflates type parameters</p>
+</li><li><p>It conflates array indices (makes sense once I think about it)</p>
+</li><li><p>Your checklist of questions on existing an error message.</p>
+</li><li><p>The need for teaching ownership-based reasoning.</p>
+</li><li><p>How perverse the bag of tricks can be.</p>
+</li><li><p>How more complex analysis has the unanticipated drawback of reducing opportunities for learning.</p>
+</li></ul><p>Maybe we need multiple analysis engines that can be swapped out?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-27T08:11:10.424Z" class="reply"><span class="user">nicolas decoster</span> <a href="#2020-07-27T08:11:10.424Z" class="date">2020-07-27 08:11:10</a> <div class="message"><p>Here is a bit of context. I have a very small Rust experience. As small as reading half of "Programming Rust" from O'Reilly, start coding in Rust, trying to replicate other languages habits, struggle with lot's of compiler error messages, finally actually understand the hard way that habits must change, unperfectly change them, implement some basic toy CRDT algorithm in Rust (which target WebAssembly for use in the browser), forget about all of this (it was one year ago and I didn't use Rust again since).</p>
+<p>For your first question:</p>
+<blockquote><p>Does the process of interpreting a type error make sense? Does it ring true to your own experience (in Rust or other languages?)Yes, completely. And especially with Rust. Even if my memory of Rust is a bit... rusty (sorry for the bad pun...) and even if I didn't catch very well all your code examples (maybe I read it too fast too) reading the discussion totally makes sense and resonates with what I have experienced. To be precise on one point: I didn't write any unsafe code, even if there were several cases where it can be a solution. But as I was learning, and it strongly feels against the Rust idea, and that it seems complicated to write (and need to learn new things like you point in the article), I didn't do it.</p>
+</blockquote>
+<p>And for the other question:</p>
+<blockquote><p>Did you learn something new? Does this paper help you understand/frame the usability challenges about Rust specifically, or potentially a different language?Totally, it is a kind of global 'aha' moment too for me. All your points are like I felt them during my Rust experience but didn't really grasp or "put a name" on it. Especially, it wasn't clear to me that some compiler errors were due to incompletness, and I feel like knowing this would have been of great help in the way to manage the compiler and its messages, and knowing it now will definitely helps me in my future Rust experience (if any).</p>
+</blockquote>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T11:22:06.432Z" class="reply"><span class="user">Michael Coblenz</span> <a href="#2020-07-29T11:22:06.432Z" class="date">2020-07-29 11:22:06</a> <div class="message"><p>The paper was an interesting read, thanks! I particularly appreciated the examples showing how users of Rust have to understand the internals of the borrow checker.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T11:23:33.432Z" class="reply"><span class="user">Michael Coblenz</span> <a href="#2020-07-29T11:23:33.432Z" class="date">2020-07-29 11:23:33</a> <div class="message"><p>I did some user studies of a language I designed that uses ownership, and I managed to get most participants to work successfully with ownership. However, the ownership system was substantially simpler than Rust’s.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T17:25:19.434Z" class="reply"><span class="user">Will Crichton</span> <a href="#2020-07-29T17:25:19.434Z" class="date">2020-07-29 17:25:19</a> <div class="message"><p><strong>@Michael Coblenz</strong> ah that’s right, I will need to revisit the Obsidian studies!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T19:05:14.435Z" class="reply"><span class="user">Michael Coblenz</span> <a href="#2020-07-29T19:05:14.435Z" class="date">2020-07-29 19:05:14</a> <div class="message"><p>I’ll email you a more up-to-date draft.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-07-24T06:24:33.400Z" class="post"><span class="user">Tudor Girba</span> <a href="#2020-07-24T06:24:33.400Z" class="date">🕰️ 2020-07-24 06:24:33</a> <div class="message"><p>Glamorous Toolkit is now beta: <a href="https://gtoolkit.com"></a><a href="https://gtoolkit.com">https://gtoolkit.com</a></p>
+<p>We wrote a summary of what this entails here: <a href="https://blog.feenk.com/glamorous-toolkit-v0-7-1214-beta-2uv9ne4vyynvcv08kcm07cihz/"></a><a href="https://blog.feenk.com/glamorous-toolkit-v0-7-1214-beta-2uv9ne4vyynvcv08kcm07cihz/">https://blog.feenk.com/glamorous-toolkit-v0-7-1214-beta-2uv9ne4vyynvcv08kcm07cihz/</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://gtoolkit.com/">Glamorous Toolkit</a></p>
+<p>🔗 <a href="https://blog.feenk.com/glamorous-toolkit-v0-7-1214-beta-2uv9ne4vyynvcv08kcm07cihz/">Glamorous Toolkit v0.7.1214 beta</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2020-07-27T09:08:12.424Z" class="reply"><span class="user">Tudor Girba</span> <a href="#2020-07-27T09:08:12.424Z" class="date">2020-07-27 09:08:12</a> <div class="message"><p>Currently, we work with OpenGL. Skia already supports Metal, but we just didn’t adopt it yet. We will in the near future.</p>
+<p>So, currently, if you have OpenGL context, you can just draw to texture and we display it as is. For now, if you want to try Metal, it would require an extra step of going from a texture to a pixel buffer.&nbsp;But, when we will be on Metal, that extra step will not be needed anymore.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-07-28T20:58:50.426Z" class="post"><span class="user">Philipp Krüger</span> <a href="#2020-07-28T20:58:50.426Z" class="date">2020-07-28 20:58:50</a> <div class="message"><p>I've been trying to put more of my work into words, so I've built a blog. I've started at the beginning and quite simply and hope to expand to more interesting topics in the future. Let me know what you think of this first post (it has some interactive code examples for everyone who likes to play around 😉 ).</p>
+<p><a href="https://irreactive.com/declarative-apis"></a><a href="https://irreactive.com/declarative-apis">https://irreactive.com/declarative-apis</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://irreactive.com/declarative-apis">Improving Declarative APIs for Graphics with Types</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2020-07-28T21:15:05.428Z" class="reply"><span class="user">Dan Swirsky</span> <a href="#2020-07-28T21:15:05.428Z" class="date">2020-07-28 21:15:05</a> <div class="message"><p>Does your approach have an advantage over the following declarative approach:</p>
+<p>rectangle</p>
+<p>   filled = blue</p>
+<p>   length = 50</p>
+<p>   height = 30</p>
+<p>   x = 200</p>
+<p>   y = 300</p>
+<p>circle</p>
+<p>   outlined = red</p>
+<p>   radius = 20</p>
+<p>   x = 100</p>
+<p>   y = 100</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-28T21:19:19.428Z" class="reply"><span class="user">Philipp Krüger</span> <a href="#2020-07-28T21:19:19.428Z" class="date">2020-07-28 21:19:19</a> <div class="message"><p>Well, that's a great declarative API too! I guess you're saying that in your case of this API, you don't need the distinction between Stencils and Pictures, because you can just use the 'outlined' or 'filled' field, right?</p>
+<p>It's useful to have this distinction, because you sometimes want to make a stencil from two objects, for example a rectangle and a circle on top of each other, and then outline that once.</p>
+<p>So that'd be something like:</p>
+<pre><code>outlined "red"
+
+  (superimposedStencils
+
+    [ circle 20
+
+    , rectangle 100 100
+
+    ]
+
+  )</code></pre></div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-28T21:21:11.428Z" class="reply"><span class="user">Philipp Krüger</span> <a href="#2020-07-28T21:21:11.428Z" class="date">2020-07-28 21:21:11</a> <div class="message"><p>And even if you don't need to be able to superimpose stencils, you'd still want to check that either 'outlined' or 'filled' is set at compile time. Presumably using types. And wrapping is then just another way of adding parameters.</p>
+<p>I'll be writing more about that soon, though. So stay tuned 🙂</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T01:06:09.429Z" class="reply"><span class="user">Ricardo A. Medina</span> <a href="#2020-07-29T01:06:09.429Z" class="date">2020-07-29 01:06:09</a> <div class="message"><p>if you haven't seen it <strong>@Philipp Krüger</strong>: <a href="https://medium.com/@stevekrouse/types-are-shapes-d6af1e83192f"></a><a href="https://medium.com/@stevekrouse/types-are-shapes-d6af1e83192f">https://medium.com/@stevekrouse/types-are-shapes-d6af1e83192f</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://medium.com/@stevekrouse/types-are-shapes-d6af1e83192f">Types are shapes — a graphical programming exploration</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-07-29T07:03:48.430Z" class="reply"><span class="user">Dan Swirsky</span> <a href="#2020-07-29T07:03:48.430Z" class="date">2020-07-29 07:03:48</a> <div class="message"><p>In this arrangement</p>
+<pre><code>outlined "red"
+
+  (superimposedStencils
+
+    [ circle 20
+
+    , rectangle 100 100
+
+    ]
+
+  )</code></pre><p>What determines which object is on top of the other? If it's the order in which circle and rectangle appear from top to bottom, then it's mostly declarative but a bit imperative, too?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T07:10:10.430Z" class="reply"><span class="user">Philipp Krüger</span> <a href="#2020-07-29T07:10:10.430Z" class="date">2020-07-29 07:10:10</a> <div class="message"><p><a href="https://twitter.com/danskydan">Dan Swirsky</a> It's the order of elements in the list argument of <code>superimposedStencils</code> .</p>
+<p>That's still declarative, I'd say, but we're getting into weird-terminology-park here. I'd rather think about what benefit does this API have over another? I know I resort to using 'imperative' and 'declarative' sometimes, but in this case these APIs look and behave the same.</p>
+<p>So, going a little bit on a stretch: Declarative and imperative aren't opposites. Declarative APIs can be implemented with declarative code.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T07:17:42.430Z" class="reply"><span class="user">Dan Swirsky</span> <a href="#2020-07-29T07:17:42.430Z" class="date">2020-07-29 07:17:42</a> <div class="message"><p>You mean implemented with imperative code?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T07:19:30.430Z" class="reply"><span class="user">Dan Swirsky</span> <a href="#2020-07-29T07:19:30.430Z" class="date">2020-07-29 07:19:30</a> <div class="message"><p>The PL I'm designing mixes both as well, but I use a 'layer' property to control object overlap</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T08:29:31.432Z" class="reply"><span class="user">Philipp Krüger</span> <a href="#2020-07-29T08:29:31.432Z" class="date">2020-07-29 08:29:31</a> <div class="message"><p><strong>@Ricardo A. Medina</strong> Oh, I've seen that one, but just noticed it was written by <strong>@Steve Krouse</strong>! Yeah, that article has lots of overlap 🙂</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T12:03:45.433Z" class="reply"><span class="user">nicolas decoster</span> <a href="#2020-07-29T12:03:45.433Z" class="date">2020-07-29 12:03:45</a> <div class="message"><p>Interesting article, <strong>@Philipp Krüger</strong>! 🙂</p>
+<p>I like your declarative language for vector graphics, and the way it seems to be good at composition: you can combine stencils in more complex stencils, and only after that applying some style to it. I like that you explicitly focus on "shape" first (your "stencil", nice name) a concept that come before how it is rendered. First time I see it. I guess there are some other languages for graphics that use the same kind of model.</p>
+<p>I also like the way you illustrate the type checking with Scratch like blocks. And even if you write in the article that it is just for illustration, I find this is a good example of that sometime visual languages can be more expressive than text. In that case it is visually obvious that you are not allowed to put a "rectangle" block in a "moved" one, with text programming you have to figure it yourself, or the editor linter or compiler can tell you are doing something wrong, but only after doing it, in the visual I don't even try to do it.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T14:18:20.433Z" class="reply"><span class="user">Jack Rusher</span> <a href="#2020-07-29T14:18:20.433Z" class="date">2020-07-29 14:18:20</a> <div class="message"><p>Nice! I'm particularly fond of declarative + functional for this sort of thing, for example check out the (mostly student authored) gallery for the online teaching tool we built to support <a href="https://clojurebridge.org"></a><a href="https://clojurebridge.org">https://clojurebridge.org</a> a couple years ago: <a href="https://www.maria.cloud/gallery?eval=true"></a><a href="https://www.maria.cloud/gallery?eval=true">https://www.maria.cloud/gallery?eval=true</a></p>
+<p>(One can modify and re-evaluate any code cell by typing Command-Enter -- Control-Enter on Windows/Linux -- with the keyboard focus in that cell.)</p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://clojurebridge.org/">ClojureBridge</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-07-29T15:05:06.434Z" class="reply"><span class="user">Philipp Krüger</span> <a href="#2020-07-29T15:05:06.434Z" class="date">2020-07-29 15:05:06</a> <div class="message"><p><strong>@Jack Rusher</strong> I love myself some declarative graphics APIs 🙂 This one reminds me of racket's picts (they've been an inspiration to me since forever), but you've gone amazingly far with that one, amazing. I've never seen maria cloud, too. Also, nice fernsehturm 😄</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-29T16:43:58.434Z" class="reply"><span class="user">Jack Rusher</span> <a href="#2020-07-29T16:43:58.434Z" class="date">2020-07-29 16:43:58</a> <div class="message"><p>Thanks, <strong>@Philipp Krüger</strong>. Racket's quick introduction using the picture language, along with the chapter of SICP that uses the same language, was a big influence on our intro curriculum ("Learn Clojure with Shapes"): <a href="https://www.maria.cloud/intro"></a><a href="https://www.maria.cloud/intro">https://www.maria.cloud/intro</a></p>
+<p>BTW, for those interested in CS history in general and representation in particular: the heritage of applying functional programming to geometry starts with Peter Henderson's <a href="https://eprints.soton.ac.uk/257577/1/funcgeo2.pdf"></a><a href="https://eprints.soton.ac.uk/257577/1/funcgeo2.pdf">https://eprints.soton.ac.uk/257577/1/funcgeo2.pdf</a>, the implementation for which was written by his grad student <a href="http://www.cse.chalmers.se/~ms/"></a><a href="http://www.cse.chalmers.se/~ms/">http://www.cse.chalmers.se/~ms/</a> who went on to be a fine researcher in functional programming, especially using functional languages to design hardware. It was ported to scheme for the class that became SICP by <a href="https://www.mona.uwi.edu/compsci/prof-daniel-n-coore"></a><a href="https://www.mona.uwi.edu/compsci/prof-daniel-n-coore">https://www.mona.uwi.edu/compsci/prof-daniel-n-coore</a> who had been one of the top academic performers of his generation in Jamaica before attending MIT. Mike Sperber ported it to PLT scheme, from whence the Racket version.</p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://www.mona.uwi.edu/compsci/prof-daniel-n-coore">Prof. Daniel N. Coore | The Department of Computing</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-07-29T21:54:02.435Z" class="reply"><span class="user">Scott Anderson</span> <a href="#2020-07-29T21:54:02.435Z" class="date">2020-07-29 21:54:02</a> <div class="message"><p><strong>@Jack Rusher</strong> maria.cloud is a really nice learning environment, I was impressed when I first saw it, cool to see that you were involved</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-07-29T08:14:14.431Z" class="post"><span class="user">Tudor Girba</span> <a href="#2020-07-29T08:14:14.431Z" class="date">2020-07-29 08:14:14</a> <div class="message"><p>People ask about the difference between Glamorous Toolkit and Pharo. This post addresses that difference: <a href="https://blog.feenk.com/glamorous-toolkit-and-pharo-5aufgcequ38az2s0dj0t1nu0f/"></a><a href="https://blog.feenk.com/glamorous-toolkit-and-pharo-5aufgcequ38az2s0dj0t1nu0f/">https://blog.feenk.com/glamorous-toolkit-and-pharo-5aufgcequ38az2s0dj0t1nu0f/</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://blog.feenk.com/glamorous-toolkit-and-pharo-5aufgcequ38az2s0dj0t1nu0f/">Glamorous Toolkit and Pharo</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2020-07-29T17:06:33.434Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-07-29T17:06:33.434Z" class="date">2020-07-29 17:06:33</a> <div class="message"><p>Every time I read about GT I come away determined to look more deeply into it, but so far I'm stymied each time. Just thinking aloud on some ways you may be able to help me help myself..</p>
+<ol start="1"><li>Do you happen to have any blog posts or screencasts about using GT to work with a non-smalltalk codebase? You pointed me at the Java capabilities over a year ago, but sadly it hasn't "stuck".</li></ol><ol start="2"><li>As someone who isn't embedded in the Smalltalk world, many of the nouns in GT blog posts are not clear to me. For example, this quote seems really profound:</li></ol><blockquote><p>Smalltalk is famous for the ability to program in the Debugger, in the presence of live objects. With GT, we are perfecting programming in the Inspector.</p>
+</blockquote>
+<p>However, I don't have a good grasp of the distinction between the Smalltalk Debugger and Inspector, so I fear I'm not fully grokking the idea yet.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-30T01:33:47.443Z" class="reply"><span class="user">Garth Goldwater</span> <a href="#2020-07-30T01:33:47.443Z" class="date">2020-07-30 01:33:47</a> <div class="message"><p>i would kill to see a video walkthrough of using GT for one task from start to finish with an explain-like-i’m-five level of detail about what’s going on. i support the mission and the vision and the interface 1000% but very badly need a getting started guide that introduces basic concepts, especially for people who aren’t used to working in even the live environments like the one that vanilla pharo provides. i really think gtoolkit could be the killer app for smalltalk in the same way that rails was the killer app for ruby—but that requires an introduction for non-smalltalkers, just like rails required guides directed at people who didn’t originally use ruby (only more so, because the leap in expressiveness is much larger)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-30T05:55:58.443Z" class="reply"><span class="user">Tudor Girba</span> <a href="#2020-07-30T05:55:58.443Z" class="date">2020-07-30 05:55:58</a> <div class="message"><p>Thanks both for these kind words. How about we organize a public 2h session in which I demo and you can ask questions?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-30T05:57:53.443Z" class="reply"><span class="user">Tudor Girba</span> <a href="#2020-07-30T05:57:53.443Z" class="date">2020-07-30 05:57:53</a> <div class="message"><p>In the meantime, <a href="https://github.com/akkartik/mu">Kartik Agaram</a> one of the important application areas of GT is software assessment. You can find a set of links to two longer tutorial-like blog posts here: <a href="https://gtoolkit.com/usecases/software-assessment/"></a><a href="https://gtoolkit.com/usecases/software-assessment/">https://gtoolkit.com/usecases/software-assessment/</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://gtoolkit.com/usecases/software-assessment/">Glamorous Toolkit</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-07-30T10:27:14.444Z" class="reply"><span class="user">Tudor Girba</span> <a href="#2020-07-30T10:27:14.444Z" class="date">2020-07-30 10:27:14</a> <div class="message"><p><a href="https://github.com/akkartik/mu">Kartik Agaram</a></p>
+<blockquote><p>As someone who isn’t embedded in the Smalltalk world, many of the nouns in GT blog posts are not clear to me. For example, this quote seems really profoundIndeed, we do think this is rather significant. At the same time, we are still catching up with explaining these implications in ways that do not require prior Smalltalk knowledge. That is why specific questions or challenges do help us a lot.</p>
+</blockquote>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-07-30T14:33:27.445Z" class="reply"><span class="user">Garth Goldwater</span> <a href="#2020-07-30T14:33:27.445Z" class="date">2020-07-30 14:33:27</a> <div class="message"><p>i will gladly make myself available to be publicly ignorant of smalltalk in any way that’s helpful</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
