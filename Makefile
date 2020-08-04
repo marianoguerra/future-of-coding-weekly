@@ -4,4 +4,4 @@ history-index:
 
 update-search-index:
 	git pull
-	cd search/tools; python3 ingest.py '../../history/20*'
+	python3 search/tools/ingest.py 'history/20*' history/users.json

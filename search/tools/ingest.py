@@ -7,8 +7,19 @@ import asyncio
 from asonic import Client
 from asonic.enums import Channel
 
+def user_ids_to_names(path):
+    result = {}
+    for user_data in json.load(open(path)):
+        user_id = user_data['id']
+        name = user_data.get('name', user_id)
+        real_name = user_data.get('real_name', name)
+        result[user_id] = '@' + name + ':' + real_name
 
-async def main(history_glob):
+    return result
+
+
+async def main(history_glob, users_path):
+  user_id_to_name = user_ids_to_names(users_path)
   c = Client(host='127.0.0.1', port=1491, password="SecretPassword")
   await c.channel(Channel.INGEST)
 
@@ -33,10 +44,12 @@ async def main(history_glob):
                 ts = item.get('ts', '0')
                 thread_ts = item.get('thread_ts', ts)
                 key =  ts + ':' + thread_ts + ':' + msg_date
+                user_id = item.get('user', '?')
+                user_name = user_id_to_name.get(user_id, '@unknown:unknown')
 
                 if text:
                   try:
-                    await c.push('messages', channel_name, key, text, 'eng')
+                    await c.push('messages', channel_name, key, user_name + ' ' + text, 'eng')
                     count += 1
                     if count % 100 == 0:
                       print('.', end='', flush=True)
@@ -49,4 +62,4 @@ async def main(history_glob):
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(main(sys.argv[1]))
+    loop.run_until_complete(main(sys.argv[1], sys.argv[2]))
