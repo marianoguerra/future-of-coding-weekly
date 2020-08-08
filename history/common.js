@@ -55,6 +55,7 @@ const AUTHORS = {
   'Felix Kohlgrüber': '[Felix Kohlgrüber](https://twitter.com/FKohlgrueber)',
   'Chris Granger': '[Chris Granger](https://twitter.com/ibdknox)',
   'Nicolas Decoster': '[Nicolas Decoster](https://twitter.com/ogadaki)',
+  'nicolas decoster': '[Nicolas Decoster](https://twitter.com/ogadaki)',
   'Daniel Owsianski': '[Daniel Owsianski](https://twitter.com/dannyow)',
   'Vitorio Miliano': '[Vitorio Miliano](http://vitor.io/)',
   'Andreas S': '[Andreas S](https://twitter.com/curious_reader)',
@@ -82,6 +83,10 @@ const AUTHORS = {
   'Harry Brundage': '[Harry Brundage](https://twitter.com/harrybrundage)',
   'Konrad Hinsen': '[Konrad Hinsen](https://khinsen.net/)',
   'Xandor Schiefer': '[Xandor Schiefer](https://twitter.com/zeorin)',
+  'Tudor Girba': '[Tudor Girba](https://twitter.com/girba)',
+  'Alex Miller': '[Alex Miller](https://twitter.com/puredanger)',
+  'Jack Rusher': '[Jack Rusher](https://twitter.com/jackrusher)',
+  'Emmanuel Oga': '[Emmanuel Oga](https://emmanueloga.com/)',
 };
 
 export {AUTHORS};
