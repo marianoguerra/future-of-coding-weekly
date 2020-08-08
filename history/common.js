@@ -87,6 +87,7 @@ const AUTHORS = {
   'Alex Miller': '[Alex Miller](https://twitter.com/puredanger)',
   'Jack Rusher': '[Jack Rusher](https://twitter.com/jackrusher)',
   'Emmanuel Oga': '[Emmanuel Oga](https://emmanueloga.com/)',
+  'Ray Imber': '[](https://www.linkedin.com/in/raymond-imber-3a445b21)',
 };
 
 export {AUTHORS};
