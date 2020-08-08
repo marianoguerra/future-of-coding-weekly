@@ -252,6 +252,7 @@ function main() {
               'https://marianoguerra.github.io/future-of-coding-weekly/history/weekly/2020/' +
               linkSuffix,
             txt = this.history.msgs
+              .filter((msg) => !msg.$isOlder)
               .map((msg) => msgToMdNL(msg, linkPrefix))
               .join('\n\n---\n\n');
           downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');

@@ -103,7 +103,8 @@ function msgToMdNL(msg, linkPrefix) {
     ),
     resourceLink = findFirstLink(msg),
     resourceText = resourceLink ? `📝 ${resourceLink} via ` : '💬 ',
-    base = `${resourceText}${userText}\n\n${conversationLink}\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
+    oldMark = msg.$isOlder ? '🕰️ ' : '',
+    base = `${resourceText}${userText}${oldMark}\n\n${conversationLink}\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
 
   return base;
 }
@@ -254,6 +255,7 @@ function enrichMessage(msg, args, isOlder) {
     msg.$filesText = '';
   }
 
+  msg.$isOlder = isOlder;
   try {
     const datePrefix = isOlder ? '🕰️ ' : '';
     msg.$dateStrISO = date.toISOString();
