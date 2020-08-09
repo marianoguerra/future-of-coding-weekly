@@ -90,6 +90,9 @@ const AUTHORS = {
   'Ray Imber':
     '[Ray Imber](https://www.linkedin.com/in/raymond-imber-3a445b21)',
   'Ricardo A. Medina': '[Ricardo A. Medina](https://twitter.com/ricmedr)',
+  'Joe Nash': '[Joe Nash](https://twitter.com/jna_sh)',
+  'Peter van Hardenberg': '[Peter van Hardenberg](https://twitter.com/pvh)',
+  'Philipp Krüger': '[Philipp Krüger](https://twitter.com/matheusdev23)',
 };
 
 export {AUTHORS};
