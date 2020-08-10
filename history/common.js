@@ -93,6 +93,7 @@ const AUTHORS = {
   'Joe Nash': '[Joe Nash](https://twitter.com/jna_sh)',
   'Peter van Hardenberg': '[Peter van Hardenberg](https://twitter.com/pvh)',
   'Philipp Krüger': '[Philipp Krüger](https://twitter.com/matheusdev23)',
+  'Nick Smith': '[https://twitter.com/NickSmit_](Nick Smith)',
 };
 
 export {AUTHORS};
