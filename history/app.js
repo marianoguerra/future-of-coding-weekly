@@ -247,6 +247,10 @@ function main() {
             .join('\n\n---\n\n');
           downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
         },
+        exportThisAsNewsletterWithWeek: function (week) {
+          const month = this.toDate.split('-')[1];
+          this.exportAsNewsletter(`${month}/${week}/${this.channel}.html`);
+        },
         exportAsNewsletter: function (linkSuffix) {
           const linkPrefix =
               'https://marianoguerra.github.io/future-of-coding-weekly/history/weekly/2020/' +
