@@ -95,6 +95,8 @@ const AUTHORS = {
   'Philipp Krüger': '[Philipp Krüger](https://twitter.com/matheusdev23)',
   'Nick Smith': '[Nick Smith](https://twitter.com/NickSmit_)',
   ikrima: '[ikrima](https://twitter.com/ikrimae)',
+  'Brian Hempel': '[Brian Hempel](http://people.cs.uchicago.edu/~brianhempel/)',
+  'Roben Kleene': '[Roben Kleene](https://twitter.com/robenkleene)',
 };
 
 export {AUTHORS};
