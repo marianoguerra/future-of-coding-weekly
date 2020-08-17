@@ -1,0 +1,287 @@
+[
+    {
+        "client_msg_id": "eed5930e-7b72-454b-bf9a-9e3424447c70",
+        "type": "message",
+        "text": "<@US370TRJA> <@U014WA16VNJ>",
+        "user": "U017GNJM021",
+        "ts": "1597274529.478800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2OX",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "US370TRJA"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U014WA16VNJ"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596545313.448700",
+        "parent_user_id": "U017GNJM021",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U014WA16VNJ",
+                    "US370TRJA"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "b4f593f3-d4a0-43bb-b707-87cebb90f81d",
+        "type": "message",
+        "text": "Hi <@U018LAH5QCT>, this looks great! Are you able to go a bit deeper into the technical details of how you achieve liveness? I'm familiar with ASTs but not with Vue or Tailwind, if that helps.",
+        "user": "UPMFG2571",
+        "ts": "1597309910.479300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WgO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U018LAH5QCT"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", this looks great! Are you able to go a bit deeper into the technical details of how you achieve liveness? I'm familiar with ASTs but not with Vue or Tailwind, if that helps."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1597160173.472500",
+        "parent_user_id": "U018LAH5QCT"
+    },
+    {
+        "client_msg_id": "1cf7d870-bdb6-431d-b6a6-829c2612cb6b",
+        "type": "message",
+        "text": "Sure! I'm not sure what you mean by \"liveness\", but if you're referring to the CSS feedback cycle, the details aren't particular to the technologies.\n\n1. To skip waiting for the project to rebuild, the extension opens a WebSocket connection between the editor and the browser. To start the connection, the user has to drop a snippet into their `main.js` they get through the extension command `alt+o ss`.\n2. Through that connection, the extension sends `edit-class` events, which target an element with a specific `data-olympus` attribute and add/remove the given classes on it.\n3. The `data-olympus` attribute is added to the source code of a given component via an extension command (`alt+o ai`)\n4. In the editor, rather than editing class lists directly, the user goes through an input that's summoned by an extension command (`alt+o et`). Every time the user adds/removes a class, the extension patches the classes on the corresponding AST node and reprints the source, and sends an event through the WebSocket with the appropriate payload.\nIt could be more elegant and efficient. Editing through the AST isn't necessary, but it was quicker development-wise to work with objects and call `.toString()` than to work with locations in the underlying string representation. I'm also not a fan of the `data-olympus` attribute, but it was the quickest way to map identity between AST nodes and live DOM nodes. Neither do I love that the user has to drop a snippet into their source code, but it didn't feel worth publishing an NPM package to hide the snippet. Ideally, the snippet would be part of the build system and included/excluded based on the environment.",
+        "user": "U018LAH5QCT",
+        "ts": "1597322574.479600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TS+8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sure! I'm not sure what you mean by \"liveness\", but if you're referring to the CSS feedback cycle, the details aren't particular to the technologies.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "To skip waiting for the project to rebuild, the extension opens a WebSocket connection between the editor and the browser. To start the connection, the user has to drop a snippet into their "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "main.js",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " they get through the extension command "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "alt+o ss",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Through that connection, the extension sends "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "edit-class",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " events, which target an element with a specific "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "data-olympus",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " attribute and add/remove the given classes on it."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "data-olympus",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " attribute is added to the source code of a given component via an extension command ("
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "alt+o ai",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ")"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "In the editor, rather than editing class lists directly, the user goes through an input that's summoned by an extension command ("
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "alt+o et",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "). Every time the user adds/removes a class, the extension patches the classes on the corresponding AST node and reprints the source, and sends an event through the WebSocket with the appropriate payload."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nIt could be more elegant and efficient. Editing through the AST isn't necessary, but it was quicker development-wise to work with objects and call "
+                            },
+                            {
+                                "type": "text",
+                                "text": ".toString()",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " than to work with locations in the underlying string representation. I'm also not a fan of the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "data-olympus",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " attribute, but it was the quickest way to map identity between AST nodes and live DOM nodes. Neither do I love that the user has to drop a snippet into their source code, but it didn't feel worth publishing an NPM package to hide the snippet. Ideally, the snippet would be part of the build system and included/excluded based on the environment."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1597160173.472500",
+        "parent_user_id": "U018LAH5QCT"
+    },
+    {
+        "client_msg_id": "0434c02a-b441-4370-8ad0-ea48c714b803",
+        "type": "message",
+        "text": "Got it, that's perfect, thank you. Yes, by liveness I meant as in live coding or on-the-fly programming.",
+        "user": "UPMFG2571",
+        "ts": "1597340383.479800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xeBA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Got it, that's perfect, thank you. Yes, by liveness I meant as in live coding or on-the-fly programming."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1597160173.472500",
+        "parent_user_id": "U018LAH5QCT"
+    }
+]

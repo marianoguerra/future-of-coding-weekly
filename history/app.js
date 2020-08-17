@@ -37,7 +37,7 @@ function main() {
         queryLink: baseUrl,
         fromDate: yesterdayDate(),
         toDate: tomorrowDate(),
-        channel: 'general',
+        channel: 'thinking-together',
         loadingStatus: null,
         msgFilter: '',
         filteredMsgs: [],
