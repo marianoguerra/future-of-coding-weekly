@@ -11,7 +11,7 @@ function main() {
   new Vue({
     el: '#app',
     data: {
-      channel: 'general',
+      channel: 'thinking-together',
       search: '',
       isError: false,
       errorMsg: '',
