@@ -135,6 +135,7 @@ function main() {
 
                 if (msg) {
                   msg.$searchURL = `https://marianoguerra.github.io/future-of-coding-weekly/history/?fromDate=${fromDate}&toDate=${toDate}&channel=${channel}`;
+                  msg.$channelName = channel;
                   this.msgs.push(msg);
                 } else {
                   console.log(
