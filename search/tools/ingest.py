@@ -43,13 +43,14 @@ async def main(history_glob, users_path):
                 # date of the file as key
                 ts = item.get('ts', '0')
                 thread_ts = item.get('thread_ts', ts)
-                key =  ts + ':' + thread_ts + ':' + msg_date
+                key =  ts + ':' + thread_ts + ':' + msg_date + ':' + channel_name
                 user_id = item.get('user', '?')
                 user_name = user_id_to_name.get(user_id, '@unknown:unknown')
+                bucket = 'all'
 
                 if text:
                   try:
-                    await c.push('messages', channel_name, key, user_name + ' ' + text, 'eng')
+                    await c.push('messages', bucket, key, user_name + ' ' + text, 'eng')
                     count += 1
                     if count % 100 == 0:
                       print('.', end='', flush=True)

@@ -12,10 +12,11 @@ app = Sanic("FoC Search Server")
 app.static('/history/', './history/')
 app.static('/', './search')
 
-async def search(channel, term, host='127.0.0.1', port=1491, password='SecretPassword'):
+async def search(_channel, term, host='127.0.0.1', port=1491, password='SecretPassword'):
   c = Client(host=host, port=port, password=password, max_connections=100)
   await c.channel(Channel.SEARCH)
-  keys_raw = await c.query('messages', channel, term, limit=10000, locale='eng')
+  bucket = 'all'
+  keys_raw = await c.query('messages', bucket, term, limit=10000, locale='eng')
   return [key.decode('utf-8') for key in keys_raw]
 
 @app.route("/search/")

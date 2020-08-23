@@ -59,7 +59,7 @@ function main() {
               this.isError = false;
               data.result.forEach((rawKey, _i, _it) => {
                 const key = rawKey.trim(),
-                  [tsStr, , msgFileDate] = key.split(':'),
+                  [tsStr /*threadTs*/, , msgFileDate, channel] = key.split(':'),
                   [yearStr, monthStr, dayStr] = msgFileDate.split('-'),
                   year = parseInt(yearStr, 10),
                   month = parseInt(monthStr, 10),
@@ -78,68 +78,80 @@ function main() {
                   msgsByDay[msgFileDate] = msgsForDay;
                 }
 
-                msgsForDay.push([tsStr, dateFromStr, dateToStr]);
+                msgsForDay.push([tsStr, dateFromStr, dateToStr, channel]);
               });
 
               const daysToLoad = Object.keys(msgsByDay);
               daysToLoad.sort();
               this.loadUsers()
                 .then((_) => this.loadChannels())
-                .then((_) =>
-                  this.loadMsgsByDay(daysToLoad, 0, msgsByDay, this.channel, [])
-                );
+                .then((_) => this.loadMsgsByDay(daysToLoad, 0, msgsByDay, []));
             } else {
               this.isError = true;
               this.errorMsg = data.reason;
             }
           });
       },
-      loadMsgsByDay: function (
-        daysToLoad,
-        i,
-        msgsByDay,
-        channel,
-        olderMessagesToLoad
-      ) {
+      loadMsgsByDay: function (daysToLoad, i, msgsByDay, olderMessagesToLoad) {
         const date = daysToLoad[i];
         if (date) {
           const [year, month, day] = date.split('-'),
-            msgsForThisDay = msgsByDay[date];
+            msgsForThisDayOnAllChannels = msgsByDay[date],
+            msgsForThisDayByChannel = {};
 
-          loadMsgsForDay(year, month, day, channel).then((msgs) => {
-            parseHistoryChannelData(
-              msgs,
-              this.users,
-              this.channels,
-              this.msgsByTs,
-              this.allMsgs,
-              olderMessagesToLoad
-            );
+          for (
+            let i = 0, len = msgsForThisDayOnAllChannels.length;
+            i < len;
+            i += 1
+          ) {
+            const msg = msgsForThisDayOnAllChannels[i],
+              channel = msg[3];
 
-            msgsForThisDay.sort();
-            for (let i = 0, len = msgsForThisDay.length; i < len; i += 1) {
-              const [msgTs, fromDate, toDate] = msgsForThisDay[i],
-                msg = this.msgsByTs[msgTs];
-
-              if (msg) {
-                msg.$searchURL = `https://marianoguerra.github.io/future-of-coding-weekly/history/?fromDate=${fromDate}&toDate=${toDate}&channel=${channel}`;
-                this.msgs.push(msg);
-              } else {
-                console.log(
-                  date,
-                  msgTs,
-                  new Date(parseFloat(msgTs) * 1000).toISOString(),
-                  'not found'
-                );
-              }
+            let msgs = msgsForThisDayByChannel[channel];
+            if (msgs === undefined) {
+              msgs = [];
+              msgsForThisDayByChannel[channel] = msgs;
             }
-            this.loadMsgsByDay(
-              daysToLoad,
-              i + 1,
-              msgsByDay,
-              channel,
-              olderMessagesToLoad
-            );
+
+            msgs.push(msg);
+          }
+
+          Object.keys(msgsForThisDayByChannel).forEach((channel) => {
+            const msgsForThisDay = msgsForThisDayByChannel[channel];
+            loadMsgsForDay(year, month, day, channel).then((msgs) => {
+              parseHistoryChannelData(
+                msgs,
+                this.users,
+                this.channels,
+                this.msgsByTs,
+                this.allMsgs,
+                olderMessagesToLoad
+              );
+
+              msgsForThisDay.sort();
+              for (let i = 0, len = msgsForThisDay.length; i < len; i += 1) {
+                const [msgTs, fromDate, toDate] = msgsForThisDay[i],
+                  msg = this.msgsByTs[msgTs];
+
+                if (msg) {
+                  msg.$searchURL = `https://marianoguerra.github.io/future-of-coding-weekly/history/?fromDate=${fromDate}&toDate=${toDate}&channel=${channel}`;
+                  this.msgs.push(msg);
+                } else {
+                  console.log(
+                    date,
+                    msgTs,
+                    new Date(parseFloat(msgTs) * 1000).toISOString(),
+                    'not found'
+                  );
+                }
+              }
+              this.loadMsgsByDay(
+                daysToLoad,
+                i + 1,
+                msgsByDay,
+                olderMessagesToLoad
+              );
+            });
           });
         }
       },
