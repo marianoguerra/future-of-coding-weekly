@@ -150,6 +150,16 @@ function main() {
           const paths = Array.from(pathSet);
           paths.sort();
           this.loadOlderMessages(paths, 0, messagesToLoadByPath);
+
+          window.setTimeout(() => {
+            // scroll to hash if set
+            const id = location.hash.slice(1),
+              element = document.getElementById(id);
+
+            if (element) {
+              element.scrollIntoView();
+            }
+          }, 500);
         },
         loadOlderMessages: function (paths, i, messagesToLoadByPath) {
           const path = paths[i],
