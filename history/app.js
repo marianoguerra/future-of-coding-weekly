@@ -157,6 +157,7 @@ function main() {
               element = document.getElementById(id);
 
             if (element) {
+              element.style.border = '2px solid rgb(0, 51, 34)';
               element.scrollIntoView();
             }
           }, 500);
