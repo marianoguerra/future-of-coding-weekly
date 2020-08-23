@@ -134,7 +134,7 @@ function main() {
                   msg = this.msgsByTs[msgTs];
 
                 if (msg) {
-                  msg.$searchURL = `https://marianoguerra.github.io/future-of-coding-weekly/history/?fromDate=${fromDate}&toDate=${toDate}&channel=${channel}`;
+                  msg.$searchURL = `https://marianoguerra.github.io/future-of-coding-weekly/history/?fromDate=${fromDate}&toDate=${toDate}&channel=${channel}#${msg.$dateStrISO}`;
                   msg.$channelName = channel;
                   this.msgs.push(msg);
                 } else {
