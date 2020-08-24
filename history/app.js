@@ -201,15 +201,7 @@ function main() {
           this.loadChannelDateRange(this.channel, fromDate, toDate);
         },
         getDumpFileName: function (extension) {
-          return (
-            this.channel +
-            '_' +
-            this.fromDate +
-            '_' +
-            this.toDate +
-            '.' +
-            extension
-          );
+          return this.channel + '.' + extension;
         },
         filterMessages: function () {
           const filterText = this.msgFilter.toLowerCase(),
