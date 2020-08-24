@@ -153,12 +153,14 @@ function main() {
 
           window.setTimeout(() => {
             // scroll to hash if set
-            const id = location.hash.slice(1),
-              element = document.getElementById(id);
+            const id = location.hash.slice(1);
+            if (id) {
+              const element = document.getElementById(id);
 
-            if (element) {
-              element.style.border = '2px solid rgb(0, 51, 34)';
-              element.scrollIntoView();
+              if (element) {
+                element.style.border = '2px solid rgb(0, 51, 34)';
+                element.scrollIntoView();
+              }
             }
           }, 500);
         },
