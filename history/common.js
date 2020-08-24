@@ -97,6 +97,7 @@ const AUTHORS = {
   ikrima: '[ikrima](https://twitter.com/ikrimae)',
   'Brian Hempel': '[Brian Hempel](http://people.cs.uchicago.edu/~brianhempel/)',
   'Roben Kleene': '[Roben Kleene](https://twitter.com/robenkleene)',
+  'Joshua Horowitz': '[Joshua Horowitz](https://twitter.com/qualmist)',
 };
 
 export {AUTHORS};

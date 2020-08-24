@@ -45,6 +45,7 @@ function handleComment(comment, node, authors) {
   });
 
   node.appendChild(container);
+  node.appendChild(ce('br', {}));
   // The beforebegin and afterend positions work only if the node is in a tree
   // and has an element parent.
   container.insertAdjacentText('beforebegin', '\n\n');
