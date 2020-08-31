@@ -98,6 +98,11 @@ const AUTHORS = {
   'Brian Hempel': '[Brian Hempel](http://people.cs.uchicago.edu/~brianhempel/)',
   'Roben Kleene': '[Roben Kleene](https://twitter.com/robenkleene)',
   'Joshua Horowitz': '[Joshua Horowitz](https://twitter.com/qualmist)',
+  'Dennis Heihoff': '[Dennis Heihoff](https://twitter.com/denik)',
+  'hamish todd': '[Hamish Todd](https://twitter.com/hamish_todd)',
+  'Cameron Yick': '[Cameron Yick](https://twitter.com/hydrosquall)',
+  'Chris Rabl': '[Chris Rabl](https://twitter.com/crabl)',
+  'Mike Cann': '[Mike Cann](https://twitter.com/mikeysee)',
 };
 
 export {AUTHORS};
