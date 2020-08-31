@@ -25,6 +25,7 @@ function ce(tag, attrs, ...body) {
   return node;
 }
 
+let mdOutput = '';
 function handleComment(comment, node, authors) {
   const container = ce('div', {style: 'margin-top:1em'}),
     markdown = comment.body,
@@ -35,6 +36,7 @@ function handleComment(comment, node, authors) {
       ).exec(markdown) || []
     ).slice(1);
 
+  mdOutput += comment.body + '\n\n';
   container.innerHTML = mdToHTML(markdown);
 
   matchResult.forEach((v, i, _arr) => {
@@ -99,6 +101,7 @@ function onCommentsFinished(_contributors, authors) {
   document.getElementById(
     'output-html'
   ).textContent = outputNode.innerHTML.replace(/<p>/g, '\n\n<p>').trim();
+  document.getElementById('output-md').textContent = mdOutput;
 }
 
 function addCommentSeparator(_outputNode) {
