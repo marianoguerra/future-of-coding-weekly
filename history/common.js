@@ -59,6 +59,7 @@ const AUTHORS = {
   'Daniel Owsianski': '[Daniel Owsianski](https://twitter.com/dannyow)',
   'Vitorio Miliano': '[Vitorio Miliano](http://vitor.io/)',
   'Andreas S': '[Andreas S](https://twitter.com/curious_reader)',
+  'Andreas S.': '[Andreas S](https://twitter.com/curious_reader)',
   'Robbie Gleichman': '[Robbie Gleichman](https://www.rgleichman.com/)',
   'J. Ryan Stinnett': '[J. Ryan Stinnett](https://twitter.com/jryans)',
   'Korede Aderele': '[Korede Aderele](twitter.com/korede_ta)',
