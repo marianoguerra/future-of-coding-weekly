@@ -106,6 +106,7 @@ const AUTHORS = {
   'Mike Cann': '[Mike Cann](https://twitter.com/mikeysee)',
   'Andrew Carr': '[Andrew Carr](https://twitter.com/andrew_n_carr)',
   Drewverlee: '[Drewverlee](https://drewverlee.github.io/)',
+  'Henning Dieterichs': '[Henning Dieterichs](https://twitter.com/hediet_dev)',
 };
 
 export {AUTHORS};
