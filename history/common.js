@@ -104,6 +104,8 @@ const AUTHORS = {
   'Cameron Yick': '[Cameron Yick](https://twitter.com/hydrosquall)',
   'Chris Rabl': '[Chris Rabl](https://twitter.com/crabl)',
   'Mike Cann': '[Mike Cann](https://twitter.com/mikeysee)',
+  'Andrew Carr': '[Andrew Carr](https://twitter.com/andrew_n_carr)',
+  Drewverlee: '[Drewverlee](https://drewverlee.github.io/)',
 };
 
 export {AUTHORS};
