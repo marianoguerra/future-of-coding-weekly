@@ -1,0 +1,541 @@
+[
+    {
+        "client_msg_id": "d17d2542-1fbf-4532-9803-d6474cc00390",
+        "type": "message",
+        "text": "Does anyone have any knowledge of labelled transition systems or finite state processes (or LTSA)? I just discovered them whilst browsing concurrency books. They seem to be a generalization of state machines that can actually hold data (program state) within the transitions and do computations in the course of transitioning. I'm thinking they might be a decent means of reasoning about program behaviour (specifically, this book says they're good for reasoning about concurrent processes).",
+        "user": "UCGAK10LS",
+        "ts": "1566457758.344400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1566478068.000000"
+        }
+    },
+    {
+        "client_msg_id": "317c2646-af1e-40b4-aeb9-d32283ec13ee",
+        "type": "message",
+        "text": "I think he's talking about unification \/ consistency. Almost all applications work with structured data of some sort (primitive types like strings and numbers and collection types like lists \/ trees \/ graphs), but most apps use their own storage representation and UI for editing the data. His idea is to create a database that directly supports structured data. Then, all apps could use this database and a small set of tools could be used to edit the database data in a consistent fashion.\nText files and editors provide a uniform editing experience for text (= sequences of chars), but if that text encodes structured data, the edit operations on that structured data aren't consistent anymore. For example, hierarchies (trees) are represented in vastly different ways in text files. In markdown lists, hierarchy is determined by indentation. In PLs with c-like syntax hierarchy is expressed by blocks enclosed in curly braces. The same applies to lists etc.\nBecause different text files represent structured data differently, they also require different editing operations. Adding a new item to an html list requires different editing operations than adding an item to a markdown list, even though it's conceptually the same operation.\nIn summary, I think that a \"file system\" \/ \"database\" should provide a set of primitives that can naturally represent common data structures. Sequences of bytes organized in a tree seem limiting to me. To put it another way: You wouldn't want to work with a PL that only offered trees of byte-strings, so why would you accept that as a file system?",
+        "user": "UAL7940NM",
+        "ts": "1566461374.344500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566430274.337300",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "point_up",
+                "users": [
+                    "UHWC9PXBL"
+                ],
+                "count": 1
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "ULM3U6275"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "91aaa997-360f-4bea-87a5-7e0bc964f403",
+        "type": "message",
+        "text": "What you describe sounds very much like IPFS (though I suspect Armstrong had the idea before). I have been playing with IPFS recently, and it's indeed amazing how many problems simply go away. On the other hand, representing mutable things (\"my blog\") on IPFS is a bit of a pain because mutable references without a central namespace are tricky.",
+        "user": "UJBAJNFLK",
+        "ts": "1566461461.344700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566430717.339900",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "c4c32ffb-bb5f-4621-b52c-467dee8f37ff",
+        "type": "message",
+        "text": "I think it's important to recognize that both immutability and mutability are important and should be possible in a (file) system. Immutability (like IPFS uses) makes things like sharing data, caching, ... trivial because an address unambiguously describes the content it links to. On the other hand, you sometimes want to link to something more abstract, e.g. a blog post or a wiki article that might be modified after the link was created. This can be thought of as an interface (\"I don't care what exact content I'm linking to as long as it has a certain set of properties\"). You can see the difference between unambiguous links and interfaces in many areas, e.g. dependency specifications (interface) and pinned dependencies \/ lock files (unambiguous link).\nTraditional file systems and the web only support (weak) interface links by location. IPFS focuses on unambiguous links mostly. The future \"file system\" should probably support both types of links by design.",
+        "user": "UAL7940NM",
+        "ts": "1566462182.344900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566430717.339900",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0",
+                    "U85HCL7JP",
+                    "U6FKVSVCK",
+                    "UFEQUBNNT",
+                    "UJBAJNFLK"
+                ],
+                "count": 5
+            }
+        ]
+    },
+    {
+        "client_msg_id": "54411ce1-b872-4d69-9e21-12811620444e",
+        "type": "message",
+        "text": "Visual Embedded Rust: <https:\/\/medium.com\/@ly.lee\/visual-embedded-rust-programming-with-visual-studio-code-1bc1262e398c>",
+        "user": "UAL7940NM",
+        "ts": "1566470292.345500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBSMEUXAA"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "aed57014-1e5f-4c47-8ed6-4aa96aef0b7e",
+        "type": "message",
+        "text": "<@UAL7940NM> I think one lesson of the last 10 years (that has been independently learned in several areas) is that in environments of abundant storage it's better to build mutable interfaces out of immutable primitives rather than vice versa.",
+        "user": "UCUSW7WVD",
+        "ts": "1566492024.346200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566430717.339900",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "b35d3dff-8075-4487-94ed-0d0ee56d8f43",
+        "type": "message",
+        "text": "Almost every program of any complexity has multiple finite state machines, that carry state data and do computations during the transitions. Only in textbooks where they boil things down to the simplest possible explanations do they omit these. That is why shared mutable state is so prevalent. In most languages you create some variables, and either use a switch statement or have a bunch of functions in some kind of array structure that dispatches to the logic for the state on each event. In my Beads language i included a finite state syntax to make it much clearer to the reader about the logic, as it centralizes the state transition logic, but that is a nicety and not essential. Most computer games are gigantic state machines with fancy artwork. Most experienced programmers do state machines in their sleep, they are so common. Business products typically have fewer, and more boring states, like paying on time, 30 days late, 90 days late. That's about as exciting as it gets in accounting, state-wise.",
+        "user": "UEQ6M68H0",
+        "ts": "1566496720.351400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "5e3b9d49-b882-4ae7-bf3c-1e58e020a9cc",
+        "type": "message",
+        "text": "It is the willy-nilly dispersal of state information that makes some programs hard to read. Many times the spec for a product has the state nicely listed in a concentrated table, but when implemented, many languages like Java disperse the state logic into little bits, one chunk per class, with maybe 100 classes, and then it makes it super hard to understand the mechanics of the machine.",
+        "user": "UEQ6M68H0",
+        "ts": "1566496825.353200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "0f59f2a3-3742-4322-af1c-82e0cf1e6a6e",
+        "type": "message",
+        "text": "This is one of the achilles heels (there are multiple) of the OOP paradigm, in that it does not collect related state transition logic.",
+        "user": "UEQ6M68H0",
+        "ts": "1566496860.353900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UF2GNRUTV",
+                    "UCUSW7WVD",
+                    "UBSMEUXAA",
+                    "UAVCC2X70"
+                ],
+                "count": 4
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a292fece-05a6-4d47-9249-89ef2aa6bff7",
+        "type": "message",
+        "text": "The criticism of OOP is valid. An FP aficionado may push back that while state machines are fundamental, they don't have to rely on mutable state.",
+        "user": "UCUSW7WVD",
+        "ts": "1566500090.355200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "3b4e2361-6fa5-4384-a68b-0b2cfd2a7802",
+        "type": "message",
+        "text": "We should not equate OOP with classes in Java, though :slightly_smiling_face:",
+        "user": "UE1JQM9HQ",
+        "ts": "1566502697.355600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "633a60a7-439c-49e8-acfd-3562960d06e3",
+        "type": "message",
+        "text": "That depends on what you mean by \"OOP\", then. I can think of at least 3 different categories or definitions :)",
+        "user": "UAVCC2X70",
+        "ts": "1566518236.361700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "8223ba2b-778a-42d9-a055-8b575c4dd30f",
+        "type": "message",
+        "text": "willy-nilly dispersal of state information, that's how I feel about fluent, functional regex APIs :smile:",
+        "user": "UM1HH60GN",
+        "ts": "1566518586.362200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "50ee467d1311",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-08-07\/719033961125_50ee467d13114e4314c2_72.jpg",
+            "first_name": "Gary",
+            "real_name": "Gary Trakhman",
+            "display_name": "Gary Trakhman",
+            "team": "T5TCAFTA9",
+            "name": "gary.trakhman",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "f74b12da-e472-41b2-a568-693671cd3a9d",
+        "type": "message",
+        "text": "sure, regexes are hard to read, but they're a really concise form of a state machine",
+        "user": "UM1HH60GN",
+        "ts": "1566518615.362600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "50ee467d1311",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-08-07\/719033961125_50ee467d13114e4314c2_72.jpg",
+            "first_name": "Gary",
+            "real_name": "Gary Trakhman",
+            "display_name": "Gary Trakhman",
+            "team": "T5TCAFTA9",
+            "name": "gary.trakhman",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UAVCC2X70"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0EC1E07D-9B39-4C8D-B7F8-B52A7737644F",
+        "type": "message",
+        "text": "My understanding: What software authors need from a language varies so greatly across each of those tiny squares that sampling from it with quantitative research doesn’t tell you very much at all. But I’ve only read the tweet!",
+        "user": "UFEQUBNNT",
+        "ts": "1566519330.365100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566372560.320100",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "EFFCA4B6-2B3B-47C1-9532-ACF77D23BA77",
+        "type": "message",
+        "text": "&gt; These two paragraphs feel contradictory. Text files already provide roughly the same sequence of operations to update. Can anybody tell what the article expects the benefits of databases to be? I see something about the CPU cycles to parse text files. But that seems to perversely ignore the complexities of using a database.\n&gt; \n&gt; Another take: your file system already has much that looks like a database with journalling and so on. Mission accomplished?\n\nMaybe you’re right. There’s a lot in the OS and our UIs that isn’t editable as text. I wonder if the author‘s dissatisfaction comes from that? If deleting the line in the ‘ps’ output that represented a process killed the process, would that make them happy?",
+        "user": "UFEQUBNNT",
+        "ts": "1566520216.369100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566430274.337300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "FE1248D0-325E-4802-A2CA-A9D7AC552519",
+        "type": "message",
+        "text": "Datomic is immutable data in one storage, and mutable references to the immutable data in another. I always liked the split, but have never had occasion to try actually making anything within those constraints.",
+        "user": "UFEQUBNNT",
+        "ts": "1566520530.371900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFEQUBNNT",
+            "ts": "1566520548.000000"
+        },
+        "thread_ts": "1566430717.339900",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "a0c82365-2a20-4a17-8fb8-ff35ed7c5069",
+        "type": "message",
+        "text": "<@UEQ6M68H0> I agree with what you said, however what I'm trying to do here is find an existing formalization of these kinds of complicated state machines. Labelled Transition Systems are apparently exactly that, for programs that have a finite set of states (bounded memory use \/ non-recursive data types). Symbolic Transition Systems appear to handle infinite-state programs. Academics have taken these systems and built programming languages on top of them (such as the class of languages called \"process calculi\" or \"process algebras\"). We might be able to learn something from these languages.",
+        "user": "UCGAK10LS",
+        "ts": "1566521979.378500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1566522060.000000"
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "5F24E81A-3417-4BFB-81C8-AF21072C4C34",
+        "type": "message",
+        "text": "I work with <@UEQ6M68H0>’s so-called boring accounting state machines day-to-day (they are boring :). But even the simplest is governed by events that are coming from devices all over the world, aggregated in servers all over the world, fed into streaming or batch event processors… To answer “What state is a user in?” with the value that’s stored in a particular database misses so much. Sometimes the value isn’t anywhere, because it’s defined as the output of a computation based on other states. People generally choose whichever version of the answer is nearest at hand. “Let’s read it from here instead of there because this data source is updated more frequently.” Every read of a state is an estimation process.\n\nSo I have a hard time imagining what “collecting state transition logic” could possibly look like. I feel like the scope has to be exceedingly small for that idea to make sense. Even at the app level, you have event loops and synchronization and subsystem boundaries introducing propagation delays that make it difficult to say what a state is. (Race conditions!)\n\nBut maybe you just need an exceedingly homogenous programming environment along the lines of Unison to make those big systems seem small? Or Eve-like global synchronization?",
+        "user": "UFEQUBNNT",
+        "ts": "1566522756.388800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFEQUBNNT",
+            "ts": "1566523165.000000"
+        },
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "UJWEF5QTX"
+                ],
+                "count": 2
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UDQBTJ211"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

@@ -1,0 +1,1145 @@
+[
+    {
+        "client_msg_id": "fcba1fa4-4bf4-465c-aaa9-68e3c9a3a594",
+        "type": "message",
+        "text": "<@UC6997THT> I think the core problem with diffing\/merging (V)PL code is the *mismatch between the data structure of the code and the data structure the diff works on*. The data structure that most naturally represents code is some kind of a tree\/graph. This data structure is usually stored by encoding it in a binary or textual (JSON\/XML) format. The encoded data structure is a flat string \/ array of bytes that still contains all information of the initial data structure, but needs to be decoded\/parsed to use that information. We then usually take these encoded data structures and perform diffs on them. This works well with changes in the initial data structure that only lead to local changes in the encoded data structure (e.g. changing a `1` literal to a `0`), but fails in more complex cases (e.g. changing the order of elements, wrapping an element, ...). It's like comparing two strings by encoding them as a images first and performing a pixel-by-pixel diff on the images afterwards. Even small changes like adding a character would lead to large differences in the encoded images. We should really move past text-based diffs and use AST \/ data structure diffs instead IMO.\n\nIt's also interesting to note that *more accurate diffs also reduce the number of conflicts*. For example, if user A adds a parameter to a function and user B changes the return type, a line-based diff would yield a merge conflict. A diff that works on an AST-like structure could detect these changes accurately and combine them without producing a conflict.\n\n*Splitting code into smaller files seems like a hack to me*. It forces git to only search for changes locally (within the file), which might indeed help getting smaller diffs for local changes. On the other hand, non-local changes like combining two files into one become even harder. If we'd perform diffs on data structures instead, local changes would lead to small diffs quite naturally...",
+        "user": "UAL7940NM",
+        "ts": "1549530513.895000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAL7940NM",
+            "ts": "1549530698.000000"
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "&gt;We should really move past text-based diffs and use AST \/ data structure diffs instead IMO.\n\nYeah, agreed. This comes up every now and then so that it almost feels like we all agree on this, but yet I haven’t seen this anywhere. Why is that?\n\nIs it too hard to implement? Are there implementation challenges that I can’t see (because I haven’t tried)?\n\nOr maybe is there a good solution I just haven’t heard about that just needs to become more popular?\n\nOr is it because it’s too daunting with all the text-based tools (git etc.) in place that nobody really believes we can pull this off?\n\nThis seems like a smaller, much more manageable version of the grand “let’s revolutionize programming” problem, so if that is not happening for whatever reason I wonder if there are any insights to gain for the even bigger challenges we discuss here.",
+        "user": "U5STGTB3J",
+        "ts": "1549531985.905800",
+        "thread_ts": "1548823279.730200",
+        "root": {
+            "client_msg_id": "afbb04bb-62da-4502-88ea-86686f8f7b65",
+            "type": "message",
+            "text": "This seems like a different approach to VPL, I found the beginning of the talk boring and the presenter might not now enough from Data Flow VPL. But his approach is different to all the VPL's that I have seen. You can start at min. 12 with the following link if you want to avoid the introduction\n<https:\/\/youtu.be\/edQyRJyVsUg?t=716>",
+            "user": "U85HCL7JP",
+            "ts": "1548823279.730200",
+            "team": "T5TCAFTA9",
+            "attachments": [
+                {
+                    "service_name": "YouTube",
+                    "service_url": "https:\/\/www.youtube.com\/",
+                    "title": "What could a Clojure\/LISP editor be like? - Rakhim Davletkaliyev",
+                    "title_link": "https:\/\/youtu.be\/edQyRJyVsUg?t=716",
+                    "author_name": "Clojure Helsinki",
+                    "author_link": "https:\/\/www.youtube.com\/channel\/UC7GYPoytIg5R56V2Pn-xU9g",
+                    "thumb_url": "https:\/\/i.ytimg.com\/vi\/edQyRJyVsUg\/hqdefault.jpg",
+                    "thumb_width": 480,
+                    "thumb_height": 360,
+                    "fallback": "YouTube Video: What could a Clojure\/LISP editor be like? - Rakhim Davletkaliyev",
+                    "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/edQyRJyVsUg?start=716&feature=oembed&start=716&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                    "video_html_width": 400,
+                    "video_html_height": 225,
+                    "from_url": "https:\/\/youtu.be\/edQyRJyVsUg?t=716",
+                    "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                    "id": 1,
+                    "original_url": "https:\/\/youtu.be\/edQyRJyVsUg?t=716"
+                }
+            ],
+            "thread_ts": "1548823279.730200",
+            "reply_count": 54,
+            "reply_users_count": 11,
+            "latest_reply": "1549574483.942000",
+            "reply_users": [
+                "UAL7940NM",
+                "UC2A2ARPT",
+                "U85HCL7JP",
+                "UBKNXPBAB",
+                "U8A5MS6R1",
+                "UEQ6M68H0",
+                "UC6997THT",
+                "U5STGTB3J",
+                "UFD2JRE58",
+                "UFW3LB2KA",
+                "U85MWBKEY"
+            ],
+            "subscribed": false
+        },
+        "client_msg_id": "BCA8080F-7A49-49E8-96BA-8323C1387A89",
+        "reactions": [
+            {
+                "name": "clap",
+                "users": [
+                    "U85HCL7JP"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1109D7D5-4DEB-4813-9A7E-C1CA0D29E9F4",
+        "type": "message",
+        "text": "I like the idea just for making us all aware of things posted to those forums. As I don’t spend much time there (I’m already spending way too much time here), it would be great to have one place where you can somewhat reliably feel like you learn about all the stuff that’s going on.",
+        "user": "U5STGTB3J",
+        "ts": "1549532650.910500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1549444226.884400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "06e0d232-77ac-476b-9d9f-b33f9e696fb2",
+        "type": "message",
+        "text": "&gt; We all agree on this, but yet I haven’t seen this anywhere. Why is that?\n\nI'll add some dissenting opinion for you :smile:",
+        "user": "UFD2JRE58",
+        "ts": "1549537988.910700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a5ffbcc8-047b-48dd-ab4a-c5f6cc3ff346",
+        "type": "message",
+        "text": "*AST Diff*\n\nI've tried using diffs of ASTs. The issue is that an AST representation tends to be verbose both structurally and with an excess of redundant meta-data that is otherwise perfectly comprehensible in the underlying text.\n\nThe thing people may be missing is that the underlying text is the most elegant and human readable version of the behaviour that the language designer and programmer could achieve. If the AST was clearer, that would be the underlying text.\n\nJust like @ says with diffing vpl text serialisations, ast visualisation is not wysiwyg. It takes a lot of effort to look at an AST and actually match it to the code you wrote.\n\nI think the potential value is as an information layer on top of the text diff. You can use AST information to indicate that a value's type has changed in a passage of code despite the underlying text not changing. This however is very much in the realm of \"neat idea\" i.e. I can't recall a situation where this would have been super valuable.",
+        "user": "UFD2JRE58",
+        "ts": "1549538050.911000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP",
+        "reactions": [
+            {
+                "name": "star-struck",
+                "users": [
+                    "UFPPABQ7P"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7d7ce2dc-4675-438f-95fc-9f07d3580e47",
+        "type": "message",
+        "text": "*Semantic Merge*\n\nA related idea that often comes up that I have been disappointed with - it didn't enable anything too useful. At the low level, semantic constraints makes more things unmergeable e.g.  can't merge a boolean and number value. I haven't been able to make semantic knowledge about higher level constructs produce a better result. You might be able ensure syntactic correctness but the real problem at the heart of merging is preserving intent. I have found that broken text can better preserve conflicting intent and provide a better basis for a resolution than coerced correct syntax. I think this is because:\n\n- merging text = merging the actual material that is changed\n- merging asts = merging a higher level interpretation of the material\n\nSurprisingly, I believe the underlying material that people are editing better captures intent and the high level interpretation can disguise it.\n\nI think AST merge lets you identify more types of conflict but rarely new types of resolution. If you want radically better merge you need radically better information about the **intent** of the change in addition to the change itself.\n\nThis is something that could be achieved by a new class of editor that captures more about a user's editing intent in addition to the actual changes to AST or underlying material.",
+        "user": "UFD2JRE58",
+        "ts": "1549538166.912000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFD2JRE58",
+            "ts": "1549538216.000000"
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2a243461-38d0-43ee-94c0-34626f2ec594",
+        "type": "message",
+        "text": "&gt;It takes a lot of effort to look at an AST and actually match it to the code you wrote.\nto be honest, it takes me some effort to read usual text diffs, some highlighting, as GitHub and Git UI clients do, improve this a lot. So maybe by AST diffs we should always imply an ability to render those nicely?",
+        "user": "UFW3LB2KA",
+        "ts": "1549539157.912500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2bcec88b965",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42bcec88b9653a5c34e35a2be102e115.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Max",
+            "real_name": "Max Desiatov",
+            "display_name": "maxd",
+            "team": "T5TCAFTA9",
+            "name": "max",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFW3LB2KA",
+            "ts": "1549539182.000000"
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "8abbb7d4-1bf3-40a6-8041-8a77a32b594f",
+        "type": "message",
+        "text": "The typical thing you lose in an AST visualisation is infix notation and layout. It's much worse than syntax highlighted code.",
+        "user": "UFD2JRE58",
+        "ts": "1549539420.912800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "ee059c65-bcc4-450d-b72c-fdd32c8fbae3",
+        "type": "message",
+        "text": "Take those away and math\/logical expressions become barely readable.",
+        "user": "UFD2JRE58",
+        "ts": "1549539645.913000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "84b381c8-7f88-4da3-b6ad-8507d546124b",
+        "type": "message",
+        "text": "<@U5STGTB3J> Good Questions. I guess that the reasons are somewhat historical \/ cultural (for example in the Unix Philosophy: \"Avoid stringently columnar or binary input formats\"). A lot of people have probably tried working with binary formats and failed because tools for viewing, searching, editing, diffing, ... weren't available. It also seems like most binary formats are very domain specific which indeed requires custom tools for the tasks I listed before. These formats also cannot be used beyond their original use-cases which means that they're not universal.\n\nSo the interesting question to me is whether it'd be possible to create a \"universal\" general-purpose binary format that could be used to encode domain specific data structures. Something that allows to encode trees, graphs, lists, primitive types, ... would be nice. You could then write tools for editing, seaching, diffing, ... these \"universal\" files. Applications could encode their data structure in this format like they currently do with text.\n\nI don't know whether something like this exists, but even if it did, you'd still have to convince people to use it. This is probably the hardest part.",
+        "user": "UAL7940NM",
+        "ts": "1549542451.913300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "30641d4f-17fa-4645-8b7a-fc2268495ca2",
+        "type": "message",
+        "text": "<@UAL7940NM> you are basically talking about knowledge graphs. You might like to spend some time with semantic web technologies (rdf, sparql etc.) to understand the horror :smiling_imp:\n\nIMHO it's an example of how increasing generality\/universality makes solving valuable problems harder, not easier.",
+        "user": "UFD2JRE58",
+        "ts": "1549543319.913500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFD2JRE58",
+            "ts": "1549543524.000000"
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD",
+                    "UEQ7QL15F"
+                ],
+                "count": 2
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "sob",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "5ad55646-43b0-48d1-b1e3-0cec880bbc0d",
+        "type": "message",
+        "text": "<@UFD2JRE58> (replying to AST Diff) I agree that ASTs aren't a good option for representing code *to the user*, but this may be because they weren't designed with that use-case in mind. ASTs are a representation suited for the compiler and not for a human. I wonder how a \"user-centric program representation\" would look like. Off the top of my head: keep comments \/ docs; only nest as much as possible (1+2+3 as one node with three children instead of nested binary nodes); ...\n\nI don't know whether this has been explored in academia or anywhere else, but please leave a link below if you know something.\n\nAlso, you could still use a presentation layer on top of this data structure that renders it in the most readable form. This would allow much more flexibility in what presentations can be used and would also put an end to the debates of code style \/ formatting, etc.. Style \/ Formatting should be a user setting and not something that's part of the program representation.",
+        "user": "UAL7940NM",
+        "ts": "1549543594.913800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "8fb5cbb5-0f1c-41df-9129-cdf2c63e8bbe",
+        "type": "message",
+        "text": "<@UFD2JRE58> (replying to Semantic Merge) hmm... I have trouble thinking of a concrete example where semantic merge conflict resolution is worse than text-based merge resolution. Could you probably provide one? Thanks. I agree that capturing intend or change is an interesting option as well. CRDTs and friends look interesting, but I'm not an expert in that domain.",
+        "user": "UAL7940NM",
+        "ts": "1549544045.914000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "b88cf47e-760a-41fe-88e9-5696e2f9eed5",
+        "type": "message",
+        "text": "<@UAL7940NM> (AST Diff) It feels like the concept reduces down to text diffs with syntax highlighting and gofmt type tools which is pretty much where we are now.",
+        "user": "UFD2JRE58",
+        "ts": "1549544116.914200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "518a6135-e907-4171-b828-81de0db5bb97",
+        "type": "message",
+        "text": "I'll check knowledge graphs out, thanks for the tip!",
+        "user": "UAL7940NM",
+        "ts": "1549544157.914400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "46375806-BBD3-4EEB-B9FA-39C70A4C04AC",
+        "type": "message",
+        "text": "Thanks, <@UFD2JRE58> and <@UAL7940NM> — these are great points. \n\nOn that note: I do know <http:\/\/xmailserver.org\/diff2.pdf>, but can you point me to papers or articles about diff algorithms for graphs or trees?",
+        "user": "U5STGTB3J",
+        "ts": "1549549140.916700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "adad0d90-a347-45b8-be34-b528f7b96175",
+        "type": "message",
+        "text": "<@U5STGTB3J> (graph diff)\n\nI have looked for graph diff\/merge without any luck.\n\nIn my case I used Operational Transform for diff\/merge across graph data-structures. I could use user's edit histories so I didn't need a graph equivalent of longest-common-sequence and had a better chance to preserve intention.",
+        "user": "UFD2JRE58",
+        "ts": "1549552939.917000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "a6fc75bb-aa6e-4b6f-9c4d-20751afa3e9a",
+        "type": "message",
+        "text": "<@UAL7940NM>\n\n&gt; a concrete example where semantic merge conflict resolution is worse than text-based merge resolution\n\nThe typical \"worse\" result would be a type conflict leading to a dead-end whereas a text merge can just smush things together. It might be wrong but closer to the solution.\n\nI'll try and give the simplest example. Assume three way merge within lines:\n\nOriginal: `var x = 3;`\nUser A: `var x = 4;`\nUser B: `var x = \"3\";`\n\nText merge: `var x = \"4\";`\nSemantic merge: conflict - can't merge string literal and number literal\n\nEssentially I needed pairwise merge rules between different types of semantic transformation. Text merge only needs to implement one pairwise merge rule for all text edits.\n\nIn this case, we could combine text and number edits by stringyifying numbers but doing this type of thing is relaxing semantic constraints rather than taking advantage of them so it now seems like a hard way to do a dumb text merge.",
+        "user": "UFD2JRE58",
+        "ts": "1549553026.917200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ca63ca2aa38f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-20\/529811744742_ca63ca2aa38fa658cc4f_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Woods",
+            "display_name": "duncanawoods",
+            "team": "T5TCAFTA9",
+            "name": "duncan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFD2JRE58",
+            "ts": "1549553327.000000"
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "27D335AB-D341-4E55-8EED-10A60892E749",
+        "type": "message",
+        "text": "Oh, just read about this: <https:\/\/github.com\/apple\/swift-evolution\/blob\/master\/proposals\/0240-ordered-collection-diffing.md> — haven’t looked at it yet, but looks like I just answered my own question.",
+        "user": "U5STGTB3J",
+        "ts": "1549553569.918400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "41e3efa6-3750-4d2f-8757-84a83e8d6863",
+        "type": "message",
+        "text": "... Just gonna pop in here and say...  RDF and related ideas (like EAV) get short shrift! The semantic web was a good idea.. * smoke bomb *",
+        "user": "UC2A2ARPT",
+        "ts": "1549556382.918900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1549556428.000000"
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "7812e9ae-3b56-4247-b6bf-19f884174d37",
+        "type": "message",
+        "text": "... * un-smoke bomb *\n&gt; So the interesting question to me is whether it'd be possible to create a \"universal\" general-purpose binary format that could be used to encode domain specific data structures.\nUTF-8?\n* re-smoke bomb *",
+        "user": "UC2A2ARPT",
+        "ts": "1549556750.919300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP",
+        "reactions": [
+            {
+                "name": "bomb",
+                "users": [
+                    "U5STGTB3J",
+                    "UAL7940NM",
+                    "U85HCL7JP"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "ac1f22ee-5d78-4d4b-b6c3-53cc6c4e6d1e",
+        "type": "message",
+        "text": "<@UFD2JRE58> Thanks for the example!",
+        "user": "UAL7940NM",
+        "ts": "1549559706.919900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "6be62550-dc3a-4af0-a17c-c81d4f931968",
+        "type": "message",
+        "text": "&gt; &gt; We should really move past text-based diffs and use AST \/ data structure diffs instead IMO.\n&gt; Yeah, agreed. This comes up every now and then so that it almost feels like we all agree on this, but yet I haven’t seen this anywhere. Why is that?\n\nI think you can't retrofit this idea onto systems built around the plain text medium. For any language, the language designer has put a lot of thought into the text syntax with specific goals such as comprehension. How editors and version systems treat the text files is not something that is designed at all - it's already *established* and an important context that the designer works within. The AST is designed, but not for the same purpose as the surface syntax. When talking about AST\/graph based versioning, we're really talking about a context shift - a deeper shift in the primary surface medium - i.e. some structured editing medium *instead* of plain text blob editing. Really we want a top to bottom redesign here - languages designed for structured editing combined with a common medium and tooling for viewing and manipulation. I don't think anyone has nailed this yet to get the fluidity and flexibility needed for multi purpose expression. As an example of a frame with a different medium - if we were to say we're going to implement a language to express programs as 'spreadsheets', we're immediately thinking about what the rows here or columns there could represent, and not the high level plain text syntax. Diffs and versioning also falls out of the medium - we think of cell oriented diffs.\n\nAnother aspect with structured editing is that versioning could be integrated with the editing experience. The idea is you want to preserve identity of the cells\/nodes\/items while you manipulate them. The possible power for semantic merging does seem higher than text. E.g. you might be able to encode that multiple items added to an entity are all merged and global identifier renames merged properly with other changes. But we'd want any custom merge logic to also be embedded in the medium.",
+        "user": "U8A5MS6R1",
+        "ts": "1549560957.920100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBSMEUXAA",
+                    "UC2A2ARPT",
+                    "U85HCL7JP"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "460f77bc-79be-4a52-ad3f-60819cca1392",
+        "type": "message",
+        "text": "Oh, maybe it's third party. Back when I was using it everybody in my circle of friends\/colleagues had it as well so I thought it was official",
+        "user": "UDRF3ALP4",
+        "ts": "1549562941.920300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "cc11a4b410bd",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-01-16\/527084657030_cc11a4b410bd932425de_72.jpg",
+            "first_name": "Gregor",
+            "real_name": "Gregor",
+            "display_name": "Gregor",
+            "team": "T5TCAFTA9",
+            "name": "gregorwbr",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548677438.676400",
+        "parent_user_id": "UDRF3ALP4"
+    },
+    {
+        "client_msg_id": "01013eee-5f74-46a2-a952-0738de4ad697",
+        "type": "message",
+        "text": "It is not possible in the general case to go 100% backwards from a change in the AST. You can't fully reconstruct source from the compiled code, but you can get close. But we are talking exactitudes, so unless your language is visual to begin with, in which case the AST is identical to the source, this won't be happening.",
+        "user": "UEQ6M68H0",
+        "ts": "1549567685.924300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1549567685.924300",
+        "reply_count": 7,
+        "reply_users_count": 4,
+        "latest_reply": "1549699848.954500",
+        "reply_users": [
+            "UC2A2ARPT",
+            "UC6997THT",
+            "UFD2JRE58",
+            "UEQ6M68H0"
+        ],
+        "replies": [
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1549567861.924500"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1549567896.924700"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1549567947.924900"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1549568130.925200"
+            },
+            {
+                "user": "UC6997THT",
+                "ts": "1549607268.944100"
+            },
+            {
+                "user": "UFD2JRE58",
+                "ts": "1549622317.947300"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1549699848.954500"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "d65e2199-8e42-4d45-aab1-ad7c47e487ae",
+        "type": "message",
+        "text": "You're talking about things like.. reconstructing the exact pattern of indentation, comments (if they aren't represented in the AST).. right?",
+        "user": "UC2A2ARPT",
+        "ts": "1549567861.924500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1549567685.924300",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "0fd98ea7-5e95-47d8-9f1a-671b1f4ab9bb",
+        "type": "message",
+        "text": "That's no longer an issue if you use something like <https:\/\/prettier.io\/docs\/en\/index.html>",
+        "user": "UC2A2ARPT",
+        "ts": "1549567896.924700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1549567685.924300",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "6b3ffd6d-1e25-4a50-8bee-8af81ae48eba",
+        "type": "message",
+        "text": "&gt; Prettier enforces a consistent code style (i.e. code formatting that won't affect the AST) across your entire codebase because it disregards the original styling by parsing it away and re-printing the parsed AST with its own rules [...]",
+        "user": "UC2A2ARPT",
+        "ts": "1549567947.924900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1549567981.000000"
+        },
+        "thread_ts": "1549567685.924300",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "d41d6318-4753-4fe9-a42e-2521775f3ff2",
+        "type": "message",
+        "text": "I think, in general, it's worth taking it as a given that if AST-aware version control becomes _a thing_, it'll be in the context of a language that has something like Prettier or gofmt to enforce consistent mapping between AST and source — or it'll be a language where you're expected to edit it in a structural or visual editor.\n\nIn other words, I don't think anyone is suggesting we use an AST-aware SCM for Java. That's like oiling the doors on the already-sunk Titanic.",
+        "user": "UC2A2ARPT",
+        "ts": "1549568130.925200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1549568149.000000"
+        },
+        "thread_ts": "1549567685.924300",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "fc484de6-1262-4488-9558-cfe4c669a5c5",
+        "type": "message",
+        "text": "Some more resources I found:\n• [Fine-Grained and Accurate Source Code Differencing: GumTree](<http:\/\/courses.cs.vt.edu\/cs6704\/spring17\/slides_by_students\/CS6704_gumtree_Kijin_AN_Feb15.pdf>)\n• [Algorithms for Graph Similarity and Subgraph Matching](<https:\/\/www.cs.cmu.edu\/~jingx\/docs\/DBreport.pdf>)\n• [A Differencing Algorithm for Object-Oriented Programs](<https:\/\/www.cc.gatech.edu\/~orso\/papers\/term.orso.harrold.ASE04.pdf>)\n• And then there is the git data model that's potentially interesting as well as CRDTs, which have tons of papers.",
+        "user": "U5STGTB3J",
+        "ts": "1549571673.925700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U5STGTB3J",
+            "ts": "1549571733.000000"
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP",
+        "reactions": [
+            {
+                "name": "+1::skin-tone-3",
+                "users": [
+                    "UAL7940NM"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4E205DBB-3317-4B55-B0E7-DD4263A39EDE",
+        "type": "message",
+        "text": "To answer <@U5STGTB3J>’s original question as to why AST Diffs aren’t more widely used I’d offer a few points. \n\nFirst — I’ve tried doing this before and some of the less intuitive technical challenges come as the structure of the ASTs changes over time.  Your diff and merge algorithms then need to have a notion of migrations between each subsequent version of the language— even additions of new types \/ relationships can cause a problem for the algorithms. This unfortunately brings along a terrible scaling characteristic — the algorithms for each language gets much more complex as time goes on — never something you want to build in. Meanwhile Git works the same way on every type of text file and it hasn’t changed much in 10+ years of reliable operation. \n\nSecond — you need to consider what problem this is actually solving and what representation the user is expected to work on? Is it a text reconstruction of the AST you check in or is it the AST itself? If it’s text then you likely have to store that \/ diff it too or formatting is lost on each commit. So all you do is bolt on complexity to Git. Also it’s non-trivial to regenerate code from an AST — especially code you’d want to work with as a developer. \n\nIn general — complex solutions are hard to maintain, collaborate on and advance. With dozens of languages to support and thousands of versions it’s no surprise that text has won. Think in terms of natural selection — same level of fitness for a fraction of the cost is going to win out over time. \n\nI think AST diffs will be important in the future but not for SCM use cases. They’ll be used to help people code alongside generators without worrying about losing their manual contributions. That domain is sufficiently constrained and provides enough value that I think we’ll see production tools using it within 4-10 years. ",
+        "user": "U85MWBKEY",
+        "ts": "1549573818.941800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "88eacb7e65ed",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-08\/681438296241_88eacb7e65edebc579ab_72.jpg",
+            "first_name": "Aidan",
+            "real_name": "Aidan Cunniffe",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "acunniffe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UFW3LB2KA",
+                    "UC6997THT"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7e98d2bf-060c-4675-93c1-670331542b0b",
+        "type": "message",
+        "text": "Can we rely on identity preserving manipulations in the tooling over general graph diffing? Consider that we don't use diffing to determine which data record was changed in the database - the model is there is that we're modifying existing structure via some targeted commands.\nSame thing for programs or whatever we are representing. Since we're manipulating through a representation, clicking or typing on stuff - could we just preserve the identity of the objects been manipulated and intent of the author by appending to the original structure?",
+        "user": "U8A5MS6R1",
+        "ts": "1549574483.942000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1548823279.730200",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "975a9498-bb06-4ca1-a2f6-8e1961d1019d",
+        "type": "message",
+        "text": "Yeah, my gut says that a randomly-generated icon that persisted forever would be better, at least for re-finding directories. Otherwise, adding a big file to a directory would make its icon look totally different.\n\nI would love it if the icons were still packed circles though, because that looks dope.",
+        "user": "UFEQUBNNT",
+        "ts": "1549583398.942400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1549264861.860200",
+        "parent_user_id": "UCKRZS3DZ",
+        "reactions": [
+            {
+                "name": "sunglasses",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2806e58c-53e1-483b-9a2c-471b21187256",
+        "type": "message",
+        "text": "So nice!",
+        "user": "UFEQUBNNT",
+        "ts": "1549583716.942700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1549325465.867000",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "358db112-9076-429c-899d-1c1651cdc7c5",
+        "type": "message",
+        "text": "His main point seems to be that external DSLs are bad, but writing declarative style code can be good and composable. The embedded HTML example he gives reminds me a lot of how the HTML module works in Elm. <https:\/\/package.elm-lang.org\/packages\/elm-lang\/html\/latest\/Html>",
+        "user": "UD43R8ZFV",
+        "ts": "1549603257.943600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "85ee3dacef95",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-30\/445630960161_85ee3dacef95dd5617e4_72.png",
+            "first_name": "Tim",
+            "real_name": "Tim Swast",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "tswast",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1549401459.878200",
+        "parent_user_id": "UEDDR6L5Q"
+    },
+    {
+        "client_msg_id": "9f68ac49-e87d-4598-9cdc-29b157ba4417",
+        "type": "message",
+        "text": "I am one of those opposed to prettiers. The topic comes up about once a year on the Chrome team. Someone suggests \"We should add a auto formatter to the commit system\" and then it's always pointed out that an auto formatter never handles the exceptions and ends up making the code less readable.\n\nMaybe you believe there should be no exceptions. I disagree. As a simple example let's take javascript objects. should they be\n\n```\nconst arrayOfRects = [\n  { x: 0, y: 0, width: 100, },\n  { x: 123, y: 45, width: 10, },\n  { x: -45, y: -410, width: -123, },\n];\n```\n\nvs\n\n```\nconst arrayOfRects = [\n  {\n     x: 0,\n     y: 0,\n     width: 100,\n  },\n  {\n     x: 123,\n     y: 45,\n     width: 10,\n  },\n  {\n     x: -45,\n     y: -410,\n     width: -123,\n  },\n];\n```\nvs\n\n```\nconst arrayOfRects = [\n  { x:   0, y:    0, width:  100, },\n  { x: 123, y:   45, width:   10, },\n  { x: -45, y: -410, width: -123, },\n];\n```\n\nI prefer the last one depending on the situation. There are plenty of places where turning the data into something more like a table makes it much much easier to find errors and see exceptions but auto formaters normal destroy such formatting.\n\nIn the same way I'd expect issues with VPLs in that people want to arrange their nodes the way that works best for them, not on some auto-layed out way. Consider 6 nodes that could be stacked vertically, horizontally, 3x2, 2x3 or just manually placed wherever. Now two or more people move the nodes and you've got a conflict that needs resolving.\n\nMaybe not a good example. I'm just trying to point out that just like an code AST generally removes all formatting info which is often an issue, VPLs probably also have similar types of metadata that will end up causing similar issues.",
+        "user": "UC6997THT",
+        "ts": "1549607268.944100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f3eb3ca69d86",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-13\/414472553296_f3eb3ca69d86feb77929_72.png",
+            "first_name": "Gregg",
+            "real_name": "Gregg Tavares",
+            "display_name": "gman",
+            "team": "T5TCAFTA9",
+            "name": "slack1",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC6997THT",
+            "ts": "1549607431.000000"
+        },
+        "thread_ts": "1549567685.924300",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "7a04e633-f235-4fc5-a366-1c7c89d5cc4c",
+        "type": "message",
+        "text": "Here is one-on-one talk between me and <@UFD2JRE58>\n\ndiscussed:\n * what are real problems? efficient abstractions, pain of macros\n * consistency in system with many parts on different platforms\n * how wind turbines work, embedded programming\n * system of code generators from spreadsheets, LadderLogic\n * realtime systems\n * testing of embedded systems\n * process of program design\n * vague description, constraints\n * structured documentation that puts constraints on code\n * <https:\/\/thorny.io\/>, space of decisions, way to capture reasoning\n * different personalities, different tools?\n * me (Vladimir Gordeev) preparing for university\n\n<https:\/\/youtu.be\/UagX5ssqaVM>",
+        "user": "UCKRZS3DZ",
+        "ts": "1549612268.945200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCKRZS3DZ",
+            "ts": "1549618917.000000"
+        },
+        "attachments": [
+            {
+                "service_name": "Thorny",
+                "title": "Thorny - Decision-making superpowers for designers, engineers and leaders",
+                "title_link": "https:\/\/thorny.io\/",
+                "text": "Thorny - Decision-making superpowers for designers, engineers and leaders",
+                "fallback": "Thorny: Thorny - Decision-making superpowers for designers, engineers and leaders",
+                "thumb_url": "https:\/\/thorny.io\/img\/favicon-310.png",
+                "ts": 1470834000,
+                "from_url": "https:\/\/thorny.io\/",
+                "thumb_width": 310,
+                "thumb_height": 310,
+                "service_icon": "https:\/\/thorny.io\/img\/favicon-57.png",
+                "id": 1,
+                "original_url": "https:\/\/thorny.io\/"
+            },
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "8 February, one-on-one talk between Vladimir Gordeev and Duncan Woods",
+                "title_link": "https:\/\/youtu.be\/UagX5ssqaVM",
+                "author_name": "Vladimir Gordeev",
+                "author_link": "https:\/\/www.youtube.com\/user\/GordeevVladimirV",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/UagX5ssqaVM\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: 8 February, one-on-one talk between Vladimir Gordeev and Duncan Woods",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/UagX5ssqaVM?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/UagX5ssqaVM",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 2,
+                "original_url": "https:\/\/youtu.be\/UagX5ssqaVM"
+            }
+        ],
+        "thread_ts": "1549612268.945200",
+        "reply_count": 3,
+        "reply_users_count": 2,
+        "latest_reply": "1549618921.946800",
+        "reply_users": [
+            "UFW3LB2KA",
+            "UCKRZS3DZ"
+        ],
+        "replies": [
+            {
+                "user": "UFW3LB2KA",
+                "ts": "1549618734.946300"
+            },
+            {
+                "user": "UCKRZS3DZ",
+                "ts": "1549618905.946500"
+            },
+            {
+                "user": "UCKRZS3DZ",
+                "ts": "1549618921.946800"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U5TCAFTD3"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

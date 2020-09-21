@@ -1,0 +1,938 @@
+[
+    {
+        "client_msg_id": "b1625ac3-2632-496f-8713-63534ec666d8",
+        "type": "message",
+        "text": "&gt; How do you handle functions that take two arguments?\n\nStill considering different approaches, in combination with different modes of time travel, different ways of storing state internally, to see what feels good and avoids perf cliffs.\n\nMy current favourite is what you mentioned: functions don't open themselves to input until they have data waiting at every inlet. If multiple pieces of data arrive at one inlet before other inlets are filled, we just do last-write-wins. If you want a queue instead, that could just be a special kind of edge. I call this idea \"perching\" because it's like the data point is perched on the lip of the function, waiting until the function opens up.\n\nAnother option is that data points \"paint\" the edges they travel along, leaving a permanent trail of their data value. When a function receives a data point at an inlet, it can accept that input and produce a result even if other inlets don't have a data point waiting at them, so long as those inlet edges have previously been painted with a value. This is sort of like a version of FRP-style behaviours \/ signals depicted as standing waves, where the initial wavefront is a point. It's also analogous to the way that variables in a scope work, which are in essence painted with a value as the instruction pointer passes over them to do an assignment and they remain so painted until the next assignment. (Yes, I do spend a lot of time thinking of our common abstract execution metaphors as little machines with agency which, I know, is a \"no-no\" in some technical writing circles.)\n\nPainting seems really interesting and I definitely haven't explored it enough, but I have a raft of concerns that don't seem to be fading as I consider it more. Painting adds several new kinds of complexity (compared to perching and other ideas), and requires a whole additional set of editor tools. There might not be a good way for the artist to embody painted edges the way they can embody points — what would \"painted edges: the game\" be like, and is that useful for programming?\n\nThere's another problem that both painting and perching have, which I only really started to appreciate after exploring painting in depth. Currently, the act of a data point arriving at a function is two things combined together that might need to be separate — it's the provision of data, and it's the initiation of that function's execution. It's both (eg) a value and a \"bang\". I might want to separate these things, so that the system isn't \"complecting what and when\" to borrow a Hickeyism. (And that's 25¢ in the jar.)\n\nAnd yes, of course, I am very resistant to any idea that crosses my path that'd lead to hidden state. Much like incidental complexity (which Hest warmly embraces), hidden state is something that will inevitably happen in some sense or another, but I want to be very careful about what things I hide, and how.\n\nSo, what do you think? Should I separate the movement of data and the movement of execution? There are lots of ways to do that. If you were providing multiple pieces of data to a function, how might you do it?",
+        "user": "UC2A2ARPT",
+        "ts": "1567530113.013700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566801692.212900",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "5f0e4d1e-2490-473b-b453-a888f60804d6",
+        "type": "message",
+        "text": "Have there been any episodes about the STEPS project? I’d love to hear an in-depth interview it.",
+        "user": "ULM3U6275",
+        "ts": "1567530849.014700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "ULM3U6275",
+            "ts": "1567558924.000000"
+        },
+        "thread_ts": "1567530849.014700",
+        "reply_count": 12,
+        "reply_users_count": 5,
+        "latest_reply": "1567685399.067300",
+        "reply_users": [
+            "UGLSY9X3J",
+            "U85HCL7JP",
+            "U5TCAFTD3",
+            "UHWC9PXBL",
+            "UJFN50C00"
+        ],
+        "replies": [
+            {
+                "user": "UGLSY9X3J",
+                "ts": "1567532107.015300"
+            },
+            {
+                "user": "U85HCL7JP",
+                "ts": "1567533098.016100"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1567535557.020000"
+            },
+            {
+                "user": "UGLSY9X3J",
+                "ts": "1567535600.020200"
+            },
+            {
+                "user": "UGLSY9X3J",
+                "ts": "1567535606.020400"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1567535950.020600"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1567566277.032900"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1567672021.060200"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1567672066.060400"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1567672364.060600"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1567672426.060800"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1567685399.067300"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1567685399.067300",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJK8MKYAZ",
+                    "UEBG0NPDK",
+                    "UC2A2ARPT",
+                    "UAL7940NM",
+                    "UGLSY9X3J",
+                    "U8A5MS6R1",
+                    "U79HM6726",
+                    "UCUSW7WVD",
+                    "UA14TGLTC"
+                ],
+                "count": 9
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e6bc4d4c-9265-4c58-a1c8-96e3f29506a5",
+        "type": "message",
+        "text": "could you get Alan on FoC podcast <@U5TCAFTD3>? :slightly_smiling_face:",
+        "user": "UGLSY9X3J",
+        "ts": "1567532107.015300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g03ebdf13bbe",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e03ebdf13bbeacace66454bea388b927.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Srini Kadamati",
+            "display_name": "srini",
+            "team": "T5TCAFTA9",
+            "name": "srini",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567530849.014700",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "type": "message",
+        "text": "<@ULM3U6275> I had an email exchange with Alan about STEPS and this is what I got from him",
+        "files": [
+            {
+                "id": "FN15YEGBH",
+                "created": 1567532183,
+                "timestamp": 1567532183,
+                "name": "Screenshot 2019-09-03 13.35.50.png",
+                "title": "Screenshot 2019-09-03 13.35.50.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "UGLSY9X3J",
+                "editable": false,
+                "size": 743857,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FN15YEGBH\/screenshot_2019-09-03_13.35.50.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FN15YEGBH\/download\/screenshot_2019-09-03_13.35.50.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_64.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_80.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_360.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_360_w": 360,
+                "thumb_360_h": 357,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_480.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_480_w": 480,
+                "thumb_480_h": 477,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_160.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_720.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_720_w": 720,
+                "thumb_720_h": 715,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_800.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_800_w": 800,
+                "thumb_800_h": 794,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_960.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_960_w": 960,
+                "thumb_960_h": 953,
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_1024.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 1017,
+                "image_exif_rotation": 1,
+                "original_w": 2272,
+                "original_h": 2256,
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/UGLSY9X3J\/FN15YEGBH\/screenshot_2019-09-03_13.35.50.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-FN15YEGBH-4b0feb10c5",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UGLSY9X3J",
+        "display_as_bot": false,
+        "ts": "1567532187.015700",
+        "client_msg_id": "7aa179a8-dc8b-4500-84ea-63771e0488d1",
+        "thread_ts": "1567532187.015700",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1567572854.037800",
+        "reply_users": [
+            "UHWC9PXBL",
+            "UCUSW7WVD"
+        ],
+        "replies": [
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1567566488.036700"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1567572854.037800"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "ULM3U6275",
+                    "UBM0S2AN4",
+                    "UCUSW7WVD",
+                    "UA14TGLTC",
+                    "UMVFWPZ36"
+                ],
+                "count": 5
+            }
+        ]
+    },
+    {
+        "client_msg_id": "befebcda-55cf-407d-b7fd-4d6563ae3717",
+        "type": "message",
+        "text": "There some papers available in <http:\/\/www.vpri.org\/writings.php>, search for `STEPS`",
+        "user": "U85HCL7JP",
+        "ts": "1567533098.016100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e6db0e9dd5fe",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-15\/956131187863_e6db0e9dd5fe2e3b9df2_72.jpg",
+            "first_name": "",
+            "real_name": "Daniel Garcia",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "daniel.garcia.carmona",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567530849.014700",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "03c01458-2346-4cfc-96fa-0c4abf4f9d98",
+        "type": "message",
+        "text": "<@UGLSY9X3J> Thanks for the response. Yeah, I’ve heard that STEPS gets more function from less code, but was hoping to hear some details on how it does so.",
+        "user": "ULM3U6275",
+        "ts": "1567533862.019200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "ULM3U6275",
+            "ts": "1567552697.000000"
+        },
+        "thread_ts": "1567533862.019200",
+        "reply_count": 6,
+        "reply_users_count": 4,
+        "latest_reply": "1567599780.039900",
+        "reply_users": [
+            "UGLSY9X3J",
+            "ULM3U6275",
+            "UA14TGLTC",
+            "U5TCAFTD3"
+        ],
+        "replies": [
+            {
+                "user": "UGLSY9X3J",
+                "ts": "1567534448.019300"
+            },
+            {
+                "user": "UGLSY9X3J",
+                "ts": "1567534532.019600"
+            },
+            {
+                "user": "UGLSY9X3J",
+                "ts": "1567534534.019800"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1567558633.027200"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1567599746.039600"
+            },
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1567599780.039900"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1567599780.039900"
+    },
+    {
+        "client_msg_id": "da4b5afc-bded-4bb4-9e8e-1e0ed597b2b7",
+        "type": "message",
+        "text": "one of the things he talks about is replicating 2.5D graphics in very few lines of code. Which is Dan Amelang’s work on Nile graphics. See this part of the talk: <https:\/\/youtu.be\/prIwpKL57dM?t=2836>",
+        "user": "UGLSY9X3J",
+        "ts": "1567534448.019300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g03ebdf13bbe",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e03ebdf13bbeacace66454bea388b927.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Srini Kadamati",
+            "display_name": "srini",
+            "team": "T5TCAFTA9",
+            "name": "srini",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Alan Kay - Programming Languages &amp; Programming (2013)",
+                "title_link": "https:\/\/youtu.be\/prIwpKL57dM?t=2836",
+                "author_name": "Every Alan Kay Video",
+                "author_link": "https:\/\/www.youtube.com\/channel\/UCFq9sZjPFZIZObk-CZsws1A",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/prIwpKL57dM\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Alan Kay - Programming Languages & Programming (2013)",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/prIwpKL57dM?start=2836&feature=oembed&start=2836&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/prIwpKL57dM?t=2836",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/prIwpKL57dM?t=2836"
+            }
+        ],
+        "thread_ts": "1567533862.019200",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "ULM3U6275"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f9c22bf1-2ebd-42cd-8a5d-26c70c1bc91b",
+        "type": "message",
+        "text": "Alan often talks about how “new building blocks” \/ mental models need to be invented to escape the false-tradeoff of “more code - more functionality” vs “less code - less functionality”.\n\nFor Nile, they created some new math &amp; algorithms to create a simple graphics library.",
+        "user": "UGLSY9X3J",
+        "ts": "1567534532.019600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g03ebdf13bbe",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e03ebdf13bbeacace66454bea388b927.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Srini Kadamati",
+            "display_name": "srini",
+            "team": "T5TCAFTA9",
+            "name": "srini",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567533862.019200",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "ce949a8d-5755-421b-a6ee-f6ff391e6716",
+        "type": "message",
+        "text": "also more info on this page: <https:\/\/tinlizzie.org\/IA\/index.php\/Rethinking_Design,_Risk,_and_Software_(2012)#The_graphics_engine_of_the_STEPS_project:_Dan_Amelang.27s_Nile_and_Gezira>",
+        "user": "UGLSY9X3J",
+        "ts": "1567534534.019800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g03ebdf13bbe",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e03ebdf13bbeacace66454bea388b927.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Srini Kadamati",
+            "display_name": "srini",
+            "team": "T5TCAFTA9",
+            "name": "srini",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567533862.019200",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "ULM3U6275",
+                    "UHWC9PXBL",
+                    "UJFN50C00"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2d36c9de-6e84-4aa4-8af2-57b89e40fa09",
+        "type": "message",
+        "text": "I wish!",
+        "user": "U5TCAFTD3",
+        "ts": "1567535557.020000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567530849.014700",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "2f806d85-0488-4df5-9f43-bbe972433c4f",
+        "type": "message",
+        "text": "or Dan Amelang :slightly_smiling_face:",
+        "user": "UGLSY9X3J",
+        "ts": "1567535600.020200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g03ebdf13bbe",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e03ebdf13bbeacace66454bea388b927.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Srini Kadamati",
+            "display_name": "srini",
+            "team": "T5TCAFTA9",
+            "name": "srini",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567530849.014700",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "ed956f74-b244-479e-bb9c-0988879dcfe1",
+        "type": "message",
+        "text": "or one of their other collaborators!",
+        "user": "UGLSY9X3J",
+        "ts": "1567535606.020400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g03ebdf13bbe",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e03ebdf13bbeacace66454bea388b927.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Srini Kadamati",
+            "display_name": "srini",
+            "team": "T5TCAFTA9",
+            "name": "srini",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567530849.014700",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "c9a9bfa7-a584-4646-b7fa-635893840f28",
+        "type": "message",
+        "text": "That's a good idea. Maybe I get land a collaborator",
+        "user": "U5TCAFTD3",
+        "ts": "1567535950.020600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567530849.014700",
+        "parent_user_id": "ULM3U6275",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UGLSY9X3J",
+                    "UHWC9PXBL",
+                    "UKFNXF0F9"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d876fa19-734b-4a2f-acdc-43a55fba81ba",
+        "type": "message",
+        "text": "I'm thinking in terms of 'Edges represent function calls, not function signatures' so am a bit confused how each inlet will only provide partial data for the function. That sounds more like function signatures (all inlets need inputs). The question is this: does an edge carry all the data for the target node or only part of the data?\n\nIf I were to provide multiple pieces of data to a function, maybe I'd introduce some synchrony nodes. E.g. a Y connector that merges two pieces of data into one, so it can be passed down to function. The only purpose of these synchrony nodes would be combining different pieces of data (ensuring they 'sync up') and then putting them on a single track en route to the function node.",
+        "user": "U8A5MS6R1",
+        "ts": "1567543228.021300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566801692.212900",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "17a6a1c9-1a0a-4fe5-a893-1652ef168566",
+        "type": "message",
+        "text": "Prof. Wirth's Lilith computer is another miracle of economy, and was sold for a few years. It used Oberon and was inspired by his time spent at Xerox PARC. Oberon is a very clever language; i used its predecessor Modula-2 for 20 years to great success. Wirth made a deadly mistake when he removed enumerated types from Oberon 1 which prevented large code bases written in Modula-2 to cross over. Oberon 2 fixed it, but the damage was already done.",
+        "user": "UEQ6M68H0",
+        "ts": "1567550338.024600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "F7BA1698-E5D1-4F99-97EF-952C776FBC42",
+        "type": "message",
+        "text": "Thanks <@UGLSY9X3J> I wish this talk clearly showed his projector video so we could see what he’s talking about. ",
+        "user": "ULM3U6275",
+        "ts": "1567558633.027200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567533862.019200",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "client_msg_id": "40219F3F-36C2-4B6A-8669-8A736EFE52DD",
+        "type": "message",
+        "text": "i think the edges represent function calls but the arguments being passed in are particles flowing along those edges. so function signatures are more like specs of how many pieces of data need to hit a function before it spits out another returns (spits out another particle). might be way off base though",
+        "user": "UHWC9PXBL",
+        "ts": "1567566151.030500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566801692.212900",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "B533B003-4359-4763-85BE-C82824FF4417",
+        "type": "message",
+        "text": "btw i really like the perching and painting metaphors they’re very evocative ",
+        "user": "UHWC9PXBL",
+        "ts": "1567566175.031300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566801692.212900",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "611573C6-4A3F-44B3-BC71-FA7012143D57",
+        "type": "message",
+        "text": "omg i would love to hear about the “golden box” (IIRC) behind OMeta or a better explanation of the graphics stuff they developed",
+        "user": "UHWC9PXBL",
+        "ts": "1567566277.032900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UHWC9PXBL",
+            "ts": "1567566292.000000"
+        },
+        "thread_ts": "1567530849.014700",
+        "parent_user_id": "ULM3U6275"
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "i can probably dredge up the talks he gave with steps if anyone is interested. his classic move was to interrupt the presentation on the FoC to point out that he obviously wasn’t using powerpoint, to hit a button, and have all his slides fall apart graphically as they were held together with a physics-ish constraint system a la sketch pad (or do a demo of how text got laid out with a logic reminiscent of ant colonies)",
+        "user": "UHWC9PXBL",
+        "ts": "1567566488.036700",
+        "thread_ts": "1567532187.015700",
+        "root": {
+            "type": "message",
+            "text": "<@ULM3U6275> I had an email exchange with Alan about STEPS and this is what I got from him",
+            "files": [
+                {
+                    "id": "FN15YEGBH",
+                    "created": 1567532183,
+                    "timestamp": 1567532183,
+                    "name": "Screenshot 2019-09-03 13.35.50.png",
+                    "title": "Screenshot 2019-09-03 13.35.50.png",
+                    "mimetype": "image\/png",
+                    "filetype": "png",
+                    "pretty_type": "PNG",
+                    "user": "UGLSY9X3J",
+                    "editable": false,
+                    "size": 743857,
+                    "mode": "hosted",
+                    "is_external": false,
+                    "external_type": "",
+                    "is_public": true,
+                    "public_url_shared": false,
+                    "display_as_bot": false,
+                    "username": "",
+                    "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FN15YEGBH\/screenshot_2019-09-03_13.35.50.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FN15YEGBH\/download\/screenshot_2019-09-03_13.35.50.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_64.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_80.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_360.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_360_w": 360,
+                    "thumb_360_h": 357,
+                    "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_480.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_480_w": 480,
+                    "thumb_480_h": 477,
+                    "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_160.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_720.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_720_w": 720,
+                    "thumb_720_h": 715,
+                    "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_800.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_800_w": 800,
+                    "thumb_800_h": 794,
+                    "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_960.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_960_w": 960,
+                    "thumb_960_h": 953,
+                    "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_1024.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_1024_w": 1024,
+                    "thumb_1024_h": 1017,
+                    "image_exif_rotation": 1,
+                    "original_w": 2272,
+                    "original_h": 2256,
+                    "permalink": "https:\/\/futureofcoding.slack.com\/files\/UGLSY9X3J\/FN15YEGBH\/screenshot_2019-09-03_13.35.50.png",
+                    "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-FN15YEGBH-4b0feb10c5",
+                    "is_starred": false,
+                    "has_rich_preview": false
+                }
+            ],
+            "upload": true,
+            "user": "UGLSY9X3J",
+            "display_as_bot": false,
+            "ts": "1567532187.015700",
+            "client_msg_id": "7aa179a8-dc8b-4500-84ea-63771e0488d1",
+            "thread_ts": "1567532187.015700",
+            "reply_count": 2,
+            "reply_users_count": 2,
+            "latest_reply": "1567572854.037800",
+            "reply_users": [
+                "UHWC9PXBL",
+                "UCUSW7WVD"
+            ],
+            "subscribed": false
+        },
+        "client_msg_id": "672F6FB4-43C1-44DE-8E41-221EB53794C9",
+        "reactions": [
+            {
+                "name": "smile",
+                "users": [
+                    "UCUSW7WVD",
+                    "ULM3U6275"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "It's very frustrating. For all of Alan Kay's vision and breadth of knowledge he's subject to a fairly mundane academic blind spot: the false dichotomy between research and \"a hardened general development system\".\n\nThere's a growing awareness today that papers about computer science are inferior without source code, that source code needs to be easy to build and run, and that it needs to build and run on the systems people have access to. I think these factors are far more important than the quality of empirical studies. Any sort of realistic empirical study of tool use just has too many variables to nail down. But if you make a working system available to people and 200 people try it out over 10 years, then all sorts of insights should shake out of that relatively immersive usage that will never come up in a traditional, superficial review process.\n\nA system for general development doesn't have to be compatible with existing software, and it doesn't have to work at the scale of a Google or Facebook. Aim for 200 people over 10 years. But that requires a fundamentally different mindset than raising funding, publishing a paper, throwing code over a wall, and calling it done.",
+        "user": "UCUSW7WVD",
+        "ts": "1567572854.037800",
+        "thread_ts": "1567532187.015700",
+        "root": {
+            "type": "message",
+            "text": "<@ULM3U6275> I had an email exchange with Alan about STEPS and this is what I got from him",
+            "files": [
+                {
+                    "id": "FN15YEGBH",
+                    "created": 1567532183,
+                    "timestamp": 1567532183,
+                    "name": "Screenshot 2019-09-03 13.35.50.png",
+                    "title": "Screenshot 2019-09-03 13.35.50.png",
+                    "mimetype": "image\/png",
+                    "filetype": "png",
+                    "pretty_type": "PNG",
+                    "user": "UGLSY9X3J",
+                    "editable": false,
+                    "size": 743857,
+                    "mode": "hosted",
+                    "is_external": false,
+                    "external_type": "",
+                    "is_public": true,
+                    "public_url_shared": false,
+                    "display_as_bot": false,
+                    "username": "",
+                    "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FN15YEGBH\/screenshot_2019-09-03_13.35.50.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FN15YEGBH\/download\/screenshot_2019-09-03_13.35.50.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_64.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_80.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_360.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_360_w": 360,
+                    "thumb_360_h": 357,
+                    "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_480.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_480_w": 480,
+                    "thumb_480_h": 477,
+                    "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_160.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_720.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_720_w": 720,
+                    "thumb_720_h": 715,
+                    "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_800.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_800_w": 800,
+                    "thumb_800_h": 794,
+                    "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_960.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_960_w": 960,
+                    "thumb_960_h": 953,
+                    "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FN15YEGBH-f7eab79101\/screenshot_2019-09-03_13.35.50_1024.png?t=xoxe-197418537349-1220335257046-1227067770482-88f226025a2db8e34ac513e918d80320",
+                    "thumb_1024_w": 1024,
+                    "thumb_1024_h": 1017,
+                    "image_exif_rotation": 1,
+                    "original_w": 2272,
+                    "original_h": 2256,
+                    "permalink": "https:\/\/futureofcoding.slack.com\/files\/UGLSY9X3J\/FN15YEGBH\/screenshot_2019-09-03_13.35.50.png",
+                    "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-FN15YEGBH-4b0feb10c5",
+                    "is_starred": false,
+                    "has_rich_preview": false
+                }
+            ],
+            "upload": true,
+            "user": "UGLSY9X3J",
+            "display_as_bot": false,
+            "ts": "1567532187.015700",
+            "client_msg_id": "7aa179a8-dc8b-4500-84ea-63771e0488d1",
+            "thread_ts": "1567532187.015700",
+            "reply_count": 2,
+            "reply_users_count": 2,
+            "latest_reply": "1567572854.037800",
+            "reply_users": [
+                "UHWC9PXBL",
+                "UCUSW7WVD"
+            ],
+            "subscribed": false
+        },
+        "client_msg_id": "2b913fe6-9388-4679-a0b7-504227e54259",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT",
+                    "UA14TGLTC",
+                    "UHWC9PXBL",
+                    "UJFN50C00"
+                ],
+                "count": 4
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UEQ6M68H0",
+                    "UJFN50C00",
+                    "UJ6LDMMN0"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "586482bf-73fa-41be-a793-fde86c38a1da",
+        "type": "message",
+        "text": "In Max, Pd, vvvv, Cables, Nodes, etc., each function node has a number of inlet and outlet ports (usually typed). Each port serves a specific purpose.\n\nI want artist-defined functions to be able to have something akin to ports. In fact, it's a design requirement of the kinds of simulations my team plans to build in Hest. But I want to be able to implement those _visibly multi-parameter_ functions entirely in terms of simpler functions that just look like points. Simple geometry for the most primitive\/core functions, complex geometry for more complex\/specialized functions. (Short version of \"why?\" — it makes for a stronger harmony between the drawing model and programming model). How to accomplish this?\n\nI could try to make the core of the language consist only of single argument functions that execute immediately when data is provided. This feels very.. lambda calculus. I can't conceive of how to make this performant _in fuckin javascript_. I think I have to do multi-argument, somehow.\n\n\"Synchrony nodes\" is similar to an idea I've been toying with, which I call \"sync gates\". They're basically the \"sync\" operator in SpaceChem, used for temporal coordination — when a data point arrives at a sync gate, it sits there and waits until all other connected sync gates also have a point waiting at them, then all the gates open. No Y-combination, just little gate nodes connected with a \"wire\" edge. I though about using sync gates in combination with the idea that functions treat the simultaneous arrival of data points as a multi-argument invocation. But I think synchrony nodes are even better, because if you numbered the inbound branches of the Y, you could establish an order, which I think is essential. (I don't think I want to make Hest like a stack\/concatenative language, using the temporal order that data arrives at a function as the argument order — that's too confusing).\n\nIt's hard for me to think about this stuff without also thinking about how an artist-defined function is created, so I should probably speak to that. When defining a function within Hest, you draw a graphic \"icon\" for that function using the vector art tools, and lay out the code next to that graphic. You also connect the code to the graphic as needed to (say) alter the graphic in response to state (because functions in Hest can be stateful). If you want to have (say) a row of inlet ports along the top of the graphic, you'd draw what those ports should look like, tell Hest to treat them as ports (which means they'll accept edge connections from outside), and route where the incoming data should go.",
+        "user": "UC2A2ARPT",
+        "ts": "1567576284.038800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566801692.212900",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "8b069f22-0e33-4e99-b75a-7c3e93ecfe98",
+        "type": "message",
+        "text": "I realize that didn't address \"Edges represent function calls, not function signatures\" — I think it's worth handling everything I say with oven mitts, since I'm changing my mind constantly, trying tons of experiments, deleting as much code as I write, and always speaking about what I'm working toward at the moment, not what I've completely decided to do.",
+        "user": "UC2A2ARPT",
+        "ts": "1567576458.039000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566801692.212900",
+        "parent_user_id": "UC2A2ARPT",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

@@ -3,32 +3,134 @@
 <head>
 <meta charset=utf-8>
 <title>Future of Coding Helpers</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-<body>
+<body class="p-3">
 
-<h2>Emojis</h2>
-<ul>
-<li>
+<div id="app" class="form-group">
+  <div class="row m-3">
+    <div class="col">
+      <label>Author <strong>{{pronouns[curAuthor]}}</strong></label>
+    </div>
+    <div class="col">
+      <input class="form-control" type="search" list="authors" v-model="curAuthor" placeholder="Author Name">
+    </div>
+    <div class="col">
+      <input class="form-control" type="text" v-bind:value="curAuthorText">
+    </div>
+    <div class="col">
+      <button v-on:click="copyAuthorText()" class="btn btn-primary btn-sm">Copy</button>
+    </div>
+    <div class="col">
+      <button v-on:click="clearAuthor()" class="btn btn-warning btn-sm">Clear</button>
+    </div>
+    <datalist id="authors">
+      <option v-for="(url, key) in authors" v-bind:value="key">
+    </datalist>
+  </div>
+  <div class="row m-3">
+    <div class="col">
+      <label>By</label>
+    </div>
+    <div class="col">
+      <input class="form-control" type="search" v-model="curBy" placeholder="Name">
+    </div>
+    <div class="col">
+      <input class="form-control" type="text" v-model="curByUrl" placeholder="URL">
+    </div>
+    <div class="col">
+      <button v-on:click="copyByText()" class="btn btn-primary btn-sm">Copy</button>
+    </div>
+    <div class="col">
+      <button v-on:click="clearBy()" class="btn btn-warning btn-sm">Clear</button>
+    </div>
+  </div>
 
-🧵</li><li>
-🎥</li><li>
-📝</li><li>
-🎙️</li><li>
-📱</li><li>
-💻</li><li>
-⌨️</li><li>
-🖱️</li><li>
-📷</li><li>
-📑</li><li>
-📦</li><li>
-📝</li><li>
-📅</li><li>
-📈</li><li>
-🔧</li><li>
-🐦</li><li>
+  <div class="row m-3">
+    <div class="col">
+      <label>Slack Thread</label>
+    </div>
+    <div class="col">
+      <input class="form-control" type="url" v-model="curSlackThread" placeholder="URL">
+    </div>
+    <div class="col">
+      <input class="form-control" type="text" v-bind:value="curSlackThreadText">
+    </div>
+    <div class="col">
+      <button v-on:click="copySlackThreadText()" class="btn btn-primary btn-sm">Copy</button>
+    </div>
+    <div class="col">
+      <button v-on:click="clearSlackThread()" class="btn btn-warning btn-sm">Clear</button>
+    </div>
+  </div>
 
-</li>
-</ul>
+  <div class="row m-3">
+    <div class="col">
+      <label>Url</label>
+    </div>
+    <div class="col">
+      <input class="form-control" type="url" v-model="url" placeholder="URL">
+    </div>
+    <div class="col">
+      <input class="form-control" type="text" v-model="urlTitle" placeholder="URL Title">
+    </div>
+    <div class="col">
+      <button v-on:click="copyUrl()" class="btn btn-primary btn-sm">Copy</button>
+    </div>
+    <div class="col">
+      <button v-on:click="clearUrl()" class="btn btn-warning btn-sm">Clear</button>
+    </div>
+  </div>
 
+  <div class="row m-3">
+    <div class="col">
+      <textarea rows="5" class="form-control" v-model="quotes"></textarea>
+    </div>
+  </div>
+
+  <div class="row m-3">
+    <button v-on:click="clearAll()" class="btn btn-warning btn-sm m-3 w-100">Clear All</button>
+  </div>
+
+  <div class="row m-3">
+    <div class="col">
+      <textarea rows="5" class="form-control" readonly>{{message}}</textarea>
+    </div>
+    <button v-on:click="copyMessage()" class="btn btn-primary btn-sm m-3 w-100">Copy</button>
+  </div>
+
+</div>
+
+<div class="mx-3 p-3">
+  <h2>Emojis</h2>
+
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">🧵</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">🎥</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📝</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">🎙️</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📱</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">💻</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">⌨️</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">🖱️</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📷</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📑</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📦</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📝</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📅</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📈</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">🔧</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">🐦</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">🌐</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">🎮</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">💬</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">💭</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📢</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">❓</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📄</button>
+  <button onclick="copyInnerContent(event)" class="btn btn-lg btn-light mr-2">📙</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="module" src="helpers.js"></script>
 </body>
 </html>

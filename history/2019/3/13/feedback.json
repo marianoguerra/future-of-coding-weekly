@@ -1,0 +1,737 @@
+[
+    {
+        "client_msg_id": "c497a8d3-a9e7-497a-b88e-f942de24d624",
+        "type": "message",
+        "text": "The Loyc structure works okay, but where it will break down in terms of offering language translateability is that the real problem with language conversion is not the operators; those are typically fairly straightforward to parse:  a + b means the + operator with two operands.The killer problem is all the symbol table gyrations that come up, with all the subtle context switches. For example, you have a static global named x, a field in a record named x, a local variable named x, and the compiler is tracking a very complex web of inheritance chains to figure out which x you mean at any one time. Your conversion program would need to disambiguate the names. In my current work more than 50% of the total effort of the compiler is tracking all the symbol information. In inferred type languages, where the programmer doesn't have to specify explicitly the type, but it is inferred through various means, it gets extremely difficult to nail down the type, but one must of course do this to remap the code. So although the goal of your project is laudable, i believe it will become impossible, else you would be implementing a compiler for each language, just to map it to another. If two languages are similar enough the mapping can go one way pretty easily but to go bidirectionally between a wide variety of languages would be a massive and quite difficult task.",
+        "user": "UEQ6M68H0",
+        "ts": "1552463295.059100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1552777722.000000"
+        },
+        "thread_ts": "1552463295.059100",
+        "reply_count": 4,
+        "reply_users_count": 2,
+        "latest_reply": "1553575290.146600",
+        "reply_users": [
+            "UD6EXQVM0",
+            "UEQ6M68H0"
+        ],
+        "replies": [
+            {
+                "user": "UD6EXQVM0",
+                "ts": "1552519902.087400"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1553574763.146100"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1553574964.146400"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1553575290.146600"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "cad715a0-a179-45c3-9311-36446d2d4c55",
+        "type": "message",
+        "text": "Don't get me wrong; if you can find two languages whose naming systems are similar enough it should work okay. But if you try to map a language with deeply nested naming systems into one that has far fewer levels, it gets very thorny.",
+        "user": "UEQ6M68H0",
+        "ts": "1552463483.060200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "8875295b-a06b-4dcc-99f9-aa0726a244e1",
+        "type": "message",
+        "text": "If some language has a built-in function called flurb(), you can always just create a runtime function that does that function on the other language. But structural issues, name scoping, and tricky closures and nesting of symbols can be hard to remap between languages. As a long time user of Modula-2 i could convert M2 to many other languages very easily because it is actually very simple. Always easier to map from a simple language into a more complex one (like Swift for example), but a nightmare to go from a complex one like Swift into say Pascal or Python.",
+        "user": "UEQ6M68H0",
+        "ts": "1552463654.063100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "a086b01e-6199-4544-9770-878e29c3ddc1",
+        "type": "message",
+        "text": "Swift has some really crazy complex super subtle syntax features that i can't even imagine why they bothered because they take more effort to learn than they must save. All part of the committee approach that Swift has adopted, which is the PL\/1 or ADA of our time. A gigantic language that just couldn't say \"no\" to any feature anyone could think of. PL\/1 was great, and so is Swift, but it isn't easy for other people to make a Swift compiler, so it is more or less locked-in to Apple.",
+        "user": "UEQ6M68H0",
+        "ts": "1552463735.064500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1552777788.000000"
+        },
+        "thread_ts": "1552463735.064500",
+        "reply_count": 18,
+        "reply_users_count": 5,
+        "latest_reply": "1552559940.091900",
+        "reply_users": [
+            "UFW3LB2KA",
+            "U5STGTB3J",
+            "UEQ6M68H0",
+            "UAVCC2X70",
+            "UA14TGLTC"
+        ],
+        "replies": [
+            {
+                "user": "UFW3LB2KA",
+                "ts": "1552478992.065500"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1552515471.068100"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1552517018.070200"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1552518093.077900"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1552518198.078700"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1552518825.086800"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1552519293.087100"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1552529001.087800"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1552529276.088000"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1552529360.088200"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1552529707.088600"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1552530012.088800"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1552530319.089300"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1552533642.090700"
+            },
+            {
+                "user": "UFW3LB2KA",
+                "ts": "1552559435.091300"
+            },
+            {
+                "user": "UFW3LB2KA",
+                "ts": "1552559589.091500"
+            },
+            {
+                "user": "UFW3LB2KA",
+                "ts": "1552559804.091700"
+            },
+            {
+                "user": "UFW3LB2KA",
+                "ts": "1552559940.091900"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "2e827c40-3cd4-4141-9c33-b5cd9ac02e5c",
+        "type": "message",
+        "text": "I personally find Swift very minimalistic, elegant, practical and powerful compared to a lot of other languages, e.g. Rust and C++. I enjoy using Swift, especially after having some substantial experience with Python, JavaScript, TypeScript and Objective-C. Managing any complexity in Python and JavaScript (and Objective-C especially due to its verbosity) is a nightmare, while in Swift it's easy peasy due to advanced type system and nice syntax. This is also what I hear from a lot of other people and see in practice while working on large projects. So I think the bottom line is that our opinions about its complexity are subjective and we won't be able to make any definitive statements until we gather any quantitative data about this.",
+        "user": "UFW3LB2KA",
+        "ts": "1552478992.065500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2bcec88b965",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42bcec88b9653a5c34e35a2be102e115.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Max",
+            "real_name": "Max Desiatov",
+            "display_name": "maxd",
+            "team": "T5TCAFTA9",
+            "name": "max",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFW3LB2KA",
+            "ts": "1552479192.000000"
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "344C6FE6-CBF0-440A-A65F-96A584630083",
+        "type": "message",
+        "text": "<@UEQ6M68H0> Can you elaborate on what you consider “really crazy complex super subtle syntax features” in Swift? Would love to better understand that with a few examples.",
+        "user": "U5STGTB3J",
+        "ts": "1552515471.068100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "E5483856-D981-4ACE-A245-BE4794E5007D",
+        "type": "message",
+        "text": "I’d love to join that tour, if it's not too late. Maybe there's even a possibility to record it, so we can all join asynchronously?",
+        "user": "U5STGTB3J",
+        "ts": "1552515633.069700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1551808612.031300",
+        "parent_user_id": "UE1JQM9HQ"
+    },
+    {
+        "client_msg_id": "f738f8f4-12ed-4314-b7be-2ac0d59bc0f4",
+        "type": "message",
+        "text": "Not too late at all. Would you have time tomorrow? <@U5STGTB3J>",
+        "user": "UE1JQM9HQ",
+        "ts": "1552516190.069900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE1JQM9HQ",
+            "ts": "1552516275.000000"
+        },
+        "thread_ts": "1551808612.031300",
+        "parent_user_id": "UE1JQM9HQ"
+    },
+    {
+        "client_msg_id": "ad508da2-312d-4401-ad4b-a35e39a024ae",
+        "type": "message",
+        "text": "Don't get me wrong. Swift is overwhelmingly preferred by the Apple dev community, because the standard for Objective C was \"whatever the compiler does\", hardly a sensible situation. To my knowledge, the original designer of Swift has left Apple, so they have lost their benevolent dictator for life whose typical job it is to hold back the tide of unnecessary feature elaboration. As a consequence you have things like adding iterability to enumerated types, with the kicker that now there is some subtle pragma statement you have to add.  Take this example from a swift 4.2 feature explanation from <https:\/\/www.hackingwithswift.com\/articles\/77\/whats-new-in-swift-4-2>\n\nenum Direction: CaseIterable {\n    static var allCases: [Direction] {\n        return [.north, .south, .east, .west]\n    }\n\n    case north, south, east, west\n\n    @available(*, unavailable)\n    case all\n}\n\nSomeone reading that code above, has to now understand the @available keyword, and the deep meaning of @available(*, unavailable). That is clear as mud. And this took me all of 10 seconds to find on the internet, just by looking at \"new swift features\" you can see the complexification that inevitably occurs once a committee can start adding their so-called contributions. If a committee had taken over Michelangelo's statue of David, he would have a hat, a cane, and all sorts of accessories added by now. There is a great virtue to simplicity, and whether you study the latest ADA, Java, or C++, etc., you see significant additions to the original core language, and the net result is a massive cognitive burden on the learner.",
+        "user": "UEQ6M68H0",
+        "ts": "1552517018.070200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1552517647.000000"
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "3D1B9183-C044-4836-825A-58783CB952EE",
+        "type": "message",
+        "text": "Depends on when exactly, but generally tomorrow (Thursday) works. I’m in the London time zone.",
+        "user": "U5STGTB3J",
+        "ts": "1552517195.071300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1551808612.031300",
+        "parent_user_id": "UE1JQM9HQ"
+    },
+    {
+        "client_msg_id": "7f3bd313-4c60-4134-9217-e9cb695ee84c",
+        "type": "message",
+        "text": "You can indeed measure complexity. You can look at the total number of pages of documentation you have to read to cover the features of the language. you can examine how many tokens the EBNF grammar has. How many API's you have to call to implement a reference program. It is extremely critical when comparing languages to give the same exact clear specifications for each of the reference programs, so the comparison is valid. That was one of the first things i did was make a small sequence of graphical interactive programs, a clock, a wristwatch, snake, tictactoe, minesweeper, chess, and then give that same task to some of the various competing next-gen language efforts. When you start doing a fair amount of drawing, if you are basing your language on HTML\/CSS for drawing you hit a wall quickly, because my specifications call for responding to the size, orientation, and DPI of the device you are on. This is why people are so wedded to frameworks in the JS world, because raw DOM manipulation is pretty tricky. To a great extent, the HTML\/CSS world is just a botched implementation of Display Postscript, which was one of Steve Job's favorite things, but overruled by his technical staff as unworkable.",
+        "user": "UEQ6M68H0",
+        "ts": "1552518093.077900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "81b01385-3197-4202-9916-32226540195e",
+        "type": "message",
+        "text": "And i assert is the API load that is the major problem today. You can learn a language pretty easily, it is the investment in the API's that dominates now, because many OS's have thousands of API's to learn, and you not only have to learn what each one does, but the exact sequence they must be used in, which is where some of the hardest bugs there are arise; improper sequencing of computation is i believe 50% of all debugging.",
+        "user": "UEQ6M68H0",
+        "ts": "1552518198.078700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UGJ9KAZM3"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "78b76efb-694f-450c-9966-ba75610babb5",
+        "type": "message",
+        "text": "I was very impressed with Swift 1. I read the manual the day it came out, all 600 pages, and i think Apple did the best they could given the constraint that they couldn't change any of the underlying operating system, with the thousands of API's and object-oriented model they selected back in the day when Next computer and the NextStep OS started that generation of product. But i don't consider Swift simple, and that is what i am after. A new language that drastically simplifies programming.",
+        "user": "UEQ6M68H0",
+        "ts": "1552518825.086800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "7b5e5f4c-7357-42c0-9f0e-61b7b00d3213",
+        "type": "message",
+        "text": "You have to understand my history to grasp why it is i hate all these modern things. I was influenced by Prof. Niklaus Wirth of ETH, and used first the Pascal language, then Modula-2 for 20 years. The core of the Modula-2 language can be covered in around 100 pages. The language is clean as a whistle, and programs written it are 1\/2 the length of C, due to achieving a higher degree of code sharing. I used it for 20 years and made macintosh\/windows desktop software products. Yes, it was work to write my own graphical layer, because the language has no drawing primitives. But the many run-time checks it offered compared to C made it a safer language to program in.  The windows compiler i used is now released as freeware, formerly known as the stony brook compiler, it is miraculously fast, with the ability to compile and link programs super fast. I think my 100k line code base for Discus was just a few seconds.\n\n<https:\/\/www.modula2.org\/adwm2\/>\n\nProf. Wirth later made his own computer (the Lilith machine), and his own OS, which i don't think many other small teams ever accomplished. He spent some time at Xerox Palo Alto Research center, and was inspired. When you dig deep enough Xerox invented most of the modern computer technologies, but was poorly run and the management never capitalized on any of its many breakthroughs.",
+        "user": "UEQ6M68H0",
+        "ts": "1552519293.087100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "ADW Software Modula-2",
+                "title_link": "https:\/\/www.modula2.org\/adwm2\/",
+                "text": "ADW Software Modula-2",
+                "fallback": "ADW Software Modula-2",
+                "from_url": "https:\/\/www.modula2.org\/adwm2\/",
+                "service_icon": "https:\/\/www.modula2.org\/favicon.ico",
+                "service_name": "modula2.org",
+                "id": 1,
+                "original_url": "https:\/\/www.modula2.org\/adwm2\/"
+            }
+        ],
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "f3deeadd-3404-45f0-ae08-4f2c948b1a50",
+        "type": "message",
+        "text": "I was asking about LES\/LTs specifically, but you're welcome to discuss broader goals. May I ask what your current work is about?",
+        "user": "UD6EXQVM0",
+        "ts": "1552519902.087400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463295.059100",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "6ea723e5-33ee-440a-abaa-a2e324c55f58",
+        "type": "message",
+        "text": "It seems that this topic has too many facets to agree on. In many respects, complexity is objective (e.g. go watch Rich Hickey's \"Simple Made Easy\"). But there's a big difference between complexity of a language and complexity of code, complexity of frameworks, etc. There's also complexity of all features vs a practical subset.\n\nJavaScript is a perfect example of this: On the one hand it has a lot of bad parts; on the other, the so called \"good parts\" form a subset that's one of the purest, simplest, and most powerful and practical languages ever; but on the other other hand, it's also been the target of some of the most bloated and over-tooled software practices ever.",
+        "user": "UAVCC2X70",
+        "ts": "1552529001.087800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "dcc1a381-20b3-4c5d-9eac-6ddc2b298255",
+        "type": "message",
+        "text": "<@UAVCC2X70> One lovely thing about Lua is that it's basically \"Dynamic Language: the Good Parts Edition\" – or if that's too bold, we could say it was designed by committee but by taking the intersection of the committee's opinions.",
+        "user": "UA14TGLTC",
+        "ts": "1552529276.088000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UAVCC2X70"
+                ],
+                "count": 1
+            },
+            {
+                "name": "sunglasses",
+                "users": [
+                    "UAVCC2X70"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0f1bda92-a275-4873-ae50-cb5ce39da420",
+        "type": "message",
+        "text": "Back to the original question, I think it's really a social \/ personal matter.\n\nFor example, I don't see potential for finding one common representation that would be used everywhere; there's just too many people and opinions and options that are not going to coalesce. But if you (or a growing community) wanted to use it for a set of tools that you'd expand to support multiple (and perhaps any) language, then sure I think it can work just fine.\n\nThe idea of being able to create tools or features or whatever that is implemented in terms of a generic representation that can target any language ... that's pretty cool!",
+        "user": "UAVCC2X70",
+        "ts": "1552529360.088200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "0e0a2b27-2ca3-457c-9e9b-90e8f84c8497",
+        "type": "message",
+        "text": "... That being said though, I personally would find it simpler to just use a dynamic\/generic data structure, like dictionaries and lists; or a dynamic language where that's the norm to begin with. That's a major part of why I'm using JavaScript for my universal-software-tool project. I find that highly preferable to creating a generalizable representation in a statically typed language -- but that's also my general language preference speaking :)\n\nIf you put the structure choice aside though (e.g. Loyc versus JSON), the idea of finding a general representation of code is definitely something that relates to what I'm doing, and for that matter, I think Loyc had identified the right components (identifiers, values, nested structure, attributes \/ meta, and all operations represented as \"calls\") ... And that's a topic\/space that might actually be worth it's own focus \/ collaboration, because I'm sure it's something that multiple of us are exploring",
+        "user": "UAVCC2X70",
+        "ts": "1552529707.088600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1553107199.000000"
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "d5960d3f-328e-4fd4-8726-2da170f3e8bf",
+        "type": "message",
+        "text": "Anyway, If the goal is a common representation that can match the syntax of any language (from a source code standpoint), then Loyc makes a lot of sense.\n\nBut (perhaps depending on what I've intends to do with it) I also think a better approach would be to identify since general semantics for a program and pick a representation for that, and then (if desired) be able to generate serve code in other languages for that. Some things like variables, functions, and expressions are universal; but other things like classes, attributes, namespaces, access-modifiers (e.g. public \/ private) are not, and I'd personally argue that (from a language agnostic view) those things don't add much value, especially since most of what they \"do\" can be achieved through other techniques (e.g. with closures). And then it's a matter of how do you generate the equivalent in any given language.\n\n... That's perhaps getting into \"different goals\" territory (and perhaps specific to what my reasons would be for cross-language code), but I suspect the main differences are whether you want to generate a common parse from multiple languages, or compile one representation *to* multiple languages; and whether you want the output to be ideal for each language, or just for the common representation to be ideal just so long as compiling to other languages \"works\".",
+        "user": "UAVCC2X70",
+        "ts": "1552530012.088800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1552532999.000000"
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "806fec21-9232-4b0a-889c-721620877dd5",
+        "type": "message",
+        "text": "Ironically, I was just listening to Barry Jay talk about the Pattern Calculus <https:\/\/youtu.be\/4i4SNvlWnmM?t=800>, which is a somewhat pleasing general semantics.",
+        "user": "UA14TGLTC",
+        "ts": "1552530319.089300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "YOW! Lambda Jam 2017 Barry Jay - Beyond Lambda-Calculus: Intensional Computation #YOWLambdaJam",
+                "title_link": "https:\/\/youtu.be\/4i4SNvlWnmM?t=800",
+                "author_name": "YOW! Conferences",
+                "author_link": "https:\/\/www.youtube.com\/user\/YOWAustralia",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/4i4SNvlWnmM\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: YOW! Lambda Jam 2017 Barry Jay - Beyond Lambda-Calculus: Intensional Computation #YOWLambdaJam",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/4i4SNvlWnmM?start=800&feature=oembed&start=800&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/4i4SNvlWnmM?t=800",
+                "service_icon": "https:\/\/a.slack-edge.com\/2089\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/4i4SNvlWnmM?t=800"
+            }
+        ],
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "0f219572-f99b-449b-984f-d7d454967637",
+        "type": "message",
+        "text": "What I'm wondering after seeing the demo is (1) is it useful for anything other than creating animations? (or might there be tweaks you could make to expand its usefulness to other domains? I can't guess, my brain is on autopilot atm) (2) why is it black and white?",
+        "user": "UD6EXQVM0",
+        "ts": "1552531640.089600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1552531780.000000"
+        },
+        "thread_ts": "1551880052.032500",
+        "parent_user_id": "UF6RLAL7J"
+    },
+    {
+        "client_msg_id": "e455d698-95d3-476c-b3dd-7499305a62cd",
+        "type": "message",
+        "text": "I'll take a look!\n\nAlso, anyone interested in universal language \/ semantics \/ syntax should really take a look at Ian Piumarta's \"Open Reuseable Object Models\" -- It's amazing, and makes the typical \"meta object protocol\" look weak. It used to be a document on <http:\/\/VPRI.org|VPRI.org> (if it's not anymore)",
+        "user": "UAVCC2X70",
+        "ts": "1552533642.090700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1552463735.064500",
+        "parent_user_id": "UEQ6M68H0"
+    }
+]

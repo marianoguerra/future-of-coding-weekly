@@ -1,0 +1,870 @@
+[
+    {
+        "client_msg_id": "418c6a95-a80a-4053-8b64-4471d9d7f269",
+        "type": "message",
+        "text": "<@UCUSW7WVD> Yes, gensym for infix operators was what I was thinking of. But there is more:\n`(let ((fn (make-symbol \"foo-bar\")))`\n `(eval `(progn (defun ,fn () nil)`\n               `(,fn)))`\nThis must raise an error at some point - but where? Do you disallow making mixed symbols? Using them as function names? Calling the misnamed function?\n\nMy point is that in a language with Lisp-style meta-programming, any constraint on syntax percolates down to lower layers, with hard to foresee consequences. And that's why s-expressions are so hard to replace, in my opinion.",
+        "user": "UJBAJNFLK",
+        "ts": "1590823456.277400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJBAJNFLK",
+            "ts": "1590823705.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yPef3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Yes, gensym for infix operators was what I was thinking of. But there is more:\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "(let ((fn (make-symbol \"foo-bar\")))",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (eval `(progn (defun ,fn () nil)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "               (,fn)))",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nThis must raise an error at some point - but where? Do you disallow making mixed symbols? Using them as function names? Calling the misnamed function?\n\nMy point is that in a language with Lisp-style meta-programming, any constraint on syntax percolates down to lower layers, with hard to foresee consequences. And that's why s-expressions are so hard to replace, in my opinion."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "a92a1f60-174c-4cea-ae2a-1db7ca5fda62",
+        "type": "message",
+        "text": "<@UJN1TAYEQ> You can certainly define `[ ... ]`  as an alternative for `'( ... )`  and use it in printing. That leaves symbols requiring an explicit quote. But with the new list syntax, you have also broken homoiconicity a bit. Suppose you construct a list which you then turn into code by feeding it to `eval` : your list constructor now has a different aspect than code written by hand.",
+        "user": "UJBAJNFLK",
+        "ts": "1590823867.277800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "M\/H4I",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJN1TAYEQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " You can certainly define "
+                            },
+                            {
+                                "type": "text",
+                                "text": "[ ... ]",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "  as an alternative for "
+                            },
+                            {
+                                "type": "text",
+                                "text": "'( ... )",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "  and use it in printing. That leaves symbols requiring an explicit quote. But with the new list syntax, you have also broken homoiconicity a bit. Suppose you construct a list which you then turn into code by feeding it to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "eval",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " : your list constructor now has a different aspect than code written by hand."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "944f33b9-37a1-4100-ace7-cabb6402b2b2",
+        "type": "message",
+        "text": "There's no error there. It's just more inconvenient to call. If you create the symbol using `make-symbol` (or `sym` in Wart), you have to also refer to it the same way.\n```(eval `(def (foo a b) (let ,(sym \"a-b\") 34 ,(sym \"a-b\"))))\n(foo 8 9)\n=&gt; 34  # args are ignored```\nDoes this seem like a big problem? I've learned to expect that metaprogramming is a sharp tool that can get one in trouble.",
+        "user": "UCUSW7WVD",
+        "ts": "1590824797.278100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "k=4s",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There's no error there. It's just more inconvenient to call. If you create the symbol using "
+                            },
+                            {
+                                "type": "text",
+                                "text": "make-symbol",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (or "
+                            },
+                            {
+                                "type": "text",
+                                "text": "sym",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in Wart), you have to also refer to it the same way.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(eval `(def (foo a b) (let ,(sym \"a-b\") 34 ,(sym \"a-b\"))))\n(foo 8 9)\n=> 34  # args are ignored"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nDoes this seem like a big problem? I've learned to expect that metaprogramming is a sharp tool that can get one in trouble."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "2ae94285-a97a-453d-bca8-ae84d4cf3e35",
+        "type": "message",
+        "text": "Can confirm.",
+        "user": "UA14TGLTC",
+        "ts": "1590838636.278400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8Z61",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Can confirm."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590774956.270400",
+        "parent_user_id": "U71PMQ1V0"
+    },
+    {
+        "client_msg_id": "50d24f0b-4ab6-4767-9e19-0f8ce2d7b24e",
+        "type": "message",
+        "text": "The rationale for Sweet-Expressions begins with \"Many software developers find Lisp s-expression notation inconvenient and unpleasant to read.\" And continues with \"Mainstream adoption will, however, always be curtailed by the syntax.\". I think that Sweet-Expressions fails at the goal of finding a syntax that makes Lisp acceptable to the mainstream, and I think this failure is due in part to not having a full understanding of what the problems are with Lisp syntax (from a mainstream perspective). The proposal's author boils down the issues to (1) a lack of infix notation, and (2) too many parentheses, which can be fixed by indentation as syntax. This is not the complete set: the Philip Wadler paper I cited earlier discusses additional issues.",
+        "user": "UJN1TAYEQ",
+        "ts": "1590850519.278700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "AI8Ku",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The rationale for Sweet-Expressions begins with \"Many software developers find Lisp s-expression notation inconvenient and unpleasant to read.\" And continues with \"Mainstream adoption will, however, always be curtailed by the syntax.\". I think that Sweet-Expressions fails at the goal of finding a syntax that makes Lisp acceptable to the mainstream, and I think this failure is due in part to not having a full understanding of what the problems are with Lisp syntax (from a mainstream perspective). The proposal's author boils down the issues to (1) a lack of infix notation, and (2) too many parentheses, which can be fixed by indentation as syntax. This is not the complete set: the Philip Wadler paper I cited earlier discusses additional issues."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "9e9c229c-2419-4038-9aa3-8dd706662ce7",
+        "type": "message",
+        "text": "One of the problems with Lisp syntax is in the way values are printed. Mainstream languages print values as constructor expressions. Lisp prints values as the code that would be executed by the evaluator, if the value was passed to `eval`. When I suggested how to fix Lisp, <@UJBAJNFLK> replied that \"you have broken homoiconicity a bit\". So this is a tradeoff in syntax design. Lisp syntax is designed to make metaprogramming easier, *at the expense of* making ordinary, non-metaprogramming more difficult.",
+        "user": "UJN1TAYEQ",
+        "ts": "1590850920.278900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "UQEr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One of the problems with Lisp syntax is in the way values are printed. Mainstream languages print values as constructor expressions. Lisp prints values as the code that would be executed by the evaluator, if the value was passed to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "eval",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". When I suggested how to fix Lisp, "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UJBAJNFLK"
+                            },
+                            {
+                                "type": "text",
+                                "text": " replied that \"you have broken homoiconicity a bit\". So this is a tradeoff in syntax design. Lisp syntax is designed to make metaprogramming easier, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "at the expense of",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " making ordinary, non-metaprogramming more difficult."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "C8D8C36A-5853-4FD3-9A95-3D8AA2D0DAC3",
+        "type": "message",
+        "text": "the sound design is SO GOOD in that example. amazing how holistic the tooling is ",
+        "user": "UHWC9PXBL",
+        "ts": "1590852790.280000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "AKR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the sound design is SO GOOD in that example. amazing how holistic the tooling is "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590817980.277200",
+        "parent_user_id": "UES04SML7"
+    },
+    {
+        "client_msg_id": "d5e90876-7066-4a56-844b-4e0663c2143b",
+        "type": "message",
+        "text": "<@UCUSW7WVD> So how do you print those symbols then? As (sym \"a-b\") as well?",
+        "user": "UJBAJNFLK",
+        "ts": "1590864211.280200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PKTo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " So how do you print those symbols then? As (sym \"a-b\") as well?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "ce3786eb-d837-4fef-8ec3-f8ea9a2e7970",
+        "type": "message",
+        "text": "No, they print as `a-b`. Construction happens after the read phase. Infix expansion happens during the read phase.",
+        "user": "UCUSW7WVD",
+        "ts": "1590864265.280400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BBa",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "No, they print as "
+                            },
+                            {
+                                "type": "text",
+                                "text": "a-b",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Construction happens after the read phase. Infix expansion happens during the read phase."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "8619112b-89d0-49e6-a109-c68e41b19dc1",
+        "type": "message",
+        "text": "<@UJN1TAYEQ> That sounds like a good summary of the trade-off. I doubt it was a conscious decision for Lisp, more like a tacit priority.",
+        "user": "UJBAJNFLK",
+        "ts": "1590864268.280600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kLFr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJN1TAYEQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " That sounds like a good summary of the trade-off. I doubt it was a conscious decision for Lisp, more like a tacit priority."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "c8b80b01-5db9-4f5c-ab8d-970f2ac2aaef",
+        "type": "message",
+        "text": "<@UCUSW7WVD> OK, so you accept to print notation that cannot be read. Fair enough.",
+        "user": "UJBAJNFLK",
+        "ts": "1590864322.280800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sW4YY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " OK, so you accept to print notation that cannot be read. Fair enough."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN",
+        "reactions": [
+            {
+                "name": "slightly_smiling_face",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7ce4be43-55a5-4836-ae65-1e85093c32f5",
+        "type": "message",
+        "text": "I see. Cross-talk between Doug's goals and mine. Thank you!",
+        "user": "UCUSW7WVD",
+        "ts": "1590864434.281100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ruey",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I see. Cross-talk between Doug's goals and mine. Thank you!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "fb68fff8-2a80-4baa-a282-ebeb5d7691b9",
+        "type": "message",
+        "text": "On the topic of arithmetic and infix operators: I spent a lot of time researching this for my Leibniz project, which is all about mathematics, with lots of operators. Any identifier can be used as an infix operators. Initially, I followed APL and Smalltalk in adopting a no-precedence left-to-right evaluation (APL is right-to-left). But then Shriram Krishnamurthi pointed me to the approach he had taken in his Pycket language (designed for teaching), which I adopted immediately and so far without regrets.\nThe rule is simple: an expression with more than one infix operator requires parentheses for disambiguation. So, no precedence, nor left-to-right. The one exception is a chain of identical infix operators. So you can write `2 + 3 + 4 + 4` , which is parsed left-to-right. The net outcome is that you can read expressions as if they used traditional maths rules, but you don't need to remember precedence rules. And due to the same-operator exception, the number of parentheses remains very reasonable.",
+        "user": "UJBAJNFLK",
+        "ts": "1590864965.281300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "DpWHa",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "On the topic of arithmetic and infix operators: I spent a lot of time researching this for my Leibniz project, which is all about mathematics, with lots of operators. Any identifier can be used as an infix operators. Initially, I followed APL and Smalltalk in adopting a no-precedence left-to-right evaluation (APL is right-to-left). But then Shriram Krishnamurthi pointed me to the approach he had taken in his Pycket language (designed for teaching), which I adopted immediately and so far without regrets.\nThe rule is simple: an expression with more than one infix operator requires parentheses for disambiguation. So, no precedence, nor left-to-right. The one exception is a chain of identical infix operators. So you can write "
+                            },
+                            {
+                                "type": "text",
+                                "text": "2 + 3 + 4 + 4",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " , which is parsed left-to-right. The net outcome is that you can read expressions as if they used traditional maths rules, but you don't need to remember precedence rules. And due to the same-operator exception, the number of parentheses remains very reasonable."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c1896266-483e-47c3-b56a-854b00f559a7",
+        "type": "message",
+        "text": "That is indeed clean and easy to explain.",
+        "user": "UCUSW7WVD",
+        "ts": "1590865332.281600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "KJ+Ck",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That is indeed clean and easy to explain."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "fca87066-bd39-43f6-a66d-230949598f17",
+        "type": "message",
+        "text": "Thanks Konrad. I'm looking at Leibnitz right now (<http:\/\/khinsen.net\/leibniz\/>). A small correction: Leibnitz borrows its infix precedence rules from *Pyret* (<http:\/\/pyret.org|pyret.org>), not Pycket.",
+        "user": "UJN1TAYEQ",
+        "ts": "1590868774.281800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rdF6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks Konrad. I'm looking at Leibnitz right now ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/khinsen.net\/leibniz\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "). A small correction: Leibnitz borrows its infix precedence rules from "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Pyret",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/pyret.org",
+                                "text": "pyret.org"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), not Pycket."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590712683.260000",
+        "parent_user_id": "UT60XSVCN"
+    },
+    {
+        "client_msg_id": "084e4779-be86-483c-9b9e-bdc2adcbd71f",
+        "type": "message",
+        "text": "dreams is an incredible achievement, and many users are able to handle its complexity. By no means is it an easy task, even with the Dreams engine, to make a product, but many people have done so, with outstanding results. It is a momentous achievement to have a tool of this depth and breadth.",
+        "user": "UEQ6M68H0",
+        "ts": "1590892832.282500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "KGd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "dreams is an incredible achievement, and many users are able to handle its complexity. By no means is it an easy task, even with the Dreams engine, to make a product, but many people have done so, with outstanding results. It is a momentous achievement to have a tool of this depth and breadth."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1590817980.277200",
+        "parent_user_id": "UES04SML7"
+    }
+]

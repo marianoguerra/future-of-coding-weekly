@@ -1,0 +1,755 @@
+[
+    {
+        "client_msg_id": "939f6a21-5635-47bf-9c8a-4d90d1881635",
+        "type": "message",
+        "text": "Here is a nice satirical article about using text as an interface for a drawing tool: <https:\/\/programmingmadecomplicated.wordpress.com\/2017\/10\/29\/introducing-drw-a-useful-tool-to-solve-a-practical-problem\/>\n\nI think the point is that it's just as ridiculous that programming works that way, at least when the thing being programmed is something visual or structural.",
+        "user": "UAVCC2X70",
+        "ts": "1550072901.017300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Programming, Made Complicated",
+                "service_url": "http:\/\/programmingmadecomplicated.wordpress.com",
+                "title": "Introducing drw: a “useful tool” to solve a “practical problem”.",
+                "title_link": "https:\/\/programmingmadecomplicated.wordpress.com\/2017\/10\/29\/introducing-drw-a-useful-tool-to-solve-a-practical-problem\/",
+                "author_name": "Joel",
+                "author_link": "https:\/\/programmingmadecomplicated.wordpress.com\/author\/programmingmadecomplicated\/",
+                "thumb_url": "https:\/\/programmingmadecomplicated.files.wordpress.com\/2017\/10\/drw_smiley_2.png?fit=200%2C150",
+                "thumb_width": 200,
+                "thumb_height": 150,
+                "text": "(I have gripes that I need to get out of my system. I think that documenting my approach to a coding task could demonstrate some points I want to make, and help me give some ideas solid grounding.)\nMotivation\nExisting solutions for drawing graphics suffer from numerous technical, performance and usability flaws. (probably&mdash;I didn&rsquo;t bother to check.) But I want to be able to draw things using a computer. I have an itch, so to speak, and I&rsquo;m going to make a tool to scratch it.\nSo, I have decided to write a &ldquo;useful tool&rdquo; for building basic raster graphics. Like any &ldquo;useful tool&rdquo; worth its salt, it shall be designed for the environment of the 1970&rsquo;s teletype. Might I just remark, that we&nbsp;are so lucky that the pinnacle of human-computer interaction was reached so early on in computing. No other technological invention can boast of such rapid mastery!&nbsp;For the decades since, we&rsquo;ve been able to avoid wasting time on solved problems like &ldquo;how to use the new-fangled computing devices&rdquo;, letting us focus instead on what really matters&mdash;like writing &ldquo;useful tools&rdquo; to solve the&nbsp;real-world problems that we face&nbsp;right now.\nIt Must Have A Name\nBecause the tech of 1970, despite all its glory, made it undesirable to type very much, its name must be short and sweet. I&rsquo;ll call it: draw.\nWait, hmm, that looks odd. Verbose, perhaps. I don&rsquo;t want to be typing four characters every time I want to paint a pretty picture! Ah, I know, I have to use some inexplicable abbreviation&mdash;how about: drw. Yeah, that&rsquo;ll do it.\nOperation\nI&rsquo;m going to begin by considering how my life would be different after creating the drw&nbsp;utility. What do I want to happen? First of all, I am faced with a blank line of paper. (well, such was the case for my spiritual ancestors back in the &rsquo;70s; sadly we have to make do with simulated paper these days.) I feel like I might type:\n$ drw &gt; smiley.png\nWhat happens then? Interactive mode, I guess. I want to draw a simple smiley face, so probably start with something like&hellip;\n$ drw &gt; smiley.png\n# c 100 100 50\nThe c&nbsp;stands for &ldquo;circle&rdquo; (obviously). The first two numbers are the x- and y- co-ordinates of the centre (obviously), in pixels, from the top left-hand corner (duh). The third parameter is the radius expressed in pixels (what else?). Oh, and the #&nbsp;is the prompt for input. (it just felt like the right character to use.)\nHm, I should probably have that information easily accessible from the application itself. Here&rsquo;s what my printout should look like after requesting help:\n# h c\nc: circle\nUsage: c x y r\n#\nYeah, that should do it. I also realise something else I missed out. How is drw&nbsp;going to do anything without knowing the dimensions of the image? They should have been passed in at the start.\n$ drw -w 640 -h 480 &gt; smiley.png\n# c 100 100 50 % outline of the head\n# c 85 85 8    % left eye\n# c 115 85 8   % right eye\n# bz 85 215 100 230 115 215 % mouth\nOf course, any sensible language needs support for comments. This isn&rsquo;t some hacker system where obscurity is a&nbsp;goal; no, far from it. We must always remember that code is used by&nbsp;humans to communicate their intentions to the&nbsp;computer.\nCan you imagine how user-unfriendly&nbsp;computing would be, if we had to adapt ourselves to fit the machine instead of the other way round? Madness!\nNext, if I want curvy shapes like the mouth, then there ought to be a command for B&eacute;zier curves. The three pairs of co-ordinates are just the three control points for a quadratic curve. There could be an optional extra argument for a cubic or something.\n# h bz\nbz: Bezier curve\nUsage: bz x0 y0 x1 y1 x2 y2 [x3 y3]\n#\nGreat. But one huge thing I forgot about: colours! Ah well, there can easily be defaults. Initially the background is black and the foreground is white, just like my beloved teletype emulator! &#10084;\nThen I should be able to send End-Of-File via Ctrl-D and see my picture in all its artistic brilliance!\n...\n# c 115 85 8   % right eye\n# bz 85 215 100 230 115 215 % mouth\n# ^D\nOutput written to stdout.\n$ pngvwr smiley.png\n\nHa! That&rsquo;s funny. The mouth is all the way down there? Come to think of it, the face only goes from y=50 to y=150 (assuming I did my mental maths correctly&mdash;such clerical work is inappropriate for a scientific instrument), so why the hell did I think 215 and 230 were a good idea? And the scale is way too small. I want to make some adjustments&hellip;\nDamn. I&rsquo;ll have to go back and enter all the commands again! But wait: I could just write them in a file and pipe that to stdin; I get scripting for free!&nbsp;Now that&rsquo;s the power of the command line. Can you imagine how cumbersome this stuff would be in a GUI? Or with pencil and paper? &#128578;\n$ cat smiley.drw\ns 2.5        % scale the coord sys by 2.5\nc 100 100 50 % outline of the head\nc 85 85 8    % left eye\nc 115 85 8   % right eye\nbz 85 115 100 130 115 115 % mouth&nbsp;(fixed!)\nCommands to alter the coordinate system would be useful too. At minimum, scale, rotate, translate. (I was going to use r&nbsp;for rectangle, but I still have capital R!)\n$ drw -w 640 -h 480  smiley.png\nOutput written to stdout.\n$ ls\nsmiley.drw  smiley.png\n$ pngvwr smiley.png\nAnd so, TikZ is born.\nRight, that&rsquo;s enough design for now. The next installments will use the coding of drw&nbsp;as a springboard for concrete demonstrations of some ideas. And of course, more &ldquo;features&rdquo; will be tacked on as they come up. But regardless of how far this goes, some things are guaranteed:\nThere will never be immediate feedback between creator and creation. The &ldquo;spec&rdquo; for the picture is written and compiled, and the result &ldquo;viewed&rdquo;, in separate, batch-mode stages; completely unlike &ldquo;drawing&rdquo; in any sense of the word.\nThe program will be its own little untouchable universe. Functionality can only be added during the &ldquo;fabrication process&rdquo; of the next version. It will be as brittle as pottery.\nWorst of all, fundamentally visual concepts like position, size, shape, colour, angle etc. will remain brutally stuffed into the Language Box. The whole point of such a command-line utility is to use a thousand words to describe a picture. How is this anything other than outrageous?\n&nbsp;\n&nbsp;\n&nbsp;",
+                "fallback": "Programming, Made Complicated Link: Introducing drw: a &#8220;useful tool&#8221; to solve a &#8220;practical problem&#8221;.",
+                "from_url": "https:\/\/programmingmadecomplicated.wordpress.com\/2017\/10\/29\/introducing-drw-a-useful-tool-to-solve-a-practical-problem\/",
+                "service_icon": "https:\/\/s2.wp.com\/i\/webclip.png",
+                "id": 1,
+                "original_url": "https:\/\/programmingmadecomplicated.wordpress.com\/2017\/10\/29\/introducing-drw-a-useful-tool-to-solve-a-practical-problem\/"
+            }
+        ],
+        "thread_ts": "1534675466.000100",
+        "parent_user_id": "U5TCAFTD3",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d8822429-1208-4871-bef6-84a7e069ea51",
+        "type": "message",
+        "text": "BV also makes a great point about this in \"Learnable Programming\" (see the \"Dump the parts bin on the floor\" section): <http:\/\/worrydream.com\/LearnableProgramming>",
+        "user": "UAVCC2X70",
+        "ts": "1550073075.017600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1550073091.000000"
+        },
+        "thread_ts": "1534675466.000100",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "4bfe9dec-b654-49e9-93cf-2867da5f6f96",
+        "type": "message",
+        "text": "Does anyone have any good sources on practical techniques for implementing a type system?",
+        "user": "UAJ9DV971",
+        "ts": "1550078557.019300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "540fc50d2192",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-12\/502004543669_540fc50d2192cc8aba20_72.jpg",
+            "first_name": "Marcel",
+            "real_name": "Marcel Goethals",
+            "display_name": "wolkenmachine",
+            "team": "T5TCAFTA9",
+            "name": "accounts",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1550078557.019300",
+        "reply_count": 4,
+        "reply_users_count": 4,
+        "latest_reply": "1550150629.064600",
+        "reply_users": [
+            "UFW3LB2KA",
+            "UBN9AFS0N",
+            "UC21F8Q48",
+            "UAJ9DV971"
+        ],
+        "replies": [
+            {
+                "user": "UFW3LB2KA",
+                "ts": "1550080116.019400"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1550080659.019600"
+            },
+            {
+                "user": "UC21F8Q48",
+                "ts": "1550085955.032200"
+            },
+            {
+                "user": "UAJ9DV971",
+                "ts": "1550150629.064600"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "c8ab4954-e8ce-4a21-89c9-bf9741670e65",
+        "type": "message",
+        "text": "<https:\/\/gist.github.com\/chrisdone\/0075a16b32bfd4f62b7b>",
+        "user": "UFW3LB2KA",
+        "ts": "1550080116.019400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2bcec88b965",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42bcec88b9653a5c34e35a2be102e115.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "Max",
+            "real_name": "Max Desiatov",
+            "display_name": "maxd",
+            "team": "T5TCAFTA9",
+            "name": "max",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1550078557.019300",
+        "parent_user_id": "UAJ9DV971"
+    },
+    {
+        "client_msg_id": "d42c8389-8a17-4c9b-a177-4c0ee8e79f07",
+        "type": "message",
+        "text": "didn't read it yet but read the previous ones, so it should be as good :slightly_smiling_face: <https:\/\/mitpress.mit.edu\/books\/little-typer>",
+        "user": "UBN9AFS0N",
+        "ts": "1550080659.019600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "The MIT Press",
+                "title": "The Little Typer",
+                "title_link": "https:\/\/mitpress.mit.edu\/books\/little-typer",
+                "text": "An introduction to dependent types, demonstrating the most beautiful aspects, one step at a time. A program's type describes its behavior. Dependent types are a first-class part of a language, and are much more powerful than other kinds of types; using just one language for types and programs allows program descriptions to be as powerful as the programs they describe. The Little Typer explains dependent types, beginning with a very small language that looks very much like Scheme and extending it to cover both programming with dependent types and using dependent types for mathematical reasoning. Readers should be familiar with the basics of a Lisp-like programming language, as presented in the first four chapters of The Little Schemer. The first five chapters of The Little Typer provide the needed tools to understand dependent types; the remaining chapters use these tools to build a bridge between mathematics and programming. Readers will learn that tools they know from programming—pairs, lists, functions, and recursion—can also capture patterns of reasoning. The Little Typer does not attempt to teach either practical programming skills or a fully rigorous approach to types. Instead, it demonstrates the most beautiful aspects as simply as possible, one step at a time.",
+                "fallback": "The MIT Press: The Little Typer",
+                "image_url": "https:\/\/mitpress.mit.edu\/sites\/default\/files\/styles\/large_book_cover\/http\/mitp-content-server.mit.edu%3A18180\/books\/covers\/cover\/%3Fcollid%3Dbooks_covers_0%26isbn%3D9780262536431%26type%3D.jpg?itok=FjfCaUQy",
+                "from_url": "https:\/\/mitpress.mit.edu\/books\/little-typer",
+                "image_width": 194,
+                "image_height": 250,
+                "image_bytes": 135486,
+                "service_icon": "https:\/\/mitpress.mit.edu\/themes\/custom\/mitpress_theme\/favicon.ico",
+                "id": 1,
+                "original_url": "https:\/\/mitpress.mit.edu\/books\/little-typer"
+            }
+        ],
+        "thread_ts": "1550078557.019300",
+        "parent_user_id": "UAJ9DV971"
+    },
+    {
+        "client_msg_id": "6ca7ac8b-7919-4882-a744-407e6b9a93e5",
+        "type": "message",
+        "text": "&gt; It might seem that the “escape” would be to create some tool (or language, etc.) to improve software\/programming, and then remake the tool using the tool itself. However, this standard definition of “bootstrapping” does nothing to break free from the limited context of the tool.\nRight. The power of bootstrapping is the tight feedback cycle and.. intimacy. The cost is not getting to learn from real world priorities and constraints, losing sight of a user who is not you.\nIf you’re trying to change the nature of programming, if you want it to be more democratic, accessible, and cheap, who are your users? Are they still programming professionals? How general purpose can your tool really be? And how can you build it in a way that’s tight with (learns from, is accountable to) the target users?\nThese aren’t the 1980's. You can’t create the ability to put numbers in boxes and have the whole world sing your praises because the alternative is paper. The environment now is far more complex. The real benefits of what we (each) want to build will come only with time and investment by a user community.",
+        "user": "UD3AK9JRF",
+        "ts": "1550083965.026700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "4e7c4673-b6e1-4815-82a2-3c4269d3eb20",
+        "type": "message",
+        "text": "We all have good ideas, and many of them converge or seem *cough* synergistic. The problem for us is predominantly in figuring out  the right environment and strategy for letting them grow. Politics, positioning, and aesthetics matter. Attitude matters—especially humility and patience, without losing the ambition to chase the big ideas. Money matters: who you take it from and when. Resourcing matters: skills in design, CS, user research, marketing, business, etc; and creating an intellectual environment with the right size and balance to learn deeply what most needs learning.",
+        "user": "UD3AK9JRF",
+        "ts": "1550084657.032100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "00a17cfe-5272-47c9-a269-7d3a19a1c690",
+        "type": "message",
+        "text": "What kind of type system? I implemented Hindley-Milner by starring at wikipedia for a really long time (Algorithm J) and TAPL (Types and Programming Languages). The Chris Done post mentioned above looks pretty good but may be too dense if this is your first go or you’re not familiar with Haskell. <https:\/\/en.wikipedia.org\/wiki\/Hindley%E2%80%93Milner_type_system> <https:\/\/www.cis.upenn.edu\/~bcpierce\/tapl\/>",
+        "user": "UC21F8Q48",
+        "ts": "1550085955.032200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "d79ba47b2952",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-03\/410049852848_d79ba47b2952e74a99d9_72.jpg",
+            "first_name": "Brian",
+            "real_name": "Brian Hempel",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "brianhempel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Hindley–Milner type system",
+                "title_link": "https:\/\/en.wikipedia.org\/wiki\/Hindley%E2%80%93Milner_type_system",
+                "from_url": "https:\/\/en.wikipedia.org\/wiki\/Hindley%E2%80%93Milner_type_system",
+                "author_name": "Wikipedia",
+                "author_link": "https:\/\/en.wikipedia.org\/",
+                "text": "A Hindley–Milner (HM) type system is a classical type system for the lambda calculus with parametric polymorphism. It is also known as Damas–Milner or Damas–Hindley–Milner. It was first described by J. Roger Hindley and later rediscovered by Robin Milner. Luis Damas contributed a close formal analysis and proof of the method in his PhD thesis.Among HM's more notable properties are its completeness and its ability to infer the most general type of a given program without programmer-supplied type annotations or other hints. Algorithm W is an efficient type inference method that performs in almost linear time with respect to the size of the source, making it practically useful to type large programs. HM is preferably used for functional languages. It was first implemented as part of the type system of the programming language ML. Since then, HM has been extended in various ways, most notably with type class constraints like those in Haskell.",
+                "fallback": "wikipedia: Hindley–Milner type system",
+                "service_icon": "https:\/\/a.slack-edge.com\/bfaba\/img\/unfurl_icons\/wikipedia.png",
+                "id": 1,
+                "original_url": "https:\/\/en.wikipedia.org\/wiki\/Hindley%E2%80%93Milner_type_system"
+            }
+        ],
+        "thread_ts": "1550078557.019300",
+        "parent_user_id": "UAJ9DV971"
+    },
+    {
+        "client_msg_id": "995b4bfc-d882-4a14-916e-cc69f201e789",
+        "type": "message",
+        "text": "We on this slack are very motivated by the ideas and vision, sometimes singularly so. That’s a liability.",
+        "user": "UD3AK9JRF",
+        "ts": "1550087311.033700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "14765f0b-55ba-4031-80cf-a35c9eed0c72",
+        "type": "message",
+        "text": "Yeah, in general I’ve been feeling a bit frustrated with this group because there’s disproportionate interest in prototypes rather than moving from prototype to “pilot project”. Doing that requires thinking about not just the narrow technical issues but the social and cultural context in which technical decisions are made.\n\nRight now this group doesn’t feel like it’s about the “future of programming”. It feels more about “ideas that _may_ be the future of programming, if somebody else puts in a whole bunch of other work.” (I have similar complaints with academia in general.)\n\nI sense that some people here are working on more mature projects and startups that I’m sure think about these angles. But _the group_ isn’t fostering such collaboration.\n\nI shared these thoughts with <@U5TCAFTD3> last week, and one idea he had was to create a new channel. But I haven’t ~had time to~ come up with a crisp boundary for it yet. Might as well open it up and ask others for ideas.",
+        "user": "UCUSW7WVD",
+        "ts": "1550087972.037900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1550087972.037900",
+        "reply_count": 14,
+        "reply_users_count": 7,
+        "latest_reply": "1550305227.109400",
+        "reply_users": [
+            "UF5PAGQQ4",
+            "UCUSW7WVD",
+            "UE6EFEPTQ",
+            "UC2A2ARPT",
+            "UDLFL2HD4",
+            "UAVCC2X70",
+            "UEQ6M68H0"
+        ],
+        "replies": [
+            {
+                "user": "UF5PAGQQ4",
+                "ts": "1550088505.038000"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1550088541.038200"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1550096994.047200"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1550102899.047400"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1550105799.047800"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1550106018.048300"
+            },
+            {
+                "user": "UDLFL2HD4",
+                "ts": "1550157792.077200"
+            },
+            {
+                "user": "UDLFL2HD4",
+                "ts": "1550158184.077400"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1550216827.088500"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1550216968.090500"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1550217143.092200"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1550245186.101600"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1550261759.102100"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1550305227.109400"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1550305227.109400"
+    },
+    {
+        "client_msg_id": "164a17ea-e605-4626-bf6c-8ced60e1c181",
+        "type": "message",
+        "text": "even looking at some of the links and reading about people’s ideas here is very useful to me and it feels like collaboration to some extent. Also I enjoyed the first 1-to-1 I had last week!",
+        "user": "UF5PAGQQ4",
+        "ts": "1550088505.038000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g99a3fab7a1a",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/299a3fab7a1a2d6644455dedae9fce0a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Stathis Sideris",
+            "display_name": "Stathis",
+            "team": "T5TCAFTA9",
+            "name": "sideris",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1550087972.037900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UD3AK9JRF",
+                    "U85HCL7JP",
+                    "UFW3LB2KA",
+                    "UDRF3ALP4",
+                    "UA14TGLTC",
+                    "U5TCAFTD3",
+                    "UBUFWBGNN"
+                ],
+                "count": 7
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f6459212-5d10-40b9-be16-6ab92043d578",
+        "type": "message",
+        "text": "Yeah, it’s definitely useful!",
+        "user": "UCUSW7WVD",
+        "ts": "1550088541.038200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1550087972.037900",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "72d6b5c6-c125-4c8b-ae3e-01339379b17d",
+        "type": "message",
+        "text": "Well, my collaborator and I have a pilot project, and I’d very much appreciate feedback on strategy, especially from people with real-world experience.",
+        "user": "UD3AK9JRF",
+        "ts": "1550088845.039300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "856f77cc-24b8-45a5-9ed9-12e461349e45",
+        "type": "message",
+        "text": "Or, to commiserate with other people struggling to get things off the ground; to condense all our hopes and dreams into a vision; to find and take the first steps.",
+        "user": "UD3AK9JRF",
+        "ts": "1550088921.040600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "ac529ca5-755b-4962-9070-8b67a4e82a1a",
+        "type": "message",
+        "text": "Hmm, I wonder if pairwise conversations would be more useful if we first collaborate on an “idea maze”. (<http:\/\/cdixon.org\/2013\/08\/04\/the-idea-maze>, but I think it’s helpful to more than just startups.) That way we may choose to talk to people who answer the same way on certain questions, or who have gone the opposite way on some other question that we’re now starting to second-guess ourselves on. And at the very least it may provide a more fertile starting point for conversations.",
+        "user": "UCUSW7WVD",
+        "ts": "1550089871.043200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "cdixon blog",
+                "service_url": "http:\/\/cdixon.org",
+                "title": "The idea maze",
+                "title_link": "http:\/\/cdixon.org\/2013\/08\/04\/the-idea-maze",
+                "author_name": "cdixon",
+                "author_link": "https:\/\/cdixon.org\/author\/cdixon2000\/",
+                "text": "The pop culture view of startups is that they&rsquo;re all about coming up with a great product idea. After the eureka moment, the outcome is preordained. This neglects the years of toil that entrepreneurs endure, and also the fact that the vast majority of startups change over time, often dramatically.\nIn response to this pop culture misconception, it has become popular in the startup community to say things like &ldquo;execution is everything&rdquo; and &ldquo;ideas don&rsquo;t matter&rdquo;.\nBut the reality is that ideas do matter, just not in the narrow sense in which startup ideas are popularly defined. Good startup ideas are well developed, multi-year plans that contemplate many possible paths according to how the world changes. Balaji Srinivasan calls this the idea maze:\n\nA good founder is capable of anticipating which turns lead to treasure and which lead to certain death. A bad founder is just running to the entrance of (say) the &ldquo;movies\/music\/filesharing\/P2P&rdquo; maze or the &ldquo;photosharing&rdquo; maze without any sense for the history of the industry, the players in the maze, the casualties of the past, and the technologies that are likely to move walls and change assumptions.\n\nImagine, for example, that you were thinking of starting Netflix back when it was founded in 1997. How would content providers, distribution channels, and competitors respond? How soon would technology develop to open a hidden door and let you distribute online instead of by mail? Or consider Dropbox in 2007. Dozens of cloud storage companies had been started before. What mistakes had they made? How would incumbents like Amazon and Google respond? How would new platforms like mobile affect you?\nWhen you&rsquo;re starting out, it&rsquo;s impossible to completely map out the idea maze. But there are some places you can look for help:\n1) History. If your idea has been tried before (and almost all good ideas have), you should figure out what the previous attempts did right and wrong. A lot of this knowledge exists only in the brains of practitioners, which is one of many reasons why &ldquo;stealth mode&rdquo; is a bad idea. The benefits of learning about the maze generally far outweigh the risks of having your idea stolen.\n2) Analogy. You can also build the maze by analogy to similar businesses. If you are building a &ldquo;peer economy&rdquo; company it can be useful to look at what Airbnb did right. If you are building a marketplace you should understand eBay&rsquo;s beginnings. Etc.\n3) Theories. There are now decades of historical data on tech startups, and smart observers have sifted through to develop theories that generalize that data. Some of these theories come from academia (e.g. Clay Christensen) but increasingly they come from investors and entrepreneurs on blogs.\n4) Direct experience. A lot of good startup founders figure out the maze through direct experience, often at work. The key here is to put yourself in interesting mazes and give yourself time to figure it out.\nThe metaphor of a maze also helps you think about competition. Competition from other startups is usually just a distraction. In all likelihood, they won&rsquo;t take the same path, and the presence of others in your maze means you might be onto something. Your real competition &ndash; and what you should worry about &ndash; is the years you could waste going down the wrong path.",
+                "fallback": "cdixon blog Link: The idea maze",
+                "from_url": "http:\/\/cdixon.org\/2013\/08\/04\/the-idea-maze",
+                "service_icon": "http:\/\/1.gravatar.com\/blavatar\/9c35ca135481aaf921b451d6b4861545?s=114",
+                "id": 1,
+                "original_url": "http:\/\/cdixon.org\/2013\/08\/04\/the-idea-maze"
+            }
+        ],
+        "reactions": [
+            {
+                "name": "cool",
+                "users": [
+                    "U85HCL7JP",
+                    "UD3AK9JRF"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c779ed28-0505-487d-a193-ed1d51b9927f",
+        "type": "message",
+        "text": "Thanks for that post. Which decisions are most discriminating for us, or would pair us up most productively? Who you take money from? Who you’re trying to serve? Pragmatic incrementalism vs shooting the moon?",
+        "user": "UD3AK9JRF",
+        "ts": "1550090952.045000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1550090952.045000",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1550105989.048100",
+        "reply_users": [
+            "UCUSW7WVD"
+        ],
+        "replies": [
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1550105989.048100"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "d8e90791-2b28-47fe-8653-abd25197bac3",
+        "type": "message",
+        "text": "Which is to say, yes, that’s a fertile starting point for a conversation :slightly_smiling_face:",
+        "user": "UD3AK9JRF",
+        "ts": "1550091020.045300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "c9008c66-ed42-4375-aea3-4155166ff724",
+        "type": "message",
+        "text": "I don't see much discussion of the principles of programming for humans, etc, here, just lots of links to own or other's projects.",
+        "user": "UE6EFEPTQ",
+        "ts": "1550096994.047200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1550087972.037900",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "5ba8570d-111d-401a-a6a8-d5cc9bc0b367",
+        "type": "message",
+        "text": "Not sure what you mean. Can you share some ~links~ examples? :wink:\n\nI’m skeptical that we’re in a position to productively think about universal principles. Programming is in a pre-Kepler state, and you’re looking for post-Newton results. But.. happy to be proven wrong.\n\n(One reason I like the “Future” framing: it doesn’t feel asymptotic like say, “the Right Way” or “Silver Bullet” or “correct” do. I interpret “Future” as open-ended. The goal is just to not paint ourselves into a corner, IMO.)",
+        "user": "UCUSW7WVD",
+        "ts": "1550102899.047400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1550103377.000000"
+        },
+        "thread_ts": "1550087972.037900",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "56bdcb50-e19d-45bb-9bac-392c0f454a4f",
+        "type": "message",
+        "text": "I am 100% in the \"putting in a whole bunch of work\" camp. I have a design that I'm in the many-years-long process of building out. What I like about this community is that I can come here to discuss ideas that will help steer my course slightly one way or another. I'm not here to look for a starting point — I'm here to look for things that'd help me make the most of the thing I'm making. Seeing other peoples' prototypes is really helpful to me, because it's a good way to communicate subtle ideas about the experience of someone's approach to the HCI of a programming.",
+        "user": "UC2A2ARPT",
+        "ts": "1550105799.047800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1550105837.000000"
+        },
+        "thread_ts": "1550087972.037900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "UA14TGLTC",
+                    "UCKRZS3DZ",
+                    "U5TCAFTD3",
+                    "UAVCC2X70"
+                ],
+                "count": 5
+            }
+        ]
+    },
+    {
+        "client_msg_id": "07f411e2-9d75-40b4-b58a-f8285294629a",
+        "type": "message",
+        "text": "Some initial questions, with incomplete possible answers in parentheses:\n\n• What’s the #1 problem to attack? _(open-ended)_\n• Are you trying to use what’s already been built? _(binary compatible, source compatible, muscle memory compatible, conceptually similar, nope)_\n• What level are you operating at? _(app, UI toolkit, CLI toolkit, specific programming language, software library, OS kernel, everything)_\n• What’s the representation? _(Free text, structured text, visual, kinesthetic, natural language)_\n• …\n\nHopefully that’s a starting point. I suspect the list of possible answers in each case is just a sample of points on a continuous spectrum, with infinite extent in either direction, and infinite detail between any two points.\n\nBut then there’s the open-ended answers (and there are probably more such questions to ask). I’m hoping there we start out with all unique answers but can over time gradually notice opportunities for coalescing based purely on structural similarities in follow-up questions (similar turns in the maze).\n\nI’m a little disappointed that my questions are mostly about solution characteristics rather than problem statement characteristics. Hopefully others can help figure out that side of things. I think it’s the more important side.",
+        "user": "UCUSW7WVD",
+        "ts": "1550105989.048100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1550106108.000000"
+        },
+        "thread_ts": "1550090952.045000",
+        "parent_user_id": "UD3AK9JRF",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UAVCC2X70"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4a3262b9-370d-4669-b728-13ef70fcb134",
+        "type": "message",
+        "text": "When the time comes for me to share my project (which will come _after_ it has accrued a few thousand hours of internal testing by my team), it'll contribute to the \"pilot project\" part of the community. Until that time comes, I'm happy to be able to participate in the rawer, ideation-focussed part of the community.",
+        "user": "UC2A2ARPT",
+        "ts": "1550106018.048300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1550087972.037900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD",
+                    "UA14TGLTC",
+                    "U8A5MS6R1",
+                    "UCKRZS3DZ",
+                    "U5TCAFTD3"
+                ],
+                "count": 5
+            }
+        ]
+    }
+]

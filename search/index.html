@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Future of Coding History Search</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="app" v-cloak>
+
+      <div id="ui">
+
+        <a id="logo" href="https://futureofcoding.org">
+          <img src="logo.svg" alt="Future of Coding History Search">
+        </a>
+
+        <div id="small-logo">
+          <a href="https://futureofcoding.org">Future of Coding</a> History Search
+        </div>
+
+        <div id="center">
+          <div id="query">
+            <div>
+              <div class="field">
+                <label>Search</label>
+                <input type="search" v-model="search" v-on:keyup.enter="doSearch()">
+              </div>
+
+              <!--<div class="field">
+                <label>Channel</label>
+                <select v-model="channel">
+                  <option value="feedback">🗄️ #feedback</option>
+                  <option value="general">🗄️ #general</option>
+                  <option value="linking-together">#linking-together</option>
+                  <option value="present-company">#present-company</option>
+                  <option value="share-your-work">#share-your-work</option>
+                  <option value="thinking-together">#thinking-together</option>
+                  <option value="two-minute-week">#two-minute-week</option>
+                </select>
+              </div>-->
+            </div>
+
+            <button id="load" v-on:click="doSearch()">Search</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="msgs-output">
+        <div class="post" v-for="msg in msgs" :key="msg.ts" :id="msg.$dateStrISO">
+          <span class="user">{{msg.$userName}}</span>
+          <a class="date" :href="msg.$searchURL" target="_blank">{{msg.$dateStr}}</a>
+          <span class="channel">#{{msg.$channelName}}</span>
+          <span v-if="!msg.$isParent" title="click on the date to search for context" style="font-size:0.8em;color:#cc3333;float:right">thread reply</span>
+          <div class="message" v-html="msg.$html"></div>
+          <div class="attachments" v-html="msg.$attachmentsHtml"></div>
+          <div class="files" v-html="msg.$filesHtml"></div>
+
+          <div class="replies">
+            <div class="reply" v-for="resp in msg.responses" :key="resp.ts" :id="resp.$dateStrISO">
+              <span class="user">{{resp.$userName}}</span>
+              <a class="date" :href="'#' + resp.$dateStrISO">{{resp.$dateStr}}</a>
+              <div class="message" v-html="resp.$html"></div>
+              <div class="attachments" v-html="resp.$attachmentsHtml"></div>
+              <div class="files" v-html="resp.$filesHtml"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/history/lib/simple-markdown.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
+

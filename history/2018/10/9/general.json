@@ -1,0 +1,417 @@
+[
+    {
+        "client_msg_id": "d6e22d49-8302-4714-87ef-6964d40b53a8",
+        "type": "message",
+        "text": "<@U8A5MS6R1>\n&gt; I'm definitely interested in learning about the details of what you are thinking about.\n\nThe idea is simple:\n\nWe need to store code somewhere, to be able reference it, do fine-grained versioning, link data to exact version of code, exact place in code, etc. Many wonderful features require code to be stored and referenced. So we need to store code in some kind of data structure. Looking at ipfs and git we may come to conclusion that DAG might be that kind of data structure.\n\nDAG is a directed acyclic graph. Each node has body, and number of links with keys to other nodes.\n\nDAG is so expressive, that it can represent many other datatypes: list, set, dictionary. If so, we can use it as the only compound datatype in language for now, it simplifies everything greatly. So you have functions, that accept single DAG argument and return a DAG. Keyed links serve as named arguments in other languages.\n\nNext thing is pattern matching, through which you gonna do branching. Just like you have patterns for lists and dicts, it's possible to define pattern for a DAG. Something like that: {Value, key1: Node1, VariableKey =&gt; Node2 | RestLinks}. You may add guards to these patterns.\n\nThen find a way to encode that kind of patterns and functions into DAG itself.\nThis way you get nice pure language that is reminds lisp a bit, due it's homoiconicy.\n\nI haven't fully decided how IO gonna look like.\nI like the idea of putting code inside actors (just like Erlang).\nSpliting all code into statements: send, receive, spawn, loop, return, match, dirty-call;\nExpressions: pure-call, compose (the opposite of pattern deconstruction).",
+        "user": "UCKRZS3DZ",
+        "ts": "1539068488.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538994616.000100",
+        "parent_user_id": "UCKRZS3DZ",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "U8A5MS6R1"
+                ],
+                "count": 2
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UCQ4BBFQ9"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "5bb55b96-1855-40f2-95f8-09613b9dadb7",
+        "type": "message",
+        "text": "Actually I like the idea of copy-pasting :smiley: This is indeed how people usually learn.\n\nIf copied code is short, way may leave it as it is.\nIf it is over certain size and any of the copies is edited, we may suggest to extract it into function, or change in all places.\n\nIf during change of the copy user reorders IO-statements, then copy should be split into smaller chunks where IO is still in same order as in original code.\n\nExtracting copied code into function with reordered IO-instructions doesn't make sense.",
+        "user": "UCKRZS3DZ",
+        "ts": "1539071122.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCKRZS3DZ",
+            "ts": "1539071991.000000"
+        },
+        "thread_ts": "1539030605.000100",
+        "parent_user_id": "U8A5MS6R1",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3E039EAC-B475-468C-8F1B-D91113FC3D9D",
+        "type": "message",
+        "text": "The thing is, copy-pasted code plus propagated updates is just the same as function\/variable abstraction but without any visual indicators that make it obvious. It would likely just make code harder to read, without providing any new benefits beyond being a potential learning aid.",
+        "user": "UCGAK10LS",
+        "ts": "1539072472.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1539030605.000100",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "25b94a26-083d-4673-9d97-29b133337056",
+        "type": "message",
+        "text": "<@U6KQ2S410> has an amazing new demo on this topic <https:\/\/vimeo.com\/287270545>\n\nWhen teaching kids, copy and paste is very natural for them but then they get themselves into unmaintainable messes. Yet it's hard to teach abstraction up front \"in the abstract\" before a kid  shoots themselves with its lack. It'd be a dream if there could be a tool that helps them \"refactor\" copy and pasted code because it kept track of \"what code came from where\". ",
+        "user": "U5TCAFTD3",
+        "ts": "1539073771.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Vimeo",
+                "service_url": "https:\/\/vimeo.com\/",
+                "title": "Managed Copy &amp; Paste",
+                "title_link": "https:\/\/vimeo.com\/287270545",
+                "author_name": "Jonathan Edwards",
+                "author_link": "https:\/\/vimeo.com\/jonathoda",
+                "thumb_url": "https:\/\/i.vimeocdn.com\/video\/722372293_295x166.jpg",
+                "thumb_width": 295,
+                "thumb_height": 166,
+                "text": "Postscript to “Direct Programming”",
+                "fallback": "Vimeo Video: Managed Copy & Paste",
+                "video_html": "<iframe src=\"https:\/\/player.vimeo.com\/video\/287270545?autoplay=1&app_id=122963\" width=\"400\" height=\"225\" frameborder=\"0\" title=\"Managed Copy &amp; Paste\" webkitallowfullscreen mozallowfullscreen allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/vimeo.com\/287270545",
+                "service_icon": "https:\/\/a.slack-edge.com\/bfaba\/img\/unfurl_icons\/vimeo.png",
+                "id": 1,
+                "original_url": "https:\/\/vimeo.com\/287270545"
+            }
+        ],
+        "thread_ts": "1539030605.000100",
+        "parent_user_id": "U8A5MS6R1",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U8A5MS6R1",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9c5fc9e0-9d3c-48d0-8c5a-32e94a5672a2",
+        "type": "message",
+        "text": "I guess I'm asking why trees aren't sufficient for code, like in Lisp.\n\nLisp represents code as ASTs or Abstract Syntax Trees. As the name suggests, they're just trees. No graphs needed there. But compilers internally use other representations including graphs. So I'm asking if you plan to use something other than ASTs to write programs in.\n\nYou're right that graphs are useful in general. But if you don't use the syntax for graphs in _code_ then you just have a DSL, not something homoiconic.",
+        "user": "UCUSW7WVD",
+        "ts": "1539099186.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1539099866.000000"
+        },
+        "thread_ts": "1538995679.000100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "964ceac6-fcf6-42d6-b18b-c14d4aecb69b",
+        "type": "message",
+        "text": "You could use your graph syntax for ASTs without using any edges 'back' to ancestors. Is that just Lisp syntax?\n\nWhat _problem_ do you see that graphs are the solution to?",
+        "user": "UCUSW7WVD",
+        "ts": "1539099572.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538995679.000100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "fa3ea60e-846c-463f-8f62-f5950c4c01c1",
+        "type": "message",
+        "text": "I wasn't clear from the beginning, but to be honest I was thinking about DAGs. They are pretty much like trees, almost.\nWhy DAGs? Convenient to persist and reference versions of code.\n\nWhat problem I needed DAGs for? Wanted to have unambiguous way to reference to exact statement, exact expression of specific version of code.\nThis would open up many opportunities: for example smart merges of code (more fine-grained diffs), and many others.",
+        "user": "UCKRZS3DZ",
+        "ts": "1539100805.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538995679.000100",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "cca61466-5a2f-44e9-967b-f4e00be5efb5",
+        "type": "message",
+        "text": "I think about live editing and time-travel -- this requires to track which version of expression produced what, what depends on what. DAGs are wonderful for it.",
+        "user": "UCKRZS3DZ",
+        "ts": "1539100895.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538995679.000100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "18659f06-b026-4c70-8d72-cd678921eddb",
+        "type": "message",
+        "text": "Also - this is somewhat philosophical - but what is the purpose of 'abstraction'? What is proper vs improper abstraction?\n\nI look at abstraction as kind of a compression - you extract some common pattern from *copies* and can then represent the system more compactly. However the presence of copies that share some aspects but not others is the starting point of seeking abstractions.\n\nNow if we specify something compactly using an abstraction, we have to mentally 'fill' the abstractions to see what is really going on (i.e. mentally reconstruct the full copy). So if we want our system to help us visualize this, we're back at rendering the fully constructed copies. If this works well it would render the abstracted parts and parameterized parts differently - perhaps allowing different operations on each. But the point I'm making is that 'working with copies' isn't incompatible with building better abstractions.",
+        "user": "U8A5MS6R1",
+        "ts": "1539104934.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1539030605.000100",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "773cc13e-da18-4e3e-a6fe-387512f192e7",
+        "type": "message",
+        "text": "Makes more sense now. Lisp represents code at a single moment, before it starts running. You want to maintain both its history and potentially also its results at run-time, all in a single data structure. Macros with provenance, I love it. Maybe making DAGs easy to handle could result in a Lisp with a Smalltalk flavor.",
+        "user": "UCUSW7WVD",
+        "ts": "1539107964.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538995679.000100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "018f5595-bfc9-4e5c-9baf-b9c7c559e28f",
+        "type": "message",
+        "text": "To answer your original question, I'm fairly certain this hasn't been done.",
+        "user": "UCUSW7WVD",
+        "ts": "1539107985.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538995679.000100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "4a380988-60ee-403f-a1ff-cf80d78c1d46",
+        "type": "message",
+        "text": "<@UCUSW7WVD> thanks",
+        "user": "UCKRZS3DZ",
+        "ts": "1539115461.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1538995679.000100",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "94635c80-08a1-4e66-99b7-fe367c02f2da",
+        "type": "message",
+        "text": "In his up and down the ladder of abstraction essay, BV argues that abstraction is useful for getting a higher level view of a system. Copies is one way to see it but another way is that it's generalizing over a  dimension",
+        "user": "U5TCAFTD3",
+        "ts": "1539123123.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1539030605.000100",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "cbc1442b-c129-49cc-a256-a088477b5bdf",
+        "type": "message",
+        "text": "I agree that it may be useful to _create_ abstractions through a copy-and-edit interface (like in Jonathon’s work), as long as it is clear that this is what’s happening. I don’t think that functions and “connected copies” should be distinct concepts though, because the latter is superfluous as a separate feature. Perhaps Ctrl + C should generate an (invisible-by-default) anonymous function to abstract the selection rather than doing an AST-based copy (preventing regular copying from even being achievable) and there should be a key combo that allows users to “expand” and edit a particular instance of where the function is used, thereby editing the function itself. It would likely be a lot of work to make a good UX for this, at which point we could study how\/when\/whether it’s a useful feature.",
+        "user": "UCGAK10LS",
+        "ts": "1539140761.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1539141173.000000"
+        },
+        "thread_ts": "1539030605.000100",
+        "parent_user_id": "U8A5MS6R1"
+    }
+]

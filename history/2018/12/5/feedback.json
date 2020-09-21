@@ -1,0 +1,194 @@
+[
+    {
+        "client_msg_id": "effa03ae-89c3-429d-b6e1-68b4a50040cf",
+        "type": "message",
+        "text": "Cheers <@UEKEQGB9C> I think your observation \"No OO language has such an explicit concept of network or assemblage. They all stop at the level of class.\" is quite right and important. You could say that our system, Infusion, represents a form of \"Assemblage Programming\" in that it indeed allows the topology of an arbitrary-sized patch of the runtime and its connectivity to be described in a single gesture. There some docs here <https:\/\/docs.fluidproject.org\/infusion\/development\/SubcomponentDeclaration.html> and a moderately chunky real-world example here - <https:\/\/github.com\/GPII\/gpii-app\/blob\/master\/src\/main\/app.js#L62> - would be interested to hear if this is the kind of thing you are imagining or impressions of any areas it seems to fall short. Whilst this example is mostly tree-like, we can also describe some DAGs through injection.",
+        "user": "UEH6T3RJB",
+        "ts": "1544009885.031100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g5184556fcf3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/75184556fcf3aa660f5e56b8e5bdd46d.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0021-72.png",
+            "first_name": "",
+            "real_name": "Antranig Basman",
+            "display_name": "Bosmon",
+            "team": "T5TCAFTA9",
+            "name": "amb26slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873883.010000",
+        "parent_user_id": "UEKEQGB9C"
+    },
+    {
+        "client_msg_id": "2a88b0da-0526-47e4-bdf2-55f5a6ec224a",
+        "type": "message",
+        "text": "<@UEH6T3RJB> Yes. If I understand it, Infusion is doing something like this. In fact everyone recognises the need to talk about assemblages of objects. That's not controversial. There are dozens of \"business process modelling\" tools and UML tools and all kinds of similar higher-level descriptions. And, like Infusion (if I understand), there are frameworks too.\n\nMy issue is that there is always major friction and extra hassle when trying to depend on an external tool, or even on a framework, for good ideas that could (and I think, in this case, should) be built into the language and treated as \"standard\".\n\nWhen it's in a framework, it's always an \"optional\" extra, it's not in the initial installer of the language, it's not taught to beginners, it's not the de-facto way that everything is done, there's no syntactic support to make it elegant so it always ends up looking clunky ... etc.\n\nThat's the mystery to me ... we have 40 + years of \"builder\" tools and frameworks to help understand and work on assemblages of objects. But almost no language designer sees how useful it would be to build into the language itself.\n\nAlso, I grokked this through learning Clojure and starting to work with EDN. I see that algebraic data in Haskell is even prettier. But you shouldn't have to give up OO just to get this. Some people like OO. And with Smalltalk-like OO you have something every bit as elegant and principled as the best FP languages today. BUT ... missing this capactity to talk easily about assemblages. In Smalltalk it's particularly egregious because the Class Browser, one of the wonderful elegant tools, forces you into it ... everything is about the Class and the Class hierarchy.",
+        "user": "UEKEQGB9C",
+        "ts": "1544013807.031300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48a3c4ba8f2",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/248a3c4ba8f2972427222d46954f9c1c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "Phil Jones",
+            "display_name": "interstar",
+            "team": "T5TCAFTA9",
+            "name": "interstar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEKEQGB9C",
+            "ts": "1544041805.000000"
+        },
+        "thread_ts": "1543873883.010000",
+        "parent_user_id": "UEKEQGB9C"
+    },
+    {
+        "client_msg_id": "7befef77-a5e7-431d-ab8b-9ff652e81dd5",
+        "type": "message",
+        "text": "<@U8A5MS6R1> The representation I'm thinking of is designed to be static rather than dynamic. The data-structures are explicitly declared in source code rather than the result of computation.\n\nThat's obviously less flexible, but I'm willing to make that trade off because\n\na) I like immutability by default anyway, so I think mutability should be rare and explicit. With encouragement not to use it.\n\nb) the fact we have an OR in the grammar (ie. we can say \"this component of the other objects can be like this or like that) already gives us more flexibility than you'd think. The data-structure doesn't mutate at runtime but it does have several different shapes it can take.\n\nc) I'm quite interested in Jonathan Edwards' \"social data-types\" Where data mutation IS required, I'd quite like to see higher-level declarative ways of talking about it. Eg. to be able to say in the declaration of an assemblage : \"the values of this part are automatically synced with an isomorphic structure in the cloud\"\n\nRather than having programmers faff around doing low level mutation, I'd like to see languages support higher level strategies of mutation.\n\nIn terms of constructing. You construct the entire assemblage at once. The description of the assemblage can be used to define some kind of parser of an EDN-like serialization (like in the Pong example in the blog post).",
+        "user": "UEKEQGB9C",
+        "ts": "1544014390.031600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48a3c4ba8f2",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/248a3c4ba8f2972427222d46954f9c1c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "Phil Jones",
+            "display_name": "interstar",
+            "team": "T5TCAFTA9",
+            "name": "interstar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEKEQGB9C",
+            "ts": "1544014726.000000"
+        },
+        "thread_ts": "1543873883.010000",
+        "parent_user_id": "UEKEQGB9C"
+    },
+    {
+        "client_msg_id": "37333802-447d-4065-a989-202217c9fea7",
+        "type": "message",
+        "text": "Yes, I agree that such facilities need to be parts of \"languages\", but the economics of development prohibit people from building such things and getting them adopted. A more favorable roadmap is to develop such systems as frameworks, gradually expand their capabilities, and progressively impoverish the host language so that it can eventually be thrown away. It's impractical to design such a scheme as a language and expect to get all of its design details correct without having access to a living community continually validating (or invalidating) its results on real problems. So whilst Infusion's current status as a framework is uncontroversial (meaning it can be adopted!), its roadmap might be less so. In terms of your static\/dynamic distinction, and preference for immutability, I think we are on the same page - where it is idiomatic, we already store such definitions in static files rather than \"compute\" them. +1 to constructing the entire assemblage at once. Where we disagree is where you say \"This isn’t meant to be changing the semantics of a running OO system\" - a key goal is to collapse the distinction between run-time, design-time and compile-time.",
+        "user": "UEH6T3RJB",
+        "ts": "1544015622.032100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g5184556fcf3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/75184556fcf3aa660f5e56b8e5bdd46d.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0021-72.png",
+            "first_name": "",
+            "real_name": "Antranig Basman",
+            "display_name": "Bosmon",
+            "team": "T5TCAFTA9",
+            "name": "amb26slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873883.010000",
+        "parent_user_id": "UEKEQGB9C"
+    },
+    {
+        "client_msg_id": "f055ef1c-eee3-4c09-ad02-735599843583",
+        "type": "message",
+        "text": "<@UEKEQGB9C> - I see. It would be useful for me to see the contrast in the assembly idea and the class idea using the use case you picked. I completely agree that the 'wider schema gets lost'. But for the car example, I can see a Java class definition looking exactly like the pattern you have - the Car class would contain members attributes where the types define what they are and even allow alternatives via things like interfaces. The definition is scattered across files, but is it simply a matter of chasing those links down vs seeing the schema in one place? Do you think the following is the key distinction in this system:\n&gt; I’ve long thought that it would be useful for a language to have an explicit distinction between slots containing objects that are components “internal” to an object, and slots containing other external objects that are lent to it, or that represent things outside itself.\n\nPerhaps assemblies describe how the are wired up wrt their external relationships only? There seems to be some overlap with dependency injection.  Also how does this relate to encapsulation? Can you reach an Engine if you have a Car, without the Car mediating the access?\n\nI agree the low level ad hoc mutation doesn't seem to scale well and some form of managed mutation is better. Overall I feel there are few different ideas here and it would help to break these apart.",
+        "user": "U8A5MS6R1",
+        "ts": "1544049553.032400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873883.010000",
+        "parent_user_id": "UEKEQGB9C"
+    },
+    {
+        "client_msg_id": "1fa4c75e-e354-4fcc-a64a-ba5c29ff2680",
+        "type": "message",
+        "text": "<@UEH6T3RJB>\n&gt; collapse the distinction between run-time, design-time and compile-time.\n\nAgree 100%. Do you think Smalltalk achieves this? This aspect seems to be orthogonal to OO semantics.",
+        "user": "U8A5MS6R1",
+        "ts": "1544049657.032600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873883.010000",
+        "parent_user_id": "UEKEQGB9C"
+    },
+    {
+        "client_msg_id": "cb1bd7fc-aedb-405e-9e94-b4f9f396e23f",
+        "type": "message",
+        "text": "<@U8A5MS6R1> Yes. Imagine this was a Java-like language. Even a JVM language.\n\nThe end result in the \"assemblage language\" and in Java would be exactly the same : 10 objects of 10 different types (or classes) wired together in a particular way. The difference is just that in Java, the knowledge of how they are wired together is scattered through 10 different constructors in ten different source-files and it's a pain to keep running around and keeping track of that in your head.\n\nIn the assemblage language, the knowledge of how the objects are wired together is in 10 consecutive lines of code in the same place, where it's easy for the programmer to get a good overview. Or to make changes.\n\nThis itself is what I think is the key distinction of an assemblage language from every other OO language I've seen. (Whether Java, Smalltalk, Ruby or Python)\n\nAnd that's what I think would be the biggest win. Just putting that schema overview in a single place and expressive form.\n\nHaving an explicit distinction between \"internal component\" and other kinds of references you're holding is a separate issue. I think it's ALSO a good idea. And I think it's extremely compatible with an assemblage language. And it's convenient to represent this distinction with sigils in the schema.\n\nBut it's an idea that could ALSO be implemented in a more traditional object oriented language.\n\nIn fact you get some of these capabilities with inner-classes and \"friends\" or whatever they're called in Java  and C++ etc. Not to mention public and private qualifiers. But these are too \"low level\". Instead of mechanisms expressing what the real world is like (eg. this is a permanent component of that, this is a temporary occupant of that, this is a context of that) you have to implement it yourself.\n\nBTW : this is hardly an original idea. Literally the first new thing that the UML brings to structure modelling is two different arrows to distinguish aggregation from usage.\n\nMy thinking on encapsulation is that there doesn't need to be much within the assemblage. The assemblage consists of a number of classes that work well together, whose roles are defined in terms of each other, and which don't make much sense outside the assemblage. So you don't need to hide the details of one from another. If the assemblage language enforces encapsulation, the right border is between one assemblage and another. (I mention that here : <http:\/\/sdi.thoughtstorms.info\/?p=1351> )\n\nCan you reach the engine in a car without having the car involved? In the real world, not really. There are two situations ... one is you're talking about a real engine in a real car. The other is maybe you're talking about an engine in an engine factory that hasn't been put into a car yet.\n\nI think your program is going to have to know which of these two situations it's really modelling.\n\nThe fact you're using an Assemblage language rather than a \"normal\" OO language doesn't commit you one way or another.\n\nIn an ordinary OO language you might require that an Engine has a reference back to the Car that contains it. And, yes, you'll need a Dependency Injection strategy to make sure that happens. Or the Engine might not need a reference back to the Car that contains it. And you won't.\n\nThe assemblage language would be the same. Perhaps it would be a good idea to make that, itself, explicit. We might need as well as a \"Component of\" relationship, to be able to specify \"Component of that can't exist outside the context of\" relationship.",
+        "user": "UEKEQGB9C",
+        "ts": "1544055122.032900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48a3c4ba8f2",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/248a3c4ba8f2972427222d46954f9c1c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "Phil Jones",
+            "display_name": "interstar",
+            "team": "T5TCAFTA9",
+            "name": "interstar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873883.010000",
+        "parent_user_id": "UEKEQGB9C"
+    },
+    {
+        "client_msg_id": "d8bcadc9-5779-436f-9511-c3327d1cbe7e",
+        "type": "message",
+        "text": "<@UEH6T3RJB> I'm not going to say you're wrong about costs, but I'd like to flag up the counter-argument : that once something moves into the language, you just get one version of it, so you don't have rival competing implementations, the way you do with frameworks. The functionality is tied into the language, so you don't get problems where the language changes and the framework is incompatible with it. Beginners learn the idea from the beginning because it's part of the language. And you don't get two groups of users of the language who have trouble with each others' code because they are used to two rival frameworks.\n\nSure I agree that frameworks managed independently of the language core give more scope for trying out new ideas without being held back by the language designers etc. But I think there's an argument that overall, when a good idea moves into the language itself, that reduces costs for everyone.\n\nThink of something like garbage collection. You can do it in C++ via a library. But it's never hassle-free. Or cost-free. Whereas in Java you can basically forget about it.\n\nBut I'm not dissing the framework approach. And I certainly didn't intend this as a criticism of Infusion. If I wanted to get this functionality into, say, Javascript, I'd certainly do it as a library or a pre-processor, not waste my time trying to convince some committee to put it into the core.\n\nI'm approaching this as someone interested in inventing new languages, so that's where I obviously see it.\n\nWhen I said not change the underlying semantics, what I mean is that I can see that it would be possible to create an assemblage language that was like Java (ie. statically typed, very definite \"compile time\", etc.)\n\nAnd I can also imagine an assemblage language in a very dynamic, live, late-bound world like Smalltalk.\n\nThe idea can be fitted into both.",
+        "user": "UEKEQGB9C",
+        "ts": "1544057166.033100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48a3c4ba8f2",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/248a3c4ba8f2972427222d46954f9c1c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "Phil Jones",
+            "display_name": "interstar",
+            "team": "T5TCAFTA9",
+            "name": "interstar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873883.010000",
+        "parent_user_id": "UEKEQGB9C"
+    }
+]

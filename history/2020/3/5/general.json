@@ -1,0 +1,362 @@
+[
+    {
+        "client_msg_id": "af874eda-97b3-47d8-89f4-b05042c621df",
+        "type": "message",
+        "text": "Very nice, as <@UA14TGLTC> said, gives good idea of what it is all about!\nI am new to this community so I don't want to stipulate in any way that I know what are the general principles of the community, but this part caught my attention: \"One of many principles held by the community is that computing currently reflects the interests of a narrow minority of people\". It sounds a tiny little bit conspiracy theory-ish to me.\nMaybe intention was to say that programming at its current state is not easy to approach nor engage with without seemingly unneccessary amount of education, at least for simpler tasks? Instead, it might sound instead like there is a group of people intentionally keeping programming inaccessible due to their personal interests (elitism).",
+        "user": "UUB7RA7PF",
+        "ts": "1583419967.088800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2fdcf29b225b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-26\/971836171367_2fdcf29b225b02e66825_72.png",
+            "first_name": "Martin",
+            "real_name": "Martin Sosic",
+            "display_name": "Martin",
+            "team": "T5TCAFTA9",
+            "name": "sosic.martin",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BI+1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Very nice, as "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UA14TGLTC"
+                            },
+                            {
+                                "type": "text",
+                                "text": " said, gives good idea of what it is all about!\nI am new to this community so I don't want to stipulate in any way that I know what are the general principles of the community, but this part caught my attention: \"One of many principles held by the community is that computing currently reflects the interests of a narrow minority of people\". It sounds a tiny little bit conspiracy theory-ish to me.\nMaybe intention was to say that programming at its current state is not easy to approach nor engage with without seemingly unneccessary amount of education, at least for simpler tasks? Instead, it might sound instead like there is a group of people intentionally keeping programming inaccessible due to their personal interests (elitism)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1583385195.087100",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "5372ab1e-0851-41ac-9ac2-ee726122c6df",
+        "type": "message",
+        "text": "I've often wondered, \"GUI, huh, what is it good for?\" This post provides a compelling answer (i.e not images\/video):\n\n<https:\/\/arcan-fe.com\/2020\/02\/10\/leveraging-the-display-server-to-improve-debugging>",
+        "user": "UCUSW7WVD",
+        "ts": "1583423589.090300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Arcan",
+                "service_url": "http:\/\/arcan-fe.com",
+                "title": "Leveraging the “Display Server” to Improve Debugging",
+                "title_link": "https:\/\/arcan-fe.com\/2020\/02\/10\/leveraging-the-display-server-to-improve-debugging",
+                "author_name": "bjornstahl",
+                "author_link": "https:\/\/arcan-fe.com\/author\/bjornstahl\/",
+                "thumb_url": "https:\/\/arcanfe.files.wordpress.com\/2020\/01\/linux_observability_tools.png?fit=200%2C150",
+                "thumb_width": 200,
+                "thumb_height": 150,
+                "text": "I spend most of my time digging through software-in-execution rather than software-at-rest (e.g. source code). Sometimes the subject of study is malware hissing like a snake and lashing out at the barriers of a virtual machine; sometimes it is terrible software deserving of an exploit being written; sometimes it is a driver on a far-away device that flips bits when a clock got skewed or circuits gets too hot &mdash; most of the time it is something between these extremes.Many years ago, a friend and I distilled some thoughts on the matter into the free-as-in-beer &lsquo;systemic software debugging&lsquo;. Maybe one day I have enough of both structure and incentive to revisit the topic in a less confined setting. Until such a time, it might be useful to document some experiments and experiences along the way, which&nbsp; brings us to the topic of this post: ways of using the display server infrastructure and its position in the user-space stack, to reason about- and bootstrap- debugging.&nbsp;While that may come off as a bit strange, first recall that the&rdquo;Display server&rdquo; is a misnomer (hence the &ldquo;&rdquo;): the tradition is that it, of course, serve much more than the display. In the majority of cases you would also find that they &lsquo;serve&rsquo; user-initiated blob transfers (&lsquo;clipboard&rsquo; and &lsquo;drag&amp;drop&rsquo;) as well as a range of input devices (keyboard, mice, &hellip;). In that sense a terminal emulator, web browser and virtual machine monitor rightly fall into this category. What I try to refer to is the IPC system or amalgamation of IPC systems that stitch user-space together into the thing you interact with.The article is structured around three groups of problems and respective solutions:Activation and OutputChain of TrustProcess and IdentityEach explaining parts of what goes on in the following video:The central theme is that the code that comes with the IPC system (xlib, xcb, arcan-shmif, &hellip;) can be used to construct debugging tools from inside the targeted process, and piggyback on the same IPC system for activation, inputs and information gathering\/output.The gains is that you get a user friendly, zero-cost until activation, high-bandwidth, variable number of channels to collect process information, that can cooperate with the client and let it provide its higher level view of its debug state, while at the same time add custom primitives with few to none additional allocations post-instrumentation.&nbsp;ContextTo add some demarcation, the more interesting target here is live inspection of mature software as part of a grander system &ndash; far away from the comforts of a debug build with click-to-set breakpoints launched from the safety of an integrated development environment. The culprit is not obvious and the issue might not be reliably repeatable.Your goals might not be to fix the issue, but to gather evidence and communicate to someone that can.Also bear in mind that this is not directly about &ldquo;the debugger&rdquo; in the sense of the nuclear powered Suisse army knife that is also known a &lsquo;symbolic debugger&rsquo; tool such as &lsquo;gdb&rsquo; and &lsquo;lldb&rsquo;, but rather the whole gamut of tooling needed to understand what role a piece of software fulfils and how it is currently functioning within that role.Think how the &lsquo;intervention&rsquo; friendly version of this intimidating chart from Brendan Gregg&rsquo;s post on Linux Performance would look like for the &lsquo;applications block&rsquo; and you get closer to the idea:\n\n\n\nActivation and OutputThis first group of problems covers software that wants to cooperate by adding features now that may be useful for debugging later. Some refer to this as &lsquo;pre-bugging&rsquo;.Consider the notion that you are a responsible, pro-active developer. You understand the need for others to inspect what your application or library is doing, and that there are things in the execution environment you simply cannot account for while remaining sane and getting things done. You want to make it easier for the next one in line, and get higher quality feedback about what went wrong out there in the field.What are your normal practical options?Command-line argumentEnvironment VariableSpecific User Interface toggleThese are all problematic, though in somewhat different ways.&nbsp;With the first two options you have the problem of communicating that the feature is available (how will the user discover it, how will you remember it is there) &ndash; README.md, man pages, FAQ\/Wiki, ancients words of wisdom spray painted on a live chicken, and so on &ndash; something need to announce that the option is there.Options 1 and 2 are also quite static; they get set and evaluated when the program is started, and if you want to activate debug output dynamically, well, tough luck. Your problem then needs to be reproducible both with- and without- debug output enabled.The actual output also comes with noticeable system impact &ndash; sending strings to STDOUT, STDERR may break (introduce new bugs) other processing steps the user might have, common in the traditional UNIX pipes and filters structure. They are also not necessarily &lsquo;dumb pipes&rsquo;, isatty() is very much a thing (as is baud rate), as is threading. The combination of these properties makes for an awful communication channel to try and multiplex debug output on.The other option, writing to a log device or file can clog up storage, wear down flash storage, and inadvertently leave sensitive user information around. Formatting the output itself is also a thing to consider, even &lsquo;simple&rsquo; printf has some with serious gotcha&rsquo;s (read up on locale-defined behaviour) and information that is better presented as changes over time than a stream of samples will need other tools to be built for post-processing.&nbsp;Option 3 involve quite a lot more of work to implement, as the feature should mesh with other user interface properties. When properly done however, it can add quite a lot of power to the software &ndash; look no further than the set of debugging tools built into Chrome or Firefox. Of course, it helps that these are also development environment in and of itself to incentive the cost and effort. While often a better option, it still composes poorly with other non-cooperative information collection.Post-mortem (crash-dump) is a slightly different story and one that calls for a much longer discussion. This is out of scope for this article, though the primitives that emerge will work as both a transport for core dumps and as a way of annotating them, but is a decent follow-up topic.Enough with the problem space description, where does the display server fit in?In the most trivial of window systems, a client connects somehow, requests\/allocates some kind of storage container (window), draws into it either directly as characters or pixels, or indirectly through drawing commands to the server itself or through an intermediary (like the GPU). In return, the client gets input events, clipboard actions and so on back over the same or related channel. This holds true even for a terminal emulator.These windows may come with some kind of type model attached; indirectly through the combination of properties set (parent window, draw order) and directly through some other type tag (X11, for instance, has a long list of popups, tooltips, menus, dnd, and so on), and arcan has a really (too much actually) long one.Step 1 &ndash; Add a debug typeThis allows other client agnostic tools to enumerate windows of this type, compose them together and record\/stream\/share. Controls for activation are there, as well as a data channel that is high bandwidth, capable of cleanly multiplex multiple data types.Step 2 &ndash; Two-sided allocationNow for the more complicated step. Recall the problem of saying when debugging features are needed (command-line or environment). The ideal approach wo…",
+                "fallback": "Arcan Link: Leveraging the &#8220;Display Server&#8221; to Improve&nbsp;Debugging",
+                "from_url": "https:\/\/arcan-fe.com\/2020\/02\/10\/leveraging-the-display-server-to-improve-debugging",
+                "service_icon": "https:\/\/arcanfe.files.wordpress.com\/2017\/10\/arcanicon.png?w=180",
+                "id": 1,
+                "original_url": "https:\/\/arcan-fe.com\/2020\/02\/10\/leveraging-the-display-server-to-improve-debugging"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=nIM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've often wondered, \"GUI, huh, what is it good for?\" This post provides a compelling answer (i.e not images\/video):\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/arcan-fe.com\/2020\/02\/10\/leveraging-the-display-server-to-improve-debugging"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d208c049-2855-4751-ba68-62cc2b73cbb4",
+        "type": "message",
+        "text": "There's definitely strands of both perspectives within this community. E.g see <https:\/\/alarmingdevelopment.org\/?p=1173>",
+        "user": "U8A5MS6R1",
+        "ts": "1583429869.091100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Alarming Development",
+                "title": "The problem with programming and how to fix it",
+                "title_link": "https:\/\/alarmingdevelopment.org\/?p=1173",
+                "text": "Programming could be much much easier most of the time. This unnecessary difficulty wastes the effort of professional programmers, but worse, prevents many people from programming at all. The probl…",
+                "fallback": "Alarming Development: The problem with programming and how to fix it",
+                "thumb_url": "https:\/\/s0.wp.com\/i\/blank.jpg",
+                "ts": 1532998686,
+                "from_url": "https:\/\/alarmingdevelopment.org\/?p=1173",
+                "thumb_width": 200,
+                "thumb_height": 200,
+                "id": 1,
+                "original_url": "https:\/\/alarmingdevelopment.org\/?p=1173"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dVC1f",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There's definitely strands of both perspectives within this community. E.g see "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/alarmingdevelopment.org\/?p=1173"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1583385195.087100",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "af61c2d2-3204-4a55-b922-e951280d5e8b",
+        "type": "message",
+        "text": "I thought \"reflects the interests\" is a good way to put it because it does not imply underlying motives or processes. E.g. there could be a feedback loop: tech selects people, people select tech. So we have \"more of the same\" kinds of ideas and values that happened to exist at the start.",
+        "user": "U8A5MS6R1",
+        "ts": "1583429956.091400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vn0H",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I thought \"reflects the interests\" is a good way to put it because it does not imply underlying motives or processes. E.g. there could be a feedback loop: tech selects people, people select tech. So we have \"more of the same\" kinds of ideas and values that happened to exist at the start."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1583385195.087100",
+        "parent_user_id": "UC2A2ARPT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UUB7RA7PF",
+                    "UC2A2ARPT",
+                    "UJ6LDMMN0"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "07a8918c-71ca-470e-a758-c25c8e03d8bf",
+        "type": "message",
+        "text": "<@UUB7RA7PF> That paragraph is meant to address diversity. One of the goals held by a number of people in the community is to make programming accessible to more people — see <#CLYCGTCPL|end-user-programming>, for instance. One aspect of that is technical: programming tools force a lot of complexity on the programmer, and perhaps redesigning how we do programming could make it less demanding. Another aspect is political: a lot of software comes from for-profit companies with an interest in tightly controlling what you can do with their software, so it's rare that an end user is empowered to modify the software they use. One other aspect is social: programming, like anything else that is designed by humans, reflects the people who designed it. A lot of the people who laid the groundwork for our computers and programming tools were white, male, financially secure, straight, cis, able bodied, american, english-speaking, literate, sighted, etc. Thus the needs of these people were relatively well-addressed from the start (insofar as programming addresses _anyones_ needs, a notion which we're here to push back against, haha), whereas the needs of people who are different from that norm were not necessarily as well-addressed — and in many ways, still aren't — so we call these people \"historically underrepresented\". One of the exciting things about the various future of programming initiatives, whether it's visual programming languages or verbal programming or physical interfaces or virtual reality or crypto or so on, is that they often benefit people for whom the current practices hinder. They're also opportunities for people from diverse backgrounds to be involved in the design of something new.\n\nAll that is to say, I think it's important that we say, right up front, that we're aware of this history and are interested in learning from it.",
+        "user": "UC2A2ARPT",
+        "ts": "1583430022.091700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1583430068.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "eAv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UUB7RA7PF"
+                            },
+                            {
+                                "type": "text",
+                                "text": " That paragraph is meant to address diversity. One of the goals held by a number of people in the community is to make programming accessible to more people — see "
+                            },
+                            {
+                                "type": "channel",
+                                "channel_id": "CLYCGTCPL"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", for instance. One aspect of that is technical: programming tools force a lot of complexity on the programmer, and perhaps redesigning how we do programming could make it less demanding. Another aspect is political: a lot of software comes from for-profit companies with an interest in tightly controlling what you can do with their software, so it's rare that an end user is empowered to modify the software they use. One other aspect is social: programming, like anything else that is designed by humans, reflects the people who designed it. A lot of the people who laid the groundwork for our computers and programming tools were white, male, financially secure, straight, cis, able bodied, american, english-speaking, literate, sighted, etc. Thus the needs of these people were relatively well-addressed from the start (insofar as programming addresses "
+                            },
+                            {
+                                "type": "text",
+                                "text": "anyones",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " needs, a notion which we're here to push back against, haha), whereas the needs of people who are different from that norm were not necessarily as well-addressed — and in many ways, still aren't — so we call these people \"historically underrepresented\". One of the exciting things about the various future of programming initiatives, whether it's visual programming languages or verbal programming or physical interfaces or virtual reality or crypto or so on, is that they often benefit people for whom the current practices hinder. They're also opportunities for people from diverse backgrounds to be involved in the design of something new.\n\nAll that is to say, I think it's important that we say, right up front, that we're aware of this history and are interested in learning from it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1583385195.087100",
+        "parent_user_id": "UC2A2ARPT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UUB7RA7PF",
+                    "U8A5MS6R1",
+                    "UJ6LDMMN0",
+                    "UCGAK10LS",
+                    "UA14TGLTC"
+                ],
+                "count": 5
+            },
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6fa9956d-b4aa-434e-8835-1958af6ee2b8",
+        "type": "message",
+        "text": "Great work. I like it a lot! It really shows the mindset of this community and how anyone can safely engages in this collaborative thinking about future of programming. Thanks! :slightly_smiling_face:",
+        "user": "UJ6LDMMN0",
+        "ts": "1583444120.093200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "426cd5067da7",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-26\/607834329346_426cd5067da7fc8c6933_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XeelG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Great work. I like it a lot! It really shows the mindset of this community and how anyone can safely engages in this collaborative thinking about future of programming. Thanks! "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1583385195.087100",
+        "parent_user_id": "UC2A2ARPT"
+    }
+]

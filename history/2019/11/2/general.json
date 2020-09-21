@@ -1,0 +1,1442 @@
+[
+    {
+        "client_msg_id": "1c43fe36-e7d2-483f-89dd-fa3704908f64",
+        "type": "message",
+        "text": "And SAM acrhitecture is strongly inspired by temporal logic of actions (TLA) from Leslie Lamport which is a theory background to reason about concurrent systems. It aims to proove algorithms correctness using a formalism which specify both actions and state with formulas. It is kind of state with transitions.",
+        "user": "UJ6LDMMN0",
+        "ts": "1572682443.460700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "426cd5067da7",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-26\/607834329346_426cd5067da7fc8c6933_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572648862.445700",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "1C1D0B7F-91FC-4A3A-9D67-CD0A343B34A0",
+        "type": "message",
+        "text": "The big difference between queries and rewriting is that rewrite rules are applied recursively, until there is no more rule that matches.",
+        "user": "UJBAJNFLK",
+        "ts": "1572686319.462800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572217129.305100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "FAD49333-1664-495F-811A-609CB08FD4A2",
+        "type": "message",
+        "text": "<@UAVCC2X70> I completely agree, but I’d also add that convenience matters very much in practice. And there is one fundamental difference of some macro systems (e.g. scheme-style hygienic macros) to everything else: several phases share the same namespaces for identifiers.",
+        "user": "UJBAJNFLK",
+        "ts": "1572686747.466600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "ba82d208-2f4c-4043-985e-bc923d1a017c",
+        "type": "message",
+        "text": "But that's an implementation detail? The stated goal is declarativeness, code expressing the shape of inputs and outputs. Here the memory variables actually compromise the goal. Rewrite rules need to sometimes be uncoiled in your head.",
+        "user": "UCUSW7WVD",
+        "ts": "1572687045.466800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1572712800.000000"
+        },
+        "thread_ts": "1572217129.305100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "f54cc5ca-68c4-4ca6-8820-5f90e73cfb43",
+        "type": "message",
+        "text": "```\n\/\/ actions compute proposals\nconst proposal = {incrementBy: 1}\n\n\/\/ the model accepts, partially accepts or rejects the proposals\nmodel.accept(proposal)\n    \/\/ compute the new state representation\n    .then(state =&gt; representation(state))\n    \/\/ share the state representation\n    .then(render)\n```\nThe corollary in the Object Network architecture is what I call \"Functional Observer\" - the state of an object is a function of its current state and the state of peer objects observed through links.\n\nSo peer objects can \"propose\" changes but it's up to the target whether or not to change state. I call proposals \"intentions\": when there's an intention of an object on another - simply by virtue of its current state - it puts the system \"in tension\" (see what I did thar? :smile: ) and this tension only resolves when either the intention state is abandoned or the target does something to its own state to react to it.\n\nThat is a robust model as there are no ephemeral \"actions\" or messages, just a global state where things are settled or waiting to settle, thus giving eventual consistency and emergent behaviour from local rules.",
+        "user": "UE6EFEPTQ",
+        "ts": "1572691679.467100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE6EFEPTQ",
+            "ts": "1572692294.000000"
+        },
+        "thread_ts": "1572648862.445700",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "343117E1-6DB5-4C1B-921A-F25AB2303826",
+        "type": "message",
+        "text": "<https:\/\/github.com\/microsoft\/vscode\/issues\/16110>",
+        "user": "UPDJV04FR",
+        "ts": "1572704497.469700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g68488bdee31",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68488bdee316f15225caa185e233be88.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-72.png",
+            "first_name": "",
+            "real_name": "Mason",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "masonsimon",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572184945.295600",
+        "parent_user_id": "UNV27TUKA"
+    },
+    {
+        "client_msg_id": "25266D82-8000-4D02-A2D8-19FBC0CA1983",
+        "type": "message",
+        "text": "Hey friends! Wanted to say Steve's video with mpj on expressions and statements is a new top fav! Very exciting times",
+        "user": "UPQCK79UJ",
+        "ts": "1572708132.471800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga5fe52a2a63",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/a5fe52a2a63ec5847a1c41e1d1f541ce.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "",
+            "real_name": "Jess Cummins",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "me1419",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572708132.471800",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1572714689.492000",
+        "reply_users": [
+            "UHWC9PXBL",
+            "ULM3U6275"
+        ],
+        "replies": [
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1572711165.480200"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1572714689.492000"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U5TCAFTD3"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "C5F0AD7B-9C25-4981-8634-8231F8E2E3DF",
+        "type": "message",
+        "text": "Is there a formalization to add and validate constraints on the valid intervals in which particular events can be emitted in the system?\n\nI mean there might be multiple services\/objects around waiting for messages and due the combinatorical explosion we can't enumerate all the possible sequences of events. \n\nI just can't believe there is no standard\/proven way\/know how to generate event sequences in any programming language. To me it seems it should be part of the testing libs maybe with additional abstractions for expressing the distinct \"services\"\/\"objects\", but I don't see the need for a separate programming language for that, but still, I am not aware if that in the mainstream. \n\nI am wondering why is that.",
+        "user": "UL3CJ7YKC",
+        "ts": "1572709118.479700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "5612322b81b6",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-14\/834114331988_5612322b81b6d142511b_72.jpg",
+            "first_name": "Pezo",
+            "real_name": "Pezo - Zoltan Peto",
+            "display_name": "Pezo - Zoltan Peto",
+            "team": "T5TCAFTA9",
+            "name": "pezo1919",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UL3CJ7YKC",
+            "ts": "1572709240.000000"
+        },
+        "thread_ts": "1572709118.479700",
+        "reply_count": 12,
+        "reply_users_count": 5,
+        "latest_reply": "1573296628.260900",
+        "reply_users": [
+            "UFPPABQ7P",
+            "UAVCC2X70",
+            "UC2A2ARPT",
+            "UL3CJ7YKC",
+            "UKQT95T1V"
+        ],
+        "replies": [
+            {
+                "user": "UFPPABQ7P",
+                "ts": "1572709674.479900"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1572741455.025000"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572758585.035800"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572758973.036400"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572759059.036600"
+            },
+            {
+                "user": "UL3CJ7YKC",
+                "ts": "1572778068.067400"
+            },
+            {
+                "user": "UL3CJ7YKC",
+                "ts": "1572778403.073300"
+            },
+            {
+                "user": "UL3CJ7YKC",
+                "ts": "1572780113.075800"
+            },
+            {
+                "user": "UL3CJ7YKC",
+                "ts": "1572780862.077000"
+            },
+            {
+                "user": "UKQT95T1V",
+                "ts": "1573269518.257500"
+            },
+            {
+                "user": "UKQT95T1V",
+                "ts": "1573269553.257700"
+            },
+            {
+                "user": "UL3CJ7YKC",
+                "ts": "1573296628.260900"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "db3be3fc-2d18-4514-9155-b31a9294d5d1",
+        "type": "message",
+        "text": "What would be the use case\/domain this would be applied to? Something like a state machine?",
+        "user": "UFPPABQ7P",
+        "ts": "1572709674.479900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "cb9d79e2bebc",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-05-09\/631538186901_cb9d79e2bebc09100b3f_72.jpg",
+            "first_name": "Cole",
+            "real_name": "Cole Lawrence",
+            "display_name": "Cole",
+            "team": "T5TCAFTA9",
+            "name": "colelawr",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572709118.479700",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "<https:\/\/youtu.be\/4p6gNRgI_cc> the video ",
+        "user": "UHWC9PXBL",
+        "ts": "1572711165.480200",
+        "thread_ts": "1572708132.471800",
+        "root": {
+            "client_msg_id": "25266D82-8000-4D02-A2D8-19FBC0CA1983",
+            "type": "message",
+            "text": "Hey friends! Wanted to say Steve's video with mpj on expressions and statements is a new top fav! Very exciting times",
+            "user": "UPQCK79UJ",
+            "ts": "1572708132.471800",
+            "team": "T5TCAFTA9",
+            "thread_ts": "1572708132.471800",
+            "reply_count": 2,
+            "reply_users_count": 2,
+            "latest_reply": "1572714689.492000",
+            "reply_users": [
+                "UHWC9PXBL",
+                "ULM3U6275"
+            ],
+            "subscribed": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Expressions versus statements? The future of functional programming (with Steve Krouse)",
+                "title_link": "https:\/\/youtu.be\/4p6gNRgI_cc",
+                "author_name": "Fun Fun Function",
+                "author_link": "https:\/\/www.youtube.com\/channel\/UCO1cgjhGzsSYb1rsB4bFe4Q",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/4p6gNRgI_cc\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Expressions versus statements? The future of functional programming (with Steve Krouse)",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/4p6gNRgI_cc?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/4p6gNRgI_cc",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/4p6gNRgI_cc"
+            }
+        ],
+        "client_msg_id": "815DC1A1-6ACC-4B62-83DA-6E3584B76E07"
+    },
+    {
+        "client_msg_id": "695B0579-AC5F-4DDF-B24B-11292AABA1C9",
+        "type": "message",
+        "text": "Recursive application makes rewriting Turing-complete. Not a detail for me.",
+        "user": "UJBAJNFLK",
+        "ts": "1572712723.482000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572217129.305100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "5DDA4910-AEE1-4805-9CCD-7F53AC878A7E",
+        "type": "message",
+        "text": "<@UNV27TUKA> it looks like mason has the best answer for everyday coding—you may need to write the plugin yourself but the static analysis is already done in vscode ",
+        "user": "UHWC9PXBL",
+        "ts": "1572713096.485900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572184945.295600",
+        "parent_user_id": "UNV27TUKA"
+    },
+    {
+        "client_msg_id": "188092BE-CDD9-42F3-BA7E-A2AC1C129A16",
+        "type": "message",
+        "text": "<@UHWC9PXBL> Lazy evaluation is not sufficient to get the equivalent of macros. A lazy function can decide to evaluate an argument or not, but it cannot change the semantics of evaluation. A macro can do anything at all to its arguments. A Lisp macro could implement Fortran with s-expression syntax, for example.\nYou can probably do something similar to JIT for macro expansion, but it needs to be distinct from function evaluation.",
+        "user": "UJBAJNFLK",
+        "ts": "1572713159.487800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJBAJNFLK",
+            "ts": "1572713300.000000"
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "ee88b208-bfe7-40f2-901b-df3766adec05",
+        "type": "message",
+        "text": "well, iterative does too: applying until convergence or no more LHS matches",
+        "user": "UE6EFEPTQ",
+        "ts": "1572713524.488100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE6EFEPTQ",
+            "ts": "1572713634.000000"
+        },
+        "thread_ts": "1572217129.305100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "9d748dfd-f5e5-4628-89f8-d1d75bcff775",
+        "type": "message",
+        "text": "not a(n implementation) detail for me either!",
+        "user": "UE6EFEPTQ",
+        "ts": "1572713549.488300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE6EFEPTQ",
+            "ts": "1572716983.000000"
+        },
+        "thread_ts": "1572217129.305100",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "A31EC59F-0BBD-4BD5-B70E-121C0BFB8C0D",
+        "type": "message",
+        "text": "FP discussions seem to begin with everyone saying how much more understandable FP is, and end with everyone confused about every aspect of it.",
+        "user": "ULM3U6275",
+        "ts": "1572714689.492000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "ULM3U6275",
+            "ts": "1572890601.000000"
+        },
+        "thread_ts": "1572708132.471800",
+        "parent_user_id": "UPQCK79UJ",
+        "reactions": [
+            {
+                "name": "clap",
+                "users": [
+                    "UHWC9PXBL",
+                    "UC2A2ARPT"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "185453a2-cc47-4bda-a6f5-7057fe0fddd7",
+        "type": "message",
+        "text": "<@UJBAJNFLK> - some languages allow passing around 'unevaluated expressions' where the recipient decides even how to interpret the expressions. E.g. lisp fexprs, red\/rebol blocks etc. Do you think these are equivalent to macros?",
+        "user": "U8A5MS6R1",
+        "ts": "1572718055.492400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "0fe68ba8-dec6-4b03-81c4-414b1c88b1f2",
+        "type": "message",
+        "text": "IIRC Xerox PARC &amp; co used the most powerful computers available at the time to \"invent the future\": the graphical environments and programming languages regular people use now.\n\nWhat would be the equivalent today?\nMy (naive) impression is that programming language and HCI labs don't seem to make use of 64 core processors with a 100 GB of RAM and GPU computing to similarly invent the future.",
+        "user": "UKB1S7ZMY",
+        "ts": "1572723679.497200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7ec9a7d1fc78",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-15\/838161930967_7ec9a7d1fc785cc9b389_72.jpg",
+            "first_name": "",
+            "real_name": "Adriaan Leijnse",
+            "display_name": "Adriaan Leijnse",
+            "team": "T5TCAFTA9",
+            "name": "adriaan.leijnse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UKB1S7ZMY",
+            "ts": "1572723887.000000"
+        },
+        "thread_ts": "1572723679.497200",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1572779225.073600",
+        "reply_users": [
+            "U5TCAFTD3"
+        ],
+        "replies": [
+            {
+                "user": "U5TCAFTD3",
+                "ts": "1572779225.073600"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1572779225.073600",
+        "reactions": [
+            {
+                "name": "+1::skin-tone-2",
+                "users": [
+                    "UJVEPCVT6"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "B6897CB0-9342-4627-AE3F-651096A10CCD",
+        "type": "message",
+        "text": "<@U8A5MS6R1> Yes, those are equivalent to macros, but differ in details.",
+        "user": "UJBAJNFLK",
+        "ts": "1572723978.000900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "f30ddd2c-d321-4adb-9bad-ade65998c367",
+        "type": "message",
+        "text": "I think it might look like using some general (but highly parallelizable?) techniques that we know can be optimized using hypothetical sufficiently smart compilers or runtimes to run on normal computers.",
+        "user": "UKB1S7ZMY",
+        "ts": "1572724082.002300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7ec9a7d1fc78",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-15\/838161930967_7ec9a7d1fc785cc9b389_72.jpg",
+            "first_name": "",
+            "real_name": "Adriaan Leijnse",
+            "display_name": "Adriaan Leijnse",
+            "team": "T5TCAFTA9",
+            "name": "adriaan.leijnse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "9b80f387-f89e-4f88-a292-1273043d36c4",
+        "type": "message",
+        "text": "that’s kind of what im describing as a “generalization of lazy evaluation”—the value of the unevaluated code expressions themselves could be created via a function that produces code only when demanded",
+        "user": "UHWC9PXBL",
+        "ts": "1572725749.003100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "b04a5b50-46dc-4b19-8201-967411c71913",
+        "type": "message",
+        "text": "might be too far in abstract-land, though",
+        "user": "UHWC9PXBL",
+        "ts": "1572725761.003500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "92D34C5F-1809-4D99-AC74-57C17D6C88F5",
+        "type": "message",
+        "text": "<@UKB1S7ZMY> Are your frustrations with software primarily about it not running fast enough? ",
+        "user": "ULM3U6275",
+        "ts": "1572725857.004900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g588e3d3aa94",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/7588e3d3aa94ba40f57f495ec8c3206b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "Steve",
+            "real_name": "Steve Dekorte",
+            "display_name": "Steve Dekorte",
+            "team": "T5TCAFTA9",
+            "name": "steve447",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "b8678494-3421-4088-bc38-74ca380ab331",
+        "type": "message",
+        "text": "The software that is released seems fast enough, but what about the programs that never get written? Some behavior is very easy to model precisely using maths but trying to implement the modeling language bogs you down in low-level details. It would be nice to be able to experiment with reasonable performance on a supercomputer without having to worry so much about making programs usable on a regular computer.\nOne example of this is FRP which took a while to run well for a limited set of programs. However, the model is way more expressive than what gets implemented.",
+        "user": "UKB1S7ZMY",
+        "ts": "1572739072.024700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7ec9a7d1fc78",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-15\/838161930967_7ec9a7d1fc785cc9b389_72.jpg",
+            "first_name": "",
+            "real_name": "Adriaan Leijnse",
+            "display_name": "Adriaan Leijnse",
+            "team": "T5TCAFTA9",
+            "name": "adriaan.leijnse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "1e88af02-af29-49cc-9d97-ecba8bd620db",
+        "type": "message",
+        "text": "What kind of events?\n\nI assume you're not taking about code triggered events, since those can be triggered by code.\n\nJava has something called \"Robot\" which lets you control the mouse and keyboard programmatically (for \"testing purposes\")",
+        "user": "UAVCC2X70",
+        "ts": "1572741455.025000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1572741468.000000"
+        },
+        "thread_ts": "1572709118.479700",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "f1b4c692-2618-4161-bc61-09099d7ad3be",
+        "type": "message",
+        "text": "<@UAVCC2X70>: \"the only real difference is WHEN the processing occurs -- otherwise it's all *just code* with no fundamental difference. Separating code into different \"kinds\" of things for each \"time\" (e.g. functions vs macros) is absolutely NOT intrinsic to that kind of phased processing\"\n\nI disagree. The reason that stages exist is that *we need different representations of the program at different times*. That's why there are different kinds of things in different stages.\n\nIn early dialects of Lisp, FEXPRs were the original version of macros, and there was no stage restriction. Everything happened in one stage. This meant you couldn't compile Lisp, you could only interpret an abstract syntax tree. In order to compile Lisp into efficient machine code or VM code, the compiler *changes the representation of the program* to a form that runs faster, but the compiled form doesn't support macro expansion. So it was necessary for Lisp to add a macro expansion stage. When FEXPRs are restricted to running in the macro expansion stage, they are called MACROs.\n\nThe reason that Curv has so many stages is that a Curv program transitions across *5 different representations*, and certain operations on code are only possible on certain program representations: source code -&gt; VM code -&gt; shape value -&gt; GLSL shader program -&gt; GPU machine code.",
+        "user": "UJN1TAYEQ",
+        "ts": "1572741495.025300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "22a170d2-9bb8-4231-b1a2-6230b7e5b1ea",
+        "type": "message",
+        "text": "Sure, convenience is definitely good. But just purely to answer the original question: Yes, the boundaries between compile time and run time, and functions and macros, etc, is completely 100% artificial.\n\nSuper practical, successful, proven, convenient, etc? Absolutely! But fundamental or inevitable? Absolutely not!",
+        "user": "UAVCC2X70",
+        "ts": "1572743139.025500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "2889a26d-a277-4f94-a8c7-0db39898cd25",
+        "type": "message",
+        "text": "Just watched that video about collapsing towers of interpreters -- great stuff! Thanks for sharing!",
+        "user": "UAVCC2X70",
+        "ts": "1572744026.026400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UHWC9PXBL"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fcddcfcd-bc0b-469a-b2cb-0ae932bfc5a1",
+        "type": "message",
+        "text": "I feel that I've given a good basic argument, with several examples of where the boundaries between stages (such as compile time and run time) are fundamental and inevitable. You all don't know Curv, but the FEXPR example is pretty well understood.",
+        "user": "UJN1TAYEQ",
+        "ts": "1572744782.026600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "54c3af0c-afbb-4bd3-9a0b-f1c7416d760e",
+        "type": "message",
+        "text": "<@UJN1TAYEQ> - I 100% agree, but with a *heavy* footnote that \"such as\" is not the same as \"which can only possibly be accomplished in terms of\".\n\nAnd that's my entire point: that the separation and phases are necessary, but there's nothing fundamental about how or where that separation is defined, or who or what gets to draw those lines.\n\nWhen you do it yourself in your own code, it's just code transforming code. But if it's mandated by a separate program beyond your control, then it's called \"a compiler\" (and the hard lines are called a \"programming language\"). *That* part is not _fundamentally_ necessary.",
+        "user": "UAVCC2X70",
+        "ts": "1572746041.027000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1572747631.000000"
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UHWC9PXBL"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "77a482d8-7b12-4700-819d-f0b5f3a81b91",
+        "type": "message",
+        "text": "As for different representations (e.g. the \"3-lisp\" complexity), that sounds like a real mess to have to deal with, so that advice is very appreciated!\n\nBut also, I see no reason that wisdom cannot be applied in any context (e.g. not just a compiler) where code manipulates \/ generates other code.",
+        "user": "UAVCC2X70",
+        "ts": "1572748454.031800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "6b7a3334-1ff5-4922-b580-b2034259cb2d",
+        "type": "message",
+        "text": "I'm actually thinking that Racket is probably the best compromise at the intersection of all this. It enforces separation through layers of \"language\", but lets you be in control of defining them how you like.\n\nHypothetically, I bet you could even make your own language\/syntax for specifying languages ... though I'm honestly not sure how practical that would actually be.",
+        "user": "UAVCC2X70",
+        "ts": "1572748746.033300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1572748957.000000"
+        },
+        "thread_ts": "1571972846.216600",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "2bfb3962-e525-4b42-9775-b538e2a41134",
+        "type": "message",
+        "text": "My impression is that the Xerox Alto was a minicomputer, comparable to a PDP-11 minicomputer, and was distinguished by specialized hardware like a mouse, a bitmap display, and ethernet. The Alto fit in a small cabinet. IBM mainframes of that era filled a room. I think that the true analog of an Alto-like computer today would be FoC projects that use specialized hardware to prototype new ways for people to interact with computers. A really good example would be <http:\/\/dynamicland.org|dynamicland.org>, which is Alan Kay's current project.",
+        "user": "UJN1TAYEQ",
+        "ts": "1572749022.035400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572749022.035400",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1572771172.039000",
+        "reply_users": [
+            "UJ6LDMMN0"
+        ],
+        "replies": [
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1572771172.039000"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "735ffd65-694d-491f-bf16-28356809fdd8",
+        "type": "message",
+        "text": "&gt; Is there a formalization to add and validate constraints on the valid intervals in which particular events can be emitted in the system?\n\nThis sounds like the raison d'être of state machines.",
+        "user": "UC2A2ARPT",
+        "ts": "1572758585.035800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572709118.479700",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "f6e2a0ff-249f-4bdb-8dba-6f21be2ba74b",
+        "type": "message",
+        "text": "&gt; I mean there might be multiple services\/objects around waiting for messages and due the combinatorical explosion we can't enumerate all the possible sequences of events.\n\nIf those services or objects all share a thread of execution, then (possibly nested) state machines and their ilk are pretty much the bread and butter of organizing asynchrony.\n\nIf there's any kind of parallelism happening (whether locally or across a network), then you're entering into the domain of the CAP theorem, and can pull out the coordination schemes like Raft or Paxos and the guarantees like linearizability and serializability. These are the standard and _proven_ (in that they're formally verifiable and rigorous) means of reasoning about distributed systems. Though good luck guaranteeing that your implementation is perfectly correct — cosmic rays and whatnot.",
+        "user": "UC2A2ARPT",
+        "ts": "1572758973.036400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572709118.479700",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "2c8b1fac-750f-4b07-a2d1-b749179ede6b",
+        "type": "message",
+        "text": "This stuff is all programming language-agnostic — it's just the way we talk about properties of distributed software that emerge from the laws of physics.",
+        "user": "UC2A2ARPT",
+        "ts": "1572759059.036600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572709118.479700",
+        "parent_user_id": "UL3CJ7YKC"
+    },
+    {
+        "client_msg_id": "5c20e3d6-b03d-4e40-89ff-aa22d65213c4",
+        "type": "message",
+        "text": "Let's start a thread for this discussion, rather than creating a lot of scrollback for the whole channel. Here's <@UKB1S7ZMY>'s prompt:\n\n&gt; IIRC Xerox PARC &amp; co used the most powerful computers available at the time to \"invent the future\": the graphical environments and programming languages regular people use now.\n&gt; What would be the equivalent today?\n&gt; My (naive) impression is that programming language and HCI labs don't seem to make use of 64 core processors with a 100 GB of RAM and GPU computing to similarly invent the future.",
+        "user": "UC2A2ARPT",
+        "ts": "1572759144.037500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1572759167.000000"
+        },
+        "thread_ts": "1572759144.037500",
+        "reply_count": 67,
+        "reply_users_count": 11,
+        "latest_reply": "1573601074.362700",
+        "reply_users": [
+            "UC2A2ARPT",
+            "UJ6LDMMN0",
+            "UJN1TAYEQ",
+            "UBN9AFS0N",
+            "ULM3U6275",
+            "UE6EFEPTQ",
+            "UKB1S7ZMY",
+            "U6FKVSVCK",
+            "UPDJV04FR",
+            "U5STGTB3J",
+            "UC6997THT"
+        ],
+        "replies": [
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572759643.037800"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1572771488.039200"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1572783163.077300"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572787811.077700"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572787861.077900"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572787962.078100"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572788115.078300"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572788210.078500"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572788455.078700"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572792063.079000"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572792138.079300"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1572795118.080500"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1572797201.081400"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1572797340.081600"
+            },
+            {
+                "user": "UKB1S7ZMY",
+                "ts": "1572800912.082000"
+            },
+            {
+                "user": "U6FKVSVCK",
+                "ts": "1572801657.082200"
+            },
+            {
+                "user": "U6FKVSVCK",
+                "ts": "1572801760.082500"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572802477.082700"
+            },
+            {
+                "user": "U6FKVSVCK",
+                "ts": "1572802728.082900"
+            },
+            {
+                "user": "U6FKVSVCK",
+                "ts": "1572802801.083100"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1572803983.083500"
+            },
+            {
+                "user": "UKB1S7ZMY",
+                "ts": "1572808375.085100"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1572808717.090900"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1572811414.091400"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1572813927.091600"
+            },
+            {
+                "user": "UPDJV04FR",
+                "ts": "1572817567.094400"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572839533.098400"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572839543.098600"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572839550.098800"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572839557.099000"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572839564.099200"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572839568.099400"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572839571.099600"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572840068.100000"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1572858258.102500"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1572914047.114600"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572918046.115000"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1572927134.123400"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1572946096.125500"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1572946160.125700"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1572946205.126000"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1572946273.126200"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1572957931.127300"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572973063.138000"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1572984982.139200"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1572986160.139500"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1572987046.140300"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572987162.140500"
+            },
+            {
+                "user": "UC2A2ARPT",
+                "ts": "1572988162.141500"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1573048426.143700"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1573073867.185400"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1573075728.190300"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1573076722.197900"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1573077934.198500"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1573077984.198800"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1573079232.210900"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1573079749.211100"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1573081755.225400"
+            },
+            {
+                "user": "UC6997THT",
+                "ts": "1573321152.262700"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1573340239.275500"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1573375824.279500"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1573413377.282900"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1573427174.320500"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1573493707.330400"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1573498521.339700"
+            },
+            {
+                "user": "ULM3U6275",
+                "ts": "1573511195.340400"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1573601074.362700"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "pray",
+                "users": [
+                    "U5STGTB3J",
+                    "UAL7940NM"
+                ],
+                "count": 2
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0",
+                    "UPDJV04FR"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a8c6ac30-c5aa-45a6-b4ac-6c8eaf0d9439",
+        "type": "message",
+        "text": "The way I think of this is... what hardware can be purchased or built (or even conceptualized) that stands a good chance of inevitably going mainstream in the future. That's what the Alto and Dynabook and Memex were in the past. Here are some things that fit that criteria today:\n\n• VR goggles\n• AR goggles\n• Augmented hearing devices\n• Dynamicland (h\/t <@UJN1TAYEQ>)\n• worn tactile feedback devices\n• anti-grav \/ hover\n• foldable screens\n• micrometer-accurate device positioning \/ orientation awareness\n• extreme battery efficiency, low heat production\n• hyper sensitive microphones with fantastic signal\/noise and extreme frequency response\n• quantum computers\n• gigapixel resolution still and video cameras\n• centimeter-scale GPS\n• hemi and full spherical cameras\n• stereoscopic cameras\n• metamaterials\n• $1\/kg to LEO\n• vacation homes at L1-L5\n• the fucking holodeck\n\nYou get the idea. My point is — I see no shortage of opportunities to apply the model \"spend enough money and imagination today, and you can work on the technology that'll be ubiquitous in 10-30 years\"",
+        "user": "UC2A2ARPT",
+        "ts": "1572759643.037800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1572759830.000000"
+        },
+        "thread_ts": "1572759144.037500",
+        "parent_user_id": "UC2A2ARPT",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UHWC9PXBL",
+                    "UKB1S7ZMY",
+                    "UFB8STN7K",
+                    "UMWF81HTP"
+                ],
+                "count": 4
+            }
+        ]
+    },
+    {
+        "client_msg_id": "ac5f0dd6-9ce3-46b9-9c16-7a1bcd23b6a6",
+        "type": "message",
+        "text": "Yes, the point is learning. You should almost always be able to glean at least one bit of new information no matter who you talk to that makes it worthwhile",
+        "user": "UMVFWPZ36",
+        "ts": "1572761766.038200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g96a1ef57fee",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/96a1ef57fee8349bd6f92faf153f9ec3.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0005-72.png",
+            "first_name": "",
+            "real_name": "Breck Yunits",
+            "display_name": "Breck Yunits",
+            "team": "T5TCAFTA9",
+            "name": "breck7",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572282098.317700",
+        "parent_user_id": "UPV1HUCBH"
+    }
+]

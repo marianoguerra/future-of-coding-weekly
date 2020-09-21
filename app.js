@@ -1,5 +1,5 @@
 //@format
-/*globals SimpleMarkdown*/
+/*globals Set, SimpleMarkdown*/
 const USER = 'marianoguerra',
   REPO = 'future-of-coding-weekly',
   ISSUES_URL = `https://api.github.com/repos/${USER}/${REPO}/issues`;
@@ -25,78 +25,57 @@ function ce(tag, attrs, ...body) {
   return node;
 }
 
+let mdOutput = '';
 function handleComment(comment, node, authors) {
   const container = ce('div', {style: 'margin-top:1em'}),
     markdown = comment.body,
     matchResult = (
-      new RegExp('\\[([^\\[]*?)\\]\\((https://twitter.com/.*?)\\)', 'gm').exec(
-        markdown
-      ) || []
+      new RegExp(
+        '\\[([^\\[]*?)\\]\\((https?://(www\\.)?twitter.com/([^/]+))\\)',
+        'gm'
+      ).exec(markdown) || []
     ).slice(1);
 
+  mdOutput += comment.body + '\n\n';
   container.innerHTML = mdToHTML(markdown);
 
-  if (matchResult.length === 0) {
-    console.log(matchResult, markdown);
-  }
-  matchResult.forEach((v, i, arr) => {
-    if (i % 2 === 0) {
-      const username = v,
-        url = arr[i + 1];
-      authors.push([username, url]);
+  matchResult.forEach((v, i, _arr) => {
+    if (i % 4 === 3) {
+      const username = v;
+      authors.add(username);
     }
   });
 
   node.appendChild(container);
+  node.appendChild(ce('br', {}));
+  // The beforebegin and afterend positions work only if the node is in a tree
+  // and has an element parent.
+  container.insertAdjacentText('beforebegin', '\n\n');
+  container.insertAdjacentText('afterend', '\n\n');
 }
 
 function link(url, label) {
   return ce('a', {href: url, target: '_blank'}, label || url);
 }
 
-function onCommentsFinished(contributors, authors) {
+function onCommentsFinished(_contributors, authors) {
+  console.log(authors);
   const outputNode = document.getElementById('output'),
-    contributorsSorted = Object.keys(contributors).sort(),
-    authorsSorted = authors.sort(([userA], [userB]) =>
+    authorsSorted = Array.from(authors).sort((userA, userB) =>
       userA.localeCompare(userB)
-    ),
-    authorsDom = ce('p', {}, 'Authors: '),
-    contributorsDom = ce('p', {}, 'Contributors: ');
+    );
 
   outputNode.appendChild(
     ce('hr', {style: 'border:0;border-top:1px solid #cccccc'})
   );
 
-  contributorsSorted.forEach((username, i, arr) => {
-    const dom = ce('a', {href: contributors[username].html_url}, username);
-    contributorsDom.appendChild(dom);
-
-    if (i + 1 < arr.length) {
-      contributorsDom.appendChild(toNode(', '));
-    }
-  });
-
-  authorsSorted.forEach(([name, url], i, arr) => {
-    const dom = ce('a', {href: url}, name);
-    authorsDom.appendChild(dom);
-
-    if (i + 1 < arr.length) {
-      authorsDom.appendChild(toNode(', '));
-    }
-  });
-
-  console.log(
-    authorsSorted.map(([_, url]) => '@' + url.split('/')[3]).join(' ')
-  );
-
-  outputNode.appendChild(contributorsDom);
-  outputNode.appendChild(authorsDom);
+  console.log(authorsSorted.map((name) => '@' + name).join(' '));
 
   outputNode.appendChild(
     ce(
       'p',
       {},
-      'Not a member yet? check the ',
+      'Not a member yet? Check the ',
       link('https://futureofcoding.org/', 'Future of Coding Community')
     )
   );
@@ -105,28 +84,28 @@ function onCommentsFinished(contributors, authors) {
     ce(
       'p',
       {},
-      'Not convinced yet? check the ',
-      link('https://tinyletter.com/marianoguerra/archive', 'Newsletter Archive')
-    )
-  );
-
-  outputNode.appendChild(
-    ce(
-      'p',
-      {},
-      'Want to contribute? Check ',
-      link('https://github.com/marianoguerra/future-of-coding-weekly'),
-      ' for instructions, have a productive week!'
+      'Not subscribed yet? ',
+      link(
+        'https://tinyletter.com/marianoguerra/',
+        'Subscribe to the Newsletter'
+      ),
+      ' (',
+      link(
+        'https://tinyletter.com/marianoguerra/archive',
+        'Newsletter Archive'
+      ),
+      ')'
     )
   );
 
   document.getElementById(
     'output-html'
   ).textContent = outputNode.innerHTML.replace(/<p>/g, '\n\n<p>').trim();
+  document.getElementById('output-md').textContent = mdOutput;
 }
 
-function addCommentSeparator(outputNode) {
-  outputNode.appendChild(ce('p', {}, '--'));
+function addCommentSeparator(_outputNode) {
+  //outputNode.appendChild(ce('p', {style: 'text-align:center'}, '🚥'));
 }
 
 function onComments(comments, baseUrl, count, contributors, authors) {
@@ -149,14 +128,14 @@ function onComments(comments, baseUrl, count, contributors, authors) {
 }
 
 function loadCommentsPage(baseUrl, count, contributors, authors, callback) {
-  fetchJson(baseUrl + count, comments =>
+  fetchJson(baseUrl + count, (comments) =>
     callback(comments, baseUrl, count + 1, contributors, authors)
   );
 }
 
 function handleIssue(issue) {
   const contributors = {},
-    authors = [];
+    authors = new Set();
   loadCommentsPage(
     issue.comments_url + '?page=',
     1,
@@ -186,7 +165,7 @@ function moreThanOneIssueOpen() {
 
 function handleIssues(data) {
   const openIssues = data
-    .filter(issue => issue.state === 'open')
+    .filter((issue) => issue.state === 'open')
     .sort((issueA, issueB) => issueA.number - issueB.number);
 
   if (openIssues.length === 0) {
@@ -202,7 +181,7 @@ function handleIssues(data) {
 
 function fetchJson(url, onData) {
   return fetch(url)
-    .then(res => res.json())
+    .then((res) => res.json())
     .then(onData);
 }
 
@@ -218,10 +197,10 @@ function overrideDefaultHtml(ruleName, overrideFn) {
 }
 
 const customRules = {
-    paragraph: overrideDefaultHtml('paragraph', function(node, output, state) {
+    paragraph: overrideDefaultHtml('paragraph', function (node, output, state) {
       return '<p>' + output(node.content, state) + '</p>\n';
     }),
-    blockQuote: overrideDefaultHtml('blockQuote', function(
+    blockQuote: overrideDefaultHtml('blockQuote', function (
       node,
       output,
       state
@@ -231,7 +210,7 @@ const customRules = {
         output(node.content, state) +
         '</blockquote>\n'
       );
-    })
+    }),
   },
   rules = Object.assign({}, defaultRules, customRules),
   rawBuiltParser = SimpleMarkdown.parserFor(rules),

@@ -1,0 +1,122 @@
+[
+    {
+        "client_msg_id": "eee57964-74a5-4ed2-9620-95a16d9c09c0",
+        "type": "message",
+        "text": "Datalog can actually be seen as relational algebra plus monotone fixed points, so your two examples are quite closely related. It's worth noting that, strictly speaking, neither relational algebra nor Datalog accounts for either *aggregations* or even *sorting*, so they're... pretty limited in practice. SQL adds these features, of course, but I'm not sure whether it's guided by some underlying theory.",
+        "user": "UEF95M2RH",
+        "ts": "1544204611.034400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4e6637707ff",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c4e6637707ff62601f3dd21ec7626095.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "",
+            "real_name": "Michael Arntzenius",
+            "display_name": "rntz",
+            "team": "T5TCAFTA9",
+            "name": "daekharel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873378.006400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "d86b11ad-8e29-4c4c-a7b7-505eb1b12aa9",
+        "type": "message",
+        "text": "I'm not sure they exactly satisfy your request, but other things you might look at include the Bird-Meertens formalism and the Boom hierarchy:\n\n<https:\/\/en.wikipedia.org\/wiki\/Bird%E2%80%93Meertens_formalism>\n<https:\/\/blog.acolyer.org\/2014\/11\/06\/the-boom-hierarchy\/>",
+        "user": "UEF95M2RH",
+        "ts": "1544204642.034600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4e6637707ff",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c4e6637707ff62601f3dd21ec7626095.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "",
+            "real_name": "Michael Arntzenius",
+            "display_name": "rntz",
+            "team": "T5TCAFTA9",
+            "name": "daekharel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Bird–Meertens formalism",
+                "title_link": "https:\/\/en.wikipedia.org\/wiki\/Bird%E2%80%93Meertens_formalism",
+                "from_url": "https:\/\/en.wikipedia.org\/wiki\/Bird%E2%80%93Meertens_formalism",
+                "author_name": "Wikipedia",
+                "author_link": "https:\/\/en.wikipedia.org\/",
+                "text": "The Bird–Meertens formalism (BMF) is a calculus for deriving programs from specifications (in a functional-programming setting) by a process of equational reasoning. It was devised by Richard Bird and Lambert Meertens as part of their work within IFIP Working Group 2.1.\nIt is sometimes referred to in publications as BMF, as a nod to Backus–Naur form. Facetiously it is also referred to as Squiggol, as a nod to ALGOL, which was also in the remit of WG 2.1, and because of the \"squiggly\" symbols it uses. A less-used variant name, but actually the first one suggested, is SQUIGOL.",
+                "fallback": "wikipedia: Bird–Meertens formalism",
+                "service_icon": "https:\/\/a.slack-edge.com\/bfaba\/img\/unfurl_icons\/wikipedia.png",
+                "id": 1,
+                "original_url": "https:\/\/en.wikipedia.org\/wiki\/Bird%E2%80%93Meertens_formalism"
+            },
+            {
+                "service_name": "the morning paper",
+                "service_url": "http:\/\/blog.acolyer.org",
+                "title": "The Boom Hierarchy",
+                "title_link": "https:\/\/blog.acolyer.org\/2014\/11\/06\/the-boom-hierarchy\/",
+                "author_name": "adriancolyer",
+                "author_link": "https:\/\/blog.acolyer.org\/author\/adriancolyer\/",
+                "text": "The Boom Hierarchy &ndash; Bunkenberg \nIn honour of the CodeMesh conference this week, and as recommended in a recent tweet by Eric Meijer, today&rsquo;s paper gives insight on some of our most fundamental data structures and the operations on them.\n\nThe Boom Hierarchy is the family of data structures tree, list, bag, and set, to be used with the functions reduce, map, filter. &hellip; the relations between the data structures are explained. No category theory required!\n\nBunkenberg does use the word &lsquo;homomorphism&rsquo; a lot though &#128521; I find these sometimes intimidating sounding words a lot easier to get along with by picking apart them apart. So &lsquo;homo&rsquo; meaning &lsquo;the same&rsquo; (as in homogeneous), and &lsquo;morph&rsquo; meaning &lsquo;shape or form&rsquo;.  So homomorphism is things that have the same shape &ndash; or more precisely a relation between their shapes\/forms such that you can translate from one to the other and back again. \nAt the core of the paper is a really simple idea: consider a binary operation (something that takes two arguments, such as &lsquo;+&rsquo;). There are four laws of interest that the operation may or may not obey. Using ++ to stand in for the binary operator, these are:\nThe unit law &ndash; does the operation have a unit value U such that x++U = x and U ++ x = x. For sum, the unit value is 0.\nThe associative law &ndash; (a ++ b) ++ c = a ++ (b++c)\n\nThe commutative law &ndash; a ++ b = b ++ a\n\nIdempotency &ndash; a ++ a = a. (For example, set union)\nA data structure (algebra) can either follow the restrictions implied by a given law, or not. If &lsquo;1&rsquo; represents &lsquo;follows the law&rsquo; and &lsquo;0&rsquo; represents &lsquo;does not follow the law&rsquo;, and we code for each law in sequence, then we can characterise a data structure as e.g. 1100 (lists : obey the unit and associative laws, but not the commutative and idempotency ones). Thus there are 16 different combinations, and each one represents a different data structure! This collection of data structures is &lsquo;the Boom Hierarchy&rsquo;.\nReduce, map, and filter can be applied to all data structures in the hierarchy. \nAny homomorphism from a free algebra (a data structure) can be defined as a combination of a map and a reduce. \nThe paper then goes on to highlight some of the data structures formed by the combinations of the laws, and some neat operations that can be formed using map and reduce. \nFor example, a set has code 1111, and existential qualification (&lsquo;there exists&rsquo;), isEmpty, size, membership and more can all be defined using simple map and reduce translations.\nA really neat introduction to the power of &lsquo;algebraic thinking&rsquo;.",
+                "fallback": "the morning paper Link: The Boom Hierarchy",
+                "from_url": "https:\/\/blog.acolyer.org\/2014\/11\/06\/the-boom-hierarchy\/",
+                "service_icon": "https:\/\/secure.gravatar.com\/blavatar\/09326a066a08237015d6b84f026d36ae?s=114",
+                "id": 2,
+                "original_url": "https:\/\/blog.acolyer.org\/2014\/11\/06\/the-boom-hierarchy\/"
+            }
+        ],
+        "thread_ts": "1543873378.006400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "43d8215a-11e1-498f-b82b-b9a00d95950a",
+        "type": "message",
+        "text": "I've been working on a language called Datafun (<http:\/\/www.rntz.net\/datafun|www.rntz.net\/datafun>), which generalizes Datalog; it's based on a generalized form of set comprehensions.\n\nSet comprehensions themselves generalize relational algebra, but have a distinctly different flavor when actually writing programs; and naturally, the fact that they're more general makes them harder to implement as efficiently. For a theory of set comprehensions (&amp; other kinds of comprehension), you might read Phil Wadler's \"Comprehending Monads\". For how to generalize this to account for other common queries like \"group by\", you could see Jeremy Gibbon's \"Comprehending Ringads\".\n\n<https:\/\/ncatlab.org\/nlab\/files\/WadlerMonads.pdf>\n<http:\/\/www.cs.ox.ac.uk\/jeremy.gibbons\/publications\/ringads.pdf>",
+        "user": "UEF95M2RH",
+        "ts": "1544204748.034900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4e6637707ff",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c4e6637707ff62601f3dd21ec7626095.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "",
+            "real_name": "Michael Arntzenius",
+            "display_name": "rntz",
+            "team": "T5TCAFTA9",
+            "name": "daekharel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873378.006400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "e2876678-c6ef-4aab-aeec-b9bac00a5ad2",
+        "type": "message",
+        "text": "Sorry for the infodump. Hopefully some of that is helpful.",
+        "user": "UEF95M2RH",
+        "ts": "1544204769.035100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4e6637707ff",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/c4e6637707ff62601f3dd21ec7626095.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0017-72.png",
+            "first_name": "",
+            "real_name": "Michael Arntzenius",
+            "display_name": "rntz",
+            "team": "T5TCAFTA9",
+            "name": "daekharel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1543873378.006400",
+        "parent_user_id": "UBN9AFS0N"
+    }
+]

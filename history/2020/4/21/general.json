@@ -1,0 +1,1703 @@
+[
+    {
+        "client_msg_id": "86e0fb77-e9ac-4b6d-8de7-b4ca2859e2f8",
+        "type": "message",
+        "text": "Check out\nReltron: <https:\/\/kevinlynagh.com\/reltron\/>\n\nGamma: <https:\/\/thegamma.net\/>\n\nStencil: <https:\/\/stenci.la\/blog\/introducing-sheets\/>\n\nand other works from CSAIL on databases like Espalier: <https:\/\/sdg.csail.mit.edu\/projects\/espalier>\n\nin this context.",
+        "user": "UDKTZSD6H",
+        "ts": "1587454249.095300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2b4594ccf61c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-06-03\/652459184852_2b4594ccf61c401763eb_72.png",
+            "first_name": "",
+            "real_name": "Prathyush",
+            "display_name": "Prathyush",
+            "team": "T5TCAFTA9",
+            "name": "prax08",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UDKTZSD6H",
+            "ts": "1587454352.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WkJeD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Check out\nReltron: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/kevinlynagh.com\/reltron\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nGamma: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/thegamma.net\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nStencil: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/stenci.la\/blog\/introducing-sheets\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nand other works from CSAIL on databases like Espalier: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/sdg.csail.mit.edu\/projects\/espalier"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nin this context."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587409068.093400",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "open_mouth",
+                "users": [
+                    "UFEQUBNNT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1da34557-1875-4d07-96be-3dd99b272888",
+        "type": "message",
+        "text": "<https:\/\/billwadge.wordpress.com\/2020\/04\/20\/the-intensional-spreadsheet\/>",
+        "user": "UBN9AFS0N",
+        "ts": "1587457167.095700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Bill Wadge's Blog",
+                "service_url": "http:\/\/billwadge.wordpress.com",
+                "title": "The Intensional Spreadsheet",
+                "title_link": "https:\/\/billwadge.wordpress.com\/2020\/04\/20\/the-intensional-spreadsheet\/",
+                "author_name": "Bill Wadge",
+                "author_link": "https:\/\/billwadge.wordpress.com\/author\/billwadge\/",
+                "text": "A while back Weichang Du and I designed a spreadsheet based on intensional logic, the&nbsp; logic of values that vary over a coordinate space.\nSpreadsheets are a natural fit for &lsquo;intensifying&rsquo; because a sheet is already a two-dimensional intension, varying over the horizontal (A, B, C, &hellip;) and vertical (1, 2, 3, &hellip;) dimensions. But we can do better than just redo Excel with intensional semantics. Intensionality opens up some interesting possibilities; like user-defined operators, time varying sheets, or nested sheets.\n\nThis post is based on the IEEE Software article Du and I wrote, A Three Dimensional Spreadsheet,&nbsp;but with a different notation (to simplify the presentation).\nThe Fibonacci Numbers\nLet&rsquo;s start with a simple example &ndash; the Fibonacci numbers. Suppose we want to compute them and display them in row 1. In Excel it&rsquo;s easy peasy, we put 0 in cell A1 and 1 in cell B1; then A1+B1 in cell C1, B1+C1 in cell D1, C1+D1 in cell E1, etc. The formulas in the cells are\nA   B     C       D       E      F\n-----------------------------------\n0 | 1 | A1+B1 | B1+C1 | C1+D1 | ...\n\nand the values displayed are\nA   B   C   D   E    F\n-----------------------------------\n0 | 1 | 2 | 3 | 5 | ...\n\nNotice that the formulas in the cells are all different; although if you know Excel, you know that they are all &lsquo;copies&rsquo; of the formula in C2. Not literally copies, but functional copies. The value in cell E1 bears the same relationship to the two values on the left as C1 does to the two values on its left.\nConfused? Never mind, it all works out more simply with the intensional spreadsheet.\nThe basic idea is that we define a sheet (which needs a name, say F) by putting expressions in cells. The difference is that they are in the language of two dimensional intensions. Let&rsquo;s call the horizontal dimension h and the vertical dimension v. We need space versions of the traditional Lucid temporal operators first,&nbsp;next, and fby. (Plus prev).\nLet&rsquo;s call next.h right and prev.h left (for obvious reasons). Then we put the following formulas in the cells A1, B1, C1, &hellip;\nA   B          C                      D                       E                \n------------------------------------------------------------------------------\n0 | 1 | left F + left left F | left F + left left F  | left F + left left F  | ...\n\nThe first thing to notice is that apart from the first two, the formulas are exactly the same. Copying in the intensional spreadsheet is just that.\nAlso evaluation is just that. To get (for example) the numerical value of the cell D1, we evaluate the formula stored in D1. This evaluation will entail evaluating the formulas in C1 and eventually in A1 and B1, the base cases of the recursion. Note that this is eduction (more below).\n[It&rsquo;s been pointed out that you can get something close to this with R1C1 notation. R[-2]C is the cell two columns to the left on the same row. This notation is not as general; for example we can write left(F+left F).]\nAbsolute References\nIt should be clear that most spread sheets are easily formulated in the new notation. The only question is how to do what are known as &lsquo;absolute&nbsp; references&rsquo;, that are not altered by traditional copying. One approach is to use expressions like A2 as absolute coordinates; so that e.g. F.A2 is the contents of exactly the A2 cell of F (in the above, 1) and it gets copied as exactly F.A2.\nAs a special case, we have operators side and top that take us to the side and top of the sheet, respectively. So side F is F.A and top F is F.0.\nDefault Formulas\nThe fact that all but the first two formulas in the Fibonacci sheet are the same suggests some shortcuts. The user interface could allow us to select a set of cells and put a single formula into each of them.\nAnother idea is to allow us to give a default formula for an entire row (or column), with the understanding that putting formulas in individual cells overrides the default.\nAs another example we could define a sheet P by putting 1 in every cell in row 1, 1 in every cell in column A, and the default formula\nleft P + up P\nin all the other cells of P. The result is to make every column a running total of the column to the left. The result is Pascal&rsquo;s triangle (tilted to the left)\n---------------------\n| 1 | 1 | 1 | 1 | 1 ...\n---------------------\n| 1 | 2 | 3 | 4 | 5 \n---------------------\n| 1 | 3 | 6 |10 |15 \n---------------------\n| 1 | 4 |10 |20 |35 \n---------------------\n| 1 | 5 |15 |35 |70\n--------------------- \n\nGlobal Definitions\nOur spreadsheet design allows for definitions that apply globally. For example, if we add the global definition\nF2 = left F + left left F\nthen we can put F2 in cells C1, D1, E1 etc. We can have global user defined functions like\nleft2(X) = left left X\nand define F2 as\nleft F + left2(F)\nFunctions can of course be defined recursively; for example\nleftsum(X,i) = if i eq 0 then 0 else left X + leftsum(left X,i-1) fi\ndefines e.g. leftsum(F,10) to be the sum of the 10 values to the left. If we want to sum all the values to the left we can add the global definition\nleftsumall(X) = leftsum(X,index.h)\nwhere index.d is the coordinate in the d dimension.\nSpreadstreams\nSince we already have dimensions h and v it&rsquo;s no technical problem to allow the traditional Lucid time dimension t. The result is a three-dimensional spreadsheet which could be understood as a time varying two dimensional spreadsheet. For example, a traditional spreadsheet might display sales (S) of car models by salesman. With the time dimension we can do this for every month, starting with (say) January as month 0.\nThen we can have extra cells (along the side and the bottom) which display totals for model and salesman (for the current month). But with the time dimension we can also display percentage change over the&nbsp; last month. For example of D10 displays Bob&rsquo;s total month sales, we can put the formula\n100*(S &ndash; prev S)\/(prev S)\nin D11 which will now display the percentage change in Bob&rsquo;s sales.\nAnother example of a time varying spreadsheet is that for the relaxation method. It is used to give approximate solutions to the Poisson equation &nabla;2 P = 0. It is an iterative process where each (interior) cell value is repeatedly replaced by the average of the values above and below and on either side; for example, the value of F8 is replace by the average of the values of F7, F9, E8 and G8.\nWe can program this by placing the formula\nprev (left P + right P + up P + down P)\/4\nin all the interior cells.\nNested spreadsheets\nThe intensional approach allows another generalization: nested spreadsheets. By this we mean that any cell of the main sheet can (but not necessarily does) contain a whole sub-spreadsheet. And that any cell of the sub-spreadsheet might contain a sub-sub-spreadsheet, and so on.\nIndexing makes this simple: any cell of the sub-spreadsheet is indexed by two letter-number combinations. For example, if F8 has a sub-sheet, its cells have coordinates&nbsp; like F8.C10 or F8.H7. In the same way a cell in a sub-sub-sheet might have an index F8.H7.K21.\nNested sheets would allow a very natural way of representing hierarchical data. The top row of the main sheet could hold sales per year and month (two dimensions) and each cell could hold data of sales per month\/salesperson (two more dimensions).\nWe would need extra intensional operators which take us down one level or across to neighbouring sheets. We haven&rsquo;t worked out the details.\nDemand-driven evaluation\nThis all sounds extremely ambitious and even impractical; and would be if we tried to implement it with conventional techniques. For example, if the user can open sub-sheets on the fly,&nbsp; how do we know how many cells to allocate?\nIt is all made possible by a simple technique for evaluation of intensional systems, namely demand driven (lazy) evaluation; also called eduction.\nBriefly, it …",
+                "fallback": "Bill Wadge's Blog Link: The Intensional Spreadsheet",
+                "from_url": "https:\/\/billwadge.wordpress.com\/2020\/04\/20\/the-intensional-spreadsheet\/",
+                "service_icon": "https:\/\/s0.wp.com\/i\/webclip.png",
+                "id": 1,
+                "original_url": "https:\/\/billwadge.wordpress.com\/2020\/04\/20\/the-intensional-spreadsheet\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7U2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https:\/\/billwadge.wordpress.com\/2020\/04\/20\/the-intensional-spreadsheet\/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d54feb09-ca3b-4472-93df-0265eafbd166",
+        "type": "message",
+        "text": "The Convivial Computing Salon will be held on Zoom May 4-9. Each session will include a presentation, a response, and a public Q&amp;A\n<https:\/\/docs.google.com\/spreadsheets\/d\/1tuyRit9qQN1kwckS3rND8GmvSKPo-qBJW8aroEIwFt8\/edit?usp=sharing>",
+        "user": "U6KQ2S410",
+        "ts": "1587478348.097300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Wv3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The Convivial Computing Salon will be held on Zoom May 4-9. Each session will include a presentation, a response, and a public Q&A\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/docs.google.com\/spreadsheets\/d\/1tuyRit9qQN1kwckS3rND8GmvSKPo-qBJW8aroEIwFt8\/edit?usp=sharing"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587478348.097300",
+        "reply_count": 6,
+        "reply_users_count": 5,
+        "latest_reply": "1587562228.113400",
+        "reply_users": [
+            "UK3LH8CF5",
+            "U6KQ2S410",
+            "U010SQSJGLS",
+            "UNBPP291C",
+            "U8A5MS6R1"
+        ],
+        "replies": [
+            {
+                "user": "UK3LH8CF5",
+                "ts": "1587479079.097600"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1587479156.097900"
+            },
+            {
+                "user": "U010SQSJGLS",
+                "ts": "1587479407.098200"
+            },
+            {
+                "user": "UNBPP291C",
+                "ts": "1587497492.106800"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1587508383.108200"
+            },
+            {
+                "user": "U6KQ2S410",
+                "ts": "1587562228.113400"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "cool",
+                "users": [
+                    "U79HM6726",
+                    "UAJ9DV971",
+                    "UETFVV24Q",
+                    "UC2A2ARPT",
+                    "UCKRZS3DZ",
+                    "UUK6Y29R8",
+                    "UFQQ3P867"
+                ],
+                "count": 7
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UJN1TAYEQ",
+                    "UJBAJNFLK",
+                    "UCKRZS3DZ",
+                    "U8A5MS6R1",
+                    "UFQQ3P867",
+                    "UU45NNMHT"
+                ],
+                "count": 6
+            },
+            {
+                "name": "tada",
+                "users": [
+                    "UCKRZS3DZ",
+                    "UJ6LDMMN0",
+                    "UU45NNMHT",
+                    "UD31LGQKB",
+                    "UCGAK10LS"
+                ],
+                "count": 5
+            },
+            {
+                "name": "clap",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            },
+            {
+                "name": "100",
+                "users": [
+                    "UU45NNMHT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e521ff45-8eca-4670-993c-d33d8125bc8d",
+        "type": "message",
+        "text": "Is there anywhere that tickets can be purchased for one or more of these?",
+        "user": "UK3LH8CF5",
+        "ts": "1587479079.097600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "4377ee2417eb",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-25\/886144219253_4377ee2417eb9eaacd4b_72.jpg",
+            "first_name": "",
+            "real_name": "Jimmy Miller",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jimmyhmiller",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UK3LH8CF5",
+            "ts": "1587479082.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2dhsI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Is there anywhere that tickets can be purchased for one or more of these?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587478348.097300",
+        "parent_user_id": "U6KQ2S410"
+    },
+    {
+        "client_msg_id": "4c1c9f86-6166-46d0-9dc3-c7af026f8f30",
+        "type": "message",
+        "text": "It will be open to the public",
+        "user": "U6KQ2S410",
+        "ts": "1587479156.097900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NbsL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It will be open to the public"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587478348.097300",
+        "parent_user_id": "U6KQ2S410",
+        "reactions": [
+            {
+                "name": "grinning",
+                "users": [
+                    "UK3LH8CF5",
+                    "UJBAJNFLK",
+                    "UNBPP291C"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "b54ae12b-00e6-4c8c-8ca2-51e36f574c8d",
+        "type": "message",
+        "text": "How does one attend?",
+        "user": "U010SQSJGLS",
+        "ts": "1587479407.098200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge900b2beeb5",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e900b2beeb5a6877d191b8d15623671b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Michael Coblenz",
+            "display_name": "Michael Coblenz",
+            "team": "T5TCAFTA9",
+            "name": "mcoblenz",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bjl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "How does one attend?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587478348.097300",
+        "parent_user_id": "U6KQ2S410"
+    },
+    {
+        "client_msg_id": "ca7c95ef-0183-498d-903b-0f004f2a6db1",
+        "type": "message",
+        "text": "<http:\/\/tomasp.net\/blog\/2020\/data-exploration-calculus\/>",
+        "user": "UBN9AFS0N",
+        "ts": "1587479841.098500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Data exploration calculus: Capturing the essence of exploratory data scripting",
+                "title_link": "http:\/\/tomasp.net\/blog\/2020\/data-exploration-calculus\/",
+                "text": "What would a small formal language for data scripting look like? The lambda calculus captures the essence of functional programming. In this article, I present a small formal calculus that captures the essence of data scripting as done, for example, by journalists exploring data using Python and pandas.",
+                "fallback": "Data exploration calculus: Capturing the essence of exploratory data scripting",
+                "image_url": "http:\/\/tomasp.net\/blog\/2020\/data-exploration-calculus\/calculus.png",
+                "from_url": "http:\/\/tomasp.net\/blog\/2020\/data-exploration-calculus\/",
+                "image_width": 250,
+                "image_height": 250,
+                "image_bytes": 15802,
+                "service_icon": "http:\/\/tomasp.net\/img\/favicon-big.png",
+                "service_name": "tomasp.net",
+                "id": 1,
+                "original_url": "http:\/\/tomasp.net\/blog\/2020\/data-exploration-calculus\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "e1fop",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "http:\/\/tomasp.net\/blog\/2020\/data-exploration-calculus\/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587479841.098500",
+        "reply_count": 4,
+        "reply_users_count": 3,
+        "latest_reply": "1587492627.106300",
+        "reply_users": [
+            "UFB8STN7K",
+            "UBN9AFS0N",
+            "UAJKEBGP8"
+        ],
+        "replies": [
+            {
+                "user": "UFB8STN7K",
+                "ts": "1587481832.098900"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1587482396.099600"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1587482415.099800"
+            },
+            {
+                "user": "UAJKEBGP8",
+                "ts": "1587492627.106300"
+            }
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UKP3B2J5D",
+                    "UGLSY9X3J"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e827bb26-f5fc-4a10-a2f5-051147c2b145",
+        "type": "message",
+        "text": "Hmm, this seems not too distinct from what the R folks are doing. a grammar of data manipulation (<https:\/\/dplyr.tidyverse.org\/>), a grammar of graphics (<https:\/\/ggplot2.tidyverse.org\/>), etc.",
+        "user": "UFB8STN7K",
+        "ts": "1587481832.098900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFB8STN7K",
+            "ts": "1587481857.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "\/sSd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hmm, this seems not too distinct from what the R folks are doing. a grammar of data manipulation ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/dplyr.tidyverse.org\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), a grammar of graphics ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/ggplot2.tidyverse.org\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), etc."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587479841.098500",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "eff028ab-6be5-416e-ac33-42b2672a5cb7",
+        "type": "message",
+        "text": "an algebra instead of a grammar maybe? :slightly_smiling_face:",
+        "user": "UBN9AFS0N",
+        "ts": "1587482396.099600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "u4x2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "an algebra instead of a grammar maybe? "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587479841.098500",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "0c1b0db1-3c64-43e4-b64d-93f2c5950d12",
+        "type": "message",
+        "text": "but yeah, I see them as parts of the same thing",
+        "user": "UBN9AFS0N",
+        "ts": "1587482415.099800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7Pavd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "but yeah, I see them as parts of the same thing"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587479841.098500",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "220e1afe-0ec2-44dd-b5cb-43310f23467f",
+        "type": "message",
+        "text": "<@UJN1TAYEQ> Interesting, thanks for the explanations!\nAre there any examples of non-database code using relations and relational algebra? I remember being rather disappointed by the tarpit paper recommending this style but not giving any concrete examples.",
+        "user": "UJBAJNFLK",
+        "ts": "1587488047.100200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g05e4cf66ef1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/305e4cf66ef1179f7e95981b1520ba1a.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0004-72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "T7mi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJN1TAYEQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Interesting, thanks for the explanations!\nAre there any examples of non-database code using relations and relational algebra? I remember being rather disappointed by the tarpit paper recommending this style but not giving any concrete examples."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587276251.075500",
+        "parent_user_id": "U012FRV0EV7"
+    },
+    {
+        "client_msg_id": "711CD94A-8F4B-4F2C-A583-E96A0C8B849B",
+        "type": "message",
+        "text": "Hey <@UC2A2ARPT>, this is such a great idea. Do you mind sharing what inspired it and\/or what made you set up the new channel?",
+        "user": "U5STGTB3J",
+        "ts": "1587489543.102100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "UUL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hey "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UC2A2ARPT"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", this is such a great idea. Do you mind sharing what inspired it and\/or what made you set up the new channel?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587235213.070400",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "0FAC4007-4D64-4FCF-A186-F3881067D9CC",
+        "type": "message",
+        "text": "Never mind… found it in the much more appropriate #random — clearly I’m doing this in the wrong order.",
+        "user": "U5STGTB3J",
+        "ts": "1587489618.103100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yjf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Never mind… found it in the much more appropriate #random — clearly I’m doing this in the wrong order."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587235213.070400",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "186f8eca-8c08-4228-88f8-34cc02bbe834",
+        "type": "message",
+        "text": "That fish-eye view of an infinite spreadsheet in Espalier is :100:",
+        "user": "UFEQUBNNT",
+        "ts": "1587489661.103500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "z7t",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That fish-eye view of an infinite spreadsheet in Espalier is "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "100"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587409068.093400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "4b0e70bd-f444-443d-9429-0c99637f1ea4",
+        "type": "message",
+        "text": "Whenever we do these sorts of \"New Community Initiative!\" things, there's often a preceeding discussion in <#CEXED56UR|meta> — here's the relevant one for this new channel: <https:\/\/futureofcoding.slack.com\/archives\/CEXED56UR\/p1586759935039000>",
+        "user": "UC2A2ARPT",
+        "ts": "1587490134.103700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "from_url": "https:\/\/futureofcoding.slack.com\/archives\/CEXED56UR\/p1586759935039000",
+                "fallback": "[April 12th, 2020 11:38 PM] ivanreese: Prompted by <https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1586714499350400|this message> in <#C5T9GPWFL|general>, I've created a new <#C0120A3L30R|two-minute-week> channel.\n\nPrompted by <https:\/\/futureofcoding.slack.com\/archives\/C5U3SEW6A\/p1586721059035600|this message> in <#C5U3SEW6A|random>, I've written up <https:\/\/futureofcoding.org\/two-minute-week|some documentation> for the channel, linked from our <https:\/\/futureofcoding.org\/community|community page> and from the description\/topic of the channel itself. Let me have your feedback on the docs in the replies.\n\nLet's also get a few good videos posted to serve as inspiration, and then I'll add everyone on the Slack and make it part of the default set of channels.\n\nThanks <@UBN9AFS0N>, <@UCUSW7WVD>, and everyone who helped brainstorm on this so far. I think it'll be loads of fun.",
+                "ts": "1586759935.039000",
+                "author_id": "UC2A2ARPT",
+                "author_subname": "Ivan Reese",
+                "channel_id": "CEXED56UR",
+                "channel_name": "meta",
+                "is_msg_unfurl": true,
+                "text": "Prompted by <https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1586714499350400|this message> in <#C5T9GPWFL|general>, I've created a new <#C0120A3L30R|two-minute-week> channel.\n\nPrompted by <https:\/\/futureofcoding.slack.com\/archives\/C5U3SEW6A\/p1586721059035600|this message> in <#C5U3SEW6A|random>, I've written up <https:\/\/futureofcoding.org\/two-minute-week|some documentation> for the channel, linked from our <https:\/\/futureofcoding.org\/community|community page> and from the description\/topic of the channel itself. Let me have your feedback on the docs in the replies.\n\nLet's also get a few good videos posted to serve as inspiration, and then I'll add everyone on the Slack and make it part of the default set of channels.\n\nThanks <@UBN9AFS0N>, <@UCUSW7WVD>, and everyone who helped brainstorm on this so far. I think it'll be loads of fun.",
+                "author_name": "Ivan Reese",
+                "author_link": "https:\/\/futureofcoding.slack.com\/team\/UC2A2ARPT",
+                "author_icon": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-48.png",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "id": 1,
+                "original_url": "https:\/\/futureofcoding.slack.com\/archives\/CEXED56UR\/p1586759935039000",
+                "footer": "Posted in #meta"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QkkSp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Whenever we do these sorts of \"New Community Initiative!\" things, there's often a preceeding discussion in "
+                            },
+                            {
+                                "type": "channel",
+                                "channel_id": "CEXED56UR"
+                            },
+                            {
+                                "type": "text",
+                                "text": " — here's the relevant one for this new channel: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/futureofcoding.slack.com\/archives\/CEXED56UR\/p1586759935039000"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587235213.070400",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "10b35ae3-e299-41c6-a8e9-8fc24b76ee0b",
+        "type": "message",
+        "text": "<@UJBAJNFLK> Eve puts almost everything into a database. IIRC, it didn't put much of a spotlight on the acts of projecting and joining, since they were so basic to the execution model.",
+        "user": "UFEQUBNNT",
+        "ts": "1587491001.104200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WMZE=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJBAJNFLK"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Eve puts almost everything into a database. IIRC, it didn't put much of a spotlight on the acts of projecting and joining, since they were so basic to the execution model."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587276251.075500",
+        "parent_user_id": "U012FRV0EV7"
+    },
+    {
+        "client_msg_id": "c202a87d-d44e-47fc-bdfd-c94125e2c6d6",
+        "type": "message",
+        "text": "This sounds cool, but I don't quite \"get\" the new algebra he is introducing. For one thing, in what sense are relations \"first-class citizens\"? Maybe I don't know the definition of a \"relation\". Also, why does the join work?\n```project(\n  join(suppliers, cities),\n  [:sid, :name, :city, :country])```\ndoes it choose implicitly to join on \"city\" just because the two tables both have a city column? But what if the column names don't match, and how is this going to work if two tables happen to share a column name but it is just a coincidence and not intended for joining?\n\nI have always found relational algebra unnatural. In non-DB code, if you want to know what city a person lives in, it's just `person.address.city`... DBs are so clumsy in comparison, constantly making you think about how to join tables together while including and excluding the right data. You might say \"well what if you want to know what people are associated with an address... not so easy then, huh?\" Yeah, then I'd have to run a query like `people.Select(p =&gt; p.address).Where(a =&gt; a == address)`, but by golly, simple paths like `person.address.city`  are both very convenient and maximally efficient computationally.",
+        "user": "UD6EXQVM0",
+        "ts": "1587491106.104400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1587491834.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ligv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This sounds cool, but I don't quite \"get\" the new algebra he is introducing. For one thing, in what sense are relations \"first-class citizens\"? Maybe I don't know the definition of a \"relation\". Also, why does the join work?\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "project(\n  join(suppliers, cities),\n  [:sid, :name, :city, :country])"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "does it choose implicitly to join on \"city\" just because the two tables both have a city column? But what if the column names don't match, and how is this going to work if two tables happen to share a column name but it is just a coincidence and not intended for joining?\n\nI have always found relational algebra unnatural. In non-DB code, if you want to know what city a person lives in, it's just "
+                            },
+                            {
+                                "type": "text",
+                                "text": "person.address.city",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "... DBs are so clumsy in comparison, constantly making you think about how to join tables together while including and excluding the right data. You might say \"well what if you want to know what people are associated with an address... not so easy then, huh?\" Yeah, then I'd have to run a query like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "people.Select(p => p.address).Where(a => a == address)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", but by golly, simple paths like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "person.address.city",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "  are both very convenient and maximally efficient computationally."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587276251.075500",
+        "parent_user_id": "U012FRV0EV7"
+    },
+    {
+        "client_msg_id": "b0f4e465-f26f-4801-87fd-f4a30637823b",
+        "type": "message",
+        "text": "<@UD6EXQVM0> AFAICT, it's just the natural join from relational algebra, with formal definition here: <https:\/\/en.wikipedia.org\/wiki\/Relational_algebra#Natural_join_(%E2%8B%88)>",
+        "user": "UFEQUBNNT",
+        "ts": "1587491368.104900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFEQUBNNT",
+            "ts": "1587491376.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "s8KzB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UD6EXQVM0"
+                            },
+                            {
+                                "type": "text",
+                                "text": " AFAICT, it's just the natural join from relational algebra, with formal definition here: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/en.wikipedia.org\/wiki\/Relational_algebra#Natural_join_(%E2%8B%88)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587276251.075500",
+        "parent_user_id": "U012FRV0EV7"
+    },
+    {
+        "client_msg_id": "2400f199-6321-41a3-93be-cb5f28c8f0a4",
+        "type": "message",
+        "text": "I can't argue with the inconvenience of your implementation of `people.address.city` except to say that the way you get the convenient `people.address.city` syntax with an ORM is to define the relations between people and addresses and cities, so a language based on relations would probably have that too.",
+        "user": "UFEQUBNNT",
+        "ts": "1587491584.105300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFEQUBNNT",
+            "ts": "1587491632.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lmWon",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I can't argue with the inconvenience of your implementation of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "people.address.city",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " except to say that the way you get the convenient "
+                            },
+                            {
+                                "type": "text",
+                                "text": "people.address.city",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " syntax with an ORM is to define the relations between people and addresses and cities, so a language based on relations would probably have that too."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587276251.075500",
+        "parent_user_id": "U012FRV0EV7"
+    },
+    {
+        "client_msg_id": "8909fa58-ee2d-4c54-b186-7754cc107df5",
+        "type": "message",
+        "text": "Anyone know of a easy2use tool for doing a screen recording with a webcam in the corner of the screen?",
+        "user": "UD6EXQVM0",
+        "ts": "1587492240.105700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xwH",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Anyone know of a easy2use tool for doing a screen recording with a webcam in the corner of the screen?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587235213.070400",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "f9111b5d-dbeb-440b-bb88-5dd9b833efce",
+        "type": "message",
+        "text": "OBS is reasonably easy to get the hang of, and there should be a gazillion good tutorials for it since it's the ubiquitous tool of streamers. It will let you visually arrange the different video feeds however you want.",
+        "user": "UC2A2ARPT",
+        "ts": "1587492466.105900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FTWnh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "OBS is reasonably easy to get the hang of, and there should be a gazillion good tutorials for it since it's the ubiquitous tool of streamers. It will let you visually arrange the different video feeds however you want."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587235213.070400",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "153223bb-26d1-4dd9-a1a3-a38aa0a8bee9",
+        "type": "message",
+        "text": "If you have questions about what quality settings to use, shoot me a DM and I'll help you hash it out.",
+        "user": "UC2A2ARPT",
+        "ts": "1587492503.106100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yiJ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If you have questions about what quality settings to use, shoot me a DM and I'll help you hash it out."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587235213.070400",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "946b9a4b-73be-4a10-8f90-6bfbf75aa379",
+        "type": "message",
+        "text": "<@UHWC9PXBL>",
+        "user": "UAJKEBGP8",
+        "ts": "1587492627.106300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge0cf3605817",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/be0cf3605817ed3839061421303ee896.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Srini Kadamati",
+            "display_name": "srini",
+            "team": "T5TCAFTA9",
+            "name": "skadamat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XiF5e",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UHWC9PXBL"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587479841.098500",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "b2d712c2-1ec2-462f-8ea3-627475b1cd65",
+        "type": "message",
+        "text": "its open? awesomeee!",
+        "user": "UNBPP291C",
+        "ts": "1587497492.106800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gcf29e340a09",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/cf29e340a09ac08ae262632ef9101046.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Ian Rumac",
+            "display_name": "Ian Rumac",
+            "team": "T5TCAFTA9",
+            "name": "ian.rumac",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Jlz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "its open? awesomeee!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587478348.097300",
+        "parent_user_id": "U6KQ2S410"
+    },
+    {
+        "client_msg_id": "d8a783d0-ebe9-4304-955b-325b4dac623d",
+        "type": "message",
+        "text": "<@UD6EXQVM0> A relation is just what you probably think: a table, or a set of tuples. Relations are first class in Alf because relations can be directly manipulated as first class objects (of class \"Relation\") in the host language, Ruby. This is in contrast with the software he is comparing Alf to, which allow you to run SQL queries against an external relational database, but don't model the relations as objects. In 2013, maybe this was a bigger deal than it is today.",
+        "user": "UJN1TAYEQ",
+        "ts": "1587497557.107000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5t90c",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UD6EXQVM0"
+                            },
+                            {
+                                "type": "text",
+                                "text": " A relation is just what you probably think: a table, or a set of tuples. Relations are first class in Alf because relations can be directly manipulated as first class objects (of class \"Relation\") in the host language, Ruby. This is in contrast with the software he is comparing Alf to, which allow you to run SQL queries against an external relational database, but don't model the relations as objects. In 2013, maybe this was a bigger deal than it is today."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587276251.075500",
+        "parent_user_id": "U012FRV0EV7"
+    },
+    {
+        "client_msg_id": "3b2e0c40-4685-4349-bfb9-0ed9cd62f2ec",
+        "type": "message",
+        "text": "Er... I thought I agreed, but you lost me at \"machine code\".",
+        "user": "UD6EXQVM0",
+        "ts": "1587507284.107800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1587507297.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zv\/+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Er... I thought I agreed, but you lost me at \"machine code\"."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1586108832.143700",
+        "parent_user_id": "UJN1TAYEQ"
+    },
+    {
+        "client_msg_id": "db307b4b-981b-4b75-aa06-475840e3859e",
+        "type": "message",
+        "text": "wow that's a great lineup",
+        "user": "U8A5MS6R1",
+        "ts": "1587508383.108200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qg7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "wow that's a great lineup"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587478348.097300",
+        "parent_user_id": "U6KQ2S410"
+    },
+    {
+        "client_msg_id": "3a1306d8-6327-4fb5-93d8-7c46e073583e",
+        "type": "message",
+        "text": "Well, my LES\/Loyc tree project standardizes (to some extent) the structure of code independent from its syntax. You can take a Loyc tree (an in-memory language-independent syntax tree) and serialize it in a textual syntax (LES2, LES3, EC#) or in a binary format (Jonathan Van der Cruysse invented one). It's not a programming language nor an environment; it's intended as a foundation for others to build languages and environments on.",
+        "user": "UD6EXQVM0",
+        "ts": "1587508940.108400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1587509079.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Xdi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Well, my LES\/Loyc tree project standardizes (to some extent) the structure of code independent from its syntax. You can take a Loyc tree (an in-memory language-independent syntax tree) and serialize it in a textual syntax (LES2, LES3, EC#) or in a binary format (Jonathan Van der Cruysse invented one). It's not a programming language nor an environment; it's intended as a foundation for others to build languages and environments on."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585588913.032700",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "CDFABB73-E302-4CA9-9379-6699A70A5760",
+        "type": "message",
+        "text": "i had no idea that object spreadsheets was still being worked on—it’s great to see how much progress they’ve made!",
+        "user": "UHWC9PXBL",
+        "ts": "1587532626.109900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "\/jlS3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i had no idea that object spreadsheets was still being worked on—it’s great to see how much progress they’ve made!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587409068.093400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "E0C08A4B-FE73-4B1E-8402-32B94456E8E2",
+        "type": "message",
+        "text": "<@UFEQUBNNT> which view are you referencing? not sure i saw it in the screen cap on the website or in the new ui video",
+        "user": "UHWC9PXBL",
+        "ts": "1587532850.111000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nNa",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UFEQUBNNT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " which view are you referencing? not sure i saw it in the screen cap on the website or in the new ui video"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1587409068.093400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "b28e195a-3aa2-4714-9c10-f8526f9459b4",
+        "type": "message",
+        "text": "<@UD6EXQVM0> Hey! I've seen your project when I was searching for existing solutions, it is indeed interesting. It is great that you are here also.\n\nThere are some things that I didn't like in loyc trees. Specifically use of literals.\n\nI wanted this tree data structure to be used by as many parties as possible. I expected it to be easily stored as JSON in text file, stored as file tree in Git or tree in IPFS. Use of literals like uint64 goes against that, since Git files are not typed and JSON numbers are expected to be numbers of JavaScript, which are doubles internally and cannot denote max value of uint64.\n\nThus, allowing different kinds of literals might create a lot of friction, many little hacks how to denote this of that kind of literals in this or that storage.\n\nMy solution to that is to have only one kind of literal: binary blob. Other kinds of values can be denoted with a wrap that will be represented equally on all storage systems: `{\"uint32\": \"\\0x00000001\"}`",
+        "user": "UCKRZS3DZ",
+        "ts": "1587536691.111400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCKRZS3DZ",
+            "ts": "1587536876.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Et6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UD6EXQVM0"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Hey! I've seen your project when I was searching for existing solutions, it is indeed interesting. It is great that you are here also.\n\nThere are some things that I didn't like in loyc trees. Specifically use of literals.\n\nI wanted this tree data structure to be used by as many parties as possible. I expected it to be easily stored as JSON in text file, stored as file tree in Git or tree in IPFS. Use of literals like uint64 goes against that, since Git files are not typed and JSON numbers are expected to be numbers of JavaScript, which are doubles internally and cannot denote max value of uint64.\n\nThus, allowing different kinds of literals might create a lot of friction, many little hacks how to denote this of that kind of literals in this or that storage.\n\nMy solution to that is to have only one kind of literal: binary blob. Other kinds of values can be denoted with a wrap that will be represented equally on all storage systems: "
+                            },
+                            {
+                                "type": "text",
+                                "text": "{\"uint32\": \"\\0x00000001\"}",
+                                "style": {
+                                    "code": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585588913.032700",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "aaba6eb1-ed71-42e3-be66-ab01580e8ffb",
+        "type": "message",
+        "text": "How to interpret it, what is number what is not, what is annotation and what is not -- all of this is decided on level higher, in the tree editor",
+        "user": "UCKRZS3DZ",
+        "ts": "1587536940.111800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "drf\/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "How to interpret it, what is number what is not, what is annotation and what is not -- all of this is decided on level higher, in the tree editor"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585588913.032700",
+        "parent_user_id": "UCKRZS3DZ"
+    }
+]

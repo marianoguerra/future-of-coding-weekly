@@ -1,0 +1,1381 @@
+[
+    {
+        "type": "message",
+        "text": "<@UCUSW7WVD> thanks, will apply :)\n\n<@UE3KC0VK6>: It might be more powerful, but I don't think in metaprogramming: as I understand, RxJS *runs* JS to create the expression tree. So basically you have a turing-complete preprocessor. I don't have enough primitives for eval-time turing completeness, but that should just be a matter of time as far as I can tell. The differences to Obervable as far as I can tell are two:\n\n1.) My language has explicitly defined semantics and UX for updating the graph at runtime. This is the main contribution I think, I'm not expecting to come up with a better general purpose FRP language here.\n2.) The metaprogramming and flowbased logic have the same syntax and share some semantics. The metaprogramming only runs at eval-time, but at eval-time a single tick of flow-logic is also executed incrementally as the tree is built. Due to the dependency tracking, it is also known whether values are dependent on the root event or not. Based on this, the metaprogramming operations can access computation results, and determine whether values are subject to future changes or not. So (+ 3 3) is an eval-time constant, while (+ 3 (time\/count 1)) is not (time\/count has an implicit  dependency on the root event). It's essentially constant folding.",
+        "user": "UNGNT3BKR",
+        "ts": "1582973702.027700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UNGNT3BKR",
+            "ts": "1582973909.000000"
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "7D189D13-A9DE-4942-B3CC-2EDFE33EE419",
+        "type": "message",
+        "text": "Sorry to be unclear, I meant <http:\/\/observablehq.com|observablehq.com>, not RxJS — but I think this explanation still applies and is helpful!",
+        "user": "UE3KC0VK6",
+        "ts": "1582988270.030700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7jmM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sorry to be unclear, I meant "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/observablehq.com",
+                                "text": "observablehq.com"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", not RxJS — but I think this explanation still applies and is helpful!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "EA1DDE63-8DFA-41BF-AF1A-2B5ECBF98542",
+        "type": "message",
+        "text": "Updating the graph (as in rewiring it, not just updating values?) is super cool!",
+        "user": "UE3KC0VK6",
+        "ts": "1582988538.032200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kz2uF",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Updating the graph (as in rewiring it, not just updating values?) is super cool!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "<@UE3KC0VK6> yup, both rewiring and updating constants are supported with no compromises :) I don't know much about ObservableHQ, so I can't really compare to that currently.",
+        "user": "UNGNT3BKR",
+        "ts": "1582988686.032400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "E4056983-942B-4F4F-8E2B-C7018D7B6225",
+        "type": "message",
+        "text": "What does no compromises mean, no recalculation besides downstream of the new dependency link? Also do expressions have access to their previous values?",
+        "user": "UE3KC0VK6",
+        "ts": "1582988957.037100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TOBU=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What does no compromises mean, no recalculation besides downstream of the new dependency link? Also do expressions have access to their previous values?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "previous to what? expressions keep their identity + local state when re-evaluating the code, even when their inputs change or they are moved to another expressions input etc.\nBy no compromises I mean that it doesn't rely on a best-effort text diffing algorithm or something like that, any kind of restructuring is fully supported.",
+        "user": "UNGNT3BKR",
+        "ts": "1582989164.037300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "identity (+ therefore local state) is only lost when an expression crosses some domain boundaries where this is undefined, like moving an expression out of or into a loop or a function.",
+        "user": "UNGNT3BKR",
+        "ts": "1582989263.038200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "B7A32651-ED2C-437D-8412-B375AFE025DE",
+        "type": "message",
+        "text": "Ok, I'm still wrapping my head around the local state and identity",
+        "user": "UE3KC0VK6",
+        "ts": "1582989475.039500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "z7nf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ok, I'm still wrapping my head around the local state and identity"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "<@UE3KC0VK6> <https:\/\/youtu.be\/ZXqgFb1U7q0?t=276> , pay attention to the transitions when changes are made: the lfo operator is not recreated when its parameters change, it keeps running from its last position. It is not recreated because it has a continous identity across reevaluations, and therefore it can hold on to its local state (the phase of the oscillation) as well.",
+        "user": "UNGNT3BKR",
+        "ts": "1582989674.041000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Proof of Concept: \"alivecoding\" - livecoding with persistent expressions",
+                "title_link": "https:\/\/youtu.be\/ZXqgFb1U7q0?t=276",
+                "author_name": "s-ol",
+                "author_link": "https:\/\/www.youtube.com\/user\/S0lll0sSOL",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/ZXqgFb1U7q0\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Proof of Concept: \"alivecoding\" - livecoding with persistent expressions",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/ZXqgFb1U7q0?start=276&feature=oembed&start=276&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/ZXqgFb1U7q0?t=276",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/ZXqgFb1U7q0?t=276"
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "7A29CF5B-5C3D-4CC2-A09A-63BF1CCEA386",
+        "type": "message",
+        "text": "I hadn't watched the video yet, early feedback: you might speed up the first two minutes, I just spent it watching typing slower than I can read",
+        "user": "UE3KC0VK6",
+        "ts": "1582989900.042900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iqS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I hadn't watched the video yet, early feedback: you might speed up the first two minutes, I just spent it watching typing slower than I can read"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "yes, thats why its not the video that is linked on the main page. I'm not using it to introduce to the topic anymore, but the linked to a specific timestamp (4:36) is relevant to what you asked about",
+        "user": "UNGNT3BKR",
+        "ts": "1582989983.043100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "6BA6A766-FEF2-4588-A7E3-16263E4E1035",
+        "type": "message",
+        "text": "Thanks, super helpful to watch this video!",
+        "user": "UE3KC0VK6",
+        "ts": "1582990424.043800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Z9V",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks, super helpful to watch this video!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UNGNT3BKR"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "type": "message",
+        "text": "thanks anyway for the comment, I'm keeping a list of things to keep in mind when making future videos. I'll probably switch to commenting using voice-over, speeding up the video is tricky because changing time scales would be very confusing to viewers once the code starts running as well.",
+        "user": "UNGNT3BKR",
+        "ts": "1582990486.045300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "A887FE6A-5C8B-4166-843A-1C9500E5FC14",
+        "type": "message",
+        "text": "Next I'm curious about the interface I need to implement to write my own things like lfo in the video - do they need to be able to be updated?",
+        "user": "UE3KC0VK6",
+        "ts": "1582990513.046200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vTuO0",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Next I'm curious about the interface I need to implement to write my own things like lfo in the video - do they need to be able to be updated?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "<@UE3KC0VK6> for most operators, the update procedure is the same as the init procedure. Currently there is three hooks - the constructor, \"setup\" and \"tick\". setup is called every time there are new parameters (including right after the constructor).",
+        "user": "UNGNT3BKR",
+        "ts": "1582990596.047700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "F8333C5B-27B9-4D11-9C88-9C6DA4543A3A",
+        "type": "message",
+        "text": "To compare to something else, I'm imagining the lfo implements an interface like a React component",
+        "user": "UE3KC0VK6",
+        "ts": "1582990607.047900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ql+M",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "To compare to something else, I'm imagining the lfo implements an interface like a React component"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "C104B357-944B-4EDF-A225-55851E359D6C",
+        "type": "message",
+        "text": "Ah cool, I'm thinking of setup as something like componentDidUpdate",
+        "user": "UE3KC0VK6",
+        "ts": "1582990611.048200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE3KC0VK6",
+            "ts": "1582990697.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "04Vz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ah cool, I'm thinking of setup as something like componentDidUpdate"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "I'm working on different ways to make this interface easier to implement in the various cases - notably the 'simple' case of a pure functional operator like (+ 1 2), which doesn't need any state. It's also about making a nice interface to perform argument type validation\/matching",
+        "user": "UNGNT3BKR",
+        "ts": "1582990679.048700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UNGNT3BKR",
+            "ts": "1582990722.000000"
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "91CD645E-B9E2-4002-AF6E-AAE0F45C6FE6",
+        "type": "message",
+        "text": "React hooks might be interesting design influence for specifying how to handle different kinds of updates, which may become a large portion of code when writing these components",
+        "user": "UE3KC0VK6",
+        "ts": "1582990792.051000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9avT+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "React hooks might be interesting design influence for specifying how to handle different kinds of updates, which may become a large portion of code when writing these components"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "B2ECAE88-4D08-4D15-9DE3-62927232EBCE",
+        "type": "message",
+        "text": "Thqt,'s just conjecture though. This system is really neat! I would want to use it over a normal repl for livecoding!",
+        "user": "UE3KC0VK6",
+        "ts": "1582990843.052700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE3KC0VK6",
+            "ts": "1582990962.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lrVe",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thqt,'s just conjecture though. This system is really neat! I would want to use it over a normal repl for livecoding!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UCUSW7WVD",
+                    "UNGNT3BKR"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "C1319BE6-36CA-45E5-8134-0ECA3A0D77C1",
+        "type": "message",
+        "text": "Building in the time dependence with tick makes sense",
+        "user": "UE3KC0VK6",
+        "ts": "1582990924.053800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JkE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Building in the time dependence with tick makes sense"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "Thanks, that's a good sign ;)",
+        "user": "UNGNT3BKR",
+        "ts": "1582991037.054200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "tick is not really time dependent, it gets triggered whenever any of the input streams are 'dirty'. This is what I'm fiddling with currently; there is a kind of dichotomy between 'event streams' and 'value streams' and I'm figuring out where that separation should be made (is it the value type? is it a style of reacting to changes? is it a style of output stream?)",
+        "user": "UNGNT3BKR",
+        "ts": "1582991140.054400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "type": "message",
+        "text": "event streams are 'dirty' even if the value is the same as the previous one (e.g. playing the note C then some time later the note C again - two events). Between events the stream is 'empty'. On the other hand value streams are always at a value, and may even want to be interpolated. They don't need to be marked dirty when the new value is the old, and reassigning an input from one value stream to another shouldn't be considered a change when the values are the same either.",
+        "user": "UNGNT3BKR",
+        "ts": "1582991254.054600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "c0a2f592-f307-4403-9e56-44bd6e465001",
+        "type": "message",
+        "text": "Are you familiar with David Barbour's work?",
+        "user": "UCUSW7WVD",
+        "ts": "1582991409.054900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1582991417.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fUoA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Are you familiar with David Barbour's work?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "<@UCUSW7WVD>: no! do you have a link or title?",
+        "user": "UNGNT3BKR",
+        "ts": "1582991497.055200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "<https:\/\/tidalcycles.org\/index.php\/What_is_a_pattern%3F> confirmed my understanding of these two being different (here considered 'digital' and 'analog'  streams), and also let me notice that I do need ('digital') event-streams to be able to carry multiple events in a single frame",
+        "user": "UNGNT3BKR",
+        "ts": "1582991564.055400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "79a74545-1aa6-48d3-8553-c54d841a2994",
+        "type": "message",
+        "text": "What do you mean by 'frame' here? I'm not very familiar with this area.",
+        "user": "UCUSW7WVD",
+        "ts": "1582991745.055600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JgQi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What do you mean by 'frame' here? I'm not very familiar with this area."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "<@UCUSW7WVD> a frame of the event loop \/ one tick of the root event.",
+        "user": "UNGNT3BKR",
+        "ts": "1582991826.055800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "f4d566cb-ceb9-4d45-8758-ac83003a89ba",
+        "type": "message",
+        "text": "Got it. Why does one tick need multiple events?",
+        "user": "UCUSW7WVD",
+        "ts": "1582991878.056100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uTso",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Got it. Why does one tick need multiple events?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "for example when polling external inputs there might be multiple events found in a single tick, and they should ideally flow down the tree individually",
+        "user": "UNGNT3BKR",
+        "ts": "1582991943.056400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "so if I have an operator that returns the note number of MIDI note-on events on my midi controller, and I plug this into a \"play a note\" operator, I want to be able to hit three keys simultaneously and have three notes played in the same root-event-frame",
+        "user": "UNGNT3BKR",
+        "ts": "1582992006.056600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "6e6e94c4-66a9-47d8-b49a-d52f7b5d3642",
+        "type": "message",
+        "text": "I see, in different parts of the graph.",
+        "user": "UCUSW7WVD",
+        "ts": "1582992018.056800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zloy5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I see, in different parts of the graph."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "on the other hand if three different \"control change\" events arrive from a single knob I turned very quickly, only the latest one needs to propagate",
+        "user": "UNGNT3BKR",
+        "ts": "1582992038.057000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "3c5afd7f-585e-4590-922a-9dde012844fe",
+        "type": "message",
+        "text": "The note case can be finessed at the peripheral. Some peripherals will support chording. Not all need to.",
+        "user": "UCUSW7WVD",
+        "ts": "1582992072.057200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1582992084.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "m8wb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The note case can be finessed at the peripheral. Some peripherals will support chording. Not all need to."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "what do you mean by peripheral? The \"play a note operator\" \/ whatever it talks to?",
+        "user": "UNGNT3BKR",
+        "ts": "1582992137.057500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "not all will be able to, but I need a clean way to represent the multiple events in flight as they thread through various operators",
+        "user": "UNGNT3BKR",
+        "ts": "1582992182.057700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "Reading a bit on Barbour's RDP, events are completely eliminated in his design. I'll have to think on whether that is an option or not, it seems like he acknowledges that this is not a universal solution.",
+        "user": "UNGNT3BKR",
+        "ts": "1582992955.057900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "client_msg_id": "f4c1621f-4bfc-491c-8b5d-4f9eca22053a",
+        "type": "message",
+        "text": "I don't understand him very well, and it's been several years since I read about RDP. It seemed quite rigorous and principled.",
+        "user": "UCUSW7WVD",
+        "ts": "1582993058.058100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "22n",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't understand him very well, and it's been several years since I read about RDP. It seemed quite rigorous and principled."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "yes, same here on understanding it. i think the design is really about the distributed and eventual consistency goals, which is very unlike what i (think i) need for this application (livecoding)",
+        "user": "UNGNT3BKR",
+        "ts": "1582993284.058300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "I'm willing to make compromises on many principles that help keep complicated big codebases and distributed systems maintainable if it helps have an environment that is effective for small audio-visual pieces and easy to manipulate live. It's really meant to be a duct-tape language for realtime processing",
+        "user": "UNGNT3BKR",
+        "ts": "1582993424.058500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2B4BFC05-7EC9-47A7-BFD0-4B72C7A1E3CF",
+        "type": "message",
+        "text": "Good design space, interested to see what you do. Do you plan to have tick capped at 60 fps or something like that, or do you get multiple tick calls for multiple events the same frame?",
+        "user": "UE3KC0VK6",
+        "ts": "1582994740.062500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2aabe3b15ad",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/42aabe3b15ad406ed4237abd473bd55f.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0006-72.png",
+            "first_name": "",
+            "real_name": "Thomas Ballinger",
+            "display_name": "ballingt",
+            "team": "T5TCAFTA9",
+            "name": "me1542",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "DryOG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Good design space, interested to see what you do. Do you plan to have tick capped at 60 fps or something like that, or do you get multiple tick calls for multiple events the same frame?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    },
+    {
+        "type": "message",
+        "text": "right now the root event clocks about every millisecond, then everything time-clocked gets a delta event from a clock, which slows that down to 60fps",
+        "user": "UNGNT3BKR",
+        "ts": "1582996445.062700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f5598145b9e3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-11-20\/844081492646_f5598145b9e31ad2c4bd_72.jpg",
+            "first_name": "Sol",
+            "real_name": "Sol Bekic",
+            "display_name": "s-ol",
+            "team": "T5TCAFTA9",
+            "name": "machinemail_slack",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1582737045.011100",
+        "parent_user_id": "UNGNT3BKR"
+    }
+]

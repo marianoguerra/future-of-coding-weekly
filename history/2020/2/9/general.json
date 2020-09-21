@@ -1,0 +1,666 @@
+[
+    {
+        "client_msg_id": "97426a01-4cd7-4a56-9a9f-8e0e7e26081c",
+        "type": "message",
+        "text": "<@UEQ6M68H0>\n&gt; … it makes the game far harder to understand and prove correct than something much more conventional.\n\nThis seems right at first glance, but I would want to learn more about the tooling before I agree. I still have only skimmed the linked papers, but the original authors rely on model-checking for various aspects of BP already, so I suspect proving correctness of tic-tac-toe is within reach.\n\nAs for understanding, well, if the idea that the event log is all that matters to understanding legacy code is true, then a tool that lets you manually or programmatically explore potential event logs might be even better than trying to find all the move validation code in a traditional code base. Certainly, if the way you understand a program is with event logs, that would make answering reachability questions like \"what happens when 'X' tries to move\" or \"what can prevent an 'X' move\" straight-forward. The answer to the first is a printout, and the answer to the second is some representation of \"if it's preceded by an 'X' move.\"\n\nI'm definitely imagining the best possible scenario, though. BP is on my reading list now, so perhaps I'll be brought back to earth soon. :slightly_smiling_face:",
+        "user": "UFEQUBNNT",
+        "ts": "1581238268.054500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g8971fe7ee8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/68971fe7ee8fd814c26391c727c065bb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0010-72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "CBnC1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UEQ6M68H0"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n> … it makes the game far harder to understand and prove correct than something much more conventional.\n\nThis seems right at first glance, but I would want to learn more about the tooling before I agree. I still have only skimmed the linked papers, but the original authors rely on model-checking for various aspects of BP already, so I suspect proving correctness of tic-tac-toe is within reach.\n\nAs for understanding, well, if the idea that the event log is all that matters to understanding legacy code is true, then a tool that lets you manually or programmatically explore potential event logs might be even better than trying to find all the move validation code in a traditional code base. Certainly, if the way you understand a program is with event logs, that would make answering reachability questions like \"what happens when 'X' tries to move\" or \"what can prevent an 'X' move\" straight-forward. The answer to the first is a printout, and the answer to the second is some representation of \"if it's preceded by an 'X' move.\"\n\nI'm definitely imagining the best possible scenario, though. BP is on my reading list now, so perhaps I'll be brought back to earth soon. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "5cd77580-acaa-49dd-b765-9898d64d5923",
+        "type": "message",
+        "text": "Temporal logic means different things to different people. I suggest you refine your question so that the answers are more relevant to your purposes.\n\nMy Beads language runtime has an automatic temporal logic built in, that schedules affected portions of the screen for refresh based on changes in the underlying model. It is an invisible system that saves the programmer the trouble of calculating for every microscopic change in the underlying model, which layout\/drawing functions need to be called again. This is very useful for a 2D world, but to be frank many people are using 3D interfaces now and they refresh the whole model on every single frame, so they don't have to bother guessing which part to redraw (under-draw causes glitches, and over-draw slows the product down). There is a certain brute-force simplicity to stored 3D graphics.\n\nIt also can run backwards post-mortem, which is a temporal operation that is extremely useful for debugging client problems. One of the biggest problems facing software today is the inability for companies to replicate intermittent problems, based on complex user-specific data values, with the result that companies like MS, Apple and Adobe have hundreds of thousands if not millions of open bugs reported that the vast majority of fall into the category \"cannot duplicate\" so they fester in their bug reporting systems. We are in an era where consumers accept sloppy products that are riddled with minor bugs, and i find it personally abhorrent that it is so acceptable. With so many projects grown to a size where a single person cannot understand the product from top to bottom, we are in a very dark age IMHO.",
+        "user": "UEQ6M68H0",
+        "ts": "1581282078.059800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1581316906.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sqgN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Temporal logic means different things to different people. I suggest you refine your question so that the answers are more relevant to your purposes.\n\nMy Beads language runtime has an automatic temporal logic built in, that schedules affected portions of the screen for refresh based on changes in the underlying model. It is an invisible system that saves the programmer the trouble of calculating for every microscopic change in the underlying model, which layout\/drawing functions need to be called again. This is very useful for a 2D world, but to be frank many people are using 3D interfaces now and they refresh the whole model on every single frame, so they don't have to bother guessing which part to redraw (under-draw causes glitches, and over-draw slows the product down). There is a certain brute-force simplicity to stored 3D graphics.\n\nIt also can run backwards post-mortem, which is a temporal operation that is extremely useful for debugging client problems. One of the biggest problems facing software today is the inability for companies to replicate intermittent problems, based on complex user-specific data values, with the result that companies like MS, Apple and Adobe have hundreds of thousands if not millions of open bugs reported that the vast majority of fall into the category \"cannot duplicate\" so they fester in their bug reporting systems. We are in an era where consumers accept sloppy products that are riddled with minor bugs, and i find it personally abhorrent that it is so acceptable. With so many projects grown to a size where a single person cannot understand the product from top to bottom, we are in a very dark age IMHO."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581027718.051600",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "9d594b06-a70a-4e98-8617-f9c58b342ecc",
+        "type": "message",
+        "text": "I mean \"temporal logic\"(s) in the sense of \"propositional logic\" or \"predicate logic\". It's a niche mathematical topic, and I don't expect many people to know anything about it. I thought it was worth asking though!",
+        "user": "UCGAK10LS",
+        "ts": "1581283679.060000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Hh2Y",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I mean \"temporal logic\"(s) in the sense of \"propositional logic\" or \"predicate logic\". It's a niche mathematical topic, and I don't expect many people to know anything about it. I thought it was worth asking though!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581027718.051600",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "bc9db91a-2835-44b4-97ab-08d0cd534026",
+        "type": "message",
+        "text": "I would classify the behaviours you're describing as incremental update, and reverse (or record-replay) debugging, respectively. These are their own theoretical topics :slightly_smiling_face:",
+        "user": "UCGAK10LS",
+        "ts": "1581283910.060200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "oKXqu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I would classify the behaviours you're describing as incremental update, and reverse (or record-replay) debugging, respectively. These are their own theoretical topics "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581027718.051600",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "aa8b0286-580f-4530-a410-7da476e15af0",
+        "type": "message",
+        "text": "<@UFEQUBNNT> It would be a great breakthrough if we discovered that decomposing problems into behaviors aided in creating verified models for them. I haven't seen this yet, but it seems worth exploring.\n\nAlso, you're right that BP can seem quite useful if you imagine the best possible scenario. But that doesn't seem how it's being sold. It seems to be sold as a methodogical silver bullet. Just use it and all problems become easy. If they instead said, \"if used well it will help\" I'd be much more amenable.\n\n*Exhibit A* _\"What if we could make changes or understand how complex systems work without having to read and maintain an artifact.\"_ (OP, 3:34) This seems wildly overblown. You still have to maintain the artifact. Especially if you want the desired model to be a linear\/affine combination of the input behaviors. Because there are certainly many more combinations of behaviors that lead to spaghetti than not.\n\nI had a conversation with Luca Matteis a month ago (<https:\/\/twitter.com\/lmatteis\/status\/1204862635537252352>) where we chatted a bit about my layers as compared to BP. I'm careful not to claim my layers always help. It takes taste to decompose programs into layers the right way. Even so, BP seems to lack one thing layers provide: intermediate combinations are useful, and functionality grows in a monotonic way. What happens to a BP program if you take out one behavior? Is it still legal? Easy to reason about? Useful? I haven't seen anybody answer these questions.\n\n*Exhibit B* Here's a less technical description of BP by the creator: <http:\/\/www.wisdom.weizmann.ac.il\/~harel\/papers\/LiberatingProgramming.pdf>. It seems _incredibly_ overblown. We discussed it back in Dec 2018, but that's way beyond the visible window of this forum. Here's a comment I wrote there about it.\n\n---\n\n&gt; ...current methods for dealing with programming the dynamics of reactivity, however powerful and convenient, suffer from the same woes: We sit in front of a screen and write (or draw) programs that prescribe the behavior for each of the relevant parts of the system over time. Then we must check\/test\/verify that the combined behavior of all the parts satisfies a separately specified set of requirements or constraints. ... There is no need for separate specifications for the operational tasks and the requirements thereof. Anything that falls inside the total sum of what has been played-in will be a legal behavior of the system. \nI'm still wrapping my head around this vision, but I think it's ignoring the essential complexity of programming. On a fundamental level programmers deal with non-linear building blocks; interactions between constraints can be hard to imagine ahead of time. How would you gain confidence that you've \"played-in\" a project sufficiently to work out possible constraints?\n\nAdmittedly we have trouble doing this with existing systems. But surely we need to pay _more_ attention to constraints, not less. Representing actions physically makes it more difficult to survey all actions entered so far, the scenarios they apply in, etc.\n\nCheck\/test\/verify is the _fundamental_, irreducible core of programming. Trying to eliminate it is a fool's errand.\n\nLSC (the original Behavioral Programming system) introduces the notion of \"play-in\" to describe scenarios and how the system should react to them. So there'll be a natural tendency for the number of scenarios and handlers to grow. It's unclear to me how the opposite dynamic of _generalizing scenarios_ happens. How does the system encourage noticing that two scenarios are special cases of a single one and may be coalesced? How does the programmer\/user replace two played-in scenarios with a single new one? Without supporting this countervailing operation, the whole system will descend into monotonically complexifying spaghetti.\n\n---\n\nBased on this quote, I don't think BP started out envisioning model-checking. If they've since started to do so, I'd appreciate recent papers.",
+        "user": "UCUSW7WVD",
+        "ts": "1581288917.060400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1581292163.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zUFe",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UFEQUBNNT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " It would be a great breakthrough if we discovered that decomposing problems into behaviors aided in creating verified models for them. I haven't seen this yet, but it seems worth exploring.\n\nAlso, you're right that BP can seem quite useful if you imagine the best possible scenario. But that doesn't seem how it's being sold. It seems to be sold as a methodogical silver bullet. Just use it and all problems become easy. If they instead said, \"if used well it will help\" I'd be much more amenable.\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Exhibit A",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\"What if we could make changes or understand how complex systems work without having to read and maintain an artifact.\"",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (OP, 3:34) This seems wildly overblown. You still have to maintain the artifact. Especially if you want the desired model to be a linear\/affine combination of the input behaviors. Because there are certainly many more combinations of behaviors that lead to spaghetti than not.\n\nI had a conversation with Luca Matteis a month ago ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/twitter.com\/lmatteis\/status\/1204862635537252352"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") where we chatted a bit about my layers as compared to BP. I'm careful not to claim my layers always help. It takes taste to decompose programs into layers the right way. Even so, BP seems to lack one thing layers provide: intermediate combinations are useful, and functionality grows in a monotonic way. What happens to a BP program if you take out one behavior? Is it still legal? Easy to reason about? Useful? I haven't seen anybody answer these questions.\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Exhibit B",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " Here's a less technical description of BP by the creator: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/www.wisdom.weizmann.ac.il\/~harel\/papers\/LiberatingProgramming.pdf"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". It seems "
+                            },
+                            {
+                                "type": "text",
+                                "text": "incredibly",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " overblown. We discussed it back in Dec 2018, but that's way beyond the visible window of this forum. Here's a comment I wrote there about it.\n\n---\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "...current methods for dealing with programming the dynamics of reactivity, however powerful and convenient, suffer from the same woes: We sit in front of a screen and write (or draw) programs that prescribe the behavior for each of the relevant parts of the system over time. Then we must check\/test\/verify that the combined behavior of all the parts satisfies a separately specified set of requirements or constraints. ... There is no need for separate specifications for the operational tasks and the requirements thereof. Anything that falls inside the total sum of what has been played-in will be a legal behavior of the system. "
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm still wrapping my head around this vision, but I think it's ignoring the essential complexity of programming. On a fundamental level programmers deal with non-linear building blocks; interactions between constraints can be hard to imagine ahead of time. How would you gain confidence that you've \"played-in\" a project sufficiently to work out possible constraints?\n\nAdmittedly we have trouble doing this with existing systems. But surely we need to pay "
+                            },
+                            {
+                                "type": "text",
+                                "text": "more",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " attention to constraints, not less. Representing actions physically makes it more difficult to survey all actions entered so far, the scenarios they apply in, etc.\n\nCheck\/test\/verify is the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "fundamental",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", irreducible core of programming. Trying to eliminate it is a fool's errand.\n\nLSC (the original Behavioral Programming system) introduces the notion of \"play-in\" to describe scenarios and how the system should react to them. So there'll be a natural tendency for the number of scenarios and handlers to grow. It's unclear to me how the opposite dynamic of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "generalizing scenarios",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " happens. How does the system encourage noticing that two scenarios are special cases of a single one and may be coalesced? How does the programmer\/user replace two played-in scenarios with a single new one? Without supporting this countervailing operation, the whole system will descend into monotonically complexifying spaghetti.\n\n---\n\nBased on this quote, I don't think BP started out envisioning model-checking. If they've since started to do so, I'd appreciate recent papers."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "8b9bd5ad-c319-4118-84c2-bd36450a3e68",
+        "type": "message",
+        "text": "There's an interesting connection betwen BP and <http:\/\/people.csail.mit.edu\/brooks\/papers\/AIM-864.pdf>",
+        "user": "UCUSW7WVD",
+        "ts": "1581289273.060800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3WF",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There's an interesting connection betwen BP and "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/people.csail.mit.edu\/brooks\/papers\/AIM-864.pdf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "b2b6fda0-cb46-41ff-b129-95ac3f699695",
+        "type": "message",
+        "text": "Imperative programming is concerned with the order in which things happen.\n\nFunctional programming tries to make things as atemporal as possible, robust to multiple orderings of operations.\n\nOP shows how to write unordered behaviors -- but rely on the operations happening in just the right order. (at time 9:30) I don't understand why this is a good thing! It seems to be the worst of both worlds. I still have to think about the order in which I want things to happen, but now I can't just describe the order directly. I have to arrange behaviors to make that order emergently occur. And now readers can't just read behaviors and understand their purpose. They have to _simulate_ them to understand implications. Why is this an improvement on just regular much-maligned imperative programming?\n\nIn fairness, OP is not by the creator of BP. But it doesn't seem like a strong case.",
+        "user": "UCUSW7WVD",
+        "ts": "1581289598.061000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WGBHK",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Imperative programming is concerned with the order in which things happen.\n\nFunctional programming tries to make things as atemporal as possible, robust to multiple orderings of operations.\n\nOP shows how to write unordered behaviors -- but rely on the operations happening in just the right order. (at time 9:30) I don't understand why this is a good thing! It seems to be the worst of both worlds. I still have to think about the order in which I want things to happen, but now I can't just describe the order directly. I have to arrange behaviors to make that order emergently occur. And now readers can't just read behaviors and understand their purpose. They have to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "simulate",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " them to understand implications. Why is this an improvement on just regular much-maligned imperative programming?\n\nIn fairness, OP is not by the creator of BP. But it doesn't seem like a strong case."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "5b362a56-29ca-4713-81cd-f1410bce6902",
+        "type": "message",
+        "text": "I'm at 12 minutes now, and OP is talking about modifying a program based on just reading an event trace. I _love_ traces, and I _want_ to nod along. But wait a minute, what if a program needed events to happen in different orders in two different scenarios? Most real-world programs have many many scenarios they need to work in. Never allowing ourselves to touch existing parts of the program seems like a bad way to reliably get the desired effect.\n\nIt's not clear to me how this block means \"block loadingAccount until adShown\":\n```yield {\n  wait: 'adShown'\n  block: 'loadingAccount'\n}```\nCan somebody explain this? Is it assuming there's another b-thread somewhere pumping out 'loadingAccount' events _ad infinitum_?",
+        "user": "UCUSW7WVD",
+        "ts": "1581290295.061600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4wSAy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm at 12 minutes now, and OP is talking about modifying a program based on just reading an event trace. I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "love",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " traces, and I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "want",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to nod along. But wait a minute, what if a program needed events to happen in different orders in two different scenarios? Most real-world programs have many many scenarios they need to work in. Never allowing ourselves to touch existing parts of the program seems like a bad way to reliably get the desired effect.\n\nIt's not clear to me how this block means \"block loadingAccount until adShown\":\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yield {\n  wait: 'adShown'\n  block: 'loadingAccount'\n}"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nCan somebody explain this? Is it assuming there's another b-thread somewhere pumping out 'loadingAccount' events "
+                            },
+                            {
+                                "type": "text",
+                                "text": "ad infinitum",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "ec4d5d1b-b17d-4cfa-b78a-60d8d518e44b",
+        "type": "message",
+        "text": "The animations suggest that b-threads run in lock step, each `yield` in them taking equal time. Is this true? Certainly the examples here would have wildly different behavior for different relative timings. Being this sensitive to timing seems really bad. It gives me flashbacks to writing Verilog code and running into bugs from signals not getting to a latch in time for the next clock cycle.\n\nOk, I'll stop spamming this thread. Summary: I have been slowly thinking about BP over 1.5 years now, and my opinion is slowly crystallizing to opposition. OP seems like a poor advertisement for BP. Either it's misunderstanding BP or it's making certain drawbacks very obvious but not self-aware of doing so.",
+        "user": "UCUSW7WVD",
+        "ts": "1581290720.061800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dJXEQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The animations suggest that b-threads run in lock step, each "
+                            },
+                            {
+                                "type": "text",
+                                "text": "yield",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in them taking equal time. Is this true? Certainly the examples here would have wildly different behavior for different relative timings. Being this sensitive to timing seems really bad. It gives me flashbacks to writing Verilog code and running into bugs from signals not getting to a latch in time for the next clock cycle.\n\nOk, I'll stop spamming this thread. Summary: I have been slowly thinking about BP over 1.5 years now, and my opinion is slowly crystallizing to opposition. OP seems like a poor advertisement for BP. Either it's misunderstanding BP or it's making certain drawbacks very obvious but not self-aware of doing so."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "2bcb4d41-2e1b-4457-9c31-c22f66568e75",
+        "type": "message",
+        "text": "Ah, I see that <http:\/\/www.wisdom.weizmann.ac.il\/~amarron\/BP%20-%20CACM%20-%20Author%20version.pdf> (the original BP paper?) admits the possibility of conflicting b-threads in Section 5.1. They point out that:\n\n* Conflicts can be resolved using priorities. Which absolutely requires new b-threads to be aware of what older b-threads exist.\n* A model-checker is required to warn programmers when conflict may arise.\n\nUsing BP in React seems like a recipe for spaghetti until React gains a model-checker. Is there one in development somewhere?",
+        "user": "UCUSW7WVD",
+        "ts": "1581292548.062100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vh7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ah, I see that "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/www.wisdom.weizmann.ac.il\/~amarron\/BP%20-%20CACM%20-%20Author%20version.pdf"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (the original BP paper?) admits the possibility of conflicting b-threads in Section 5.1. They point out that:\n\n* Conflicts can be resolved using priorities. Which absolutely requires new b-threads to be aware of what older b-threads exist.\n* A model-checker is required to warn programmers when conflict may arise.\n\nUsing BP in React seems like a recipe for spaghetti until React gains a model-checker. Is there one in development somewhere?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1580955499.046800",
+        "parent_user_id": "USUMN6XLH"
+    },
+    {
+        "client_msg_id": "72790792-68ea-4bac-b517-5c972894cf9b",
+        "type": "message",
+        "text": "Actually the deduction of what sections of the screen drawing functions need to be executed again is predicate logic, where logical implication is being calculated automatically. This saves you the trouble of writing all the implication rules for every microscopic change in your model. As the number of controls grows on the screen, the number of interactions between the widgets on the screen can grow exponentially. This is a feature directly borrowed from PROLOG and it is not common.  The Unix  Make build tool language uses an explicit predicate logic for example, and another example of automatic predicate logic in Beads is the compiler's module system which is borrowed from Modula-2 whereby you can specify imports very simply and it builds the total list of modules to compile, and does them in the correct order. The key thing with predicate logic is to try and avoid having users write the predicates explicitly, because they are not easy to construct. The average programmer knows simple boolean logic but long predicate chains are downright opaque to most. One should always keep in mind the example  of Principia Mathematica by Russell &amp; Whitehead, which took something on the order of 100 pages of gibberish to prove 1+1 = 2. Logical purity is an altar on which you can sacrifice all productivity.",
+        "user": "UEQ6M68H0",
+        "ts": "1581317344.062600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1581317390.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Ln6Zi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Actually the deduction of what sections of the screen drawing functions need to be executed again is predicate logic, where logical implication is being calculated automatically. This saves you the trouble of writing all the implication rules for every microscopic change in your model. As the number of controls grows on the screen, the number of interactions between the widgets on the screen can grow exponentially. This is a feature directly borrowed from PROLOG and it is not common.  The Unix  Make build tool language uses an explicit predicate logic for example, and another example of automatic predicate logic in Beads is the compiler's module system which is borrowed from Modula-2 whereby you can specify imports very simply and it builds the total list of modules to compile, and does them in the correct order. The key thing with predicate logic is to try and avoid having users write the predicates explicitly, because they are not easy to construct. The average programmer knows simple boolean logic but long predicate chains are downright opaque to most. One should always keep in mind the example  of Principia Mathematica by Russell & Whitehead, which took something on the order of 100 pages of gibberish to prove 1+1 = 2. Logical purity is an altar on which you can sacrifice all productivity."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1581027718.051600",
+        "parent_user_id": "UCGAK10LS"
+    }
+]

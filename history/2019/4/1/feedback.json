@@ -1,0 +1,379 @@
+[
+    {
+        "client_msg_id": "a0cceb0a-0078-46c5-8578-017685d78281",
+        "type": "message",
+        "text": "Just found these two posts:\n<http:\/\/scattered-thoughts.net\/blog\/2014\/05\/17\/pain-we-forgot\/> (See the \"Change\" section)\n<https:\/\/stevebennett.me\/2012\/02\/24\/10-things-i-hate-about-git\/>",
+        "user": "UAL7940NM",
+        "ts": "1554103962.014700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "43873346f949",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-13\/399377633206_43873346f949174e340e_72.jpg",
+            "first_name": "Felix",
+            "real_name": "Felix Kohlgrüber",
+            "display_name": "Felix Kohlgrüber",
+            "team": "T5TCAFTA9",
+            "name": "felix.kohlgrueber",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Steve Bennett blogs",
+                "service_url": "http:\/\/stevebennett.me",
+                "title": "10 things I hate about Git",
+                "title_link": "https:\/\/stevebennett.me\/2012\/02\/24\/10-things-i-hate-about-git\/",
+                "author_name": "steveko",
+                "author_link": "https:\/\/stevebennett.me\/author\/steveko\/",
+                "thumb_url": "https:\/\/steveko.files.wordpress.com\/2012\/02\/subversion-arrows1.png?fit=200%2C150",
+                "thumb_width": 114,
+                "thumb_height": 150,
+                "text": "Git is the source code version control system that is rapidly becoming the standard for open source projects. It has a powerful distributed model which allows advanced users to do tricky things with branches, and rewriting history. What a pity that it&rsquo;s so hard to learn, has such an unpleasant command line interface, and treats its users with such utter contempt.\n1. Complex information model\nThe information model is complicated &ndash; and you need to know all of it. As a point of reference, consider Subversion: you have files, a working directory, a repository, versions, branches, and tags. That&rsquo;s pretty much everything you need to know. In fact, branches are tags, and files you already know about, so you really need to learn three new things. Versions are linear, with the odd merge. Now Git: you have files, a working tree, an index, a local repository, a remote repository, remotes (pointers to remote repositories), commits, treeishes (pointers to commits), branches, a stash&hellip; and you need to know all of it.\n2. Crazy command line syntax\nThe command line syntax is completely arbitrary and inconsistent. Some &ldquo;shortcuts&rdquo; are graced with top level commands: &ldquo;git pull&rdquo; is exactly equivalent to &ldquo;git fetch&rdquo; followed by &ldquo;git merge&rdquo;. But the shortcut for &ldquo;git branch&rdquo; combined with &ldquo;git checkout&rdquo;? &ldquo;git checkout -b&rdquo;. Specifying filenames completely changes the semantics of some commands (&ldquo;git commit&rdquo; ignores local, unstaged changes in foo.txt; &ldquo;git commit foo.txt&rdquo; doesn&rsquo;t). The various options of &ldquo;git reset&rdquo; do completely different things.\nThe most spectacular example of this is the command &ldquo;git am&rdquo;, which as far as I can tell, is something Linus hacked up and forced into the main codebase to solve a problem he was having one night. It combines email reading with patch applying, and thus uses a different patch syntax (specifically, one with email headers at the top).\n3. Crappy documentation\nThe man pages are one almighty &ldquo;fuck you&rdquo;. They describe the commands from the perspective of a computer scientist, not a user. Case in point:\ngit-push &ndash; Update remote refs along with associated objects\nHere&rsquo;s a description for humans: git-push &ndash; Upload changes from your local repository into a remote repository\nUpdate, another example: (thanks cgd)\ngit-rebase &ndash; Forward-port local commits to the updated upstream head\nTranslation: git-rebase &ndash; Sequentially regenerate a series of commits so they can be applied directly to the head node\n4. Information model sprawl\nRemember the complicated information model in step 1? It keeps growing, like a cancer. Keep using Git, and more concepts will occasionally drop out of the sky: refs, tags, the reflog, fast-forward commits, detached head state (!), remote branches, tracking, namespaces\n5. Leaky abstraction\nGit doesn&rsquo;t so much have a leaky abstraction as&nbsp;no abstraction. There is essentially no distinction between implementation detail and user interface. It&rsquo;s understandable that an advanced user might need to know a little about how features are implemented, to grasp subtleties about various commands. But even beginners are quickly confronted with hideous internal details. In theory, there is the &ldquo;plumbing&rdquo; and &ldquo;the porcelain&rdquo; &ndash; but you&rsquo;d better be a plumber to know how to work the porcelain.\n\nA common response I get to complaints about Git&rsquo;s command line complexity is that &ldquo;you don&rsquo;t need to use all those commands, you can use it like Subversion if that&rsquo;s what you really want&rdquo;. Rubbish. That&rsquo;s like telling an old granny that the freeway isn&rsquo;t scary, she can drive at 20kph in the left lane if she wants. Git doesn&rsquo;t provide any useful subsets &ndash; every command soon requires another; even simple actions often require complex actions to undo or refine.\n\nHere was the (well-intentioned!) advice from a GitHub maintainer of a project I&rsquo;m working on (with apologies!):\n\nFind the merge base between your branch and master: &lsquo;git merge-base master yourbranch&rsquo;\nAssuming you&rsquo;ve already committed your changes, rebased your commit onto the merge base, then create a new branch:\ngit rebase &ndash;onto  HEAD~1 HEAD\ngit checkout -b my-new-branch\nCheckout your ruggedisation branch, and remove the commit you just rebased: &lsquo;git reset &ndash;hard HEAD~1&rsquo;\nMerge your new branch back into ruggedisation: &lsquo;git merge my-new-branch&rsquo;\nCheckout master (&lsquo;git checkout master&rsquo;), merge your new branch in (&lsquo;git merge my-new-branch&rsquo;), and check it works when merged, then remove the merge (&lsquo;git reset &ndash;hard HEAD~1&rsquo;).\nPush your new branch (&lsquo;git push origin my-new-branch&rsquo;) and log a pull request.\nTranslation: &ldquo;It&rsquo;s easy, Granny. Just rev to 6000, dump the clutch, and use wheel spin to get round the first corner. Up to third, then trail brake onto the freeway, late apexing but watch the marbles on the inside. Hard up to fifth, then handbrake turn to make the exit.&rdquo;\n\n6. Power for the maintainer, at the expense of the contributor\n\nMost of the power of Git is aimed squarely at maintainers of codebases: people who have to merge contributions from a wide number of different sources, or who have to ensure a number of parallel development efforts result in a single, coherent, stable release. This is good. But the majority of Git users are not in this situation: they simply write code, often on a single branch for months at a time. Git is a 4 handle, dual boiler espresso machine &ndash; when all they need is instant.\nInterestingly, I don&rsquo;t think this trade-off is inherent in Git&rsquo;s &nbsp;design. It&rsquo;s simply the result of ignoring the needs of normal users, and confusing architecture with interface. &ldquo;Git is good&rdquo; is true if speaking of architecture &ndash; but false of user interface. Someone could quite conceivably write an improved interface (easygit is a start) that hides unhelpful complexity such as the index and the local repository.\n7. Unsafe version control\nThe fundamental promise of any version control system is this: &ldquo;Once you put your precious source code in here, it&rsquo;s safe. You can make any changes you like, and you can always get it back&rdquo;. Git breaks this promise. Several ways a committer can irrevocably destroy the contents of a repository:\ngit add . \/ &hellip; \/ git push -f origin master\ngit push origin +master\ngit rebase -i  \/ git push\n8. Burden of VCS maintainance pushed to contributors\nIn the traditional open source project, only one person had to deal with the complexities of branches and merges: the maintainer. Everyone else only had to update, commit, update, commit, update, commit&hellip; Git dumps the burden of &nbsp;understanding complex version control on everyone &ndash; while making the maintainer&rsquo;s job easier. Why would you do this to new contributors &ndash; those with nothing invested in the project, and every incentive to throw their hands up and leave?\n9. Git history is a bunch of lies\nThe primary output of development work should be source code. Is a well-maintained history really such an important by-product? Most of the arguments for rebase, in particular, rely on aesthetic judgments about &ldquo;messy merges&rdquo; in the history, or &ldquo;unreadable logs&rdquo;. So rebase encourages you to lie in order to provide other developers with a &ldquo;clean&rdquo;, &ldquo;uncluttered&rdquo; history. Surely the correct solution is a better log output that can filter out these unwanted merges.\n10. Simple tasks need so many commands\nThe point of working on an open source project is to make some changes, then share them with the world. In Subversion, this looks like:\n\nMake some changes\nsvn commit\n…",
+                "fallback": "Steve Bennett blogs Link: 10 things I hate about&nbsp;Git",
+                "from_url": "https:\/\/stevebennett.me\/2012\/02\/24\/10-things-i-hate-about-git\/",
+                "service_icon": "https:\/\/secure.gravatar.com\/blavatar\/c7f9331c35c3c296089cd9d0117c301f?s=114",
+                "id": 1,
+                "original_url": "https:\/\/stevebennett.me\/2012\/02\/24\/10-things-i-hate-about-git\/"
+            }
+        ],
+        "thread_ts": "1553340554.128300",
+        "parent_user_id": "UA8HY8R7B"
+    },
+    {
+        "client_msg_id": "006b3fe3-a5df-4168-a054-31818697f1d2",
+        "type": "message",
+        "text": "Creative! I've never seen this before",
+        "user": "U5TCAFTD3",
+        "ts": "1554104203.015000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7c31dc735c6c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-09-11\/433781465829_7c31dc735c6c1257fe1f_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Krouse",
+            "display_name": "stevekrouse",
+            "team": "T5TCAFTA9",
+            "name": "stevekrouse",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553984196.011300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "461db01e-9c30-498c-8a01-20d0889a355f",
+        "type": "message",
+        "text": "wow that is some pungent criticism. I always knew i didn't like Git, but now i really don't like it at all. Hard to believe that something that messy would become such a popular standard.",
+        "user": "UEQ6M68H0",
+        "ts": "1554108587.015200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1554108604.000000"
+        },
+        "thread_ts": "1553340554.128300",
+        "parent_user_id": "UA8HY8R7B"
+    },
+    {
+        "client_msg_id": "8a7808a0-3872-4e1b-8b75-937cd960cfab",
+        "type": "message",
+        "text": "&gt; You might also want to make it much easier to merge changes by detecting possible conflicts in an ongoing way -- \"hey, would everything be okay if I merged to master now? if I merged this other branch? are there any branches I'm in conflict with?\"\n\n<@UFXFB1RK8> I've been thinking about a slightly different problem that feels kinda isomorphic to one part of this one: picking a good time to poke\/prod\/nag programmers to upgrade a dependency.\n\nOne piece of prior art here is the way `pip` will remind you to `pip install --upgrade pip` when you run it. It's never blocking but it does enter the field of vision no matter how much output any individual run is throwing out.",
+        "user": "UCUSW7WVD",
+        "ts": "1554133089.015600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553340554.128300",
+        "parent_user_id": "UA8HY8R7B"
+    },
+    {
+        "client_msg_id": "be80c919-1790-4bc2-a5fd-5717d281e36e",
+        "type": "message",
+        "text": "Nice series which addresses very fundamental issues. Good to hear that there is more to come :smiley:",
+        "user": "U7C7B75R6",
+        "ts": "1554143539.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "be27878783b4",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-10\/604262911488_be27878783b4b23a5ed4_72.png",
+            "first_name": "",
+            "real_name": "Niko Autio",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "niko.elmari",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553974366.009700",
+        "parent_user_id": "UAVCC2X70"
+    },
+    {
+        "client_msg_id": "7be218ac-edee-4277-b230-25aa1a041107",
+        "type": "message",
+        "text": "I see some overlap with Houynhnhnm Computing:\n<http:\/\/ngnghm.github.io\/index.html>",
+        "user": "UAVCC2X70",
+        "ts": "1554146149.000300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Houyhnhnm Computing",
+                "title_link": "http:\/\/ngnghm.github.io\/index.html",
+                "text": "Houyhnhnm Computing",
+                "fallback": "Houyhnhnm Computing",
+                "from_url": "http:\/\/ngnghm.github.io\/index.html",
+                "service_icon": "http:\/\/ngnghm.github.io\/img\/favicon.ico",
+                "service_name": "ngnghm.github.io",
+                "id": 1,
+                "original_url": "http:\/\/ngnghm.github.io\/index.html"
+            }
+        ],
+        "thread_ts": "1553974366.009700",
+        "parent_user_id": "UAVCC2X70"
+    },
+    {
+        "client_msg_id": "0b9834b9-c858-40a6-918a-433ed163082e",
+        "type": "message",
+        "text": "Yeah Houynhnhnm Computing has come up before in relation to 'Systems, not Programs'. E.g. <https:\/\/lobste.rs\/s\/fj6ssu\/systems_not_programs#c_c1kgtd>. See also the Tunes project (<http:\/\/tunes.org\/>) which the author started (<https:\/\/ngnghm.github.io\/About.html>). The wiki has a lot of links to interesting historical software.",
+        "user": "U8A5MS6R1",
+        "ts": "1554149761.000600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Systems, not Programs",
+                "title_link": "https:\/\/lobste.rs\/s\/fj6ssu\/systems_not_programs#c_c1kgtd",
+                "text": "21 comments",
+                "fallback": "Systems, not Programs",
+                "thumb_url": "https:\/\/lobste.rs\/apple-touch-icon-144.png",
+                "from_url": "https:\/\/lobste.rs\/s\/fj6ssu\/systems_not_programs#c_c1kgtd",
+                "thumb_width": 144,
+                "thumb_height": 144,
+                "service_icon": "https:\/\/lobste.rs\/apple-touch-icon.png",
+                "service_name": "lobste.rs",
+                "id": 1,
+                "original_url": "https:\/\/lobste.rs\/s\/fj6ssu\/systems_not_programs#c_c1kgtd"
+            },
+            {
+                "title": "About Ngnghm",
+                "title_link": "https:\/\/ngnghm.github.io\/About.html",
+                "text": "About Ngnghm: If you want to build a ship, don’t drum up the men to gather wood, divide the work, and give orders. Instead, teach them to yearn for the vast and endless sea. ― Antoine de Saint-Exupéry, creatively misquoted A TUNES Retrospective: Decades...",
+                "fallback": "About Ngnghm",
+                "from_url": "https:\/\/ngnghm.github.io\/About.html",
+                "service_icon": "https:\/\/ngnghm.github.io\/img\/favicon.ico",
+                "service_name": "ngnghm.github.io",
+                "id": 2,
+                "original_url": "https:\/\/ngnghm.github.io\/About.html"
+            }
+        ],
+        "thread_ts": "1553974366.009700",
+        "parent_user_id": "UAVCC2X70",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U7C7B75R6"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "71bd053f-6418-4aff-922e-b951a7d4171c",
+        "type": "message",
+        "text": "<@UFXFB1RK8> perhaps one reason why we haven't seen a less painful merging tool is the very fact that to be smarter the version control system has to be more integrated with the language\/environment.  Still doesn't explain (as <@UAL7940NM>'s links direct) why Git won out over other distributed version control systems.  Maybe between Linux and Github, Git just had critical mass.  I don't like to think that people delight in Git's complexity.  (So says this proud SourceTree user because I cannot be bothered.)",
+        "user": "UA14TGLTC",
+        "ts": "1554149792.000900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553340554.128300",
+        "parent_user_id": "UA8HY8R7B",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UGJ9KAZM3",
+                    "UD3AK9JRF"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "28576e2f-249c-44be-bbef-b628263d2aad",
+        "type": "message",
+        "text": "As a personal anecdote, when Git first came out I was using Darcs. I'd never gotten into CVS and Subversion, and I didn't really get into version control until I found a decentralized tool. But Darcs was already starting to seem sluggish for my (fairly puny) repositories. So when Git came out, its sheer speed was sufficient for me to instantly switch. This story seems to fit with the early adoption of Google Chrome as well. Performance is a feature, as they say. (GitHub came _much_ later, and only after it was quite clear that Git was the runaway winner.)",
+        "user": "UCUSW7WVD",
+        "ts": "1554150502.001100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1554150557.000000"
+        },
+        "thread_ts": "1553340554.128300",
+        "parent_user_id": "UA8HY8R7B"
+    },
+    {
+        "client_msg_id": "be204c68-7b12-41b6-a8df-e92e22ad7c01",
+        "type": "message",
+        "text": "Felix's links compare distributed version control (git) vs. centralized repositories (svn) so it's not quite fair comparison; I suspect that the main reason git won over is precisely how its distributed nature enables advanced and expert developer ecosystems (which was one of the central design rationales Torvalds had for git in the first place).\nNot requiring commit rights lowers the threshold of making bug fix\/contributions - after you know the tools it doesn't make a difference if it takes you 2 commands (5 seconds) or 10 commands (30 seconds) to perform some version control maneuver, but if you need access to repository? That involves other people so we're talking about minutes of realtime and probably several calendar days here. Distributed pays a small price in added command sequence complexity, but it's a price I will personally pay any day.\n\nAs for is git essentially better or worse than distributed version control solutions I have no idea as I have no experience. Tried to look for a qualitative comparison between git and mercurial, but couldn't come up with a nice one.\n\nGit ecosystem has a rich variety of gui tools to support it (better and worse), so I'm not really convinced by the arguments that \"git command line is bad\" is a fundamental argument.\n\nMerging is a _hard, hard_ problem. I second <@UA14TGLTC>’s thoughts here: merging only becomes easier if it can be integrated with the language\/environment. We're neck-deep in the tradeoff-land once more: powerful, generic, intuitive; pick two.",
+        "user": "UGJ9KAZM3",
+        "ts": "1554151314.001400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "a9ca5b79893e",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-05\/567982344725_a9ca5b79893ede5381e5_72.jpg",
+            "first_name": "Iridian",
+            "real_name": "Iridian Kiiskinen",
+            "display_name": "Iridian",
+            "team": "T5TCAFTA9",
+            "name": "iridian",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UGJ9KAZM3",
+            "ts": "1554151377.000000"
+        },
+        "thread_ts": "1553340554.128300",
+        "parent_user_id": "UA8HY8R7B"
+    },
+    {
+        "client_msg_id": "ed426223-fdef-4a70-b5b5-6a815ba34749",
+        "type": "message",
+        "text": "FWIW I collaborated with Faré on <http:\/\/tunes.org>",
+        "user": "UH88R0560",
+        "ts": "1554155182.001800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gca0a3a519d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/bca0a3a519d1abdcc254f23d043fbceb.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "Brian T. Rice",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "briantrice",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553984196.011300",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "UGYGY18UX",
+                    "U8A5MS6R1"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0241ddea-a5fe-4e7c-870f-8c176c14ad32",
+        "type": "message",
+        "text": "FWIW, I spent some time thinking about what version control could mean for narrative text, and came to the same conclusion. The best experience relies on preserving as much of the intent and context of a change, expressed in terms of the kind of work being done (rename variable, reorder sentences, etc). To me, that suggested that the definitions of the various changes that could be performed should be versioned alongside the documents themselves.",
+        "user": "UD3AK9JRF",
+        "ts": "1554173675.002300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g35dfa49055c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/235dfa49055c0a25f2ccfc667a7a6b77.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-72.png",
+            "first_name": "",
+            "real_name": "Peter Abrahamsen",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "rainhead",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553340554.128300",
+        "parent_user_id": "UA8HY8R7B"
+    }
+]

@@ -1,0 +1,625 @@
+[
+    {
+        "client_msg_id": "606b63ce-abaf-4fb8-87bd-321ed0a1d928",
+        "type": "message",
+        "text": "<@ULK0Z4MPV> you might consider looking at my Beads language. It has three aspects that relate to your work. It is a clean sheet approach and emits to raw JS with no external dependencies such as Rect, etc.. You declare a model as a graph database schema that will be filled in with data later with data. Then you write chunks of code that draw your screen using the model data in a pure manner (the view). The controller chunks are blocks of code appended to the view drawing subroutines.  There is also the notion of a derived quantity which is lazily evaluated when it is referenced. The key advantage over your method is that if a view drawing function uses model variables, a, b and c, if any of those 3 variables change their value, then the draw chunk is re-executed. This is all tracked automatically without any the programmer having to declare dependencies, similar to how spreadsheets work, except that this is about re-executing drawing functions with memorized parameters, which is quite different than simple formulas being executed in topological order. It has a central event system called the Loom, which combines publish\/subscribe, network, keyboard, mouse, timer events into one unified event stream, that is fed to the constellation of code chunks, based on their appropriateness for that event.",
+        "user": "UEQ6M68H0",
+        "ts": "1589702121.389000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1589702270.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MGh+Q",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "ULK0Z4MPV"
+                            },
+                            {
+                                "type": "text",
+                                "text": " you might consider looking at my Beads language. It has three aspects that relate to your work. It is a clean sheet approach and emits to raw JS with no external dependencies such as Rect, etc.. You declare a model as a graph database schema that will be filled in with data later with data. Then you write chunks of code that draw your screen using the model data in a pure manner (the view). The controller chunks are blocks of code appended to the view drawing subroutines.  There is also the notion of a derived quantity which is lazily evaluated when it is referenced. The key advantage over your method is that if a view drawing function uses model variables, a, b and c, if any of those 3 variables change their value, then the draw chunk is re-executed. This is all tracked automatically without any the programmer having to declare dependencies, similar to how spreadsheets work, except that this is about re-executing drawing functions with memorized parameters, which is quite different than simple formulas being executed in topological order. It has a central event system called the Loom, which combines publish\/subscribe, network, keyboard, mouse, timer events into one unified event stream, that is fed to the constellation of code chunks, based on their appropriateness for that event."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589558372.347500",
+        "parent_user_id": "ULK0Z4MPV"
+    },
+    {
+        "client_msg_id": "97984798-FBF0-4D03-83DD-FA38C099B675",
+        "type": "message",
+        "text": "Hi, thanks for sharing your approach!\nSummarizing: the main difference between our implementations is that in yours in each frame the whole graph gets evaluated and in mine a node gets only triggers by an event (which can be external) and this can be dependent of time but certainly not necessarily and most of the time it's user input that trigger a node or other node's triggering other nodes. Both our graphs are directed I think. Also the way the graph gets evaluated is different, in yours the pull architecture as you describe is very different then in mine , which is forward directed.\nVery interesting this discussion about our approaches, I am going to think about it some more.\n",
+        "user": "U0123H7JRDM",
+        "ts": "1589703199.389400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfb283c8a09c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/fb283c8a09c5c8909b00498ba9634a70.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Maikel",
+            "real_name": "Maikel van de Lisdonk",
+            "display_name": "Maikel",
+            "team": "T5TCAFTA9",
+            "name": "maikel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GEi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi, thanks for sharing your approach!\nSummarizing: the main difference between our implementations is that in yours in each frame the whole graph gets evaluated and in mine a node gets only triggers by an event (which can be external) and this can be dependent of time but certainly not necessarily and most of the time it's user input that trigger a node or other node's triggering other nodes. Both our graphs are directed I think. Also the way the graph gets evaluated is different, in yours the pull architecture as you describe is very different then in mine , which is forward directed.\nVery interesting this discussion about our approaches, I am going to think about it some more.\n"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589540394.327600",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "2dcc55c7-6311-422c-8ea9-ddeb903b3487",
+        "type": "message",
+        "text": "Yes, you have it right I think.  Except to say that nodes in my graph that aren't required won't wind up getting evaluated; i.e. if they aren't part of the dependency chain of the output node, then they will not evaluate, and if a node is 'current', it doesn't need to do any work.   I don't allow loops in the network; i.e. a node will not evaluate twice per graph evaluation.  For this reason, I have a generation number on each node which can track the global generation and avoid repeat computation.  It makes the evaluation logic quite clean I think.",
+        "user": "UUQ2EQW21",
+        "ts": "1589706571.389600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Zjm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, you have it right I think.  Except to say that nodes in my graph that aren't required won't wind up getting evaluated; i.e. if they aren't part of the dependency chain of the output node, then they will not evaluate, and if a node is 'current', it doesn't need to do any work.   I don't allow loops in the network; i.e. a node will not evaluate twice per graph evaluation.  For this reason, I have a generation number on each node which can track the global generation and avoid repeat computation.  It makes the evaluation logic quite clean I think."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589540394.327600",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "e2d1d382-36e4-444d-b211-d260fe1e984a",
+        "type": "message",
+        "text": "I am probably quite influenced by the Maya directed graph approach, which was my first exposure to such an idea; though I don't implement the push\/pull architecture that they do.",
+        "user": "UUQ2EQW21",
+        "ts": "1589706731.389800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "IaKA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I am probably quite influenced by the Maya directed graph approach, which was my first exposure to such an idea; though I don't implement the push\/pull architecture that they do."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589540394.327600",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "E5386B23-CF3C-49AD-A118-1CEF2C6C64C8",
+        "type": "message",
+        "text": "My influence was the node-red project",
+        "user": "U0123H7JRDM",
+        "ts": "1589710733.390700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfb283c8a09c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/fb283c8a09c5c8909b00498ba9634a70.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Maikel",
+            "real_name": "Maikel van de Lisdonk",
+            "display_name": "Maikel",
+            "team": "T5TCAFTA9",
+            "name": "maikel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JVf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "My influence was the node-red project"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589540394.327600",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "EBBEEB53-D206-4796-BBA7-7875949EB219",
+        "type": "message",
+        "text": "How do you handle the communication between the user interface and the graph engine? I assume that the graph engine runs in a separate thread, do you send messages from there to the UI main thread?",
+        "user": "U0123H7JRDM",
+        "ts": "1589718551.393800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfb283c8a09c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/fb283c8a09c5c8909b00498ba9634a70.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Maikel",
+            "real_name": "Maikel van de Lisdonk",
+            "display_name": "Maikel",
+            "team": "T5TCAFTA9",
+            "name": "maikel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nO9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "How do you handle the communication between the user interface and the graph engine? I assume that the graph engine runs in a separate thread, do you send messages from there to the UI main thread?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589660842.386100",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "client_msg_id": "B1250589-9054-4240-A4D8-A6AE7FB57443",
+        "type": "message",
+        "text": "Another question: how do you handle an LFO to modulate a filter frequency in your graph engine? Do they have there own timers and update a \"generation number\" themselves?",
+        "user": "U0123H7JRDM",
+        "ts": "1589721272.397000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfb283c8a09c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/fb283c8a09c5c8909b00498ba9634a70.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Maikel",
+            "real_name": "Maikel van de Lisdonk",
+            "display_name": "Maikel",
+            "team": "T5TCAFTA9",
+            "name": "maikel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XE48x",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Another question: how do you handle an LFO to modulate a filter frequency in your graph engine? Do they have there own timers and update a \"generation number\" themselves?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589660842.386100",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "client_msg_id": "f48a00fa-5683-47a7-90de-08c6d2853b5b",
+        "type": "message",
+        "text": "<@UEQ6M68H0> it does sound very nice. Honestly, it might be a risky business decision to adopt at this point. But I'd be happy to try to build something and provide feedback. Do you have links?",
+        "user": "ULK0Z4MPV",
+        "ts": "1589728787.397600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "84fdccb39d9b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-05-07\/1111736156419_84fdccb39d9b31c2626b_72.jpg",
+            "first_name": "",
+            "real_name": "Ryan King",
+            "display_name": "Ryan King",
+            "team": "T5TCAFTA9",
+            "name": "ryan.king1809",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Q\/oK2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UEQ6M68H0"
+                            },
+                            {
+                                "type": "text",
+                                "text": " it does sound very nice. Honestly, it might be a risky business decision to adopt at this point. But I'd be happy to try to build something and provide feedback. Do you have links?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589558372.347500",
+        "parent_user_id": "ULK0Z4MPV"
+    },
+    {
+        "client_msg_id": "D0D8C98F-E543-4C9B-BE07-833E2107D88F",
+        "type": "message",
+        "text": "Or maybe you next video could be on how to set up beads?",
+        "user": "ULK0Z4MPV",
+        "ts": "1589728939.398600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "84fdccb39d9b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-05-07\/1111736156419_84fdccb39d9b31c2626b_72.jpg",
+            "first_name": "",
+            "real_name": "Ryan King",
+            "display_name": "Ryan King",
+            "team": "T5TCAFTA9",
+            "name": "ryan.king1809",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "M=9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Or maybe you next video could be on how to set up beads?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589558372.347500",
+        "parent_user_id": "ULK0Z4MPV"
+    },
+    {
+        "type": "message",
+        "text": "To answer the first question, you should probably check out my first 2 minute week video: <https:\/\/futureofcoding.slack.com\/files\/UUQ2EQW21\/F011WFWEGMC\/week2minute_1.mp4>\nThe short story is that I've been working on a 'Live Coding' environment for some time; it is audio + visual.  Designed as a toolkit for performance, teaching, research.  So the audio is a smaller part of the whole.",
+        "upload": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TmzY6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "To answer the first question, you should probably check out my first 2 minute week video: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/futureofcoding.slack.com\/files\/UUQ2EQW21\/F011WFWEGMC\/week2minute_1.mp4"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nThe short story is that I've been working on a 'Live Coding' environment for some time; it is audio + visual.  Designed as a toolkit for performance, teaching, research.  So the audio is a smaller part of the whole."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "user": "UUQ2EQW21",
+        "ts": "1589732641.398800",
+        "edited": {
+            "user": "UUQ2EQW21",
+            "ts": "1589732644.000000"
+        },
+        "client_msg_id": "5d553bd4-f8f2-4645-8c95-787a440e555c",
+        "thread_ts": "1589660842.386100",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "client_msg_id": "6c1f24be-2bbb-41b8-810d-f4d6340e9dc8",
+        "type": "message",
+        "text": "When used in the audio code, the graph is running in the audio thread (the same one which the sound card requests a new buffer on).  The generated notes from Orca\/Music Language, etc. do run in a separate thread to this, but the notes are turned into PCM audio by the graph on the soundcard thread.\nThe UI is indeed on a separate thread.  I like lock-free programming, so as much as possible the UI is detached from the audio.  Some special nodes have 'real time' sections designed to happen in the audio thread, and 'UI' sections for display purposes.  It's up to the nodes that do this to manage shared state correctly.  This localises the problem somewhat.  An example of that might be the ADSR curve which has blue dots running along it containing note events.",
+        "user": "UUQ2EQW21",
+        "ts": "1589732907.399300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UUQ2EQW21",
+            "ts": "1589793369.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "o5Ox2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "When used in the audio code, the graph is running in the audio thread (the same one which the sound card requests a new buffer on).  The generated notes from Orca\/Music Language, etc. do run in a separate thread to this, but the notes are turned into PCM audio by the graph on the soundcard thread.\nThe UI is indeed on a separate thread.  I like lock-free programming, so as much as possible the UI is detached from the audio.  Some special nodes have 'real time' sections designed to happen in the audio thread, and 'UI' sections for display purposes.  It's up to the nodes that do this to manage shared state correctly.  This localises the problem somewhat.  An example of that might be the ADSR curve which has blue dots running along it containing note events."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589660842.386100",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "client_msg_id": "23718c26-5065-4582-9607-b0975b1d2a1d",
+        "type": "message",
+        "text": "None of this is perfect yet, it is still a work in progress, and I tend to jump around filling in gaps as I see fit!",
+        "user": "UUQ2EQW21",
+        "ts": "1589732962.399700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NT5e",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "None of this is perfect yet, it is still a work in progress, and I tend to jump around filling in gaps as I see fit!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589660842.386100",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "client_msg_id": "563d312b-b639-4cf2-bfb4-79ef4b6015b1",
+        "type": "message",
+        "text": "For the question on LFO, it is probably best to think of what a graph step is in my engine.  When the sound card requests a buffer of, say, 500 stereo samples, the graph is run.  Any notes that are due for scheduling are updated in the 'instrument' node, and then the output node 'pulls' 500 samples.  This means each node then processes 500 audio samples in its 'compute' step.  This is an atomic operation.  For example, the oscillator's compute sample might build 500 sin samples into the buffer from the wavetable.  Each node has to handle multiple channels, and doesn't know up front what it will receive.  This is the data flow part.  The LFO is no different.  Suppose it is feeding an oscillator to modulate the frequency.  The LFO data flow pin is connected to the oscillator modulation data flow pin.  At run time, the LFO will generate its 500 samples when the oscillator evaluates the modulation input, then the oscillator will generate its 500 samples and combine them with the incoming data.  If you look at the Frequency analyser in my last video, you will see the separate channels of audio.  This node simply looks at what is connected to it, and displays all the channels it finds.",
+        "user": "UUQ2EQW21",
+        "ts": "1589733232.399900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UUQ2EQW21",
+            "ts": "1589733309.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "biL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "For the question on LFO, it is probably best to think of what a graph step is in my engine.  When the sound card requests a buffer of, say, 500 stereo samples, the graph is run.  Any notes that are due for scheduling are updated in the 'instrument' node, and then the output node 'pulls' 500 samples.  This means each node then processes 500 audio samples in its 'compute' step.  This is an atomic operation.  For example, the oscillator's compute sample might build 500 sin samples into the buffer from the wavetable.  Each node has to handle multiple channels, and doesn't know up front what it will receive.  This is the data flow part.  The LFO is no different.  Suppose it is feeding an oscillator to modulate the frequency.  The LFO data flow pin is connected to the oscillator modulation data flow pin.  At run time, the LFO will generate its 500 samples when the oscillator evaluates the modulation input, then the oscillator will generate its 500 samples and combine them with the incoming data.  If you look at the Frequency analyser in my last video, you will see the separate channels of audio.  This node simply looks at what is connected to it, and displays all the channels it finds."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589660842.386100",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "client_msg_id": "F69762AD-C0D0-4797-999A-226871956B07",
+        "type": "message",
+        "text": "<@UUQ2EQW21> thanks for the detailed descriptions! It's really great to read about other implementations ",
+        "user": "U0123H7JRDM",
+        "ts": "1589782154.402100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfb283c8a09c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/fb283c8a09c5c8909b00498ba9634a70.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Maikel",
+            "real_name": "Maikel van de Lisdonk",
+            "display_name": "Maikel",
+            "team": "T5TCAFTA9",
+            "name": "maikel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Bev",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UUQ2EQW21"
+                            },
+                            {
+                                "type": "text",
+                                "text": " thanks for the detailed descriptions! It's really great to read about other implementations "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589540394.327600",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "5306779C-29DF-4B82-AD91-E33A5FA912FA",
+        "type": "message",
+        "text": "I now watched your 1st video and it's much more clear, awesome concept! ",
+        "user": "U0123H7JRDM",
+        "ts": "1589782409.403200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfb283c8a09c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/fb283c8a09c5c8909b00498ba9634a70.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Maikel",
+            "real_name": "Maikel van de Lisdonk",
+            "display_name": "Maikel",
+            "team": "T5TCAFTA9",
+            "name": "maikel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rjCES",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I now watched your 1st video and it's much more clear, awesome concept! "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1589660842.386100",
+        "parent_user_id": "UUQ2EQW21"
+    }
+]

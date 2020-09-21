@@ -1,0 +1,156 @@
+[
+    {
+        "client_msg_id": "d8fdf30c-ecc0-4d95-a6bf-adacf8c4f48d",
+        "type": "message",
+        "text": "more random thoughs\n\n&gt; input validation\n\nagree with the above comments it will likely make things worse not better. As a simple example imagine a word processor that disallows mis-spelled words. You type 'w' and it deleted it as *not a complete word* Instead you have to past an entire word that starts with 'w'. Pasting anything else then a valid word is impossible. Extreme example but the same will happen with code. There are lots of invalid states needed in getting to a valid state.\n\nI feel like editor integrated linters help here. They highlight possible issues but don't prevent input.\n\n&gt; import management\n\nThere are infinite imports. I don't really want my environment giving me a list of 6000 completions when I type 'L'.\n\nSame as above I feel like editor based linters help here. The editor's highlighting might suggested some completions, it might also mention that it can't find the requested module, but it doesn't stop me from specifiying it. It's possible I plan to add the module later. It's also possible I have a complex build and the editor can't find the module.\n\n&gt; Identifier alias\n\nThis sounds like I'll be unable to read the code if I look at it anywhere but my environment since I'll only be used to my identifiers.\n\nBetter IMO are coding standards. For example Swift lists a bunch of naming suggestions\n\n<https:\/\/swift.org\/documentation\/api-design-guidelines\/>\n\n&gt; Formatting\n\nI'm not a fan of autoformatting,. The topic comes up about once a year on the Chromium team and gets shot down every time. The issue is formatting matters and autoformatters can't know when it does. Some of this is preference of course but for example, many style guides suggest to align end of line comments. Example (probably bad but I'm to lazy to figure out the perfect example)\n\n```\nfloat vel = 123.45;               \/\/ velocity in meters per second;\nfloat acc = 42.1;                 \/\/ acceleration in meters per second ^ 2\nint dur = 21;                     \/\/ duration in frames\nVector3 dir = { 1.2, 2.1, 7.9 };  \/\/ direction of acceleration in world space\n```\n\nIf you accept the idea that aligning the comments makes the code more readable then you have to accept that alignment itself can make the code more readable.\n\n```\nfloat   vel = 123.45;             \/\/ velocity in meters per second;\nfloat   acc = 42.1;               \/\/ acceleration in meters per second ^ 2\nint     dur = 21;                 \/\/ duration in frames\nVector3 dir = { 1.2, 2.1, 7.9 };  \/\/ direction of acceleration in world space\n```\n\nI know the above is a bad example. I don't have time to dig through the Chromium code for better examples where formatting in a way any auto formatter would format makes the code far far less readable. I can just say they arguably exist. Maybe that could be solved by comments or something\n\n```\n\/\/ autoformatting: off\n...\ncode that doesn't follow auto-formatting rules\n...\n\/\/ autoformatting: on\n```\n\nbut in general I find autoformatting to be constraining.\n\nThe Chromium team pretty much always responds \"You're free to run an auto-formatter on any changes you make\". You can not wholesale reformat a file but if you're making changes to a file you can run on auto-formatter on the changed lines. The team itself will not be adding an auto formatter. I agree with that decision.\n\n&gt; Compilation\n\nI work on projects that can take anywhere from 3 minutes to 4+ hours to build. I don't always want auto-compliation.\n\n&gt; Deployment\n\nI work on projects with gigabytes of final data and terabytes of source data. (Games).\n\nWhich reminds me\n\n<https:\/\/www.joelonsoftware.com\/2002\/05\/06\/five-worlds\/>",
+        "user": "UC6997THT",
+        "ts": "1556703412.002400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f3eb3ca69d86",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-13\/414472553296_f3eb3ca69d86feb77929_72.png",
+            "first_name": "Gregg",
+            "real_name": "Gregg Tavares",
+            "display_name": "gman",
+            "team": "T5TCAFTA9",
+            "name": "slack1",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Swift.org",
+                "title_link": "https:\/\/swift.org\/documentation\/api-design-guidelines\/",
+                "text": "Swift is a general-purpose programming language built using a modern approach to safety, performance, and software design patterns.",
+                "fallback": "Swift.org",
+                "from_url": "https:\/\/swift.org\/documentation\/api-design-guidelines\/",
+                "service_icon": "https:\/\/swift.org\/apple-touch-icon.png",
+                "service_name": "swift.org",
+                "id": 1,
+                "original_url": "https:\/\/swift.org\/documentation\/api-design-guidelines\/"
+            },
+            {
+                "service_name": "Joel on Software",
+                "title": "Five Worlds",
+                "title_link": "https:\/\/www.joelonsoftware.com\/2002\/05\/06\/five-worlds\/",
+                "text": "Something important is almost never mentioned in all the literature about programming and software development, and as a result we sometimes misunderstand each other. You’re a software develo…",
+                "fallback": "Joel on Software: Five Worlds",
+                "thumb_url": "https:\/\/i2.wp.com\/www.joelonsoftware.com\/wp-content\/uploads\/2016\/12\/11969842.jpg?fit=400%2C400&ssl=1",
+                "ts": 1020644098,
+                "from_url": "https:\/\/www.joelonsoftware.com\/2002\/05\/06\/five-worlds\/",
+                "thumb_width": 400,
+                "thumb_height": 400,
+                "service_icon": "https:\/\/i2.wp.com\/www.joelonsoftware.com\/wp-content\/uploads\/2016\/12\/11969842.jpg?fit=180%2C180&#038;ssl=1",
+                "id": 2,
+                "original_url": "https:\/\/www.joelonsoftware.com\/2002\/05\/06\/five-worlds\/"
+            }
+        ],
+        "thread_ts": "1555418947.006700",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "f791cf01-32c3-4fe0-8e7e-e4b596dd4eba",
+        "type": "message",
+        "text": "I can think of one other example for auto-formatting (still not sure it's a good example). The API signature for `drawImage` in the JavaScript Canvas API is `drawImage(img, sourceRectX, sourceRectY, sourceRectWidth, sourceRectHeight, destRectX, destRectY, destRectWidth, destRectHeight)`\n\nI will almost always choose to format that as\n\n```\ndrawImage(\n   imgRefence,\n   sourceRectArguments,\n   destRectArguments);\n```\n\nNo auto formatter I know of has the knowledge to know the arguments are more readable if arguments 2,3,4,5 are on one line and 6,7,8,9 are on another so they will almost always make the code less readable IMO.",
+        "user": "UC6997THT",
+        "ts": "1556703694.002700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f3eb3ca69d86",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-13\/414472553296_f3eb3ca69d86feb77929_72.png",
+            "first_name": "Gregg",
+            "real_name": "Gregg Tavares",
+            "display_name": "gman",
+            "team": "T5TCAFTA9",
+            "name": "slack1",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555418947.006700",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "1d1a23c3-d697-4766-946c-f3007b4cddc7",
+        "type": "message",
+        "text": "Sorry I think I ranted on this before but I vehemently disagree with making the web kernel smaller. I used to have that opinion and I changed my mind.\n\nI'm assuming by that people mean they just want some low-level VM like thing with pixels and input. So let's consider some of the issues\n\n• Everyone renders their own text using their own font data and their own font renderers.\n\nResult: Internationalization is worse than ever. Trying to type Chinese, Japanese, Korean, fails in 99% of apps.\n\n• Everyone renders text to pixels\n\nResult: No way to write ad blockers since there is no structure to the data. It's just a block of pixels. No way to write translation extensions like Rikaikun. No way for Google Translate to translate a page because it can't scan the document. At best it could only OCR what's on the screen at the moment assuming the page doesn't have some fancy background making OCR too hard. No way to select, copy and paste text. Again there's no standard structure so unless the app itself decides to implement highlighting text with the cursor and letting you copy that text to a clipboard you're out of luck.\n\n• No blocking videos\n\nVideos are currently blockable because they are generally implemented using a `&lt;video&gt;` tag and because the protocols are standardized. In a 'we draw video using our own codec to pixel world' no more blocking video since there is no way for the system to know that you're drawing pixels for text or video, it's all just pixels.\n\n• No support for Accessibility tech\n\nAgain, because the common format is HTML it's easy to write something that translates to braille or reads the words aloud. In a \"it's a bucket of pixels and all data is opaque\" that disappears\n\n• Hyperlinks disappear\n\nIf everyone is making up their own display to pixels tech then there are no links\n\nThere are many many similar issues. I know browsers have their issues but I disagree the world would be better with a low-level \"cross platform assembly + drawing surface\"\n\nI also know some of the issues above could be kind of solved by standards and praying that every developer in the world follows those standards and that they all update to the new standards as the standards change.\n\nMy impression is that by having the standard be the default method of creation it leads to far more people following the standards since it's the path of least resistance.",
+        "user": "UC6997THT",
+        "ts": "1556705199.002900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f3eb3ca69d86",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-13\/414472553296_f3eb3ca69d86feb77929_72.png",
+            "first_name": "Gregg",
+            "real_name": "Gregg Tavares",
+            "display_name": "gman",
+            "team": "T5TCAFTA9",
+            "name": "slack1",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555589692.025100",
+        "parent_user_id": "U5TCAFTD3",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UC2A2ARPT",
+                    "UJ6LDMMN0",
+                    "UBSMEUXAA"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "75d427af-7cf8-4dba-a80a-0244a6a4f7f2",
+        "type": "message",
+        "text": "<@UC6997THT> some low-level VM like thing?  You mean like for handheld mobile computers?  :wink:",
+        "user": "UA14TGLTC",
+        "ts": "1556719750.003300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555589692.025100",
+        "parent_user_id": "U5TCAFTD3"
+    },
+    {
+        "client_msg_id": "e4a5a3b8-e42b-489c-aa5c-f6c3fa9a0175",
+        "type": "message",
+        "text": "<@UC6997THT> what if small didn't mean low level but high level yet compact? Like rebol, lisp, smalltalk, etc?  Compare with how large the browser spec is.. number of HTML tags and complexity of css.",
+        "user": "U8A5MS6R1",
+        "ts": "1556726109.003500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh Chaturvedi",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555589692.025100",
+        "parent_user_id": "U5TCAFTD3"
+    }
+]
