@@ -1,0 +1,1874 @@
+[
+    {
+        "type": "message",
+        "text": "I've been noodling for the umpteenth time on a representation for programs that reduces the need to \"play computer\". My post last night on <#C0120A3L30R|two-minute-week> (<https://futureofcoding.slack.com/archives/C0120A3L30R/p1600587602007800>) triggered enough unexpected thinking together to get me to write up my recent attempts and try to trigger more.\n\nWe all simulate programs in our heads. The activity seems to break down into two major use cases:\n* Forward path: Extracting functions out of arbitrary computations.\n* Backward path: Imagining the execution of arbitrary computations containing function calls.\n\nThe forward path fits very well with ideas like starting with concrete examples and emphasizing data at all times. Nobody should ever have to start with a function definition. Instead, start with an example computation like: `18 * 9/5 + 32`, and incrementally end up at a function like `celsius-to-fahrenheit`. The backward path fits with various metaphors for debugging programs. Debug by print, debug by step, time-travel debugging. A key concern is how to _uncoil_ static computations (loops, recursion) into dynamic metaphors (traces, stack frames, interactive movements).\n\nPostfix expressions fit beautifully with the backward path. As the demo of Brief (<https://www.youtube.com/watch?v=R3MNcA2dpts>) showed, execution is already quite uncoiled, with no backward jumps. While the Brief demo didn't show it (it's easy to spot where the presenter plays computer in their heads), it's reasonable to imagine a way to drill down into function calls, replacing words with their definitions. By contrast, conventional expressions -- tree-shaped and using names -- immediately throw up impediments in understanding _what happens first_.\n\nHowever, the forward path is thornier:\n1. It's common to claim that point-free programs make it easy to factor out new definitions, but that's only true when the definition consists of consecutive words. Consider how you would go from `* 3 3` to a definition of `square`, or from `3 4 + 5 *` to a definition of `(a+b)*c`.\n2. After they're extracted, point-free functions are harder to understand. What does the stack need to look like at the start? How many words, what types, how many words consumed, all these questions require simulating programs in your head. Or a manual comment.\n\nThis was the idea maze in my head until I saw LoGlo (<https://loglo.app/2020-06-16>). The cool idea here has taken me weeks to articulate: lines have names and get separate stacks. Forth typically writes to names within lines with words like `!`. Limiting definitions to one per line strikes me as an advance. And having names gives us a way to make Forth words less point-free. I start imagining flows like turning `* 3 3` into `* x x` using two 'rename' operations, and then turning the entire line into a new function. Like, imagine a UI with a code side on the left, and a scratch computation on the right:\n\n```              \u2502\n              \u2502  x: 3\n              \u2502  * x x\n              \u2502```\nAfter defining a function it might look like this:\n\n```              \u2502\n   : sq x     \u2502  sq 3\n        * x x \u2502\n              \u2502```\nNotice how the definition of `x:` above gets replaced by the call to `sq` below. That's kinda pleasing.\n\nBut there's issues. This manipulation requires modifying definitions of free variables. Worse, I ended up with the function call in _prefix_ order. Trying to make things consistent got me stuck up on a tree with a 2D layout until I noticed I'd lost the benefits of postfix that got me on this road in the first place. I'll include it here just in case it sparks ideas for others, but I'm starting to think it's a dead end.\n\nAnyways, that's where I am, still looking for a representation that's easy to uncoil and where inlining function calls is a 'smooth' visualization.",
+        "files": [
+            {
+                "id": "F01B1TPL02X",
+                "created": 1600645250,
+                "timestamp": 1600645250,
+                "name": "tree.png",
+                "title": "tree.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "UCUSW7WVD",
+                "editable": false,
+                "size": 302030,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01B1TPL02X/tree.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01B1TPL02X/download/tree.png",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_360.png",
+                "thumb_360_w": 180,
+                "thumb_360_h": 360,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_480.png",
+                "thumb_480_w": 239,
+                "thumb_480_h": 480,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_720.png",
+                "thumb_720_w": 359,
+                "thumb_720_h": 720,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_800.png",
+                "thumb_800_w": 800,
+                "thumb_800_h": 1604,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_960.png",
+                "thumb_960_w": 479,
+                "thumb_960_h": 960,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B1TPL02X-9a126fed05/tree_1024.png",
+                "thumb_1024_w": 511,
+                "thumb_1024_h": 1024,
+                "original_w": 875,
+                "original_h": 1754,
+                "thumb_tiny": "AwAwABe1gUZ5o5ooAKWiigBM0Y5zS03PNAC0tJS0AJ+NH4/pSHOeKWgA5paKKAP/2Q==",
+                "permalink": "https://futureofcoding.slack.com/files/UCUSW7WVD/F01B1TPL02X/tree.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01B1TPL02X-02e73d0f42",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "VmOp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've been noodling for the umpteenth time on a representation for programs that reduces the need to \"play computer\". My post last night on "
+                            },
+                            {
+                                "type": "channel",
+                                "channel_id": "C0120A3L30R"
+                            },
+                            {
+                                "type": "text",
+                                "text": " ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://futureofcoding.slack.com/archives/C0120A3L30R/p1600587602007800"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") triggered enough unexpected thinking together to get me to write up my recent attempts and try to trigger more.\n\nWe all simulate programs in our heads. The activity seems to break down into two major use cases:\n* Forward path: Extracting functions out of arbitrary computations.\n* Backward path: Imagining the execution of arbitrary computations containing function calls.\n\nThe forward path fits very well with ideas like starting with concrete examples and emphasizing data at all times. Nobody should ever have to start with a function definition. Instead, start with an example computation like: "
+                            },
+                            {
+                                "type": "text",
+                                "text": "18 * 9/5 + 32",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and incrementally end up at a function like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "celsius-to-fahrenheit",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". The backward path fits with various metaphors for debugging programs. Debug by print, debug by step, time-travel debugging. A key concern is how to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "uncoil",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " static computations (loops, recursion) into dynamic metaphors (traces, stack frames, interactive movements).\n\nPostfix expressions fit beautifully with the backward path. As the demo of Brief ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.youtube.com/watch?v=R3MNcA2dpts"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") showed, execution is already quite uncoiled, with no backward jumps. While the Brief demo didn't show it (it's easy to spot where the presenter plays computer in their heads), it's reasonable to imagine a way to drill down into function calls, replacing words with their definitions. By contrast, conventional expressions -- tree-shaped and using names -- immediately throw up impediments in understanding "
+                            },
+                            {
+                                "type": "text",
+                                "text": "what happens first",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nHowever, the forward path is thornier:\n1. It's common to claim that point-free programs make it easy to factor out new definitions, but that's only true when the definition consists of consecutive words. Consider how you would go from "
+                            },
+                            {
+                                "type": "text",
+                                "text": "* 3 3",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to a definition of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "square",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", or from "
+                            },
+                            {
+                                "type": "text",
+                                "text": "3 4 + 5 *",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to a definition of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "(a+b)*c",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n2. After they're extracted, point-free functions are harder to understand. What does the stack need to look like at the start? How many words, what types, how many words consumed, all these questions require simulating programs in your head. Or a manual comment.\n\nThis was the idea maze in my head until I saw LoGlo ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://loglo.app/2020-06-16"
+                            },
+                            {
+                                "type": "text",
+                                "text": "). The cool idea here has taken me weeks to articulate: lines have names and get separate stacks. Forth typically writes to names within lines with words like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "!",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Limiting definitions to one per line strikes me as an advance. And having names gives us a way to make Forth words less point-free. I start imagining flows like turning "
+                            },
+                            {
+                                "type": "text",
+                                "text": "* 3 3",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " into "
+                            },
+                            {
+                                "type": "text",
+                                "text": "* x x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " using two 'rename' operations, and then turning the entire line into a new function. Like, imagine a UI with a code side on the left, and a scratch computation on the right:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "              \u2502\n              \u2502  x: 3\n              \u2502  * x x\n              \u2502"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAfter defining a function it might look like this:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "              \u2502\n   : sq x     \u2502  sq 3\n        * x x \u2502\n              \u2502"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nNotice how the definition of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x:",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " above gets replaced by the call to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "sq",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " below. That's kinda pleasing.\n\nBut there's issues. This manipulation requires modifying definitions of free variables. Worse, I ended up with the function call in "
+                            },
+                            {
+                                "type": "text",
+                                "text": "prefix",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " order. Trying to make things consistent got me stuck up on a tree with a 2D layout until I noticed I'd lost the benefits of postfix that got me on this road in the first place. I'll include it here just in case it sparks ideas for others, but I'm starting to think it's a dead end.\n\nAnyways, that's where I am, still looking for a representation that's easy to uncoil and where inlining function calls is a 'smooth' visualization."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "user": "UCUSW7WVD",
+        "display_as_bot": false,
+        "ts": "1600645382.040000",
+        "thread_ts": "1600645382.040000",
+        "reply_count": 29,
+        "reply_users_count": 5,
+        "latest_reply": "1600872932.006900",
+        "reply_users": [
+            "UCUSW7WVD",
+            "UHWC9PXBL",
+            "U013ZLJARC7",
+            "UPX3PH28N",
+            "UA14TGLTC"
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "19aa326b-6f94-4a12-9855-22867cc59ca7",
+        "type": "message",
+        "text": "Wait, do I just need to switch how I define names?\n\n```              \u2502  3 :x\n              \u2502  * x x\n              \u2502\n=&gt;\n   : sq x     \u2502  3 sq\n     * x x    \u2502\n              \u2502```",
+        "user": "UCUSW7WVD",
+        "ts": "1600645792.040300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "g8kLo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Wait, do I just need to switch how I define names?\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "              \u2502  3 :x\n              \u2502  * x x\n              \u2502\n=>\n   : sq x     \u2502  3 sq\n     * x x    \u2502\n              \u2502"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "65394c16-c26a-4bab-8999-e31d2f75b6a8",
+        "type": "message",
+        "text": "i have to read this in more detail later. you may be interested in <http://www.nsl.com/k/xy/xy.htm|XY>, and <https://hypercubed.github.io/joy/html/jp-flatjoy.html|Floy>, two concatenative languages that eschew nested quotations (what I think you\u2019re dealing with that got you to the prefix stuff).\n\nxy lets every program have both a stack (representing\u2026 the stack) and a queue (representing the stream of tokens that are the rest of the program). It\u2019s an interesting route around the problem you\u2019re talking about, and I feel like it\u2019s either exactly right or maybe the inverse of right",
+        "user": "UHWC9PXBL",
+        "ts": "1600651465.040500",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UHWC9PXBL",
+            "ts": "1600651483.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RuKn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i have to read this in more detail later. you may be interested in "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://www.nsl.com/k/xy/xy.htm",
+                                "text": "XY"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://hypercubed.github.io/joy/html/jp-flatjoy.html",
+                                "text": "Floy"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", two concatenative languages that eschew nested quotations (what I think you\u2019re dealing with that got you to the prefix stuff).\n\nxy lets every program have both a stack (representing\u2026 the stack) and a queue (representing the stream of tokens that are the rest of the program). It\u2019s an interesting route around the problem you\u2019re talking about, and I feel like it\u2019s either exactly right or maybe the inverse of right"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "9f2d3d73-d431-4800-9f40-2c7cce14d56f",
+        "type": "message",
+        "text": "also: this got posted here a while ago and seems like an interesting route around the named variable problem: <https://suhr.github.io/papers/calg.html>",
+        "user": "UHWC9PXBL",
+        "ts": "1600651531.040800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "K5pkp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "also: this got posted here a while ago and seems like an interesting route around the named variable problem: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://suhr.github.io/papers/calg.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "type": "message",
+        "text": "",
+        "files": [
+            {
+                "id": "F01AYLYPV2R",
+                "created": 1600651567,
+                "timestamp": 1600651567,
+                "name": "Screen Shot 2020-09-20 at 9.26.05 PM.png",
+                "title": "Screen Shot 2020-09-20 at 9.26.05 PM.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "UHWC9PXBL",
+                "editable": false,
+                "size": 118582,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01AYLYPV2R/screen_shot_2020-09-20_at_9.26.05_pm.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01AYLYPV2R/download/screen_shot_2020-09-20_at_9.26.05_pm.png",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AYLYPV2R-c5ad9a6b8b/screen_shot_2020-09-20_at_9.26.05_pm_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AYLYPV2R-c5ad9a6b8b/screen_shot_2020-09-20_at_9.26.05_pm_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AYLYPV2R-c5ad9a6b8b/screen_shot_2020-09-20_at_9.26.05_pm_360.png",
+                "thumb_360_w": 360,
+                "thumb_360_h": 230,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AYLYPV2R-c5ad9a6b8b/screen_shot_2020-09-20_at_9.26.05_pm_480.png",
+                "thumb_480_w": 480,
+                "thumb_480_h": 307,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AYLYPV2R-c5ad9a6b8b/screen_shot_2020-09-20_at_9.26.05_pm_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AYLYPV2R-c5ad9a6b8b/screen_shot_2020-09-20_at_9.26.05_pm_720.png",
+                "thumb_720_w": 720,
+                "thumb_720_h": 460,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AYLYPV2R-c5ad9a6b8b/screen_shot_2020-09-20_at_9.26.05_pm_800.png",
+                "thumb_800_w": 800,
+                "thumb_800_h": 511,
+                "original_w": 844,
+                "original_h": 539,
+                "thumb_tiny": "AwAeADC/xnkn8KPl9TRgf5NLj/OaAE+X1NHy+ppQo70uF9KAG/L6mlAUngmnYWjAoAZ/wKj/AIF/OjqcYFLs+lACZ/2v50d+Wp2D7flS4Pt+VADeP7xpRgnhjS4Pt+VAB9vyoA//2Q==",
+                "permalink": "https://futureofcoding.slack.com/files/UHWC9PXBL/F01AYLYPV2R/screen_shot_2020-09-20_at_9.26.05_pm.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01AYLYPV2R-26e247c627",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "user": "UHWC9PXBL",
+        "display_as_bot": false,
+        "ts": "1600651570.041000",
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f62afc21-cdae-46b6-a36f-39f882211dc6",
+        "type": "message",
+        "text": "if im understanding the way you\u2019ve written the example code-with-scratchpad above, the forthy way to write assignment would be : DEFINE X 3; which could be sugared down to :x 3 and also maybe punned to read as \u201cput the symbol :x on the stack\u201d ? i dont think that would work actually",
+        "user": "UHWC9PXBL",
+        "ts": "1600651836.041400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "P2T2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "if im understanding the way you\u2019ve written the example code-with-scratchpad above, the forthy way to write assignment would be : DEFINE X 3; which could be sugared down to :x 3 and also maybe punned to read as \u201cput the symbol :x on the stack\u201d ? i dont think that would work actually"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "9e73df4b-c7e9-4494-98b1-799c78b6b1e2",
+        "type": "message",
+        "text": "Yeah, the idea is that naming is special syntax that doesn't sugar down to stack ops, and that happens outside the scope of any stack.",
+        "user": "UCUSW7WVD",
+        "ts": "1600651939.041700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TGiiE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, the idea is that naming is special syntax that doesn't sugar down to stack ops, and that happens outside the scope of any stack."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "1ff0d20e-f284-4880-898b-fe7be4cf86b6",
+        "type": "message",
+        "text": "^^ that\u2019s the same as forth. : enters immediate mode. dont really understand what that means but you stop interacting with the stack",
+        "user": "UHWC9PXBL",
+        "ts": "1600651985.041900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Nv6ej",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "^^ that\u2019s the same as forth. : enters immediate mode. dont really understand what that means but you stop interacting with the stack"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "e1c2a324-0680-4ff3-90a2-de51dc8e096a",
+        "type": "message",
+        "text": "I was referring to Forth's two kinds of names: definitions and variables (memory locations). `x: 3` is intended to replace `3 x !` not `: define x 3 ;`.",
+        "user": "UCUSW7WVD",
+        "ts": "1600652385.042100",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1600652437.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+NW4O",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I was referring to Forth's two kinds of names: definitions and variables (memory locations). "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x: 3",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is intended to replace "
+                            },
+                            {
+                                "type": "text",
+                                "text": "3 x !",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " not "
+                            },
+                            {
+                                "type": "text",
+                                "text": ": define x 3 ;",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "EB9FE518-5F95-403D-ADF0-6F47733BA1C2",
+        "type": "message",
+        "text": "oops i must have skimmed past that part in the stuff i\u2019ve attempted to read on forth",
+        "user": "UHWC9PXBL",
+        "ts": "1600652730.043800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "G4gWy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "oops i must have skimmed past that part in the stuff i\u2019ve attempted to read on forth"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "C778A832-8FEE-4349-9BA4-CAE4DA317590",
+        "type": "message",
+        "text": "Ohhh this is the store and retrieve stuff ",
+        "user": "UHWC9PXBL",
+        "ts": "1600652788.044300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "KPc",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ohhh this is the store and retrieve stuff "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "74D8D0C9-82F3-49D1-9930-0FC3ED604E7F",
+        "type": "message",
+        "text": "i always spend time thinking about the define semantics because 1. the scoping is really weird and interesting and seems to \u201cjust work\u201d even though they have a funky way of handling shadowing and 2. i think you can use the same thing for data if you just use quotations a la joy",
+        "user": "UHWC9PXBL",
+        "ts": "1600654435.046500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2a6O7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i always spend time thinking about the define semantics because 1. the scoping is really weird and interesting and seems to \u201cjust work\u201d even though they have a funky way of handling shadowing and 2. i think you can use the same thing for data if you just use quotations a la joy"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "type": "message",
+        "text": "Here's a diagram I scrawled of a more fully worked example (sum of squares). It shows 2 ways to imagine inlining. In option A we have a standard Forth, and inlining replaces words with their definitions. The stack stays the same, it just gets more intermediate steps.\n\nIn option B we still have a stack, but execution state also includes a namespace of values for (immutable?) variables. For example, adding `:x` to a line saves the top of the stack as the value of `x`. Every line starts with an empty stack, but can share data with previous lines via variables.\n\nNow inlining shows a second stack in its own row. We might even want to expand the stack of the caller to fit the callee in, just one 'row' down to show that it's an independent, isolated stack. (The `x` in `sq` is unrelated to the `x` in the caller since each function has its own namespace.)\n\nI think both are equally uncoiled. The big benefit of option B to me is that the accidental complexity of stack manipulation (`swap` and `dup`) has been eliminated.",
+        "files": [
+            {
+                "id": "F01B81HHV52",
+                "created": 1600656453,
+                "timestamp": 1600656453,
+                "name": "20200920_193626.jpg",
+                "title": "20200920_193626.jpg",
+                "mimetype": "image/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UCUSW7WVD",
+                "editable": false,
+                "size": 1296353,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01B81HHV52/20200920_193626.jpg",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01B81HHV52/download/20200920_193626.jpg",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_64.jpg",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_80.jpg",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_360.jpg",
+                "thumb_360_w": 270,
+                "thumb_360_h": 360,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_480.jpg",
+                "thumb_480_w": 360,
+                "thumb_480_h": 480,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_160.jpg",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_720.jpg",
+                "thumb_720_w": 540,
+                "thumb_720_h": 720,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_800.jpg",
+                "thumb_800_w": 800,
+                "thumb_800_h": 1067,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_960.jpg",
+                "thumb_960_w": 720,
+                "thumb_960_h": 960,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F01B81HHV52-7157831051/20200920_193626_1024.jpg",
+                "thumb_1024_w": 768,
+                "thumb_1024_h": 1024,
+                "original_w": 3024,
+                "original_h": 4032,
+                "thumb_tiny": "AwAwACSx06ClxS0nUVJQYooooAY65OaTZ9fzqSikAA5peKQUd/xpgLRSZNLQAlFFFABSE1XachsUn2g0AWfyparRzksAanzQAtFJmjNID//Z",
+                "permalink": "https://futureofcoding.slack.com/files/UCUSW7WVD/F01B81HHV52/20200920_193626.jpg",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01B81HHV52-e900099d98",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "m+gV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Here's a diagram I scrawled of a more fully worked example (sum of squares). It shows 2 ways to imagine inlining. In option A we have a standard Forth, and inlining replaces words with their definitions. The stack stays the same, it just gets more intermediate steps.\n\nIn option B we still have a stack, but execution state also includes a namespace of values for (immutable?) variables. For example, adding "
+                            },
+                            {
+                                "type": "text",
+                                "text": ":x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to a line saves the top of the stack as the value of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Every line starts with an empty stack, but can share data with previous lines via variables.\n\nNow inlining shows a second stack in its own row. We might even want to expand the stack of the caller to fit the callee in, just one 'row' down to show that it's an independent, isolated stack. (The "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in "
+                            },
+                            {
+                                "type": "text",
+                                "text": "sq",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is unrelated to the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in the caller since each function has its own namespace.)\n\nI think both are equally uncoiled. The big benefit of option B to me is that the accidental complexity of stack manipulation ("
+                            },
+                            {
+                                "type": "text",
+                                "text": "swap",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "dup",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ") has been eliminated."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "user": "UCUSW7WVD",
+        "display_as_bot": false,
+        "ts": "1600656498.046700",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1600656761.000000"
+        },
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "67858E83-C7F3-4769-B369-601BE8DF079F",
+        "type": "message",
+        "text": "we\u2019re both in agreement that stack manipulation is bad and makes everyone feel bad for sure. \n\ni\u2019m not opposed to variables but i do think that B is more coiled\u2014there\u2019s shadowing in the example, which is hard for beginners (and sometimes annoying for experts), and you did draw a coil with your arrows to the inline function :wink:. \n\nid argue that B is more readable/comprehensible but also more coiled. at the very least, it would be harder to communicate visually where exactly x and y are coming from with the same clean and regular table view as you were using before. and the definition of anything using x or y now depends on your environment which means it can\u2019t be factored seamlessly anymore\n\nfactor, joy, and other modern concatenatives use quotations and combinators to get around a lot of the shuffling, but combinators IMO are just as bad (the canonical example is called \u201cbi\u201d, and i can never remember whether it expects two quotes on top of the stack and applies each to the next two items respectively, returning them in order, or some other permutation. even trying to describe my misunderstanding in words is hard). \n\ni definitely don\u2019t have any immediate solutions yet but the comma product article i posted is one attempt, i think pattern matching on the stack itself could be another, and (weirdly) thinking of variables as like almost vim macros that replace with values in-place could be a third direction (like some shells let you expand, eg, how `rm *.txt` `&lt;tab&gt;` can expand the text at your prompt `rm hello.txt readme.txt getting_started.txt` in a directory containing all those files) i think i have about 8 total options for this but my notecards aren\u2019t with me and those are the ones i both know of and can remember off the top of my head",
+        "user": "UHWC9PXBL",
+        "ts": "1600661790.063000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1BsA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "we\u2019re both in agreement that stack manipulation is bad and makes everyone feel bad for sure. \n\ni\u2019m not opposed to variables but i do think that B is more coiled\u2014there\u2019s shadowing in the example, which is hard for beginners (and sometimes annoying for experts), and you did draw a coil with your arrows to the inline function "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". \n\nid argue that B is more readable/comprehensible but also more coiled. at the very least, it would be harder to communicate visually where exactly x and y are coming from with the same clean and regular table view as you were using before. and the definition of anything using x or y now depends on your environment which means it can\u2019t be factored seamlessly anymore\n\nfactor, joy, and other modern concatenatives use quotations and combinators to get around a lot of the shuffling, but combinators IMO are just as bad (the canonical example is called \u201cbi\u201d, and i can never remember whether it expects two quotes on top of the stack and applies each to the next two items respectively, returning them in order, or some other permutation. even trying to describe my misunderstanding in words is hard). \n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "i definitely don\u2019t have any immediate solutions yet but the comma product article i posted is one attempt, i think pattern matching on the stack itself could be another, and (weirdly) thinking of variables as like almost vim macros that replace with values in-place could be a third direction (like some shells let you expand, eg, how "
+                            },
+                            {
+                                "type": "text",
+                                "text": "rm *.txt",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "<tab>",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " can expand the text at your prompt "
+                            },
+                            {
+                                "type": "text",
+                                "text": "rm hello.txt readme.txt getting_started.txt",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in a directory containing all those files) i think i have about 8 total options for this but my notecards aren\u2019t with me and those are the ones i both know of and can remember off the top of my head"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "smile",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "87DB7DA1-981D-418F-B291-4A9A58439758",
+        "type": "message",
+        "text": "another option might be to have every stack also hold an environment, which is almost like an interface in that it just \u201cexpects\u201d an x or y to be defined. so like your variable dictionary gets carried around with your stacks. that\u2019s appealing to me, since i have the conspiratorial belief that variable assignment is just nested record modification that\u2019s been hidden behind some weird syntax",
+        "user": "UHWC9PXBL",
+        "ts": "1600661890.066100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "b/J",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "another option might be to have every stack also hold an environment, which is almost like an interface in that it just \u201cexpects\u201d an x or y to be defined. so like your variable dictionary gets carried around with your stacks. that\u2019s appealing to me, since i have the conspiratorial belief that variable assignment is just nested record modification that\u2019s been hidden behind some weird syntax"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "ceca99ef-0248-4785-b8ec-08af9fd6c1a3",
+        "type": "message",
+        "text": "Yeah, you're mirroring many of my own concerns.\n\nOne thing I want to point out: the shadowing you mentioned is _essential_ to this idea. Basically I rely on shadowing to avoid making decisions about variable names. However, once a function is defined it can now be invoked with entirely different names.",
+        "user": "UCUSW7WVD",
+        "ts": "1600663459.066500",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1600663607.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1F34Z",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, you're mirroring many of my own concerns.\n\nOne thing I want to point out: the shadowing you mentioned is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "essential",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to this idea. Basically I rely on shadowing to avoid making decisions about variable names. However, once a function is defined it can now be invoked with entirely different names."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "d3827e51-6ff9-4be7-bd2f-ba0ef40808bb",
+        "type": "message",
+        "text": "<@UCUSW7WVD> Could you say a few more words about what you dislike in defining `square` as `dup *`? I always liked that sort of thing in FORTH, which is clouding my understanding.",
+        "user": "U013ZLJARC7",
+        "ts": "1600677014.067000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3j9B",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Could you say a few more words about what you dislike in defining "
+                            },
+                            {
+                                "type": "text",
+                                "text": "square",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " as "
+                            },
+                            {
+                                "type": "text",
+                                "text": "dup *",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "? I always liked that sort of thing in FORTH, which is clouding my understanding."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "b4354a49-bb1f-41b2-a440-d77e47db518d",
+        "type": "message",
+        "text": "Me too! I always enjoy stack manipulation puzzles. This isn't about fixing something broken in Forth, but about seeing what part of Forth I can take with me to spreadsheets and example-oriented programming.\n\nI'm probably still failing to internalize the previous discussion at <https://futureofcoding.slack.com/archives/C5U3SEW6A/p1599496562080600>, so this would be a great place for a rebuttal-by-screencast. Assume you've already run `(* 13 13)` (or its Forth equivalent) at your favorite REPL. How do you get from that expression to a definition of the function `square` in persistent form?\n\nThe assumption I'm making is that nobody calculates the square of 13 at the REPL by typing `13 dup *`. So it seems to me that we need some way to nudge people to massage `13 13 *` into a form that needs a single copy of the input(s).\n\nIt's just a thought experiment in the end. It's a frame of reference I'm taking on for the duration, and in the process I'm working against some of my own discomfort with spreadsheets and other 2D representations.",
+        "user": "UCUSW7WVD",
+        "ts": "1600702839.067500",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1600703068.000000"
+        },
+        "attachments": [
+            {
+                "from_url": "https://futureofcoding.slack.com/archives/C5U3SEW6A/p1599496562080600",
+                "fallback": "[September 7th, 2020 9:36 AM] garth: <https://news.ycombinator.com/item?id=23811382|https://news.ycombinator.com/item?id=23811382> great post on the lisp REPL\u2019s difference from other REPLs. sidenote: can someone explain to me how lisp programmers go from talking to the REPL to updating the code in their source files? in talks and stuff it always seems to be with copy and paste. is that accurate?",
+                "ts": "1599496562.080600",
+                "author_id": "UHWC9PXBL",
+                "author_subname": "Garth Goldwater",
+                "channel_id": "C5U3SEW6A",
+                "channel_name": "linking-together",
+                "is_msg_unfurl": true,
+                "is_thread_root_unfurl": true,
+                "text": "<https://news.ycombinator.com/item?id=23811382|https://news.ycombinator.com/item?id=23811382> great post on the lisp REPL\u2019s difference from other REPLs. sidenote: can someone explain to me how lisp programmers go from talking to the REPL to updating the code in their source files? in talks and stuff it always seems to be with copy and paste. is that accurate?",
+                "author_name": "Garth Goldwater",
+                "author_link": "https://futureofcoding.slack.com/team/UHWC9PXBL",
+                "author_icon": "https://secure.gravatar.com/avatar/10d754210ed4e4706eba3d063cdf99f0.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-48.png",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "id": 1,
+                "original_url": "https://futureofcoding.slack.com/archives/C5U3SEW6A/p1599496562080600",
+                "footer": "Thread in #linking-together"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9vT",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Me too! I always enjoy stack manipulation puzzles. This isn't about fixing something broken in Forth, but about seeing what part of Forth I can take with me to spreadsheets and example-oriented programming.\n\nI'm probably still failing to internalize the previous discussion at "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://futureofcoding.slack.com/archives/C5U3SEW6A/p1599496562080600"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", so this would be a great place for a rebuttal-by-screencast. Assume you've already run "
+                            },
+                            {
+                                "type": "text",
+                                "text": "(* 13 13)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (or its Forth equivalent) at your favorite REPL. How do you get from that expression to a definition of the function "
+                            },
+                            {
+                                "type": "text",
+                                "text": "square",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in persistent form?\n\nThe assumption I'm making is that nobody calculates the square of 13 at the REPL by typing "
+                            },
+                            {
+                                "type": "text",
+                                "text": "13 dup *",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". So it seems to me that we need some way to nudge people to massage "
+                            },
+                            {
+                                "type": "text",
+                                "text": "13 13 *",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " into a form that needs a single copy of the input(s).\n\nIt's just a thought experiment in the end. It's a frame of reference I'm taking on for the duration, and in the process I'm working against some of my own discomfort with spreadsheets and other 2D representations."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "b85fa6d1-ff18-4d95-9962-404a5a7f3221",
+        "type": "message",
+        "text": "This is an interesting question. When I look at `(* 13 13)` I see `169`. Or, to be more clear, when I see a form that operates only on _constants_, I think of it as a constant itself. So I would only execute a form like that one in a Lisp REPL using `eval-and-replace` semantics to calculate some constant I want to embed in the code. If, on the other had, I were planning to parameterize such a calculation I'd use a lambda (say, `#(* % %)` in Clojure notation), which lifts quite naturally to a `def` or `defn` if needed.",
+        "user": "U013ZLJARC7",
+        "ts": "1600705869.068000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "w4ypl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is an interesting question. When I look at "
+                            },
+                            {
+                                "type": "text",
+                                "text": "(* 13 13)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " I see "
+                            },
+                            {
+                                "type": "text",
+                                "text": "169",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Or, to be more clear, when I see a form that operates only on "
+                            },
+                            {
+                                "type": "text",
+                                "text": "constants",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", I think of it as a constant itself. So I would only execute a form like that one in a Lisp REPL using "
+                            },
+                            {
+                                "type": "text",
+                                "text": "eval-and-replace",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " semantics to calculate some constant I want to embed in the code. If, on the other had, I were planning to parameterize such a calculation I'd use a lambda (say, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "#(* % %)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in Clojure notation), which lifts quite naturally to a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "def",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " or "
+                            },
+                            {
+                                "type": "text",
+                                "text": "defn",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " if needed."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UCUSW7WVD",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "408892f9-c58a-4b10-8f7d-0f98c741a0d0",
+        "type": "message",
+        "text": "BTW, although I understand that you aren't trying to \"fix FORTH\" in any sense, some of what came up in these last few threads reminded me of this paper that talks about adding various functional programming constructs to FORTH starting from the fewest possible cominators:\n<http://soton.mpeforth.com/flag/jfar/vol4/no4/article6.pdf>\n... and this classic about implementing a linear logic Lisp that compiles to FORTH:\n<https://hashingit.com/elements/research-resources/1994-03-ForthStack.pdf>",
+        "user": "U013ZLJARC7",
+        "ts": "1600710069.068300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2kK3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "BTW, although I understand that you aren't trying to \"fix FORTH\" in any sense, some of what came up in these last few threads reminded me of this paper that talks about adding various functional programming constructs to FORTH starting from the fewest possible cominators:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://soton.mpeforth.com/flag/jfar/vol4/no4/article6.pdf"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n... and this classic about implementing a linear logic Lisp that compiles to FORTH:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://hashingit.com/elements/research-resources/1994-03-ForthStack.pdf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "type": "message",
+        "text": "Have there been similar approaches to this style of formatting? ",
+        "files": [
+            {
+                "id": "F01BTLXH2JC",
+                "created": 1600718249,
+                "timestamp": 1600718249,
+                "name": "Image from iOS.jpg",
+                "title": "Image from iOS",
+                "mimetype": "image/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UULA9D1GT",
+                "editable": false,
+                "size": 61936,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01BTLXH2JC/image_from_ios.jpg",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01BTLXH2JC/download/image_from_ios.jpg",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_64.jpg",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_80.jpg",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_360.jpg",
+                "thumb_360_w": 360,
+                "thumb_360_h": 85,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_480.jpg",
+                "thumb_480_w": 480,
+                "thumb_480_h": 113,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_160.jpg",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_720.jpg",
+                "thumb_720_w": 720,
+                "thumb_720_h": 170,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_800.jpg",
+                "thumb_800_w": 800,
+                "thumb_800_h": 189,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_960.jpg",
+                "thumb_960_w": 960,
+                "thumb_960_h": 227,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BTLXH2JC-5017d455ab/image_from_ios_1024.jpg",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 242,
+                "original_w": 1024,
+                "original_h": 242,
+                "thumb_tiny": "AwALADCjS5PqaSigAyfWjJ9aKKACiiigD//Z",
+                "permalink": "https://futureofcoding.slack.com/files/UULA9D1GT/F01BTLXH2JC/image_from_ios.jpg",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01BTLXH2JC-662263ddca",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wfm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Have there been similar approaches to this style of formatting? "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "user": "UULA9D1GT",
+        "display_as_bot": false,
+        "ts": "1600718253.069500",
+        "client_msg_id": "33BD9088-5DED-479F-82D7-9D4E29E22163",
+        "thread_ts": "1600718253.069500",
+        "reply_count": 12,
+        "reply_users_count": 5,
+        "latest_reply": "1601106105.019000",
+        "reply_users": [
+            "UCUSW7WVD",
+            "UULA9D1GT",
+            "U013KEPEJ2H",
+            "UDQBTJ211",
+            "U013ZLJARC7"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "7a08db95-a6d4-405d-9b06-c4c1e7947bb0",
+        "type": "message",
+        "text": "Should the division by 2 on line 106 be indented less? Just to make sure I'm following.",
+        "user": "UCUSW7WVD",
+        "ts": "1600718419.069800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "093",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Should the division by 2 on line 106 be indented less? Just to make sure I'm following."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT"
+    },
+    {
+        "client_msg_id": "043D66DF-BE0D-418A-8CC6-E8181C0D0FD7",
+        "type": "message",
+        "text": "I put the line 106 division centered between the two parenthetically-cyan elements",
+        "user": "UULA9D1GT",
+        "ts": "1600719655.071100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+eLb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I put the line 106 division centered between the two parenthetically-cyan elements"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT"
+    },
+    {
+        "client_msg_id": "cd400027-efb6-44d8-a5f3-99cd821c2299",
+        "type": "message",
+        "text": "i understand the limit of text editor means you cant have the `r` block actually parallel to the `l` block for the addition, but i'd find it more readable if lines 102/103/104 were atleast merged to give as much parallelism to the addition as possible?\n\nor put a different way, i'm taking it that the formatting of the division on new lines helps convey meaning by reference to traditional mathematic formatting... whereas, what meaning is being conveyed by putting the addition elements on new lines?",
+        "user": "U013KEPEJ2H",
+        "ts": "1600720322.071600",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U013KEPEJ2H",
+            "ts": "1600722169.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Y5W",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i understand the limit of text editor means you cant have the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "r",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " block actually parallel to the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "l",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " block for the addition, but i'd find it more readable if lines 102/103/104 were atleast merged to give as much parallelism to the addition as possible?\n\nor put a different way, i'm taking it that the formatting of the division on new lines helps convey meaning by reference to traditional mathematic formatting... whereas, what meaning is being conveyed by putting the addition elements on new lines?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT"
+    },
+    {
+        "client_msg_id": "907a612f-f0a0-42ca-a9a2-656a674279ab",
+        "type": "message",
+        "text": "<@UULA9D1GT> ohh, I see. Thanks. That makes sense and also seems like the major drawback here. (I know this isn't an answer to your question.)",
+        "user": "UCUSW7WVD",
+        "ts": "1600721887.071900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6Oujj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UULA9D1GT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " ohh, I see. Thanks. That makes sense and also seems like the major drawback here. (I know this isn't an answer to your question.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT"
+    },
+    {
+        "client_msg_id": "468C0EDC-2162-459D-8A51-7948508BD875",
+        "type": "message",
+        "text": "The rationale for 102-104 not merging is that I wanted each line to have only a single scale of operation \u2014 putting the left denominator on the same line as the right numerator reduces the negative space that assists the parsing of each chunk as visually separate ",
+        "user": "UULA9D1GT",
+        "ts": "1600722115.075500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rwy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The rationale for 102-104 not merging is that I wanted each line to have only a single scale of operation \u2014 putting the left denominator on the same line as the right numerator reduces the negative space that assists the parsing of each chunk as visually separate "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "DCD9D659-1E79-4EF7-9698-4CEFCCCAF1BF",
+        "type": "message",
+        "text": "I want it to be clear that the left and right operands are rotationally symmetric around the plus \u2014 if I but the left denom and right numer on the same line the addition gets sort of hidden in the mixing of hierarchies",
+        "user": "UULA9D1GT",
+        "ts": "1600722273.077700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "EW5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I want it to be clear that the left and right operands are rotationally symmetric around the plus \u2014 if I but the left denom and right numer on the same line the addition gets sort of hidden in the mixing of hierarchies"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT"
+    },
+    {
+        "client_msg_id": "49C4264D-4189-4348-9A61-2D601BD48564",
+        "type": "message",
+        "text": "This is all mostly for fun and is very much an critique of the inadequacies of text editors for math notation  ",
+        "user": "UULA9D1GT",
+        "ts": "1600722348.079200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uPP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is all mostly for fun and is very much an critique of the inadequacies of text editors for math notation  "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "smile",
+                "users": [
+                    "U013KEPEJ2H",
+                    "UNV27TUKA"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "E843FE17-2AA8-4FA4-ACDA-6E84CE8995D5",
+        "type": "message",
+        "text": "I want the presented shape of the equation to be quickly parseable without having to remember which parentheses are paired as is common in single-line formulae",
+        "user": "UULA9D1GT",
+        "ts": "1600722494.082000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BWlA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I want the presented shape of the equation to be quickly parseable without having to remember which parentheses are paired as is common in single-line formulae"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT"
+    },
+    {
+        "client_msg_id": "471B6491-6158-421D-AEFC-B3D234D4D8B2",
+        "type": "message",
+        "text": "Or if they are split into many separate variable definitions then the structure of the equation is even more obscured, requiring that sort of \u201cthinking like a computer\u201d to hold all disparate elements in mind",
+        "user": "UULA9D1GT",
+        "ts": "1600722560.083800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "HUu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Or if they are split into many separate variable definitions then the structure of the equation is even more obscured, requiring that sort of \u201cthinking like a computer\u201d to hold all disparate elements in mind"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT"
+    },
+    {
+        "client_msg_id": "33BF7DFD-1F0B-41B0-900C-3F1B75687EC3",
+        "type": "message",
+        "text": "this is vague and maybe irresponsible spitballing from a staying-on-topic perspective, but what if there was a kind of a stack shuffling operator, that split the stack n items down, and then pattern matched them back on top. so maybe you\u2019d pass a series of symbols into it and transform the stack. eg ( n1 n2 \u2014 n1 n1 n2 )",
+        "user": "UHWC9PXBL",
+        "ts": "1600725204.087700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vQLNZ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "this is vague and maybe irresponsible spitballing from a staying-on-topic perspective, but what if there was a kind of a stack shuffling operator, that split the stack n items down, and then pattern matched them back on top. so maybe you\u2019d pass a series of symbols into it and transform the stack. eg ( n1 n2 \u2014 n1 n1 n2 )"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "C25C7BEC-98D5-4F26-B4C8-E19755F0BBC4",
+        "type": "message",
+        "text": "like... you could just pun the usual stack notation syntax ",
+        "user": "UHWC9PXBL",
+        "ts": "1600725235.088400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "DjD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "like... you could just pun the usual stack notation syntax "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "CC40D4F5-3CEE-489E-89C6-336E74469940",
+        "type": "message",
+        "text": "and from a ux perspective would feel a lot like drag and drop",
+        "user": "UHWC9PXBL",
+        "ts": "1600725251.089100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "E9+3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "and from a ux perspective would feel a lot like drag and drop"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "3CE9455F-C351-45E7-9FE6-D71C379B96C7",
+        "type": "message",
+        "text": "would that break the ability to break apart programs anywhere? i\u2019m not sure but i suspect not",
+        "user": "UHWC9PXBL",
+        "ts": "1600725297.090200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Qqf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "would that break the ability to break apart programs anywhere? i\u2019m not sure but i suspect not"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600645382.040000",
+        "parent_user_id": "UCUSW7WVD"
+    }
+]

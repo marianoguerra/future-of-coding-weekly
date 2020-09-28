@@ -1,0 +1,1143 @@
+[
+    {
+        "client_msg_id": "dc75b4c9-a996-4a22-9102-ff00ffdb8775",
+        "type": "message",
+        "text": "I'm mainly interested in the distributed computing wing of data science. Having dealt with spark and Hadoop, I really think they're very ripe for a better programming experience",
+        "user": "UUQLAMX4H",
+        "ts": "1601083627.017600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fh8gv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm mainly interested in the distributed computing wing of data science. Having dealt with spark and Hadoop, I really think they're very ripe for a better programming experience"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "7b45de60-2af1-416f-bd52-eb87891f2368",
+        "type": "message",
+        "text": "<@UK3LH8CF5> I just watched the idealized commit logs talk. Very well done, and it takes me back, because my PhD thesis involved program dependence graphs and constructing tiny slices out of very large programs that computed precisely the hard-to-cache memory accesses so that they could be prefetched on a separate thread (computer, actually).\n\nSlices certainly have lots of applications, but there's a reason why there's no empirical evidence that they're valuable for comprehension: they aren't actually the most elegant ordering as he claims. The reason: data transformations. Halfway through the evolution of a program someone redid all the data structures to organize by one axis rather than another. Slices get killed there. In general, slices focus on code but the compiler techniques we have (as of 12 years ago) are forced to approximate data access. This loop accesses field `x` in some node of this linked list, so let's assume it accesses it in _all_ nodes. That sort of thing.\n\nRegarding the specific idea he proposes: it doesn't actually result in a very idealized commit log, because a) you still have to provide a heuristic test sequence, and that's non-trivial, b) lots of times you get a more comprehensible result if you combine sets of tests in a single 'idealized commit' (but that blows up your search space for a) even more), and -- most important! -- c) no program has complete test coverage. If you focus only on tests you lose valuable insight along the way.\n\nMe, after spending 8 years trying to treat programs as black boxes and apply tools to them, I go back to the thing he dismissed at the start. There's no way to understand programs efficiently when the author didn't design for it from the start. If a program had multiple authors, it's as easy to read as the author _least_ interested in comprehensibility made it. Programs have to be designed for comprehensibility. So toss out the modern social organization and its incentives for creating programs primarily as black boxes for people to use.\n\n(I'll share my approach to idealized commit logs for the umpteenth time, just in case somebody hasn't already seen it: <http://akkartik.name/post/wart-layers>)\n\n<@U85HCL7JP> I don't recall the context at work where it came up, but I'm increasingly noticing myself constructing larger refactorings out of what my Java IDE provides, like renaming variables. I renamed a variable here, another variable there, did a few other things, and the end result was that I split up a class that handled some input space into two classes that partition the space between themselves. It would be nice (in a first world problems sort of way) if that was obvious in the diff. This isn't a strong opinion, just a random idea.",
+        "user": "UCUSW7WVD",
+        "ts": "1601100326.018100",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1601157655.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9oEY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UK3LH8CF5"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I just watched the idealized commit logs talk. Very well done, and it takes me back, because my PhD thesis involved program dependence graphs and constructing tiny slices out of very large programs that computed precisely the hard-to-cache memory accesses so that they could be prefetched on a separate thread (computer, actually).\n\nSlices certainly have lots of applications, but there's a reason why there's no empirical evidence that they're valuable for comprehension: they aren't actually the most elegant ordering as he claims. The reason: data transformations. Halfway through the evolution of a program someone redid all the data structures to organize by one axis rather than another. Slices get killed there. In general, slices focus on code but the compiler techniques we have (as of 12 years ago) are forced to approximate data access. This loop accesses field "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in some node of this linked list, so let's assume it accesses it in "
+                            },
+                            {
+                                "type": "text",
+                                "text": "all",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " nodes. That sort of thing.\n\nRegarding the specific idea he proposes: it doesn't actually result in a very idealized commit log, because a) you still have to provide a heuristic test sequence, and that's non-trivial, b) lots of times you get a more comprehensible result if you combine sets of tests in a single 'idealized commit' (but that blows up your search space for a) even more), and -- most important! -- c) no program has complete test coverage. If you focus only on tests you lose valuable insight along the way.\n\nMe, after spending 8 years trying to treat programs as black boxes and apply tools to them, I go back to the thing he dismissed at the start. There's no way to understand programs efficiently when the author didn't design for it from the start. If a program had multiple authors, it's as easy to read as the author "
+                            },
+                            {
+                                "type": "text",
+                                "text": "least",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " interested in comprehensibility made it. Programs have to be designed for comprehensibility. So toss out the modern social organization and its incentives for creating programs primarily as black boxes for people to use.\n\n(I'll share my approach to idealized commit logs for the umpteenth time, just in case somebody hasn't already seen it: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://akkartik.name/post/wart-layers"
+                            },
+                            {
+                                "type": "text",
+                                "text": ")\n\n"
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U85HCL7JP"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I don't recall the context at work where it came up, but I'm increasingly noticing myself constructing larger refactorings out of what my Java IDE provides, like renaming variables. I renamed a variable here, another variable there, did a few other things, and the end result was that I split up a class that handled some input space into two classes that partition the space between themselves. It would be nice (in a first world problems sort of way) if that was obvious in the diff. This isn't a strong opinion, just a random idea."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600909562.010100",
+        "parent_user_id": "UFB8STN7K",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7",
+                    "U85HCL7JP",
+                    "UKDM3GLAJ"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "455e1d47-c2c3-443f-b100-c51992868115",
+        "type": "message",
+        "text": "Interesting thread.  My requirements are for storing code points to capture serendipity.  In my tool, I have the beginnings of a system which stores code deltas in the project while live coding.  I want to enable users to capture that moment when a visual effect or sequence of sound is great and rewind to that point afterwards (i.e. when not on stage giving the actual performance).  This is easier in a live coding environment because things are more constrained in a single session/tool.  Good live coders often experience that moment where they are in the zone, and a perfect combination of audio/visual has occurred, but then it is lost forever behind the complex edits they used to get to that point.",
+        "user": "UUQ2EQW21",
+        "ts": "1601103477.018300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3BC6=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Interesting thread.  My requirements are for storing code points to capture serendipity.  In my tool, I have the beginnings of a system which stores code deltas in the project while live coding.  I want to enable users to capture that moment when a visual effect or sequence of sound is great and rewind to that point afterwards (i.e. when not on stage giving the actual performance).  This is easier in a live coding environment because things are more constrained in a single session/tool.  Good live coders often experience that moment where they are in the zone, and a perfect combination of audio/visual has occurred, but then it is lost forever behind the complex edits they used to get to that point."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600909562.010100",
+        "parent_user_id": "UFB8STN7K"
+    },
+    {
+        "client_msg_id": "8b5873f3-03ba-4c37-b81a-4fbc157e5148",
+        "type": "message",
+        "text": "Have you had a look at Julia? It's basically an infix re-implemention of Common Lisp that, while general purpose, is targeted toward exactly this niche:\n<https://docs.julialang.org/en/v1/stdlib/REPL/>",
+        "user": "U013ZLJARC7",
+        "ts": "1601105879.018600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Rpx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Have you had a look at Julia? It's basically an infix re-implemention of Common Lisp that, while general purpose, is targeted toward exactly this niche:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://docs.julialang.org/en/v1/stdlib/REPL/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "48e6466c-5bf8-43d0-8925-97016fe9faf1",
+        "type": "message",
+        "text": "This earliest example of using vertical spacing to format maths of which I'm aware was done on punch cards in 1978: <http://bitsavers.informatik.uni-stuttgart.de/pdf/intermetrics/programming_in_hal-s.pdf>",
+        "user": "U013ZLJARC7",
+        "ts": "1601106022.018800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "v7f7e",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This earliest example of using vertical spacing to format maths of which I'm aware was done on punch cards in 1978: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://bitsavers.informatik.uni-stuttgart.de/pdf/intermetrics/programming_in_hal-s.pdf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT"
+    },
+    {
+        "type": "message",
+        "text": "",
+        "files": [
+            {
+                "id": "F01BU47MLM7",
+                "created": 1601106102,
+                "timestamp": 1601106102,
+                "name": "Screen Shot 2020-09-26 at 09.40.51.png",
+                "title": "Screen Shot 2020-09-26 at 09.40.51.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U013ZLJARC7",
+                "editable": false,
+                "size": 139040,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01BU47MLM7/screen_shot_2020-09-26_at_09.40.51.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01BU47MLM7/download/screen_shot_2020-09-26_at_09.40.51.png",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_360.png",
+                "thumb_360_w": 360,
+                "thumb_360_h": 151,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_480.png",
+                "thumb_480_w": 480,
+                "thumb_480_h": 201,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_720.png",
+                "thumb_720_w": 720,
+                "thumb_720_h": 302,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_800.png",
+                "thumb_800_w": 800,
+                "thumb_800_h": 335,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_960.png",
+                "thumb_960_w": 960,
+                "thumb_960_h": 402,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F01BU47MLM7-fc964c073e/screen_shot_2020-09-26_at_09.40.51_1024.png",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 429,
+                "original_w": 1432,
+                "original_h": 600,
+                "thumb_tiny": "AwAUADDQbcScdKTDe9Pb7tMAAJ/rQAYf3pfm96d8uO1Hy+1ADRu96UAg8nil+X2oXoKAFIyKbt/2j+dOooATHuaXHvRRQAY96BwKKKAP/9k=",
+                "permalink": "https://futureofcoding.slack.com/files/U013ZLJARC7/F01BU47MLM7/screen_shot_2020-09-26_at_09.40.51.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01BU47MLM7-abda961642",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "user": "U013ZLJARC7",
+        "display_as_bot": false,
+        "ts": "1601106105.019000",
+        "thread_ts": "1600718253.069500",
+        "parent_user_id": "UULA9D1GT",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d530f81a-087b-4ee6-bf6d-e679b6281196",
+        "type": "message",
+        "text": "Julia is definitely worth a look for anything data science, if you don't depend on libraries in other languages. I wouldn't quite call it a variant of Common Lisp, since its live programming support is not at the same level, but it's certainly better than any of the more established data science languages.\nOne potential issue to watch out for is the enormous dependency stack of Julia, being based on LLVM. If you ever find yourself having to install it from source, that's a major undertaking, and if you need your code to work for ten years, the fragility of that stack could also become a source of trouble.",
+        "user": "UJBAJNFLK",
+        "ts": "1601115038.019800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ES6rT",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Julia is definitely worth a look for anything data science, if you don't depend on libraries in other languages. I wouldn't quite call it a variant of Common Lisp, since its live programming support is not at the same level, but it's certainly better than any of the more established data science languages.\nOne potential issue to watch out for is the enormous dependency stack of Julia, being based on LLVM. If you ever find yourself having to install it from source, that's a major undertaking, and if you need your code to work for ten years, the fragility of that stack could also become a source of trouble."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "a66aa422-7c33-4aeb-9dbb-6abeda7102b5",
+        "type": "message",
+        "text": "yeah I\u2019ve played with Julia a bit",
+        "user": "UAJKEBGP8",
+        "ts": "1601134586.020600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vx82j",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yeah I\u2019ve played with Julia a bit"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "eb0d6d35-4b11-42c4-86ff-33ac33adf924",
+        "type": "message",
+        "text": "I think it\u2019s fine for their designed purpose, which is \u201chigh performance-ish step child of Python / R but modern\u201d",
+        "user": "UAJKEBGP8",
+        "ts": "1601134599.020800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LBqQQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think it\u2019s fine for their designed purpose, which is \u201chigh performance-ish step child of Python / R but modern\u201d"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "9fab7d98-46ff-43be-b2e2-f398a2440d1a",
+        "type": "message",
+        "text": "but its not a way of computing :thinking_face:",
+        "user": "UAJKEBGP8",
+        "ts": "1601134608.021000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "H1gt",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "but its not a way of computing "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "thinking_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "70f85016-e01b-476d-8a20-9db17aa014e2",
+        "type": "message",
+        "text": "<@U019CPED6T1> Would you share a link to your blog?",
+        "user": "U01A1C2K8MP",
+        "ts": "1601138516.021600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0IQ7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U019CPED6T1"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Would you share a link to your blog?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "6dcd77a3-ac67-47ca-9da0-98714f970eb5",
+        "type": "message",
+        "text": "Happy to! <https://andrewnc.github.io/blog/blog.html|https://andrewnc.github.io/blog/blog.html> \n\nI haven't been allowed to write this summer because of my internship. But I have 2 or 3 posts on the pipeline for the end of the year. \n\nI hope you enjoy reading, they're quite simple, mostly me recording my experience and experimentation. \n\nI'll gradually add more \"deep\" PL and data science topics as time goes on.",
+        "user": "U019CPED6T1",
+        "ts": "1601138768.021800",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "title": "Andrew Carr blog",
+                "title_link": "https://andrewnc.github.io/blog/blog.html",
+                "text": "a blog by Andrew Carr about data science with EsoLangs",
+                "fallback": "Andrew Carr blog",
+                "from_url": "https://andrewnc.github.io/blog/blog.html",
+                "service_name": "andrewnc.github.io",
+                "id": 1,
+                "original_url": "https://andrewnc.github.io/blog/blog.html"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=9fD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Happy to! "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://andrewnc.github.io/blog/blog.html",
+                                "text": "https://andrewnc.github.io/blog/blog.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": " \n\nI haven't been allowed to write this summer because of my internship. But I have 2 or 3 posts on the pipeline for the end of the year. \n\nI hope you enjoy reading, they're quite simple, mostly me recording my experience and experimentation. \n\nI'll gradually add more \"deep\" PL and data science topics as time goes on."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "8cf1cf2f-86e5-486c-9dbb-ea8a5d5536ba",
+        "type": "message",
+        "text": "I probably have 15 or so languages I want to try out still too. I'll probably compile a list eventually of the cool esolangs I find",
+        "user": "U019CPED6T1",
+        "ts": "1601138913.022100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5m=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I probably have 15 or so languages I want to try out still too. I'll probably compile a list eventually of the cool esolangs I find"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "4e621b1c-1cd2-44d9-8243-34eff2cd229f",
+        "type": "message",
+        "text": "&gt; tables / spreadsheets / csvs / databases are all a format, a CS concept, and a mental representation. \nThey're all tables :wink: Spreadsheets are tables with reactive function execution. (relational) Databases are collections of related tables, with the relationships themselves maintained in other tables.",
+        "user": "U01A1C2K8MP",
+        "ts": "1601138920.022300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9MJF",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "tables / spreadsheets / csvs / databases are all a format, a CS concept, and a mental representation. "
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "They're all tables "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Spreadsheets are tables with reactive function execution. (relational) Databases are collections of related tables, with the relationships themselves maintained in other tables."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "c5204451-57b9-4ac3-a4d5-eb31b46c73dd",
+        "type": "message",
+        "text": "<@U019CPED6T1> thanks!",
+        "user": "U01A1C2K8MP",
+        "ts": "1601138988.022500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/Kj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U019CPED6T1"
+                            },
+                            {
+                                "type": "text",
+                                "text": " thanks!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U019CPED6T1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f675b3b8-f46b-4344-967e-c5e2282b6b51",
+        "type": "message",
+        "text": "<@U01A0KANUUU> The first time I saw a Roassal demo video, I was so hyped, I tweeted it with a comment paraphrasing Arthur C. Clarke: \"Any sufficiently advanced technology is indistinguishable from Smalltalk 80.\" Unfortunately, I could rarely get it to work reliably. I really wish someone would  address Smalltalk's module system issues.",
+        "user": "U01A1C2K8MP",
+        "ts": "1601139550.022800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wzWQz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U01A0KANUUU"
+                            },
+                            {
+                                "type": "text",
+                                "text": " The first time I saw a Roassal demo video, I was so hyped, I tweeted it with a comment paraphrasing Arthur C. Clarke: \"Any sufficiently advanced technology is indistinguishable from Smalltalk 80.\" Unfortunately, I could rarely get it to work reliably. I really wish someone would  address Smalltalk's module system issues."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "ae48ea4d-6fad-479b-8857-60cd4c310810",
+        "type": "message",
+        "text": "&gt; In R for instance, data frames are lists of columns, but when I'm wrangling data, I don't actually think of them as such, they're just data frames.\n<@UMH5FAW2Y> That's funny. I almost always think of them as lists of columns, unless I'm reading or writing them from/to disk. OTOH, I almost never extract a column from a table to use a column operation directly. It's always t.col(whatever).",
+        "user": "U01A1C2K8MP",
+        "ts": "1601139870.023200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fxx",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In R for instance, data frames are lists of columns, but when I'm wrangling data, I don't actually think of them as such, they're just data frames."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UMH5FAW2Y"
+                            },
+                            {
+                                "type": "text",
+                                "text": " That's funny. I almost always think of them as lists of columns, unless I'm reading or writing them from/to disk. OTOH, I almost never extract a column from a table to use a column operation directly. It's always t.col(whatever)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "590d6e8d-faa4-4f5d-b8f1-4a55a8cb7dd4",
+        "type": "message",
+        "text": "Regarding live coding in Julia, I've heard good things about Pluto.jl <https://github.com/fonsp/Pluto.jl|https://github.com/fonsp/Pluto.jl>",
+        "user": "UR482RFPY",
+        "ts": "1601140814.023800",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "GitHub",
+                "title": "fonsp/Pluto.jl",
+                "title_link": "https://github.com/fonsp/Pluto.jl",
+                "text": ":balloon: Simple reactive notebooks for Julia. Contribute to fonsp/Pluto.jl development by creating an account on GitHub.",
+                "fallback": "GitHub: fonsp/Pluto.jl",
+                "from_url": "https://github.com/fonsp/Pluto.jl",
+                "thumb_url": "https://repository-images.githubusercontent.com/242439725/07418d80-9717-11ea-9190-50ccceb2d76f",
+                "thumb_width": 500,
+                "thumb_height": 250,
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/github.png",
+                "id": 1,
+                "original_url": "https://github.com/fonsp/Pluto.jl"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Bk=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Regarding live coding in Julia, I've heard good things about Pluto.jl "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/fonsp/Pluto.jl",
+                                "text": "https://github.com/fonsp/Pluto.jl"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "3080a435-be8b-4a13-835e-1ba4c0138e85",
+        "type": "message",
+        "text": "<@U01A1C2K8MP> I don\u2019t really use Roassal myself, but I do know they\u2019ve been hard at work on version 3 which hopefully provides more stability. I think it follows the new Iceberg/Baseline git-based installation. It will also come built-in to Pharo 9, which is current itself in dev phase:\n<https://github.com/ObjectProfile/Roassal3>",
+        "user": "U01A0KANUUU",
+        "ts": "1601140843.024100",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "GitHub",
+                "title": "ObjectProfile/Roassal3",
+                "title_link": "https://github.com/ObjectProfile/Roassal3",
+                "text": "The Roassal Visualization Engine. Contribute to ObjectProfile/Roassal3 development by creating an account on GitHub.",
+                "fallback": "GitHub: ObjectProfile/Roassal3",
+                "thumb_url": "https://avatars1.githubusercontent.com/u/2318368?s=400&v=4",
+                "from_url": "https://github.com/ObjectProfile/Roassal3",
+                "thumb_width": 400,
+                "thumb_height": 400,
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/github.png",
+                "id": 1,
+                "original_url": "https://github.com/ObjectProfile/Roassal3"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pXT=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U01A1C2K8MP"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I don\u2019t really use Roassal myself, but I do know they\u2019ve been hard at work on version 3 which hopefully provides more stability. I think it follows the new Iceberg/Baseline git-based installation. It will also come built-in to Pharo 9, which is current itself in dev phase:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/ObjectProfile/Roassal3"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "15eaf85d-5289-45e8-b05e-b54f5c51a3f4",
+        "type": "message",
+        "text": "FWIW, I think Wolfram/Mathematica is a language/toolkit that is worth considering when talking about data science languages. Its lispy style and abilities in the code-as-data area are interesting/impressive.",
+        "user": "U01A1C2K8MP",
+        "ts": "1601140875.024400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bYggu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "FWIW, I think Wolfram/Mathematica is a language/toolkit that is worth considering when talking about data science languages. Its lispy style and abilities in the code-as-data area are interesting/impressive."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "793da768-8e33-4914-b717-ebc9caae08c8",
+        "type": "message",
+        "text": "<@U01A0KANUUU> I don't think the stability issues are Roassal-specific. I think it's a function of how Pharo combines code from various sources into one super-environment, especially without the relative safety provided by static type and version checking.  Direct updates to the system classes are another issue.\n\nBase Pharo simply has 'too much junk in its trunk' to ever be reliable.  The Date class, for example, has an easter function that, IIRC, returns the day Easter falls on in any given year.",
+        "user": "U01A1C2K8MP",
+        "ts": "1601141185.024700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Mu4z",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U01A0KANUUU"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I don't think the stability issues are Roassal-specific. I think it's a function of how Pharo combines code from various sources into one super-environment, especially without the relative safety provided by static type and version checking.  Direct updates to the system classes are another issue.\n\nBase Pharo simply has 'too much junk in its trunk' to ever be reliable.  The Date class, for example, has an easter function that, IIRC, returns the day Easter falls on in any given year."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "57adbaeb-0671-496a-9477-d4b024c97c3a",
+        "type": "message",
+        "text": "I\u2019ve not had too many problems with this kind of stability in Squeak or Pharo, but the environments to expect users to be a little more proactive in managing what\u2019s going on",
+        "user": "U01A0KANUUU",
+        "ts": "1601141501.024900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ro8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I\u2019ve not had too many problems with this kind of stability in Squeak or Pharo, but the environments to expect users to be a little more proactive in managing what\u2019s going on"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "deb2e9d1-c54e-4a2c-8d50-084ab5eaaa99",
+        "type": "message",
+        "text": "Both are still full of older classes/methods, like you\u2019ve pointed out. But they\u2019ve slowly been purging this stuff. The Pharo team actually builds the image from the ground up now, so anyone can bootstrap their own minimal images as needed",
+        "user": "U01A0KANUUU",
+        "ts": "1601141561.025100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XAd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Both are still full of older classes/methods, like you\u2019ve pointed out. But they\u2019ve slowly been purging this stuff. The Pharo team actually builds the image from the ground up now, so anyone can bootstrap their own minimal images as needed"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "771b997d-4285-4ff4-87d2-2f5cd7b69a24",
+        "type": "message",
+        "text": "And yes, static type checking is not something you will get in that environment by definition and specific intent",
+        "user": "U01A0KANUUU",
+        "ts": "1601141589.025300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Du1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "And yes, static type checking is not something you will get in that environment by definition and specific intent"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "3502240f-f936-4112-b7eb-aa1d5478630c",
+        "type": "message",
+        "text": "<@UCUSW7WVD> one interesting part of the idealized commit log idea is that it doesn\u2019t actually use slicing, just code coverage (which is trivial to compute with sufficient runtime instrumentation). Also because it\u2019s dynamic, there\u2019s no need for conservative approximations.\n\nI agree that the heuristic ordering of tests is problematic. Another alternative might be to think more statistically. Think about each test as a document and each line of code invoked as a term. Then a test\u2019s focus would be the lines of code with the highest TF-IDF score (i.e. lines that occur in the test that happen less frequently in other tests).",
+        "user": "UFB8STN7K",
+        "ts": "1601143494.025500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "x/V/2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " one interesting part of the idealized commit log idea is that it doesn\u2019t actually use slicing, just code coverage (which is trivial to compute with sufficient runtime instrumentation). Also because it\u2019s dynamic, there\u2019s no need for conservative approximations.\n\nI agree that the heuristic ordering of tests is problematic. Another alternative might be to think more statistically. Think about each test as a document and each line of code invoked as a term. Then a test\u2019s focus would be the lines of code with the highest TF-IDF score (i.e. lines that occur in the test that happen less frequently in other tests)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600909562.010100",
+        "parent_user_id": "UFB8STN7K",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4e1b53d3-2b24-474f-a7e8-af1fc35d102a",
+        "type": "message",
+        "text": "<@U01A1C2K8MP> for sure, I need to play with Mathematica more. It gets a bad rep cuz its not open source but",
+        "user": "UAJKEBGP8",
+        "ts": "1601145360.025800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ky=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U01A1C2K8MP"
+                            },
+                            {
+                                "type": "text",
+                                "text": " for sure, I need to play with Mathematica more. It gets a bad rep cuz its not open source but"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "9f8ddfd6-de5f-430c-85b3-e8f65cee3ab3",
+        "type": "message",
+        "text": "they pioneered in interactive / notebook driven exploratoin",
+        "user": "UAJKEBGP8",
+        "ts": "1601145366.026000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pcBY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "they pioneered in interactive / notebook driven exploratoin"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "b27033bf-33ca-460b-a6ba-c92e38e6ed32",
+        "type": "message",
+        "text": "<@U01A0KANUUU> I understand. I programmed in Smalltalk for years and love the language, but it hasn't evolved. Anyway, wrong thread for this :wink:",
+        "user": "U01A1C2K8MP",
+        "ts": "1601148191.026200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jO5dk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U01A0KANUUU"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I understand. I programmed in Smalltalk for years and love the language, but it hasn't evolved. Anyway, wrong thread for this "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601046462.012500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "9b74e913-3a28-4e87-92bd-ea8eee480a34",
+        "type": "message",
+        "text": "I don't really understand Roam, although it is favorably mentioned here frequently. I tried a couple of videos but quit after 15 minutes when all they've demod is linking between notes.  It seems like watered down NoteCards, with a (really) nice UI.   Everyone here is probably familiar with NoteCards but if not, the first two linked papers are very good. <https://en.wikipedia.org/wiki/NoteCards>",
+        "user": "U01A1C2K8MP",
+        "ts": "1601148801.027900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pBnW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't really understand Roam, although it is favorably mentioned here frequently. I tried a couple of videos but quit after 15 minutes when all they've demod is linking between notes.  It seems like watered down NoteCards, with a (really) nice UI.   Everyone here is probably familiar with NoteCards but if not, the first two linked papers are very good. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://en.wikipedia.org/wiki/NoteCards"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601148801.027900",
+        "reply_count": 5,
+        "reply_users_count": 3,
+        "latest_reply": "1601186962.041100",
+        "reply_users": [
+            "UN9SCH5RD",
+            "U01A1C2K8MP",
+            "UPX3PH28N"
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UGYGY18UX"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3bbeb5d1-a0da-41da-877a-5e4af08afd6b",
+        "type": "message",
+        "text": "you just gave a few reasons: notecards is no longer available afaict, and roam has a nice UI, so if you want to write notes with links between them, you may as well use roam, no? :slightly_smiling_face:",
+        "user": "UN9SCH5RD",
+        "ts": "1601149253.028000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2D+Iu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "you just gave a few reasons: notecards is no longer available afaict, and roam has a nice UI, so if you want to write notes with links between them, you may as well use roam, no? "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601148801.027900",
+        "parent_user_id": "U01A1C2K8MP"
+    },
+    {
+        "client_msg_id": "7FA21C03-C82D-43A1-BDBF-850434942C71",
+        "type": "message",
+        "text": "Just watched that video - really interesting since I\u2019ve never heard of code slices before. My only reaction though is that it comes back to how well the unit tests are witten, as noted above. It\u2019s probably unrealistic to expect tests to cover even half the code base in most projects.  I think I still like the idea of a complete record of every program edit with a scrubber. Perhaps highlighting the code lines that are still in the TOT version, and showing heat maps for areas that are changed often, etc. Perhaps I could deep dive into a region of code and see how it evolved; with optional hiding of low code coverage areas...",
+        "user": "UUQ2EQW21",
+        "ts": "1601154482.036400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+Al",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Just watched that video - really interesting since I\u2019ve never heard of code slices before. My only reaction though is that it comes back to how well the unit tests are witten, as noted above. It\u2019s probably unrealistic to expect tests to cover even half the code base in most projects.  I think I still like the idea of a complete record of every program edit with a scrubber. Perhaps highlighting the code lines that are still in the TOT version, and showing heat maps for areas that are changed often, etc. Perhaps I could deep dive into a region of code and see how it evolved; with optional hiding of low code coverage areas..."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600909562.010100",
+        "parent_user_id": "UFB8STN7K",
+        "reactions": [
+            {
+                "name": "+1::skin-tone-3",
+                "users": [
+                    "U85HCL7JP"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
