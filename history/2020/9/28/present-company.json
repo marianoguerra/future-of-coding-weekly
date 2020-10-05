@@ -1,0 +1,286 @@
+[
+    {
+        "client_msg_id": "a4ab6241-9413-41ad-b836-c707fa41a3a1",
+        "type": "message",
+        "text": "Does anyone have resources about explicit versus implicit \"casting\" from a conceptual level? In the language I'm designing we're playing with the idea of describing all \"Things\" as a combination of:\n\u2022 \"Representations\" like Text, Audio, Image, File, etc and\n\u2022 \"Properties\" (described by the object's themselves) which produce a Thing\nThe big idea here is that representations are the only way to get concrete data out of a Thing if you aren't the service which declares the \"Thing\". And any collaborating code would not be able to require the concrete \"Thing\" they expect, they could only describe the \"representations\" they require to work (such as representation as an \"Email Address\"). This is similar to the golang philosophy of specifying inputs to your function as interfaces and always return concretes.\n\nSo if we were modeling some Slack domain models, we might have:\n*Slack Message (*repr: *Text)*\n\u2022 *Sent: Timestamp*\n\u2022 *Body:* *Slack Message Body*\n\u2022 *Attachments: List of \"attachment\" (Slack Attachment) (*_generics of some kind)_\n*Slack Attachment (*repr: *File)*\n\u2022 ...\n*Slack Message Body (repr: Text, Rich Text, HTML Text, Markdown)*\n\u2022 _No properties_\n*Timestamp (repr: Timestamp)*\n\u2022 Year: Natural\n\u2022 Month: Natural [1, 12]",
+        "user": "UFPPABQ7P",
+        "ts": "1601320424.020900",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UFPPABQ7P",
+            "ts": "1601320460.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "egkU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Does anyone have resources about explicit versus implicit \"casting\" from a conceptual level? In the language I'm designing we're playing with the idea of describing all \"Things\" as a combination of:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "\"Representations\" like Text, Audio, Image, File, etc and"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "\"Properties\" (described by the object's themselves) which produce a Thing"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe big idea here is that representations are the only way to get concrete data out of a Thing if you aren't the service which declares the \"Thing\". And any collaborating code would not be able to require the concrete \"Thing\" they expect, they could only describe the \"representations\" they require to work (such as representation as an \"Email Address\"). This is similar to the golang philosophy of specifying inputs to your function as interfaces and always return concretes.\n\nSo if we were modeling some Slack domain models, we might have:\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Slack Message (",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "repr: "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Text)",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Sent: Timestamp",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Body:",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "Slack Message Body",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Attachments: List of \"attachment\" (Slack Attachment) (",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "generics of some kind)",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Slack Attachment (",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "repr: "
+                            },
+                            {
+                                "type": "text",
+                                "text": "File)",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "..."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Slack Message Body (repr: Text, Rich Text, HTML Text, Markdown)",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "No properties",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Timestamp (repr: Timestamp)",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Year: Natural"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Month: Natural [1, 12]"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601320424.020900",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1601341642.021500",
+        "reply_users": [
+            "U016VUZGUUQ",
+            "UFPPABQ7P"
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    }
+]

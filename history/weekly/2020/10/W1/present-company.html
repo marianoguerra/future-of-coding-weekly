@@ -1,0 +1,146 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2020-09-28T19:13:44.020Z" class="post"><span class="user">Cole Lawrence</span> <a href="#2020-09-28T19:13:44.020Z" class="date">2020-09-28 19:13:44</a> <div class="message"><p>Does anyone have resources about explicit versus implicit "casting" from a conceptual level? In the language I'm designing we're playing with the idea of describing all "Things" as a combination of:</p>
+<ul><li>"Representations" like Text, Audio, Image, File, etc and</li><li>"Properties" (described by the object's themselves) which produce a Thing</li></ul><p>The big idea here is that representations are the only way to get concrete data out of a Thing if you aren't the service which declares the "Thing". And any collaborating code would not be able to require the concrete "Thing" they expect, they could only describe the "representations" they require to work (such as representation as an "Email Address"). This is similar to the golang philosophy of specifying inputs to your function as interfaces and always return concretes.</p>
+<p>So if we were modeling some Slack domain models, we might have:</p>
+<p>Slack Message (repr: Text)</p>
+<ul><li>Sent: Timestamp</li><li>Body: Slack Message Body</li><li>Attachments: List of "attachment" (Slack Attachment) (generics of some kind)Slack Attachment (repr: File)</li></ul><ul><li>...Slack Message Body (repr: Text, Rich Text, HTML Text, Markdown)</li></ul><ul><li>No propertiesTimestamp (repr: Timestamp)</li></ul><ul><li>Year: Natural</li><li>Month: Natural [1, 12]</li></ul></div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2020-09-29T01:03:17.021Z" class="reply"><span class="user">Andrew F</span> <a href="#2020-09-29T01:03:17.021Z" class="date">2020-09-29 01:03:17</a> <div class="message"><p>That all seems extremely reasonable (similar to ideas I'm working on, for sure), but I don't understand how casting comes into it. Implicitly casting Things to representations?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T01:07:22.021Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T01:07:22.021Z" class="date">2020-09-29 01:07:22</a> <div class="message"><p>Yeah, so for example, in <code>Alexa [speak] (message: ___)</code> message might require a Thing with a representation of Any of: Text, Audio Playback, Spoken Audio, Timed Text (think like subtitles), etc.</p>
+<p>So, what ever "Thing" you pass in will be "casted" (sorta) into the representation based on some priority and perhaps the code author's help.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-09-29T15:48:01.023Z" class="post"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T15:48:01.023Z" class="date">2020-09-29 15:48:01</a> <div class="message"><p>Anyone know what it's called in concept naming when you give something a meaningless name (like naming something "Soup" and "SoupBowl") to avoid conflation with existing concepts?</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2020-09-29T15:48:45.023Z" class="reply"><span class="user">Srini Kadamati</span> <a href="#2020-09-29T15:48:45.023Z" class="date">2020-09-29 15:48:45</a> <div class="message"><p>ThrowawayNameCollisionAvoidance obviously</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:49:42.024Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T15:49:42.024Z" class="date">2020-09-29 15:49:42</a> <div class="message"><p>Like some projects at Apple were given names like P12, P14, etc, which I think probably helped with avoiding accidental pigeon holing, and made it easier to keep an open mind about what the design and purpose might be</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:50:32.024Z" class="reply"><span class="user">Srini Kadamati</span> <a href="#2020-09-29T15:50:32.024Z" class="date">2020-09-29 15:50:32</a> <div class="message"><p>interesting, didn’t know that!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:51:01.024Z" class="reply"><span class="user">Srini Kadamati</span> <a href="#2020-09-29T15:51:01.024Z" class="date">2020-09-29 15:51:01</a> <div class="message"><p>but it sounds smart, reminds me of the issue of using temp music during movie production: <a href="https://www.youtube.com/watch?v=7vfqkvwW2fs"></a><a href="https://www.youtube.com/watch?v=7vfqkvwW2fs">https://www.youtube.com/watch?v=7vfqkvwW2fs</a></p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://www.youtube.com/watch?v=7vfqkvwW2fs">The Marvel Symphonic Universe</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-09-29T15:51:40.024Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T15:51:40.024Z" class="date">2020-09-29 15:51:40</a> <div class="message"><p>At my company we have several core models with obscure names to avoid confusion, because we don't want anyone assuming anything about the model's purpose.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:51:49.024Z" class="reply"><span class="user">Srini Kadamati</span> <a href="#2020-09-29T15:51:49.024Z" class="date">2020-09-29 15:51:49</a> <div class="message"><p>thats’ smart</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:52:33.025Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T15:52:33.025Z" class="date">2020-09-29 15:52:33</a> <div class="message"><p>The movie temp music analogy is a good one!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:53:17.025Z" class="reply"><span class="user">Srini Kadamati</span> <a href="#2020-09-29T15:53:17.025Z" class="date">2020-09-29 15:53:17</a> <div class="message"><p>yeah!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:53:33.025Z" class="reply"><span class="user">Srini Kadamati</span> <a href="#2020-09-29T15:53:33.025Z" class="date">2020-09-29 15:53:33</a> <div class="message"><p>don’t know what the ‘official’ name for this general pattern is called but hey maybe you should blog about that / try to help popularize a term!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:53:40.025Z" class="reply"><span class="user">Srini Kadamati</span> <a href="#2020-09-29T15:53:40.025Z" class="date">2020-09-29 15:53:40</a> <div class="message"><p>TempName, TempProjectName? etc</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T15:56:12.026Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T15:56:12.026Z" class="date">2020-09-29 15:56:12</a> <div class="message"><p>I was once designing a node based conversation tree execution planner type project for conversation "bots" and I used names like "Sidewalk" vs "Blueprint" to describe different levels of the reification (logical programming) process. At that time I had little experience with the vocabulary of datalog execution, so if I was doing the project again, I'd probably not need to use novel names</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T16:00:37.026Z" class="reply"><span class="user">Ivan Reese</span> <a href="#2020-09-29T16:00:37.026Z" class="date">2020-09-29 16:00:37</a> <div class="message"><p>Maybe relevant — a discussion about the degree to which brand/product names should be meaningful/meaningless, etc: <a href="https://99percentinvisible.org/episode/title-tk/"></a><a href="https://99percentinvisible.org/episode/title-tk/">https://99percentinvisible.org/episode/title-tk/</a></p>
+<p>"Title TK", specifically, is a common placeholder title, sort of like the Lorem Ipsum of titles.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T16:11:57.027Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T16:11:57.027Z" class="date">2020-09-29 16:11:57</a> <div class="message"><p>In this podcast, they describe "Arbitrary Names" and "Empty Vessel" names like "Kodak".</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T16:12:58.027Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T16:12:58.027Z" class="date">2020-09-29 16:12:58</a> <div class="message"><p>Spectrum between Descriptive Names ("Shredded Wheat") to Arbitrary ("Hulu" or "Apple")</p>
+<p>And in between "suggestive names" like "Microsoft"</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T16:18:57.027Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-29T16:18:57.027Z" class="date">2020-09-29 16:18:57</a> <div class="message"><p>I think "empty vessel" is exactly the kind of language I was looking for to describe my situation. Thanks, <a href="https://twitter.com/spiralganglion">Ivan Reese</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-29T23:14:09.028Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-09-29T23:14:09.028Z" class="date">2020-09-29 23:14:09</a> <div class="message"><p>It looks like we do the same activity for many reasons. To add another, I've taken to creating playlists in Alexa with random words like "Rose Doughnut" to get it to play hard-to-pronounce songs like <a href="https://youtube.com/watch?v=XBr11cQDg-E"></a><a href="https://youtube.com/watch?v=XBr11cQDg-E">https://youtube.com/watch?v=XBr11cQDg-E</a>. I wonder if each reason tends to get a distinct name.</p>
+<p>Another reason goes by "code words" for projects involving many people, either for security (Operation Overlord for the Normandy landings), or as a placeholder (Emerald Sea for what became Google+).</p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://youtube.com/watch?v=XBr11cQDg-E">Kaisi Hai Ye Rut [Full Song] Dil Chahta Hai</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-09-29T23:40:43.029Z" class="reply"><span class="user">Andrew Carr</span> <a href="#2020-09-29T23:40:43.029Z" class="date">2020-09-29 23:40:43</a> <div class="message"><p>Not to be too flippant, but I generally use names from spongebob if I'm hoping to obfuscate intention.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T03:30:02.029Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-30T03:30:02.029Z" class="date">2020-09-30 03:30:02</a> <div class="message"><p><a href="https://twitter.com/andrew_n_carr">Andrew Carr</a> Mastermind strats</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-02T12:51:45.042Z" class="reply"><span class="user">Drewverlee</span> <a href="#2020-10-02T12:51:45.042Z" class="date">2020-10-02 12:51:45</a> <div class="message"><p>To give something a new name with no origin: synthetic. Example:</p>
+<p>I called my new math concept a bimlond.</p>
+<p>Now, I'm against doing this unless your at the category theory level. where that's kind of the point. It's better, for learning, to have conflicts and resolve them through context.</p>
+<p>For instance, calling it "hand"to convey it moves things but doesn't make choices is better because we learn through association. It's trivial to remember that in context this doesn't refer to a human hand.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-09-30T14:46:09.037Z" class="post"><span class="user">Cole Lawrence</span> <a href="#2020-09-30T14:46:09.037Z" class="date">2020-09-30 14:46:09</a> <div class="message"><p>Does anyone have an idea of a type system (or design pattern) that can make it easy to specify a type with a feature set such as</p>
+<pre><code>type Video
+
+  capabilities:
+
+    Subtitles: ManyOf English, Spanish, Korean, etc
+
+    Encoding: OneOf AV1, MPEG-4 AVC, VP6, H.263, MVC, etc.
+
+    Container: OneOf 3GPP, 3GPP2, AVI, F4V, FLV, MP4, MKV, etc.
+
+
+
+function &lt;V&gt; bake_subtitles_into_video(video: V)
+
+  where V: Video
+
+    which "supports encoding" one-of Encoding::MPEG-4, Encoding::H.263
+
+    which "has subtitles" any Subtitles::*
+
+{
+
+    ...
+
+}</code></pre><p>So, I'm interested in asking what is currently available to my scope which can fit inside the <code>bake_subtitles_into_video</code> function.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2020-09-30T14:47:19.038Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-30T14:47:19.038Z" class="date">2020-09-30 14:47:19</a> <div class="message"><p>This feels very close to where we'd apply datalog/relational programming to load these rules, but I'm looking for how that kind of dynamic rule loading might be implemented in different ways.</p>
+<p>cc: <strong>@Pete Vilter</strong></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T16:38:21.038Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-09-30T16:38:21.038Z" class="date">2020-09-30 16:38:21</a> <div class="message"><p>if I get it right you have a bunch of videos and you want to find the ones that match a certain set of features. That  could be expressed very directly with RDF/SPARQL</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T16:38:25.038Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-09-30T16:38:25.038Z" class="date">2020-09-30 16:38:25</a> <div class="message">
+<pre><code>Data:
+
+
+
+&lt;someVideo&gt; a app:Video;
+
+  app:subtitles "en" , "es" ;
+
+  app:enncoding "av1", "vp6" ;
+
+  app:container "avi", "mp4" .
+
+
+
+Query:
+
+
+
+SELECT ?video
+
+WHERE { 
+
+  ?video app:subtitles ?anything ;
+
+         app:encoding "h.263", "mp4" .
+
+}</code></pre></div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T16:38:32.038Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-09-30T16:38:32.038Z" class="date">2020-09-30 16:38:32</a> <div class="message"><p>something like that, I think</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T16:38:54.039Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-09-30T16:38:54.039Z" class="date">2020-09-30 16:38:54</a> <div class="message"><p>the query returns all the videos with subtitles and both encodings</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T16:44:27.039Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-30T16:44:27.039Z" class="date">2020-09-30 16:44:27</a> <div class="message"><p>Does something like SPARQL enable richer mismatch information? Say I want to check if a specific video meets the criteria of <code>bake_subtitles_into_video</code> and if it didn't have subtitles it could share an error like <code>video1 isn't compatible with bake_subtitles_into_video because it fails "supports encoding" which expected one of MPEG-4 or H.263</code> ?</p>
+<p>I'm essentially trying to create suggestions based on missed constraints (or partial rule satisfaction) as well.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T17:06:53.039Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-09-30T17:06:53.039Z" class="date">2020-09-30 17:06:53</a> <div class="message"><p>there are various ways, yes. The rdf data is a graph, so you can explore it at your leisure. For instance you can perform an initial SPARQL query to retrieve some of the graph and then further explore it with "manual" code (imperative).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T17:07:30.039Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-09-30T17:07:30.039Z" class="date">2020-09-30 17:07:30</a> <div class="message"><p>but there are also languages that attempt to validate  in a declarative way constraints in the graph data, like ShEx or SHACL</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T17:08:02.040Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-09-30T17:08:02.040Z" class="date">2020-09-30 17:08:02</a> <div class="message"><p><a href="https://book.validatingrdf.com/bookHtml010.html#sec62"></a><a href="https://book.validatingrdf.com/bookHtml010.html#sec62">https://book.validatingrdf.com/bookHtml010.html#sec62</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T17:08:25.040Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-09-30T17:08:25.040Z" class="date">2020-09-30 17:08:25</a> <div class="message"><p>I'm learning SHACL at the moment 🙂</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T17:55:55.040Z" class="reply"><span class="user">Will Crichton</span> <a href="#2020-09-30T17:55:55.040Z" class="date">2020-09-30 17:55:55</a> <div class="message"><p>You could implement this in Rust traits.</p>
+<pre><code>trait Video&lt;Subtitles, Encoding, Container&gt; { .. }
+
+
+
+fn bake_subtitles_into_video&lt;V, S, E, C&gt;(video: V) 
+
+where V: Video&lt;S, E, C&gt;,
+
+      E: Contains&lt;MPEG4, H263&gt;,
+
+      S: GreaterThan&lt;Len&lt;S&gt;, Zero&gt;
+
+{ .. }</code></pre></div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T18:01:59.040Z" class="reply"><span class="user">Will Crichton</span> <a href="#2020-09-30T18:01:59.040Z" class="date">2020-09-30 18:01:59</a> <div class="message"><p>The higher-level point being that the operators of <code>ManyOf</code>, <code>OneOf</code>, <code>HasSubtitles</code>, <code>SupportsEncoding</code>, so on can all be encoded into type-level operations on type-lists and type-sets.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T18:02:04.041Z" class="reply"><span class="user">Cole Lawrence</span> <a href="#2020-09-30T18:02:04.041Z" class="date">2020-09-30 18:02:04</a> <div class="message"><p>Wow! Very interesting and scary at the same time. My language authoring environment and type system takes a lot of inspiration from Rust (which is easy to do, since we're building the complex parts in Rust). I am really interested in how a language like Rust could allow for annotations within the trait constraints to aid with troubleshooting rule mismatch. Rust and TypeScript do a great and pretty good job of sharing with the author why certain types are not being satisfied. But, what if they weren't bound to a plain text authoring experience? They could probably add natural language explanations for where things went wrong (as well as making the explanations i18n friendly).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-09-30T18:05:05.041Z" class="reply"><span class="user">Will Crichton</span> <a href="#2020-09-30T18:05:05.041Z" class="date">2020-09-30 18:05:05</a> <div class="message"><p>Yeah that’s the classic issue with type-level encodings of rules: error messages are kind of awful. The documentation also tends to suck. But better tooling could help, like this research project that uses typestate to improve Java documentation: <a href="http://www.cs.cmu.edu/~jssunshi/pubs/thesis-extras/PlaiddocResultSet.html"></a><a href="http://www.cs.cmu.edu/~jssunshi/pubs/thesis-extras/PlaiddocResultSet.html">http://www.cs.cmu.edu/~jssunshi/pubs/thesis-extras/PlaiddocResultSet.html</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
