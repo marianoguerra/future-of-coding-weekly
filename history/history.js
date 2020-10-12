@@ -231,16 +231,19 @@ function enrichMessage(msg, args, isOlder) {
         accum += '\n\n';
       }
 
-      const file = files[i];
+      const file = files[i],
+        mimetype = file.mimetype || '';
       let icon = '🔗';
-      if (file.mimetype.startsWith('video/')) {
+      if (mimetype.startsWith('video/')) {
         icon = '🎥';
-      } else if (file.mimetype.startsWith('image/')) {
+      } else if (mimetype.startsWith('image/')) {
         icon = '📷';
-      } else if (file.mimetype.startsWith('application/')) {
+      } else if (mimetype.startsWith('application/')) {
         icon = '📄';
-      } else if (file.mimetype.startsWith('text/')) {
+      } else if (mimetype.startsWith('text/')) {
         icon = '🗒️';
+      } else {
+        console.warn('unknown mimetype', file);
       }
 
       if (file.title) {
