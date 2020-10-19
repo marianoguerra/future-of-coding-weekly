@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2020-10-11T08:29:57.045Z" class="post"><span class="user">Kartik Agaram</span> <a href="#2020-10-11T08:29:57.045Z" class="date">🕰️ 2020-10-11 08:29:57</a> <div class="message"><p>Update on my text-mode postfix language and its live-updating environment, all built up from x86 machine code: <a href="https://archive.org/details/akkartik-2min-2020-10-10"></a><a href="https://archive.org/details/akkartik-2min-2020-10-10">https://archive.org/details/akkartik-2min-2020-10-10</a></p>
+<p>Previous episode: <a href="https://futureofcoding.slack.com/archives/C0120A3L30R/p1601191514009500"></a><a href="https://futureofcoding.slack.com/archives/C0120A3L30R/p1601191514009500">https://futureofcoding.slack.com/archives/C0120A3L30R/p1601191514009500</a></p>
+<p>Main project page: <a href="https://github.com/akkartik/mu"></a><a href="https://github.com/akkartik/mu">https://github.com/akkartik/mu</a></p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F01C9L3T745/screen_shot_2020-10-11_at_1.14.21_am.png">Screen Shot 2020-10-11 at 1.14.21 AM.png</a></p>
+</blockquote>
+</div> <div class="replies"><div id="2020-10-11T23:00:08.055Z" class="reply"><span class="user">Garth Goldwater</span> <a href="#2020-10-11T23:00:08.055Z" class="date">2020-10-11 23:00:08</a> <div class="message"><p>love the visualization! checking my understanding about intended semantics: if i defined a function as <code>x y myFunc: x y + 4 x *;</code> would it pull two values off the stack, with the x getting the top value and y getting the one below it?</p>
+<p>also (tricky question): any thoughts on recursion?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-11T23:23:23.056Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-10-11T23:23:23.056Z" class="date">2020-10-11 23:23:23</a> <div class="message"><p>I haven't really used multiple args yet, so not sure if I've done it right. But my thought is that arg order should match calls. The function definition <code>x y myFunc</code> should map to a call like <code>3 4 myFunc</code> with <code>x</code> getting <code>3</code> and <code>y</code> getting <code>4</code>.</p>
+<p>Perhaps I'm missing something, but I don't think there's anything tricky about recursion! A recursive call is just a function call like any other, and the visualization metaphor here should uncoil it just like any other call. I don't have conditionals or quotes yet, so all recursion at the moment would be infinite. So it's not very useful at the moment.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-11T23:30:28.056Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-10-11T23:30:28.056Z" class="date">2020-10-11 23:30:28</a> <div class="message"><p>One concern I have with this whole approach is something I've chatted with <a href="https://twitter.com/spiralganglion">Ivan Reese</a> about before and something visible in the screenshot above: lots of name-punning. Different parts of a single (expanded) line may have very different behavior attached to the same name (here <code>x</code>).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-12T00:45:00.063Z" class="reply"><span class="user">Garth Goldwater</span> <a href="#2020-10-12T00:45:00.063Z" class="date">2020-10-12 00:45:00</a> <div class="message"><p>thanks, that’s helpful clarification! i guess the difference in argument order depends on whether the function definition metaphor applies to the stack or the tokens you’re passing to the interpreter (if that makes sense). like 3 4 myFunc is either a series of stack instructions or a macro defining how to interpret the previous two tokens.</p>
+<p>not sure what i thought would be tricky about recursion—just can be tricky in general for UI</p>
+<p>i wonder if the name-punning issue can be resolved a bit further in UX. may have some messy sketch ideas about that</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-12T00:47:14.063Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-10-12T00:47:14.063Z" class="date">2020-10-12 00:47:14</a> <div class="message"><p>One potential argument here is that the punning is ok, because you can just accept what the name turns into at each point, since you are freed from having to compute it. I don't know if that's a valid argument, though..</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-12T02:36:06.063Z" class="reply"><span class="user">Robert Butler</span> <a href="#2020-10-12T02:36:06.063Z" class="date">2020-10-12 02:36:06</a> <div class="message"><p>It occurs to me that this is very much like FORTH. FORTH avoids name punning by not naming the args in anything other than comments and just assuming there is a thing on the stack and my operation does this to it. That said, you can't do arg checking or any sort of typing in that manner.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-12T02:38:48.064Z" class="reply"><span class="user">Robert Butler</span> <a href="#2020-10-12T02:38:48.064Z" class="date">2020-10-12 02:38:48</a> <div class="message"><p>I'm not sure how anything with a name scoped to a function can avoid name punning. It would have to be purely positional which would be very hard to read for humans.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
