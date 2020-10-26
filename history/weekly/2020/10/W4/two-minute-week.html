@@ -1,0 +1,50 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2020-10-21T06:34:34.071Z" class="post"><span class="user">Kartik Agaram</span> <a href="#2020-10-21T06:34:34.071Z" class="date">2020-10-21 06:34:34</a> <div class="message"><p>Today's video wraps up implementing the mock-up I shared exactly a month ago.[1]</p>
+<p><a href="https://archive.org/details/akkartik-2min-20201020"></a><a href="https://archive.org/details/akkartik-2min-20201020">https://archive.org/details/akkartik-2min-20201020</a></p>
+<p>I'm quite happy with how this is turning out. The environment is visual but dense. I imagine the ability to juggle multiple sandboxes on the right, all sharing a common set of function definitions on the left. Functions still can't be edited, but the mechanisms for editing are in place, and you'll be able to see all sandboxes update as you edit function definitions.</p>
+<p>The one major drawback -- that <a href="https://twitter.com/spiralganglion">Ivan Reese</a> won't like -- is the extensive use of name-punning to make this work. By construction, function definitions share the same names for their arguments as the ones you chose for their first call. As a result you almost immediately have two <code>x</code>s on the same line that look the same and seem to behave identically, but mean subtly different things.</p>
+<p>Main project page: <a href="https://github.com/akkartik/mu"></a><a href="https://github.com/akkartik/mu">https://github.com/akkartik/mu</a></p>
+<p>[1] <a href="https://futureofcoding.slack.com/archives/C5T9GPWFL/p1600645382040000"></a><a href="https://futureofcoding.slack.com/archives/C5T9GPWFL/p1600645382040000">https://futureofcoding.slack.com/archives/C5T9GPWFL/p1600645382040000</a></p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F01CKLPGVU7/20201020-postfix-function-definition.png">20201020-postfix-function-definition.png</a></p>
+</blockquote>
+</div> <div class="replies"><div id="2020-10-22T11:34:23.075Z" class="reply"><span class="user">Chris Maughan</span> <a href="#2020-10-22T11:34:23.075Z" class="date">2020-10-22 11:34:23</a> <div class="message"><p>Looking really nice.  The UI geek in me wants to move the text to align with the stack - like this:</p>
+<p>Is that something that is hard to do in the terminal?</p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F01DTRD811N/image.png">image.png</a></p>
+</blockquote>
+</div></div><div id="2020-10-22T15:16:41.075Z" class="reply"><span class="user">Ivan Reese</span> <a href="#2020-10-22T15:16:41.075Z" class="date">2020-10-22 15:16:41</a> <div class="message"><p>I think I prefer it in Kartik's design, where the text is aligned with the spaces between stacks (so you can sort of view it as an input followed by a response).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-22T15:43:27.076Z" class="reply"><span class="user">Chris Maughan</span> <a href="#2020-10-22T15:43:27.076Z" class="date">2020-10-22 15:43:27</a> <div class="message"><p>To my eyes, I like straight lines (I'd move the * down a bit too to align it with the 'x')  I can see your point, but if that's the case, I'd actually make the spaces wider; so that the 'in between' is as big as the stack; so it is more obvious</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-22T15:43:52.076Z" class="reply"><span class="user">Chris Maughan</span> <a href="#2020-10-22T15:43:52.076Z" class="date">2020-10-22 15:43:52</a> <div class="message"><p>And, I know I'm nit-picking here.  Apologies for that.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-10-22T15:44:49.076Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-10-22T15:44:49.076Z" class="date">2020-10-22 15:44:49</a> <div class="message"><p>😄 Chris, that was actually how my first demo looked. I might go back to it or something.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-10-22T10:45:40.074Z" class="post"><span class="user">Chris Maughan</span> <a href="#2020-10-22T10:45:40.074Z" class="date">2020-10-22 10:45:40</a> <div class="message"><p>In lieu of an update video, here's a super-wide screenshot of my Live Coding tool; showing the audio components.</p>
+<p>I've spent the last few weeks fixing the build system to use vcpkg (this is a massive change, but a massive improvement too; it should really reduce the time I waste making builds work.&nbsp;It also makes my CMake files smaller and simpler).  I estimate I spend 25% of my time fixing cross platform builds/CI. etc.  This has to stop; I have lost weeks to figuring out all these issues.  Discovering that vcpkg solves most of my problems was a revelation; it is laughably easy to build complex libraries and link them into your projects.</p>
+<p>I've also been updating to the ImGui docking branch.&nbsp;This is going to be great for live coding; giving you more surface area to put your various windows and tools.&nbsp;This screenshot is an example across my 3 monitors; I will shortly have the visual pieces up and running too.</p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F01D3T5CNH0/image.png">image.png</a></p>
+</blockquote>
+</div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>
