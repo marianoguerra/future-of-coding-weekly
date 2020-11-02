@@ -1,0 +1,526 @@
+[
+    {
+        "client_msg_id": "00edd4e1-01d7-456a-b320-4580d2244685",
+        "type": "message",
+        "text": "I think of the end of the function as the beginning of the return value's lifetime, not the end. Maybe you could find a way to \"initialize\" the output variable at/near the end, or maybe just take that perspective as a vote for explicit returns.\n\nWhat are the intended semantics of example 4, where you seem to have x and out mapped to the same register in the same scope. Or is out spilled during the body block, and the assignment to out is targeted at the stack, then popped between the body block and the \"actual\" function block? It looks like I answered my question while writing it, but I'll leave this just in case I got it wrong...",
+        "user": "U016VUZGUUQ",
+        "ts": "1604186657.126100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bkf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think of the end of the function as the beginning of the return value's lifetime, not the end. Maybe you could find a way to \"initialize\" the output variable at/near the end, or maybe just take that perspective as a vote for explicit returns.\n\nWhat are the intended semantics of example 4, where you seem to have x and out mapped to the same register in the same scope. Or is out spilled during the body block, and the assignment to out is targeted at the stack, then popped between the body block and the \"actual\" function block? It looks like I answered my question while writing it, but I'll leave this just in case I got it wrong..."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1604180931.125900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7427d2cc-b6c7-448f-8506-09f03b84d002",
+        "type": "message",
+        "text": "Yeah, that's a good insight. I wish I'd thought of that a year ago..\n\nIf you first ignore outputs, the semantics of a `var` B in a new block are that it shadows any var A in an outer block. However, a second `var` C to the same register in the same block simply clobbers the register. There's no way afterwards to get the first var B.\n\nNow reintroducing function outputs in example 4, the assignment to `out` would write register `eax`. Then the `break` would increment the stack pointer to skip the saved value of `x` before jumping to end of function.\n\nDoes this make sense?",
+        "user": "UCUSW7WVD",
+        "ts": "1604187339.126900",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1604188223.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2+2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, that's a good insight. I wish I'd thought of that a year ago..\n\nIf you first ignore outputs, the semantics of a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "var",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " B in a new block are that it shadows any var A in an outer block. However, a second "
+                            },
+                            {
+                                "type": "text",
+                                "text": "var",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " C to the same register in the same block simply clobbers the register. There's no way afterwards to get the first var B.\n\nNow reintroducing function outputs in example 4, the assignment to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "out",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " would write register "
+                            },
+                            {
+                                "type": "text",
+                                "text": "eax",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Then the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "break",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " would increment the stack pointer to skip the saved value of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " before jumping to end of function.\n\nDoes this make sense?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1604180931.125900",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "f9a02255-ed2b-4588-bf00-49fd3f9b74d0",
+        "type": "message",
+        "text": "<@UHWC9PXBL> i\u2019m still formulating my thoughts but I think canvases might not be ideal for knowledge transfer (documentation). Along your lines of thought, I _think_ documentation wants to be in a more linear format (e.g. notion doc or markdown file) so that it\u2019s readable with ability to drill down/explore on the side. The notion-style slashword interface would be cool!\n\nMakes me think of <@US6TKS2HW>\u2019s post <https://futureofcoding.slack.com/archives/CCL5VVBAN/p1600909703001500>",
+        "user": "U019PRL1BNU",
+        "ts": "1604192759.127300",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://futureofcoding.slack.com/archives/CCL5VVBAN/p1600909703001500",
+                "fallback": "[September 23rd, 2020 6:08 PM] raathigesh92: Experimenting with a code documentation idea - <https://twitter.com/Raathigesh/status/1308728988160765952>",
+                "ts": "1600909703.001500",
+                "author_id": "US6TKS2HW",
+                "author_subname": "Raathi",
+                "channel_id": "CCL5VVBAN",
+                "channel_name": "share-your-work",
+                "is_msg_unfurl": true,
+                "is_thread_root_unfurl": true,
+                "text": "Experimenting with a code documentation idea - <https://twitter.com/Raathigesh/status/1308728988160765952>",
+                "author_name": "Raathi",
+                "author_link": "https://futureofcoding.slack.com/team/US6TKS2HW",
+                "author_icon": "https://avatars.slack-edge.com/2020-01-03/891659417364_08d810dfba72ae74c1d2_48.jpg",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "id": 1,
+                "original_url": "https://futureofcoding.slack.com/archives/CCL5VVBAN/p1600909703001500",
+                "footer": "Thread in #share-your-work"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vYtAz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UHWC9PXBL"
+                            },
+                            {
+                                "type": "text",
+                                "text": " i\u2019m still formulating my thoughts but I think canvases might not be ideal for knowledge transfer (documentation). Along your lines of thought, I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "think",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " documentation wants to be in a more linear format (e.g. notion doc or markdown file) so that it\u2019s readable with ability to drill down/explore on the side. The notion-style slashword interface would be cool!\n\nMakes me think of "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "US6TKS2HW"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\u2019s post "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://futureofcoding.slack.com/archives/CCL5VVBAN/p1600909703001500"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1604079401.115400",
+        "parent_user_id": "U019PRL1BNU"
+    },
+    {
+        "client_msg_id": "acde8a1c-1070-44ca-a1c8-01adb614b986",
+        "type": "message",
+        "text": "I think I understand your description. So at the write to `out`,  `x2` is \"shadowing\" `x` in `eax`, `x` is on the stack, then `out` clobbers `x2`?\n\nMy instincts say,  if you're doing it this way, `out` should be spilled to the stack like other vars when you enter `$foo:body`. Then the break would in principle pop `x`, immediately pop `out`, and `ret`. If you're treating output vars as a special case wrt storage management, I don't see how you're getting any benefit from making them syntactically look like regular vars.\n\nIs anything sensible supposed to happen if you don't immediately follow a write to an output with a break or something? Is that verboten, and if so is it checked?\n\nMaybe you should just ban mapping multiple vars to to same register in the same block, and consider `out` mapped at the function level. `x` isn't allowed to be in `eax` until you push a new block.\n\nHopefully this is semi-useful, but it's late here. :) FWIW, I didn't invent the idea about returns being the start of a new lifetime. It's mostly derived from Single Static Information IR, which has a similar relationship to SSA as Plan9 does to Unix: even more idealistic, and no one uses it.",
+        "user": "U016VUZGUUQ",
+        "ts": "1604212779.128700",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U016VUZGUUQ",
+            "ts": "1604212834.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GM0",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think I understand your description. So at the write to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "out",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ",  "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x2",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is \"shadowing\" "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in `eax`, `x` is on the stack, then `out` clobbers `x2`?\n\nMy instincts say,  if you're doing it this way, `out` should be spilled to the stack like other vars when you enter "
+                            },
+                            {
+                                "type": "text",
+                                "text": "$foo:body",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Then the break would in principle pop `x`, immediately pop `out`, and `ret`. If you're treating output vars as a special case wrt storage management, I don't see how you're getting any benefit from making them syntactically look like regular vars.\n\nIs anything sensible supposed to happen if you don't immediately follow a write to an output with a break or something? Is that verboten, and if so is it checked?\n\nMaybe you should just ban mapping multiple vars to to same register in the same block, and consider "
+                            },
+                            {
+                                "type": "text",
+                                "text": "out",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " mapped at the function level. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " isn't allowed to be in "
+                            },
+                            {
+                                "type": "text",
+                                "text": "eax",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " until you push a new block.\n\nHopefully this is semi-useful, but it's late here. :) FWIW, I didn't invent the idea about returns being the start of a new lifetime. It's mostly derived from Single Static Information IR, which has a similar relationship to SSA as Plan9 does to Unix: even more idealistic, and no one uses it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1604180931.125900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "smile",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "26059464-075b-4e73-b1c2-a311089c6c76",
+        "type": "message",
+        "text": "&gt; Can you see me drowning in my own ambition yet?\u00a0\u00a0:man-swimming::skin-tone-4::shark:\nYes! I guess people here knows that feeling. :sweat_smile: I guess we are a bunch of futurists swimming or sailing the seas of programming. Sometime feeling like drowning, sometime like surfing.",
+        "user": "UJ6LDMMN0",
+        "ts": "1604224153.129200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "p83",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Can you see me drowning in my own ambition yet?\u00a0\u00a0"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "man-swimming",
+                                "skin_tone": 4
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "shark"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes! I guess people here knows that feeling. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I guess we are a bunch of futurists swimming or sailing the seas of programming. Sometime feeling like drowning, sometime like surfing."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1604155452.122300",
+        "parent_user_id": "UJ6LDMMN0"
+    },
+    {
+        "client_msg_id": "8c5497e8-6093-49b0-ae8d-fdc986431526",
+        "type": "message",
+        "text": "&gt; The motivation behind it is to build a \u201cbetter Excel\u201d for power users and also software developers who would rather not deal with all the incidental complexity of modern app development for a project with complex logic, ie not just some CRUD app.\nI also think it is an interesting target audience. Not really all end users,  but some that want to do a bit more programming. And trying to create tools for them and also for some \"expert\" developers is something very interesting.",
+        "user": "UJ6LDMMN0",
+        "ts": "1604225096.129500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "HZz1",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The motivation behind it is to build a \u201cbetter Excel\u201d for power users and also software developers who would rather not deal with all the incidental complexity of modern app development for a project with complex logic, ie not just some CRUD app."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I also think it is an interesting target audience. Not really all end users,  but some that want to do a bit more programming. And trying to create tools for them and also for some \"expert\" developers is something very interesting."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1604155452.122300",
+        "parent_user_id": "UJ6LDMMN0"
+    },
+    {
+        "client_msg_id": "147a8965-ee02-40b2-86b5-c1d1928f422c",
+        "type": "message",
+        "text": "I like your idea to keep history to make things more explorable by keeping the time dimension. I guess this can become very tricky. I guess you have to find a way to manage the space limit for the history, i.e. when it takes too much resources. For simple use case it can be fine, but when you manage big tables that changes often you will have to remove part of the history.",
+        "user": "UJ6LDMMN0",
+        "ts": "1604225294.129700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lg1R",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I like your idea to keep history to make things more explorable by keeping the time dimension. I guess this can become very tricky. I guess you have to find a way to manage the space limit for the history, i.e. when it takes too much resources. For simple use case it can be fine, but when you manage big tables that changes often you will have to remove part of the history."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1604155452.122300",
+        "parent_user_id": "UJ6LDMMN0"
+    },
+    {
+        "client_msg_id": "ac3c1237-b9d5-4331-bd9a-e9e3a7c1dd5e",
+        "type": "message",
+        "text": "&gt; sometime like surfing\nI\u2019ll try and get there! :man-surfing::skin-tone-4:\n\n&gt; And trying to create tools for them and also for some \u201cexpert\u201d developers is something very interesting.\nThis honestly comes from me being a big personal finance nerd, and I once made a spreadsheet that calculates all of my finances, think a personal double sided balance sheet. Coming back a year later though, it made the engineer side want to cry. It was impossible to maintain efficiently, but I also didn\u2019t want to manage an app to do it either. Then as I learned more about the adoption of Functions-as-a-Service, it seemed to really extend the upper limit for the use cases.\n\n&gt; I guess you have to find a way to manage the space limit for the history, i.e. when it takes too much resources.\nYeah, this is definitely an outstanding question. I imagine I will just do a simple set sized FIFO cache to start out, and then down the road I could push to something like IndexedDB (once those bindings actually exist in Rust -&gt; wasm).",
+        "user": "U01BAS8GU86",
+        "ts": "1604243602.129900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/FpF",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "sometime like surfing"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I\u2019ll try and get there! "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "man-surfing",
+                                "skin_tone": 4
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "And trying to create tools for them and also for some \u201cexpert\u201d developers is something very interesting."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This honestly comes from me being a big personal finance nerd, and I once made a spreadsheet that calculates all of my finances, think a personal double sided balance sheet. Coming back a year later though, it made the engineer side want to cry. It was impossible to maintain efficiently, but I also didn\u2019t want to manage an app to do it either. Then as I learned more about the adoption of Functions-as-a-Service, it seemed to really extend the upper limit for the use cases.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I guess you have to find a way to manage the space limit for the history, i.e. when it takes too much resources."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, this is definitely an outstanding question. I imagine I will just do a simple set sized FIFO cache to start out, and then down the road I could push to something like IndexedDB (once those bindings actually exist in Rust -> wasm)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1604155452.122300",
+        "parent_user_id": "UJ6LDMMN0"
+    }
+]
