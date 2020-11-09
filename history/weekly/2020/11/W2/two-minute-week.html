@@ -1,0 +1,37 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2020-11-04T09:13:35.084Z" class="post"><span class="user">Chris Maughan</span> <a href="#2020-11-04T09:13:35.084Z" class="date">2020-11-04 09:13:35</a> <div class="message"><p>Another screenshot update.</p>
+<p>Slow progress on making the audio side of the project into something more robust and useful.</p>
+<ul><li>Added audio configuration for choosing sound device (on the top right of the screenshot)</li><li>Added a spectrum analysis window.  If this looks familiar, it's the same FFT/GUI code I contributed to Sonic Pi, although here it is using ImGui</li><li>Continuing work on dock windows/gui setup.</li></ul></div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F01DWH2NW05/image.png">image.png</a></p>
+</blockquote>
+</div> <div class="replies"><div id="2020-11-04T09:19:11.085Z" class="reply"><span class="user">Chris Maughan</span> <a href="#2020-11-04T09:19:11.085Z" class="date">2020-11-04 09:19:11</a> <div class="message"><p>The technical challenge of adding the sound options was really in cleaning up the generation of the graphs when the audio changes.  Since many nodes in the graph might be processing music data at the current audio rate, I needed to shut the graph down, reconfigure the nodes, and restart.</p>
+<p>This builds on previous work I've done to manage the graphs inside the audio pipeline.  Effectively a graph is either 'Active' or 'Inactive'; the distinction is that an active graph can be run inside the audio thread.  A graph is made inactive by quickly swapping pointers under a spin-lock.  This means that the audio thread never waits for a graph, and never does a mutex lock which can schedule away from the audio thread when the lock is freed.</p>
+<p>Technical details aside, this is tricky to make clean and robust, but I think I'm there.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-11-04T09:20:45.085Z" class="reply"><span class="user">Chris Maughan</span> <a href="#2020-11-04T09:20:45.085Z" class="date">2020-11-04 09:20:45</a> <div class="message"><p>The output sound data in the audio side is also copied into a buffer and pointer-swapped so it can be processed in other threads.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
