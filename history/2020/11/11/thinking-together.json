@@ -1,0 +1,162 @@
+[
+    {
+        "client_msg_id": "83ae43aa-63db-429e-b46d-1b1b80b14af0",
+        "type": "message",
+        "text": "Sort of along the lines above, is it possible that what people are looking for with static types is an additional alternative view of a function? I've found very little reason for types in my work from a compiler perspective, but it does often occur that I see a function name and argument list without knowing what to do with it. e.g. the following:\n\n```(map (fn [price-bracket]\n       (let [groups (group-by :contract-type price-bracket)]\n         (mc/map-vals (fn [contracts]\n                        (dt/aggregate-table contracts\n                          {:selected-keys      [:returns\n                                                :revenue \n                                                :cost\n                                                :market-price]}))\n           groups)))\n  individual)```\nThis could alternatively be shown as\n```[[{whatever keys} ...] ...]\n=&gt; [{contract {:returns ... :revenue ... :cost ... :market-price ...} ...} ...]```\nWhich, along with a name is *far* faster to grok and read past",
+        "user": "U01DUNFS2N4",
+        "ts": "1605124537.384800",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U01DUNFS2N4",
+            "ts": "1605124603.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ukJ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sort of along the lines above, is it possible that what people are looking for with static types is an additional alternative view of a function? I've found very little reason for types in my work from a compiler perspective, but it does often occur that I see a function name and argument list without knowing what to do with it. e.g. the following:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(map (fn [price-bracket]\n       (let [groups (group-by :contract-type price-bracket)]\n         (mc/map-vals (fn [contracts]\n                        (dt/aggregate-table contracts\n                          {:selected-keys      [:returns\n                                                :revenue \n                                                :cost\n                                                :market-price]}))\n           groups)))\n  individual)"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This could alternatively be shown as\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "[[{whatever keys} ...] ...]\n=> [{contract {:returns ... :revenue ... :cost ... :market-price ...} ...} ...]"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Which, along with a name is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "far",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " faster to grok and read past"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1605124537.384800",
+        "reply_count": 12,
+        "reply_users_count": 8,
+        "latest_reply": "1605230026.415300",
+        "reply_users": [
+            "USH01JEDQ",
+            "UPX3PH28N",
+            "UCUSW7WVD",
+            "UA14TGLTC",
+            "U015902ESJC",
+            "U016VUZGUUQ",
+            "UG0EL18H3",
+            "U01DUNFS2N4"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "9e7d98a9-5b47-4c40-b4e7-50de6c7355ac",
+        "type": "message",
+        "text": "I'd say that functions also usually entail a transformation of some kind - a type is useful to understand the pre-transformation state (and often a separate type for the post-transformation state - why it's helpful to spell these out as explicit function signatures)",
+        "user": "USH01JEDQ",
+        "ts": "1605125200.385200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "USH01JEDQ",
+            "ts": "1605127079.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PJD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'd say that functions also usually entail a transformation of some kind - a type is useful to understand the pre-transformation state (and often a separate type for the post-transformation state - why it's helpful to spell these out as explicit function signatures)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1605124537.384800",
+        "parent_user_id": "U01DUNFS2N4"
+    },
+    {
+        "client_msg_id": "6441dd03-c10b-4371-b6c0-b1eba4077f04",
+        "type": "message",
+        "text": "Static types also help during refactor. Add a parameter to a function \u2014 compile errors show you all the places that you need to pass it. Convert parameter from string to aggregate structure \u2014 same thing, you have a list of places that you need to fix. This makes me quite comfortable doing large-scale refactorings. With dynamically-typed languages I'm much more cautious",
+        "user": "UPX3PH28N",
+        "ts": "1605126719.385400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "o6p",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Static types also help during refactor. Add a parameter to a function \u2014 compile errors show you all the places that you need to pass it. Convert parameter from string to aggregate structure \u2014 same thing, you have a list of places that you need to fix. This makes me quite comfortable doing large-scale refactorings. With dynamically-typed languages I'm much more cautious"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1605124537.384800",
+        "parent_user_id": "U01DUNFS2N4",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UUB7RA7PF",
+                    "UA14TGLTC",
+                    "U01EKU0UM24"
+                ],
+                "count": 3
+            }
+        ]
+    }
+]
