@@ -68,11 +68,15 @@ function findFirstLink(msg) {
     msg.attachments = attachments.slice(1);
     // MUT: we remove the first attachment from the list and format it to text again
     addMsgAttachmentsText(msg);
-    return firstAttachment.$text.replace(/^> /, '');
+
+    return [
+      attachmentThumbnail(firstAttachment),
+      firstAttachment.$text.replace(/^> /, ''),
+    ];
   }
 
   if (!blocks) {
-    return null;
+    return [null, null];
   }
 
   for (let i = 0, len = blocks.length; i < len; i += 1) {
@@ -96,9 +100,9 @@ function findFirstLink(msg) {
                 /^https:\/\/twitter.com\/(.*)\/status\/[0-9]+/
               );
               if (match === null) {
-                return '📝 ' + mdLink(label, url);
+                return [urlThumbnail(url), '📝 ' + mdLink(label, url)];
               } else {
-                return '🐦 ' + mdLink('Tweet from @' + match[1], url);
+                return [null, '🐦 ' + mdLink('Tweet from @' + match[1], url)];
               }
             }
           }
@@ -107,7 +111,7 @@ function findFirstLink(msg) {
     }
   }
 
-  return null;
+  return [null, null];
 }
 
 function msgToMdNL(msg, linkPrefix) {
@@ -117,10 +121,11 @@ function msgToMdNL(msg, linkPrefix) {
       '🧵 conversation',
       `${linkPrefix}#${msg.$dateStrISO}`
     ),
-    resourceLink = findFirstLink(msg),
+    [thumbnail, resourceLink] = findFirstLink(msg),
+    thumbnailText = thumbnail ? thumbnail + '\n\n' : '',
     resourceText = resourceLink ? `${resourceLink} via ` : '💬 ',
     oldMark = msg.$isOlder ? '🕰️ ' : '',
-    base = `${resourceText}${userText}${oldMark}\n\n${conversationLink}\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
+    base = `${resourceText}${userText}${oldMark}\n\n${conversationLink}\n\n${thumbnailText}${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
 
   return base;
 }
@@ -181,6 +186,25 @@ function attachmentCanBeFirstLink(att) {
   return (
     att && (att.service_name === 'YouTube' || (att.title && att.title_link))
   );
+}
+
+function attachmentThumbnail(att) {
+  if (att && att.service_name === 'YouTube') {
+    return urlThumbnail(att.title_link);
+  } else {
+    return null;
+  }
+}
+
+const YOUTUBE_REGEX = /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})/i;
+function urlThumbnail(url) {
+  const match = url.match(YOUTUBE_REGEX),
+    id = match && match[1];
+  if (id) {
+    return `![Thumbnail](https://img.youtube.com/vi/${id}/mqdefault.jpg)`;
+  } else {
+    return null;
+  }
 }
 
 const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'},
