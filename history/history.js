@@ -61,7 +61,12 @@ function mdLink(label, url) {
   return `[${label}](${url})`;
 }
 
-function findFirstLink({blocks}) {
+function findFirstLink({blocks, attachments}) {
+  const firstAttachment = attachments ? attachments[0] : null;
+  if (attachmentCanBeFirstLink(firstAttachment)) {
+    return firstAttachment.$text.replace(/^> /, '');
+  }
+
   if (!blocks) {
     return null;
   }
@@ -83,7 +88,14 @@ function findFirstLink({blocks}) {
               const {url, text} = subElem,
                 label = text || url;
 
-              return mdLink(label, url);
+              const match = url.match(
+                /^https:\/\/twitter.com\/(.*)\/status\/[0-9]+/
+              );
+              if (match === null) {
+                return '📝 ' + mdLink(label, url);
+              } else {
+                return '🐦 ' + mdLink('Tweet from @' + match[1], url);
+              }
             }
           }
         }
@@ -102,7 +114,7 @@ function msgToMdNL(msg, linkPrefix) {
       `${linkPrefix}#${msg.$dateStrISO}`
     ),
     resourceLink = findFirstLink(msg),
-    resourceText = resourceLink ? `📝 ${resourceLink} via ` : '💬 ',
+    resourceText = resourceLink ? `${resourceLink} via ` : '💬 ',
     oldMark = msg.$isOlder ? '🕰️ ' : '',
     base = `${resourceText}${userText}${oldMark}\n\n${conversationLink}\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
 
@@ -159,6 +171,12 @@ function enrichAttachment(att) {
   } else {
     att.$text = '';
   }
+}
+
+function attachmentCanBeFirstLink(att) {
+  return (
+    att && (att.service_name === 'YouTube' || (att.title && att.title_link))
+  );
 }
 
 const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'},
