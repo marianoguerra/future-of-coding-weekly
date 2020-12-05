@@ -61,9 +61,13 @@ function mdLink(label, url) {
   return `[${label}](${url})`;
 }
 
-function findFirstLink({blocks, attachments}) {
-  const firstAttachment = attachments ? attachments[0] : null;
+function findFirstLink(msg) {
+  const {blocks, attachments} = msg,
+    firstAttachment = attachments ? attachments[0] : null;
   if (attachmentCanBeFirstLink(firstAttachment)) {
+    msg.attachments = attachments.slice(1);
+    // MUT: we remove the first attachment from the list and format it to text again
+    addMsgAttachmentsText(msg);
     return firstAttachment.$text.replace(/^> /, '');
   }
 
@@ -214,15 +218,7 @@ function parseMsgText(msg, {users}) {
     );
 }
 
-//const types = {};
-function enrichMessage(msg, args, isOlder) {
-  const {users} = args,
-    date = new Date(+msg.ts * 1000),
-    {user} = msg;
-
-  msg.$date = date;
-  msg.$text = msgBlocksToMd(msg, args);
-  msg.$html = mdToHTML(msg.$text);
+function addMsgAttachmentsText(msg) {
   const atts = msg.attachments;
   if (atts) {
     let accum = '';
@@ -240,6 +236,18 @@ function enrichMessage(msg, args, isOlder) {
   } else {
     msg.$attachmentsText = '';
   }
+}
+
+//const types = {};
+function enrichMessage(msg, args, isOlder) {
+  const {users} = args,
+    date = new Date(+msg.ts * 1000),
+    {user} = msg;
+
+  msg.$date = date;
+  msg.$text = msgBlocksToMd(msg, args);
+  msg.$html = mdToHTML(msg.$text);
+  addMsgAttachmentsText(msg);
 
   const files = msg.files;
   if (files) {
