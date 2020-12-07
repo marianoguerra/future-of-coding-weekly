@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2020-11-30T02:34:55.131Z" class="post"><span class="user">Robert Butler</span> <a href="#2020-11-30T02:34:55.131Z" class="date">2020-11-30 02:34:55</a> <div class="message"><p>Pretty big update this week thanks to the long weekend. I was inspired by <a href="https://github.com/akkartik/mu">Kartik Agaram</a> single page Mu language description and by how it was a language designed to fit the hardware. I knew I had to do the same and hadn't achieved that yet, so I reworked uCISC syntax from the ground up to be what it should be given the hardware and wrote a compiler for it. From there, I went full emulator, trying and succeeding to get really close parity with the virtual version with the hardware. Faster iterations, better debugging without losing predictable hardware execution. To put the new language through it's paces, I started writing a game you can play over UART. It's about 800 lines of code written from the ground up, text routines, I/O, everything and translates to about that many instructions. Approaching 2k words after you add in text literals. I demo it at the end: <a href="https://youtu.be/ZeUq9h4zSj8"></a><a href="https://youtu.be/ZeUq9h4zSj8">https://youtu.be/ZeUq9h4zSj8</a></p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://youtu.be/ZeUq9h4zSj8">2 Minute Week for 2020-11-29</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2020-11-30T02:59:33.131Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-11-30T02:59:33.131Z" class="date">2020-11-30 02:59:33</a> <div class="message"><p>This is amazing!!</p>
+<p>What do you rely on the IDE for? I notice some Kotlin code in other tabs?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-11-30T03:54:30.131Z" class="reply"><span class="user">Robert Butler</span> <a href="#2020-11-30T03:54:30.131Z" class="date">2020-11-30 03:54:30</a> <div class="message"><p>I use the IDE to write the Kotlin code for the emulator. I'm trying to see if the IDE can change my mind about just using vim + CLI. As I ramp up my mainly ucisc code writing rather than Kotlin, I suspect I'll find it less useful.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-11-30T16:27:57.132Z" class="reply"><span class="user">Jack Rusher</span> <a href="#2020-11-30T16:27:57.132Z" class="date">2020-11-30 16:27:57</a> <div class="message"><p>Nice work! One thing thing I've enjoyed doing in this situation, after writing an emulator, is to provide interactive tooling through a side-channal to the emulator, thus enabling things like livecoding, rewind/replay debugging, and so on. For me, this drastically improves the experience of coding for embedded systems.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-11-30T17:38:46.132Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-11-30T17:38:46.132Z" class="date">2020-11-30 17:38:46</a> <div class="message"><p>Just to make sure I'm understanding: you were developing on an emulator for a while, but the above video was interfacing with real hardware?!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-11-30T21:17:13.137Z" class="reply"><span class="user">Robert Butler</span> <a href="#2020-11-30T21:17:13.137Z" class="date">2020-11-30 21:17:13</a> <div class="message"><p>That is correct. The main thing I wanted with the emulation was real parity with the hardware, so build and debug in the emulator with great confidence it will work just the same on the hardware, timing quirks and all. In the video, that was running on 100% real hardware but I did all the dev work on the emulator.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-11-30T21:21:13.137Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-11-30T21:21:13.137Z" class="date">2020-11-30 21:21:13</a> <div class="message"><p>Yes, that is super valuable. I still remember the couple of weeks of hell it took me to realize x86 has different register encodings for some instructions.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-11-30T21:24:52.139Z" class="reply"><span class="user">Robert Butler</span> <a href="#2020-11-30T21:24:52.139Z" class="date">2020-11-30 21:24:52</a> <div class="message"><p><a href="https://twitter.com/jackrusher">Jack Rusher</a> I think you blew my mind with the thought of live coding assembly.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-12-02T18:39:41.142Z" class="post"><span class="user">Charlie Roberts</span> <a href="#2020-12-02T18:39:41.142Z" class="date">2020-12-02 18:39:41</a> <div class="message"><p>I spent some time this week re-implementing a step sequencer inside of gibber, the live coding environment I work on. You can now either use <code>x / X</code> to indicate trigger / accented trigger or enter velocities using hexadecimal. Patterns can be manipulated globally or an a per pattern basis. <a href="https://twitter.com/gibber_cc/status/1334200044342243328"></a><a href="https://twitter.com/gibber_cc/status/1334200044342243328">https://twitter.com/gibber_cc/status/1334200044342243328</a></p>
+</div> <div class="attachments"><blockquote><p>🐦 <a href="https://twitter.com/@gibber_cc">gibber</a>: Here's a short demo of a newly-reworked step sequencing object in gibber. There's also a revised tutorial on using it at <a href="http://gibber.cc/alpha/playground">http://gibber.cc/alpha/playground</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2020-12-04T16:56:52.144Z" class="reply"><span class="user">Garth Goldwater</span> <a href="#2020-12-04T16:56:52.144Z" class="date">2020-12-04 16:56:52</a> <div class="message"><p>it’s remarkable how quick and comprehensible gibber is</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-12-05T17:57:59.144Z" class="post"><span class="user">Maikel van de Lisdonk</span> <a href="#2020-12-05T17:57:59.144Z" class="date">2020-12-05 17:57:59</a> <div class="message"><p>Hi, this week a text-only update : the goal I had this week was to implement a more real-life use-case and use that to improve and extend the editor. What better in this covid-19 period then a small dashboard to show world-wide covid-19 statistics using a countries dropdown and sub selection by province if there are any,  and show that in a chart. I use <a href="http://api.covid19api.com"></a><a href="http://api.covid19api.com">http://api.covid19api.com</a> to retrieve the data. I added some tasks/node-types to filter/sort/group/select the data that is being retrieved. Since the flowrunner that I build is payload based, it’s all about manipulating/adding properties to the payload each node receives using these new tasks. The payload is a simple javascript object in the web-playground implementation of the editor.</p>
+<p>The output is shown in a chart using a chart node that uses the echarts npm package and it is also configured by adding the full json configuration to the payload and filling the data based on the input payload.</p>
+<p>Functionality of this “covid-19 dashboard” is still limited, but I will extend the current flow with more functionalities like selecting start and enddates. You can see the current flow in the image.</p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F01GM6Y9CP3/covid-19-dashboard-flow.png">covid-19-dashboard-flow.png</a></p>
+</blockquote>
+</div> <div class="replies"><div id="2020-12-05T18:12:57.145Z" class="reply"><span class="user">Maikel van de Lisdonk</span> <a href="#2020-12-05T18:12:57.145Z" class="date">2020-12-05 18:12:57</a> <div class="message"><p>This is the ui-view of the flow without all the nodes that manipulate the incoming data/payloads :</p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F01GENYR3J8/covid-19-ui-view.png">covid-19-ui-view.png</a></p>
+</blockquote>
+</div></div><div id="2020-12-06T10:40:06.145Z" class="reply"><span class="user">Maikel van de Lisdonk</span> <a href="#2020-12-06T10:40:06.145Z" class="date">2020-12-06 10:40:06</a> <div class="message"><p>My example might seem simple from the outset, although it is still simple if you would compare it with real real-life use-cases, but it surfaces some issues. When I choose US as country, no data is shown or only after quite a long time. The reason for this is that the flowrunner currently reruns the flow each time you choose a value in that dropdown or other form-controls. When not a lot of processing is needed, you dont notice the problem this causes. But because US has a lot of data, it is very much noticable : network calls are being rerun and a lot of data needs to be processed. The network calls itself also takes some time offcourse, which in this case I got litte control over. I am going to work on a solution to solve the problems on the flowrunner side. An idea is to be able to rerun a single node in a flow with its last payload that it received from an input-node.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
