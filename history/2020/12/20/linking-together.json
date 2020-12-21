@@ -1,0 +1,320 @@
+[
+    {
+        "client_msg_id": "f3459195-7691-4286-9a96-338cac63cae3",
+        "type": "message",
+        "text": "Extremely useful talk. I really liked how candid the speaker was about the challenges of debugging low-level systems like device drivers. According to them, Scheme gives you a nice REPL for debugging hard-to-reproduce bugs in low-level code like device drivers. However, the cost at the moment is that you have to deal with GC occurring at inopportune times, something a less capable language would shield you from.\n\nI'm just starting to get into OS development, and I'm acutely aware of the benefits on the other side of the fence (bootstrapping OS capabilities using a language, rather than bootstrapping language capabilities using an OS, as Mu does). This is a useful project to keep on my radar, if only to better understand the sort of debugging they've had to learn to do.",
+        "user": "UCUSW7WVD",
+        "ts": "1608444596.403000",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1608446200.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7ZI/+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Extremely useful talk. I really liked how candid the speaker was about the challenges of debugging low-level systems like device drivers. According to them, Scheme gives you a nice REPL for debugging hard-to-reproduce bugs in low-level code like device drivers. However, the cost at the moment is that you have to deal with GC occurring at inopportune times, something a less capable language would shield you from.\n\nI'm just starting to get into OS development, and I'm acutely aware of the benefits on the other side of the fence (bootstrapping OS capabilities using a language, rather than bootstrapping language capabilities using an OS, as Mu does). This is a useful project to keep on my radar, if only to better understand the sort of debugging they've had to learn to do."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608325299.400800",
+        "parent_user_id": "U013ZLJARC7",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fd726a1f-2bf0-4bdc-9545-911dfe5ef6b1",
+        "type": "message",
+        "text": "Number of processes on my Mac as I read this: 409 :joy:\n\nBut I don't really get why number of processes is such an obvious metric here. He gets into the need for kernels to be small and most work to be done in userland, which is reasonable. But when we have billions of cycles to work with, it seems reasonable to have lots of user processes doing useful work for, you know, the user. And user processes benefit just as much from shared libraries as kernel processes.\n\n---\n\nYou're right that his desire for processes to communicate via shared memory without any marshalling or unmarshalling is straight out of the Smalltalk playbook.\n\nMore than STEPS, the work I'd point him at is <https://arcan-fe.com>. Particularly principle 6 of <https://www.divergent-desktop.org/blog/2020/08/10/principles-overview/#p6>:\n\n&gt; An application does not get to disturb you by \u2018asking for permission\u2019 just to steal data from a sensor \u2013 it always gets some kind of data. You decide, dynamically, which sensor that is actually sampled and what that entails. Access the \u2018camera\u2019 does not automatically imply sampling the actual device, it means being routed a video stream. The user decide what that stream covers and when.\nSo yes, apps should be able to read the file system. They just shouldn't ever be sure it's the _real_ file system.\n\nAccessing the file system is the least of our privacy or security worries on a modern computer. All our data is over the network. Malicious code could read your data from one remote location and exfiltrate it to another remote location without ever hitting the local file system. Arcan thinks about the _entire_ security envelope.\n\n---\n\nI feel for his desire to do away with device drivers and graphics accelerators, but it just doesn't reconcile with geopolitical realities. Companies control the hardware they produce. Consumers don't prioritize openness of interfaces. Incumbents don't care about enabling new OSs.\n\nHe's a game programmer and he needs the graphics acceleration. Sucks to be in that position. I feel fortunate that I can just say, \"a pox on all your houses,\" and want less from my graphics card.",
+        "user": "UCUSW7WVD",
+        "ts": "1608446049.403200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1608446073.000000"
+        },
+        "attachments": [
+            {
+                "title": "12 Principles for a Diverging Desktop Future",
+                "title_link": "https://www.divergent-desktop.org/blog/2020/08/10/principles-overview/#p6",
+                "text": "12 Principles for a Diverging Desktop Future 10 Aug 2020 ...",
+                "fallback": "12 Principles for a Diverging Desktop Future",
+                "from_url": "https://www.divergent-desktop.org/blog/2020/08/10/principles-overview/#p6",
+                "service_name": "divergent-desktop.org",
+                "id": 2,
+                "original_url": "https://www.divergent-desktop.org/blog/2020/08/10/principles-overview/#p6"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0mhd3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Number of processes on my Mac as I read this: 409 "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "joy"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nBut I don't really get why number of processes is such an obvious metric here. He gets into the need for kernels to be small and most work to be done in userland, which is reasonable. But when we have billions of cycles to work with, it seems reasonable to have lots of user processes doing useful work for, you know, the user. And user processes benefit just as much from shared libraries as kernel processes.\n\n---\n\nYou're right that his desire for processes to communicate via shared memory without any marshalling or unmarshalling is straight out of the Smalltalk playbook.\n\nMore than STEPS, the work I'd point him at is "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://arcan-fe.com"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Particularly principle 6 of "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.divergent-desktop.org/blog/2020/08/10/principles-overview/#p6"
+                            },
+                            {
+                                "type": "text",
+                                "text": ":\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "An application does not get to disturb you by \u2018asking for permission\u2019 just to steal data from a sensor \u2013 it always gets some kind of data. You decide, dynamically, which sensor that is actually sampled and what that entails. Access the \u2018camera\u2019 does not automatically imply sampling the actual device, it means being routed a video stream. The user decide what that stream covers and when."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nSo yes, apps should be able to read the file system. They just shouldn't ever be sure it's the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "real",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " file system.\n\nAccessing the file system is the least of our privacy or security worries on a modern computer. All our data is over the network. Malicious code could read your data from one remote location and exfiltrate it to another remote location without ever hitting the local file system. Arcan thinks about the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "entire",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " security envelope.\n\n---\n\nI feel for his desire to do away with device drivers and graphics accelerators, but it just doesn't reconcile with geopolitical realities. Companies control the hardware they produce. Consumers don't prioritize openness of interfaces. Incumbents don't care about enabling new OSs.\n\nHe's a game programmer and he needs the graphics acceleration. Sucks to be in that position. I feel fortunate that I can just say, \"a pox on all your houses,\" and want less from my graphics card."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608322429.399200",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "30c52f27-0520-4ef4-a906-db25182884c2",
+        "type": "message",
+        "text": "yah I pretty much agree with all your points <@UCUSW7WVD>. He also dismisses a question about what I can only interpret to mean \u201chow do you overcome the network effects of existing software / apps?\u201c.  People have tried late-stage mobile operating systems and they don\u2019t work b/c people want their existing apps to just work. Ultimately his bias is definitely towards a simple, gardened computing system that works for him (runs games, creates slides, stream stuff, and be super fast &amp; light). But if a new cool sleek minimal OS can\u2019t run Zoom or w/e, its gonna struggle.\n\nAs with most new paradigms, I personally think the only way we get new operating systems is in new modes of computing // major hardware changes. Windows OS in VR is a silly idea (its like how film was recorded plays for a while, not native to the medium). Same with AR / AR equivalents.",
+        "user": "UAJKEBGP8",
+        "ts": "1608484111.403800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YtA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yah I pretty much agree with all your points "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". He also dismisses a question about what I can only interpret to mean \u201chow do you overcome the network effects of existing software / apps?\u201c.  People have tried late-stage mobile operating systems and they don\u2019t work b/c people want their existing apps to just work. Ultimately his bias is definitely towards a simple, gardened computing system that works for him (runs games, creates slides, stream stuff, and be super fast & light). But if a new cool sleek minimal OS can\u2019t run Zoom or w/e, its gonna struggle.\n\nAs with most new paradigms, I personally think the only way we get new operating systems is in new modes of computing // major hardware changes. Windows OS in VR is a silly idea (its like how film was recorded plays for a while, not native to the medium). Same with AR / AR equivalents."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608322429.399200",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "7a7425e1-f7c3-4769-a2da-6c610fc40cd5",
+        "type": "message",
+        "text": "I actually agree with that answer of his. As I recall, he said a new OS doesn't have to run everything the current platform can run.\n\nYou can either try to reinvent OSs or you can try to run all software. Trying to do both fatally over-constrains the problem.\n\nAnd we don't _need_ to eradicate current computers. The number of devices per human is growing exponentially. No reason the new can't coexist with the old. \"My other laptop is a Porsche.\"\n\n---\n\nRe VR: Any OS that just surfs hardware shifts is doomed to be as crappy as the old paradigm :smile: Chasing market share will take you, fast failing, to the same lucrative dead end the previous generation of chasing market share ended up. To be better you have to know what forces shaped the past, and which of those forces you are going to avoid.",
+        "user": "UCUSW7WVD",
+        "ts": "1608485781.404000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "P4df",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I actually agree with that answer of his. As I recall, he said a new OS doesn't have to run everything the current platform can run.\n\nYou can either try to reinvent OSs or you can try to run all software. Trying to do both fatally over-constrains the problem.\n\nAnd we don't"
+                            },
+                            {
+                                "type": "text",
+                                "text": " need ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "to eradicate current computers. The number of devices per human is growing exponentially. No reason the new can't coexist with the old. \"My other laptop is a Porsche.\"\n\n---\n\nRe VR: Any OS that just surfs hardware shifts is doomed to be as crappy as the old paradigm "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Chasing market share will take you, fast failing, to the same lucrative dead end the previous generation of chasing market share ended up. To be better you have to know what forces shaped the past, and which of those forces you are going to avoid."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608322429.399200",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "720b5a2e-44e1-49d5-a97c-ce7ecac41e72",
+        "type": "message",
+        "text": "&gt;  As I recall, he said a new OS doesn\u2019t have to run everything the current platform can run.\n&gt; \n&gt; You can either try to reinvent OSs or you can try to run all software. Trying to do both fatally over-constrains the problem.\nI don\u2019t disagree but I think that new OS has to be much better / focused for a specific set of use cases where people are willing to let go of the network effects. That\u2019s super super hard, especially in the networked computing world we live in",
+        "user": "UAJKEBGP8",
+        "ts": "1608486042.404200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RZkki",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": " As I recall, he said a new OS doesn\u2019t have to run everything the current platform can run.\n\nYou can either try to reinvent OSs or you can try to run all software. Trying to do both fatally over-constrains the problem."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI don\u2019t disagree but I think that new OS has to be much better / focused for a specific set of use cases where people are willing to let go of the network effects. That\u2019s super super hard, especially in the networked computing world we live in"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608322429.399200",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "b8c507b1-8148-422e-b5a2-c28e42d17b8e",
+        "type": "message",
+        "text": "maybe back in the day, you could have an OS 100% optimized for artists / graphic designers / movie producers. But now they have to open up Word docs and join Zoom calls too",
+        "user": "UAJKEBGP8",
+        "ts": "1608486065.404400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9Lmeu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "maybe back in the day, you could have an OS 100% optimized for artists / graphic designers / movie producers. But now they have to open up Word docs and join Zoom calls too"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608322429.399200",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "7f45ebaa-f847-4614-9efb-6a69114812dc",
+        "type": "message",
+        "text": "I also think the funding model is hard. Just doing a \u201cSimple OS\u201d I don\u2019t think really works. I think it\u2019s gotta be the new paradigm (like VR) or a new use case",
+        "user": "UAJKEBGP8",
+        "ts": "1608486090.404600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SgT",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I also think the funding model is hard. Just doing a \u201cSimple OS\u201d I don\u2019t think really works. I think it\u2019s gotta be the new paradigm (like VR) or a new use case"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608322429.399200",
+        "parent_user_id": "UAJKEBGP8"
+    }
+]

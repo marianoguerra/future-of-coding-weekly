@@ -1,0 +1,205 @@
+[
+    {
+        "client_msg_id": "c5d8ba15-838b-4dab-9fc5-f1743e2890c7",
+        "type": "message",
+        "text": "I'm looking for a format to add a bit of semantic meaning to JSON (as minimal as possible).\n<https://github.com/cognitect/transit-format#transit> is such a format, but I'd like to know if there are others.\n\nFor instance, imagine trying to represent JSON+Dates, and no other additional type.\nFrom: `[\"a\", 123, ..., \"whatever\", \"~#date:1929292929\"]` ...\n... a JS decoder would see `\"~#date:1929292929\"` and convert that to `[\"a\", 123, ..., \"whatever\", new Date(1929292929)]` .\nWhat if I wanted to encode the `\"~#date:1929292929\"` string verbatim? Now I have to come up with some escaping mechanism, say, `~~` : `\"~~~#date:1929292929\"` , etc.\n\nSo I could try to come up with a format to do what I need, but I wonder if there are already specs out there doing something similar other than transit.\n\nI want something a bit easier to implement than Transit... it has a bit more features than I need (for instance, I don't really need caching or user defined types).",
+        "user": "UN9SCH5RD",
+        "ts": "1608491424.130300",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "GitHub",
+                "title": "cognitect/transit-format",
+                "title_link": "https://github.com/cognitect/transit-format#transit",
+                "text": "A data interchange format. Contribute to cognitect/transit-format development by creating an account on GitHub.",
+                "fallback": "GitHub: cognitect/transit-format",
+                "thumb_url": "https://avatars1.githubusercontent.com/u/5470150?s=400&v=4",
+                "from_url": "https://github.com/cognitect/transit-format#transit",
+                "thumb_width": 400,
+                "thumb_height": 400,
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/github.png",
+                "id": 1,
+                "original_url": "https://github.com/cognitect/transit-format#transit"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=1s3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm looking for a format to add a bit of semantic meaning to JSON (as minimal as possible).\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/cognitect/transit-format#transit"
+                            },
+                            {
+                                "type": "text",
+                                "text": " is such a format, but I'd like to know if there are others.\n\nFor instance, imagine trying to represent JSON+Dates, and no other additional type.\nFrom: "
+                            },
+                            {
+                                "type": "text",
+                                "text": "[\"a\", 123, ..., \"whatever\", \"~#date:1929292929\"]",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ...\n... a JS decoder would see "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\"~#date:1929292929\"",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and convert that to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "[\"a\", 123, ..., \"whatever\", new Date(1929292929)]",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " .\nWhat if I wanted to encode the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\"~#date:1929292929\"",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " string verbatim? Now I have to come up with some escaping mechanism, say, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "~~",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " : "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\"~~~#date:1929292929\"",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " , etc.\n\nSo I could try to come up with a format to do what I need, but I wonder if there are already specs out there doing something similar other than transit.\n\nI want something a bit easier to implement than Transit... it has a bit more features than I need (for instance, I don't really need caching or user defined types)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608491424.130300",
+        "reply_count": 17,
+        "reply_users_count": 10,
+        "latest_reply": "1608540176.145800",
+        "reply_users": [
+            "UL5AX4G2H",
+            "UCUSW7WVD",
+            "UN9SCH5RD",
+            "UA14TGLTC",
+            "UHWC9PXBL",
+            "USH01JEDQ",
+            "U01DUNFS2N4",
+            "UDQBTJ211",
+            "U8A5MS6R1",
+            "U013ZLJARC7"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "960fc681-5abf-4bd3-97ae-b12aad49c4cd",
+        "type": "message",
+        "text": "This is basically embedding type information into JSON, so use dicts, add a \"type\" field and be done with it. There might? be a standard, but don't worth about it. If there is and you find it later, converting whatever you write to their standard should be solvable with a short python program",
+        "user": "UL5AX4G2H",
+        "ts": "1608494780.130500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qul3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is basically embedding type information into JSON, so use dicts, add a \"type\" field and be done with it. There might? be a standard, but don't worth about it. If there is and you find it later, converting whatever you write to their standard should be solvable with a short python program"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608491424.130300",
+        "parent_user_id": "UN9SCH5RD",
+        "reactions": [
+            {
+                "name": "point_up",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "28bc9c03-3959-423d-987f-5b04b6076ead",
+        "type": "message",
+        "text": "Somebody correct me if I'm wrong, but YAML supports arbitrary Ruby types, and that's turned into a security morass and now considered a bad idea. So yeah, what <@UL5AX4G2H> said.",
+        "user": "UCUSW7WVD",
+        "ts": "1608501107.130700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xn0+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Somebody correct me if I'm wrong, but YAML supports arbitrary Ruby types, and that's turned into a security morass and now considered a bad idea. So yeah, what "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UL5AX4G2H"
+                            },
+                            {
+                                "type": "text",
+                                "text": " said."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608491424.130300",
+        "parent_user_id": "UN9SCH5RD"
+    }
+]
