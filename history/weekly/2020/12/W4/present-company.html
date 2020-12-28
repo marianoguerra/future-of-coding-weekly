@@ -1,0 +1,87 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2020-12-20T19:10:24.130Z" class="post"><span class="user">Emmanuel Oga</span> <a href="#2020-12-20T19:10:24.130Z" class="date">🕰️ 2020-12-20 19:10:24</a> <div class="message"><p>I'm looking for a format to add a bit of semantic meaning to JSON (as minimal as possible).</p>
+<p><a href="https://github.com/cognitect/transit-format#transit"></a><a href="https://github.com/cognitect/transit-format#transit">https://github.com/cognitect/transit-format#transit</a> is such a format, but I'd like to know if there are others.</p>
+<p>For instance, imagine trying to represent JSON+Dates, and no other additional type.</p>
+<p>From: <code>["a", 123, ..., "whatever", "~#date:1929292929"]</code> ...</p>
+<p>... a JS decoder would see <code>"~#date:1929292929"</code> and convert that to <code>["a", 123, ..., "whatever", new Date(1929292929)]</code> .</p>
+<p>What if I wanted to encode the <code>"~#date:1929292929"</code> string verbatim? Now I have to come up with some escaping mechanism, say, <code>~~</code> : <code>"~~~#date:1929292929"</code> , etc.</p>
+<p>So I could try to come up with a format to do what I need, but I wonder if there are already specs out there doing something similar other than transit.</p>
+<p>I want something a bit easier to implement than Transit... it has a bit more features than I need (for instance, I don't really need caching or user defined types).</p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://github.com/cognitect/transit-format#transit">cognitect/transit-format</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2020-12-20T23:30:08.131Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-20T23:30:08.131Z" class="date">2020-12-20 23:30:08</a> <div class="message"><p>guys, there's a spectrum ... I'm confused by the black and white answers I sometimes get from the "Future of Coding" forum. It seems the future is black and white...</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-20T23:30:24.131Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-20T23:30:24.131Z" class="date">2020-12-20 23:30:24</a> <div class="message"><p>at one side, there's "just use maps". At the other, there's Transit. What's in the middle?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-20T23:32:46.131Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-20T23:32:46.131Z" class="date">2020-12-20 23:32:46</a> <div class="message"><p>I'm just curious how other people solved this issue, seems like a problem a lot of people may have tackled. For instance, if I "just use maps", then if I want to encode that map verbatim, I need to escape somehow. I'm curious how other dealt with this problem. Maybe the answer is to not worry about that case, reversibility, etc.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-20T23:45:14.131Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-12-20T23:45:14.131Z" class="date">2020-12-20 23:45:14</a> <div class="message"><p>Didn't intend to sound black and white! Just trying to answer the question to my knowledge. I'm not an expert here, so it's hard to be dogmatic 😄</p>
+<p>Encoding maps: just put them in quotes, use backslashes for escaping? I'm not familiar with Transit, unfortunately.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-20T23:55:19.132Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2020-12-20T23:55:19.132Z" class="date">2020-12-20 23:55:19</a> <div class="message"><p>From the Transit page:</p>
+<blockquote><p>Users of data formats without such facilities must rely on either schemas, convention, or context to convey elements not included in the base set, making application code much more complex. With Transit, schemas, convention, and context-sensitive logic are not required.</p>
+</blockquote>
+<p>I suppose conventions and schemas is what we're both reaching for. I just haven't felt this particular pain point yet..</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T01:35:25.132Z" class="reply"><span class="user">William Taysom</span> <a href="#2020-12-21T01:35:25.132Z" class="date">2020-12-21 01:35:25</a> <div class="message"><p>You'll always run into escaping issues in principle, the trick is finding the way to avoid them in practice.  Depending on your context, the "~#" prefix might be enough, you might not even ever need to escape them.  Not if "~#" doesn't occur naturally.</p>
+<p>Using a hash with a "type" key or perhaps a "<del>type</del>" key for extra safety is perhaps a more versatile (and verbose) solution.</p>
+<p>The only downer of using extra ~s to meta-escape is that it can get silly sometime.  I vaguely recall a system wherein to write backslash I had to use the string <code>"\\\\\\"</code>.   So having another way to say backslash would have worked out better.</p>
+<p>See also Quining <a href="https://en.wikipedia.org/wiki/Quine_%28computing%29"></a><a href="https://en.wikipedia.org/wiki/Quine_%28computing%29">https://en.wikipedia.org/wiki/Quine_%28computing%29</a>.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T03:17:04.142Z" class="reply"><span class="user">Garth Goldwater</span> <a href="#2020-12-21T03:17:04.142Z" class="date">2020-12-21 03:17:04</a> <div class="message"><p>here’s an off the wall idea: you could have a companion “types” array whose keys are access instructions and whose values are enums representing the type. eg <code>“person.birthday”: “date”</code>. you could make it ad-hoc with relative positioning with a jq-like syntax, eg <code>user: { createdAt: </code><a href="tel:17261669">tel:17261669</a><code>, “.createdAt”: “date” }</code>. idk if that’s too wacky </p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T03:20:15.143Z" class="reply"><span class="user">Christopher Galtenberg</span> <a href="#2020-12-21T03:20:15.143Z" class="date">2020-12-21 03:20:15</a> <div class="message"><p>Hungarian notation for the key names</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T04:00:25.144Z" class="reply"><span class="user">Jarrett Atkinson</span> <a href="#2020-12-21T04:00:25.144Z" class="date">2020-12-21 04:00:25</a> <div class="message"><p>This may still be too heavy weight, but why not implement just a subset of transit? Iirc it should be possible</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T04:48:58.144Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-21T04:48:58.144Z" class="date">2020-12-21 04:48:58</a> <div class="message"><p>A subset of transit could work, I was just curious about other options.</p>
+<p>Actual transit ends up looking like a lot of nested arrays, something like:</p>
+<p> <code>["~#array", [1, 2, [~#date 1929292929], [~#json, [1, 2, 1929292929]]]</code></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T06:36:14.144Z" class="reply"><span class="user">Chris Knott</span> <a href="#2020-12-21T06:36:14.144Z" class="date">2020-12-21 06:36:14</a> <div class="message"><p>I like Garth's idea. Send complementary JSON with the same structure, with the type names in the place of the values (you can omit unnecessary parts)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T07:26:28.145Z" class="reply"><span class="user">Shalabh Chaturvedi</span> <a href="#2020-12-21T07:26:28.145Z" class="date">2020-12-21 07:26:28</a> <div class="message"><blockquote><p>What if I wanted to encode the <code>"~#date:1929292929"</code> string verbatim? Now I have to come up with some escaping mechanism, say, <code>~~</code></p>
+</blockquote>
+<p>Or you could use the same mechanism: <code>"~#string:'~#date:...'"</code></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T08:35:20.145Z" class="reply"><span class="user">Jack Rusher</span> <a href="#2020-12-21T08:35:20.145Z" class="date">2020-12-21 08:35:20</a> <div class="message"><p><a href="https://github.com/edn-format/edn"></a><a href="https://github.com/edn-format/edn">https://github.com/edn-format/edn</a> is a simpler textual representation (Clojure's version of sexps) that includes reader extensibility ("tagged elements"). It's easy to emit and there are a fairly large number of reader implementations out there, including <a href="https://github.com/edporras/edn_turbo"></a><a href="https://github.com/edporras/edn_turbo">https://github.com/edporras/edn_turbo</a> embedded into Ruby that we built at my last company. Would that work for you?</p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://github.com/edn-format/edn">edn-format/edn</a></p>
+<p>🔗 <a href="https://github.com/edporras/edn_turbo">edporras/edn_turbo</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-12-21T08:39:06.145Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-21T08:39:06.145Z" class="date">2020-12-21 08:39:06</a> <div class="message"><p>hey Jack, I think EDN is a good inspiration too, but is mostly a stand-alone textual format, I was thinking more of something more directly built on top of JSON</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T08:42:56.145Z" class="reply"><span class="user">Jack Rusher</span> <a href="#2020-12-21T08:42:56.145Z" class="date">2020-12-21 08:42:56</a> <div class="message"><p>What would the layer above look like/seek to accomplish? That info might lead to a better suggestion 🙂</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T17:21:06.147Z" class="reply"><span class="user">Garth Goldwater</span> <a href="#2020-12-21T17:21:06.147Z" class="date">2020-12-21 17:21:06</a> <div class="message"><p>if you end up going with my idea, please let me know how it works out for you! it’s basically half-assing infra’s method: <a href="http://www.christopherkhall.com/research.html"></a><a href="http://www.christopherkhall.com/research.html">http://www.christopherkhall.com/research.html</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T22:20:15.147Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-21T22:20:15.147Z" class="date">2020-12-21 22:20:15</a> <div class="message"><p>The details are a bit hazy ... very roughly, I've a PoC that takes <a href="https://gist.github.com/EmmanuelOga/0d626107e5ed2bc6f5e7bf3925d032fd"></a><a href="https://gist.github.com/EmmanuelOga/0d626107e5ed2bc6f5e7bf3925d032fd">https://gist.github.com/EmmanuelOga/0d626107e5ed2bc6f5e7bf3925d032fd</a> and turn them into HTML. It works but it has quite some layers of complexity (RDF+XML/XSLT).</p>
+<p>It uses Saxon/JS. Saxon does what I'm asking: it expresses the full XSLT type system on top of JSON, it is just more than a bit hairy, as you can imagine... At the same time Saxon/JS lacks basic things like supporting async extension functions.</p>
+<p>It occurred to me I could create a format to express both markup and graph data with an eye on building on top of JSON from the start, as opposed to the Frankenstein of tech I currently use.</p>
+<p>Something like <a href="https://github.com/thi-ng/umbrella/tree/develop/packages/egf"></a><a href="https://github.com/thi-ng/umbrella/tree/develop/packages/egf">https://github.com/thi-ng/umbrella/tree/develop/packages/egf</a> comes close but it is missing the markup part (mixed content).</p>
+<p>For now I'm just looking at "prior art", specially if I can find very minimal formats that build on top of JSON without adding too much complexity to ... steal 🙂 .. some of the patterns people use when building on top of JSON.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-21T22:57:34.148Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-21T22:57:34.148Z" class="date">2020-12-21 22:57:34</a> <div class="message"><p><a href="https://concise-encoding.org/"></a><a href="https://concise-encoding.org/">https://concise-encoding.org/</a> is able to express both markup and graphs and apparently has a JSON representation as well, so I'll be looking at it too. C/E's scope seems a lot larger than what I'm looking for and I don't necessarily like its grammar.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-22T16:24:41.149Z" class="reply"><span class="user">Roman Sushkov</span> <a href="#2020-12-22T16:24:41.149Z" class="date">2020-12-22 16:24:41</a> <div class="message"><p>Not sure if this fits your use case, but there is also <a href="https://dhall-lang.org/"></a><a href="https://dhall-lang.org/">https://dhall-lang.org/</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://dhall-lang.org/">The Dhall configuration language</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-12-22T22:18:55.149Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-22T22:18:55.149Z" class="date">2020-12-22 22:18:55</a> <div class="message"><p>looks like dhall can tx to json but not the other way around, so given a piece of json you don't necessarily know the type of a k/v</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2020-12-23T08:34:29.150Z" class="reply"><span class="user">Jack Rusher</span> <a href="#2020-12-23T08:34:29.150Z" class="date">2020-12-23 08:34:29</a> <div class="message"><p><a href="https://emmanueloga.com/">Emmanuel Oga</a> So, after sleeping on this, I kept coming back to the feeling that what you really want is a lisp and s-expressions, but barring that maybe your life would be simpler of you used something like Karsten's <a href="https://www.npmjs.com/package/@thi.ng/hiccup"></a><a href="https://www.npmjs.com/package/@thi.ng/hiccup">https://www.npmjs.com/package/@thi.ng/hiccup</a> for the markup instead of including HTML strings?</p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://www.npmjs.com/package/@thi.ng/hiccup">@thi.ng/hiccup</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2020-12-23T11:29:56.150Z" class="reply"><span class="user">Emmanuel Oga</span> <a href="#2020-12-23T11:29:56.150Z" class="date">2020-12-23 11:29:56</a> <div class="message"><p>hiccup looks like a possible building block for the markup, not sure if I will be able to use it directly but maybe I can use some of its ideas</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2020-12-24T01:04:04.151Z" class="post"><span class="user">Breck Yunits</span> <a href="#2020-12-24T01:04:04.151Z" class="date">2020-12-24 01:04:04</a> <div class="message"><p>Great read <a href="https://parentheticallyspeaking.org/articles/pedagogic-ide/"></a><a href="https://parentheticallyspeaking.org/articles/pedagogic-ide/">https://parentheticallyspeaking.org/articles/pedagogic-ide/</a></p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2020-12-24T02:16:47.151Z" class="reply"><span class="user">William Taysom</span> <a href="#2020-12-24T02:16:47.151Z" class="date">2020-12-24 02:16:47</a> <div class="message">
+<blockquote><p>But we need the output to be actionable by a student.I like their focus.</p>
+</blockquote>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
