@@ -257,9 +257,7 @@ function main() {
           this.exportAsNewsletter(`${month}/${week}/${this.channel}.html`);
         },
         exportAsNewsletter: function (linkSuffix) {
-          const linkPrefix =
-              'https://marianoguerra.github.io/future-of-coding-weekly/history/weekly/2020/' +
-              linkSuffix,
+          const linkPrefix = `https://marianoguerra.github.io/future-of-coding-weekly/history/weekly/${new Date().getFullYear()}/${linkSuffix}`,
             txt = this.history.msgs
               .filter((msg) => !msg.$isOlder)
               .map((msg) => msgToMdNL(msg, linkPrefix))
