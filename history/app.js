@@ -1,8 +1,7 @@
 //@format
 /*globals Vue, Set*/
 import {
-  yesterdayDate,
-  tomorrowDate,
+  dateDayOffset,
   loadUsers,
   loadChannels,
   dateIsLessThanDate,
@@ -27,6 +26,10 @@ function getBaseUrl() {
   return origin + pathname;
 }
 
+function mdTitle1(t) {
+  return '# ' + t + '\n\n';
+}
+
 function main() {
   const query = parseQuery(window.location.search),
     baseUrl = getBaseUrl(),
@@ -35,9 +38,9 @@ function main() {
       data: {
         baseUrl,
         queryLink: baseUrl,
-        fromDate: yesterdayDate(),
-        toDate: tomorrowDate(),
-        channel: 'thinking-together',
+        fromDate: dateDayOffset(-7),
+        toDate: dateDayOffset(0),
+        channel: 'two-minute-week',
         loadingStatus: null,
         msgFilter: '',
         filteredMsgs: [],
@@ -252,16 +255,36 @@ function main() {
             .join('\n\n---\n\n');
           downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
         },
-        exportThisAsNewsletterWithWeek: function (week) {
-          const month = this.toDate.split('-')[1];
-          this.exportAsNewsletter(`${month}/${week}/${this.channel}.html`);
+        getMdTitleForCurrentChannel: function () {
+          switch (this.channel) {
+            case 'two-minute-week':
+              return mdTitle1('Two Minute Week');
+            case 'share-your-work':
+              return mdTitle1('Our Work');
+            case 'thinking-together':
+              return mdTitle1('Thinking Together');
+            case 'linking-together':
+              return mdTitle1('Content');
+            default:
+              return mdTitle1(this.channel);
+          }
         },
-        exportAsNewsletter: function (linkSuffix) {
+        exportThisAsNewsletterWithWeek: function (week) {
+          const month = this.toDate.split('-')[1],
+            title = this.getMdTitleForCurrentChannel();
+          this.exportAsNewsletter(
+            `${month}/${week}/${this.channel}.html`,
+            title
+          );
+        },
+        exportAsNewsletter: function (linkSuffix, title) {
           const linkPrefix = `https://marianoguerra.github.io/future-of-coding-weekly/history/weekly/${new Date().getFullYear()}/${linkSuffix}`,
-            txt = this.history.msgs
-              .filter((msg) => !msg.$isOlder)
-              .map((msg) => msgToMdNL(msg, linkPrefix))
-              .join('\n\n---\n\n');
+            txt =
+              title +
+              this.history.msgs
+                .filter((msg) => !msg.$isOlder)
+                .map((msg) => msgToMdNL(msg, linkPrefix))
+                .join('\n\n---\n\n');
           downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
         },
         exportAsHTML: function () {

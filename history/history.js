@@ -555,6 +555,10 @@ function yesterdayDate() {
   return dateToDateString(nowDayOffset(-1));
 }
 
+function dateDayOffset(offset) {
+  return dateToDateString(nowDayOffset(offset));
+}
+
 function padZero(n) {
   const s = '' + n;
   return s.length === 1 ? '0' + s : s;
@@ -580,13 +584,12 @@ const customRules = {
     paragraph: overrideDefaultHtml('paragraph', function (node, output, state) {
       return '<p>' + output(node.content, state) + '</p>\n';
     }),
-    blockQuote: overrideDefaultHtml('blockQuote', function (
-      node,
-      output,
-      state
-    ) {
-      return '<blockquote>' + output(node.content, state) + '</blockquote>\n';
-    }),
+    blockQuote: overrideDefaultHtml(
+      'blockQuote',
+      function (node, output, state) {
+        return '<blockquote>' + output(node.content, state) + '</blockquote>\n';
+      }
+    ),
   },
   rules = Object.assign({}, defaultRules, customRules),
   rawBuiltParser = SimpleMarkdown.parserFor(rules),
@@ -688,6 +691,7 @@ const EXPORT_HTML_PREFIX = `
 export {
   yesterdayDate,
   tomorrowDate,
+  dateDayOffset,
   dateIsLessThanDate,
   dateParts,
   parseHistoryChannelData,
