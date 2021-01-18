@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2021-01-10T15:01:54.218Z" class="post"><span class="user">Chris Maughan</span> <a href="#2021-01-10T15:01:54.218Z" class="date">🕰️ 2021-01-10 15:01:54</a> <div class="message"><p>I've been looking for a library that does this for a while now; this one has a convenient simple c++ core too.  Handles the complex problem of doing 2D layouts for UI, etc.:</p>
+<p><a href="https://github.com/facebook/yoga"></a><a href="https://github.com/facebook/yoga">https://github.com/facebook/yoga</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://github.com/facebook/yoga">facebook/yoga</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2021-01-11T10:30:36.220Z" class="reply"><span class="user">Chris Maughan</span> <a href="#2021-01-11T10:30:36.220Z" class="date">2021-01-11 10:30:36</a> <div class="message"><p>Here's an example layout of my node UI using Yoga.  The false coloring just shows the rectangles and margins.  Really nice 🙂</p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="https://files.slack.com/files-pri/T5TCAFTA9-F01K3Q2NN9W/image.png">image.png</a></p>
+</blockquote>
+</div></div></div></div><div id="2021-01-09T02:40:39.187Z" class="post"><span class="user">Ivan Reese</span> <a href="#2021-01-09T02:40:39.187Z" class="date">🕰️ 2021-01-09 02:40:39</a> <div class="message"><p>Anyone have a favourite JS library for working with CRDTs? Or even something a little more high-level, for doing collaborative editing? I control the editor (clients), the data model, and the server. I'd like something that helps handle conflict resolution concurrent changes to the structure of data. Curious to see what options are available. I'm definitely not looking for something tied to any particular framework (eg: React, Express, etc) — just something that works with vanilla JS.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2021-01-11T16:51:25.221Z" class="reply"><span class="user">Ivan Reese</span> <a href="#2021-01-11T16:51:25.221Z" class="date">2021-01-11 16:51:25</a> <div class="message"><p>Thanks for the thoughts everyone. Replies in order.</p>
+<blockquote><p><strong>@Don Abrams</strong>&gt; : I’d recommend operational transforms if you have a server involved.</p>
+</blockquote>
+<p>My server is just dumb data storage and presence for clients. It's not going to be running any of the editor logic, and I think the cost of involving it in the concurrent editing (eg: having it update a canonical copy after each edit) would outweigh the benefit of using OT instead of CRDTs. I'm not worried about the memory growth of CRDTs at the scale I'd be using them (fairly coarse), and I'm not worried about invalid states, but it's good to know that those are sticking points. Thanks!</p>
+<blockquote><p><a href="https://twitter.com/NickSmit_">Nick Smith</a>&gt; : Regarding “I don’t want to have to implement CRDTs”, isn’t the logic really damn simple? [...]</p>
+</blockquote>
+<p>Simple or not, there's a bunch of factors and tradeoffs to consider when writing something like CRDT structures/functions: correctness, performance, memory, API design, quality-of-life features, identification of common pitfalls, development time cost, mental overhead, and umpteen more. I'm currently just considering using CRDTs (or OT, or something else) in service of adding collaborative editing features to a tool I'm building. The collaborative editing is not a key feature, it's something I'm exploring as a might-be-cool option. I need to keep most of my focus on the domain problem my tool is addressing. This is why a library that already weighed those tradeoffs and made some coherent and well-justified decisions about them would be nice.</p>
+<blockquote><p><strong>@Cole Lawrence</strong>&gt; : What kind of data? Is it something like a node &amp; edge based editor or something more like structured text? [...] Do you have offline editing?</p>
+</blockquote>
+<p>It's sort of like a small spreadsheet, without formulas, where the main interaction is that you can swap any two cells. Stupidly simple. There will be offline editing, but I'm not worried about the case where wildly divergent offline edits need to be coherently reconciled later. There will be versioning (outside/above the level where CRDTs / collaborative editing comes into play), and that's where conflicting divergent offline edits can be resolved.</p>
+<p>Thanks again everyone!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-12T14:55:57.236Z" class="reply"><span class="user">Jack Rusher</span> <a href="#2021-01-12T14:55:57.236Z" class="date">2021-01-12 14:55:57</a> <div class="message"><p>You might enjoy hybrid logical clocks: <a href="https://github.com/jlongster/crdt-example-app"></a><a href="https://github.com/jlongster/crdt-example-app">https://github.com/jlongster/crdt-example-app</a> (talk <a href="https://archive.jlongster.com/s/dotjs-crdt-slides.pdf"></a><a href="https://archive.jlongster.com/s/dotjs-crdt-slides.pdf">https://archive.jlongster.com/s/dotjs-crdt-slides.pdf</a>)</p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://github.com/jlongster/crdt-example-app">jlongster/crdt-example-app</a></p>
+</blockquote>
+</div> <div class="files"></div></div></div></div><div id="2021-01-12T08:48:15.222Z" class="post"><span class="user">William Taysom</span> <a href="#2021-01-12T08:48:15.222Z" class="date">2021-01-12 08:48:15</a> <div class="message"><p>I have another Tabnine example for you friends.  It offered to complete this line</p>
+<pre><code>raise "expected 20 AVAILABLE_BLOCKS" unless A</code></pre><p>with</p>
+<pre><code>raise "expected 20 AVAILABLE_BLOCKS" unless AVAILABLE_BLOCKS.size == 20</code></pre></div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2021-01-12T10:52:10.222Z" class="reply"><span class="user">Chris Knott</span> <a href="#2021-01-12T10:52:10.222Z" class="date">2021-01-12 10:52:10</a> <div class="message"><p>Does it only do this with numbers? What does </p>
+<pre><code>raise "Expected twenty AVAILABLE_BLOCKS" unless A
+
+</code></pre><p>Complete to? Also what if you use a variable name that doesn't exist?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-12T13:02:54.235Z" class="reply"><span class="user">William Taysom</span> <a href="#2021-01-12T13:02:54.235Z" class="date">2021-01-12 13:02:54</a> <div class="message"><p>Completes with <code>AVAILABLE_BLOCKS</code>, so nothing fancy.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-12T13:03:58.235Z" class="reply"><span class="user">William Taysom</span> <a href="#2021-01-12T13:03:58.235Z" class="date">2021-01-12 13:03:58</a> <div class="message"><p>However, there is some pattern recognition:</p>
+<p><code>{1 =&gt; "one",</code> completes with <code>2 =&gt; "two", 3 =&gt; "three"</code>.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-12T13:05:04.236Z" class="reply"><span class="user">William Taysom</span> <a href="#2021-01-12T13:05:04.236Z" class="date">2021-01-12 13:05:04</a> <div class="message"><p>And <code>{"A" =&gt; "B",</code> completes with <code>"C" =&gt; "D", "E" =&gt; "</code>.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2021-01-12T11:47:59.235Z" class="post"><span class="user">Stefan Lesser</span> <a href="#2021-01-12T11:47:59.235Z" class="date">2021-01-12 11:47:59</a> <div class="message"><p>I want to pick up <a href="https://futureofcoding.slack.com/archives/C5T9GPWFL/p1603601936277700"></a><a href="https://futureofcoding.slack.com/archives/C5T9GPWFL/p1603601936277700">https://futureofcoding.slack.com/archives/C5T9GPWFL/p1603601936277700</a> about Christopher Alexander, where I promised to let those interested know when something is coming up. It doesn't feel right to spam this group with all the details as that's arguably borderline off-topic, so I've been looking for a good way to have a discussion with those all-in on Alexander elsewhere. This will also enable me to bring people together across a few different communities.</p>
+<p>Recently, I had a good experience with a pop-up Telegram chat group that was hosted temporarily after an online event for further discussion. This seems like a good light-weight format for the purpose I have in mind. There's no great master plan, just a few little ideas I'd like to develop further with you.</p>
+<p>If you are interested in upcoming activities around Christopher Alexander, his magnum opus The Nature of Order, and how to apply his theories to other domains (software and technology in particular), I'd like to invite you to join me here: <a href="https://t.me/joinchat/RaDQv_BGCm7OcPaP"></a><a href="https://t.me/joinchat/RaDQv_BGCm7OcPaP">https://t.me/joinchat/RaDQv_BGCm7OcPaP</a></p>
+<p>This is a low-volume announcement-ish channel if you just want to stay up to date on what's happening. And there is a linked chat if you want to engage in a more active capacity — asking questions, discussing concepts, suggesting ideas, and more.</p>
+<p>Looking forward to seeing you there!</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2021-01-12T15:04:06.236Z" class="reply"><span class="user">Andreas S.</span> <a href="#2021-01-12T15:04:06.236Z" class="date">2021-01-12 15:04:06</a> <div class="message"><p>couldn'T you create a "of-design patterns" Channel I think that could be ok?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-12T16:11:55.236Z" class="reply"><span class="user">Stefan Lesser</span> <a href="#2021-01-12T16:11:55.236Z" class="date">2021-01-12 16:11:55</a> <div class="message"><p><a href="https://twitter.com/curious_reader">Andreas S</a> I thought about it, but then having the ability to invite people from several different communities seemed more valuable to me. If you don't feel it's worth following yet another channel on yet another platform, that's ok and I totally understand. I'm sure whatever will happen over there will likely at some point make its way around back here in some form or another.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-13T18:20:34.237Z" class="reply"><span class="user">Fred</span> <a href="#2021-01-13T18:20:34.237Z" class="date">2021-01-13 18:20:34</a> <div class="message"><p><a href="https://twitter.com/stefanlesser">Stefan Lesser</a> The Nature of Order seems very interesting, going to read it so thanks for the heads up.</p>
+<p>I intuitively have had somewhat similar ideas about order and the natural formation of systems, I struggle to even articulate most of my ideas on it, so this seems like a rabbit-hole waiting for me!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-14T07:21:58.000Z" class="reply"><span class="user">Dan Cook</span> <a href="#2021-01-14T07:21:58.000Z" class="date">2021-01-14 07:21:58</a> <div class="message"><p><strong>@Fred</strong> - I recommend starting off with C.A.'s Notes on The Synthesis of Form. It takes technical topic of design, form, and function, and orients it around human value, but on a technical way such that the form and design of things is derived directly from the human / natural needs (as opposed to being a "good" design for artificial reasons)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-14T07:22:39.000Z" class="reply"><span class="user">Dan Cook</span> <a href="#2021-01-14T07:22:39.000Z" class="date">2021-01-14 07:22:39</a> <div class="message"><p>But definitely do dive into Nature of Order!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2021-01-16T17:38:31.001Z" class="post"><span class="user">Miles Sabin</span> <a href="#2021-01-16T17:38:31.001Z" class="date">2021-01-16 17:38:31</a> <div class="message"><p>An interesting plea for heterogeneity: <a href="https://twitter.com/jjcarett2/status/1350463934533431297?s=19"></a><a href="https://twitter.com/jjcarett2/status/1350463934533431297?s=19">https://twitter.com/jjcarett2/status/1350463934533431297?s=19</a></p>
+</div> <div class="attachments"><blockquote><p>🐦 <a href="https://twitter.com/@jjcarett2">Jacques Carette</a>: This morning's PL insight: another reason why "everything is an X" with X in {Object, function, list, relation, ...} is pointless reductionism. Software is something we want to assemble from pieces. This, I think, is completely uncontroversial. The error seems to stem from an 1/</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"></div></div><div id="2021-01-17T00:45:20.005Z" class="post"><span class="user">Vladyslav Sitalo</span> <a href="#2021-01-17T00:45:20.005Z" class="date">2021-01-17 00:45:20</a> <div class="message"><p>what is the simples way(s) (minimizing accidental complexity) to spin up a basic website with a form behind authentication that triggers a serverless function on submission (supplying auth context, so I can be sure in the function about the identity of the user) ?</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2021-01-17T00:47:08.005Z" class="reply"><span class="user">Vladyslav Sitalo</span> <a href="#2021-01-17T00:47:08.005Z" class="date">2021-01-17 00:47:08</a> <div class="message"><p>some options I’m aware of:</p>
+<p>Netlify functions seems promising, though it seems that I can’t use both Netlify forms &amp; functions together for the above use-case 😛</p>
+<p>have a bit of concern on how well would it scale for more complex use cases</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-17T00:48:07.005Z" class="reply"><span class="user">Vladyslav Sitalo</span> <a href="#2021-01-17T00:48:07.005Z" class="date">2021-01-17 00:48:07</a> <div class="message"><p>AWS Amplify seems like it tries to enable something like this, but reading the docs didn’t inspire me simplicity-wise =\ LMK if anyone had good experiences with it</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-17T07:33:05.005Z" class="reply"><span class="user">Vladyslav Sitalo</span> <a href="#2021-01-17T07:33:05.005Z" class="date">2021-01-17 07:33:05</a> <div class="message"><p>Netlify functions have been giving me <code>Function logs are currently unavailable. We are working on resolving the issue.</code> the whole day 😞</p>
+<p>and Amplify stuff is complex and underdocumented 😞</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-01-17T22:29:11.006Z" class="reply"><span class="user">Mariano Guerra</span> <a href="#2021-01-17T22:29:11.006Z" class="date">2021-01-17 22:29:11</a> <div class="message"><p>if you handle the authentication with a local user table then a php file 😄</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
