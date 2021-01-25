@@ -201,7 +201,7 @@ function urlThumbnail(url) {
   const match = url.match(YOUTUBE_REGEX),
     id = match && match[1];
   if (id) {
-    return `![Thumbnail](https://img.youtube.com/vi/${id}/mqdefault.jpg)`;
+    return `![Thumbnail](https://img.youtube.com/vi/${id}/hqdefault.jpg)`;
   } else {
     return null;
   }
