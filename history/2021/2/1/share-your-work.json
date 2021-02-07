@@ -1,0 +1,141 @@
+[
+    {
+        "client_msg_id": "93785fb7-0a0a-4f06-b67c-bfd0cc5773e7",
+        "type": "message",
+        "text": "I've been trying to convince people that we should standardize the concept of a \"generic expression language\"... so I designed this: <http://loyc.net/les/>\n\nAdmittedly there isn't a JavaScript version yet, but I wonder, <@U0123H7JRDM>, if you would be interested in using a standardized syntax like this for your expression language.\n\nAt its core, though, my idea is less about standardizing syntax and more about standardizing the in-memory syntax tree between different languages, and so there are two modestly different versions of the syntax right now, and then there is Enhanced C#, which is a superset of C# based on these same syntax trees.",
+        "user": "UD6EXQVM0",
+        "ts": "1612140201.021800",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1612140501.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YFV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've been trying to convince people that we should standardize the concept of a \"generic expression language\"... so I designed this: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://loyc.net/les/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nAdmittedly there isn't a JavaScript version yet, but I wonder, "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U0123H7JRDM"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", if you would be interested in using a standardized syntax like this for your expression language.\n\nAt its core, though, my idea is less about standardizing syntax and more about standardizing the in-memory syntax tree between different languages, and so there are two modestly different versions of the syntax right now, and then there is Enhanced C#, which is a superset of C# based on these same syntax trees."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1605544823.179800",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "ddecf377-4b22-4270-b2ba-9a5bfd898f9e",
+        "type": "message",
+        "text": "It occurred to me today that, by combining tree-sitter &amp; Loyc, it should be straightforward to convert source code of various languages to a common tree format. For example, the Python code\n\n    # Leading comment\n    if c &gt; 0:\n        x = f\n    else:\n        y = f(123);\n\ncould be converted to an identical syntax tree as the one produced by the C/C#/Java code\n\n    // Leading comment\n    if (c &gt; 0) {\n      x = f;\n    } else {\n      y = f(123);\n    }\n\nSpecifically, I could write a converter that would take any output from tree-sitter and convert it to a Loyc tree. I could then use LeMP macros to straightforwardly convert the syntax tree of a particular language into a mostly-common format. And comments could be preserved too, as I have written a language-agnostic algorithm for this purpose.\n\nNow, from the readme and article about tree-hugger it doesn't _look_ like tree-hugger does something like this, but correct me if I'm wrong.\n\nThis wasn't the problem I was interested in solving - I wanted to figure out how to go in the reverse direction, from Loyc tree to text, because part of my dream is to help people convert code between languages. But seeing this video makes me want to ask if conversion to a common format is something that would help the Docly project. If so, I available to help at below-market rates.\n\nYou could certainly have a separate ML model for each language - there may be enough code on GitHib to support this approach, at least for popular languages, but perhaps not for new or obscure languages. But if you convert all languages to a common format, a single model might be able to share intuitions across languages, potentially allowing improved summarization in a single model.",
+        "user": "UD6EXQVM0",
+        "ts": "1612147386.022400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hWP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It occurred to me today that, by combining tree-sitter & Loyc, it should be straightforward to convert source code of various languages to a common tree format. For example, the Python code\n\n    # Leading comment\n    if c > 0:\n        x = f\n    else:\n        y = f(123);\n\ncould be converted to an identical syntax tree as the one produced by the C/C#/Java code\n\n    // Leading comment\n    if (c > 0) {\n      x = f;\n    } else {\n      y = f(123);\n    }\n\nSpecifically, I could write a converter that would take any output from tree-sitter and convert it to a Loyc tree. I could then use LeMP macros to straightforwardly convert the syntax tree of a particular language into a mostly-common format. And comments could be preserved too, as I have written a language-agnostic algorithm for this purpose.\n\nNow, from the readme and article about tree-hugger it doesn't "
+                            },
+                            {
+                                "type": "text",
+                                "text": "look",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " like tree-hugger does something like this, but correct me if I'm wrong.\n\nThis wasn't the problem I was interested in solving - I wanted to figure out how to go in the reverse direction, from Loyc tree to text, because part of my dream is to help people convert code between languages. But seeing this video makes me want to ask if conversion to a common format is something that would help the Docly project. If so, I available to help at below-market rates.\n\nYou could certainly have a separate ML model for each language - there may be enough code on GitHib to support this approach, at least for popular languages, but perhaps not for new or obscure languages. But if you convert all languages to a common format, a single model might be able to share intuitions across languages, potentially allowing improved summarization in a single model."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1606469946.279100",
+        "parent_user_id": "UPVBV34EL"
+    },
+    {
+        "client_msg_id": "0c728230-f72b-4096-bccf-5cd102562150",
+        "type": "message",
+        "text": "I haven't used Dark before, but Gadget seems to be joining the same space - accelerating the process of writing back-ends - so I wonder what the similarities and differences are between the two.",
+        "user": "UD6EXQVM0",
+        "ts": "1612148852.022700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "EQE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I haven't used Dark before, but Gadget seems to be joining the same space - accelerating the process of writing back-ends - so I wonder what the similarities and differences are between the two."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1606844487.327800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "3d3e6e94-d04b-4b68-8234-1108775bc513",
+        "type": "message",
+        "text": "Cambria is an existence proof rather than a production implementation. The current language isn't any good. It's an ugly yaml file. I'm not familiar with LES or Loyc trees.",
+        "user": "UFXFB1RK8",
+        "ts": "1612212905.023000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BPx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Cambria is an existence proof rather than a production implementation. The current language isn't any good. It's an ugly yaml file. I'm not familiar with LES or Loyc trees."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1595031472.394700",
+        "parent_user_id": "UFXFB1RK8"
+    }
+]
