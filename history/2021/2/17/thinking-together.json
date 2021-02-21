@@ -1,0 +1,2546 @@
+[
+    {
+        "client_msg_id": "3694585a-8269-444a-b278-c1ae15d654e0",
+        "type": "message",
+        "text": "I've been thinking about an alternative approach to \"function calling\" (particularly, for *declarative* languages). Instead of having _*functions*_, where every invocation must explicitly feed in every argument, what if:\n\u2022 we define a language that supports only _*expressions containing free variables*_, and\n\u2022 we treat invocation as merely (lazy) syntactic substitution, thus arguments are \"retrieved\" from the scope where the expression is _invoked_\nFor example, I write `let f = x * x` (note the absence of a parameter list) and then later write `let x = 3; let y = f` , which sets y to 9.\nIt's important for the substitution to be lazy, since this retains the semantics of traditional functions, including the ability to make _recursive_ definitions. Given this, I don't believe I'm re-inventing macros, though I welcome enlightenment.\nYou can combine this with the usual nested syntactic scoping rules, so it's definitely _not_ the same as using global variables, or the same as closures (where all the free variables are bound at the _definition_ site). The only practical difference seems to be the UX, and the biggest UX downside is probably readability (which invocations consume which values?), but I'm confident an IDE can make the data flow more explicit.\nAdvantages of this approach:\n\u2022 Certain programs can become much more concise. For example, in drawing code, you can set the drawing `color` just once, and it will be automatically consumed by all drawing functions (i.e. expressions-with-free-variables) that are invoked in that scope. This actually obviates the \"type classes\" feature that functional languages often pursue. (Type classes aim to enable exactly this kind of \"implicit argument passing\", but achieve it in a more convoluted way.)\n\u2022 You've removed the concept of a \"function call\" entirely from the language. You only need substitution (i.e. referencing). Less features is better, when all else is equal.\nDisadvantages of this approach:\n\u2022 As mentioned earlier, it may be harder to understand which values are being consumed where. But I'm confident that an IDE can make this clear. (I'm building a language based on ASTs and structured editing anyway, so it's guaranteed to be combined with a sufficiently-smart IDE.)\n\u2022 You need to worry about \"accidental variable capture\", where a variable which _just happens_ to be in scope is accidentally used by a function (i.e. expression) invocation. I think this is a real problem in languages where variables are identified by _*text strings*_, but FWIW, the language I'm designing is _not_ based on text strings, and so can be designed in such a way that a local variable will never _accidentally_ have the same UUID as a free variable found in a function (i.e. expression). In an AST-based language, every function definition should _by default_ use unique UUIDs for its free variables. Only _related functions_ from the same library should share UUIDs, for example the `color` variable used in a drawing library should be the same across all drawing functions.\nI'd love to hear others' thoughts. Has this been tried before? Are there additional advantages or disadvantages that I've missed? Is it worth a try? Note that I'm thinking specifically about declarative languages here. Imperative languages _may_ add complications (but may not!).",
+        "user": "UCGAK10LS",
+        "ts": "1613528098.183700",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613535718.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "74r",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've been thinking about an alternative approach to \"function calling\" (particularly, for "
+                            },
+                            {
+                                "type": "text",
+                                "text": "declarative",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " languages). Instead of having "
+                            },
+                            {
+                                "type": "text",
+                                "text": "functions",
+                                "style": {
+                                    "bold": true,
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", where every invocation must explicitly feed in every argument, what if:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "we define a language that supports only "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "expressions containing free variables",
+                                        "style": {
+                                            "bold": true,
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ", and"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "we treat invocation as merely (lazy) syntactic substitution, thus arguments are \"retrieved\" from the scope where the expression is "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "invoked",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "For example, I write "
+                            },
+                            {
+                                "type": "text",
+                                "text": "let f = x * x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (note the absence of a parameter list) and then later write "
+                            },
+                            {
+                                "type": "text",
+                                "text": "let x = 3; let y = f",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " , which sets y to 9.\nIt's important for the substitution to be lazy, since this retains the semantics of traditional functions, including the ability to make "
+                            },
+                            {
+                                "type": "text",
+                                "text": "recursive",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " definitions. Given this, I don't believe I'm re-inventing macros, though I welcome enlightenment.\nYou can combine this with the usual nested syntactic scoping rules, so it's definitely "
+                            },
+                            {
+                                "type": "text",
+                                "text": "not",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " the same as using global variables, or the same as closures (where all the free variables are bound at the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "definition",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " site). The only practical difference seems to be the UX, and the biggest UX downside is probably readability (which invocations consume which values?), but I'm confident an IDE can make the data flow more explicit.\nAdvantages of this approach:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Certain programs can become much more concise. For example, in drawing code, you can set the drawing "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "color",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " just once, and it will be automatically consumed by all drawing functions (i.e. expressions-with-free-variables) that are invoked in that scope. This actually obviates the \"type classes\" feature that functional languages often pursue. (Type classes aim to enable exactly this kind of \"implicit argument passing\", but achieve it in a more convoluted way.)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "You've removed the concept of a \"function call\" entirely from the language. You only need substitution (i.e. referencing). Less features is better, when all else is equal."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Disadvantages of this approach:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "As mentioned earlier, it may be harder to understand which values are being consumed where. But I'm confident that an IDE can make this clear. (I'm building a language based on ASTs and structured editing anyway, so it's guaranteed to be combined with a sufficiently-smart IDE.)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "You need to worry about \"accidental variable capture\", where a variable which "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "just happens",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " to be in scope is accidentally used by a function (i.e. expression) invocation. I think this is a real problem in languages where variables are identified by "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "text strings",
+                                        "style": {
+                                            "bold": true,
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ", but FWIW, the language I'm designing is "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "not",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " based on text strings, and so can be designed in such a way that a local variable will never "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "accidentally",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " have the same UUID as a free variable found in a function (i.e. expression). In an AST-based language, every function definition should "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "by default",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " use unique UUIDs for its free variables. Only "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "related functions",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " from the same library should share UUIDs, for example the "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "color",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " variable used in a drawing library should be the same across all drawing functions."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'd love to hear others' thoughts. Has this been tried before? Are there additional advantages or disadvantages that I've missed? Is it worth a try? Note that I'm thinking specifically about declarative languages here. Imperative languages "
+                            },
+                            {
+                                "type": "text",
+                                "text": "may",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " add complications (but may not!)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "reply_count": 53,
+        "reply_users_count": 13,
+        "latest_reply": "1613797498.021600",
+        "reply_users": [
+            "UCUSW7WVD",
+            "UCGAK10LS",
+            "UEBG0NPDK",
+            "U01JNTE35QS",
+            "UFB8STN7K",
+            "UQ706GB9U",
+            "UA14TGLTC",
+            "UJBAJNFLK",
+            "U016VUZGUUQ",
+            "UN06QADNV",
+            "UF71PR58X",
+            "U013ZLJARC7",
+            "UHWC9PXBL"
+        ],
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UC2A2ARPT",
+                    "UBSMEUXAA"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "61f43831-c757-4cb8-93a3-64384c420d75",
+        "type": "message",
+        "text": "Is this the same as unhygienic macros? (I love unhygienic macros, but I haven't tried to program with just them.)",
+        "user": "UCUSW7WVD",
+        "ts": "1613528712.184100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "o/JL0",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Is this the same as unhygienic macros? (I love unhygienic macros, but I haven't tried to program with just them.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "fb728db0-9fca-4858-9916-ce546c216817",
+        "type": "message",
+        "text": "It shares similarities with macros, but you should still be able to define recursive functions using this approach, and thus substitution needs to be able to occur \"lazily\". I'm not sure if there are macro systems which can do that; I'm not very familiar with macro systems in general.\n\nI added the word \"lazy\" to the original post.",
+        "user": "UCGAK10LS",
+        "ts": "1613528995.184400",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613529168.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZxHTD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It shares similarities with macros, but you should still be able to define recursive functions using this approach, and thus substitution needs to be able to occur \"lazily\". I'm not sure if there are macro systems which can do that; I'm not very familiar with macro systems in general.\n\nI added the word \"lazy\" to the original post."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "cba0be87-28b7-418c-81f2-9de4e5e741f9",
+        "type": "message",
+        "text": "Interesting. One phrase for literature surveys may be \"lazy call by name\"\n\n_Edit_: Apparently call by name as defined in the literature is always lazy: <https://en.wikipedia.org/wiki/Evaluation_strategy#Call_by_name>. So this may be subtly different in some way I can't brain atm.",
+        "user": "UCUSW7WVD",
+        "ts": "1613529602.184900",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1613529849.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "t/f",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Interesting. One phrase for literature surveys may be \"lazy call by name\"\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Edit",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ": Apparently call by name as defined in the literature is always lazy: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://en.wikipedia.org/wiki/Evaluation_strategy#Call_by_name"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". So this may be subtly different in some way I can't brain atm."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "bfd8c1bc-10bf-4741-8b82-8ff562e8c702",
+        "type": "message",
+        "text": "this is how our english stuff works, since in natural language you often don\u2019t refer to arguments if they\u2019re obvious",
+        "user": "UEBG0NPDK",
+        "ts": "1613529738.185100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uN9m",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "this is how our english stuff works, since in natural language you often don\u2019t refer to arguments if they\u2019re obvious"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "7e189dd9-5ae4-451d-9ad7-61a907970d02",
+        "type": "message",
+        "text": "the important part is that we show you our explicit interpretation and allow you to correct it in case we picked the wrong thing",
+        "user": "UEBG0NPDK",
+        "ts": "1613529787.185300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vPi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the important part is that we show you our explicit interpretation and allow you to correct it in case we picked the wrong thing"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "clap",
+                "users": [
+                    "UCGAK10LS"
+                ],
+                "count": 1
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3deacc47-1231-4c4a-8875-c438fed9cd62",
+        "type": "message",
+        "text": "SweetHome3d - looks dated but holy damn it's good for visualising stuff",
+        "user": "UPHDH2F0C",
+        "ts": "1613529841.185600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jw5KV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "SweetHome3d - looks dated but holy damn it's good for visualising stuff"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613492668.163400",
+        "parent_user_id": "UMVFWPZ36",
+        "reactions": [
+            {
+                "name": "clap",
+                "users": [
+                    "UMVFWPZ36"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "80670677-D309-4F83-8EA1-A94DDA27FA57",
+        "type": "message",
+        "text": "There is some similarity with APL trains, hooks and forks, IMHO. Unless I\u2019m not understanding this correctly. \nThere is a bit of a learning curve with APL trains. Note that the analogy to English holds - for most people English has a few years long learning curve going from characters to words to sentences. ",
+        "user": "U01JNTE35QS",
+        "ts": "1613529980.188700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XPv=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There is some similarity with APL trains, hooks and forks, IMHO. Unless I\u2019m not understanding this correctly. \nThere is a bit of a learning curve with APL trains. Note that the analogy to English holds - for most people English has a few years long learning curve going from characters to words to sentences. "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UCGAK10LS"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4F364CA7-7913-466C-9BD6-5CD5E9DF0574",
+        "type": "message",
+        "text": "Wouldn\u2019t this be a problem where f = x*x and f = y*y are not equivalent? ",
+        "user": "U01JNTE35QS",
+        "ts": "1613530127.190100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vJZ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Wouldn\u2019t this be a problem where f = x*x and f = y*y are not equivalent? "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "f8464306-a8f5-4ad1-a728-415fc0b44744",
+        "type": "message",
+        "text": "Are you talking about comparing the two expressions under an _equality operator_: `x*x == y*y`? Equality of functions is already undefined in most programming languages.",
+        "user": "UCGAK10LS",
+        "ts": "1613530387.190300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=S3iJ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Are you talking about comparing the two expressions under an "
+                            },
+                            {
+                                "type": "text",
+                                "text": "equality operator",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ": "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x*x == y*y",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "? Equality of functions is already undefined in most programming languages."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "23e208a3-f14b-46c8-af19-18b6e744baff",
+        "type": "message",
+        "text": "If you mean that swapping one invocation for the other does not yield the same program, then that's true, but I don't think that will be a problem. The user of the function just has to indicate which variable they want to bind at the invocation site.",
+        "user": "UCGAK10LS",
+        "ts": "1613530480.190500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WsX8p",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If you mean that swapping one invocation for the other does not yield the same program, then that's true, but I don't think that will be a problem. The user of the function just has to indicate which variable they want to bind at the invocation site."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "c45dd060-746b-441f-b18d-653158b89b68",
+        "type": "message",
+        "text": "And you can always rename the variables by saying `let x = z; let y = z` if you want a set of functions to all use the same variable name, post-hoc.",
+        "user": "UCGAK10LS",
+        "ts": "1613530582.190700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QI1/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "And you can always rename the variables by saying "
+                            },
+                            {
+                                "type": "text",
+                                "text": "let x = z; let y = z",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " if you want a set of functions to all use the same variable name, post-hoc."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "f4a3e7e7-03cc-443f-91bf-fb764afac8ac",
+        "type": "message",
+        "text": "I believe the point might be that constraints on the names of variables could affect composability. If you want to call `f` you have to have a variable called `x`. But now say you have another function that needs `y` for the same variable. Or `x` for a different variable.\n\nNone of this is insurmountable, but might add noise.",
+        "user": "UCUSW7WVD",
+        "ts": "1613530651.190900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "I75Op",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I believe the point might be that constraints on the names of variables could affect composability. If you want to call "
+                            },
+                            {
+                                "type": "text",
+                                "text": "f ",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "you have to have a variable called "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". But now say you have another function that needs `y` for the same variable. Or `x` for a different variable.\n\nNone of this is insurmountable, but might add noise."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "9b40955e-09ec-4d36-a1b6-1ae345dd0ac0",
+        "type": "message",
+        "text": "I think my above comment + my second dot point under \"Disadvantages\" addresses those things :slightly_smiling_face: (I just extended the dot point to add more detail)",
+        "user": "UCGAK10LS",
+        "ts": "1613530723.191100",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613531067.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jcI8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think my above comment + my second dot point under \"Disadvantages\" addresses those things "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (I just extended the dot point to add more detail)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "38310389-3033-4ab7-9e78-642c12237e56",
+        "type": "message",
+        "text": "Ok, maybe. Capture typically involves reasoning about a single call in isolation. I'm thinking about situations where each call is fine in isolation but there's impedance in putting them into a single block. So you end up creating extra block boundaries.",
+        "user": "UCUSW7WVD",
+        "ts": "1613530845.191400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kjzj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ok, maybe. Capture typically involves reasoning about a single call in isolation. I'm thinking about situations where each call is fine in isolation but there's impedance in putting them into a single block. So you end up creating extra block boundaries."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "40f90bcc-fedb-4866-84e1-52037770709f",
+        "type": "message",
+        "text": "Ah, I see your edit. Yeah, that's basically the impedance mismatch I was alluding to. Not a huge deal. Typically when we worry about 'capture' we're concerned about insidious bugs. This is more a case of fixing a new kind of syntax error.\n\nI have to deal with some additional constraints akin to these in Mu. It's a cost, but sometimes it's worth paying.",
+        "user": "UCUSW7WVD",
+        "ts": "1613531262.191900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FTb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ah, I see your edit. Yeah, that's basically the impedance mismatch I was alluding to. Not a huge deal. Typically when we worry about 'capture' we're concerned about insidious bugs. This is more a case of fixing a new kind of syntax error.\n\nI have to deal with some additional constraints akin to these in Mu. It's a cost, but sometimes it's worth paying."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCGAK10LS",
+                    "UC2A2ARPT"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "14c5cfe5-0e70-4efc-b1e5-6e80df2230c4",
+        "type": "message",
+        "text": "This concept is pretty similar to dynamically scoped variables. e.g. emacs lisp:\n```(defun f () (* x x))\n(let ((x 2))\n  (cl-assert (= (f) 4)))```\nSee Richard Stallman\u2019s paper about emacs on why dynamic scoping promotes modularity: <https://www.gnu.org/software/emacs/emacs-paper.html#SEC17>",
+        "user": "UFB8STN7K",
+        "ts": "1613531527.192200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PiHs7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This concept is pretty similar to dynamically scoped variables. e.g. emacs lisp:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(defun f () (* x x))\n(let ((x 2))\n  (cl-assert (= (f) 4)))"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "See Richard Stallman\u2019s paper about emacs on why dynamic scoping promotes modularity: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.gnu.org/software/emacs/emacs-paper.html#SEC17"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UAVCC2X70",
+                    "U013ZLJARC7"
+                ],
+                "count": 2
+            },
+            {
+                "name": "eyes",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4b0cd18e-18d9-4888-a87f-89c4bbef9199",
+        "type": "message",
+        "text": "Worth noting that while most programming languages use lexically scoped variables, a variety of programming frameworks include dynamically scoped abstractions. Most notably React contexts.",
+        "user": "UFB8STN7K",
+        "ts": "1613531584.192400",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UFB8STN7K",
+            "ts": "1613572301.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "IFA5m",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Worth noting that while most programming languages use lexically scoped variables, a variety of programming frameworks include dynamically scoped abstractions. Most notably React contexts."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "00a280bc-383f-4671-8764-ced7578bd4f3",
+        "type": "message",
+        "text": "Yeah, this will probably \"feel similar\" to dynamic scoping, though importantly, you can still determine which bindings will be used by an expression using purely syntactic reasoning. I'll read that paper, thanks :slightly_smiling_face: (edit: The arguments Stallman makes for dynamic scope are pretty weak, IMO, and don't overlap with the arguments in my proposal.)",
+        "user": "UCGAK10LS",
+        "ts": "1613532145.192700",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613534963.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OG8nm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, this will probably \"feel similar\" to dynamic scoping, though importantly, you can still determine which bindings will be used by an expression using purely syntactic reasoning. I'll read that paper, thanks "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (edit: The arguments Stallman makes for dynamic scope are pretty weak, IMO, and don't overlap with the arguments in my proposal.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "point_up",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "16f86001-e738-47b0-bd44-1bc6ced0ebb5",
+        "type": "message",
+        "text": "i could see problems with accidentally reusing a variable name and causing unintentional problems.",
+        "user": "UQ706GB9U",
+        "ts": "1613532627.193000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1ewUN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i could see problems with accidentally reusing a variable name and causing unintentional problems."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "086eb432-8b9c-4c02-b012-f9bf9f048c9b",
+        "type": "message",
+        "text": "what about nested for loops\n```for i in ...:\n  for j in ...:\n    # eval a function that expects an index to be assigned to i but you want it use j.```",
+        "user": "UQ706GB9U",
+        "ts": "1613532681.193200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UQ706GB9U",
+            "ts": "1613532764.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "s68Fg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "what about nested for loops\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "for i in ...:\n  for j in ...:\n    # eval a function that expects an index to be assigned to i but you want it use j."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "823c9233-effd-4d81-a979-f8e78ae624df",
+        "type": "message",
+        "text": "I cover that in \"Disadvantage\" dot point 2. In short: you wouldn't ever be using \"i\" as a parameter name. You'd be using a unique UUID, and perhaps you'd use \"i\" as a human-friendly label for it, to be displayed in the IDE.\nAlso, I didn't explicitly mention that I'm thinking about declarative languages (I always make this mistake). It may be the case that imperative languages have specific qualities that introduce additional problems.",
+        "user": "UCGAK10LS",
+        "ts": "1613532991.193600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8Lt",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I cover that in \"Disadvantage\" dot point 2. In short: you wouldn't ever be using \"i\" as a parameter name. You'd be using a unique UUID, and perhaps you'd use \"i\" as a human-friendly label for it, to be displayed in the IDE.\nAlso, I didn't explicitly mention that I'm thinking about declarative languages (I always make this mistake). It may be the case that imperative languages have specific qualities that introduce additional problems."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UAVCC2X70"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "59e9847b-0e79-4089-ae42-7f2107e25ab6",
+        "type": "message",
+        "text": "Cool, a web version: <http://www.sweethome3d.com/SweetHome3DJSOnline.jsp>",
+        "user": "UMVFWPZ36",
+        "ts": "1613535105.194400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZVo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Cool, a web version: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://www.sweethome3d.com/SweetHome3DJSOnline.jsp"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613492668.163400",
+        "parent_user_id": "UMVFWPZ36"
+    },
+    {
+        "client_msg_id": "5c6dcae9-05cc-4429-83d9-f3ebbb4f90c7",
+        "type": "message",
+        "text": "Yeah, I think I missed how your proposal differs from dynamic scoping <@UCGAK10LS>.",
+        "user": "UA14TGLTC",
+        "ts": "1613543953.195700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "S=WPG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, I think I missed how your proposal differs from dynamic scoping "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCGAK10LS"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "501c2d18-7471-4b3f-8379-add9fb25ede1",
+        "type": "message",
+        "text": "Well, if you put a function definition within another function definition, the inner function should still be able to \"use\" variables from the outer function, i.e. binding the variable in the outer function might also bind it in the inner function. In other words, you can _choose_ between lexical scoping and dynamic scoping on a _per variable_ basis. Indeed, with every variable usage, you need a means to indicate which parent scope you want the variable to be bindable from; essentially you want every scope to indicate its \"parameter list\" (free variable list). This puts you somewhere in-between lexical scoping and dynamic scoping. It will require a smart syntax to be comprehensible, of course! It would work similarly to how \"quoting\" works in Lisp or Julia.",
+        "user": "UCGAK10LS",
+        "ts": "1613544639.195900",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613547390.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=xyur",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Well, if you put a function definition within another function definition, the inner function should still be able to \"use\" variables from the outer function, i.e. binding the variable in the outer function might also bind it in the inner function. In other words, you can "
+                            },
+                            {
+                                "type": "text",
+                                "text": "choose",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " between lexical scoping and dynamic scoping on a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "per variable ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "basis. Indeed, with every variable usage, you need a means to indicate which parent scope you want the variable to be bindable from; essentially you want every scope to indicate its \"parameter list\" (free variable list). This puts you somewhere in-between lexical scoping and dynamic scoping. It will require a smart syntax to be comprehensible, of course! It would work similarly to how \"quoting\" works in Lisp or Julia."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "87803CB5-39EC-4AA9-B515-78E373A24A96",
+        "type": "message",
+        "text": "To me this proposal sounds a lot like term rewriting, except that typical implementations of term rewriting include more sophisticated pattern matching.",
+        "user": "UJBAJNFLK",
+        "ts": "1613544785.197700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cE5Tm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "To me this proposal sounds a lot like term rewriting, except that typical implementations of term rewriting include more sophisticated pattern matching."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "DC1CA410-3571-4F0E-B32C-FCD0ADF23221",
+        "type": "message",
+        "text": "And I like term rewriting exactly for the reasons mentioned.",
+        "user": "UJBAJNFLK",
+        "ts": "1613544827.198500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Y6C1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "And I like term rewriting exactly for the reasons mentioned."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "31148352-2512-4d8c-a57e-ec05156e7680",
+        "type": "message",
+        "text": "I've considered very similar ideas, down to the example of graphics/color and idea of library-specific symbols. You might also look into algebraic effects as an underlying formalism for variable lookup. (That should still let you pick which variables are dynamically or lexically scoped, but it's too late for me to be confident). Also effects are just really cool in general, which is why today I lean towards using them to handle this use case by-the-way.",
+        "user": "U016VUZGUUQ",
+        "ts": "1613546395.198700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hVTO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've considered very similar ideas, down to the example of graphics/color and idea of library-specific symbols. You might also look into algebraic effects as an underlying formalism for variable lookup. (That should still let you pick which variables are dynamically or lexically scoped, but it's too late for me to be confident). Also effects are just really cool in general, which is why today I lean towards using them to handle this use case by-the-way."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UCGAK10LS"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "cc2437df-8fd1-4066-b369-392072404137",
+        "type": "message",
+        "text": "<@UJBAJNFLK> Does that perspective yield new insight? I thought _*all*_ language semantics could be expressed as a term rewriting system.",
+        "user": "UCGAK10LS",
+        "ts": "1613547269.199000",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613547295.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7qZ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJBAJNFLK"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Does that perspective yield new insight? I thought "
+                            },
+                            {
+                                "type": "text",
+                                "text": "all",
+                                "style": {
+                                    "bold": true,
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " language semantics could be expressed as a term rewriting system."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "cb0ea619-b129-4c99-a201-561bbc5ec38f",
+        "type": "message",
+        "text": "<@UCGAK10LS> In the end, everything that's Turing complete is equivalent. But the UX is very different. The particularity of term rewriting as compared to more popular functional computation frameworks is that it focuses in terms, which represent data and function applications, over rules, which represent the transformations done by the functions.",
+        "user": "UJBAJNFLK",
+        "ts": "1613549010.199500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "J0cGv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCGAK10LS"
+                            },
+                            {
+                                "type": "text",
+                                "text": " In the end, everything that's Turing complete is equivalent. But the UX is very different. The particularity of term rewriting as compared to more popular functional computation frameworks is that it focuses in terms, which represent data and function applications, over rules, which represent the transformations done by the functions."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "C35E308D-EEA2-48C1-BCB9-15E5D5683C5F",
+        "type": "message",
+        "text": "Yeah sure. I guess term rewriting might be a useful way to phrase the semantics for the purposes of explanation.",
+        "user": "UCGAK10LS",
+        "ts": "1613550266.200800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "crH",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah sure. I guess term rewriting might be a useful way to phrase the semantics for the purposes of explanation."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "b8d8bf7a-61ab-420d-99e1-653d7197d9b9",
+        "type": "message",
+        "text": "Hi Nick - have you looked at `implicit` s in Scala? It allows code quite similar to the example `let y = f`  if `f` or its parameter is marked as `implicit` . `implicit` can be used at the value and at the type level. At the value level - they are mostly used to reduce boilerplate; for example; passing around a db connection throughout the callstack could be done by marking it as an implicit parameter; and then not having to explicitly pass it on a function invocation.\nAt the type level - it is used to support a number of the advanced Scala language features.\n\nI would say its a very actively used feature of the language. Scala has a new major release coming  in which a number of the lessons learned from Scala 2 are being used to refine some areas of the language design and `implicts` are getting quite a bit of a rework; so could be an interesting case study.",
+        "user": "UN06QADNV",
+        "ts": "1613550720.201000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "g4=Ht",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi Nick - have you looked at "
+                            },
+                            {
+                                "type": "text",
+                                "text": "implicit",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " s in Scala? It allows code quite similar to the example "
+                            },
+                            {
+                                "type": "text",
+                                "text": "let y = f",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "  if "
+                            },
+                            {
+                                "type": "text",
+                                "text": "f",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " or its parameter is marked as "
+                            },
+                            {
+                                "type": "text",
+                                "text": "implicit",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " . "
+                            },
+                            {
+                                "type": "text",
+                                "text": "implicit",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " can be used at the value and at the type level. At the value level - they are mostly used to reduce boilerplate; for example; passing around a db connection throughout the callstack could be done by marking it as an implicit parameter; and then not having to explicitly pass it on a function invocation.\nAt the type level - it is used to support a number of the advanced Scala language features.\n\nI would say its a very actively used feature of the language. Scala has a new major release coming  in which a number of the lessons learned from Scala 2 are being used to refine some areas of the language design and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "implicts",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " are getting quite a bit of a rework; so could be an interesting case study."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "BD17BE3F-7538-4BC5-9BCC-EFA40037E086",
+        "type": "message",
+        "text": "Yup! I\u2019m broadly familiar with Scala implicits (but of course, thanks for suggesting :slightly_smiling_face:). I put them in the same bucket as \u201ctype classes\u201d, which I mentioned in my original post. Is there some benefit of Scala implicits which you think may not exist in my proposal? (Ignoring the type stuff). Implicits otherwise seem like a much more complicated means to achieve the same thing.",
+        "user": "UCGAK10LS",
+        "ts": "1613551020.204200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613551155.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7xY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yup! I\u2019m broadly familiar with Scala implicits (but of course, thanks for suggesting "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": "). I put them in the same bucket as \u201ctype classes\u201d, which I mentioned in my original post. Is there some benefit of Scala implicits which you think may not exist in my proposal? (Ignoring the type stuff). Implicits otherwise seem like a much more complicated means to achieve the same thing."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "24BFA985-F3F3-4347-91BC-D05950065D4E",
+        "type": "message",
+        "text": "It might be worth investigating the problems Scala users face using implicits, of course. Some of the problems may translate to this proposal.",
+        "user": "UCGAK10LS",
+        "ts": "1613551448.206300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vWuPs",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It might be worth investigating the problems Scala users face using implicits, of course. Some of the problems may translate to this proposal."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "1bcf7046-0ea4-4ab2-9ab7-b601a522371d",
+        "type": "message",
+        "text": "There does seem to be quite a bit of overlap between the two ideas.\nBuilding type classes is one of the main ways implicits are used in scala; and as you say comes with a fair amount of complexity.\nBut it is also possible to use implicts without creating type classes. As a prototyping idea - you could mark all parameters as implicit - and then have the reduced boilerplate on the function invocation; and it would also be a way to explore how often implicit resolution issues start coming up (obv that would be limited to Scala's resolution rules; but could still be an interesting worked example)",
+        "user": "UN06QADNV",
+        "ts": "1613551463.206500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vzE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There does seem to be quite a bit of overlap between the two ideas.\nBuilding type classes is one of the main ways implicits are used in scala; and as you say comes with a fair amount of complexity.\nBut it is also possible to use implicts without creating type classes. As a prototyping idea - you could mark all parameters as implicit - and then have the reduced boilerplate on the function invocation; and it would also be a way to explore how often implicit resolution issues start coming up (obv that would be limited to Scala's resolution rules; but could still be an interesting worked example)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCGAK10LS",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "D6183E3D-ABD6-4490-AA21-B3AE7D3A1CCF",
+        "type": "message",
+        "text": "Good idea :slightly_smiling_face:. I\u2019ll have a play around with it!",
+        "user": "UCGAK10LS",
+        "ts": "1613551538.207000",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613551662.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LaN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Good idea "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". I\u2019ll have a play around with it!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "30f27593-9bbb-483c-bed2-88326541e54b",
+        "type": "message",
+        "text": "Scala 3 is also adding \"implicit functions\" - so as you say; could be a area to draw \"lessons from the trenches\" and possibly even some extra inspiration from as well.\n<https://www.scala-lang.org/blog/2016/12/07/implicit-function-types.html>",
+        "user": "UN06QADNV",
+        "ts": "1613551893.207300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3y4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Scala 3 is also adding \"implicit functions\" - so as you say; could be a area to draw \"lessons from the trenches\" and possibly even some extra inspiration from as well.\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.scala-lang.org/blog/2016/12/07/implicit-function-types.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "b5bb7eac-75d5-488a-b58a-cc4ea33b6cd6",
+        "type": "message",
+        "text": "Question about how compilers work\n\nIs it possible to generate example source code from an AST node and its corresponding lexer rules?",
+        "user": "UDQKHNP51",
+        "ts": "1613558709.208400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "d0v",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Question about how compilers work\n\nIs it possible to generate example source code from an AST node and its corresponding lexer rules?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "reply_count": 19,
+        "reply_users_count": 4,
+        "latest_reply": "1613628956.244000",
+        "reply_users": [
+            "UNCP67JSK",
+            "UDQKHNP51",
+            "UN06QADNV",
+            "U01661S9F34"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "9F623BB4-06A2-4559-83B5-1514374ACB9A",
+        "type": "message",
+        "text": "That's partly how some linters and transpilers work!",
+        "user": "UNCP67JSK",
+        "ts": "1613558761.209000",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UNCP67JSK",
+            "ts": "1613558815.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qYn2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That's partly how some linters and transpilers work!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "0BCAAFDF-BF13-4665-98DB-36D82E7369E0",
+        "type": "message",
+        "text": "Eg. babel for js parses the modern js into ast, modifies the ast, and then writes back to compatible js source code.",
+        "user": "UNCP67JSK",
+        "ts": "1613558890.211200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WSqkM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Eg. babel for js parses the modern js into ast, modifies the ast, and then writes back to compatible js source code."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "2ec1f99f-fb60-425e-ab9d-4c839a22b6e2",
+        "type": "message",
+        "text": "oh, yes. that makes sense. can you think of a project whose source code is easier to study?",
+        "user": "UDQKHNP51",
+        "ts": "1613558994.213700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XK2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "oh, yes. that makes sense. can you think of a project whose source code is easier to study?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "99BAA4FA-400B-4341-BA1B-DB2C7A4EA6BF",
+        "type": "message",
+        "text": "You can quite easily write your own babel plugins, that could eg. replace strings and numbers with random values.",
+        "user": "UNCP67JSK",
+        "ts": "1613558996.213900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cDv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You can quite easily write your own babel plugins, that could eg. replace strings and numbers with random values."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "f05d5b88-912d-442b-b208-4984d3c914ae",
+        "type": "message",
+        "text": "I guess I\u2019ll look at babel since you mentioned it",
+        "user": "UDQKHNP51",
+        "ts": "1613559017.214200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iSpd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I guess I\u2019ll look at babel since you mentioned it"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "36489734-3F10-4042-8A95-7EB03A127F1F",
+        "type": "message",
+        "text": "Let me know how it goes!",
+        "user": "UNCP67JSK",
+        "ts": "1613559048.215000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/4KqW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Let me know how it goes!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "B2CE8D88-3322-4BB1-A469-0CCA9AE940D7",
+        "type": "message",
+        "text": "Would be neat to look through multiple asts containing eg. the same function, and extrapolating how you may use it from those examples, ie. similar to how some NLP algos relate words with nearby words, giving it the ability to generate sentences that sound sound, but with the added benefit of the ast; that the code will parse correctly.",
+        "user": "UNCP67JSK",
+        "ts": "1613559283.220700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tk/X",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Would be neat to look through multiple asts containing eg. the same function, and extrapolating how you may use it from those examples, ie. similar to how some NLP algos relate words with nearby words, giving it the ability to generate sentences that sound sound, but with the added benefit of the ast; that the code will parse correctly."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "da89a223-904d-489f-8f86-30f69bf05a78",
+        "type": "message",
+        "text": "yes, that would be nicer since, in that case, the code is actually more meaningful",
+        "user": "UDQKHNP51",
+        "ts": "1613559368.222700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9g/5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yes, that would be nicer since, in that case, the code is actually more meaningful"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "06166618-5DF4-49F7-9CE7-CF28567F1F22",
+        "type": "message",
+        "text": "Was recently thinking about something similar; how you could autogen UI from data, given meta info of eg. how often + in what context a user would like to access it, and partly what components goes together with each other and what kind of data.",
+        "user": "UNCP67JSK",
+        "ts": "1613559434.224400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=PTT",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Was recently thinking about something similar; how you could autogen UI from data, given meta info of eg. how often + in what context a user would like to access it, and partly what components goes together with each other and what kind of data."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "ad65f3a4-7a4d-47b1-b600-9463d137990d",
+        "type": "message",
+        "text": "the use case I have in mind is a quick reference for a language. this would serve as an easy reminder for the syntax of a specific AST node",
+        "user": "UDQKHNP51",
+        "ts": "1613559501.224600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cg9D",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the use case I have in mind is a quick reference for a language. this would serve as an easy reminder for the syntax of a specific AST node"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "435C0A0C-F181-4814-9D79-004971ECD895",
+        "type": "message",
+        "text": "Niiice! Context dependent <http://learnxinyminutes.com|learnxinyminutes.com>!",
+        "user": "UNCP67JSK",
+        "ts": "1613559547.225600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LKB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Niiice! Context dependent "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://learnxinyminutes.com",
+                                "text": "learnxinyminutes.com"
+                            },
+                            {
+                                "type": "text",
+                                "text": "!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "FECAC488-3643-4E66-8596-BCD3EE84A281",
+        "type": "message",
+        "text": "Extremely useful to not have to visit eg <http://fuckingblocksyntax.com|http://fuckingblocksyntax.com> every other minute XD Usually much easier to \"get it\" by looking at a bunch of closely similar examples, than reading long syntax definitions; at least initially to get going.",
+        "user": "UNCP67JSK",
+        "ts": "1613559626.226700",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UNCP67JSK",
+            "ts": "1613559860.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FZn56",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Extremely useful to not have to visit eg "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://fuckingblocksyntax.com",
+                                "text": "http://fuckingblocksyntax.com"
+                            },
+                            {
+                                "type": "text",
+                                "text": " every other minute XD Usually much easier to \"get it\" by looking at a bunch of closely similar examples, than reading long syntax definitions; at least initially to get going."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51",
+        "reactions": [
+            {
+                "name": "smile",
+                "users": [
+                    "U016VUZGUUQ",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "789e777b-8e55-4b96-8fa3-88ce1f3287ad",
+        "type": "message",
+        "text": "yes. learnxinyminutes is a source of inspiration",
+        "user": "UDQKHNP51",
+        "ts": "1613559688.227400",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UDQKHNP51",
+            "ts": "1613559694.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "T3d",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yes. learnxinyminutes is a source of inspiration"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "20c1cac9-5ce5-4b57-b0a6-12898f4148cd",
+        "type": "message",
+        "text": "btw, your idea about autogening UI also crossed my mind. to generate a UI that would make you enter a valid AST node",
+        "user": "UDQKHNP51",
+        "ts": "1613559770.229400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rc8x",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "btw, your idea about autogening UI also crossed my mind. to generate a UI that would make you enter a valid AST node"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "7d065cdf-a972-4573-92e5-d99e07efd7ea",
+        "type": "message",
+        "text": "It does indeed sound a little like implicit arguments. As well as Scala you could compare with Agda and Idris.",
+        "user": "UF71PR58X",
+        "ts": "1613561764.230100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Vh4BZ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It does indeed sound a little like implicit arguments. As well as Scala you could compare with Agda and Idris."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "b6d8c554-ff52-44ee-b06c-c6de7de3185e",
+        "type": "message",
+        "text": "I've come to think of implicitness as being \"term inference\" by analogy with type inference.",
+        "user": "UF71PR58X",
+        "ts": "1613561816.230300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZPi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've come to think of implicitness as being \"term inference\" by analogy with type inference."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "star-struck",
+                "users": [
+                    "UBKNXPBAB"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9b06d8a9-d1d9-4b80-b472-ca6f4b4e3f2c",
+        "type": "message",
+        "text": "All the languages I know of which have implicit arguments require both the argument positions and the corresponding definitions to be annotated in some way . This has been bothering me for a while because it seems to confuse inference/elaboration with type signatures, and I've been wondering how a language might look if these annotations were taken out of signatures (everything is just an argument) and either indicated somewhere else, or alternatively the compiler just tries to infer as much as it possibly can given all in-scope definitions ... you could approximate this is scala by having a bunch of definitions where _everything_ is marked as implicit.",
+        "user": "UF71PR58X",
+        "ts": "1613562110.230500",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UF71PR58X",
+            "ts": "1613562138.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jrx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "All the languages I know of which have implicit arguments require both the argument positions and the corresponding definitions to be annotated in some way . This has been bothering me for a while because it seems to confuse inference/elaboration with type signatures, and I've been wondering how a language might look if these annotations were taken out of signatures (everything is just an argument) and either indicated somewhere else, or alternatively the compiler just tries to infer as much as it possibly can given all in-scope definitions ... you could approximate this is scala by having a bunch of definitions where "
+                            },
+                            {
+                                "type": "text",
+                                "text": "everything",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is marked as implicit."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "60a61b74-201c-44d8-9fdb-51f23d8defa0",
+        "type": "message",
+        "text": "<https://svelte.dev/> describes itself as \"a\u00a0_compile step_\u00a0that happens when you build your app\" ... and is all about generating UI code; so perhaps that's somewhat relevant to your generating a UI ideas?",
+        "user": "UN06QADNV",
+        "ts": "1613568197.230900",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "title": "Svelte",
+                "title_link": "https://svelte.dev/",
+                "text": "Cybernetically enhanced web apps",
+                "fallback": "Svelte",
+                "image_url": "https://svelte.dev/images/twitter-card.png",
+                "from_url": "https://svelte.dev/",
+                "image_width": 500,
+                "image_height": 250,
+                "image_bytes": 3381,
+                "service_icon": "https://svelte.dev/favicon.ico",
+                "service_name": "svelte.dev",
+                "id": 1,
+                "original_url": "https://svelte.dev/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rAv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://svelte.dev/"
+                            },
+                            {
+                                "type": "text",
+                                "text": " describes itself as \"a\u00a0"
+                            },
+                            {
+                                "type": "text",
+                                "text": "compile step",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\u00a0that happens when you build your app\" ... and is all about generating UI code; so perhaps that's somewhat relevant to your generating a UI ideas?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "type": "message",
+        "subtype": "thread_broadcast",
+        "text": "It is :) Looking to go one step deeper with a custom realtime offline first decentralized graph database with binary data streaming using wasm with rust, builtin, created from a structural declarative language, supporting new UI paradigm(s) (infinite non-euclidean zoom + scroll canvas/space with fluid structure, vs the status quo of plain documents) (see webgpu), while being fully editable and having powerful action history for free, etc etc",
+        "user": "UNCP67JSK",
+        "ts": "1613569077.241500",
+        "thread_ts": "1613558709.208400",
+        "root": {
+            "client_msg_id": "b5bb7eac-75d5-488a-b58a-cc4ea33b6cd6",
+            "type": "message",
+            "text": "Question about how compilers work\n\nIs it possible to generate example source code from an AST node and its corresponding lexer rules?",
+            "user": "UDQKHNP51",
+            "ts": "1613558709.208400",
+            "team": "T5TCAFTA9",
+            "blocks": [
+                {
+                    "type": "rich_text",
+                    "block_id": "d0v",
+                    "elements": [
+                        {
+                            "type": "rich_text_section",
+                            "elements": [
+                                {
+                                    "type": "text",
+                                    "text": "Question about how compilers work\n\nIs it possible to generate example source code from an AST node and its corresponding lexer rules?"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "thread_ts": "1613558709.208400",
+            "reply_count": 19,
+            "reply_users_count": 4,
+            "latest_reply": "1613628956.244000",
+            "reply_users": [
+                "UNCP67JSK",
+                "UDQKHNP51",
+                "UN06QADNV",
+                "U01661S9F34"
+            ],
+            "subscribed": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Yv4th",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It is :) Looking to go one step deeper with a custom realtime offline first decentralized graph database with binary data streaming using wasm with rust, builtin, created from a structural declarative language, supporting new UI paradigm(s) (infinite non-euclidean zoom + scroll canvas/space with fluid structure, vs the status quo of plain documents) (see webgpu), while being fully editable and having powerful action history for free, etc etc"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "client_msg_id": "F5F7B555-148D-4391-88C8-E010539B5ADE"
+    },
+    {
+        "client_msg_id": "c001f0e4-7e23-40f1-9cae-4d674229e3a0",
+        "type": "message",
+        "text": "I don\u2019t know enough about svelte to tell\n\nI realize that what I\u2019m thinking about is basically a modal editor. I\u2019ll have to think if what I have in mind is actually practical",
+        "user": "UDQKHNP51",
+        "ts": "1613569299.241800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nEO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don\u2019t know enough about svelte to tell\n\nI realize that what I\u2019m thinking about is basically a modal editor. I\u2019ll have to think if what I have in mind is actually practical"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613558709.208400",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "bda1374d-495d-4c81-827b-03de3777fe53",
+        "type": "message",
+        "text": "I'll add to the others that this gives me dynamic scope vibes, though possibly with a dash of unification if you choose logic-programming semantics for filling in the missing values through inference?",
+        "user": "U013ZLJARC7",
+        "ts": "1613570290.242400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4xpu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'll add to the others that this gives me dynamic scope vibes, though possibly with a dash of unification if you choose logic-programming semantics for filling in the missing values through inference?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "af3f673e-7b2c-4b3a-b00e-031bf0d0a5d6",
+        "type": "message",
+        "text": "Implicits effectively _do_ encode logic programming semantics. In Agda and Idris that's an explicit aim (term inference is basically proof search). Scala is the same but somewhat accidentally.",
+        "user": "UF71PR58X",
+        "ts": "1613573176.242700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Jhl=X",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Implicits effectively "
+                            },
+                            {
+                                "type": "text",
+                                "text": "do",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " encode logic programming semantics. In Agda and Idris that's an explicit aim (term inference is basically proof search). Scala is the same but somewhat accidentally."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

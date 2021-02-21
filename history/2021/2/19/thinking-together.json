@@ -1,0 +1,1066 @@
+[
+    {
+        "type": "message",
+        "text": "I'm playing around with the interface for an NLP recognition framework at Storyscript (in Rust), and was wondering if anyone has seen this kind of design executed in any other contexts",
+        "files": [
+            {
+                "id": "F01NMEGUKL2",
+                "created": 1613690071,
+                "timestamp": 1613690132,
+                "name": "layered-nlp_draft",
+                "title": "layered-nlp draft",
+                "mimetype": "application/vnd.slack-docs",
+                "filetype": "docs",
+                "pretty_type": "Arugula",
+                "user": "UFPPABQ7P",
+                "editable": true,
+                "size": 1483,
+                "mode": "docs",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01NMEGUKL2/layered-nlp_draft",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01NMEGUKL2/download/layered-nlp_draft",
+                "permalink": "https://futureofcoding.slack.com/files/T5TCAFTA9/F01NMEGUKL2",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01NMEGUKL2-987d0fe10a",
+                "preview": "<p>Incrementally build up recognizers over an abstract token that combine to create _multiple_ possible interpretations.<br/><br/>Key features:<br/><br/>- Abstract over token type to support &quot;rich&quot; tokens like we have at Storyscript.<br/>- May generate multiple interpretations of the same token span.<br/>- Produces a set of ranges over the input token list with different attributes, for example:<br/><br/>### Layering<br/><br/>The key idea here is to enable starting from a bunch of vague tags and slowly building meaning up through incrementally adding information that builds on itself.<br/><br/>Simplification: <code>Money(&#x27;$&#x27;, Amt) = &#x27;$&#x27; + Amt</code><br/></p><pre>    $   123   .     00\n                    \u2570Natural\n              \u2570Punct\n        \u2570Natural\n        \u2570Amt(Decimal)\u256f\n    \u2570Money($&#x2F;\u00a3, Num)\u2500\u256f</pre><p><br/>Simplification:<br/><br/>- <code>Location(NYC) = &#x27;New&#x27; + &#x27;York&#x27; + &#x27;City&#x27;</code><br/>- <code>Location(AMS) = &#x27;Amsterdam&#x27;</code><br/>- <code>Address(Person, Location) = Person + Verb(&#x27;live&#x27;) + Predicate(&#x27;in&#x27;) + Location</code><br/></p><pre>   I     live      in      New York City\n                                     \u2570Noun\n                                \u2570Noun\n                            \u2570Adj\n                    \u2570Predicate\n          \u2570Verb\n    \u2570Noun\n    \u2570Person(Self)\n                            \u2570\u2500\u2500Location\u2500\u256f\n    \u2570\u2500\u2500\u2500\u2500Address(Person, Location)\u2500\u2500\u2500\u2500\u2500\u256f</pre><p><br/></p>",
+                "editor": "UFPPABQ7P",
+                "last_editor": "UFPPABQ7P",
+                "non_owner_editable": false,
+                "updated": 1613690132,
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pGU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm playing around with the interface for an NLP recognition framework at Storyscript (in Rust), and was wondering if anyone has seen this kind of design executed in any other contexts"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "user": "UFPPABQ7P",
+        "display_as_bot": false,
+        "ts": "1613690148.252700",
+        "thread_ts": "1613690148.252700",
+        "reply_count": 10,
+        "reply_users_count": 5,
+        "latest_reply": "1613825985.022900",
+        "reply_users": [
+            "UFB8STN7K",
+            "UFPPABQ7P",
+            "U01KZQEQVUP",
+            "U013ZLJARC7",
+            "UHWC9PXBL"
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "be95917a-1ec7-4e54-8c29-9ac2be9e9b3f",
+        "type": "message",
+        "text": "So we're using state diagrams in a peculiar way which is likely different. We kinda took the concept and added a ton of bells and whistles to it and made the state diagram the backbone of defining the behaviours of your backend. The state diagram is hyper away of the rest of our abstraction (our pre-built auth system, our permissioning system) and that's a big part of how we decrease the surface area of code.",
+        "user": "U01DX39SB33",
+        "ts": "1613692116.252900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ao=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So we're using state diagrams in a peculiar way which is likely different. We kinda took the concept and added a ton of bells and whistles to it and made the state diagram the backbone of defining the behaviours of your backend. The state diagram is hyper away of the rest of our abstraction (our pre-built auth system, our permissioning system) and that's a big part of how we decrease the surface area of code."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "e6874042-7905-47a5-8718-765b1c9b6da0",
+        "type": "message",
+        "text": "<https://www.loom.com/share/69299656a8c04c329a4a225961026f7c>",
+        "user": "U01DX39SB33",
+        "ts": "1613692118.253100",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "Loom",
+                "service_url": "https://www.loom.com",
+                "title": "User - Storage - mo-test-123 - Gadget",
+                "title_link": "https://www.loom.com/share/69299656a8c04c329a4a225961026f7c",
+                "thumb_url": "https://cdn.loom.com/sessions/thumbnails/69299656a8c04c329a4a225961026f7c-00001.gif",
+                "thumb_width": 1024,
+                "thumb_height": 640,
+                "fallback": "Loom Video: User - Storage - mo-test-123 - Gadget",
+                "video_html": "<iframe src=\"https://www.loom.com/embed/69299656a8c04c329a4a225961026f7c?autoplay=1\" frameborder=\"0\" width=\"1152\" height=\"864\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>",
+                "video_html_width": 1152,
+                "video_html_height": 864,
+                "from_url": "https://www.loom.com/share/69299656a8c04c329a4a225961026f7c",
+                "id": 1,
+                "original_url": "https://www.loom.com/share/69299656a8c04c329a4a225961026f7c"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5da",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://www.loom.com/share/69299656a8c04c329a4a225961026f7c"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT",
+                    "U016VUZGUUQ"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "ebb28109-9bdd-4744-ade0-a5474581e41a",
+        "type": "message",
+        "text": "I don't usually do this but I figured shooting a real raw video might work. I tried to keep it short (8 min) and I go through my entire problem. Turns out, I actually had three of em. Apologies if this thread is now in the wrong place. Sounds like thinking together is where it now belongs.",
+        "user": "U01DX39SB33",
+        "ts": "1613692142.253400",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U01DX39SB33",
+            "ts": "1613692169.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JtC2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't usually do this but I figured shooting a real raw video might work. I tried to keep it short (8 min) and I go through my entire problem. Turns out, I actually had three of em. Apologies if this thread is now in the wrong place. Sounds like thinking together is where it now belongs."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "8F96711E-6C3E-4E31-A8D7-FD6CEC4F5A02",
+        "type": "message",
+        "text": "Have you read Harel\u2019s original paper? It has visuals for both problem 2 and 3 in your video.",
+        "user": "UEBG0NPDK",
+        "ts": "1613693256.255200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "L2n",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Have you read Harel\u2019s original paper? It has visuals for both problem 2 and 3 in your video."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33",
+        "reactions": [
+            {
+                "name": "raised_hands",
+                "users": [
+                    "U01DX39SB33"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "991b586a-c27f-40d8-a01c-51cd4d1ca3ef",
+        "type": "message",
+        "text": "I'm actually reading through right now",
+        "user": "U01DX39SB33",
+        "ts": "1613694013.255400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3qmDL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm actually reading through right now"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "d29b8465-1bba-47d6-94e9-655f9a8b985b",
+        "type": "message",
+        "text": "Great recommendations everyone.",
+        "user": "U01DX39SB33",
+        "ts": "1613694021.255600",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "O=0Q",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Great recommendations everyone."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "95a9dae4-efb4-4885-ac7b-fbe322886ba5",
+        "type": "message",
+        "text": "This is essentially parsing where a given string can have multiple parses, yes?",
+        "user": "UFB8STN7K",
+        "ts": "1613694024.255800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rn+AL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is essentially parsing where a given string can have multiple parses, yes?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "0d3c8b06-ae1f-4c3a-a756-e521436eb4e4",
+        "type": "message",
+        "text": "This might sound glib, but I'm 100% serious. The best solution I've seen to problem #1 (_how do you get people past the initial unfamiliarity / reluctance?_) is to make your GUI look enviably cool. Make the GUI just explode charm, style, je ne sais quoi, mystery. Make it draw people in. Make it look like nothing they've ever seen before. Make it elicit and reward curiosity. Don't allow people to grossly assume that they know what this GUI is, what it does, and that it's not worth the 20 minutes of attention to learn how it really works.\n\nThis is a very hard problem, but it's not an NP hard problem. It's do-able, and people do it all the time.\n\n(I answered a slight variation of your question, because the other half of the question \u2014 _how do you make the GUI self-revealing to new users \u2014_\u00a0is something it sounds like you already have a good idea of how to do. Click targets, tooltips, progressive disclosure... typical UI design jazz.)",
+        "user": "UC2A2ARPT",
+        "ts": "1613698167.256500",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1613698598.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pYJk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This might sound glib, but I'm 100% serious. The best solution I've seen to problem #1 ("
+                            },
+                            {
+                                "type": "text",
+                                "text": "how do you get people past the initial unfamiliarity / reluctance?",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ") is to make your GUI look enviably cool. Make the GUI just explode charm, style, je ne sais quoi, mystery. Make it draw people in. Make it look like nothing they've ever seen before. Make it elicit and reward curiosity. Don't allow people to grossly assume that they know what this GUI is, what it does, and that it's not worth the 20 minutes of attention to learn how it really works.\n\nThis is a very hard problem, but it's not an NP hard problem. It's do-able, and people do it all the time.\n\n(I answered a slight variation of your question, because the other half of the question \u2014 "
+                            },
+                            {
+                                "type": "text",
+                                "text": "how do you make the GUI self-revealing to new users \u2014\u00a0",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "is something it sounds like you already have a good idea of how to do. Click targets, tooltips, progressive disclosure... typical UI design jazz.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UEBG0NPDK",
+                    "U01DX39SB33",
+                    "U013ZLJARC7"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0183a4fc-cfea-4b1c-ba93-e299e7f4b4f1",
+        "type": "message",
+        "text": "<@UFB8STN7K>, maybe. I've experienced mostly models that all operate on text to tags (spans) or in other places, tokens to tags.\nI'm trying to understand if the process of incrementally building up layered spans with attributes has a name. I think this is closer to something like a parser combinator that can produce multiple results and fold over itself",
+        "user": "UFPPABQ7P",
+        "ts": "1613698505.257000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Gs5L1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UFB8STN7K"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", maybe. I've experienced mostly models that all operate on text to tags (spans) or in other places, tokens to tags.\nI'm trying to understand if the process of incrementally building up layered spans with attributes has a name. I think this is closer to something like a parser combinator that can produce multiple results and fold over itself"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "11487393-0584-4403-a133-b339529c102c",
+        "type": "message",
+        "text": "So, yes. I suppose it's parsing with multiple parsed outcomes. But, the interface to building this parser for extensibility is what interests me.",
+        "user": "UFPPABQ7P",
+        "ts": "1613698640.257300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LHGr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So, yes. I suppose it's parsing with multiple parsed outcomes. But, the interface to building this parser for extensibility is what interests me."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "55596a0c-e251-4343-9b50-3d7ba1727338",
+        "type": "message",
+        "text": "^ great feedback. I should have added one crazy caveat, we have a \"no progressive disclosures\" rule right now which makes every design challenge infinitely harder. The reason for this is we think there's going to be some weening required to get devs acclimated to even the slightest GUI mostly cause of legacy rhetoric. So the idea behind our UI is that it has to be entirely keyboard navigatable. So we figured that out on storage with great difficulty. On the behaviour page (the statechart) obviously it's impossible. But we're still holding out in hopes that we'll come up with a way to structure this diagram to make it more auto-layout and then, hopefully intuitively keyboard navigatable.\n\nThere aren't that many great ways to do a progressive disclosure and still keep the hand away from the mouse.",
+        "user": "U01DX39SB33",
+        "ts": "1613700614.257700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "g9zh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "^ great feedback. I should have added one crazy caveat, we have a \"no progressive disclosures\" rule right now which makes every design challenge infinitely harder. The reason for this is we think there's going to be some weening required to get devs acclimated to even the slightest GUI mostly cause of legacy rhetoric. So the idea behind our UI is that it has to be entirely keyboard navigatable. So we figured that out on storage with great difficulty. On the behaviour page (the statechart) obviously it's impossible. But we're still holding out in hopes that we'll come up with a way to structure this diagram to make it more auto-layout and then, hopefully intuitively keyboard navigatable.\n\nThere aren't that many great ways to do a progressive disclosure and still keep the hand away from the mouse."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "7fa098cc-d363-4217-b02f-08e5e9725d94",
+        "type": "message",
+        "text": "^ I know this goal might sound insane, but I'd rather exhaust all other options and only then introduce progressive disclosures just to keep the principle alive",
+        "user": "U01DX39SB33",
+        "ts": "1613700652.257900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fNJd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "^ I know this goal might sound insane, but I'd rather exhaust all other options and only then introduce progressive disclosures just to keep the principle alive"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "db658043-39d5-48cc-9a7c-c92ff1dde31f",
+        "type": "message",
+        "text": "maybe the keyboard navigatable state diagram is the enviably cool UI you're talking about",
+        "user": "U01DX39SB33",
+        "ts": "1613700692.258100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nU/kk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "maybe the keyboard navigatable state diagram is the enviably cool UI you're talking about"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "22469efd-0926-4d7e-b5db-33dedee80c10",
+        "type": "message",
+        "text": "You might consider more of a railroad-diagram look (or at least organizing principle). Maybe oriented vertically rather than horizonal like the common examples (it will be more compact and look more like code that way for skeptical devs). I agree that auto-layout is really important for something like this, as I never ever want to fiddle with box positions.",
+        "user": "U016VUZGUUQ",
+        "ts": "1613716011.259500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rdg2p",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You might consider more of a railroad-diagram look (or at least organizing principle). Maybe oriented vertically rather than horizonal like the common examples (it will be more compact and look more like code that way for skeptical devs). I agree that auto-layout is really important for something like this, as I never ever want to fiddle with box positions."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "d0e89225-262f-47c8-9730-28911d7736ee",
+        "type": "message",
+        "text": "The first place I heard of such a feature was Charles Simonyi's \"Intentional Domain Workbench\". Here's a video about that, and he talks about identity apart from naming at about 45min in:\n\n<https://youtu.be/UBI33yXJZxg|https://youtu.be/UBI33yXJZxg>",
+        "user": "UAVCC2X70",
+        "ts": "1613716407.259700",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/",
+                "title": "The Intentional Domain Workbench",
+                "title_link": "https://youtu.be/UBI33yXJZxg",
+                "author_name": "UW Video",
+                "author_link": "https://www.youtube.com/user/UWTV",
+                "thumb_url": "https://i.ytimg.com/vi/UBI33yXJZxg/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: The Intentional Domain Workbench",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https://www.youtube.com/embed/UBI33yXJZxg?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 300,
+                "from_url": "https://youtu.be/UBI33yXJZxg",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "id": 1,
+                "original_url": "https://youtu.be/UBI33yXJZxg"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "m//J",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The first place I heard of such a feature was Charles Simonyi's \"Intentional Domain Workbench\". Here's a video about that, and he talks about identity apart from naming at about 45min in:\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://youtu.be/UBI33yXJZxg",
+                                "text": "https://youtu.be/UBI33yXJZxg"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613629318.245700",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "890579df-f9b7-4560-9fd4-746448f20fa2",
+        "type": "message",
+        "text": "This sounds quite similar to the multiple (logical) layers of annotations provided by modern NLP frameworks (e.g. <https://stanfordnlp.github.io/CoreNLP/|CoreNLP>, <https://spacy.io/|spaCy>). The natural language \"parsing\" there is mostly probabilistic so you can access multiple interpretations of a token span if you want to. Notably, these interpretations don't really cascade / explode up the logical layers, but it may be something to look at",
+        "user": "U01KZQEQVUP",
+        "ts": "1613718828.260000",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "CoreNLP",
+                "title": "Overview",
+                "title_link": "https://stanfordnlp.github.io/CoreNLP/",
+                "text": "NLP Processing In Java",
+                "fallback": "CoreNLP: Overview",
+                "thumb_url": "https://stanfordnlp.github.io/CoreNLP/assets/images/corenlp-logo.png",
+                "from_url": "https://stanfordnlp.github.io/CoreNLP/",
+                "thumb_width": 1080,
+                "thumb_height": 360,
+                "service_icon": "https://stanfordnlp.github.io/CoreNLP/favicon.ico",
+                "id": 1,
+                "original_url": "https://stanfordnlp.github.io/CoreNLP/"
+            },
+            {
+                "title": "spaCy \u00b7 Industrial-strength Natural Language Processing in Python",
+                "title_link": "https://spacy.io/",
+                "text": "spaCy is a free open-source library for Natural Language Processing in Python. It features NER, POS tagging, dependency parsing, word vectors and more.",
+                "fallback": "spaCy \u00b7 Industrial-strength Natural Language Processing in Python",
+                "image_url": "https://spacy.io/static/social_default-1d3b50b1eba4c2b06244425ff0c49570.jpg",
+                "from_url": "https://spacy.io/",
+                "image_width": 476,
+                "image_height": 250,
+                "image_bytes": 372379,
+                "service_icon": "https://spacy.io/icons/icon-48x48.png",
+                "service_name": "spacy.io",
+                "id": 2,
+                "original_url": "https://spacy.io/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vo0G",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This sounds quite similar to the multiple (logical) layers of annotations provided by modern NLP frameworks (e.g. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://stanfordnlp.github.io/CoreNLP/",
+                                "text": "CoreNLP"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://spacy.io/",
+                                "text": "spaCy"
+                            },
+                            {
+                                "type": "text",
+                                "text": "). The natural language \"parsing\" there is mostly probabilistic so you can access multiple interpretations of a token span if you want to. Notably, these interpretations don't really cascade / explode up the logical layers, but it may be something to look at"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UFPPABQ7P"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c665bb4d-6e54-44ed-8568-97f59dec0f28",
+        "type": "message",
+        "text": "I seriously doubt that xstate is the \"state of the art\" of statecharts. I bet you'll probably find more inspiration looking at Yakindu that is a really polished (alas, non-free) implementation of statecharts (including <https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/quick_ref_orthogonality#quick_ref_orthogonality|modeling orthogonal states>).\n\nWhen it comes to GUI, I like the <https://github.com/enso-org/enso/tree/main/docs/syntax|Enso approach>: hybrid/bidirectional visual _and_ textual syntax. There are lots of projects like <http://smc.sourceforge.net/|SMC> that define a special DSL. I imagine I'd spend most of my time on the textual mode if I had that, and then use the visual one to browse. A good textual DSL with a cool browsable visual representation (perhaps even retaining just _some_ interactive editable elements) seems like an easier sell than a \"1000-clicks-no-code-ui\", but that's just me :slightly_smiling_face: .\n\nGood luck with your project! Looks pretty cool.",
+        "user": "UN9SCH5RD",
+        "ts": "1613719086.260300",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UN9SCH5RD",
+            "ts": "1613719163.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "gg3rS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I seriously doubt that xstate is the \"state of the art\" of statecharts. I bet you'll probably find more inspiration looking at Yakindu that is a really polished (alas, non-free) implementation of statecharts (including "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/quick_ref_orthogonality#quick_ref_orthogonality",
+                                "text": "modeling orthogonal states"
+                            },
+                            {
+                                "type": "text",
+                                "text": ").\n\nWhen it comes to GUI, I like the "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/enso-org/enso/tree/main/docs/syntax",
+                                "text": "Enso approach"
+                            },
+                            {
+                                "type": "text",
+                                "text": ": hybrid/bidirectional visual "
+                            },
+                            {
+                                "type": "text",
+                                "text": "and",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " textual syntax. There are lots of projects like "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://smc.sourceforge.net/",
+                                "text": "SMC"
+                            },
+                            {
+                                "type": "text",
+                                "text": " that define a special DSL. I imagine I'd spend most of my time on the textual mode if I had that, and then use the visual one to browse. A good textual DSL with a cool browsable visual representation (perhaps even retaining just "
+                            },
+                            {
+                                "type": "text",
+                                "text": "some",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " interactive editable elements) seems like an easier sell than a \"1000-clicks-no-code-ui\", but that's just me "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": " .\n\nGood luck with your project! Looks pretty cool."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "e307240a-ea28-40a7-979a-94920b923952",
+        "type": "message",
+        "text": "Ah, forgot to mention <http://mbeddr.com/|mbeddr>. It is a language with a projectional editor implemented in MPS that has <https://vimeo.com/78412221|support for state machines>. So an example of a mostly textual UI with some cool visual elements on top.",
+        "user": "UN9SCH5RD",
+        "ts": "1613720670.261000",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UN9SCH5RD",
+            "ts": "1613720681.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "66/R",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ah, forgot to mention "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://mbeddr.com/",
+                                "text": "mbeddr"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". It is a language with a projectional editor implemented in MPS that has "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://vimeo.com/78412221",
+                                "text": "support for state machines"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". So an example of a mostly textual UI with some cool visual elements on top."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "87d99351-9c46-4435-88e7-cbeb36e9498e",
+        "type": "message",
+        "text": "Hard agree with <@UC2A2ARPT> on the value of aesthetics here. See: Don Norman's book on Emotional Design for a longer treatment, with a brief preview of the material here:\n<https://www.interaction-design.org/literature/topics/emotional-design>",
+        "user": "U013ZLJARC7",
+        "ts": "1613722134.261700",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "The Interaction Design Foundation",
+                "title": "What is Emotional Design?",
+                "title_link": "https://www.interaction-design.org/literature/topics/emotional-design",
+                "text": "What is Emotional Design? Emotional design is the concept of how to create designs that evoke emotions which result in positive user experiences. Designers aim to reach users on three co...",
+                "fallback": "The Interaction Design Foundation: What is Emotional Design?",
+                "thumb_url": "https://public-media.interaction-design.org/images/website-thumbnail-image.png",
+                "from_url": "https://www.interaction-design.org/literature/topics/emotional-design",
+                "thumb_width": 400,
+                "thumb_height": 400,
+                "service_icon": "https://public-media.interaction-design.org/images/app/apple-touch-icon.png",
+                "id": 1,
+                "original_url": "https://www.interaction-design.org/literature/topics/emotional-design"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "F5nqT",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hard agree with "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UC2A2ARPT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " on the value of aesthetics here. See: Don Norman's book on Emotional Design for a longer treatment, with a brief preview of the material here:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.interaction-design.org/literature/topics/emotional-design"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "474b9733-1207-49ab-9d66-758f4cb70074",
+        "type": "message",
+        "text": "I've built some visualizations of exactly this at my last startup. Also, a left-to-right, boxes-and-arrows multiple path depiction of the semantic understanding of the parsed text in question to help domain experts add assertions to the system to improve semantics.",
+        "user": "U013ZLJARC7",
+        "ts": "1613722485.262100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "i1VS4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've built some visualizations of exactly this at my last startup. Also, a left-to-right, boxes-and-arrows multiple path depiction of the semantic understanding of the parsed text in question to help domain experts add assertions to the system to improve semantics."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "a8b9ed54-b5dc-4cd4-8bf0-6421d01ccdbe",
+        "type": "message",
+        "text": "(I failed to add a link to my reading of the StateCharts paper: <https://guitarvydas.github.io/2020/12/09/StateCharts.html>) (HTH).",
+        "user": "UGWUJUZHT",
+        "ts": "1613736311.262400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JQTl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(I failed to add a link to my reading of the StateCharts paper: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://guitarvydas.github.io/2020/12/09/StateCharts.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") (HTH)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UHWC9PXBL"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f55bb5b1-9415-423f-9703-1b0a9b0b0f22",
+        "type": "message",
+        "text": "That link at the bottom is gold. Very hard to read Harel's original paper given how the schematics are laid out. Thanks for sharing",
+        "user": "U01DX39SB33",
+        "ts": "1613745000.262600",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U01DX39SB33",
+            "ts": "1613745007.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7eTd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That link at the bottom is gold. Very hard to read Harel's original paper given how the schematics are laid out. Thanks for sharing"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "6f6b9a25-7fe6-4d27-a102-01ee60bd8b69",
+        "type": "message",
+        "text": "Now that sounds interesting and closely related to what I'm working on right now. Can you share any more details? Would love to see that (and know how it works, heh).",
+        "user": "U01KZQEQVUP",
+        "ts": "1613749526.262900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Czr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Now that sounds interesting and closely related to what I'm working on right now. Can you share any more details? Would love to see that (and know how it works, heh)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "7de1c602-f4a6-482f-af38-5341ae49a14c",
+        "type": "message",
+        "text": "I think the easiest option for me right now will be to implement a tiddlywiki plugin",
+        "user": "UDQKHNP51",
+        "ts": "1613749635.263100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4SP5m",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think the easiest option for me right now will be to implement a tiddlywiki plugin"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613629318.245700",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "4d756603-f493-4b19-b24b-44ca7c146c42",
+        "type": "message",
+        "text": "I just remembered that I made this thing long ago, and it seems to have links in code fragments: <http://akkartik.name/countPaths.html|http://akkartik.name/countPaths.html>",
+        "user": "UCUSW7WVD",
+        "ts": "1613751365.263300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kKv3p",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I just remembered that I made this thing long ago, and it seems to have links in code fragments: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://akkartik.name/countPaths.html",
+                                "text": "http://akkartik.name/countPaths.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613629318.245700",
+        "parent_user_id": "UDQKHNP51"
+    }
+]

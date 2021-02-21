@@ -108,6 +108,10 @@ const AUTHORS = {
   Drewverlee: '[Drewverlee](https://drewverlee.github.io/)',
   'Henning Dieterichs': '[Henning Dieterichs](https://twitter.com/hediet_dev)',
   'Breck Yunits': '[Breck Yunits](https://twitter.com/breckyunits)',
+  'Steve Krouse': '[Steve Krouse](https://twitter.com/stevekrouse)',
+  'Stathis Sideris': '[Stathis Sideris](https://twitter.com/stathissideris)',
+  'Martin Sosic': '[Martin Sosic](https://twitter.com/MartinSosic)',
+  'Adnan Chaumette': '[Adnan Chaumette](https://twitter.com/AdnanChaumette)',
 };
 
 export {AUTHORS};
