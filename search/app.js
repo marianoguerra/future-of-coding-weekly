@@ -1,5 +1,5 @@
 //@format
-/*globals Vue, Set*/
+/*globals Vue, Set, Promise*/
 import {
   loadMsgsForDay,
   loadUsers,
@@ -8,13 +8,16 @@ import {
 } from '/history/history.js';
 
 function main() {
-  new Vue({
+  const app = new Vue({
     el: '#app',
     data: {
       channel: 'thinking-together',
       search: '',
+      offset: 0,
+      limit: 100,
       isError: false,
       errorMsg: '',
+      loading: false,
       msgsByTs: {},
       allMsgs: [],
       msgs: [],
@@ -23,7 +26,16 @@ function main() {
       channelsLoadProm: null,
       usersLoadProm: null,
     },
+    computed: {
+      hasResults: function () {
+        return this.msgs.length > 0;
+      },
+    },
     methods: {
+      loadMore: function () {
+        this.offset += this.limit;
+        this.doSearchOnly();
+      },
       loadUsers: function () {
         if (this.usersLoadProm) {
           return this.usersLoadProm;
@@ -47,10 +59,17 @@ function main() {
         }
       },
       doSearch: function () {
+        this.offset = 0;
         this.msgs = [];
         this.allMsgs = [];
         this.msgsByTs = {};
-        fetch(`search/?query=${this.search}&channel=${this.channel}`)
+        this.doSearchOnly();
+      },
+      doSearchOnly: function () {
+        this.loading = true;
+        myFetch(
+          `search/?query=${this.search}&offset=${this.offset}&limit=${this.limit}`
+        )
           .then((r) => r.json())
           .then((data) => {
             if (data.ok) {
@@ -90,6 +109,9 @@ function main() {
               this.isError = true;
               this.errorMsg = data.reason;
             }
+          })
+          .finally(() => {
+            this.loading = false;
           });
       },
       loadMsgsByDay: function (daysToLoad, i, msgsByDay, olderMessagesToLoad) {
@@ -158,6 +180,20 @@ function main() {
       },
     },
   });
+
+  window.setSearchLimit = function (l) {
+    app.limit = l;
+  };
+}
+
+window.slowdownMs = 0;
+function myFetch(url) {
+  return new Promise((resolve, reject) =>
+    window.setTimeout(
+      () => fetch(url).catch(reject).then(resolve),
+      window.slowdownMs
+    )
+  );
 }
 
 main();

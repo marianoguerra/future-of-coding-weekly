@@ -40,7 +40,10 @@
               </div>-->
             </div>
 
-            <button id="load" v-on:click="doSearch()">Search</button>
+            <button id="load" v-on:click="doSearch()" :disabled="loading">
+              <span v-if="loading">Wait</span>
+              <span v-if="!loading">Search</span>
+            </button>
           </div>
         </div>
       </div>
@@ -67,6 +70,10 @@
 
         </div>
       </div>
+      <button id="more" v-if="hasResults" @click="loadMore()" :disabled="loading">
+        <span v-if="loading">Wait</span>
+        <span v-if="!loading">More</span>
+      </button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

@@ -23,7 +23,7 @@ pip3 install asonic sanic
 Ingest:
 
 ```
-python3 search/tools/ingest.py 'history/20*'
+python3 search/tools/ingest.py 'history/20*' history/users.json
 ```
 
 ### Start Local Server
