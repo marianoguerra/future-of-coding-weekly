@@ -53,7 +53,7 @@ def getHistory(pageableObject, channelId, from_dtime, to_dtime, pageSize = 100):
             channel = channelId,
             latest  = lastTimestamp,
             oldest  = datetime_to_slack_timestamp(from_dtime),
-            count   = pageSize
+            limit = pageSize
         ).body
 
         messages.extend(response['messages'])
@@ -153,7 +153,7 @@ def fetchPublicChannels(channels, from_dtime, to_dtime):
         print(u"Fetching Public Channel: {0} {1} {2}".format(channel_name, from_dtime, to_dtime))
         base_dir = os.path.join(date_to_dirname(from_dtime))
         mkdir(base_dir)
-        messages = getHistory(slack.channels, channel['id'], from_dtime, to_dtime)
+        messages = getHistory(slack.conversations, channel['id'], from_dtime, to_dtime)
         parseMessages(base_dir, channel_name, messages, 'channel')
 
 def date_to_dirname(date):
@@ -197,7 +197,7 @@ def bootstrapKeyValues():
         users.extend(users_page)
         sleep(1)
 
-    channels = slack.channels.list().body['channels']
+    channels = slack.conversations.list().body['channels']
     print(u"Found {0} Public Channels".format(len(channels)))
     sleep(1)
 
