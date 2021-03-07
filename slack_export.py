@@ -66,7 +66,15 @@ def getHistory(pageableObject, channelId, from_dtime, to_dtime, pageSize = 100):
 
     messages.sort(key = lambda message: message['ts'])
 
-    return messages
+    threads = []
+    for message in messages:
+        ts = message['ts']
+        replies = slack.conversations.replies(channel = channelId, ts = ts)
+        threads.extend(replies.body['messages'])
+
+    threads.sort(key = lambda message: message['ts'])
+
+    return threads
 
 
 def mkdir(directory):
