@@ -168,7 +168,7 @@ function enrichAttachment(att) {
         textFromCode(EMOJI_NAME_TO_CODE[emojiCode])
       )
       .replace(/\n/g, '\n> ');
-    att.$text = `> 🐦 [${att.author_name}](https://twitter.com/${att.author_subname}): ${text}`;
+    att.$text = `\n> 🐦 [${att.author_name}](https://twitter.com/${att.author_subname}): ${text}`;
   } else if (att.service_name === 'YouTube') {
     att.$text = `> 🎥 [${att.title}](${att.title_link})`;
   } else if (att.title && att.title_link) {
@@ -283,7 +283,7 @@ function enrichMessage(msg, args, isOlder) {
 
       const file = files[i],
         mimetype = file.mimetype || '';
-      let icon = '🔗';
+      let icon = '📝';
       if (mimetype.startsWith('video/')) {
         icon = '🎥';
       } else if (mimetype.startsWith('image/')) {
