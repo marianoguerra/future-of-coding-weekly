@@ -112,6 +112,8 @@ const AUTHORS = {
   'Stathis Sideris': '[Stathis Sideris](https://twitter.com/stathissideris)',
   'Martin Sosic': '[Martin Sosic](https://twitter.com/MartinSosic)',
   'Adnan Chaumette': '[Adnan Chaumette](https://twitter.com/AdnanChaumette)',
+  'elvis chidera': '[elvis chidera](https://elvischidera.com)',
+  bmitc: '[bmitc](https://github.com/bmitc)',
 };
 
 export {AUTHORS};
