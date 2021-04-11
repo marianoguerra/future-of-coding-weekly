@@ -10,8 +10,14 @@ from urllib.request import Request, urlopen
 def download_slack_file(url, file_name, token, output_path):
     path = os.path.join(output_path, file_name)
     req = Request(url, headers={'Authorization': 'Bearer ' + token})
-    with open(path, 'wb') as handle:
-        handle.write(urlopen(req).read())
+    if os.path.exists(path):
+        print("file exists, skiping")
+        return False
+    else:
+        with open(path, 'wb') as handle:
+            handle.write(urlopen(req).read())
+
+        return True
 
 def download_attachment(file, msg, token, output_path):
     file_id = file["id"]
@@ -22,8 +28,8 @@ def download_attachment(file, msg, token, output_path):
 
     if url:
         print("downloading", url, "to", file_name, "token", token)
-        download_slack_file(url, file_name, token, output_path)
-        time.sleep(15)
+        if download_slack_file(url, file_name, token, output_path):
+            time.sleep(15)
     else:
         print("no url", file)
 
