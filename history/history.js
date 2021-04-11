@@ -264,8 +264,11 @@ function addMsgAttachmentsText(msg) {
 
 const FILES_BASE_URL = 'http://history.futureofcoding.org/history/msg_files/';
 function msgFileToUrl({id, filetype}) {
-  const extension = filetype ? '.' + filetype : '';
-  return FILES_BASE_URL + id + extension;
+  const extension = filetype ? '.' + filetype : '',
+    filename = id + extension,
+    prefix = id.slice(0, 3);
+
+  return FILES_BASE_URL + prefix + '/' + filename;
 }
 
 //const types = {};
