@@ -51,3 +51,15 @@ Change the dates (usually from monday to monday) and the output dir
 export SLACK_TOKEN=xoxp-your-token-here
 python3 slack_export.py --token $SLACK_TOKEN --publicChannels general feedback --from-date=2020-04-06 --to-date=2020-04-13 --output-dir=history/2020-04-w-2
 ```
+
+## Asset storage
+
+https://docs.ipfs.io/install/command-line/#official-distributions
+https://www.maxlaumeister.com/u/run-ipfs-on-boot-ubuntu-debian/
+
+```
+If your app's bot user has permission to access a file, your app can download
+file data by accessing url_private_download etc. with
+Authorization: Bearer xoxb-***
+header.
+```

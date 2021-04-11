@@ -262,6 +262,12 @@ function addMsgAttachmentsText(msg) {
   }
 }
 
+const FILES_BASE_URL = 'http://history.futureofcoding.org/history/msg_files/';
+function msgFileToUrl({id, filetype}) {
+  const extension = filetype ? '.' + filetype : '';
+  return FILES_BASE_URL + id + extension;
+}
+
 //const types = {};
 function enrichMessage(msg, args, isOlder) {
   const {users} = args,
@@ -297,7 +303,7 @@ function enrichMessage(msg, args, isOlder) {
       }
 
       if (file.title) {
-        file.$text = `> ${icon} [${file.title}](${file.url_private})`;
+        file.$text = `> ${icon} [${file.title}](${msgFileToUrl(file)})`;
         accum += file.$text;
       }
     }
