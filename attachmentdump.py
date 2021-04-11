@@ -8,7 +8,10 @@ import glob
 from urllib.request import Request, urlopen
 
 def download_slack_file(url, file_name, token, output_path):
-    path = os.path.join(output_path, file_name)
+    prefix = file_name[:3]
+    parent_dir = os.path.join(output_path, prefix)
+    path = os.path.join(parent_dir, file_name)
+    os.makedirs(parent_dir, exist_ok=True)
     req = Request(url, headers={'Authorization': 'Bearer ' + token})
     if os.path.exists(path):
         print("file exists, skiping")
