@@ -5,3 +5,7 @@ history-index:
 update-search-index:
 	git pull
 	python3 search/tools/ingest.py 'history/20*' history/users.json
+
+remove-files-throttle-response:
+	rm $(grep -lR "https://a.slack-edge.com/" history/msg_files/* | uniq)
+
