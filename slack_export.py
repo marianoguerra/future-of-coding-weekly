@@ -6,7 +6,7 @@ import io
 import shutil
 import copy
 from datetime import datetime, timedelta
-from pick import pick
+#from pick import pick
 from time import sleep
 
 # START monkey patching stuff
