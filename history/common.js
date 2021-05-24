@@ -114,6 +114,7 @@ const AUTHORS = {
   'Adnan Chaumette': '[Adnan Chaumette](https://twitter.com/AdnanChaumette)',
   'elvis chidera': '[elvis chidera](https://elvischidera.com)',
   bmitc: '[bmitc](https://github.com/bmitc)',
+  forresto: '[forresto](https://twitter.com/forresto)'
 };
 
 export {AUTHORS};
