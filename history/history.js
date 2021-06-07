@@ -382,7 +382,7 @@ function mapElements(o, fn, args, joinStr) {
 function blockToMd(block, args) {
   switch (block.type) {
     case 'rich_text':
-      return mapElements(block, elementToMd, args, '');
+      return mapElements(block, elementToMd, args, '\n\n');
     default:
       console.warn('Unknown type', block.type, block);
       return `Unknown type ${block.type}`;
