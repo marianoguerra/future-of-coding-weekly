@@ -1,0 +1,409 @@
+[
+    {
+        "client_msg_id": "75a5617b-b616-4c46-9ba1-7fc873ef9a5f",
+        "type": "message",
+        "text": "More thoughts on Hest, carrying on from <https://twitter.com/spiralganglion/status/1401625480348848132> (Hi <@UC2A2ARPT>!)\n\nI had some thoughts on synchronization of data, which I realize is an aspect of Hest's design space that's not fully explored, so grain of salt and all that :slightly_smiling_face:\n\nMostly I want to draw a parallel to chip design (VHDL/Verilog), which if you squint a bit is a lot like Hest but with much, much worse UX. You run into the same synchronization problems there, and the solution is actually really close to both the \"sync\" primitive and the \"Fibers\" you describe in your podcast \u2013 you put latches/registers between components of your design.\n\nIn fact, those are a nice implicit way that abstraction and structure can arise in a hardware design \u2013 when you realize you can't do all the things you want to instantaneously, you add a latch, which then delineates a component/pipeline stage.\n\nOne point (in my eyes) in favor of calling it a \"barrier\" rather than the concept of \"Fibers\" is that with Fibers, you're essentially making the bug undetectable. Consider a -thing- with two inputs, but one of them does not arrive.\n\nIf your inputs are combined at a barrier, your code would get stuck if either input didn't arrive in time, and the program might grind to a halt.\n\nBut with Fibers, presumably one of your inputs just wouldn't change and you'd have stale data on that input, but not the other. That's a recipe for producing garbage outputs and never noticing until fifteen functions later (see also: ROS :face_with_rolling_eyes: \u2013 or any pub-sub system, really).",
+        "user": "U0242H3GHHT",
+        "ts": "1623018113.065400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Mz7Fh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "More thoughts on Hest, carrying on from "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://twitter.com/spiralganglion/status/1401625480348848132"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (Hi "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UC2A2ARPT"
+                            },
+                            {
+                                "type": "text",
+                                "text": "!)\n\nI had some thoughts on synchronization of data, which I realize is an aspect of Hest's design space that's not fully explored, so grain of salt and all that "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nMostly I want to draw a parallel to chip design (VHDL/Verilog), which if you squint a bit is a lot like Hest but with much, much worse UX. You run into the same synchronization problems there, and the solution is actually really close to both the \"sync\" primitive and the \"Fibers\" you describe in your podcast \u2013 you put latches/registers between components of your design.\n\nIn fact, those are a nice implicit way that abstraction and structure can arise in a hardware design \u2013 when you realize you can't do all the things you want to instantaneously, you add a latch, which then delineates a component/pipeline stage.\n\nOne point (in my eyes) in favor of calling it a \"barrier\" rather than the concept of \"Fibers\" is that with Fibers, you're essentially making the bug undetectable. Consider a -thing- with two inputs, but one of them does not arrive.\n\nIf your inputs are combined at a barrier, your code would get stuck if either input didn't arrive in time, and the program might grind to a halt.\n\nBut with Fibers, presumably one of your inputs just wouldn't change and you'd have stale data on that input, but not the other. That's a recipe for producing garbage outputs and never noticing until fifteen functions later (see also: ROS "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "face_with_rolling_eyes"
+                            },
+                            {
+                                "type": "text",
+                                "text": " \u2013 or any pub-sub system, really)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "reply_count": 8,
+        "reply_users_count": 2,
+        "latest_reply": "1623343888.095500",
+        "reply_users": [
+            "UC2A2ARPT",
+            "U0242H3GHHT"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "dc3bfe82-1f6d-416d-867b-f90ae229ac5c",
+        "type": "message",
+        "text": "I saw this message right when you posted it, but decided to take some time to think about it before responding.\n\n(As an aside \u2014 the relation to chip design is choice. I work for a company that studies hydraulic &amp; electrical systems, so there's a ton of \"I read schematics\" DNA going into Hest. Not quite the same domain, but adjacent.)\n\n&gt; But with Fibers, presumably one of your inputs just wouldn't change and you'd have stale data on that input, but not the other.\nMy initial thought is that this is probably _fine_. As in: it's not as good as _not_ hitting this bug, granted, but it's a bug that should be easy to avoid most of the time and easy to solve when it does come up. If you hit this bug, then when you notice it 15 functions later, you just rewind execution back until you see where the problem cropped up.\n\nThat was my initial thought. But my prevailing thought is... that I don't understand what you mean by this:\n\n&gt; One point (in my eyes) in favor of calling it a \"barrier\" rather than the concept of \"Fibers\"\nIs a barrier like the \"sync\" node in SpaceChem? Is it something else?\n\nI'd like to hear more about what you think I should do instead of fibers. I think you're onto something (*), but I don't understand it well enough, even after a day of reflecting on it.\n\n(* Fibers are a conflation of several things. They hold state, they help with coordination. There are a few other approaches I've considered that keep those things separate. So it's very likely that I'll find more ways to slice up these concepts by looking at how other domains, like chips, handle similar problems.)",
+        "user": "UC2A2ARPT",
+        "ts": "1623084253.079900",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1623084335.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "U/0",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I saw this message right when you posted it, but decided to take some time to think about it before responding.\n\n(As an aside \u2014 the relation to chip design is choice. I work for a company that studies hydraulic & electrical systems, so there's a ton of \"I read schematics\" DNA going into Hest. Not quite the same domain, but adjacent.)\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "But with Fibers, presumably one of your inputs just wouldn't change and you'd have stale data on that input, but not the other."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nMy initial thought is that this is probably "
+                            },
+                            {
+                                "type": "text",
+                                "text": "fine",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". As in: it's not as good as "
+                            },
+                            {
+                                "type": "text",
+                                "text": "not",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " hitting this bug, granted, but it's a bug that should be easy to avoid most of the time and easy to solve when it does come up. If you hit this bug, then when you notice it 15 functions later, you just rewind execution back until you see where the problem cropped up.\n\nThat was my initial thought. But my prevailing thought is... that I don't understand what you mean by this:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One point (in my eyes) in favor of calling it a \"barrier\" rather than the concept of \"Fibers\""
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nIs a barrier like the \"sync\" node in SpaceChem? Is it something else?\n\nI'd like to hear more about what you think I should do instead of fibers. I think you're onto something (*), but I don't understand it well enough, even after a day of reflecting on it.\n\n(* Fibers are a conflation of several things. They hold state, they help with coordination. There are a few other approaches I've considered that keep those things separate. So it's very likely that I'll find more ways to slice up these concepts by looking at how other domains, like chips, handle similar problems.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "parent_user_id": "U0242H3GHHT"
+    },
+    {
+        "client_msg_id": "C92C3525-CE21-4F57-9885-DB0B466E5B89",
+        "type": "message",
+        "text": "Sorry, my bad for phrasing that sentence badly.\n\nBy \n&gt; calling it a \u201ebarrier\u201c rather than the concept of \u201eFibers\u201c\nwhat I was trying to say is that I think a sync node (which I am calling barrier, because that\u2018s a slightly more precise term imo) would be my preferred solution, even if it does force you to solve the issue of handling the resulting \u201ejams\u201c",
+        "user": "U0242H3GHHT",
+        "ts": "1623089010.088300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=7/t",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sorry, my bad for phrasing that sentence badly.\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nBy \n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "calling it a \u201ebarrier\u201c rather than the concept of \u201eFibers\u201c"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "what I was trying to say is that I think a sync node (which I am calling barrier, because that\u2018s a slightly more precise term imo) would be my preferred solution, even if it does force you to solve the issue of handling the resulting \u201ejams\u201c"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "parent_user_id": "U0242H3GHHT"
+    },
+    {
+        "client_msg_id": "E932A159-C3B3-48CF-BDF6-B4A39826D03A",
+        "type": "message",
+        "text": "I think we\u2018re fundamentally in agreement that something should happen at the boundaries of an \u201eabstraction\u201c, there\u2018s just multiple ways to argue how best to do it :)",
+        "user": "U0242H3GHHT",
+        "ts": "1623089086.090400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "z5X",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think we\u2018re fundamentally in agreement that something should happen at the boundaries of an \u201eabstraction\u201c, there\u2018s just multiple ways to argue how best to do it :)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "parent_user_id": "U0242H3GHHT",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "69FB0758-43FE-4887-A138-CC492FF9291C",
+        "type": "message",
+        "text": "Also, I was wondering how a \u201esync\u201c node is different from just a point with multiple incoming lines. Do those exist in Hest?",
+        "user": "U0242H3GHHT",
+        "ts": "1623089522.091700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lWt=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Also, I was wondering how a \u201esync\u201c node is different from just a point with multiple incoming lines. Do those exist in Hest?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "parent_user_id": "U0242H3GHHT"
+    },
+    {
+        "client_msg_id": "9bc72400-974c-452b-a326-6f0268db88c9",
+        "type": "message",
+        "text": "In my (not yet prototyped) designs for various potential approaches to abstraction, there would be the ability to create an abstraction that has distinct \"ports\" for multiple inputs, like what you'd find in a traditional node-and-wire / patcher visual programming system. I'm not sure that I'd want this to be part of the core language model, but I'd like to be able to build abstractions that can do this out of whatever the core model allows.\n\nIn the current prototypes, yes, you can attach multiple edges to a node. I wrote a blog post about how that makes the time-rewinding behaviour a little thorny: <http://ivanish.ca/hest-time-travel|ivanish.ca/hest-time-travel>",
+        "user": "UC2A2ARPT",
+        "ts": "1623302187.094800",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1623302220.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rOl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In my (not yet prototyped) designs for various potential approaches to abstraction, there would be the ability to create an abstraction that has distinct \"ports\" for multiple inputs, like what you'd find in a traditional node-and-wire / patcher visual programming system. I'm not sure that I'd want this to be part of the core language model, but I'd like to be able to build abstractions that can do this out of whatever the core model allows.\n\nIn the current prototypes, yes, you can attach multiple edges to a node. I wrote a blog post about how that makes the time-rewinding behaviour a little thorny: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://ivanish.ca/hest-time-travel",
+                                "text": "ivanish.ca/hest-time-travel"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "parent_user_id": "U0242H3GHHT"
+    },
+    {
+        "client_msg_id": "a068e4f0-4d3b-475f-8fd5-8045d6df1e80",
+        "type": "message",
+        "text": "As for how this is different than a sync node \u2014 that's the entire point of this inquiry into coordination mechanisms.\n\nRight now, if you have two lines that come in to a single point (function), then that function will be invoked whenever _any_ data arrives at it. Up until now, I've been regarding this as.. akin to having a function that is called from more than one place. Each incoming edge represents a different caller of the function. But this doesn't offer a nice way to build systems that need to call a function with more than one argument. So that's what I'm trying to.. figure out.",
+        "user": "UC2A2ARPT",
+        "ts": "1623302384.095100",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "VK7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "As for how this is different than a sync node \u2014 that's the entire point of this inquiry into coordination mechanisms.\n\nRight now, if you have two lines that come in to a single point (function), then that function will be invoked whenever "
+                            },
+                            {
+                                "type": "text",
+                                "text": "any",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " data arrives at it. Up until now, I've been regarding this as.. akin to having a function that is called from more than one place. Each incoming edge represents a different caller of the function. But this doesn't offer a nice way to build systems that need to call a function with more than one argument. So that's what I'm trying to.. figure out."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "parent_user_id": "U0242H3GHHT"
+    },
+    {
+        "client_msg_id": "a4d805d0-2d40-4293-9f73-78d42b003a16",
+        "type": "message",
+        "text": "Thanks for the link, that made things much more clear!\n\nLooks like you're allowing the \"function points\" (like `*=`) to have internal state too, which makes rewinding manually-inserted points even more tricky. \nIt's a fascinating design space, and my initial instinct is to go very functional on it, but that would perhaps make the entire system less accessible (I've struggled with a similar tradeoff at work, actually)",
+        "user": "U0242H3GHHT",
+        "ts": "1623319433.095300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dLB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for the link, that made things much more clear!\n\nLooks like you're allowing the \"function points\" (like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "*=",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ") to have internal state too, which makes rewinding manually-inserted points even more tricky. \nIt's a fascinating design space, and my initial instinct is to go very functional on it, but that would perhaps make the entire system less accessible (I've struggled with a similar tradeoff at work, actually)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "parent_user_id": "U0242H3GHHT"
+    },
+    {
+        "client_msg_id": "524efaa6-397a-4e9a-ad5c-3d58b91adb2a",
+        "type": "message",
+        "text": "Yeah, state is something I'm forcing myself to wrestle with, at least for now. I think it'd be much easier to design this if there was no state beyond the moving data points. But I think there are a lot of playful things I can do if state is allowed to go anywhere, even if it makes things harder to reason about, harder to design, harder to implement.\n\nIf it turns out to be just too difficult to work with, I can always simplify by removing state.",
+        "user": "UC2A2ARPT",
+        "ts": "1623343888.095500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "n=+p",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, state is something I'm forcing myself to wrestle with, at least for now. I think it'd be much easier to design this if there was no state beyond the moving data points. But I think there are a lot of playful things I can do if state is allowed to go anywhere, even if it makes things harder to reason about, harder to design, harder to implement.\n\nIf it turns out to be just too difficult to work with, I can always simplify by removing state."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623018113.065400",
+        "parent_user_id": "U0242H3GHHT"
+    }
+]
