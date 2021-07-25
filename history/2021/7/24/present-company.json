@@ -1,0 +1,198 @@
+[
+    {
+        "client_msg_id": "9BC27129-BDB8-42B4-B84B-8D32BDE49522",
+        "type": "message",
+        "text": "Does anyone have recommendations for motion design \"coding\" guidance. I'm interested in making a little FRP-oriented library for managing motion designs and fluid transitions. My implementation will be for web, but I suspect there are a lot of ideas from other ecosystems as well (like data viz, and game dev)\nRight now, I have some foundational \"spring\" physics to manage my input \"t\" step values. Next, I'm planning on designing a basic API for describing the property value mapping mathematics.",
+        "user": "UFPPABQ7P",
+        "ts": "1627141602.077200",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UFPPABQ7P",
+            "ts": "1627141669.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uwAu/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Does anyone have recommendations for motion design \"coding\" guidance. I'm interested in making a little FRP-oriented library for managing motion designs and fluid transitions. My implementation will be for web, but I suspect there are a lot of ideas from other ecosystems as well (like data viz, and game dev)\nRight now, I have some foundational \"spring\" physics to manage my input \"t\" step values. Next, I'm planning on designing a basic API for describing the property value mapping mathematics."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1627141602.077200",
+        "reply_count": 4,
+        "reply_users_count": 2,
+        "latest_reply": "1627210922.078200",
+        "reply_users": [
+            "UFPPABQ7P",
+            "UC2A2ARPT"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "4132f7aa-c3d7-4ced-8f4d-c70e0b88ec86",
+        "type": "message",
+        "text": "I feel like Puredata or MaxMSP might be good to take inspiration from",
+        "user": "UFPPABQ7P",
+        "ts": "1627143763.077400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "frQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I feel like Puredata or MaxMSP might be good to take inspiration from"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1627141602.077200",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "b52b7464-4daf-46c6-b296-175d1661dbb9",
+        "type": "message",
+        "text": "Are you asking for input on things like... how to structure the concepts so that you get the best motions possible?\n\nAs a motivating example, one approach might be to create a data structure that contains a start value, end value, perhaps the current time, and perhaps some ease function (or spring, sure). Then, each frame, you increment the time and compute a new intermedia value to display. But then what do you do if, midway through the transition, the destination needs to change? Or what happens if you need to cancel the transition mid-flight? You'll probably get discontinuities.\n\nA better approach might be to store a current value and velocity, as well as a function that handles acceleration with respect to some goal value (again, could be a spring). Then if you need to change the destination, you can just change the acceleration function, and the velocity changes smoothly as a result, and you don't get discontinuities. But what if you need to revert the transition, and return to the start point? You'll need to store that too.\n\nIf this is the level of design thinking you're looking for, the best thing I remember coming across is a WWDC session titled <https://developer.apple.com/videos/play/wwdc2018/803/|Designing Fluid Interfaces>, where they talk about _the stuff you want_ when designing an animation abstraction, plus how to design the coding interface so that it's artist-friendly (in other words, so that you can more easily predict what sort of motion you'll get when specifying parameters).\n\nHope that helps!",
+        "user": "UC2A2ARPT",
+        "ts": "1627181804.077600",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "Apple Developer",
+                "title": "Designing Fluid Interfaces - WWDC18 - Videos - Apple Developer",
+                "title_link": "https://developer.apple.com/videos/play/wwdc2018/803/",
+                "text": "Discover the techniques used to create the fluid gestural interface of iPhone X. Learn how to design with gestures and motion that feel...",
+                "fallback": "Apple Developer: Designing Fluid Interfaces - WWDC18 - Videos - Apple Developer",
+                "image_url": "https://devimages-cdn.apple.com/wwdc-services/images/42/2247/2247_wide_250x141_2x.jpg",
+                "from_url": "https://developer.apple.com/videos/play/wwdc2018/803/",
+                "image_width": 443,
+                "image_height": 250,
+                "image_bytes": 34387,
+                "service_icon": "https://developer.apple.com/favicon.ico",
+                "id": 1,
+                "original_url": "https://developer.apple.com/videos/play/wwdc2018/803/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "UL+uo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Are you asking for input on things like... how to structure the concepts so that you get the best motions possible?\n\nAs a motivating example, one approach might be to create a data structure that contains a start value, end value, perhaps the current time, and perhaps some ease function (or spring, sure). Then, each frame, you increment the time and compute a new intermedia value to display. But then what do you do if, midway through the transition, the destination needs to change? Or what happens if you need to cancel the transition mid-flight? You'll probably get discontinuities.\n\nA better approach might be to store a current value and velocity, as well as a function that handles acceleration with respect to some goal value (again, could be a spring). Then if you need to change the destination, you can just change the acceleration function, and the velocity changes smoothly as a result, and you don't get discontinuities. But what if you need to revert the transition, and return to the start point? You'll need to store that too.\n\nIf this is the level of design thinking you're looking for, the best thing I remember coming across is a WWDC session titled "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://developer.apple.com/videos/play/wwdc2018/803/",
+                                "text": "Designing Fluid Interfaces"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", where they talk about "
+                            },
+                            {
+                                "type": "text",
+                                "text": "the stuff you want",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " when designing an animation abstraction, plus how to design the coding interface so that it's artist-friendly (in other words, so that you can more easily predict what sort of motion you'll get when specifying parameters).\n\nHope that helps!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1627141602.077200",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "abf191b7-41d8-4dd4-b703-12fadceaa837",
+        "type": "message",
+        "text": "(Note that there's a transcript, and you can click words in the transcript to jump the video to that spot)\n\nI would suggest jumping ahead to 7:00, where it begins talking about \"interruption\".",
+        "user": "UC2A2ARPT",
+        "ts": "1627182263.077900",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1627182347.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "s5zvU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(Note that there's a transcript, and you can click words in the transcript to jump the video to that spot)\n\nI would suggest jumping ahead to 7:00, where it begins talking about \"interruption\"."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1627141602.077200",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "aee065dc-59d9-48e2-9bc7-dc59b347c66f",
+        "type": "message",
+        "text": "Thanks <@UC2A2ARPT>, this sounds great! Using a spring as the lowest primitive has allowed me to avoid interrupted motions. The talk looks really applicable and inspiring, thanks for sharing!",
+        "user": "UFPPABQ7P",
+        "ts": "1627210922.078200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1GE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UC2A2ARPT"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", this sounds great! Using a spring as the lowest primitive has allowed me to avoid interrupted motions. The talk looks really applicable and inspiring, thanks for sharing!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1627141602.077200",
+        "parent_user_id": "UFPPABQ7P"
+    }
+]
