@@ -118,9 +118,17 @@ const AUTHORS = {
   'Yousef El-Dardiry': '[Yousef El-Dardiry](https://twitter.com/YousefED)',
   'Florian Schulz': '[Florian Schulz](https://twitter.com/getflourish)',
   OperonGuy: '[OperonGuy](https://twitter.com/OperonGuy)',
-  xyzzy: '[xyzzy](https://xyzzyapps.link)',
+  xyzzy: '[xyzzy](http://blog.xyzzyapps.link)',
   'Jean-Louis Villecroze':
     '[Jean-Louis Villecroze](https://twitter.com/CocoaGeek)',
+  'Glen Chiacchieri': '[Glen Chiacchieri](https://twitter.com/Glench)',
+  'Marcel Goethals': '[Marcel Goethals](https://twitter.com/wolkenmachine)',
+  'Marcin Ignac': '[Marcin Ignac](https://twitter.com/marcinignac)',
+  'Rob Haisfield': '[Rob Haisfield](https://twitter.com/RobertHaisfield)',
+  Shalabh: '[Shalabh](https://twitter.com/chatur_shalabh)',
+  'Cole Lawrence': '[Cole Lawrence](https://github.com/colelawrence)',
+  'Braden Eliason': '[Braden Eliason](https://github.com/bradeneliason)',
+  //'': '[]()',
 };
 
 export {AUTHORS};
