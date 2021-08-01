@@ -118,7 +118,7 @@ const AUTHORS = {
   'Yousef El-Dardiry': '[Yousef El-Dardiry](https://twitter.com/YousefED)',
   'Florian Schulz': '[Florian Schulz](https://twitter.com/getflourish)',
   OperonGuy: '[OperonGuy](https://twitter.com/OperonGuy)',
-  xyzzy: '[xyzzy](https://xyzzyapps.link/',
+  xyzzy: '[xyzzy](https://xyzzyapps.link)',
   'Jean-Louis Villecroze':
     '[Jean-Louis Villecroze](https://twitter.com/CocoaGeek)',
 };
