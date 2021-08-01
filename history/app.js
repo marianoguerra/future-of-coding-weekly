@@ -19,6 +19,7 @@ import {
   EXPORT_HTML_SUFFIX,
   setHistoryPathBase,
 } from './history.js';
+import {AUTHORS} from './common.js';
 
 setHistoryPathBase('.');
 function getBaseUrl() {
@@ -285,7 +286,27 @@ function main() {
                 .filter((msg) => !msg.$isOlder)
                 .map((msg) => msgToMdNL(msg, linkPrefix))
                 .join('\n\n---\n\n');
+
           downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
+          this.printMessageUsersNotInAuthors();
+        },
+        printMessageUsersNotInAuthors() {
+          console.log(
+            Array.from(this.getMessageUsersNotInAuthors(this.history.msgs))
+              .sort()
+              .join(', ')
+          );
+        },
+        getMessageUsersNotInAuthors(msgs) {
+          const result = new Set();
+          msgs.forEach((msg) => {
+            const username = msg.$userName;
+            if (AUTHORS[username] === undefined) {
+              result.add(username);
+            }
+          });
+
+          return result;
         },
         exportAsHTML: function () {
           const msgsOutputNode = document.getElementById('msgs-output'),

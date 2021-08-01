@@ -114,7 +114,13 @@ const AUTHORS = {
   'Adnan Chaumette': '[Adnan Chaumette](https://twitter.com/AdnanChaumette)',
   'elvis chidera': '[elvis chidera](https://elvischidera.com)',
   bmitc: '[bmitc](https://github.com/bmitc)',
-  forresto: '[forresto](https://twitter.com/forresto)'
+  forresto: '[forresto](https://twitter.com/forresto)',
+  'Yousef El-Dardiry': '[Yousef El-Dardiry](https://twitter.com/YousefED)',
+  'Florian Schulz': '[Florian Schulz](https://twitter.com/getflourish)',
+  OperonGuy: '[OperonGuy](https://twitter.com/OperonGuy)',
+  xyzzy: '[xyzzy](https://xyzzyapps.link/',
+  'Jean-Louis Villecroze':
+    '[Jean-Louis Villecroze](https://twitter.com/CocoaGeek)',
 };
 
 export {AUTHORS};
