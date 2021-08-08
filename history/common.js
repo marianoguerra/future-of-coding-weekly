@@ -128,6 +128,14 @@ const AUTHORS = {
   Shalabh: '[Shalabh](https://twitter.com/chatur_shalabh)',
   'Cole Lawrence': '[Cole Lawrence](https://github.com/colelawrence)',
   'Braden Eliason': '[Braden Eliason](https://github.com/bradeneliason)',
+  'Andrew F': '[Andrew F](http://github.com/andrewf)',
+  'Kevin Greer': '[Kevin Greer](https://twitter.com/kgrgreer)',
+  taowen: '[taowen](https://github.com/taowen)',
+  'Yusuke Shinyama': '[Yusuke Shinyama](https://github.com/euske)',
+  'Tak Tran': '[Tak Tran](https://twitter.com/zlog)',
+  'Alexander Chichigin': '[Alexander Chichigin](https://github.com/gabriel-fallen/)',
+  'Pablo Donato': '[Pablo Donato](https://twitter.com/pablogician)',
+  'Xavier': '[Xavier](https://lambein.xyz)',
   //'': '[]()',
 };
 
