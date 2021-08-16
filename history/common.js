@@ -136,6 +136,7 @@ const AUTHORS = {
   'Alexander Chichigin': '[Alexander Chichigin](https://github.com/gabriel-fallen/)',
   'Pablo Donato': '[Pablo Donato](https://twitter.com/pablogician)',
   'Xavier': '[Xavier](https://lambein.xyz)',
+  'Denny Vrandečić': '[Denny Vrandečić](https://twitter.com/vrandezo)',
   //'': '[]()',
 };
 

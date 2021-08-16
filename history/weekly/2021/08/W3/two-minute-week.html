@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2021-08-13T12:09:25.012Z" class="post"><span class="user">Maikel van de Lisdonk</span> <a href="#2021-08-13T12:09:25.012Z" class="date">2021-08-13 12:09:25</a> <div class="message"><p>Hi, in my last update I promised to make a video on the visual webassembly compiler that I am working on as a subproject of my flow-based-programming editor. So, here it is :-) <a href="https://youtu.be/hxCrRkkhgiM"></a><a href="https://youtu.be/hxCrRkkhgiM">https://youtu.be/hxCrRkkhgiM</a> . I'll share some more info in the thread of this post and a picture of the whole flow as well.</p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://youtu.be/hxCrRkkhgiM">Visual programming a webassembly module</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2021-08-13T12:14:17.012Z" class="reply"><span class="user">Maikel van de Lisdonk</span> <a href="#2021-08-13T12:14:17.012Z" class="date">2021-08-13 12:14:17</a> <div class="message"><p>Some more details:</p>
+<p>To take a little step back, I want to illustrate the differences between what you see here in comparison to the flows that I’ve shown in other videos on this channel. The thing that they are sharing is the editor, which is a react component I build. But the way the flows are running, is totally different.&nbsp;</p>
+<p>The earlier flows are interpreted and event handlers are created based on the nodes in the flow. An event handler calls the node-tasks when it receives an event. The connections represent the events. When a node-tasks is done, it calls its output events.</p>
+<p>The node-tasks can contain quite some code themselves and from flow perspective they are much more high level.&nbsp;</p>
+<p>But the flow that you see in this video contains much smaller blocks which get compiled to webassembly in real-time in the browser using javascript when you add or change nodes.</p>
+<p>&nbsp;</p>
+<p>It somehow made more sense to layout this flow from top to bottom instead of left to right.</p>
+<p>I’ve color coded some blocks to help understand what is going on:</p>
+<p>the blue node is the start point</p>
+<p>yellow nodes are function definitions or the calling of a function</p>
+<p>orange nodes are subflow definitions and the inserting points for a subflow</p>
+<p>This flow contains two while loops for the x and y of the canvas so that we can calculate the color for each pixel. The inspiration for this was the tixyland demo from last year. So the flow also has a time parameter that is handled internally by the component that calls the compiled webassembly code from within a requestAnimationFrame.</p>
+<p>There are some helper variables which define 3 points and for each pixel the distance is calculated to these points. These 3 points are moving using a sine calculation. The sine function is actually the only javascript function that is called from within the webassembly code because webassembly has no sine function itself and my knowledge is too little to implement it in webassembly myself.</p>
+<p>In the future I hope to extend this flow to webassembly compiler to make it Turing complete and I also hope to add some features so that it can be used in more business line of applications and combine it with the other flow solution.</p>
+<p>In the editor I’ve added a feature so that I can move through a flow automatically while recording a video. I’ve tried to make it a smooth as possible but I am running into limitations of the browser or my programming capabilities. The problem is probably that it’s a hybrid model that uses both canvas and html for showing a flow. So, I am still thinking of doing a big rewrite using webgl and webassembly. If anybody has some suggestions on how to improve the performance then please let me know.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-08-13T12:16:51.012Z" class="reply"><span class="user">Maikel van de Lisdonk</span> <a href="#2021-08-13T12:16:51.012Z" class="date">2021-08-13 12:16:51</a> <div class="message"><p>This is the whole flow as an image, it was made manually using a lot of separate images and stiched together in photoshop since I can't easily export it as one readable image because of the hybrid model... although the readibility of this image can also be improved😅</p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="http://history.futureofcoding.org/history/msg_files/F02/F02APHVHN5D.png">flow.png</a></p>
+</blockquote>
+</div></div><div id="2021-08-13T21:39:50.012Z" class="reply"><span class="user">Tomas Čerkasas</span> <a href="#2021-08-13T21:39:50.012Z" class="date">2021-08-13 21:39:50</a> <div class="message"><p>So cool, thanks a lot for sharing and taking time to record video!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-08-13T22:30:57.013Z" class="reply"><span class="user">Ray Imber</span> <a href="#2021-08-13T22:30:57.013Z" class="date">2021-08-13 22:30:57</a> <div class="message"><p>I loved the feature to move through the flow while recording, but the acceleration from node to node is a bit fast for me. I'm afraid I got a little dizzy in some parts!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-08-14T05:19:08.015Z" class="reply"><span class="user">Maikel van de Lisdonk</span> <a href="#2021-08-14T05:19:08.015Z" class="date">2021-08-14 05:19:08</a> <div class="message"><p>Thanks for the feedback about the acceleration, in future video's I'll take that into account or maybe make the project available to play with it yourselves so you are more in control</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>

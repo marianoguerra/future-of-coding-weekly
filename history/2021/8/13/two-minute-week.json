@@ -1,0 +1,293 @@
+[
+    {
+        "client_msg_id": "894b5750-fdd6-4295-93ab-97f34bad4b5f",
+        "type": "message",
+        "text": "Hi, in my last update I promised to make a video on the visual webassembly compiler that I am working on as a subproject of my flow-based-programming editor. So, here it is :-) <https://youtu.be/hxCrRkkhgiM> . I'll share some more info in the thread of this post and a picture of the whole flow as well.",
+        "user": "U0123H7JRDM",
+        "ts": "1628856565.012000",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/",
+                "title": "Visual programming a webassembly module",
+                "title_link": "https://youtu.be/hxCrRkkhgiM",
+                "author_name": "Maikel van de Lisdonk",
+                "author_link": "https://www.youtube.com/channel/UCdTHgZGTRUmtwJTj2PoBG5A",
+                "thumb_url": "https://i.ytimg.com/vi/hxCrRkkhgiM/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Visual programming a webassembly module",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/hxCrRkkhgiM?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https://youtu.be/hxCrRkkhgiM",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "id": 1,
+                "original_url": "https://youtu.be/hxCrRkkhgiM"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hh4n",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi, in my last update I promised to make a video on the visual webassembly compiler that I am working on as a subproject of my flow-based-programming editor. So, here it is :-) "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://youtu.be/hxCrRkkhgiM"
+                            },
+                            {
+                                "type": "text",
+                                "text": " . I'll share some more info in the thread of this post and a picture of the whole flow as well."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1628856565.012000",
+        "reply_count": 5,
+        "reply_users_count": 3,
+        "latest_reply": "1628918348.015500",
+        "reply_users": [
+            "U0123H7JRDM",
+            "U02ADH37E02",
+            "U01661S9F34"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart_eyes",
+                "users": [
+                    "U02ADH37E02"
+                ],
+                "count": 1
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d77936e1-46ee-4fcf-bcfb-42e7859f3ca9",
+        "type": "message",
+        "text": "Some more details:\nTo take a little step back, I want to illustrate the differences between what you see here in comparison to the flows that I\u2019ve shown in other videos on this channel. The thing that they are sharing is the editor, which is a react component I build. But the way the flows are running, is totally different.\u00a0\n\nThe earlier flows are interpreted and event handlers are created based on the nodes in the flow. An event handler calls the node-tasks when it receives an event. The connections represent the events. When a node-tasks is done, it calls its output events.\nThe node-tasks can contain quite some code themselves and from flow perspective they are much more high level.\u00a0\n\nBut the flow that you see in this video contains much smaller blocks which get compiled to webassembly in real-time in the browser using javascript when you add or change nodes.\n\u00a0\nIt somehow made more sense to layout this flow from top to bottom instead of left to right.\n\nI\u2019ve color coded some blocks to help understand what is going on:\n\nthe blue node is the start point\nyellow nodes are function definitions or the calling of a function\norange nodes are subflow definitions and the inserting points for a subflow\n\nThis flow contains two while loops for the x and y of the canvas so that we can calculate the color for each pixel. The inspiration for this was the tixyland demo from last year. So the flow also has a time parameter that is handled internally by the component that calls the compiled webassembly code from within a requestAnimationFrame.\n\nThere are some helper variables which define 3 points and for each pixel the distance is calculated to these points. These 3 points are moving using a sine calculation. The sine function is actually the only javascript function that is called from within the webassembly code because webassembly has no sine function itself and my knowledge is too little to implement it in webassembly myself.\n\nIn the future I hope to extend this flow to webassembly compiler to make it Turing complete and I also hope to add some features so that it can be used in more business line of applications and combine it with the other flow solution.\n\nIn the editor I\u2019ve added a feature so that I can move through a flow automatically while recording a video. I\u2019ve tried to make it a smooth as possible but I am running into limitations of the browser or my programming capabilities. The problem is probably that it\u2019s a hybrid model that uses both canvas and html for showing a flow. So, I am still thinking of doing a big rewrite using webgl and webassembly. If anybody has some suggestions on how to improve the performance then please let me know.",
+        "user": "U0123H7JRDM",
+        "ts": "1628856857.012200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "b4dW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Some more details:\nTo take a little step back, I want to illustrate the differences between what you see here in comparison to the flows that I\u2019ve shown in other videos on this channel. The thing that they are sharing is the editor, which is a react component I build. But the way the flows are running, is totally different.\u00a0\n\nThe earlier flows are interpreted and event handlers are created based on the nodes in the flow. An event handler calls the node-tasks when it receives an event. The connections represent the events. When a node-tasks is done, it calls its output events.\nThe node-tasks can contain quite some code themselves and from flow perspective they are much more high level.\u00a0\n\nBut the flow that you see in this video contains much smaller blocks which get compiled to webassembly in real-time in the browser using javascript when you add or change nodes.\n\u00a0\nIt somehow made more sense to layout this flow from top to bottom instead of left to right.\n\nI\u2019ve color coded some blocks to help understand what is going on:\n\nthe blue node is the start point\nyellow nodes are function definitions or the calling of a function\norange nodes are subflow definitions and the inserting points for a subflow\n\nThis flow contains two while loops for the x and y of the canvas so that we can calculate the color for each pixel. The inspiration for this was the tixyland demo from last year. So the flow also has a time parameter that is handled internally by the component that calls the compiled webassembly code from within a requestAnimationFrame.\n\nThere are some helper variables which define 3 points and for each pixel the distance is calculated to these points. These 3 points are moving using a sine calculation. The sine function is actually the only javascript function that is called from within the webassembly code because webassembly has no sine function itself and my knowledge is too little to implement it in webassembly myself.\n\nIn the future I hope to extend this flow to webassembly compiler to make it Turing complete and I also hope to add some features so that it can be used in more business line of applications and combine it with the other flow solution.\n\nIn the editor I\u2019ve added a feature so that I can move through a flow automatically while recording a video. I\u2019ve tried to make it a smooth as possible but I am running into limitations of the browser or my programming capabilities. The problem is probably that it\u2019s a hybrid model that uses both canvas and html for showing a flow. So, I am still thinking of doing a big rewrite using webgl and webassembly. If anybody has some suggestions on how to improve the performance then please let me know."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1628856565.012000",
+        "parent_user_id": "U0123H7JRDM",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "type": "message",
+        "text": "This is the whole flow as an image, it was made manually using a lot of separate images and stiched together in photoshop since I can't easily export it as one readable image because of the hybrid model... although the readibility of this image can also be improved:sweat_smile:",
+        "files": [
+            {
+                "id": "F02APHVHN5D",
+                "created": 1628856886,
+                "timestamp": 1628856886,
+                "name": "flow.png",
+                "title": "flow.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U0123H7JRDM",
+                "editable": false,
+                "size": 950336,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F02APHVHN5D/flow.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F02APHVHN5D/download/flow.png",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_360.png",
+                "thumb_360_w": 240,
+                "thumb_360_h": 360,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_480.png",
+                "thumb_480_w": 320,
+                "thumb_480_h": 480,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_720.png",
+                "thumb_720_w": 480,
+                "thumb_720_h": 720,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_800.png",
+                "thumb_800_w": 800,
+                "thumb_800_h": 1200,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_960.png",
+                "thumb_960_w": 640,
+                "thumb_960_h": 960,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F02APHVHN5D-f5152808ce/flow_1024.png",
+                "thumb_1024_w": 683,
+                "thumb_1024_h": 1024,
+                "original_w": 2800,
+                "original_h": 4200,
+                "thumb_tiny": "AwAwACC/RRRSuAUUUUwCiiigAooooAKKKKACiiigD//Z",
+                "permalink": "https://futureofcoding.slack.com/files/U0123H7JRDM/F02APHVHN5D/flow.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F02APHVHN5D-2dcb8362d6",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vj4/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is the whole flow as an image, it was made manually using a lot of separate images and stiched together in photoshop since I can't easily export it as one readable image because of the hybrid model... although the readibility of this image can also be improved"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "user": "U0123H7JRDM",
+        "display_as_bot": false,
+        "ts": "1628857011.012400",
+        "thread_ts": "1628856565.012000",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "29fe2060-3323-4a6d-91d0-89e00a18ee16",
+        "type": "message",
+        "text": "So cool, thanks a lot for sharing and taking time to record video!",
+        "user": "U02ADH37E02",
+        "ts": "1628890790.012800",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "EZ+4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So cool, thanks a lot for sharing and taking time to record video!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1628856565.012000",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "27ce4f66-7538-4293-81f5-abef2f7e96f6",
+        "type": "message",
+        "text": "I loved the feature to move through the flow while recording, but the acceleration from node to node is a bit fast for me. I'm afraid I got a little dizzy in some parts!",
+        "user": "U01661S9F34",
+        "ts": "1628893857.013000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FTm9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I loved the feature to move through the flow while recording, but the acceleration from node to node is a bit fast for me. I'm afraid I got a little dizzy in some parts!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1628856565.012000",
+        "parent_user_id": "U0123H7JRDM"
+    },
+    {
+        "client_msg_id": "B9A6EA22-F019-4C6A-BB13-7257967AB9E1",
+        "type": "message",
+        "text": "Thanks for the feedback about the acceleration, in future video's I'll take that into account or maybe make the project available to play with it yourselves so you are more in control",
+        "user": "U0123H7JRDM",
+        "ts": "1628918348.015500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=9cI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for the feedback about the acceleration, in future video's I'll take that into account or maybe make the project available to play with it yourselves so you are more in control"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1628856565.012000",
+        "parent_user_id": "U0123H7JRDM",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U01661S9F34"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
