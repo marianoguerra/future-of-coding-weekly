@@ -1,7 +1,7 @@
 ---
 name: Newsletter Week Issue
 about: This is the default issue to open each week to collect resources
-title: 'Future of Coding Weekly 2021/06 Week #'
+title: 'Future of Coding Weekly 2021/09 Week #'
 labels: ''
 assignees: marianoguerra
 
