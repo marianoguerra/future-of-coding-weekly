@@ -1,5 +1,7 @@
 SLACK_TOKEN := dummy-token-change-me
 HISTORY_YEAR := 2021
+FROM_DATE := 2021-09-06
+TO_DATE := 2021-09-13
 
 history-index:
 	cd history; ls -1 2020-*/*/*.json > index.txt
@@ -17,3 +19,5 @@ list-files-throttle-response:
 remove-files-throttle-response:
 	rm $$(grep -lR "https://a.slack-edge.com/" history/msg_files/* | uniq)
 
+export-history:
+	python3 slack_export.py --token ${SLACK_TOKEN} --publicChannels linking-together present-company share-your-work thinking-together two-minute-week --output-dir history --from-date ${FROM_DATE} --to-date ${TO_DATE}
