@@ -137,6 +137,11 @@ const AUTHORS = {
   'Pablo Donato': '[Pablo Donato](https://twitter.com/pablogician)',
   'Xavier': '[Xavier](https://lambein.xyz)',
   'Denny Vrandečić': '[Denny Vrandečić](https://twitter.com/vrandezo)',
+  'Paul Tarvydas': '[Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)',
+  'Allan Campopiano': '[Allan Campopiano](https://www.linkedin.com/in/allan-campopiano-703394120/)',
+  'Alex Bit': '[Alex Bit](https://www.linkedin.com/in/alexbit/)',
+  'Nick Fox-Gieg': '[Nick Fox-Gieg](https://twitter.com/n1ckfg)',
+  'Sophie Smithburg': '[Sophie Smithburg](https://twitter.com/heartpunkk)',
   //'': '[]()',
 };
 
