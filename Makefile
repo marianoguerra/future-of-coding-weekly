@@ -21,3 +21,10 @@ remove-files-throttle-response:
 
 export-history:
 	python3 slack_export.py --token ${SLACK_TOKEN} --publicChannels linking-together present-company share-your-work thinking-together two-minute-week --output-dir history --from-date ${FROM_DATE} --to-date ${TO_DATE}
+
+start-search-server:
+	cd search && python3 server.py
+
+start-search-sonic:
+	cd .. && sonic -c config.cfg
+
