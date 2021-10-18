@@ -161,7 +161,8 @@ const TW_URL_REF_REGEX = /<(https?:\/\/.*?)>/g,
   TW_MENTION_REF_REGEX = /<(https?:\/\/.*?)\|(@.*?)>/g;
 function enrichAttachment(att) {
   if (att.service_name === 'twitter') {
-    const text = att.text
+      // tweets with no text (like a video) have no text field O.o
+      const text = ((att.text || '') + (att.thumb_url ? `\n\n![Tweet Thumbnail](${att.thumb_url})` : ''))
       .replace(TW_MENTION_REF_REGEX, (_, url, handle) => `[${handle}](${url})`)
       .replace(TW_URL_REF_REGEX, (_, url) => url)
       .replace(EMOJI_REF_REGEX, (_, emojiCode) =>

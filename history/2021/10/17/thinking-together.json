@@ -1,0 +1,824 @@
+[
+    {
+        "client_msg_id": "7ed3a149-6c5a-4cf2-b806-ffaedb308451",
+        "type": "message",
+        "text": "Has the utterly brutalist approach to end-user programming ever been tried? Just forcibly package up apps with all their dependencies, along with all the tools needed to edit, build and run them?\n\nFor a while now, we've had this notion of \"end-user programming\" in this community: the ability to modify software while we use it.\n\n<https://futureofcoding.org/episodes/033.html> by <@U5TCAFTD3>\n<https://www.inkandswitch.com/end-user-programming/> by <@UF6RLAL7J>\n<https://malleable.systems> by <@UML4ZEKDK> is also relevant\n\nHere's a sketch for an MVP that provides this experience in the bluntest, most obvious way possible:\n\u2022 Download a framework packaged as a single file, including all necessary dependencies. You download it from an https URL, and that's it, you're good to go.\n\u2022 It only supports *nix platforms on desktop machines. Linux, BSD, maybe Windows Subsystem for Linux. Macs are explicitly out because they're basically not an open platform anymore[1]. And we're going to need an open platform for the sorts of stuff we're planning below.\n\u2022 You can install arbitrary apps from arbitrary sources that run atop the framework. The apps are in interpreted languages and always come with source code.\n\u2022 When you run an app, it always opens on the app first. This is important. There's no REPL or IDE front and center. The interaction modes are whatever the app chooses.\n\u2022 When you run an app, the framework always shows the privileges it has in some consistent part of the screen. The vocabulary and enforcement of those privileges is the major responsibility of the framework. Needing it to be always visible is why you need a desktop machine with a large screen.\n\u2022 The app can ask for privileges, but the framework gives you the ability to lie to the app. Here's a simulated network environment that looks offline or has these honeypots. Here's a simulated file system with almost nothing or a few honeypot files. (Inspired by the Arcan project: <https://www.divergent-desktop.org/blog/2020/08/10/principles-overview/#p6>)\n\u2022 While running any app, the framework always provides a consistent set of primitives for interacting with the interpreted sources for that app. Imagine a button in the corner that flips a Hypercard over to open an editor on its sources, or something like that. Once you're in the editor you can modify it, run it, get syntax errors, test failures, etc. The editor and build environment themselves are implemented in the framework; for the MVP we'll assume we don't need to support modifying the framework.\nI wonder how far Glamorous Toolkit is from this sort of experience, <@UE1JQM9HQ> <@UJBAJNFLK>. On one hand it massively over-delivers on the editing framework. The sandboxing stuff is a new frontier with lots of open-ended questions on the best experience to avoid confusing people before they understand how things work.\n\nI'm also thinking about building on something less ambitious for an MVP, like libSDL atop femtolisp or LuaJIT. Maybe also JavaScript :grimacing:\n\n[1] Like, it's great Apple that you eliminated vectors for malicious apps with all the restrictions on installing software. But I already had a perfectly good and healthy and functional relationship with the folks who provide gdb. When you prevent me from installing gdb, that's not cool. It's good to want to protect people from dysfunctional relationships. But to require all relationships to go through a single point is not. /rant",
+        "user": "UCUSW7WVD",
+        "ts": "1634445846.387500",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1634445949.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0gG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Has the utterly brutalist approach to end-user programming ever been tried? Just forcibly package up apps with all their dependencies, along with all the tools needed to edit, build and run them?\n\nFor a while now, we've had this notion of \"end-user programming\" in this community: the ability to modify software while we use it.\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://futureofcoding.org/episodes/033.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": " by "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U5TCAFTD3"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.inkandswitch.com/end-user-programming/"
+                            },
+                            {
+                                "type": "text",
+                                "text": " by "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UF6RLAL7J"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://malleable.systems"
+                            },
+                            {
+                                "type": "text",
+                                "text": " by "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UML4ZEKDK"
+                            },
+                            {
+                                "type": "text",
+                                "text": " is also relevant\n\nHere's a sketch for an MVP that provides this experience in the bluntest, most obvious way possible:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Download a framework packaged as a single file, including all necessary dependencies. You download it from an https URL, and that's it, you're good to go."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "It only supports *nix platforms on desktop machines. Linux, BSD, maybe Windows Subsystem for Linux. Macs are explicitly out because they're basically not an open platform anymore[1]. And we're going to need an open platform for the sorts of stuff we're planning below."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "You can install arbitrary apps from arbitrary sources that run atop the framework. The apps are in interpreted languages and always come with source code."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "When you run an app, it always opens on the app first. This is important. There's no REPL or IDE front and center. The interaction modes are whatever the app chooses."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "When you run an app, the framework always shows the privileges it has in some consistent part of the screen. The vocabulary and enforcement of those privileges is the major responsibility of the framework. Needing it to be always visible is why you need a desktop machine with a large screen."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The app can ask for privileges, but the framework gives you the ability to lie to the app. Here's a simulated network environment that looks offline or has these honeypots. Here's a simulated file system with almost nothing or a few honeypot files. (Inspired by the Arcan project: "
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://www.divergent-desktop.org/blog/2020/08/10/principles-overview/#p6"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ")"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "While running any app, the framework always provides a consistent set of primitives for interacting with the interpreted sources for that app. Imagine a button in the corner that flips a Hypercard over to open an editor on its sources, or something like that. Once you're in the editor you can modify it, run it, get syntax errors, test failures, etc. The editor and build environment themselves are implemented in the framework; for the MVP we'll assume we don't need to support modifying the framework."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI wonder how far Glamorous Toolkit is from this sort of experience, "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UE1JQM9HQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UJBAJNFLK"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". On one hand it massively over-delivers on the editing framework. The sandboxing stuff is a new frontier with lots of open-ended questions on the best experience to avoid confusing people before they understand how things work.\n\nI'm also thinking about building on something less ambitious for an MVP, like libSDL atop femtolisp or LuaJIT. Maybe also JavaScript "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "grimacing"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n[1] Like, it's great Apple that you eliminated vectors for malicious apps with all the restrictions on installing software. But I already had a perfectly good and healthy and functional relationship with the folks who provide gdb. When you prevent me from installing gdb, that's not cool. It's good to want to protect people from dysfunctional relationships. But to require all relationships to go through a single point is not. /rant"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "reply_count": 16,
+        "reply_users_count": 6,
+        "latest_reply": "1634534011.392800",
+        "reply_users": [
+            "UJBAJNFLK",
+            "UBN9AFS0N",
+            "UAJKEBGP8",
+            "UCUSW7WVD",
+            "UDQBTJ211",
+            "UBSMEUXAA"
+        ],
+        "is_locked": false,
+        "subscribed": true,
+        "last_read": "1634534011.392800",
+        "reactions": [
+            {
+                "name": "ok_hand",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            },
+            {
+                "name": "eyes",
+                "users": [
+                    "U023V63MF6V"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4af3690b-a860-4c4c-aacb-3fe0358cc6f1",
+        "type": "message",
+        "text": "I am not aware of anything like that that has actually been tried on a large enough scale. The closest I have seen proposed recently is <https://playb.it/>. I suspect that in today's economic environment, it is not obvious how to develop such a platform commercially, nor as an Open Source commons, but I'd love to be proven wrong.",
+        "user": "UJBAJNFLK",
+        "ts": "1634462651.388300",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Y8t",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I am not aware of anything like that that has actually been tried on a large enough scale. The closest I have seen proposed recently is "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://playb.it/"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". I suspect that in today's economic environment, it is not obvious how to develop such a platform commercially, nor as an Open Source commons, but I'd love to be proven wrong."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "e6c55a84-26a0-485b-82d4-dda6d7e73a19",
+        "type": "message",
+        "text": "My view of Glamorous Toolkit in this context is as a tool for developers and power users, not as the framework you describe. Technically it would be one app among others.",
+        "user": "UJBAJNFLK",
+        "ts": "1634462793.388500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uwK6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "My view of Glamorous Toolkit in this context is as a tool for developers and power users, not as the framework you describe. Technically it would be one app among others."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "7896cdf4-aefd-4d0e-9cc5-1854dfc861f0",
+        "type": "message",
+        "text": "Another interesting question: how far are the JVM and .NET ecosystems from the view you describe? After all, they were designed as frameworks that share some of the listed goals.",
+        "user": "UJBAJNFLK",
+        "ts": "1634462847.388700",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "96o",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Another interesting question: how far are the JVM and .NET ecosystems from the view you describe? After all, they were designed as frameworks that share some of the listed goals."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "b673e206-ff98-41a7-a8f0-06384cd6ecc7",
+        "type": "message",
+        "text": "a web browser? :upside_down_face:",
+        "user": "UBN9AFS0N",
+        "ts": "1634466490.389000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "caPD6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "a web browser? "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "upside_down_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c7fd5d6a-22ce-4981-8336-bcbeae2100fb",
+        "type": "message",
+        "text": "an android emulator :smile:",
+        "user": "UBN9AFS0N",
+        "ts": "1634466535.389200",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+ByNG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "an android emulator "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "d722cfe9-ac05-44ae-9e83-37199d3c6615",
+        "type": "message",
+        "text": "<https://www.lexaloffle.com/pico-8.php>",
+        "user": "UBN9AFS0N",
+        "ts": "1634466581.389400",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "title": "PICO-8 Fantasy Console",
+                "title_link": "https://www.lexaloffle.com/pico-8.php",
+                "text": "PICO-8 is a fantasy console for making, sharing and playing tiny games and other computer programs.",
+                "fallback": "PICO-8 Fantasy Console",
+                "image_url": "https://www.lexaloffle.com/gfx/p8tv_preview_orul.png",
+                "from_url": "https://www.lexaloffle.com/pico-8.php",
+                "image_width": 579,
+                "image_height": 250,
+                "image_bytes": 337177,
+                "service_icon": "https://www.lexaloffle.com/favicon.ico",
+                "service_name": "lexaloffle.com",
+                "id": 1,
+                "original_url": "https://www.lexaloffle.com/pico-8.php"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "B6Kw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://www.lexaloffle.com/pico-8.php"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBSMEUXAA"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "58381986-d918-4881-992a-fb3c3bf7dd46",
+        "type": "message",
+        "text": "T2 Tile talked about packaging all in a single file recently <https://www.youtube.com/watch?v=kXrD-mrQ4QA>",
+        "user": "UBN9AFS0N",
+        "ts": "1634466619.389700",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/",
+                "title": "Software Packaging Sucks - T2sday Update #3109",
+                "title_link": "https://www.youtube.com/watch?v=kXrD-mrQ4QA",
+                "author_name": "The T2 Tile Project",
+                "author_link": "https://www.youtube.com/c/TheT2TileProject",
+                "thumb_url": "https://i.ytimg.com/vi/kXrD-mrQ4QA/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Software Packaging Sucks - T2sday Update #3109",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/kXrD-mrQ4QA?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https://www.youtube.com/watch?v=kXrD-mrQ4QA",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "id": 1,
+                "original_url": "https://www.youtube.com/watch?v=kXrD-mrQ4QA"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cnT",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "T2 Tile talked about packaging all in a single file recently "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.youtube.com/watch?v=kXrD-mrQ4QA"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "98a2713f-5b7b-483e-8443-e42e4243853e",
+        "type": "message",
+        "text": "don\u2019t have a video off hand but I believe Jonathan Blow has talked about this as well. The pitfalls of universally reference-able packages &amp; package versions in an OS environment, vs each one just bringing their requirements with them",
+        "user": "UAJKEBGP8",
+        "ts": "1634478167.390000",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PPSY/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "don\u2019t have a video off hand but I believe Jonathan Blow has talked about this as well. The pitfalls of universally reference-able packages & package versions in an OS environment, vs each one just bringing their requirements with them"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "0050d04f-5d58-4968-a52f-2ba2a898f5ef",
+        "type": "message",
+        "text": "The idea of packaging apps with all their dependencies has been proposed and implemented many times. What's new in <@UCUSW7WVD> proposal is \"long with all the tools needed to edit, build and run them\". That implies full transparency, which is very far from how we use containers nowadays.",
+        "user": "UJBAJNFLK",
+        "ts": "1634483411.390500",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cVtdu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The idea of packaging apps with all their dependencies has been proposed and implemented many times. What's new in "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " proposal is \"long with all the tools needed to edit, build and run them\". That implies full transparency, which is very far from how we use containers nowadays."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UCUSW7WVD",
+                    "UML4ZEKDK"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6afc2386-ff50-4a0b-949f-e2d51a874496",
+        "type": "message",
+        "text": "PICO-8 is a great point. It has editing tools and everything right within the same 128x128px screen.\n\nThe Android development environment is a thought-provoking answer as well. .apk is a single file. Can you run it just by passing it to the Android environment? Even if it opens in the IDE, hitting one keystroke to get to the simulator doesn't seem such a big deal. Seems akin to the Borland tools from the '90s which were pretty nice.\n\nWhich has me wondering what other requirements I need to add :stuck_out_tongue: I think a key piece is: the only way to run the app is from within the development framework. It's impossible to run in isolation.\n\nZooming out to a whole computer is a way to trivially satisfy these criteria. Hence my attempt to start out focused on a single app that the end-user is using.",
+        "user": "UCUSW7WVD",
+        "ts": "1634484000.390800",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1634484037.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cHHY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "PICO-8 is a great point. It has editing tools and everything right within the same 128x128px screen.\n\nThe Android development environment is a thought-provoking answer as well. .apk is a single file. Can you run it just by passing it to the Android environment? Even if it opens in the IDE, hitting one keystroke to get to the simulator doesn't seem such a big deal. Seems akin to the Borland tools from the '90s which were pretty nice.\n\nWhich has me wondering what other requirements I need to add "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "stuck_out_tongue"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I think a key piece is: the only way to run the app is from within the development framework. It's impossible to run in isolation.\n\nZooming out to a whole computer is a way to trivially satisfy these criteria. Hence my attempt to start out focused on a single app that the end-user is using."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "61002aec-9459-46d9-b270-a161d2744dcc",
+        "type": "message",
+        "text": "Ever since I learned programming I wanted to build polished apps like the ones I used to learn programming. For example, I was never satisfied with the programs I built on my BASIC interpreter because it forced me to hit Enter after pressing a key, where I could see the professional apps respond instantly to any key. I think this instinct is widespread and has basically been leading us all astray. If we just commit to never bundling apps without their development environment, never completely hiding the development environment, I think that one constraint, that commitment to a little less polish and a little more overhead, might have cascading benefits.\n\nWe'll have to fake it till we make it for a while, because clearly there's no market pressure to do this today. \"Forgive them God, for they know not what they do.\"",
+        "user": "UCUSW7WVD",
+        "ts": "1634484364.391100",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1634484474.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kt+I8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ever since I learned programming I wanted to build polished apps like the ones I used to learn programming. For example, I was never satisfied with the programs I built on my BASIC interpreter because it forced me to hit Enter after pressing a key, where I could see the professional apps respond instantly to any key. I think this instinct is widespread and has basically been leading us all astray. If we just commit to never bundling apps without their development environment, never completely hiding the development environment, I think that one constraint, that commitment to a little less polish and a little more overhead, might have cascading benefits.\n\nWe'll have to fake it till we make it for a while, because clearly there's no market pressure to do this today. \"Forgive them God, for they know not what they do.\""
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "63ae8123-71c9-43ce-bb8e-66a08dc269b4",
+        "type": "message",
+        "text": "I've read something similar about scratch, students don't like to learn with a toy environment since they know professionals don't use that. They want to learn \"the real stuff\"",
+        "user": "UBN9AFS0N",
+        "ts": "1634484559.391400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Wrh3P",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've read something similar about scratch, students don't like to learn with a toy environment since they know professionals don't use that. They want to learn \"the real stuff\""
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "UBSMEUXAA"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2dcb43fa-973c-47e1-af0f-adf30a49240a",
+        "type": "message",
+        "text": "I know the feeling. When I learnt to program the most important thing was that my program had a custom icon and appeared under Programs on the Start menu - like Real Software. What it actually _did_ not so important.",
+        "user": "UDQBTJ211",
+        "ts": "1634494630.391900",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NBeb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I know the feeling. When I learnt to program the most important thing was that my program had a custom icon and appeared under Programs on the Start menu - like Real Software. What it actually "
+                            },
+                            {
+                                "type": "text",
+                                "text": "did",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " not so important."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "5aeb9e81-6cce-4043-9c41-049b4ee4fb74",
+        "type": "message",
+        "text": "Not sure how to reconcile that with something like TikTok where people don't mind about not using Real video editing software.\n\nI think one aspect might be that they are seen as \"a TikTok\" rather than \"an edited video\". In this paradigm it might be seen as inauthentic to edit it outside the app on a Hollywood editing desk, then somehow upload it. Kind of like writing a compiler that targeted minified PICO-8 - it would be seen as dishonest.",
+        "user": "UDQBTJ211",
+        "ts": "1634494789.392100",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UDQBTJ211",
+            "ts": "1634494809.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wvt51",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Not sure how to reconcile that with something like TikTok where people don't mind about not using Real video editing software.\n\nI think one aspect might be that they are seen as \"a TikTok\" rather than \"an edited video\". In this paradigm it might be seen as inauthentic to edit it outside the app on a Hollywood editing desk, then somehow upload it. Kind of like writing a compiler that targeted minified PICO-8 - it would be seen as dishonest."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "ce7094e5-0355-4a8b-9820-ea4a82f0eccc",
+        "type": "message",
+        "text": "Probably it's comes from the privilege of not having a real need.\n\nIf you actually just want to plan reservations at your restaurant, organising training sessions for your cricket club, budget your wedding etc (i.e. what people use Excel for atm) then you don't care what it looks like, only what it does",
+        "user": "UDQBTJ211",
+        "ts": "1634495339.392400",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dvQd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Probably it's comes from the privilege of not having a real need.\n\nIf you actually just want to plan reservations at your restaurant, organising training sessions for your cricket club, budget your wedding etc (i.e. what people use Excel for atm) then you don't care what it looks like, only what it does"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "2ecf0cfd-fca2-426e-b4c6-33ec8205f5da",
+        "type": "message",
+        "text": "I think DOS-like (<https://github.com/mattiasgustavsson/dos-like|https://github.com/mattiasgustavsson/dos-like>) fits into this also. It comes with a C compiler (tcc)",
+        "user": "UBSMEUXAA",
+        "ts": "1634534011.392800",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "service_name": "GitHub",
+                "title": "GitHub - mattiasgustavsson/dos-like: Engine for making things with a MS-DOS feel, but for modern platforms",
+                "title_link": "https://github.com/mattiasgustavsson/dos-like",
+                "text": "Engine for making things with a MS-DOS feel, but for modern platforms - GitHub - mattiasgustavsson/dos-like: Engine for making things with a MS-DOS feel, but for modern platforms",
+                "fallback": "GitHub: GitHub - mattiasgustavsson/dos-like: Engine for making things with a MS-DOS feel, but for modern platforms",
+                "image_url": "https://opengraph.githubassets.com/8ea4d608af6cb9501785d50c65b51b68455600ac137ba73278177759b4dde27e/mattiasgustavsson/dos-like",
+                "image_width": 500,
+                "image_height": 250,
+                "from_url": "https://github.com/mattiasgustavsson/dos-like",
+                "image_bytes": 66933,
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/github.png",
+                "id": 1,
+                "original_url": "https://github.com/mattiasgustavsson/dos-like"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tP4Y",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think DOS-like ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/mattiasgustavsson/dos-like",
+                                "text": "https://github.com/mattiasgustavsson/dos-like"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") fits into this also. It comes with a C compiler (tcc)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1634445846.387500",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
