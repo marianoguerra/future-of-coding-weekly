@@ -142,6 +142,9 @@ const AUTHORS = {
   'Alex Bit': '[Alex Bit](https://www.linkedin.com/in/alexbit/)',
   'Nick Fox-Gieg': '[Nick Fox-Gieg](https://twitter.com/n1ckfg)',
   'Sophie Smithburg': '[Sophie Smithburg](https://twitter.com/heartpunkk)',
+  'Felipe Reigosa': '[Felipe Reigosa](https://twitter.com/MockMechanics)',
+  'Lukas Süss': '[Lukas Süss](https://twitter.com/mechadense)',
+  'George Campbell': '[George Campbell](https://gibr.net/)',
   //'': '[]()',
 };
 
