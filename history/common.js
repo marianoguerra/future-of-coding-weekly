@@ -145,6 +145,9 @@ const AUTHORS = {
   'Felipe Reigosa': '[Felipe Reigosa](https://twitter.com/MockMechanics)',
   'Lukas Süss': '[Lukas Süss](https://twitter.com/mechadense)',
   'George Campbell': '[George Campbell](https://gibr.net/)',
+  'Eric Gade': '[Eric Gade](https://homoridiculus.com)',
+  'Diego Moya': '[Diego Moya](https://twitter.com/DialMove)',
+  'Nick Arner': '[Nick Arner](https://twitter.com/nickarner)',
   //'': '[]()',
 };
 
