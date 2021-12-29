@@ -148,6 +148,14 @@ const AUTHORS = {
   'Eric Gade': '[Eric Gade](https://homoridiculus.com)',
   'Diego Moya': '[Diego Moya](https://twitter.com/DialMove)',
   'Nick Arner': '[Nick Arner](https://twitter.com/nickarner)',
+  'Alexey Shmalko': '[Alexey Shmalko](https://www.alexeyshmalko.com/)',
+  'Matthew Linkous': '[Matthew Linkous](https://twitter.com/aspen_cloud)',
+  'Srini K': '[Srini K](https://www.viz.gl/)',
+  'Benjamin Smith': '[Benjamin Smith](https://benjaminsmith.dev)',
+  'Mattia Fregola': '[Mattia Fregola](https://twitter.com/MattiaFregola)',
+  'Tom Larkworthy': '[Tom Larkworthy](https://webcode.run)',
+  'Sam Butler': '[Sam Butler](https://twitter.com/sambutlerUS)',
+  'Andrew Condon': '[Andrew Condon](https://github.com/afcondon/purescript-d3-tagless-II)',
   //'': '[]()',
 };
 
