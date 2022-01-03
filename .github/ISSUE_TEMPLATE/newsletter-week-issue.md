@@ -1,14 +1,14 @@
 ---
 name: Newsletter Week Issue
 about: This is the default issue to open each week to collect resources
-title: 'Future of Coding Weekly 2021/09 Week #'
+title: 'Future of Coding Weekly 2022/01 Week #'
 labels: ''
 assignees: marianoguerra
 
 ---
 
 - [ ] Change Month and Week Number
-- [ ] focWeekExport 2021-04-19 2021-04-26
+- [ ] focWeekExport 2022-01-19 2022-01-26
 - [ ] Summary
 - [ ] Hashtags
 - [ ] Check that comment links work (push weekly dump with channel summaries)
