@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2021-12-26T06:52:58.098Z" class="post"><span class="user">Kartik Agaram</span> <a href="#2021-12-26T06:52:58.098Z" class="date">2021-12-26 06:52:58</a> <div class="message"><p>Sandboxing in Teliva</p>
+<p>Programming languages assume all code they run is trustworthy. Browsers assume all connections they make over a network are trustworthy. I'm starting to experiment with alternatives to these approaches. Here's one early, extremely caricatured sandboxing model that's already more flexible than both conventional languages and browsers.</p>
+<p><a href="https://archive.org/details/akkartik-teliva-2021-12-25"></a><a href="https://archive.org/details/akkartik-teliva-2021-12-25">https://archive.org/details/akkartik-teliva-2021-12-25</a></p>
+<p>Main project page: <a href="https://github.com/akkartik/teliva"></a><a href="https://github.com/akkartik/teliva">https://github.com/akkartik/teliva</a></p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="http://history.futureofcoding.org/history/msg_files/F02/F02RZ2GQ8UA.png">Screen Shot 2021-12-25 at 10.51.11 PM.png</a></p>
+</blockquote>
+</div> <div class="replies"><div id="2021-12-26T07:21:28.098Z" class="reply"><span class="user">Eyal Lotem</span> <a href="#2021-12-26T07:21:28.098Z" class="date">2021-12-26 07:21:28</a> <div class="message"><p>Are you familiar with object capabilities? An alternative permission model which I think might help make fine grained permissions easier to manage</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-26T07:26:55.098Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2021-12-26T07:26:55.098Z" class="date">2021-12-26 07:26:55</a> <div class="message"><p>Oh yes, I'm a fan though not an expert. My previous Mu project used that idea. I'll be working that in here as well.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-26T07:41:23.099Z" class="reply"><span class="user">Eyal Lotem</span> <a href="#2021-12-26T07:41:23.099Z" class="date">2021-12-26 07:41:23</a> <div class="message"><p>I ask because I am familiar with Android/Google's permission model where if you want to load or save a single file, you must give broad permissions to all user files. I am not sure if this is the case here.</p>
+<p>I think the right model is decoupling file selection (done by a trusted computing component, from set of files) and file access - authority is granted by the actual transmission of the selected file to the app (as a capability).</p>
+<p>i.e: Instead of passing a file string/id into a global namespace, and separately giving permissions into that namespace - there is no globally accessible namespace of files, and you give the open file itself to the app.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-26T07:54:09.099Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2021-12-26T07:54:09.099Z" class="date">2021-12-26 07:54:09</a> <div class="message"><p>Yeah, I don't have capabilities. Yet 🙂</p>
+<p>Like I said, I'm not an expert and would appreciate someone going over what I come up with. What I had in <a href="https://github.com/akkartik/mu"></a><a href="https://github.com/akkartik/mu">https://github.com/akkartik/mu</a> (really <a href="https://github.com/akkartik/mu1"></a><a href="https://github.com/akkartik/mu1">https://github.com/akkartik/mu1</a>) was quite hokey.</p>
+<p>I believe trusted components basically work by preventing automation and hindering discoverability. Is that accurate?</p>
+<p>One thing I care about is being able to continue using an app without granting all requested privileges. For example, easily creating a fake file system with honeypot data. That feels orthogonal to capabilities. They don't preclude it, but they also don't make it easy by themselves.</p>
+<p>So I feel like there are some trade-offs to weigh here. But maybe I'm wrong and it's all a solved problem. Pointers most appreciated.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-26T08:17:44.099Z" class="reply"><span class="user">Eyal Lotem</span> <a href="#2021-12-26T08:17:44.099Z" class="date">2021-12-26 08:17:44</a> <div class="message"><p>Not sure what you mean about hindering discoverability. Anyway, I don't think it's a solved problem at all.  Object capabilities have never  made it, at least to the mainstream, as far as I'm aware. But I'm a big fan of the idea.</p>
+<p><a href="https://www.researchgate.net/publication/220910162_EROS_a_fast_capability_system"></a><a href="https://www.researchgate.net/publication/220910162_EROS_a_fast_capability_system">https://www.researchgate.net/publication/220910162_EROS_a_fast_capability_system</a> was a very interesting attempt at object capabilities</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-26T14:40:36.101Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2021-12-26T14:40:36.101Z" class="date">2021-12-26 14:40:36</a> <div class="message"><p>Thanks! Let me read (reread) that. I only meant solved technically. Basically I'm wondering how you can build say a file browser.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-26T16:22:22.101Z" class="reply"><span class="user">Mariano Guerra</span> <a href="#2021-12-26T16:22:22.101Z" class="date">2021-12-26 16:22:22</a> <div class="message"><p>deno is doing something similar <a href="https://deno.land/manual@v1.17.1/getting_started/permissions"></a><a href="https://deno.land/manual@v1.17.1/getting_started/permissions">https://deno.land/manual@v1.17.1/getting_started/permissions</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://deno.land/manual@v1.17.1/getting_started/permissions">Deno - A modern runtime for JavaScript and TypeScript</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2021-12-27T05:44:04.102Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2021-12-27T05:44:04.102Z" class="date">2021-12-27 05:44:04</a> <div class="message"><p>This seems apt: <a href="https://justinpombrio.net/2021/12/26/preventing-log4j-with-capabilities.html"></a><a href="https://justinpombrio.net/2021/12/26/preventing-log4j-with-capabilities.html">https://justinpombrio.net/2021/12/26/preventing-log4j-with-capabilities.html</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-27T06:24:52.102Z" class="reply"><span class="user">Eyal Lotem</span> <a href="#2021-12-27T06:24:52.102Z" class="date">2021-12-27 06:24:52</a> <div class="message"><p>Yeah, it's interesting!</p>
+<p>I think we can probably be finer-grained than a giant "Network" capability, too.</p>
+<p>Probably a capability to connect to specific domains, or maybe all domains but only in specific protocols or only in limited ways.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-27T07:04:14.102Z" class="reply"><span class="user">Kartik Agaram</span> <a href="#2021-12-27T07:04:14.102Z" class="date">2021-12-27 07:04:14</a> <div class="message"><p>Oh yes, that is all planned.</p>
+<p>One challenge with networking is that reads and writes become less obvious. Parsing packets may not be sustainable. But we can certainly track what host we're connecting to.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2021-12-27T07:58:16.102Z" class="reply"><span class="user">Eyal Lotem</span> <a href="#2021-12-27T07:58:16.102Z" class="date">2021-12-27 07:58:16</a> <div class="message"><p>If you put constraints by restricting access to APIs, and not grant raw packet access - I don't think it would be a difficult problem?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2021-12-26T11:34:42.101Z" class="post"><span class="user">Alexey Shmalko</span> <a href="#2021-12-26T11:34:42.101Z" class="date">2021-12-26 11:34:42</a> <div class="message"><p>This week I added let bindings to Alpha, and also fixed all things that were broken by HIR refactoring from the previous week (mainly, all built-in functions)</p>
+<p><a href="https://www.alexeyshmalko.com/alpha-8/"></a><a href="https://www.alexeyshmalko.com/alpha-8/">https://www.alexeyshmalko.com/alpha-8/</a></p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"></div></div><div id="2021-12-29T17:53:42.106Z" class="post"><span class="user">Tom Larkworthy</span> <a href="#2021-12-29T17:53:42.106Z" class="date">2021-12-29 17:53:42</a> <div class="message"><p>This week I integrated Github Actions with Observable so I can take backups and publish to NPM automatically (eventually) <a href="https://twitter.com/tomlarkworthy/status/1475383403285467145"></a><a href="https://twitter.com/tomlarkworthy/status/1475383403285467145">https://twitter.com/tomlarkworthy/status/1475383403285467145</a></p>
+</div> <div class="attachments">
+<blockquote><p>🐦 <a href="https://twitter.com/@tomlarkworthy">Tom Larkworthy</a>: Increase the power of <a href="https://twitter.com/observablehq">@observablehq</a> by triggering <a href="https://twitter.com/github">@github</a> actions from notebooks. With this notebook you can pre-authenticate triggers so there is no need to input a token.</p>
+<p><a href="https://observablehq.com/@tomlarkworthy/repository-dispatch">https://observablehq.com/@tomlarkworthy/repository-dispatch</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>
