@@ -161,8 +161,11 @@ const TW_URL_REF_REGEX = /<(https?:\/\/.*?)>/g,
   TW_MENTION_REF_REGEX = /<(https?:\/\/.*?)\|(@.*?)>/g;
 function enrichAttachment(att) {
   if (att.service_name === 'twitter') {
-      // tweets with no text (like a video) have no text field O.o
-      const text = ((att.text || '') + (att.thumb_url ? `\n\n![Tweet Thumbnail](${att.thumb_url})` : ''))
+    // tweets with no text (like a video) have no text field O.o
+    const text = (
+      (att.text || '') +
+      (att.thumb_url ? `\n\n![Tweet Thumbnail](${att.thumb_url})` : '')
+    )
       .replace(TW_MENTION_REF_REGEX, (_, url, handle) => `[${handle}](${url})`)
       .replace(TW_URL_REF_REGEX, (_, url) => url)
       .replace(EMOJI_REF_REGEX, (_, emojiCode) =>
@@ -241,6 +244,43 @@ function parseMsgText(msg, {users}) {
     .replace(SKIN_REF_REGEX, (_, skinCode) =>
       textFromCode(skinIdsToCodes[skinCode])
     );
+}
+
+function dateFromTsDayOffset(ts, offset) {
+  const date = new Date(ts);
+  date.setUTCDate(date.getUTCDate() + offset);
+  return date.toISOString().split('T')[0];
+}
+
+function historyLinkFromSlackMsgInfo(channelId, tsRaw, channels) {
+  const ts = +tsRaw / 1000,
+    date = new Date(ts),
+    dateDayBefore = dateFromTsDayOffset(ts, -1),
+    dateDayAfter = dateFromTsDayOffset(ts, 1),
+    dateIso = date.toISOString(),
+    channel = channels[channelId],
+    name = channel ? channel.name : channelId,
+    url = `/history/?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
+  return `[💬 #${name}@${dateIso}](${url})`;
+}
+
+function historyLinkFromSlackReplyInfo(
+  channelId,
+  tsRaw,
+  replyTs,
+  _channelId1,
+  channels
+) {
+  const tsFrom = +tsRaw / 1000,
+    tsTo = +replyTs * 1000,
+    msgDate = new Date(tsTo),
+    dateDayBefore = dateFromTsDayOffset(tsFrom, -1),
+    dateDayAfter = dateFromTsDayOffset(tsTo, 1),
+    dateIso = msgDate.toISOString(),
+    channel = channels[channelId],
+    name = channel ? channel.name : channelId,
+    url = `/history/?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
+  return `[💬 #${name}@${dateIso}](${url})`;
 }
 
 function addMsgAttachmentsText(msg) {
@@ -419,6 +459,10 @@ function mdUser(id, {users}) {
   return AUTHORS[name] || `**@${name}**`;
 }
 
+const SLACK_MSG_LINK_REGEX =
+    /https:\/\/futureofcoding\.slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)/g,
+  SLACK_MSG_REPLY_REGEX =
+    /https:\/\/futureofcoding\.slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)\?thread_ts=([0-9.]+)&cid=([A-Z0-9]+)/g;
 function nodeToMd(node, args) {
   switch (node.type) {
     case 'text': {
@@ -429,8 +473,26 @@ function nodeToMd(node, args) {
         return node.text.replace(/\n/g, '\n\n');
       }
     }
-    case 'link':
-      return mdLink(node.text || node.name || node.url, node.name || node.url);
+    case 'link': {
+      const url = node.url || '',
+        match = SLACK_MSG_LINK_REGEX.exec(url);
+      if (match === null) {
+        const match1 = SLACK_MSG_REPLY_REGEX.exec(url);
+        if (match1 === null) {
+          return mdLink(node.text || node.name || url, node.name || url);
+        } else {
+          return historyLinkFromSlackReplyInfo(
+            match1[1],
+            match1[2],
+            match1[3],
+            match1[4],
+            args.channels
+          );
+        }
+      } else {
+        return historyLinkFromSlackMsgInfo(match[1], match[2], args.channels);
+      }
+    }
     case 'emoji': {
       const code = EMOJI_NAME_TO_CODE[node.name];
       return code ? textFromCode(code) : `:${node.name}:`;
