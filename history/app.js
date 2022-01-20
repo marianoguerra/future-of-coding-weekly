@@ -86,7 +86,8 @@ function main() {
                     this.channels,
                     this.history.msgsByTs,
                     this.history.msgs,
-                    olderMessagesToLoad
+                    olderMessagesToLoad,
+                    channel
                   );
 
                   this.loadChannelDate(
@@ -153,7 +154,7 @@ function main() {
           }
           const paths = Array.from(pathSet);
           paths.sort();
-          this.loadOlderMessages(paths, 0, messagesToLoadByPath);
+          this.loadOlderMessages(paths, 0, messagesToLoadByPath, channel);
 
           window.setTimeout(() => {
             // scroll to hash if set
@@ -168,7 +169,7 @@ function main() {
             }
           }, 500);
         },
-        loadOlderMessages: function (paths, i, messagesToLoadByPath) {
+        loadOlderMessages: function (paths, i, messagesToLoadByPath, channel) {
           const path = paths[i],
             enrichArgs = {users: this.users, channels: this.channels},
             msgsByTs = this.history.msgsByTs;
@@ -183,12 +184,17 @@ function main() {
                     if (msgsForPath[msg.ts]) {
                       const dummyMsg = msgsByTs[msg.ts],
                         index = dummyMsg.$index;
-                      enrichMessage(msg, enrichArgs, true);
+                      enrichMessage(msg, enrichArgs, true, channel);
                       msg.responses = dummyMsg.responses;
                       this.history.msgs[index] = msg;
                     }
                   }
-                  this.loadOlderMessages(paths, i + 1, messagesToLoadByPath);
+                  this.loadOlderMessages(
+                    paths,
+                    i + 1,
+                    messagesToLoadByPath,
+                    channel
+                  );
                 });
               }
             });

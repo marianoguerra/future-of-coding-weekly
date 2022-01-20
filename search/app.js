@@ -147,7 +147,8 @@ function main() {
                 this.channels,
                 this.msgsByTs,
                 this.allMsgs,
-                olderMessagesToLoad
+                olderMessagesToLoad,
+                channel
               );
 
               msgsForThisDay.sort();

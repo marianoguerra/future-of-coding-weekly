@@ -252,15 +252,21 @@ function dateFromTsDayOffset(ts, offset) {
   return date.toISOString().split('T')[0];
 }
 
+function msgLink(tsFrom, tsTo, tsMsg, name) {
+  const date = new Date(tsMsg),
+    dateIso = date.toISOString(),
+    dateDayBefore = dateFromTsDayOffset(tsFrom, -7),
+    dateDayAfter = dateFromTsDayOffset(tsTo, 7),
+    url = `/history/?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
+
+  return {url, dateIso};
+}
+
 function historyLinkFromSlackMsgInfo(channelId, tsRaw, channels) {
   const ts = +tsRaw / 1000,
-    date = new Date(ts),
-    dateDayBefore = dateFromTsDayOffset(ts, -1),
-    dateDayAfter = dateFromTsDayOffset(ts, 1),
-    dateIso = date.toISOString(),
     channel = channels[channelId],
     name = channel ? channel.name : channelId,
-    url = `/history/?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
+    {url, dateIso} = msgLink(ts, ts, ts, name);
   return `[💬 #${name}@${dateIso}](${url})`;
 }
 
@@ -273,13 +279,9 @@ function historyLinkFromSlackReplyInfo(
 ) {
   const tsFrom = +tsRaw / 1000,
     tsTo = +replyTs * 1000,
-    msgDate = new Date(tsTo),
-    dateDayBefore = dateFromTsDayOffset(tsFrom, -1),
-    dateDayAfter = dateFromTsDayOffset(tsTo, 1),
-    dateIso = msgDate.toISOString(),
     channel = channels[channelId],
     name = channel ? channel.name : channelId,
-    url = `/history/?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
+    {url, dateIso} = msgLink(tsFrom, tsTo, tsTo, name);
   return `[💬 #${name}@${dateIso}](${url})`;
 }
 
@@ -313,9 +315,10 @@ function msgFileToUrl({id, filetype}) {
 }
 
 //const types = {};
-function enrichMessage(msg, args, isOlder) {
+function enrichMessage(msg, args, isOlder, channel) {
   const {users} = args,
-    date = new Date(+msg.ts * 1000),
+    msgTs = +msg.ts * 1000,
+    date = new Date(msgTs),
     {user} = msg;
 
   msg.$date = date;
@@ -360,13 +363,16 @@ function enrichMessage(msg, args, isOlder) {
 
   msg.$isOlder = isOlder;
   try {
-    const datePrefix = isOlder ? '🕰️ ' : '';
-    msg.$dateStrISO = date.toISOString();
-    msg.$dateStr = datePrefix + msg.$dateStrISO.replace('T', ' ').slice(0, -5);
+    const datePrefix = isOlder ? '🕰️ ' : '',
+      {url, dateIso} = msgLink(msgTs, msgTs, msgTs, channel);
+    msg.$dateStrISO = dateIso;
+    msg.$dateStr = datePrefix + dateIso.replace('T', ' ').slice(0, -5);
+    msg.$url = url;
   } catch (error) {
     console.log(date, msg, error);
     msg.$dateStr = 'Invalid Date';
     msg.$dateStrISO = 'Invalid Date';
+    msg.$url = '#';
   }
   msg.$user = users[user] || dummyUser(user);
   msg.$userName =
@@ -512,7 +518,8 @@ function parseHistoryChannelData(
   channels,
   msgByTs,
   msgOrder,
-  olderMessagesToLoad
+  olderMessagesToLoad,
+  channel
 ) {
   for (let i = 0, len = data.length; i < len; i += 1) {
     const msg = data[i];
@@ -538,7 +545,7 @@ function parseHistoryChannelData(
       ts = thread_ts;
     }
 
-    enrichMessage(msg, {users, channels}, false);
+    enrichMessage(msg, {users, channels}, false, channel);
     const isParent = ts === thread_ts;
     msg.$isParent = isParent;
 
@@ -563,7 +570,8 @@ function parseHistoryChannelData(
             responses: [msg],
           },
           {users, channels},
-          true
+          true,
+          channel
         );
         msgOrder.push(parentMsg);
         msgByTs[thread_ts] = parentMsg;

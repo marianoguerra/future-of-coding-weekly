@@ -80,7 +80,7 @@
       <div id="msgs-output">
         <div class="post" v-for="msg in filteredMsgs" :key="msg.ts" :id="msg.$dateStrISO">
           <span class="user">{{msg.$userName}}</span>
-          <a class="date" :href="'#' + msg.$dateStrISO">{{msg.$dateStr}}</a>
+          <a class="date" :href="msg.$url">{{msg.$dateStr}}</a>
           <div class="message" v-html="msg.$html"></div>
           <div class="attachments" v-html="msg.$attachmentsHtml"></div>
           <div class="files" v-html="msg.$filesHtml"></div>
@@ -88,7 +88,7 @@
           <div class="replies">
             <div class="reply" v-for="resp in msg.responses" :key="resp.ts" :id="resp.$dateStrISO">
               <span class="user">{{resp.$userName}}</span>
-              <a class="date" :href="'#' + resp.$dateStrISO">{{resp.$dateStr}}</a>
+              <a class="date" :href="resp.$url">{{resp.$dateStr}}</a>
               <div class="message" v-html="resp.$html"></div>
               <div class="attachments" v-html="resp.$attachmentsHtml"></div>
               <div class="files" v-html="resp.$filesHtml"></div>
