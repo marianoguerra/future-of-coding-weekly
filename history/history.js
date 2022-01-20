@@ -252,12 +252,15 @@ function dateFromTsDayOffset(ts, offset) {
   return date.toISOString().split('T')[0];
 }
 
+const msgLinkRoot = location.pathname.endsWith('/history/')
+  ? './'
+  : './history/';
 function msgLink(tsFrom, tsTo, tsMsg, name) {
   const date = new Date(tsMsg),
     dateIso = date.toISOString(),
     dateDayBefore = dateFromTsDayOffset(tsFrom, -7),
     dateDayAfter = dateFromTsDayOffset(tsTo, 7),
-    url = `/history/?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
+    url = `${msgLinkRoot}?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
 
   return {url, dateIso};
 }
