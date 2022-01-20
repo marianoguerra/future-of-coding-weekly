@@ -648,7 +648,7 @@ function padZero(n) {
 }
 
 function dateParts(d) {
-  return [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+  return [d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate()];
 }
 
 function dateToDateString(d) {
