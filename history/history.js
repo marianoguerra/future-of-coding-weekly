@@ -258,8 +258,8 @@ const msgLinkRoot = location.pathname.endsWith('/history/')
 function msgLink(tsFrom, tsTo, tsMsg, name) {
   const date = new Date(tsMsg),
     dateIso = date.toISOString(),
-    dateDayBefore = dateFromTsDayOffset(tsFrom, -7),
-    dateDayAfter = dateFromTsDayOffset(tsTo, 7),
+    dateDayBefore = dateFromTsDayOffset(tsFrom, -3),
+    dateDayAfter = dateFromTsDayOffset(tsTo, 3),
     url = `${msgLinkRoot}?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
 
   return {url, dateIso};
