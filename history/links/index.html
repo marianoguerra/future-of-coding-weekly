@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Future of Coding Links</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <div id="ui">
+
+        <a id="logo" href="https://futureofcoding.org">
+          <img src="./logo.svg" alt="Future of Coding Links">
+        </a>
+
+        <div id="small-logo">
+          <a href="https://futureofcoding.org">Future of Coding</a> Links 
+        </div>
+
+        <div id="center">
+          <div id="query">
+            <div>
+              <div class="field">
+                <label>Search</label>
+                <input type="search" v-model="filter" v-on:input="doSearch()">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin:1rem 0">
+        <table class="links-table">
+          <thead>
+            <tr>
+              <td>Count</td>
+              <td>Link</td>
+              <td>First Mention</td>
+              <td>Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="link in links" :key="link.url">
+              <td>{{link.count}}</td>
+              <td style="text-align:left"><a :href="link.url" target="_blank">{{link.title}}</a></td>
+              <td class="link-date">{{link.date}}</td>
+              <td :class="`link-status link-status-${link.linkStatus}`">{{link.status}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
