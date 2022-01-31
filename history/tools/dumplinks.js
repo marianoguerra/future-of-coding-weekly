@@ -1,4 +1,5 @@
 //@format
+/*globals Deno*/
 import {expandGlob} from 'https://deno.land/std@0.123.0/fs/mod.ts';
 import {DOMParser} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts';
 
@@ -72,11 +73,7 @@ async function dumpLinks(glob, titleCache) {
   await fetchTitles(urlList, titleCache);
 }
 
-function logUrlList(urlList) {
-  urlList.forEach(logUrlListEntry);
-}
-
-function logUrlListEntry({url, rawUrl, count, title, status, ts}) {
+function logUrlListEntry({rawUrl, count, title, status, ts}) {
   console.log(JSON.stringify([count, rawUrl, title, ts, status]));
 }
 
@@ -113,7 +110,7 @@ async function fetchTitles(urlList, titleCache) {
 }
 
 const CUSTOM_TITLE_BY_DOMAIN = {
-  'twitter.com': (entry, url, urlText) => {
+  'twitter.com': (entry, _url, urlText) => {
     entry.status = 200;
     entry.title = urlText;
   },
