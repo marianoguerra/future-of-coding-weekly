@@ -15,6 +15,7 @@ async function main() {
       continue;
     }
 
+    //eslint-disable-next-line no-unused-vars
     const [_count, url, title, _ts, status] = JSON.parse(line),
       isOkLink = status >= 200 && status <= 299;
     if (isOkLink) {
