@@ -1,5 +1,5 @@
 //@format
-/*globals Deno*/
+/*globals Set, Deno*/
 import {expandGlob} from 'https://deno.land/std@0.123.0/fs/mod.ts';
 import {DOMParser} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts';
 
@@ -111,27 +111,39 @@ async function fetchTitles(urlList, titleCache) {
 }
 
 const CUSTOM_TITLE_BY_DOMAIN = {
-  'twitter.com': (entry, _url, urlText) => {
-    entry.status = 200;
-    entry.title = urlText;
+    'twitter.com': (entry, _url, urlText) => {
+      entry.status = 200;
+      entry.title = urlText;
+    },
   },
-};
+  URL_BLACKLIST = new Set(['https://www.nlphistory.com/']);
 async function fetchTitle(entry) {
-  const url = new URL(entry.rawUrl),
-    handler = CUSTOM_TITLE_BY_DOMAIN[url.hostname];
-
-  if (handler) {
-    handler(entry, url, entry.rawUrl);
+  const rawUrl = entry.rawUrl;
+  if (rawUrl.endsWith('.pdf') || URL_BLACKLIST.has(rawUrl)) {
     return;
   }
 
-  const res = await fetch(entry.rawUrl),
+  const url = new URL(rawUrl),
+    handler = CUSTOM_TITLE_BY_DOMAIN[url.hostname];
+
+  if (handler) {
+    handler(entry, url, rawUrl);
+    return;
+  }
+
+  const t0 = Date.now(),
+    res = await fetch(rawUrl),
+    t = Date.now() - t0,
     contentType = res.headers.get('content-type') || '';
+
+  if (t > 1000) {
+    console.error('SLOW', t, rawUrl, res.status, contentType);
+  }
 
   entry.status = res.status;
 
   if (res.status > 299 || !contentType.includes('text/html')) {
-    console.error(entry.rawUrl, res.status, contentType);
+    console.error(rawUrl, res.status, contentType);
     return;
   }
 
