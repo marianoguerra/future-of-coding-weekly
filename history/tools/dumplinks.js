@@ -2,48 +2,75 @@
 import {expandGlob} from 'https://deno.land/std@0.123.0/fs/mod.ts';
 import {DOMParser} from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts';
 
-const decoder = new TextDecoder('utf-8'),
-  urls = {};
-for await (const file of expandGlob('*/*/*/*.json')) {
-  const rawData = await Deno.readFile(file.path),
-    data = JSON.parse(decoder.decode(rawData, {stream: true}));
+async function main() {
+  const [glob, curLinkPath] = Deno.args,
+    rawData = await Deno.readFile(curLinkPath),
+    decoder = new TextDecoder('utf-8'),
+    text = decoder.decode(rawData, {stream: true}),
+    titleCache = {};
 
-  for (let {blocks, ts} of data) {
-    if (!blocks) {
+  for (const line of text.split('\n')) {
+    if (!line) {
       continue;
     }
 
-    const tsMs0 = +ts * 1000,
-      tsMs = Number.isNaN(tsMs0) ? 0 : tsMs0;
+    const [_count, url, title, _ts, status] = JSON.parse(line),
+      isOkLink = status >= 200 && status <= 299;
+    if (isOkLink) {
+      titleCache[url] = title;
+    }
+  }
 
-    for (let {elements} of blocks) {
-      if (!elements) {
+  await dumpLinks(glob, titleCache);
+}
+
+async function dumpLinks(glob, titleCache) {
+  const decoder = new TextDecoder('utf-8'),
+    urls = {};
+
+  for await (const file of expandGlob(glob)) {
+    const rawData = await Deno.readFile(file.path),
+      data = JSON.parse(decoder.decode(rawData, {stream: true}));
+
+    for (let {blocks, ts} of data) {
+      if (!blocks) {
         continue;
       }
 
-      for (let {elements: elements1} of elements) {
-        if (!elements1) {
+      const tsMs0 = +ts * 1000,
+        tsMs = Number.isNaN(tsMs0) ? 0 : tsMs0;
+
+      for (let {elements} of blocks) {
+        if (!elements) {
           continue;
         }
 
-        for (let {url: rawUrl} of elements1) {
-          if (!rawUrl) {
+        for (let {elements: elements1} of elements) {
+          if (!elements1) {
             continue;
           }
 
-          addUrl(rawUrl, urls, tsMs);
+          for (let {url: rawUrl} of elements1) {
+            if (!rawUrl) {
+              continue;
+            }
+
+            addUrl(rawUrl, urls, tsMs);
+          }
         }
       }
     }
   }
-}
 
-const urlList = Object.values(urls).sort(
-  ({count: a, ts: tsA}, {count: b, ts: tsB}) => {
-    const countDiff = b - a;
-    return countDiff === 0 ? tsB - tsA : countDiff;
-  }
-);
+  const urlList = Object.values(urls).sort(
+    ({count: a, ts: tsA}, {count: b, ts: tsB}) => {
+      const countDiff = b - a;
+      return countDiff === 0 ? tsB - tsA : countDiff;
+    }
+  );
+
+  await fetchTitles(urlList, titleCache);
+}
 
 function logUrlList(urlList) {
   urlList.forEach(logUrlListEntry);
@@ -67,14 +94,21 @@ function addUrl(rawUrl, urls, ts) {
   urls[url].count += 1;
 }
 
-async function fetchTitles(urlList) {
+async function fetchTitles(urlList, titleCache) {
   for (let entry of urlList) {
     try {
-      await fetchTitle(entry);
-      logUrlListEntry(entry);
+      const title = titleCache[entry.rawUrl];
+      if (title) {
+        entry.title = title;
+        entry.status = 200;
+      } else {
+        await fetchTitle(entry);
+      }
     } catch (error) {
       console.error(error);
     }
+
+    logUrlListEntry(entry);
   }
 }
 
@@ -93,10 +127,13 @@ async function fetchTitle(entry) {
     return;
   }
 
-  const res = await fetch(entry.rawUrl);
+  const res = await fetch(entry.rawUrl),
+    contentType = res.headers.get('content-type') || '';
+
   entry.status = res.status;
 
-  if (res.status > 299) {
+  if (res.status > 299 || !contentType.includes('text/html')) {
+    console.error(entry.rawUrl, res.status, contentType);
     return;
   }
 
@@ -116,4 +153,4 @@ async function fetchTitle(entry) {
   }
 }
 
-await fetchTitles(urlList);
+main();

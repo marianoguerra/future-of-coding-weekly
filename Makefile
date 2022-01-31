@@ -20,7 +20,7 @@ remove-files-throttle-response:
 	rm $$(grep -lR "https://a.slack-edge.com/" history/msg_files/* | uniq)
 
 dump-links:
-	cd history && deno run --allow-read --allow-net --unsafely-ignore-certificate-errors --v8-flags=--max-old-space-size=8192 ./tools/dumplinks.js > ../links.txt
+	deno run --allow-read --allow-net --unsafely-ignore-certificate-errors --v8-flags=--max-old-space-size=8192 ./history/tools/dumplinks.js 'history/*/*/*/*.json' history/links/links.txt > links.txt
 
 export-history:
 	python3 slack_export.py --token ${SLACK_TOKEN} --publicChannels linking-together present-company share-your-work thinking-together two-minute-week --output-dir history --from-date ${FROM_DATE} --to-date ${TO_DATE}
