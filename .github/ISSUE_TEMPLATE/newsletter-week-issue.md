@@ -1,7 +1,7 @@
 ---
 name: Newsletter Week Issue
 about: This is the default issue to open each week to collect resources
-title: 'Future of Coding Weekly 2022/01 Week #'
+title: 'Future of Coding Weekly 2022/02 Week #'
 labels: ''
 assignees: marianoguerra
 
@@ -15,6 +15,7 @@ assignees: marianoguerra
 - [ ] Check to mention right person for moved messages
 - [ ] Update Search Index
 - [ ] Download New Attachments
+- [ ] Update links
 
 - https://tinyletter.com/
 - https://tinyletter.com/marianoguerra/letters/
