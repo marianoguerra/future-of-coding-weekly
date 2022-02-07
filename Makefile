@@ -3,6 +3,8 @@ HISTORY_YEAR := 2021
 FROM_DATE := 2021-09-06
 TO_DATE := 2021-09-13
 
+SHELL := /bin/bash
+
 history-index:
 	cd history; ls -1 2020-*/*/*.json > index.txt
 
