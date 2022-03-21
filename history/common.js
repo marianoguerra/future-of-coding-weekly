@@ -158,6 +158,10 @@ const AUTHORS = {
   'Andrew Condon': '[Andrew Condon](https://github.com/afcondon/purescript-d3-tagless-II)',
   'Tony O\'Dell': '[Tony O\'Dell](https://twitter.com/oynoto)',
   'Jamshid': '[Jamshid](https://twitter.com/jamshidhashimi)',
+  'Sam Ritchie': '[Sam Ritchie](https://samritchie.io)',
+  //'': '[]()',
+  //'': '[]()',
+  //'': '[]()',
   //'': '[]()',
 };
 
