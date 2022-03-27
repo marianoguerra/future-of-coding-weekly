@@ -268,6 +268,8 @@ function main() {
               return mdTitle1('Two Minute Week');
             case 'share-your-work':
               return mdTitle1('Our Work');
+            case 'reading-together':
+              return mdTitle1('Reading Together');
             case 'thinking-together':
               return mdTitle1('Thinking Together');
             case 'linking-together':

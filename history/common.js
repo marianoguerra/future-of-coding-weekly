@@ -159,9 +159,11 @@ const AUTHORS = {
   'Tony O\'Dell': '[Tony O\'Dell](https://twitter.com/oynoto)',
   'Jamshid': '[Jamshid](https://twitter.com/jamshidhashimi)',
   'Sam Ritchie': '[Sam Ritchie](https://samritchie.io)',
-  //'': '[]()',
-  //'': '[]()',
-  //'': '[]()',
+  'Tom MacWright': '[Tom MacWright](https://macwright.com/)',
+  'Corey Montella': '[Corey Montella](https://github.com/mech-lang/mech)',
+  'Orion Reed': '[Orion Reed](https://twitter.com/OrionReedOne)',
+  'Christopher Shank': '[Christopher Shank](https://mobile.twitter.com/chrisshank23)',
+  'Jason Morris': '[Jason Morris](https://twitter.com/RoundTableLaw)',
   //'': '[]()',
 };
 
