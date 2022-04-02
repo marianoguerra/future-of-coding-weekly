@@ -1,0 +1,57 @@
+[
+    {
+        "client_msg_id": "d55db05a-8a1a-4ef0-8bda-509461f08399",
+        "type": "message",
+        "text": "Thanks, that helps put your generalization in context. And what was your methodology for measuring the improvement of 1%?",
+        "user": "UCUSW7WVD",
+        "ts": "1558711260.001300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558420574.077800",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "3ec1189a-3ce5-4318-866e-f2f0ec93faea",
+        "type": "message",
+        "text": "&gt; hem. You have to admit that VGF2P8AFFINEINVQB as an opcode is absurd, and how many programmers out of a million will ever use the Galois Field Affine Transformation Inverse instruction?\n\nYes, many of the higher level, sometimes domain specific instructions and wasteful, I agree with that. I think we're talking about different CPU instructions.  I'm talking about explicit efficient use of basic SIMD instructions like move, shuffle, add, multiply, etc. that effectively exist on all consumer devices.  SSE has existed for 20 years. SSE, Altivec or Neon are on almost all consumer devices you'd would want to ship a game on, including raspberry pi and other cheap SOCs.  I assume you're only talking about new AVX instructions because you mentioned fractional market share devices?  Turning on compiler flags in many compilers does not (and cannot!) usually take advantage of SIMD, so I'm not surprised you saw no difference.  Sometimes auto-vectorization can be a win, but often it isn't, and some compilers don't support it (MSVC) or require you to write special code to make sure it is done in a performant way.   Often this stuff is hidden in a math library (<https:\/\/github.com\/Microsoft\/DirectXMath>, <https:\/\/glm.g-truc.net\/0.9.9\/index.html>) or some place where it really matters, but I'd argue that even for 3D gameplay code there are advantages.  I'm talking about the domain of games specifically because that's what Jon is trying to address in Jai.  I'm not anti-Jai btw, there are a ton of things I like about it, but SIMD and multithreading are fundamental to game performance.\n\nThe reason I'm bringing this up in the context of language is we've seen language features introduced that make writing vectorized, cache friendly and parallel code easier, and I believe there are ways to improve existing patterns that have been demonstrated.  If you're not familiar please read up on ISPC (<https:\/\/ispc.github.io\/index.html>), and Burst Compiler\\HPC# (<https:\/\/docs.unity3d.com\/Packages\/com.unity.burst@0.2\/manual\/index.html>, <https:\/\/lucasmeijer.com\/posts\/cpp_unity\/>).  It's also completely possible that Jon Blow is thinking about all of this and just hasn't demonstrated it in Jai.",
+        "user": "UBSMEUXAA",
+        "ts": "1558719829.001600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0edf98a60210",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-26\/774747080560_0edf98a60210d3ab07ea_72.jpg",
+            "first_name": "",
+            "real_name": "Scott Anderson",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "scottan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558420574.077800",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

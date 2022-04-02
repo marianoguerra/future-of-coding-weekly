@@ -1,0 +1,554 @@
+[
+    {
+        "client_msg_id": "948c1926-a9a2-40a6-abff-d1a735009e24",
+        "type": "message",
+        "text": "Interesting to read your clarifications on the differences you have in mind to Scala's approaches.\n\nI really like how this also removes the ability to use any inconsistent naming - passing \"the same\" variable to a parameter with a different name is often an area that generates a fair bit of code smell.\nHave you considered how this will work with 3rd party libraries? Its likely that libraries will use a different naming standard; so will some glue code be required to map to the naming in the rest of the code set?",
+        "user": "UN06QADNV",
+        "ts": "1613981750.023600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g96c2c97e5ed",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/96c2c97e5edea550b6935e656f64204c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0023-72.png",
+            "first_name": "",
+            "real_name": "Brent",
+            "display_name": "Brent",
+            "team": "T5TCAFTA9",
+            "name": "brentgracey",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GJ4Pt",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Interesting to read your clarifications on the differences you have in mind to Scala's approaches.\n\nI really like how this also removes the ability to use any inconsistent naming - passing \"the same\" variable to a parameter with a different name is often an area that generates a fair bit of code smell.\nHave you considered how this will work with 3rd party libraries? Its likely that libraries will use a different naming standard; so will some glue code be required to map to the naming in the rest of the code set?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "FF0EF118-FAA9-43F6-9FEF-08DFDA91BC07",
+        "type": "message",
+        "text": "I doubt that the parameters used by different libraries will often overlap _exactly_ in meaning, so they probably won’t want to share UUIDs in the vast majority of cases. Stuff like “color” will probably be that exception. There could be a standard registry (like <http:\/\/schema.org|schema.org>), or yeah, a little glue code could unify things (and is easier to implement).",
+        "user": "UCGAK10LS",
+        "ts": "1613982214.028100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Bnw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I doubt that the parameters used by different libraries will often overlap "
+                            },
+                            {
+                                "type": "text",
+                                "text": "exactly",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in meaning, so they probably won’t want to share UUIDs in the vast majority of cases. Stuff like “color” will probably be that exception. There could be a standard registry (like "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/schema.org",
+                                "text": "schema.org"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), or yeah, a little glue code could unify things (and is easier to implement)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "87f45fcc-8ea2-4d7c-9073-59a9d436800f",
+        "type": "message",
+        "text": "<@U01KZQEQVUP> This broader system was built to pick apart automotive repair manuals and assign the operation and parts discussed in every section of any manual. This, in turn, allowed us to provide a much stronger search interface for auto mechanics. So, something like \"2009 Jeep Cherokee, replace brake pads\" could show all the parts needed, specifications, procedural documentation, and so on, all at once. (Other systems required the mechanic to jump around tens of thousands of pages of documentation to assemble these bits of information, wasting time and costing customers more for repairs.)\n\nThe interface you see above is part of a tool suite I built for the analysts (automotive domain experts) to check the system's understanding of different texts, including a description of how it came to its understanding. They could then edit the ontology and taxonomy to correct errors and receive feedback in real time, including diffs of any changes in the assignments so they would know if a fix made for one thing broke something else.\n\nWe demoed <https:\/\/www.motologic.com|the system> at a big automotive conference in the form of a bakeoff where we invited mechanics on stage to race with each other to find the info they needed for a repair, one using our system for the first time the other using whichever of the industry standard tools they knew best. The mechanic using our tool won nine times out of ten. This triggered a bidding war for our acquisition. Ultimately, we sold the company to <https:\/\/en.wikipedia.org\/wiki\/Advance_Auto_Parts|Advanced Auto Parts> for a good bit of money.\n\nI wrote all the AI\/ML\/NLP and analyst-facing tools in Clojure. The underlying knowledge base used a model similar quite to RDF + OWL-lite (some of <https:\/\/scholar.google.com\/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=jack+rusher+triplestore&amp;btnG=|my work> helped get the semantic web movement started). The NLP stuff was a mix of \"modern\" statistical methods and semantic\/GOFAI stuff of the kind I've been doing since the 80s.",
+        "user": "U013ZLJARC7",
+        "ts": "1613986830.028300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U013ZLJARC7",
+            "ts": "1613991812.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YA9db",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U01KZQEQVUP"
+                            },
+                            {
+                                "type": "text",
+                                "text": " This broader system was built to pick apart automotive repair manuals and assign the operation and parts discussed in every section of any manual. This, in turn, allowed us to provide a much stronger search interface for auto mechanics. So, something like \"2009 Jeep Cherokee, replace brake pads\" could show all the parts needed, specifications, procedural documentation, and so on, all at once. (Other systems required the mechanic to jump around tens of thousands of pages of documentation to assemble these bits of information, wasting time and costing customers more for repairs.)\n\nThe interface you see above is part of a tool suite I built for the analysts (automotive domain experts) to check the system's understanding of different texts, including a description of how it came to its understanding. They could then edit the ontology and taxonomy to correct errors and receive feedback in real time, including diffs of any changes in the assignments so they would know if a fix made for one thing broke something else.\n\nWe demoed "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.motologic.com",
+                                "text": "the system"
+                            },
+                            {
+                                "type": "text",
+                                "text": " at a big automotive conference in the form of a bakeoff where we invited mechanics on stage to race with each other to find the info they needed for a repair, one using our system for the first time the other using whichever of the industry standard tools they knew best. The mechanic using our tool won nine times out of ten. This triggered a bidding war for our acquisition. Ultimately, we sold the company to "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/en.wikipedia.org\/wiki\/Advance_Auto_Parts",
+                                "text": "Advanced Auto Parts"
+                            },
+                            {
+                                "type": "text",
+                                "text": " for a good bit of money.\n\nI wrote all the AI\/ML\/NLP and analyst-facing tools in Clojure. The underlying knowledge base used a model similar quite to RDF + OWL-lite (some of "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/scholar.google.com\/scholar?hl=en&as_sdt=0%2C5&q=jack+rusher+triplestore&btnG=",
+                                "text": "my work"
+                            },
+                            {
+                                "type": "text",
+                                "text": " helped get the semantic web movement started). The NLP stuff was a mix of \"modern\" statistical methods and semantic\/GOFAI stuff of the kind I've been doing since the 80s."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UFPPABQ7P",
+                    "U01KZQEQVUP"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1b1d45b6-f2df-4f8a-870b-e21dd100e30e",
+        "type": "message",
+        "text": "Here is my understanding of your problems:\n\n1. problem #1: on-boarding\n2. problem #2: user history in the tool\n3. problem #3: allow users convenient access to parallel state machines\n\n[I think that you are generating code from users’ diagrams.  I think that you are joining the generated code to the XState library.  There are 2 different use-cases: (1) designing your tool, (2) generating code from users’ diagrams.  XState can be used for both use-cases (or just one)].\n\n1. problem #1: How to get users to love dealing with details.  They don’t.  Give them eye-candy until they buy-in.\n\nProblem #1: Yes, designing using StateCharts makes you think about details.  Users live in a fictional reality hoping that _you_ will solve all of _their_ detailed problems.  That’s why neophytes like to use BASIC and Excel (and JavaScript, Python, etc).\n\nProblem #1: Give them layers, but, don’t make them use layers immediately.  Users want “flat”, but that leads to later trouble.  Give them flat until they need more.  (Also, see Ports, in #3).  Don’t mention the fact that the “flat” layers will interconnect, once they need them to.\n\n2. problem #2: History.  The UX depends on your users - what do they want to see?  Your job boils down into (a) designing a decent UX and (b) hooking what users see, in the UX, into the generated XState code.\n\n3. problem #3: Parallel State Machines. Harel’s notation for Orthogonal States falls short (IMO) here.  in StateChart notation, state transitions are explicit (curvy arrows) _except_ when you use Orthogonal States, which can only be implied by reading the code.\n\nHow to present this to users?\n\nMy suggestion:\n\nPeel orthogonality out of user-level HSM’s and put explicit ports on the user-level HSM’s (HSM === Hierarchical State Machine).\n\nJoin ports up using explicit lines (arrows, different color, whatever).\n\nDesign it so that the users must (explicitly) wire up output ports to input (watcher) ports.\n\nDesign it so that every user-HSM is completely self-contained.\n\nDesign it so that a user-HSM can only send “state-changed” events to one of its own output ports.  Every user-HSM can observe (listen-to) “state-changed” events from other user-HSMs only-iff their ports are connected in the UX.\n\nCan an HSM send other kinds of events to its output ports?  (A: yes.  Ask me for more discussion, if this interests you.  I am happy to discuss further).\n\n4. problem #0: Go to a whiteboard and draw the design of your tool on the whiteboard.  (Use StateChart notation, if you wish).  (Most programmers skip this step and go straight to implementation using JS, Python, Rust, etc.)",
+        "user": "UGWUJUZHT",
+        "ts": "1613997703.029100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g222ae5c0173",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8222ae5c01730d4dba6a358e4d5f9031.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Paul Tarvydas",
+            "display_name": "guitarvydas",
+            "team": "T5TCAFTA9",
+            "name": "paultarvydas",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Zvwlb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Here is my understanding of your problems:\n\n1. problem #1: on-boarding\n2. problem #2: user history in the tool\n3. problem #3: allow users convenient access to parallel state machines\n\n[I think that you are generating code from users’ diagrams.  I think that you are joining the generated code to the XState library.  There are 2 different use-cases: (1) designing your tool, (2) generating code from users’ diagrams.  XState can be used for both use-cases (or just one)].\n\n1. problem #1: How to get users to love dealing with details.  They don’t.  Give them eye-candy until they buy-in.\n\nProblem #1: Yes, designing using StateCharts makes you think about details.  Users live in a fictional reality hoping that _you_ will solve all of _their_ detailed problems.  That’s why neophytes like to use BASIC and Excel (and JavaScript, Python, etc).\n\nProblem #1: Give them layers, but, don’t make them use layers immediately.  Users want “flat”, but that leads to later trouble.  Give them flat until they need more.  (Also, see Ports, in #3).  Don’t mention the fact that the “flat” layers will interconnect, once they need them to.\n\n2. problem #2: History.  The UX depends on your users - what do they want to see?  Your job boils down into (a) designing a decent UX and (b) hooking what users see, in the UX, into the generated XState code.\n\n3. problem #3: Parallel State Machines. Harel’s notation for Orthogonal States falls short (IMO) here.  in StateChart notation, state transitions are explicit (curvy arrows) _except_ when you use Orthogonal States, which can only be implied by reading the code.\n\nHow to present this to users?\n\nMy suggestion:\n\nPeel orthogonality out of user-level HSM’s and put explicit ports on the user-level HSM’s (HSM === Hierarchical State Machine).\n\nJoin ports up using explicit lines (arrows, different color, whatever).\n\nDesign it so that the users must (explicitly) wire up output ports to input (watcher) ports.\n\nDesign it so that every user-HSM is completely self-contained.\n\nDesign it so that a user-HSM can only send “state-changed” events to one of its own output ports.  Every user-HSM can observe (listen-to) “state-changed” events from other user-HSMs only-iff their ports are connected in the UX.\n\nCan an HSM send other kinds of events to its output ports?  (A: yes.  Ask me for more discussion, if this interests you.  I am happy to discuss further).\n\n4. problem #0: Go to a whiteboard and draw the design of your tool on the whiteboard.  (Use StateChart notation, if you wish).  (Most programmers skip this step and go straight to implementation using JS, Python, Rust, etc.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "d23333d3-ba18-4785-a78f-eccab68dd303",
+        "type": "message",
+        "text": "This is fascinating and exactly what I'm looking for, thanks so much. That demo idea is clever, I might steal it :slightly_smiling_face:\n\nHave you considered applying this approach to other domains? Having strong search like this would superpower a lot of retrieval &amp; cross-reference heavy tasks (e.g. medical research).\n\nA few follow-up questions, excuse my excitement.. --\n\n1. How did you generate the explanations of the system's understanding of a given text? Weighted input variables? Explainable statistical systems are quite tricky, I often struggle with this.\n2. How was the text linked to the ontology? A changing ontology is a moving target for an entity linker; haven't seen great solutions for this yet, and definitely none that could give real-time feedback. Damn. \n3. What made you use a custom knowledge base representation? Familiarity, performance, or was there something lacking in the classic RDF\/labelled property stores?\n4. Engineering-wise, how did you integrate statistical with GOFAI logic? Specifically, how did you tackle their inter-dependency wherever they interface?  \n",
+        "user": "U01KZQEQVUP",
+        "ts": "1613997834.029300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9ff8c2de03db",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-01-30\/1694828418931_9ff8c2de03dba11dab1d_72.jpg",
+            "first_name": "",
+            "real_name": "Florian Cäsar",
+            "display_name": "Florian Cäsar",
+            "team": "T5TCAFTA9",
+            "name": "florian.caesar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3dbae",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is fascinating and exactly what I'm looking for, thanks so much. That demo idea is clever, I might steal it "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nHave you considered applying this approach to other domains? Having strong search like this would superpower a lot of retrieval & cross-reference heavy tasks (e.g. medical research).\n\nA few follow-up questions, excuse my excitement.. --\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "How did you generate the explanations of the system's understanding of a given text? Weighted input variables? Explainable statistical systems are quite tricky, I often struggle with this."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "How was the text linked to the ontology? A changing ontology is a moving target for an entity linker; haven't seen great solutions for this yet, and definitely none that could give real-time feedback. Damn. "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "What made you use a custom knowledge base representation? Familiarity, performance, or was there something lacking in the classic RDF\/labelled property stores?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Engineering-wise, how did you integrate statistical with GOFAI logic? Specifically, how did you tackle their inter-dependency wherever they interface?  "
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": []
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "54c4cc15-e60d-47e1-9424-65ac32e4a8a2",
+        "type": "message",
+        "text": "There are, of course, many other possible applications of this kind of technology. I know of at least one company in that Netherlands that's doing similar things for medical research, and the <https:\/\/icfp20.sigplan.org\/details\/minikanren-2020-papers\/10\/mediKanren-A-System-for-Bio-medical-Reasoning|Medikanren> group is doing very cool things. My current work has moved on to other areas at the moment, but who knows what the future holds. :slightly_smiling_face:\n\n1. Yeah, statistical systems are terrible at explaining themselves. Explanations were generated in the logic programming\/graph theoretical part of the system.\n2. The statistical part of the NLP system fed things upward to the ontology-driven inferencer, which found paths between taxonomic entities that had linguistic stems attached to them (the KB was first statistically derived from our multi-terabyte collection of manuals, then improved by the analysts). It was able to reload and recompute an entire knowledge base in &lt;2 seconds, partially by doing much of the work in parallel on a many-core machine. It was also able to keep multiple versions online at once to do comparison and diffs.\n3. RDF is a mixed bag, and certain parts of it (complete open world assumption, for example) would only have made life harder in this context.\n4. See (2), more or less.\nGOFAI advantages include size of the needed training corpus and transparency of the system's function, but many tasks -- anything resembling sensing\/perception -- are better handled with a probabilistic approach. So, for example, it's easy to find large corpora of English language text -- even labeled! -- on which to train NLP models, and the kind of text we were dealing with was intentionally unambiguous (repair manuals!), so we were able to get very good statistical parse trees for most sentences and text fragments. But entity linking was a bit harder because of variability in how terms were used in the texts, so we needed a way to disambiguate various kinds of shorthand based on context, which turned out to be amenable to graph theoretical algorithms over a knowledge base. The KB also held a variety of other useful information about parts and tools, such as their catalog numbers so we could convert references in the manual to purchase links (quite important to our acquirer).",
+        "user": "U013ZLJARC7",
+        "ts": "1614004290.029500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U013ZLJARC7",
+            "ts": "1614008855.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "F4p",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There are, of course, many other possible applications of this kind of technology. I know of at least one company in that Netherlands that's doing similar things for medical research, and the "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/icfp20.sigplan.org\/details\/minikanren-2020-papers\/10\/mediKanren-A-System-for-Bio-medical-Reasoning",
+                                "text": "Medikanren"
+                            },
+                            {
+                                "type": "text",
+                                "text": " group is doing very cool things. My current work has moved on to other areas at the moment, but who knows what the future holds. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Yeah, statistical systems are terrible at explaining themselves. Explanations were generated in the logic programming\/graph theoretical part of the system."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The statistical part of the NLP system fed things upward to the ontology-driven inferencer, which found paths between taxonomic entities that had linguistic stems attached to them (the KB was first statistically derived from our multi-terabyte collection of manuals, then improved by the analysts). It was able to reload and recompute an entire knowledge base in <2 seconds, partially by doing much of the work in parallel on a many-core machine. It was also able to keep multiple versions online at once to do comparison and diffs."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "RDF is a mixed bag, and certain parts of it (complete open world assumption, for example) would only have made life harder in this context."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "See (2), more or less."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nGOFAI advantages include size of the needed training corpus and transparency of the system's function, but many tasks -- anything resembling sensing\/perception -- are better handled with a probabilistic approach. So, for example, it's easy to find large corpora of English language text -- even labeled! -- on which to train NLP models, and the kind of text we were dealing with was intentionally unambiguous (repair manuals!), so we were able to get very good statistical parse trees for most sentences and text fragments. But entity linking was a bit harder because of variability in how terms were used in the texts, so we needed a way to disambiguate various kinds of shorthand based on context, which turned out to be amenable to graph theoretical algorithms over a knowledge base. The KB also held a variety of other useful information about parts and tools, such as their catalog numbers so we could convert references in the manual to purchase links (quite important to our acquirer)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P"
+    },
+    {
+        "client_msg_id": "6ea86dfa-5aa6-4e11-993a-b5f1aef15551",
+        "type": "message",
+        "text": "Thanks again - I owe you a coffee next time you're near Zurich. Do you have the name\/link for that company in the Netherlands?\n1. On explanations of statistical \"reasoning\"; have you ever worked on that? There's of course lots of research there, but it's still very early and the opinion of someone with your experience would be interesting. Myself, I'm increasingly doubting the possibility of having explainable *and* performant statistical models.  \n2. Interesting, so the statistical part was unaware of the taxonomy. Did you try incorporating the taxonomy as a prior into training somehow? Also, how large was that knowledge graph? &lt;2 seconds is insane, and keeping multiple copies in memory even moreso. What was the underlying storage layer (assuming there was one)?  \n3. Not quite following on the problem with RDF - how is its open world assumption problematic?\nYeah, I imagine repair manuals must be close to the best-case when it comes to statistical parsing, ha. (Maybe government reports as well, depending on the government.)\nRegarding GOFAI &amp; your entity linker: was the entity linker purely rule-based then (i.e. using graph algorithms on the KB)?\n\nAlso --\n• I'm working on solidifying my graph theory knowledge, are there any resources\/books you would recommend? Is it even sufficiently helpful to know that stuff, considering I will mostly do applied work on graphs? I'm still waiting for my copy of \"Introduction to Graph Theory\" that I ordered months ago..\n• 2 seconds. Damn. ",
+        "user": "U01KZQEQVUP",
+        "ts": "1614013621.030100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9ff8c2de03db",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-01-30\/1694828418931_9ff8c2de03dba11dab1d_72.jpg",
+            "first_name": "",
+            "real_name": "Florian Cäsar",
+            "display_name": "Florian Cäsar",
+            "team": "T5TCAFTA9",
+            "name": "florian.caesar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RLfmC",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks again - I owe you a coffee next time you're near Zurich. Do you have the name\/link for that company in the Netherlands?\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "On explanations of statistical \"reasoning\"; have you ever worked on that? There's of course lots of research there, but it's still very early and the opinion of someone with your experience would be interesting. Myself, I'm increasingly doubting the possibility of having explainable "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "and",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " performant statistical models.  "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Interesting, so the statistical part was unaware of the taxonomy. Did you try incorporating the taxonomy as a prior into training somehow? Also, how large was that knowledge graph? <2 seconds is insane, and keeping multiple copies in memory even moreso. What was the underlying storage layer (assuming there was one)?  "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Not quite following on the problem with RDF - how is its open world assumption problematic?"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nYeah, I imagine repair manuals must be close to the best-case when it comes to statistical parsing, ha. (Maybe government reports as well, depending on the government.)\nRegarding GOFAI & your entity linker: was the entity linker purely rule-based then (i.e. using graph algorithms on the KB)?\n\nAlso --\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I'm working on solidifying my graph theory knowledge, are there any resources\/books you would recommend? Is it even sufficiently helpful to know that stuff, considering I will mostly do applied work on graphs? I'm still waiting for my copy of \"Introduction to Graph Theory\" that I ordered months ago.."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "2 seconds. Damn. "
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P"
+    }
+]

@@ -1,0 +1,589 @@
+[
+    {
+        "client_msg_id": "6aadb070-9563-47e8-b20c-d03cf5eefe97",
+        "type": "message",
+        "text": "<@UEQ6M68H0> just a correction on the node modules, they’re not getting mutated by anybody, any mutation would mean a version change and your `yarn.lock` or `package-lock.json` file — depending on which package manager you’re using — will make sure that your project always contains the exact version of the modules you were working with initially unless you manually upgrade or update them",
+        "user": "UMU2RLPR8",
+        "ts": "1570088614.139300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "84533398a201",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-10\/756734099191_84533398a201c4f2babe_72.png",
+            "first_name": "Ryan",
+            "real_name": "Ryan",
+            "display_name": "comma",
+            "team": "T5TCAFTA9",
+            "name": "ryan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "6A5163AA-12B3-4BA9-9B57-1EA0809FBCD5",
+        "type": "message",
+        "text": "Unless they mutate the package but don’t bump the version number :wink:. Or make a breaking change and only bump the patch or the minor number, or a bunch of other possibilities ",
+        "user": "U85HCL7JP",
+        "ts": "1570125145.141700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0c5d8f6a2266",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-25\/1286770110448_0c5d8f6a2266551a36f2_72.jpg",
+            "first_name": "",
+            "real_name": "Daniel Garcia",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "daniel.garcia.carmona",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "d8728270-9143-4023-b05e-8ea459665de2",
+        "type": "message",
+        "text": "It's also vastly more work to review the changes in versions of your dependencies (and their transitive dependencies) than it is to stay on top of changes in your (or your team's) own code. The culture of NPM (and rubygems, etc) is to just grab updates as they come out, to not review them (because if you're taking on hundreds of deps, and many hundreds or thousands of transitive deps, you clearly don't have the luxury of time), and trust that semver covers enough failure modes to make the risk worth it.\n\nSemver also doesn't, for example, cover the case of Angular 1 being largely abandoned by Google within a few years of its release in lieu of the totally redesigned Angular 2, requiring you to rewrite your app.\n\nThird party dependencies are by their very nature a Faustian bargain.",
+        "user": "UC2A2ARPT",
+        "ts": "1570130099.142100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1570130124.000000"
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "17cb71fc-96b0-4cf5-854a-b25e470289ce",
+        "type": "message",
+        "text": "<@U85HCL7JP> it’s not possible to change the package without also changing the version. people can mess with minor and patch versions sure, but when you’re locked to a specific version it doesn’t matter to you",
+        "user": "UMU2RLPR8",
+        "ts": "1570136533.142500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "84533398a201",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-10\/756734099191_84533398a201c4f2babe_72.png",
+            "first_name": "Ryan",
+            "real_name": "Ryan",
+            "display_name": "comma",
+            "team": "T5TCAFTA9",
+            "name": "ryan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UMU2RLPR8",
+            "ts": "1570136572.000000"
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "e78bb84d-8b84-48b7-8d3b-fa6406ebf9fd",
+        "type": "message",
+        "text": "It’s possible on CI\/CD environments, with every new build fetching the package version from `yarn.lock`,  but the underline code being different in local\/staging\/production environments",
+        "user": "U85HCL7JP",
+        "ts": "1570137838.142900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0c5d8f6a2266",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-25\/1286770110448_0c5d8f6a2266551a36f2_72.jpg",
+            "first_name": "",
+            "real_name": "Daniel Garcia",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "daniel.garcia.carmona",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2e2a039c-5add-4109-a9fd-1c7250eeee4c",
+        "type": "message",
+        "text": "I don't understand how freezing to a particular version is that great of a solution. If there is a bug in the external code that gets fixed, in order to get that bug fix you are going to have to upgrade to probably the latest version which indeed might force some rewrite. And if the tree of dependencies is large, who decides when it is safe or wise to upgrade the lower modules? Doesn't this basically cause you out of caution to freeze all this code? We have this problem all the time at my firm, where we use Asterisk\/FreePBX\/OpenVZ open source stack, and unfortunately in the case of OpenVZ the bug fixes we would like to take advantage of, break the software for several thousand virtual machines, and would take a huge effort to make the transition. Same thing with updates to FreePBX, it breaks all sorts of plug-ins which customers are using, and we aren't even aware of which ones will be broken. So we typically don't upgrade because it is too dangerous. We only upgrade when we have to. Not a perfect solution because security fixes aren't getting incorporated, and we are under constant attack by hackers (50 million break-in attempts per data center per day).  In my Beads language, i have adopted a principle for the external modules that they are encouraged to stay tiny and focused, avoiding the fan-out of dependencies which i think is a huge problem. In the lumberjack example program that i converted from React, the React yarn.lock file had over 1300 dependencies, and the lock file was 40 times larger than the program! Also, let's not forget that all this fan out is building cognitive load on what these modules do. To understand what the subsystems do you then have to learn the subsystems they use. I want to totally understand my program from end to end, and not have it recede into gray as it gets deeper. There is no reason why a simple program like the lumberjack game cannot be completely understood by the author. It is only 700 words of code, that is like a short newspaper story. Should be a piece of cake to comprehend that. I want robust software that is rock solid and without an ounce of fat.",
+        "user": "UEQ6M68H0",
+        "ts": "1570138696.143100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "64cbc699-86e6-4c59-a7da-4a382c5a8633",
+        "type": "message",
+        "text": "<@U85HCL7JP> yah, reproducibility between platforms is an issue. something that runs on os x might be slightly different on linux or not run at all on windows",
+        "user": "UMU2RLPR8",
+        "ts": "1570139216.143300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "84533398a201",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-10\/756734099191_84533398a201c4f2babe_72.png",
+            "first_name": "Ryan",
+            "real_name": "Ryan",
+            "display_name": "comma",
+            "team": "T5TCAFTA9",
+            "name": "ryan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "74e218e8-3e80-4109-84ac-5f232ee02ee0",
+        "type": "message",
+        "text": "<@UEQ6M68H0> i’m not sure you’re making the differentiation between tooling and stuff that’s necessary to run the program here. they’ll all get jumped up in the `yarn.lock` file but in `package.json` you’ll see them separated between `dependencies` and `devDependencies`",
+        "user": "UMU2RLPR8",
+        "ts": "1570139387.143500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "84533398a201",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-10\/756734099191_84533398a201c4f2babe_72.png",
+            "first_name": "Ryan",
+            "real_name": "Ryan",
+            "display_name": "comma",
+            "team": "T5TCAFTA9",
+            "name": "ryan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "33817be4-8d7b-4afa-89b6-b15174a3e0bb",
+        "type": "message",
+        "text": "React has the same problem jQuery had — people only learn the wrapper tool, and don't learn the underlying primitives, so they're unable to tell when the primitives are actually much simpler. That's how you end up with Stack Overflow posts like \"How do you add two numbers in jQuery?\" In the case of this lumberjack game, React and its ecosystem are colossal overkill. If you're building Instagram or Facebook, you'll want some infrastructure akin to React or Polymer, sure. But in that case, you're better to do what Facebook and Google did, and just build your own frameworks that you own and control. And in the case of this game, just build it using plain HTML, CSS, JS. It'll be small, maintainable, accessible (in multiple senses), and it'll still be somewhat relevant as an example in five years.",
+        "user": "UC2A2ARPT",
+        "ts": "1570141023.143900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "9e664af9-f41b-4408-a30d-abc64eee25da",
+        "type": "message",
+        "text": "There's so, so much post hoc rationalization of using these industrial scale tools like React at commercial or personal scale, probably because people have scale envy or tool obsession — I know I've got that, at least. Also, so much FUD about the complexity of JavaScript and CSS and HTML, a lot of promises made about React and post-css and tachyons and system-js and (.... yawn) simplifying that complexity. Those promises are kept, but only when you know the right cases for those tools — typically, global scale web apps made by teams of thousands of junior devs — which requires knowing what they do and what primitives they're built atop, which requires good engineering discipline.",
+        "user": "UC2A2ARPT",
+        "ts": "1570141028.144100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "8e751482-bc07-4c9e-bc91-9975aefd5caf",
+        "type": "message",
+        "text": "Beads probably has a scale for which it's an appropriate choice of tool. For us to evaluate it fairly, <@UEQ6M68H0>, you should pit it against other examples of implementations using tools appropriate for that scale. The fact that someone else made the dumb decision to use React in this inappropriate way is not a compelling argument in favor of Beads. This game doesn't need 1300 transitive dependencies — that's a bad point of comparison. Beads seems really interesting, and I'd like to see it kick ass on a level playing field.",
+        "user": "UC2A2ARPT",
+        "ts": "1570141249.144300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1570141288.000000"
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "9ddd8baa-8489-41ce-a965-a38b04abc498",
+        "type": "message",
+        "text": "Ryan pointed out my ignorance of React. I suspect that the yarn file had more than just the transitive dependencies, it also carries the build toolchain which is also gigantic. I come from a commercial background where the companies i worked for strove to control every part of the codebase they could, not because they wanted to take care of more code, but because in a pinch they want to be able to fix anything. When you depend on some company, and they don't fix a showstopping bug quickly enough, you can get screwed royally. At least in the open source universe you have access to the code, and push comes to shove you can dive in to fix it. But to understand a system in its entirety, i think that most people agree that it is desirable to have as few dependencies as possible. The way people build libraries in the npm world tends to generate these giant balls of yarn, that are so vast as to be unknowable.\n\ni find a lot of people are using Meteor, Electron, React, Vue, etc., nowadays even for small projects. When you want to make something respond to screen resolution changes, regular CSS and JS are a disaster, because there is no arithmetic in CSS, and no IF statement to control layout in HTML. The #1 language stack (HTML\/CSS\/JS) used in the world today is really 3 incompatible languages rolled into one, where one can draw but not compute, and the other can style but has no IF statement, etc., is a bizarre historical artifact. The fact that these 3 languages don't agree on a line comment syntax is totally bizarre, and this crazy system cannot stand forever as the primary language; it is simply too mediocre a design to endure. Sure, it can proliferate like COBOL did, but who now starts a project in COBOL? nobody.",
+        "user": "UEQ6M68H0",
+        "ts": "1570144375.144700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1570144717.000000"
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0"
+    },
+    {
+        "client_msg_id": "e119d63f-4ee9-4fb9-b924-92569b1d4ba9",
+        "type": "message",
+        "text": "I'm working on the replacement of html\/css\/js.. it's called.. WebAssembly! (+WebGPU :slightly_smiling_face: And I'm only half kidding",
+        "user": "UHDQ62M4P",
+        "ts": "1570153393.145000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0",
+                    "U8A5MS6R1"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "ba964a1e-da03-4033-bc92-dcb848bee2a2",
+        "type": "message",
+        "text": "I was reading the description of Tic-tac-toe in Wikipedia and start daydreaming on the smallest and easier to understand program for it.\nFirst here is the relevant paragraph from Wikipedia: `The game can be generalized to an m,n,k-game in which two players alternate placing stones of their own color on an m×n board, with the goal of getting k of their own color in a row. Tic-tac-toe is the (3,3,3)-game.`\n\nI came up with a program divided in 3 parts:\n1. A declarative set of rules\n2. A state machine for game transitions\n3. A visual specification for the screens\n\nHere are the set of rules:\n\n```\nSpace: X, O or empty\nBoard: 3x3 table of spaces\nBoard full: Board has no empty spaces\nEnd game: Board full or Win\nWin: Row, Column or Diagonal of same Player token\nDraw: Board full and not win\n\nPlayer token: X, O\nHuman player: Choose a player token\nComputer player: Remaining token not chosen by human player\n\nPlayer move: Choose empty space (Choose could be done with the mouse, keyboard, or other input device)\nComputer move: Randomly choose empty space\n```\n\nSome rules in a Haskell like language:\n```\nSpace = X | O | Empty\nBoard = Space[3][3]\nfullBoard board = none board (\\space -&gt; space == Empty)\n```\n\nI tried to have the rules read as close as possible to English. I see some rules really close (and easy to represent) in a language like Haskell.\nOther rules are probably to high level to be easy for a computer to understand (specially the winning logic)\n\nHere is the state machine. Doesn’t have the best layout, I just used the first web site I could find to generate it:",
+        "user": "U85HCL7JP",
+        "ts": "1570163339.145400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0c5d8f6a2266",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-25\/1286770110448_0c5d8f6a2266551a36f2_72.jpg",
+            "first_name": "",
+            "real_name": "Daniel Garcia",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "daniel.garcia.carmona",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U85HCL7JP",
+            "ts": "1570163446.000000"
+        }
+    },
+    {
+        "type": "message",
+        "text": "Would love to hear any comments. Does anyone think is a good idea having a programming language\/environment composed of these parts?",
+        "files": [
+            {
+                "id": "FNNMPKJUA",
+                "created": 1570163393,
+                "timestamp": 1570163393,
+                "name": "Screen Shot 2019-10-03 at 9.12.34 PM.png",
+                "title": "Screen Shot 2019-10-03 at 9.12.34 PM.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U85HCL7JP",
+                "editable": false,
+                "size": 95418,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FNNMPKJUA\/screen_shot_2019-10-03_at_9.12.34_pm.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FNNMPKJUA\/download\/screen_shot_2019-10-03_at_9.12.34_pm.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360_w": 360,
+                "thumb_360_h": 94,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480_w": 480,
+                "thumb_480_h": 126,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720_w": 720,
+                "thumb_720_h": 189,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800_w": 800,
+                "thumb_800_h": 210,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_960_w": 960,
+                "thumb_960_h": 252,
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FNNMPKJUA-1b5bfd96ad\/screen_shot_2019-10-03_at_9.12.34_pm_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 269,
+                "image_exif_rotation": 1,
+                "original_w": 1776,
+                "original_h": 466,
+                "thumb_tiny": "AwAMADDR6HqKQtjuDTqTAAxigAz6Y\/GgbiO34Uv4UZoAT5s9sU6kzRmgD\/\/Z",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U85HCL7JP\/FNNMPKJUA\/screen_shot_2019-10-03_at_9.12.34_pm.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-FNNMPKJUA-36989c8ac8",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "U85HCL7JP",
+        "display_as_bot": false,
+        "ts": "1570163396.145500",
+        "client_msg_id": "c8d5878a-f998-4115-96ff-b324c4b909f3",
+        "thread_ts": "1570163396.145500",
+        "reply_count": 12,
+        "reply_users_count": 6,
+        "latest_reply": "1570432758.180400",
+        "reply_users": [
+            "UFEQUBNNT",
+            "UEQ6M68H0",
+            "UEP7RL0HX",
+            "UA14TGLTC",
+            "UCUSW7WVD",
+            "U85HCL7JP"
+        ],
+        "replies": [
+            {
+                "user": "UFEQUBNNT",
+                "ts": "1570167705.148500"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1570169686.148700"
+            },
+            {
+                "user": "UEP7RL0HX",
+                "ts": "1570177726.151200"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1570185368.151600"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1570213664.154600"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1570220018.154900"
+            },
+            {
+                "user": "U85HCL7JP",
+                "ts": "1570248305.155100"
+            },
+            {
+                "user": "U85HCL7JP",
+                "ts": "1570248438.155300"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1570254000.155500"
+            },
+            {
+                "user": "UEP7RL0HX",
+                "ts": "1570305339.155700"
+            },
+            {
+                "user": "UEQ6M68H0",
+                "ts": "1570422094.179900"
+            },
+            {
+                "user": "UEP7RL0HX",
+                "ts": "1570432758.180400"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UNCP67JSK"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "18c22b51-7521-4fa2-832a-d53574ba413d",
+        "type": "message",
+        "text": "Sure! Does it matter to you that it seems like an environment designed specifically for turn-based games seems to be baked into its assumptions? Or would you bring more of the OS glue into the description?\n\nFWIW, I enjoyed Krouse's episode on state charts, which I think you'd find interesting if you haven't heard it: <https:\/\/futureofcoding.org\/episodes\/025>",
+        "user": "UFEQUBNNT",
+        "ts": "1570167705.148500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "565c54a4fa91",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2508698086192_565c54a4fa91a0c8c75a_72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570163396.145500",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "a4e6fbc8-2fef-48fa-b7f5-1a0acf77b480",
+        "type": "message",
+        "text": "I am very interested in the subject of minimal notation to implement a particular set of problems, and have studied TicTacToe in depth. I suggest you look at my Beads version. It is a graphical version not merely a disembodied logic system, with your same logic fused with the need to subdivide the screen into subregions, size the letters, draw messages announcing whose turn it is. These are the realities of an actual implementation. Way too easy just to skip over the graphic parts. In most of my products the drawing section of the code exceeds the logic section, which is actually the easy part. Note that the term \"row\", \"diagonal\" \"column\", would have to be explained to the computer more specifically. In my spec i call for the winning 3 in a row(s) to be highlighted (note that it is possible to have 2 winning paths at once). I would wager a reasonable sum that my implementation is within 20% of the theoretical minimum. Here is a link to the code and the spec:  <https:\/\/github.com\/magicmouse\/beads-examples\/tree\/master\/Example%20-%20Tic-Tac-Toe>\n\nSince TicTacToe is only a problem of perhaps only 500 words, the difference between implementations in various languages is fairly small, although you would be surprised at how tricky making it fit on portrait and landscape screens nicely is in many languages. Since CSS and HTML are crippled languages and have no IF statements it makes it hard to do in vanilla JS. Fixed coordinates are so 1980's, so expect that your implementation has to contend with display aspect ratios sensibly.  But even with these requirements, most languages can do this problem pretty well. I would be curious to see someone else's implementation of the same spec. Too often people change the program, so you can't do an apples-to-apples comparison.\n\nChess is a more challenging case, as it is around 1500 words to implement, about 3 times the length of TTT.\n\nYou could add to the tictactoe problem an extra feature that you want the proportion of possible futures of win\/draw\/lose for each possible move on a turn. there are only 9! possible games, and since the first move can only be one of 3 types, it is really 3 x 8! which is not a big number. That is a fascinating wrinkle to the game that takes this from a trivial program to something even harder than chess. And speaking of chess, there is a maniac programmer named Toledo who has the shortest chess program possible, an insanely devious and compact implementation that is baffling.",
+        "user": "UEQ6M68H0",
+        "ts": "1570169686.148700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1570170047.000000"
+        },
+        "thread_ts": "1570163396.145500",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "3123C21A-410A-4A7D-8A6B-C5A189A63B06",
+        "type": "message",
+        "text": "Yeah, I'm writing GLSL by hand right now (ugh) and thus I'm very eager to see WebGPU evolve. Hopefully they can come to some consensus around it, the way they did with WASM.",
+        "user": "UC2A2ARPT",
+        "ts": "1570170534.150800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1570003136.129400",
+        "parent_user_id": "UEQ6M68H0",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

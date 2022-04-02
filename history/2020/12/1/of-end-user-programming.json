@@ -1,0 +1,440 @@
+[
+    {
+        "type": "message",
+        "text": "The TeX macro suite <https:\/\/wiki.contextgarden.net\/Main_Page|ConTeXt> has one interface with definitions in different langauges. This uses TeX's [`\\csname`](<https:\/\/en.wikibooks.org\/wiki\/TeX\/csname>) macro, which allows you to call or define a TeX command by building its name from strings.\n\nAllow me to quote from <https:\/\/tex.stackexchange.com\/questions\/109869\/what-does-s-do\/110131#110131|Aditya's excellent explanation on the TeX Stack Exchange>:\n\n&gt; How should such a multilingual a key-value driven interface be defined?\n&gt; This is where the `\\c!...` and `\\v!...` macros come in. (Remember that in `\\unprotected` mode `!` is a letter, so `\\c!something` is a macro with a name `c!something`). In the core packages, ConteXt defines\n&gt; \n&gt;     \\definehead[\\v!chapter][...]\n&gt; \n&gt; This defines (amongst other things) a macro `\\e!start\\v!chapter`: in the English interface, `\\e!start=start`, `\\v!chapter=chapter`; in the French interface `\\e!start=demarre`, `\\v!chapter=chapitre`. Hence we get `\\startchapter` and `\\demarrechapitre`.\nHis full explanation is longer and better, I can recommend it.\n\nSome Stack Overflow QAs explaining the mechanism:\n\n• <https:\/\/tex.stackexchange.com\/questions\/109869\/what-does-s-do\/110131#110131>\n• <https:\/\/tex.stackexchange.com\/questions\/58654\/context-how-do-you-create-your-own-commands\/58716#58716>\nRelevant source files:\n\n• <https:\/\/source.contextgarden.net\/tex\/context\/base\/mkiv\/mult-ini.mkiv#l452|mult-ini.mkiv> contains doc comments explaining the system\n• <https:\/\/source.contextgarden.net\/tex\/context\/base\/mkiv\/mult-def.lua|mult-def.lua> contains command translations. One of them, Farsi, is a right-to-left language (actually a macrolanguage, in both senses of the word :D).\nOther noteworthy elements of the multilingual system:\n\n- namespaces for the system's words, because 'left' might mean 'the left' or 'leftwards'.\n- This implementation actually uses less CPU and RAM than the old monolingual one, because TeX commands take up less TeX tokens (1 in total) than strings (1 per letter).\n\n----\n\n#### Quick intro to ConTeXt for those unfamiliar with it\n\nI realise <https:\/\/wiki.contextgarden.net\/Main_Page|ConTeXt> is nowhere near as well-known as LaTeX, so I'll briefly introduce it. Like LaTeX, it is a TeX macro suite that provides high-level typesetting constructs on top of TeX. Its development is headed by Hans Hagen, an independent publisher\/designer in the Netherlands. Unlike LaTeX:\n\n- ConTeXt supports user-controlled per-document design as well as style sheets.\n- ConTeXt is expandable: it makes it easy to derive or define your own structural\/sementic elements. For example, you could define a section type `\\exercises` that inherits from `\\subsection`, or a block type `\\startexercise...\\stopexercise` that inherits from `\\startframed`.\n- ConTeXt is stylable: it provides commands and parameters to change the style of elements, both your own and the built-ins.\n- ConTeXt is consistent: setting style parameters uses a nice `key=value` syntax, and settings like `color=...` are available everywhere they make sense.\n- ConTeXt is integrated: fundamental typesetting concepts such as page numbering, or margin notes, or arranging multiple pages on a sheet, are all part of core. (There are third-party modules, too.)\n\nA small example: (output attached):\n\n```\\setuppapersize[A6][A5,landscape]  % A6 pages on A5 paper,\n\\setuparranging[2SIDE]             % arranged side-by-side\n\n% Section heads are bold, blue, and start 3cm below previous text.\n\\setuphead[section]\n    [color=blue,\n     style=bold,\n     before={\\blank[2cm]},\n    ]\n\n% Our custom `redsection` inherits from `section`,\n% but uses red instead.\n\\definehead[redsection][section]\n    [color=red]\n\n\\starttext  % like \\begin{document}\n\n\\section{Black, black, black...}\n\\startlines[style=bold]\n  ...is the color of my true love's hair\n  His lips are something wondrous fair.\n\\stoplines\n\n\\redsection{The lady in red is dancing with me...}\nCheek \\color[red]{to} cheek.\n\n\\section{ʿAlī ibn Abī Ṭālib}\n\\input khatt-en  % Some lorem ipsum text\n\n\\stoptext```",
+        "files": [
+            {
+                "id": "F01FP6B23V4",
+                "created": 1606824437,
+                "timestamp": 1606824437,
+                "name": "contextdemo.png",
+                "title": "contextdemo.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U01BSAKUDJQ",
+                "editable": false,
+                "size": 40700,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01FP6B23V4\/contextdemo.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01FP6B23V4\/download\/contextdemo.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01FP6B23V4-794ef6115f\/contextdemo_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01FP6B23V4-794ef6115f\/contextdemo_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01FP6B23V4-794ef6115f\/contextdemo_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360_w": 360,
+                "thumb_360_h": 255,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01FP6B23V4-794ef6115f\/contextdemo_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480_w": 480,
+                "thumb_480_h": 341,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01FP6B23V4-794ef6115f\/contextdemo_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01FP6B23V4-794ef6115f\/contextdemo_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720_w": 720,
+                "thumb_720_h": 511,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01FP6B23V4-794ef6115f\/contextdemo_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800_w": 800,
+                "thumb_800_h": 568,
+                "original_w": 864,
+                "original_h": 613,
+                "thumb_tiny": "AwAiADDSzijIoIHek2r6UAOpMgUAAdKWgBMijOaWigBOKUGkIzSbTQA6ikAxS0AFFFFADMmjJ9aKKADJ9aMn1oooAMn1pcmkooA\/\/9k=",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U01BSAKUDJQ\/F01FP6B23V4\/contextdemo.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F01FP6B23V4-8f887b0519",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "user": "U01BSAKUDJQ",
+        "display_as_bot": false,
+        "ts": "1606824623.039600",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MLj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The TeX macro suite "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/wiki.contextgarden.net\/Main_Page",
+                                "text": "ConTeXt"
+                            },
+                            {
+                                "type": "text",
+                                "text": " has one interface with definitions in different langauges. This uses TeX's ["
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\csname",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "]("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/en.wikibooks.org\/wiki\/TeX\/csname"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") macro, which allows you to call or define a TeX command by building its name from strings.\n\nAllow me to quote from "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/tex.stackexchange.com\/questions\/109869\/what-does-s-do\/110131#110131",
+                                "text": "Aditya's excellent explanation on the TeX Stack Exchange"
+                            },
+                            {
+                                "type": "text",
+                                "text": ":\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "How should such a multilingual a key-value driven interface be defined?\nThis is where the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\c!...",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\v!...",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " macros come in. (Remember that in "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\unprotected",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " mode "
+                            },
+                            {
+                                "type": "text",
+                                "text": "!",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is a letter, so "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\c!something",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is a macro with a name "
+                            },
+                            {
+                                "type": "text",
+                                "text": "c!something",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "). In the core packages, ConteXt defines\n\n    \\definehead[\\v!chapter][...]\n\nThis defines (amongst other things) a macro "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\e!start\\v!chapter",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ": in the English interface, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\e!start=start",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\v!chapter=chapter",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "; in the French interface "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\e!start=demarre",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\v!chapter=chapitre",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Hence we get "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\startchapter",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\demarrechapitre",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nHis full explanation is longer and better, I can recommend it.\n\nSome Stack Overflow QAs explaining the mechanism:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "link",
+                                        "url": "https:\/\/tex.stackexchange.com\/questions\/109869\/what-does-s-do\/110131#110131"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "link",
+                                        "url": "https:\/\/tex.stackexchange.com\/questions\/58654\/context-how-do-you-create-your-own-commands\/58716#58716"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nRelevant source files:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "link",
+                                        "url": "https:\/\/source.contextgarden.net\/tex\/context\/base\/mkiv\/mult-ini.mkiv#l452",
+                                        "text": "mult-ini.mkiv"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " contains doc comments explaining the system"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "link",
+                                        "url": "https:\/\/source.contextgarden.net\/tex\/context\/base\/mkiv\/mult-def.lua",
+                                        "text": "mult-def.lua"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " contains command translations. One of them, Farsi, is a right-to-left language (actually a macrolanguage, in both senses of the word :D)."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nOther noteworthy elements of the multilingual system:\n\n- namespaces for the system's words, because 'left' might mean 'the left' or 'leftwards'.\n- This implementation actually uses less CPU and RAM than the old monolingual one, because TeX commands take up less TeX tokens (1 in total) than strings (1 per letter).\n\n----\n\n#### Quick intro to ConTeXt for those unfamiliar with it\n\nI realise "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/wiki.contextgarden.net\/Main_Page",
+                                "text": "ConTeXt"
+                            },
+                            {
+                                "type": "text",
+                                "text": " is nowhere near as well-known as LaTeX, so I'll briefly introduce it. Like LaTeX, it is a TeX macro suite that provides high-level typesetting constructs on top of TeX. Its development is headed by Hans Hagen, an independent publisher\/designer in the Netherlands. Unlike LaTeX:\n\n- ConTeXt supports user-controlled per-document design as well as style sheets.\n- ConTeXt is expandable: it makes it easy to derive or define your own structural\/sementic elements. For example, you could define a section type "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\exercises",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " that inherits from "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\subsection",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", or a block type "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\startexercise...\\stopexercise",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " that inherits from "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\\startframed",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n- ConTeXt is stylable: it provides commands and parameters to change the style of elements, both your own and the built-ins.\n- ConTeXt is consistent: setting style parameters uses a nice "
+                            },
+                            {
+                                "type": "text",
+                                "text": "key=value",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " syntax, and settings like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "color=...",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " are available everywhere they make sense.\n- ConTeXt is integrated: fundamental typesetting concepts such as page numbering, or margin notes, or arranging multiple pages on a sheet, are all part of core. (There are third-party modules, too.)\n\nA small example: (output attached):\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\\setuppapersize[A6][A5,landscape]  % A6 pages on A5 paper,\n\\setuparranging[2SIDE]             % arranged side-by-side\n\n% Section heads are bold, blue, and start 3cm below previous text.\n\\setuphead[section]\n    [color=blue,\n     style=bold,\n     before={\\blank[2cm]},\n    ]\n\n% Our custom `redsection` inherits from `section`,\n% but uses red instead.\n\\definehead[redsection][section]\n    [color=red]\n\n\\starttext  % like \\begin{document}\n\n\\section{Black, black, black...}\n\\startlines[style=bold]\n  ...is the color of my true love's hair\n  His lips are something wondrous fair.\n\\stoplines\n\n\\redsection{The lady in red is dancing with me...}\nCheek \\color[red]{to} cheek.\n\n\\section{ʿAlī ibn Abī Ṭālib}\n\\input khatt-en  % Some lorem ipsum text\n\n\\stoptext"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "edited": {
+            "user": "U01BSAKUDJQ",
+            "ts": "1606824724.000000"
+        },
+        "thread_ts": "1606238576.036600",
+        "parent_user_id": "UV1CVSXGC"
+    }
+]

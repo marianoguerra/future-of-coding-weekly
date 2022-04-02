@@ -1,1590 +1,39 @@
 [
     {
-        "client_msg_id": "c6d9dc7e-e73b-4da1-8a76-f7cda17b03b8",
-        "type": "message",
-        "text": "*Heretical idea:* a function call syntax where the function name can appear anywhere in the call.\n\nFirst, presume we're using Haskell-style syntax, so that `f(2,3)` (C-style) is written as `f 2 3` (Haskell-style). Second, presume that parameters (in function signatures) must be prefixed with a `&amp;` symbol (or whatever symbol you prefer; we'll need this later), so the definition of `f` would look something like `f &amp;x &amp;y = ...`. Now, imagine the _definer_ of the function can choose where the function name is supposed to appear. So we could define the function f in several ways:\n\u2022 `f &amp;x &amp;y =` , in which case a function call would look like `f 2 3`\n\u2022 `&amp;x f &amp;y =` , in which case a function call would look like `2 f 3`\n\u2022 `&amp;x &amp;y f =`, in which case a function call would look like `2 3 f`\nWhy would we want a syntax like this? Many reasons.\n\n1. We get infix operators for free:\n\u2022 `&amp;x + &amp;y =` \n\u2022 `&amp;x mod &amp;y =`\n2. We can have multi-word function names:\n\u2022 `&amp;x is less than &amp;y =`\n\u2022 `if &amp;cond then &amp;a else &amp;b =`\n3. This syntax erases the distinction between defining three separate functions returning one value each, and defining one function returning a record with three fields. I think this is nice; the distinction seemed arbitrary in the first place! Reducing the number of superficial choices a programmer needs to make helps reduce the cognitive burden of programming.\n\nAnd probably more things :slightly_smiling_face:.\n\nWhat are the downsides of this syntax?\n\u2022 Some of the \"classic\" syntax of programming languages now becomes ambiguous. In particular, we hit ambiguities when passing functions around as values. In Haskell you can write expressions like `map f list` where f is a function being passed as an argument. Given we could now define `f` as an infix or postfix function (see earlier), we need to make sure that we can _refer_ to the function in an unambiguous manner. We could do this by writing something like `map (. f .) list` where the `.` symbol means an unbound parameter. For the multi-word functions, you'd write `map (. is less than 5) list`\n\u2022 There are a few other potential issues I'm working out.\nRegardless, this seems like an interesting idea, right? :slightly_smiling_face: How do people feel about it?",
-        "user": "UCGAK10LS",
-        "ts": "1633919351.305800",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1633990848.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Q7oe",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Heretical idea:",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " a function call syntax where the function name can appear anywhere in the call.\n\nFirst, presume we're using Haskell-style syntax, so that "
-                            },
-                            {
-                                "type": "text",
-                                "text": "f(2,3)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " (C-style) is written as "
-                            },
-                            {
-                                "type": "text",
-                                "text": "f 2 3",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " (Haskell-style). Second, presume that parameters (in function signatures) must be prefixed with a "
-                            },
-                            {
-                                "type": "text",
-                                "text": "&",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " symbol (or whatever symbol you prefer; we'll need this later), so the definition of "
-                            },
-                            {
-                                "type": "text",
-                                "text": "f",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " would look something like "
-                            },
-                            {
-                                "type": "text",
-                                "text": "f &x &y = ...",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ". Now, imagine the "
-                            },
-                            {
-                                "type": "text",
-                                "text": "definer",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " of the function can choose where the function name is supposed to appear. So we could define the function f in several ways:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_list",
-                        "elements": [
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "f &x &y =",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " , in which case a function call would look like "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "f 2 3",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "&x f &y =",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " , in which case a function call would look like "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "2 f 3",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "&x &y f =",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": ", in which case a function call would look like "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "2 3 f",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    }
-                                ]
-                            }
-                        ],
-                        "style": "bullet",
-                        "indent": 0,
-                        "border": 0
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\nWhy would we want a syntax like this? Many reasons.\n\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_list",
-                        "elements": [
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "We get infix operators for free:"
-                                    }
-                                ]
-                            }
-                        ],
-                        "style": "ordered",
-                        "indent": 0,
-                        "border": 0
-                    },
-                    {
-                        "type": "rich_text_list",
-                        "elements": [
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "&x + &y =",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " "
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "&x mod &y =",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    }
-                                ]
-                            }
-                        ],
-                        "style": "bullet",
-                        "indent": 0,
-                        "border": 0
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\n2. We can have multi-word function names:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_list",
-                        "elements": [
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "&x is less than &y =",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "if &cond then &a else &b =",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    }
-                                ]
-                            }
-                        ],
-                        "style": "bullet",
-                        "indent": 0,
-                        "border": 0
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\n3. This syntax erases the distinction between defining three separate functions returning one value each, and defining one function returning a record with three fields. I think this is nice; the distinction seemed arbitrary in the first place! Reducing the number of superficial choices a programmer needs to make helps reduce the cognitive burden of programming.\n\nAnd probably more things "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": ".\n\nWhat are the downsides of this syntax?\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_list",
-                        "elements": [
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "Some of the \"classic\" syntax of programming languages now becomes ambiguous. In particular, we hit ambiguities when passing functions around as values. In Haskell you can write expressions like "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "map f list",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " where f is a function being passed as an argument. Given we could now define "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "f",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " as an infix or postfix function (see earlier), we need to make sure that we can "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "refer",
-                                        "style": {
-                                            "italic": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " to the function in an unambiguous manner. We could do this by writing something like "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "map (. f .) list",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " where the "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": ".",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " symbol means an unbound parameter. For the multi-word functions, you'd write "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "map (. is less than 5) list",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "There are a few other potential issues I'm working out."
-                                    }
-                                ]
-                            }
-                        ],
-                        "style": "bullet",
-                        "indent": 0,
-                        "border": 0
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\nRegardless, this seems like an interesting idea, right? "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": " How do people feel about it?"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "reply_count": 53,
-        "reply_users_count": 11,
-        "latest_reply": "1634292338.360900",
-        "reply_users": [
-            "ULYDR7EP3",
-            "UCGAK10LS",
-            "UJ6LDMMN0",
-            "UQ706GB9U",
-            "UJBAJNFLK",
-            "UBN9AFS0N",
-            "U027P92A0N5",
-            "U02FYPLHU67",
-            "U01AD80KMLK",
-            "UMVFWPZ36",
-            "UE6EFEPTQ"
-        ],
-        "is_locked": false,
-        "subscribed": true,
-        "last_read": "1634292338.360900",
-        "reactions": [
-            {
-                "name": "heart",
-                "users": [
-                    "UJ6LDMMN0",
-                    "UC2A2ARPT"
-                ],
-                "count": 2
-            }
-        ]
-    },
-    {
-        "client_msg_id": "646988da-3489-49be-a2ea-aa8a9f04f1ec",
-        "type": "message",
-        "text": "I think you will open up for a lot of ambiguities. It might be necessary to protect against them by automatic means, like Bison does.",
-        "user": "ULYDR7EP3",
-        "ts": "1633926081.306800",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "PmM",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I think you will open up for a lot of ambiguities. It might be necessary to protect against them by automatic means, like Bison does."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "aef5ba8e-7cac-4921-b898-dac6ed2ea873",
-        "type": "message",
-        "text": "Yeah, I'm taking that as a challenge. If I can find an unambiguous syntax and semantics, the payoff could be huge :slightly_smiling_face:. Think about all the fun natural-language tricks you could do when defining functions.",
-        "user": "UCGAK10LS",
-        "ts": "1633926285.307000",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "P2K93",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Yeah, I'm taking that as a challenge. If I can find an unambiguous syntax and semantics, the payoff could be huge "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": ". Think about all the fun natural-language tricks you could do when defining functions."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "93847e7f-99fe-4b64-b76a-b588bc661be0",
-        "type": "message",
-        "text": "One constraint I'm going to be using is to demand each \"function call\" be delimited by brackets `(...)`. The contents of every pair of brackets will need to fit a function signature *exactly* (not a prefix or a subset of it). That means there will be no concept of operator precedence or associativity.",
-        "user": "UCGAK10LS",
-        "ts": "1633926372.307200",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1633926417.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "/lP3M",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "One constraint I'm going to be using is to demand each \"function call\" be delimited by brackets "
-                            },
-                            {
-                                "type": "text",
-                                "text": "(...)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ". The contents of every pair of brackets will need to fit a function signature "
-                            },
-                            {
-                                "type": "text",
-                                "text": "exactly",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " ",
-                                "style": {
-                                    "bold": true,
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "(not a prefix or a subset of it). That means there will be no concept of operator precedence or associativity."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "a453f629-257b-4e1a-a93c-17f71db2680d",
-        "type": "message",
-        "text": "But I may be able to recover associativity by adding a separate feature that captures it.",
-        "user": "UCGAK10LS",
-        "ts": "1633926391.307400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Khbx",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "But I may be able to recover associativity by adding a separate feature that captures it."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "9b47e265-d8db-4105-88d2-f8b4ad79e07c",
-        "type": "message",
-        "text": "Multi-word function names look cool, but I'm not sure they are useful. For example, wouldn't your if...then...else function always evaluate all three arguments? Many lisps implement DSLs using macros, including some that appear more like English sentences, e.g. the Common Lisp loop macro (see <http://cl-cookbook.sourceforge.net/loop.html|http://cl-cookbook.sourceforge.net/loop.html>)",
-        "user": "ULYDR7EP3",
-        "ts": "1633926856.307700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "eBaY",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Multi-word function names look cool, but I'm not sure they are useful. For example, wouldn't your if...then...else function always evaluate all three arguments? Many lisps implement DSLs using macros, including some that appear more like English sentences, e.g. the Common Lisp loop macro (see "
-                            },
-                            {
-                                "type": "link",
-                                "url": "http://cl-cookbook.sourceforge.net/loop.html",
-                                "text": "http://cl-cookbook.sourceforge.net/loop.html"
-                            },
-                            {
-                                "type": "text",
-                                "text": ")"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "03F3AF64-45C0-4677-B0D4-E45F78BA3AFC",
-        "type": "message",
-        "text": "The syntax concept I\u2019m presenting can be contemplated separately from the operational semantics of the language. So it could be lazy, or strict :woman-shrugging:. I have some ideas about the semantics I want, but that\u2019s for a separate thread :slightly_smiling_face:.",
-        "user": "UCGAK10LS",
-        "ts": "1633927023.310100",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1633927037.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "d56C4",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "The syntax concept I\u2019m presenting can be contemplated separately from the operational semantics of the language. So it could be lazy, or strict "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "woman-shrugging"
-                            },
-                            {
-                                "type": "text",
-                                "text": ". I have some ideas about the semantics I want, but that\u2019s for a separate thread "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": "."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "ULYDR7EP3",
-                    "UDQBTJ211"
-                ],
-                "count": 2
-            }
-        ]
-    },
-    {
-        "client_msg_id": "09b25166-5002-4311-aafc-bb44b29ed383",
-        "type": "message",
-        "text": "Ah, with parenthesis around every call, you might be halfway there. Will you use the `&amp;` prefix for every argument in function calls also?",
-        "user": "ULYDR7EP3",
-        "ts": "1633927189.310600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "F+e",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Ah, with parenthesis around every call, you might be halfway there. Will you use the "
-                            },
-                            {
-                                "type": "text",
-                                "text": "&",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " prefix for every argument in function calls also?"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "66D7785B-BE35-409F-887C-25A9587B95AC",
-        "type": "message",
-        "text": "Nah, I think the prefix is only necessary to disambiguate the definitions. It shouldn\u2019t be necessary at the call site!",
-        "user": "UCGAK10LS",
-        "ts": "1633927257.311800",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "dzZZ",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Nah, I think the prefix is only necessary to disambiguate the definitions. It shouldn\u2019t be necessary at the call site!"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "b1016be8-ace2-4fd4-8173-a91871e08e99",
-        "type": "message",
-        "text": "Consider any user defined functions `(fun1 &amp;X &amp;Y)` and `(&amp;X fun2 &amp;Y)`. What prevents the user from naming variables to make the ambiguous call `(fun1 fun2 var3)`?",
-        "user": "ULYDR7EP3",
-        "ts": "1633927480.312000",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "J1xy",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Consider any user defined functions "
-                            },
-                            {
-                                "type": "text",
-                                "text": "(fun1 &X &Y)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " and "
-                            },
-                            {
-                                "type": "text",
-                                "text": "(&X fun2 &Y)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ". What prevents the user from naming variables to make the ambiguous call "
-                            },
-                            {
-                                "type": "text",
-                                "text": "(fun1 fun2 var3)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "?"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "U0245E9RB2B"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "type": "message",
-        "text": "I played a bit with this idea few years ago, to use \"symbols with spaces\" for JavaScript functions. And I ended using parenthesis I also tried some other weird symbols, just to see if I can find one which is better visually (but failed).\n\n<https://stackblitz.com/edit/symbols-with-space>",
-        "files": [
-            {
-                "id": "F02H3NPEV8W",
-                "created": 1633927363,
-                "timestamp": 1633927363,
-                "name": "image.png",
-                "title": "image.png",
-                "mimetype": "image/png",
-                "filetype": "png",
-                "pretty_type": "PNG",
-                "user": "UJ6LDMMN0",
-                "editable": false,
-                "size": 3640,
-                "mode": "hosted",
-                "is_external": false,
-                "external_type": "",
-                "is_public": true,
-                "public_url_shared": false,
-                "display_as_bot": false,
-                "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F02H3NPEV8W/image.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F02H3NPEV8W/download/image.png",
-                "media_display_type": "unknown",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F02H3NPEV8W-118fd385d5/image_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F02H3NPEV8W-118fd385d5/image_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F02H3NPEV8W-118fd385d5/image_360.png",
-                "thumb_360_w": 360,
-                "thumb_360_h": 26,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F02H3NPEV8W-118fd385d5/image_160.png",
-                "original_w": 412,
-                "original_h": 30,
-                "thumb_tiny": "AwADADDSwM5owP8AJpaKAExRgYpaKAExRilooA//2Q==",
-                "permalink": "https://futureofcoding.slack.com/files/UJ6LDMMN0/F02H3NPEV8W/image.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F02H3NPEV8W-5f94c2319f",
-                "is_starred": false,
-                "has_rich_preview": false
-            },
-            {
-                "id": "F02HAFD8CUB",
-                "created": 1633927401,
-                "timestamp": 1633927401,
-                "name": "image.png",
-                "title": "image.png",
-                "mimetype": "image/png",
-                "filetype": "png",
-                "pretty_type": "PNG",
-                "user": "UJ6LDMMN0",
-                "editable": false,
-                "size": 22324,
-                "mode": "hosted",
-                "is_external": false,
-                "external_type": "",
-                "is_public": true,
-                "public_url_shared": false,
-                "display_as_bot": false,
-                "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F02HAFD8CUB/image.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F02HAFD8CUB/download/image.png",
-                "media_display_type": "unknown",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAFD8CUB-487ff356ae/image_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAFD8CUB-487ff356ae/image_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAFD8CUB-487ff356ae/image_360.png",
-                "thumb_360_w": 360,
-                "thumb_360_h": 65,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAFD8CUB-487ff356ae/image_480.png",
-                "thumb_480_w": 480,
-                "thumb_480_h": 87,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAFD8CUB-487ff356ae/image_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAFD8CUB-487ff356ae/image_720.png",
-                "thumb_720_w": 720,
-                "thumb_720_h": 130,
-                "original_w": 735,
-                "original_h": 133,
-                "thumb_tiny": "AwAIADC+Qf1pR9KdQKAEzjoKXJ9KKWgBMn0o59qWigD/2Q==",
-                "permalink": "https://futureofcoding.slack.com/files/UJ6LDMMN0/F02HAFD8CUB/image.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F02HAFD8CUB-2db6e965a2",
-                "is_starred": false,
-                "has_rich_preview": false
-            }
-        ],
-        "upload": false,
-        "user": "UJ6LDMMN0",
-        "ts": "1633927532.312300",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "fbhn",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I played a bit with this idea few years ago, to use \"symbols with spaces\" for JavaScript functions. And I ended using parenthesis I also tried some other weird symbols, just to see if I can find one which is better visually (but failed).\n\n"
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://stackblitz.com/edit/symbols-with-space"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "client_msg_id": "ec9cf555-aff2-49d2-9ccb-68664322fac9",
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "heart",
-                "users": [
-                    "UCGAK10LS"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "fb44a16f-812b-41e2-93f8-603fc4d53eed",
-        "type": "message",
-        "text": "I once thought to use a syntax like the_product_of_$1_by_$2 for the name of the function, to tell where exactly you take the parameters.",
-        "user": "UJ6LDMMN0",
-        "ts": "1633927633.312500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "i3I2",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I once thought to use a syntax like the_product_of_$1_by_$2 for the name of the function, to tell where exactly you take the parameters."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "type": "message",
-        "text": "On this topic, maybe some inspiration can be taken from the text language to specify Scratch Blocks program using text. Which is only used on the Scratch forum. It is interesting that it is not a text language that is designed to be executed directly, only to generate an image of a Scratch Program that might be executed (or not).\n<https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax>",
-        "files": [
-            {
-                "id": "F02HCM69FRS",
-                "created": 1633927939,
-                "timestamp": 1633927939,
-                "name": "image.png",
-                "title": "image.png",
-                "mimetype": "image/png",
-                "filetype": "png",
-                "pretty_type": "PNG",
-                "user": "UJ6LDMMN0",
-                "editable": false,
-                "size": 46215,
-                "mode": "hosted",
-                "is_external": false,
-                "external_type": "",
-                "is_public": true,
-                "public_url_shared": false,
-                "display_as_bot": false,
-                "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F02HCM69FRS/image.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F02HCM69FRS/download/image.png",
-                "media_display_type": "unknown",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HCM69FRS-7570c72b14/image_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HCM69FRS-7570c72b14/image_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HCM69FRS-7570c72b14/image_360.png",
-                "thumb_360_w": 360,
-                "thumb_360_h": 143,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HCM69FRS-7570c72b14/image_480.png",
-                "thumb_480_w": 480,
-                "thumb_480_h": 191,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HCM69FRS-7570c72b14/image_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HCM69FRS-7570c72b14/image_720.png",
-                "thumb_720_w": 720,
-                "thumb_720_h": 287,
-                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HCM69FRS-7570c72b14/image_800.png",
-                "thumb_800_w": 800,
-                "thumb_800_h": 319,
-                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HCM69FRS-7570c72b14/image_960.png",
-                "thumb_960_w": 960,
-                "thumb_960_h": 382,
-                "original_w": 962,
-                "original_h": 383,
-                "thumb_tiny": "AwATADC/tTP3aPLQ/wANKRn1oC470AHlp/dqOUKgHAFTVDcDIX60m9BpaioI37fMO1P8tPSqy/e7jJ7VbHIpprowaCiiigQUhUN1GaWigBAoHQUtFFAH/9k=",
-                "permalink": "https://futureofcoding.slack.com/files/UJ6LDMMN0/F02HCM69FRS/image.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F02HCM69FRS-d32d287efa",
-                "is_starred": false,
-                "has_rich_preview": false
-            }
-        ],
-        "upload": false,
-        "user": "UJ6LDMMN0",
-        "display_as_bot": false,
-        "ts": "1633927941.312800",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "TG8",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "On this topic, maybe some inspiration can be taken from the text language to specify Scratch Blocks program using text. Which is only used on the Scratch forum. It is interesting that it is not a text language that is designed to be executed directly, only to generate an image of a Scratch Program that might be executed (or not).\n"
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "edited": {
-            "user": "UJ6LDMMN0",
-            "ts": "1633927977.000000"
-        },
-        "client_msg_id": "96f5919f-cd4a-48f7-abda-5aa4558f2e9e",
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "heart",
-                "users": [
-                    "UCGAK10LS",
-                    "U01ULEWACPP"
-                ],
-                "count": 2
-            }
-        ]
-    },
-    {
-        "client_msg_id": "068f50ab-68aa-4dbb-bf17-9a993191c766",
-        "type": "message",
-        "text": "<@ULYDR7EP3>\n&gt; Consider any user defined functions\u00a0`(fun1 &amp;X &amp;Y)`\u00a0and\u00a0`(&amp;X fun2 &amp;Y)`. What prevents the user from naming variables to make the ambiguous call\u00a0`(fun1 fun2 var3)`?\nThere should be some rules for how and when names/words can be re-used. The simplest is probably that if a word appears in a function name, then it can't also be the _full_ name of a variable (nullary function).\n\nAssuming `fun1` and `fun2` aren't pre-defined variables, your example doesn't violate the aforementioned rule. However, that call would match nothing, so you'd get a compile time error.",
-        "user": "UCGAK10LS",
-        "ts": "1633928669.313100",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1633931045.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Xa+",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "ULYDR7EP3"
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_quote",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Consider any user defined functions\u00a0"
-                            },
-                            {
-                                "type": "text",
-                                "text": "(fun1 &X &Y)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "\u00a0and\u00a0"
-                            },
-                            {
-                                "type": "text",
-                                "text": "(&X fun2 &Y)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ". What prevents the user from naming variables to make the ambiguous call\u00a0"
-                            },
-                            {
-                                "type": "text",
-                                "text": "(fun1 fun2 var3)",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "?"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\nThere should be some rules for how and when names/words can be re-used. The simplest is probably that if a word appears in a function name, then it can't also be the "
-                            },
-                            {
-                                "type": "text",
-                                "text": "full",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " name of a variable (nullary function).\n\nAssuming "
-                            },
-                            {
-                                "type": "text",
-                                "text": "fun1",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " and "
-                            },
-                            {
-                                "type": "text",
-                                "text": "fun2",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " aren't pre-defined variables, your example doesn't violate the aforementioned rule. However, that call would match nothing, so you'd get a compile time error."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "834f7c03-7cd3-4621-b566-a0fa3870e656",
-        "type": "message",
-        "text": "<@UJ6LDMMN0> Cool! There are probably a million directions you can go with the idea of space-separated symbols, especially if you start treating them as *lists*, i.e. data, as Lisp does. I'm being conservative right now though, and just thinking about this as a \"generalized function call syntax\".\n\nI'm going to check out that Scratch syntax :slightly_smiling_face:.\n\n(Regarding brackets: I actually prefer the _square_ bracket syntax partly because it's list-like, but also because you don't have to hold shift to type them :innocent:).",
-        "user": "UCGAK10LS",
-        "ts": "1633929705.313700",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1633930404.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "iml",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UJ6LDMMN0"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Cool! There are probably a million directions you can go with the idea of space-separated symbols, especially if you start treating them as "
-                            },
-                            {
-                                "type": "text",
-                                "text": "lists",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ", i.e. data, as Lisp does. I'm being conservative right now though, and just thinking about this as a \"generalized function call syntax\".\n\nI'm going to check out that Scratch syntax "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": ".\n\n(Regarding brackets: I actually prefer the "
-                            },
-                            {
-                                "type": "text",
-                                "text": "square",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " bracket syntax partly because it's list-like, but also because you don't have to hold shift to type them "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "innocent"
-                            },
-                            {
-                                "type": "text",
-                                "text": ")."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "6B19F98A-CA88-4920-A12A-967C3072507B",
-        "type": "message",
-        "text": "Check out objective-c\u2019s inline arguments function syntax. <https://www.tutorialspoint.com/objective_c/objective_c_functions.htm|https://www.tutorialspoint.com/objective_c/objective_c_functions.htm>\n\n`(int)max:(int)num1 andNum:(int)num2 {\u2026}`",
-        "user": "UQ706GB9U",
-        "ts": "1633930016.315600",
-        "team": "T5TCAFTA9",
-        "attachments": [
-            {
-                "title": "Objective-C Functions",
-                "title_link": "https://www.tutorialspoint.com/objective_c/objective_c_functions.htm",
-                "text": "Objective-C Functions, A function is a group of statements that together perform a task. Every Objective-C program has one C function, which is main(), and all of the most trivial pro",
-                "fallback": "Objective-C Functions",
-                "from_url": "https://www.tutorialspoint.com/objective_c/objective_c_functions.htm",
-                "service_icon": "https://www.tutorialspoint.com/favicon.ico",
-                "service_name": "tutorialspoint.com",
-                "id": 1,
-                "original_url": "https://www.tutorialspoint.com/objective_c/objective_c_functions.htm"
-            }
-        ],
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "SnXA",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Check out objective-c\u2019s inline arguments function syntax. "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://www.tutorialspoint.com/objective_c/objective_c_functions.htm",
-                                "text": "https://www.tutorialspoint.com/objective_c/objective_c_functions.htm"
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n\n"
-                            },
-                            {
-                                "type": "text",
-                                "text": "(int)max:(int)num1 andNum:(int)num2 {\u2026}",
-                                "style": {
-                                    "code": true
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UCGAK10LS"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "type": "message",
-        "text": "&gt; (Regarding brackets: I actually prefer the\u00a0_square_\u00a0bracket syntax partly because it's list-like, but also because you don't have to hold shift to type them\u00a0:innocent:)\nThat depends on your keyboard layout. On mine (AZERTY, French), it is the parenthesis that don't need extra key and *both* curly and square brackets require \"Atl-Gr\" key. Which is annoying when you code and that's why some French devs prefer using a qwerty keyboard (so without \"\u00e9\u00e0\u00e8...\" keys).",
-        "files": [
-            {
-                "id": "F02HAL05L1Z",
-                "created": 1633932468,
-                "timestamp": 1633932468,
-                "name": "image.png",
-                "title": "image.png",
-                "mimetype": "image/png",
-                "filetype": "png",
-                "pretty_type": "PNG",
-                "user": "UJ6LDMMN0",
-                "editable": false,
-                "size": 14478,
-                "mode": "hosted",
-                "is_external": false,
-                "external_type": "",
-                "is_public": true,
-                "public_url_shared": false,
-                "display_as_bot": false,
-                "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F02HAL05L1Z/image.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F02HAL05L1Z/download/image.png",
-                "media_display_type": "unknown",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAL05L1Z-ed157ae445/image_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAL05L1Z-ed157ae445/image_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAL05L1Z-ed157ae445/image_360.png",
-                "thumb_360_w": 281,
-                "thumb_360_h": 42,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F02HAL05L1Z-ed157ae445/image_160.png",
-                "original_w": 281,
-                "original_h": 42,
-                "thumb_tiny": "AwAHADCj5jYI3sfQ5o81sr8zY781HRQBJ5jYb529uaPMfA+Y+/NR0vagCUSZc5kYL2PPFN8x8ffOfrUdFAH/2Q==",
-                "permalink": "https://futureofcoding.slack.com/files/UJ6LDMMN0/F02HAL05L1Z/image.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F02HAL05L1Z-31e710aa3c",
-                "is_starred": false,
-                "has_rich_preview": false
-            }
-        ],
-        "upload": false,
-        "user": "UJ6LDMMN0",
-        "display_as_bot": false,
-        "ts": "1633932480.316200",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "A9M",
-                "elements": [
-                    {
-                        "type": "rich_text_quote",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "(Regarding brackets: I actually prefer the\u00a0"
-                            },
-                            {
-                                "type": "text",
-                                "text": "square",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "\u00a0bracket syntax partly because it's list-like, but also because you don't have to hold shift to type them\u00a0"
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "innocent"
-                            },
-                            {
-                                "type": "text",
-                                "text": ")"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "That depends on your keyboard layout. On mine (AZERTY, French), it is the parenthesis that don't need extra key and "
-                            },
-                            {
-                                "type": "text",
-                                "text": "both",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " curly and square brackets require \"Atl-Gr\" key. Which is annoying when you code and that's why some French devs prefer using a qwerty keyboard (so without \"\u00e9\u00e0\u00e8...\" keys)."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "client_msg_id": "d1cb8f8c-2ea5-4ad5-a0a4-86e9abb1a842",
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "0C22C34E-5993-41D7-84E9-DF8E2362B4B9",
-        "type": "message",
-        "text": "Ah, I didn\u2019t realise they did that for brackets! I\u2019d love to get some statistics on (for each ASCII symbol) the percentage of people on earth who can type that symbol without any modifier keys :face_with_monocle:.\n\nIt\u2019s really important for a language designer to know :sweat_smile:",
-        "user": "UCGAK10LS",
-        "ts": "1633932608.318500",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1633932730.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "CFVLv",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Ah, I didn\u2019t realise they did that for brackets! I\u2019d love to get some statistics on (for each ASCII symbol) the percentage of people on earth who can type that symbol without any modifier keys "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "face_with_monocle"
-                            },
-                            {
-                                "type": "text",
-                                "text": ".\n\nIt\u2019s really important for a language designer to know "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "sweat_smile"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "heavy_plus_sign",
-                "users": [
-                    "UJ6LDMMN0"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "88dde1ac-eb8c-4f5b-886e-7ac72b6ba6aa",
-        "type": "message",
-        "text": "I wanted something like this for my digital scientific notation Leibniz (<https://github.com/khinsen/leibniz>) and found it very easy to implement since Leibniz is a term rewriting system. There are no function calls, only rewrite rules, so it's no problem to make the equivalent of function-call syntax function-specific.\n\nFor the parenthesis issue, I adopted a feature from the Pyret language (<https://www.pyret.org/index.html>): it requires parenthesis around any operator/function call, the one exception being chained use of the same operator. So you can write `2 + 3 + 4`, meaning `(2 + 3) + 4`, which is the most frequent situation where parenthesis can become visually dominant.\n\nIt looks to me as if this approach could be transposed to more standard programming languages, but that's a bit outside of my expertise.",
-        "user": "UJBAJNFLK",
-        "ts": "1633933358.318900",
-        "team": "T5TCAFTA9",
-        "attachments": [
-            {
-                "service_name": "GitHub",
-                "title": "GitHub - khinsen/leibniz: A Digital Scientific Notation",
-                "title_link": "https://github.com/khinsen/leibniz",
-                "text": "A Digital Scientific Notation. Contribute to khinsen/leibniz development by creating an account on GitHub.",
-                "fallback": "GitHub: GitHub - khinsen/leibniz: A Digital Scientific Notation",
-                "image_url": "https://opengraph.githubassets.com/70973b9d1593193a81257253be92fd172772420d55d603f4122228b2995f6282/khinsen/leibniz",
-                "image_width": 500,
-                "image_height": 250,
-                "from_url": "https://github.com/khinsen/leibniz",
-                "image_bytes": 93801,
-                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/github.png",
-                "id": 1,
-                "original_url": "https://github.com/khinsen/leibniz"
-            },
-            {
-                "title": "The Pyret Programming Language",
-                "title_link": "https://www.pyret.org/index.html",
-                "text": "...",
-                "fallback": "The Pyret Programming Language",
-                "thumb_url": "http://www.pyret.org/img/pyret-logo.png",
-                "from_url": "https://www.pyret.org/index.html",
-                "thumb_width": 501,
-                "thumb_height": 488,
-                "service_icon": "https://www.pyret.org/img/pyret-icon.png",
-                "service_name": "pyret.org",
-                "id": 2,
-                "original_url": "https://www.pyret.org/index.html"
-            }
-        ],
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "fptb",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I wanted something like this for my digital scientific notation Leibniz ("
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://github.com/khinsen/leibniz"
-                            },
-                            {
-                                "type": "text",
-                                "text": ") and found it very easy to implement since Leibniz is a term rewriting system. There are no function calls, only rewrite rules, so it's no problem to make the equivalent of function-call syntax function-specific.\n\nFor the parenthesis issue, I adopted a feature from the Pyret language ("
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://www.pyret.org/index.html"
-                            },
-                            {
-                                "type": "text",
-                                "text": "): it requires parenthesis around any operator/function call, the one exception being chained use of the same operator. So you can write "
-                            },
-                            {
-                                "type": "text",
-                                "text": "2 + 3 + 4",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ", meaning "
-                            },
-                            {
-                                "type": "text",
-                                "text": "(2 + 3) + 4",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ", which is the most frequent situation where parenthesis can become visually dominant.\n\nIt looks to me as if this approach could be transposed to more standard programming languages, but that's a bit outside of my expertise."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
         "client_msg_id": "c833e4df-7341-406f-bb23-94bed0dd1d23",
         "type": "message",
-        "text": "I created a language with similar ideas a while ago, it's almost complete: <https://github.com/marianoguerra/interfix>",
+        "text": "I created a language with similar ideas a while ago, it's almost complete: <https:\/\/github.com\/marianoguerra\/interfix>",
         "user": "UBN9AFS0N",
         "ts": "1633940541.319300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "service_name": "GitHub",
-                "title": "GitHub - marianoguerra/interfix: an experimental programming language for the erlang vm that is actually useful",
-                "title_link": "https://github.com/marianoguerra/interfix",
-                "text": "an experimental programming language for the erlang vm that is actually useful - GitHub - marianoguerra/interfix: an experimental programming language for the erlang vm that is actually useful",
-                "fallback": "GitHub: GitHub - marianoguerra/interfix: an experimental programming language for the erlang vm that is actually useful",
-                "image_url": "https://opengraph.githubassets.com/71efae758328409f36c5c17e541cd29676e27d757a87e4af6b26ae8082b8276b/marianoguerra/interfix",
+                "title": "GitHub - marianoguerra\/interfix: an experimental programming language for the erlang vm that is actually useful",
+                "title_link": "https:\/\/github.com\/marianoguerra\/interfix",
+                "text": "an experimental programming language for the erlang vm that is actually useful - GitHub - marianoguerra\/interfix: an experimental programming language for the erlang vm that is actually useful",
+                "fallback": "GitHub: GitHub - marianoguerra\/interfix: an experimental programming language for the erlang vm that is actually useful",
+                "image_url": "https:\/\/opengraph.githubassets.com\/71efae758328409f36c5c17e541cd29676e27d757a87e4af6b26ae8082b8276b\/marianoguerra\/interfix",
                 "image_width": 500,
                 "image_height": 250,
-                "from_url": "https://github.com/marianoguerra/interfix",
+                "from_url": "https:\/\/github.com\/marianoguerra\/interfix",
                 "image_bytes": 91669,
-                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/github.png",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/github.png",
                 "id": 1,
-                "original_url": "https://github.com/marianoguerra/interfix"
+                "original_url": "https:\/\/github.com\/marianoguerra\/interfix"
             }
         ],
         "blocks": [
@@ -1601,7 +50,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://github.com/marianoguerra/interfix"
+                                "url": "https:\/\/github.com\/marianoguerra\/interfix"
                             }
                         ]
                     }
@@ -1629,12 +78,91 @@
         ]
     },
     {
+        "client_msg_id": "c856fe5e-d51b-4134-adfb-55e7f8d337a1",
+        "type": "message",
+        "text": "<@U025PBD75TM> technically the purpose of _predictive_ Machine Learning models is to _generalize_ (somewhat) beyond what they saw in the training data. And indeed they are evaluated on data they never saw in training. But in reality this generalization goes only this far, and not really applicable to kinda \"open world\" scenarios like driving.",
+        "user": "U027P92A0N5",
+        "ts": "1633945296.319900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "d6900487d910",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-07-07\/2254853369060_d6900487d9109f495c79_72.jpg",
+            "first_name": "Alexander",
+            "real_name": "Alexander Chichigin",
+            "display_name": "Alex Chichigin",
+            "team": "T5TCAFTA9",
+            "name": "sad.ronin",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NdRb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U025PBD75TM"
+                            },
+                            {
+                                "type": "text",
+                                "text": " technically the purpose of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "predictive",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " Machine Learning models is to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "generalize",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (somewhat) beyond what they saw in the training data. And indeed they are evaluated on data they never saw in training. But in reality this generalization goes only this far, and not really applicable to kinda \"open world\" scenarios like driving."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1633370115.276200",
+        "parent_user_id": "U02FYPLHU67"
+    },
+    {
         "client_msg_id": "6cf5c7ec-a70d-48e9-94bf-21ae4b8229b1",
         "type": "message",
         "text": "I'm sorry but did you reinvent Agda's Mixfix syntax? :sweat_smile:",
         "user": "U027P92A0N5",
         "ts": "1633945505.320100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "d6900487d910",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-07-07\/2254853369060_d6900487d9109f495c79_72.jpg",
+            "first_name": "Alexander",
+            "real_name": "Alexander Chichigin",
+            "display_name": "Alex Chichigin",
+            "team": "T5TCAFTA9",
+            "name": "sad.ronin",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1666,6 +194,19 @@
         "user": "UBN9AFS0N",
         "ts": "1633946551.320300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1706,6 +247,19 @@
         "user": "UBN9AFS0N",
         "ts": "1633946599.320500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1727,12 +281,74 @@
         "parent_user_id": "UCGAK10LS"
     },
     {
+        "client_msg_id": "9cdc062f-93e8-4351-ab12-66edd9598f85",
+        "type": "message",
+        "text": "Just to check, I understood that there will be a dedicated couple of days or weekend for doing the reviews, kind of like a small event. Is that correct, or are we supposed to do the reviews as we go? I kind of liked the idea of dedicated time to focus on it, all of us.",
+        "user": "UUB7RA7PF",
+        "ts": "1633951681.320800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2fdcf29b225b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-02-26\/971836171367_2fdcf29b225b02e66825_72.png",
+            "first_name": "Martin",
+            "real_name": "Martin Sosic",
+            "display_name": "Martin",
+            "team": "T5TCAFTA9",
+            "name": "sosic.martin",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tpwT\/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Just to check, I understood that there will be a dedicated couple of days or weekend for doing the reviews, kind of like a small event. Is that correct, or are we supposed to do the reviews as we go? I kind of liked the idea of dedicated time to focus on it, all of us."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1631829268.080200",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
         "client_msg_id": "f4a60532-3f2b-4760-988b-e9e9944f417b",
         "type": "message",
         "text": "You can call me a convert and subscribe me to your heresy :stuck_out_tongue:\n\nI've always been convinced of the need to reduce the syntax needed in formal end-user languages, and decoupling parameters from their exact position is a basic tool for that; passing parameters by name instead of position was an improvement in post-C languages, so it's easy to imagine what benefits that style can bring.\n\nI'll go deeper into heresy: in a visual environment (think e.g. a spreadsheet or graphical design tool), _you don't even need the function name to be adjacent to the parameters_; the environment itself can suggest the list of nearby locally available values that are compatible with the function's input types, and the user chooses which one is appropriate. Applying functions becomes a point&amp;click interaction rather than recalling which syntax I need.\n\nThis can even depend on named parameters. Think of an IDE where, when you're passing a parameter to a function, \"intellisense\" suggests all nearby variables in scope with the right type that could be used for that parameter. Conversely, you could select a value and type a parameter name over it, and it could suggest function names that use that type of the value with that parameter name as a role for the value, so that the user to choose the most adequate suggested function. How many less API reference queries would it take for the user of this system?\n\nIn this style of coding, the structure of connections is more important than the concrete syntax of the text you create them with. In my opinion visual languages are the ones that can benefit the most from this separation between structure and placement, as perfect placement of values w.r.t. functions in a graphical environment is more difficult than with raw text.",
         "user": "U02FYPLHU67",
         "ts": "1633951807.321000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "da03e6d17065",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-28\/2536072635510_da03e6d17065db49a1d3_72.jpg",
+            "first_name": "Diego",
+            "real_name": "Diego Moya",
+            "display_name": "dialmove",
+            "team": "T5TCAFTA9",
+            "name": "dialmove",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "U02FYPLHU67",
             "ts": "1633951870.000000"
@@ -1786,12 +402,123 @@
         ]
     },
     {
+        "client_msg_id": "dc6fc735-f266-4267-ad31-12208748cb74",
+        "type": "message",
+        "text": "there will be one week to do and submit the reviews, probably by the end of november",
+        "user": "UBN9AFS0N",
+        "ts": "1633952281.321400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9mjs",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "there will be one week to do and submit the reviews, probably by the end of november"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1631829268.080200",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UUB7RA7PF"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1e6d3bcb-3c9e-4077-bf65-e979dbe10683",
+        "type": "message",
+        "text": "Yes, me too , but I am very happy with the pre-review that Kartik did. It certainly will help me to get more out of the reviews and preventing install-issues.",
+        "user": "U0123H7JRDM",
+        "ts": "1633954775.321600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gfb283c8a09c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/fb283c8a09c5c8909b00498ba9634a70.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "Maikel",
+            "real_name": "Maikel van de Lisdonk",
+            "display_name": "Maikel",
+            "team": "T5TCAFTA9",
+            "name": "maikel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lRbcy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, me too , but I am very happy with the pre-review that Kartik did. It certainly will help me to get more out of the reviews and preventing install-issues."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1631829268.080200",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UUB7RA7PF"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
         "client_msg_id": "534bfd9f-fa27-4708-a1c8-2f8ccc6eff35",
         "type": "message",
-        "text": "Vaguely related: <https://lobste.rs/s/jol24u/better_operator_precedence|https://lobste.rs/s/jol24u/better_operator_precedence>",
+        "text": "Vaguely related: <https:\/\/lobste.rs\/s\/jol24u\/better_operator_precedence|https:\/\/lobste.rs\/s\/jol24u\/better_operator_precedence>",
         "user": "ULYDR7EP3",
         "ts": "1633957607.322100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g9ad76d000ca",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/59ad76d000ca1de86487e8af9da74f72.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Axel Svensson",
+            "display_name": "Axel Svensson",
+            "team": "T5TCAFTA9",
+            "name": "mail052",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1806,8 +533,8 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://lobste.rs/s/jol24u/better_operator_precedence",
-                                "text": "https://lobste.rs/s/jol24u/better_operator_precedence"
+                                "url": "https:\/\/lobste.rs\/s\/jol24u\/better_operator_precedence",
+                                "text": "https:\/\/lobste.rs\/s\/jol24u\/better_operator_precedence"
                             }
                         ]
                     }
@@ -1824,6 +551,19 @@
         "user": "ULYDR7EP3",
         "ts": "1633957771.322300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g9ad76d000ca",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/59ad76d000ca1de86487e8af9da74f72.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Axel Svensson",
+            "display_name": "Axel Svensson",
+            "team": "T5TCAFTA9",
+            "name": "mail052",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1865,6 +605,19 @@
         "user": "U01AD80KMLK",
         "ts": "1633989791.322600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "a07cdcb6d037",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-09-09\/1376906509376_a07cdcb6d037bf7b6a5e_72.jpg",
+            "first_name": "",
+            "real_name": "Denny Vrandečić",
+            "display_name": "Denny Vrandečić",
+            "team": "T5TCAFTA9",
+            "name": "dvrandecic",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1902,6 +655,19 @@
         "user": "UCGAK10LS",
         "ts": "1633991515.323000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1944,6 +710,19 @@
         "user": "U01AD80KMLK",
         "ts": "1633991584.323200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "a07cdcb6d037",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-09-09\/1376906509376_a07cdcb6d037bf7b6a5e_72.jpg",
+            "first_name": "",
+            "real_name": "Denny Vrandečić",
+            "display_name": "Denny Vrandečić",
+            "team": "T5TCAFTA9",
+            "name": "dvrandecic",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1971,6 +750,19 @@
         "user": "UCGAK10LS",
         "ts": "1633991647.323400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1994,10 +786,23 @@
     {
         "client_msg_id": "510cae56-fa6f-41c9-99f7-8d3a5a4173cd",
         "type": "message",
-        "text": "<@ULYDR7EP3> We've probably got different ideas about the underlying semantics. If I had to guess, you're thinking of each symbol in the sequence `(a b c)` as a _value_. In contrast, I was thinking of each symbol as a \"piece of syntax\" that helps identify which function to call.\n\nUnder your interpretation, `(fun1 fun2 var3)` is ambiguous, because it could be interpreted as passing the symbolic value \"fun2\" to the fun1 function, or as passing the symbolic value \"fun1\" to the fun2 function.\n\nUnder my interpretation, there is no function definition with the signature `(fun1 fun2 .)`, so you get a compile-time error.\n\nBut since starting this thread, I've actually been trending towards the first interpretation. It might turn out to be \"nicer\" in practice, especially as an alternative to passing strings around everywhere. But I think you'd now want/need variable references to be distinguished from symbols, using the `&amp;` syntax as you mentioned, or even just the parentheses (after all, a variable reference is just a function call with zero arguments). So a function call would look like `fun1 (a) (b)` or `fun1 &amp;a &amp;b`. Though I've been thinking about a more lightweight syntax inspired by Rust's lifetime syntax: `fun1 'a 'b`. It's probably necessary to avoid parentheses/syntax hell.",
+        "text": "<@ULYDR7EP3> We've probably got different ideas about the underlying semantics. If I had to guess, you're thinking of each symbol in the sequence `(a b c)` as a _value_. In contrast, I was thinking of each symbol as a \"piece of syntax\" that helps identify which function to call.\n\nUnder your interpretation, `(fun1 fun2 var3)` is ambiguous, because it could be interpreted as passing the symbolic value \"fun2\" to the fun1 function, or as passing the symbolic value \"fun1\" to the fun2 function.\n\nUnder my interpretation, there is no function definition with the signature `(fun1 fun2 .)`, so you get a compile-time error.\n\nBut since starting this thread, I've actually been trending towards the first interpretation. It might turn out to be \"nicer\" in practice, especially as an alternative to passing strings around everywhere. But I think you'd now want\/need variable references to be distinguished from symbols, using the `&amp;` syntax as you mentioned, or even just the parentheses (after all, a variable reference is just a function call with zero arguments). So a function call would look like `fun1 (a) (b)` or `fun1 &amp;a &amp;b`. Though I've been thinking about a more lightweight syntax inspired by Rust's lifetime syntax: `fun1 'a 'b`. It's probably necessary to avoid parentheses\/syntax hell.",
         "user": "UCGAK10LS",
         "ts": "1633992465.323600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UCGAK10LS",
             "ts": "1633992558.000000"
@@ -2005,7 +810,7 @@
         "blocks": [
             {
                 "type": "rich_text",
-                "block_id": "/9EmJ",
+                "block_id": "\/9EmJ",
                 "elements": [
                     {
                         "type": "rich_text_section",
@@ -2060,7 +865,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": ", so you get a compile-time error.\n\nBut since starting this thread, I've actually been trending towards the first interpretation. It might turn out to be \"nicer\" in practice, especially as an alternative to passing strings around everywhere. But I think you'd now want/need variable references to be distinguished from symbols, using the "
+                                "text": ", so you get a compile-time error.\n\nBut since starting this thread, I've actually been trending towards the first interpretation. It might turn out to be \"nicer\" in practice, especially as an alternative to passing strings around everywhere. But I think you'd now want\/need variable references to be distinguished from symbols, using the "
                             },
                             {
                                 "type": "text",
@@ -2104,7 +909,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": ". It's probably necessary to avoid parentheses/syntax hell."
+                                "text": ". It's probably necessary to avoid parentheses\/syntax hell."
                             }
                         ]
                     }
@@ -2130,6 +935,19 @@
         "user": "ULYDR7EP3",
         "ts": "1633993018.324100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g9ad76d000ca",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/59ad76d000ca1de86487e8af9da74f72.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Axel Svensson",
+            "display_name": "Axel Svensson",
+            "team": "T5TCAFTA9",
+            "name": "mail052",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2179,6 +997,19 @@
         "user": "ULYDR7EP3",
         "ts": "1633993107.324300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g9ad76d000ca",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/59ad76d000ca1de86487e8af9da74f72.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Axel Svensson",
+            "display_name": "Axel Svensson",
+            "team": "T5TCAFTA9",
+            "name": "mail052",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2217,6 +1048,19 @@
         "user": "UCGAK10LS",
         "ts": "1633993341.324500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2253,6 +1097,19 @@
         "user": "UCGAK10LS",
         "ts": "1633993514.324700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2310,6 +1167,19 @@
         "user": "ULYDR7EP3",
         "ts": "1633995899.324900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g9ad76d000ca",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/59ad76d000ca1de86487e8af9da74f72.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0011-72.png",
+            "first_name": "",
+            "real_name": "Axel Svensson",
+            "display_name": "Axel Svensson",
+            "team": "T5TCAFTA9",
+            "name": "mail052",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2333,10 +1203,23 @@
     {
         "client_msg_id": "cb7a24d5-b5a6-4886-b536-1641962d5bbb",
         "type": "message",
-        "text": "<@U02FYPLHU67> I think there's a lot of merit to ensuring identical function calls have an identical visual structure. Readability/skimmability is one of my key concerns. I am definitely interested in smart IDEs, but I'm not sure that _requiring_ the use of a smart IDE to specify arguments (rather than having a rigid syntax) is a good thing. If you had this, I'd hope the manipulations would be immediately serialized back into a rigid textual form that is easily skimmable.",
+        "text": "<@U02FYPLHU67> I think there's a lot of merit to ensuring identical function calls have an identical visual structure. Readability\/skimmability is one of my key concerns. I am definitely interested in smart IDEs, but I'm not sure that _requiring_ the use of a smart IDE to specify arguments (rather than having a rigid syntax) is a good thing. If you had this, I'd hope the manipulations would be immediately serialized back into a rigid textual form that is easily skimmable.",
         "user": "UCGAK10LS",
         "ts": "1633997151.325200",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2351,7 +1234,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " I think there's a lot of merit to ensuring identical function calls have an identical visual structure. Readability/skimmability is one of my key concerns. I am definitely interested in smart IDEs, but I'm not sure that "
+                                "text": " I think there's a lot of merit to ensuring identical function calls have an identical visual structure. Readability\/skimmability is one of my key concerns. I am definitely interested in smart IDEs, but I'm not sure that "
                             },
                             {
                                 "type": "text",
@@ -2379,6 +1262,19 @@
         "user": "UCGAK10LS",
         "ts": "1634015682.325500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -2449,546 +1345,6 @@
                             {
                                 "type": "text",
                                 "text": " of numbers, rather than a single number.\n\nOf course, regular expressions aren't known for being easy to understand. Perhaps I could find a somewhat simpler pattern language that still allows the description of arbitrary-length expressions."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "d4679b7c-9fe9-4a87-8178-1c48a7c0b0dd",
-        "type": "message",
-        "text": "<@U01AD80KMLK> There's Perligata for a transposition of the analytic vs. synthetic concept to programming: <https://users.monash.edu/~damian/papers/HTML/Perligata.html>",
-        "user": "UJBAJNFLK",
-        "ts": "1634027488.325700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "kfLI",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "U01AD80KMLK"
-                            },
-                            {
-                                "type": "text",
-                                "text": " There's Perligata for a transposition of the analytic vs. synthetic concept to programming: "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://users.monash.edu/~damian/papers/HTML/Perligata.html"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "astonished",
-                "users": [
-                    "U01AD80KMLK",
-                    "UMVFWPZ36"
-                ],
-                "count": 2
-            }
-        ]
-    },
-    {
-        "client_msg_id": "d49e09f2-6bcb-41f5-b776-fd4c108595b2",
-        "type": "message",
-        "text": "<@UCGAK10LS> Pattern matching looks like an idea worth exploring. But as you said, it needs to be more human-friendly than regex.",
-        "user": "UJBAJNFLK",
-        "ts": "1634027774.325900",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "mb++Z",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UCGAK10LS"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Pattern matching looks like an idea worth exploring. But as you said, it needs to be more human-friendly than regex."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "90ba066f-7d00-402b-bbc6-281be391e20c",
-        "type": "message",
-        "text": "<@UBN9AFS0N> Was interfix in any way inspired by Smalltalk? Smalltalk keyword messages feel very similar.",
-        "user": "UJBAJNFLK",
-        "ts": "1634027813.326100",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Pd0dr",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UBN9AFS0N"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Was interfix in any way inspired by Smalltalk? Smalltalk keyword messages feel very similar."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "ad4edecd-2db8-4ec2-aeb7-0b3c558409cb",
-        "type": "message",
-        "text": "<@UJBAJNFLK> yes, smalltalk and dylan where some of the inspirations",
-        "user": "UBN9AFS0N",
-        "ts": "1634027883.326300",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "juJ",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UJBAJNFLK"
-                            },
-                            {
-                                "type": "text",
-                                "text": " yes, smalltalk and dylan where some of the inspirations"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "7e6a263b-0929-4054-abd6-e6e8ff7c7f0b",
-        "type": "message",
-        "text": "<@UCGAK10LS> not sure if there's a benefit. In natural language it has the advantage of emphasis. It can give some flexibility w.r.t. visual layout of the code. But in the end, it might make it more complex without a clear win. I am not advocating it, just an idea :smile:",
-        "user": "U01AD80KMLK",
-        "ts": "1634053471.326600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Kdr",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UCGAK10LS"
-                            },
-                            {
-                                "type": "text",
-                                "text": " not sure if there's a benefit. In natural language it has the advantage of emphasis. It can give some flexibility w.r.t. visual layout of the code. But in the end, it might make it more complex without a clear win. I am not advocating it, just an idea "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "smile"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UCGAK10LS"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "25008a54-b60b-481f-aab5-8a95de5c8f88",
-        "type": "message",
-        "text": "Having thought about things further, I think my proposal ends up being about metaprogramming and homoiconic languages pretty quickly. Perhaps I should search for inspiration from those.",
-        "user": "UCGAK10LS",
-        "ts": "1634101466.327500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "pb5",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Having thought about things further, I think my proposal ends up being about metaprogramming and homoiconic languages pretty quickly. Perhaps I should search for inspiration from those."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "c4648888-4f2e-44ce-8a22-1a289ccd64b4",
-        "type": "message",
-        "text": "I also took a crack at this 2 years ago. We called it \"anyfix\"/\"omnifix\". It's fun to see these other implementations with names like Interfix and Mixfix!\n\nThe use case for us was talking to medical care providers and discovering that many would invent their own written shorthands (grammars) for jotting down EMR data while working with patients, which would often have out-of-order parameters (20 inches 10lbs or 10lbs 20 inches etc). IIRC ambiguity was the exception rather than the rule. We figured if it's very clear to humans what the intent is the parser should be able to figure it out too.\n\nIt was rather easy to implement in Tree Notation, which is a whitespace based syntax where each row is a node split into cells. The line parser first determines what kind of node the line is, and then a cell parser determines what the type of each cell is. A node definition states the cell types expected and whether to use a prefix/postfix/omnifix parser. Simple tests (such as regex) are then used to detect the type of each word in the omnifix case.\n\nIn theory this puts the onus of avoiding ambiguity on the language designer, but in practice (IIRC from our small experiments) it was surprisingly easy to avoid. It seemed that usually when you have 2 params with the same type, it was often better to take a list instead.\n\nA really dumb toy demo for our implementation: <https://jtree.treenotation.org/designer/#standard%20poop>",
-        "user": "UMVFWPZ36",
-        "ts": "1634171771.336800",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "A9=wM",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I also took a crack at this 2 years ago. We called it \"anyfix\"/\"omnifix\". It's fun to see these other implementations with names like Interfix and Mixfix!\n\nThe use case for us was talking to medical care providers and discovering that many would invent their own written shorthands (grammars) for jotting down EMR data while working with patients, which would often have out-of-order parameters (20 inches 10lbs or 10lbs 20 inches etc). IIRC ambiguity was the exception rather than the rule. We figured if it's very clear to humans what the intent is the parser should be able to figure it out too.\n\nIt was rather easy to implement in Tree Notation, which is a whitespace based syntax where each row is a node split into cells. The line parser first determines what kind of node the line is, and then a cell parser determines what the type of each cell is. A node definition states the cell types expected and whether to use a prefix/postfix/omnifix parser. Simple tests (such as regex) are then used to detect the type of each word in the omnifix case.\n\nIn theory this puts the onus of avoiding ambiguity on the language designer, but in practice (IIRC from our small experiments) it was surprisingly easy to avoid. It seemed that usually when you have 2 params with the same type, it was often better to take a list instead.\n\nA really dumb toy demo for our implementation: "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://jtree.treenotation.org/designer/#standard%20poop"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UCGAK10LS"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "02d6a342-2151-417a-a244-daa0e001e62a",
-        "type": "message",
-        "text": "My language works this way because it's not based on functions as such, but on a lower-level mechanism: rewriting after pattern matching. The \"function\" symbol is just another pattern element, not distinguished from \"data\" or \"parameters\".",
-        "user": "UE6EFEPTQ",
-        "ts": "1634235182.341200",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "c+V",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "My language works this way because it's not based on functions as such, but on a lower-level mechanism: rewriting after pattern matching. The \"function\" symbol is just another pattern element, not distinguished from \"data\" or \"parameters\"."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "53097010-e3a1-49d0-8989-dcb7b245e309",
-        "type": "message",
-        "text": "<@UE6EFEPTQ> Yeah, I'm thinking of this in a similar way: a \"function signature\" is just a pattern, where none of the tokens are special \"function name\" tokens. Function calling is just pattern matching. However, I'm not thinking about *rewriting*, since that is conflating operational semantics with the mere syntax presented here. The actual means by which a computer executes a program consisting of these patterns can be considered separately.\n\nI'm aiming for a very non-conventional operational semantics, inspired by relational programming.",
-        "user": "UCGAK10LS",
-        "ts": "1634250944.354000",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1634251001.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "gzH",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UE6EFEPTQ"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Yeah, I'm thinking of this in a similar way: a \"function signature\" is just a pattern, where none of the tokens are special \"function name\" tokens. Function calling is just pattern matching. However, I'm not thinking about "
-                            },
-                            {
-                                "type": "text",
-                                "text": "rewriting",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ", since that is conflating operational semantics with the mere syntax presented here. The actual means by which a computer executes a program consisting of these patterns can be considered separately.\n\nI'm aiming for a very non-conventional operational semantics, inspired by relational programming."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "3d0a66d6-7df1-4491-ada2-690d54724b18",
-        "type": "message",
-        "text": "<@UCGAK10LS> I see your point but I think you would probably gain from studying term rewriting systems. A main featured distinguishing term rewriting from traditional function-calling approaches is precisely the separation of syntax and evaluation. Term rewriting systems start from a term algebra, which just says what valid terms look like. The next layer adds patterns and pattern matching, the result of which is a substitution. With patterns you can define rules. Rewriting is yet another layer, in which you have to decide on a strategy to select and apply rules. If you want different operational semantics, you just change the last one or two layers, but you can keep the lower ones.\nIn contrast, with traditional PL design, there is no useful layer between the AST and the full language, evaluation semantics included.",
-        "user": "UJBAJNFLK",
-        "ts": "1634280378.356700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "PKP",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UCGAK10LS"
-                            },
-                            {
-                                "type": "text",
-                                "text": " I see your point but I think you would probably gain from studying term rewriting systems. A main featured distinguishing term rewriting from traditional function-calling approaches is precisely the separation of syntax and evaluation. Term rewriting systems start from a term algebra, which just says what valid terms look like. The next layer adds patterns and pattern matching, the result of which is a substitution. With patterns you can define rules. Rewriting is yet another layer, in which you have to decide on a strategy to select and apply rules. If you want different operational semantics, you just change the last one or two layers, but you can keep the lower ones.\nIn contrast, with traditional PL design, there is no useful layer between the AST and the full language, evaluation semantics included."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "BBF0966E-4787-42B7-B18F-11C32A1313A4",
-        "type": "message",
-        "text": "What if my semantics involves the equivalent of database equi-joins and aggregation? Surely those can\u2019t be described in terms of term rewriting.",
-        "user": "UCGAK10LS",
-        "ts": "1634280553.358100",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1634280769.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "FjuQv",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "What if my semantics involves the equivalent of database equi-joins and aggregation? Surely those can\u2019t be described in terms of term rewriting."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "84E2DFEA-695B-4805-A3DB-80E510C70665",
-        "type": "message",
-        "text": "i.e. my operational semantics has nothing to do with substitution of terms",
-        "user": "UCGAK10LS",
-        "ts": "1634280599.359500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "I4Hx",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "i.e. my operational semantics has nothing to do with substitution of terms"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "f0a4968a-423c-4a3e-8ca8-f1abb2e23b57",
-        "type": "message",
-        "text": "I am not a database expert, but my first reaction is that everything can be encoded in terms. Terms are isomorphic to s-expressions, XML trees, etc. You may in the end want specialized hand-written implementations for some of those terms, for performance reasons, but I'd be surprised if your semantic would be impossible to express as terms.",
-        "user": "UJBAJNFLK",
-        "ts": "1634290940.360300",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "o6mf",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I am not a database expert, but my first reaction is that everything can be encoded in terms. Terms are isomorphic to s-expressions, XML trees, etc. You may in the end want specialized hand-written implementations for some of those terms, for performance reasons, but I'd be surprised if your semantic would be impossible to express as terms."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "thinking_face",
-                "users": [
-                    "UCGAK10LS"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "7416f121-b3e6-4373-8e22-b9e180f6ef1a",
-        "type": "message",
-        "text": "Rewriting is Turing Complete so you can do anything you want. :smiley::+1:",
-        "user": "UE6EFEPTQ",
-        "ts": "1634291402.360500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "ryO",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Rewriting is Turing Complete so you can do anything you want. "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "smiley"
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "+1"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "a5639aaa-bd6b-4ceb-a127-a8ce6302fc20",
-        "type": "message",
-        "text": "The actual transformation mechanism from before-state to after-state in the rewrite needn't be TC, though, and is probably better off not, so it terminates!",
-        "user": "UE6EFEPTQ",
-        "ts": "1634291787.360700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "FOs",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "The actual transformation mechanism from before-state to after-state in the rewrite needn't be TC, though, and is probably better off not, so it terminates!"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1633919351.305800",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "1f2c7165-48e7-4f27-a060-962899e42830",
-        "type": "message",
-        "text": "Primitive Recursive perhaps? Need a fixpoint each time: when applying the rewrites has no effect or there are no matching rewrites.",
-        "user": "UE6EFEPTQ",
-        "ts": "1634292338.360900",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UE6EFEPTQ",
-            "ts": "1634293401.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "1EI7",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Primitive Recursive perhaps? Need a fixpoint each time: when applying the rewrites has no effect or there are no matching rewrites."
                             }
                         ]
                     }

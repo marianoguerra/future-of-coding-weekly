@@ -1,0 +1,185 @@
+[
+    {
+        "client_msg_id": "fe492e04-276f-4ba3-a6fd-73c809014bcf",
+        "type": "message",
+        "text": "A couple of years ago I posted the following somewhere, maybe here:\n_____\n\nClearly shared mutable state is not even negotiable in programming, otherwise we'd have no disks, no databases, no GUIs, no 3D worlds, no social media.. basically nothing apart from addition and the like.\n\nBut poor ole' shared mutable state is the victim of two fallacies:\n\n(a) Imperative programming gets messy when trying to do concurrency and several threads of control have access to shared mutable state, giving rise to the fallacy that it's the shared mutable state's fault, not the many threads having write access.\n\n(b) Functional programming is clean and does concurrency in a way you can predict, but it doesn't have a concept of shared mutable state, giving rise to the fallacy that shared mutable state must be bad because FP is clean and doesn't have it.\n\nBut shared mutable state isn't bad: all we need to do is (a) prevent concurrent write access, and (b) combine FP and shared mutable state in a clean model.\n\n---\n\nWell these ideas go back at least to 1978 with Backus in his Turing Award lecture (<https:\/\/www.thocp.net\/biographies\/papers\/backus_turingaward_lecture.pdf>) in the form of \"Applicative State Transition\". A variant was outlined in \"Out of the Tar Pit\" as \"Functional Relational Programming\".\n\nThe model is incredibly simple: _just take a state and transform it to the next state using a clean declarative rule\/transformation\/rewrite\/function\/reduction_.\n\nThis can be done in parallel as long as you manage partitions of the state per thread.\n\n---\n\nOne consequence of this model is that the FP part must terminate: hence it's not itself Turing Complete and is probably in the class of Primitive Recursive: all recursions must have a terminating condition, all lists must be finite, etc.",
+        "user": "UE6EFEPTQ",
+        "ts": "1622634140.037500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "x4v\/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "A couple of years ago I posted the following somewhere, maybe here:\n_____\n\nClearly shared mutable state is not even negotiable in programming, otherwise we'd have no disks, no databases, no GUIs, no 3D worlds, no social media.. basically nothing apart from addition and the like.\n\nBut poor ole' shared mutable state is the victim of two fallacies:\n\n(a) Imperative programming gets messy when trying to do concurrency and several threads of control have access to shared mutable state, giving rise to the fallacy that it's the shared mutable state's fault, not the many threads having write access.\n\n(b) Functional programming is clean and does concurrency in a way you can predict, but it doesn't have a concept of shared mutable state, giving rise to the fallacy that shared mutable state must be bad because FP is clean and doesn't have it.\n\nBut shared mutable state isn't bad: all we need to do is (a) prevent concurrent write access, and (b) combine FP and shared mutable state in a clean model.\n\n---\n\nWell these ideas go back at least to 1978 with Backus in his Turing Award lecture ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.thocp.net\/biographies\/papers\/backus_turingaward_lecture.pdf"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") in the form of \"Applicative State Transition\". A variant was outlined in \"Out of the Tar Pit\" as \"Functional Relational Programming\".\n\nThe model is incredibly simple: "
+                            },
+                            {
+                                "type": "text",
+                                "text": "just take a state and transform it to the next state using a clean declarative rule\/transformation\/rewrite\/function\/reduction",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nThis can be done in parallel as long as you manage partitions of the state per thread.\n\n---\n\nOne consequence of this model is that the FP part must terminate: hence it's not itself Turing Complete and is probably in the class of Primitive Recursive: all recursions must have a terminating condition, all lists must be finite, etc."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1622048775.021900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9d56a469-aa30-412b-8ca1-aa2d4b1bc4e8",
+        "type": "message",
+        "text": "&gt;  A dynamically typed store of global state that is easy to query.\nThat seems to be the basis of the RealTalk system too (from DynamicLand)",
+        "user": "U0112C10V4Y",
+        "ts": "1622643804.037700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf521cc065bb",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f521cc065bb724c90c57c263ec7ee857.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Naveen Michaud-Agrawal",
+            "display_name": "Naveen Michaud-Agrawal",
+            "team": "T5TCAFTA9",
+            "name": "naveen.michaudagrawal",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U0112C10V4Y",
+            "ts": "1622643823.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Jahpc",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": " A dynamically typed store of global state that is easy to query."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That seems to be the basis of the RealTalk system too (from DynamicLand)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1622048775.021900",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "80949dfc-5a73-411c-a0f2-578a8bdba94b",
+        "type": "message",
+        "text": "<@UE6EFEPTQ>\n&gt; Imperative programming gets messy when trying to do concurrency\nIt's also extremely easy to make a mess with a single thread and lots of global variables. I think you're on to something, but you have perhaps gone too far in the other direction.",
+        "user": "UCUSW7WVD",
+        "ts": "1622658803.038100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZCy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UE6EFEPTQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Imperative programming gets messy when trying to do concurrency"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nIt's also extremely easy to make a mess with a single thread and lots of global variables. I think you're on to something, but you have perhaps gone too far in the other direction."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1622048775.021900",
+        "parent_user_id": "UCUSW7WVD"
+    }
+]

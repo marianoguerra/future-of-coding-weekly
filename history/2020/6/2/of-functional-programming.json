@@ -1,0 +1,311 @@
+[
+    {
+        "client_msg_id": "528f36f5-e143-443a-b7ce-c64eb8359c60",
+        "type": "message",
+        "text": "Well, I'm still quite new to this in a way, but as I see it, both lazy evaluation and parallel term reduction are meant to increase efficiency (don't eval stuff you don't need, don't eval the same thing twice; eval in parallel if they're independent).\n\nSo putting the specifics of Haskell and Lamdu choices and implementation aside, I was wondering if it's possible to have a model of graph\/DAG reduction that is both lazy and parallelisable?\n\nFirst thought is that you need a results lookup that can be shared amongst threads. A thread would have to \"claim\" a result slot even before evaluating it, to prevent two threads seeing no result and eval'ing simultaneously.\n\nAnyway, just shower thoughts, I'm not building this yet..",
+        "user": "UE6EFEPTQ",
+        "ts": "1591090165.029500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+UF",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Well, I'm still quite new to this in a way, but as I see it, both lazy evaluation and parallel term reduction are meant to increase efficiency (don't eval stuff you don't need, don't eval the same thing twice; eval in parallel if they're independent).\n\nSo putting the specifics of Haskell and Lamdu choices and implementation aside, I was wondering if it's possible to have a model of graph\/DAG reduction that is both lazy and parallelisable?\n\nFirst thought is that you need a results lookup that can be shared amongst threads. A thread would have to \"claim\" a result slot even before evaluating it, to prevent two threads seeing no result and eval'ing simultaneously.\n\nAnyway, just shower thoughts, I'm not building this yet.."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "6f3c11d2-abbc-4b79-9ce7-eef935d95429",
+        "type": "message",
+        "text": "I guess the lookup is like a bucket of thunks",
+        "user": "UE6EFEPTQ",
+        "ts": "1591090207.029700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "oF+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I guess the lookup is like a bucket of thunks"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "da5241c2-f094-4210-acd8-4c58cff8c3f1",
+        "type": "message",
+        "text": "I think the Haskell attempts at tackling auto-parallelism resulted in failures, and they found the difficult part to be granularity of work.\n\nCross-core talk is expensive, cache sharing and invalidation is expensive, locks\/barriers are expensive -- all of this is overhead that better be paid for work that is large enough to justify it.\n\nInferring which work is large enough to be worth sending to a different processor is not an easy problem",
+        "user": "U78TZ437S",
+        "ts": "1591095684.029900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga3a20a76a69",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/da3a20a76a69532fa83e790e89cb4c6c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "Eyal",
+            "real_name": "Eyal Lotem",
+            "display_name": "eyal",
+            "team": "T5TCAFTA9",
+            "name": "eyal.lotem",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YLiRx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think the Haskell attempts at tackling auto-parallelism resulted in failures, and they found the difficult part to be granularity of work.\n\nCross-core talk is expensive, cache sharing and invalidation is expensive, locks\/barriers are expensive -- all of this is overhead that better be paid for work that is large enough to justify it.\n\nInferring which work is large enough to be worth sending to a different processor is not an easy problem"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ",
+        "reactions": [
+            {
+                "name": "+1::skin-tone-2",
+                "users": [
+                    "UP28ETUSE"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "859ab4fc-308b-40f3-bde8-c1adc5b51e67",
+        "type": "message",
+        "text": "<@UE6EFEPTQ> Lazy evaluation does not increase efficiency. Haskell people often say this, but it is pure marketing. Haskell's lazy evaluation decreases efficiency, but this was an intentional tradeoff, because the goal (of the original language designers) was to increase expressive power. There's so much to say about this. I'll drop one factoid. Idris is an offshoot of Haskell that is designed to have even more expressive power than Haskell, due to its dependent type system. But Idris uses strict evaluation by default. The Idris 2 compiler was rewritten in Idris (formerly written in Haskell), and now runs 15 times faster. Lazy evaluation in the old Haskell version was a major contributor to slowness. <https:\/\/www.type-driven.org.uk\/edwinb\/why-is-idris-2-so-much-faster-than-idris-1.html>\n\nI'm not an expert on graph reduction engines, but I have to ask: how high a priority is efficiency for you, vs ease of programming, and vs expressive power?",
+        "user": "UJN1TAYEQ",
+        "ts": "1591095731.030100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "CUbFz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UE6EFEPTQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Lazy evaluation does not increase efficiency. Haskell people often say this, but it is pure marketing. Haskell's lazy evaluation decreases efficiency, but this was an intentional tradeoff, because the goal (of the original language designers) was to increase expressive power. There's so much to say about this. I'll drop one factoid. Idris is an offshoot of Haskell that is designed to have even more expressive power than Haskell, due to its dependent type system. But Idris uses strict evaluation by default. The Idris 2 compiler was rewritten in Idris (formerly written in Haskell), and now runs 15 times faster. Lazy evaluation in the old Haskell version was a major contributor to slowness. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.type-driven.org.uk\/edwinb\/why-is-idris-2-so-much-faster-than-idris-1.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI'm not an expert on graph reduction engines, but I have to ask: how high a priority is efficiency for you, vs ease of programming, and vs expressive power?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "469ea067-8dda-4361-9f6f-9027686b1127",
+        "type": "message",
+        "text": "Well the goal is to be transparent to the programmer, just optimisation",
+        "user": "UE6EFEPTQ",
+        "ts": "1591095799.030300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SIX2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Well the goal is to be transparent to the programmer, just optimisation"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "9c5d6e98-6a31-4514-b070-951fb6545a4a",
+        "type": "message",
+        "text": "Lazy evaluation adds overhead (inefficiency), but often the efficient solution is lazy.\n\nEager languages allow you to be lazy explicitly for the cases that's needed (e.g: for efficiency), and that's why <@UJN1TAYEQ> is right -- pervasive \/ implicit laziness isn't efficient.  But it can make code written with less effort perform better (if laziness is needed, you get it for no extra work)",
+        "user": "U78TZ437S",
+        "ts": "1591095853.030500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga3a20a76a69",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/da3a20a76a69532fa83e790e89cb4c6c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "Eyal",
+            "real_name": "Eyal Lotem",
+            "display_name": "eyal",
+            "team": "T5TCAFTA9",
+            "name": "eyal.lotem",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bYm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Lazy evaluation adds overhead (inefficiency), but often the efficient solution is lazy.\n\nEager languages allow you to be lazy explicitly for the cases that's needed (e.g: for efficiency), and that's why "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UJN1TAYEQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " is right -- pervasive \/ implicit laziness isn't efficient.  But it can make code written with less effort perform better (if laziness is needed, you get it for no extra work)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "2af19a79-a3db-4129-9802-b5a05c34ef0c",
+        "type": "message",
+        "text": "Data parallelism in Curv is explicit, because I don't know how to do otherwise and meet my performance goals. But the intention is that most Curv users will not need to deal with performance annotations: these will be hidden away behind high level interfaces, inside library code written by experts. So the language design goal is to allow non-experts to use optimized library abstractions without having to be explicitly aware of the optimization (you shouldn't need to change the way you write high level code to get a performance benefit). High level code is meant to be purely declarative.",
+        "user": "UJN1TAYEQ",
+        "ts": "1591097607.030700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "stA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Data parallelism in Curv is explicit, because I don't know how to do otherwise and meet my performance goals. But the intention is that most Curv users will not need to deal with performance annotations: these will be hidden away behind high level interfaces, inside library code written by experts. So the language design goal is to allow non-experts to use optimized library abstractions without having to be explicitly aware of the optimization (you shouldn't need to change the way you write high level code to get a performance benefit). High level code is meant to be purely declarative."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    }
+]

@@ -1,337 +1,24 @@
 [
     {
-        "client_msg_id": "6c520d9a-9a46-4ec0-ac11-2a7981508b2c",
-        "type": "message",
-        "text": "<@UE6EFEPTQ> Good point about being lower level than the Fediverse. As for P2P, it seems that C is not popular at all in that space. The main P2P software I actually use daily is Syncthing, written in Go. IPFS is Go and JS. All of them *could* be implemented in C, being defined in terms of protocols rather than APIs, but nobody does it. I guess it's a cultural issue: C is the lingua franca of Unix and a process-centric view of computing. P2P takes a data-centric and network-based approach. Rejecting the \"old world\" leads to rejecting its lingua franca as well.",
-        "user": "UJBAJNFLK",
-        "ts": "1608189301.334500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "MZZ",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UE6EFEPTQ"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Good point about being lower level than the Fediverse. As for P2P, it seems that C is not popular at all in that space. The main P2P software I actually use daily is Syncthing, written in Go. IPFS is Go and JS. All of them "
-                            },
-                            {
-                                "type": "text",
-                                "text": "could",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " be implemented in C, being defined in terms of protocols rather than APIs, but nobody does it. I guess it's a cultural issue: C is the lingua franca of Unix and a process-centric view of computing. P2P takes a data-centric and network-based approach. Rejecting the \"old world\" leads to rejecting its lingua franca as well."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1607884598.282600",
-        "parent_user_id": "UE6EFEPTQ"
-    },
-    {
-        "type": "message",
-        "text": "*Conditionals and multi-line functions*\n\nI've been noodling on how to do conditionals in my postfix shell. Some ideas for keywords/functions:\n\n* `return` seems quite essential. Stops executing the current function and returns top of stack.\n* `if{` and `}` and `}else{`. Here's how factorial would look with them:\n```n fact\n  = n 1 &lt;= if{ 0 return } n 1- fact n *```\n* `-&gt;` executes rest of line only if top of stack is true. Factorial again, this time in two lines:\n```n fact\n  = n 1 &lt;= -&gt; 0 return\n    n 1- fact n *```\n* `-&lt;` executes one of the next two words depending on whether top of stack is true or false.\n* `-&gt;` and `-&lt;` may also work well with `{` and `}` which group words together:\n```n fact\n  = n 1 &lt;= -&gt; {0 return} n 1- fact n *```\nA more challenging example is binary search. The gold standard here is Bret Victor's demo in _\"Inventing on Principle\"_ (linked above; screenshot below). Some attempts in postfix:\n```array key bsearch\n  = array key 0 array len bsearch-range          # delegate to helper with explicit low and high\n\n# option A\narray key low high bsearch-range\n  = low high &gt;= if{ null return }                # not found\n    low high + 2 div =mid                        # mid = (low+high)/2\n    array mid [] key = if{ mid return }          # if array[mid] == key, return mid\n    array mid [] key &lt; if{ array key mid high bsearch-range return }  # if array[mid] &lt; key, recurse over [mid, high)\n    array key low mid bsearch-range              # otherwise recurse over [low, mid)\n\n# option B\narray key low high bsearch-range\n  = low high &gt;= -&gt; null return                   # not found\n    low high + 2 div =mid                        # mid = (low+high)/2\n    array mid [] key = -&gt; mid return             # if array[mid] == key, return mid\n    array mid [] key &lt; -&gt; array key mid high bsearch-range return   # if array[mid] &lt; key, recurse over [mid, high)\n    array key low mid bsearch-range              # otherwise recurse over [low, mid)\n\n# option C\narray key low high bsearch-range\n  = low high &gt;= -&gt; null return                   # not found\n    low high + 2 div =mid                        # mid = (low+high)/2\n    array mid [] =midval                         # midval = array[mid]\n    midval key = -&gt; mid return                   # if midval == key, return mid\n    midval key &lt; =upper?                         # upper? = (midval &lt; key)\n    # return bsearch-range(array, key, upper ? mid : low, upper ? high : mid)\n    array key upper? -&lt; mid low upper? -&lt; high mid bsearch-range```\nBut how to visualize a function spanning multiple lines that operates on an array? There aren't enough dimensions.",
-        "files": [
-            {
-                "id": "F01H42Y3U7L",
-                "created": 1608190889,
-                "timestamp": 1608190889,
-                "name": "bv-binarysearch.png",
-                "title": "bv-binarysearch.png",
-                "mimetype": "image/png",
-                "filetype": "png",
-                "pretty_type": "PNG",
-                "user": "UCUSW7WVD",
-                "editable": false,
-                "size": 1112469,
-                "mode": "hosted",
-                "is_external": false,
-                "external_type": "",
-                "is_public": true,
-                "public_url_shared": false,
-                "display_as_bot": false,
-                "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01H42Y3U7L/bv-binarysearch.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01H42Y3U7L/download/bv-binarysearch.png",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_360.png",
-                "thumb_360_w": 360,
-                "thumb_360_h": 196,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_480.png",
-                "thumb_480_w": 480,
-                "thumb_480_h": 261,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_720.png",
-                "thumb_720_w": 720,
-                "thumb_720_h": 391,
-                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_800.png",
-                "thumb_800_w": 800,
-                "thumb_800_h": 435,
-                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_960.png",
-                "thumb_960_w": 960,
-                "thumb_960_h": 522,
-                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F01H42Y3U7L-944180c45c/bv-binarysearch_1024.png",
-                "thumb_1024_w": 1024,
-                "thumb_1024_h": 556,
-                "image_exif_rotation": 1,
-                "original_w": 2768,
-                "original_h": 1504,
-                "thumb_tiny": "AwAaADDQKgdBRt9v1px6U36/zoAUKPSkZRjgAc04AUMMigBAo9qNo9BS4paAA80gH0/KlooAKQjPpS0UAFFFFAH/2Q==",
-                "permalink": "https://futureofcoding.slack.com/files/UCUSW7WVD/F01H42Y3U7L/bv-binarysearch.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01H42Y3U7L-c3d10102fa",
-                "is_starred": false,
-                "has_rich_preview": false
-            }
-        ],
-        "upload": false,
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "ElDqc",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Conditionals and multi-line functions",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n\nI've been noodling on how to do conditionals in my postfix shell. Some ideas for keywords/functions:\n\n* "
-                            },
-                            {
-                                "type": "text",
-                                "text": "return",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " seems quite essential. Stops executing the current function and returns top of stack.\n* "
-                            },
-                            {
-                                "type": "text",
-                                "text": "if{",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " and "
-                            },
-                            {
-                                "type": "text",
-                                "text": "}",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " and "
-                            },
-                            {
-                                "type": "text",
-                                "text": "}else{",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ". Here's how factorial would look with them:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_preformatted",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "n fact\n  = n 1 <= if{ 0 return } n 1- fact n *"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "* "
-                            },
-                            {
-                                "type": "text",
-                                "text": "->",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " executes rest of line only if top of stack is true. Factorial again, this time in two lines:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_preformatted",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "n fact\n  = n 1 <= -> 0 return\n    n 1- fact n *"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "* "
-                            },
-                            {
-                                "type": "text",
-                                "text": "-<",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " executes one of the next two words depending on whether top of stack is true or false.\n* "
-                            },
-                            {
-                                "type": "text",
-                                "text": "->",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " and "
-                            },
-                            {
-                                "type": "text",
-                                "text": "-<",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " may also work well with "
-                            },
-                            {
-                                "type": "text",
-                                "text": "{",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " and "
-                            },
-                            {
-                                "type": "text",
-                                "text": "}",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " which group words together:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_preformatted",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "n fact\n  = n 1 <= -> {0 return} n 1- fact n *"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "A more challenging example is binary search. The gold standard here is Bret Victor's demo in "
-                            },
-                            {
-                                "type": "text",
-                                "text": "\"Inventing on Principle\"",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " (linked above; screenshot below). Some attempts in postfix:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_preformatted",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "array key bsearch\n  = array key 0 array len bsearch-range          # delegate to helper with explicit low and high\n\n# option A\narray key low high bsearch-range\n  = low high >= if{ null return }                # not found\n    low high + 2 div =mid                        # mid = (low+high)/2\n    array mid [] key = if{ mid return }          # if array[mid] == key, return mid\n    array mid [] key < if{ array key mid high bsearch-range return }  # if array[mid] < key, recurse over [mid, high)\n    array key low mid bsearch-range              # otherwise recurse over [low, mid)\n\n# option B\narray key low high bsearch-range\n  = low high >= -> null return                   # not found\n    low high + 2 div =mid                        # mid = (low+high)/2\n    array mid [] key = -> mid return             # if array[mid] == key, return mid\n    array mid [] key < -> array key mid high bsearch-range return   # if array[mid] < key, recurse over [mid, high)\n    array key low mid bsearch-range              # otherwise recurse over [low, mid)\n\n# option C\narray key low high bsearch-range\n  = low high >= -> null return                   # not found\n    low high + 2 div =mid                        # mid = (low+high)/2\n    array mid [] =midval                         # midval = array[mid]\n    midval key = -> mid return                   # if midval == key, return mid\n    midval key < =upper?                         # upper? = (midval < key)\n    # return bsearch-range(array, key, upper ? mid : low, upper ? high : mid)\n    array key upper? -< mid low upper? -< high mid bsearch-range"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\nBut how to visualize a function spanning multiple lines that operates on an array? There aren't enough dimensions."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "user": "UCUSW7WVD",
-        "display_as_bot": false,
-        "ts": "1608190990.334700",
-        "edited": {
-            "user": "UCUSW7WVD",
-            "ts": "1608191566.000000"
-        },
-        "thread_ts": "1607887127.284300",
-        "parent_user_id": "UCUSW7WVD"
-    },
-    {
         "client_msg_id": "986D915F-5C5B-4F7F-A386-6AA07838E7F4",
         "type": "message",
-        "text": "i think collections and branching are the two hardest things for a stack language to pull off ergonomically. \n\nhere\u2019s how factor handles them: <https://docs.factorcode.org/content/article-cookbook-combinators.html|https://docs.factorcode.org/content/article-cookbook-combinators.html> . i like the approach of using quotations for control flow, although it could get hairy since your quotations would also have variable names in them. \n\ni may have some harebrained ideas incoming on a couple of these fronts, although they may be nonstandard (example preview: you should have a stack language, an array language, and a hash/record/dictionary language, and their editors should just compose/nest )",
+        "text": "i think collections and branching are the two hardest things for a stack language to pull off ergonomically. \n\nhere’s how factor handles them: <https:\/\/docs.factorcode.org\/content\/article-cookbook-combinators.html|https:\/\/docs.factorcode.org\/content\/article-cookbook-combinators.html> . i like the approach of using quotations for control flow, although it could get hairy since your quotations would also have variable names in them. \n\ni may have some harebrained ideas incoming on a couple of these fronts, although they may be nonstandard (example preview: you should have a stack language, an array language, and a hash\/record\/dictionary language, and their editors should just compose\/nest )",
         "user": "UHWC9PXBL",
         "ts": "1608218332.345700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UHWC9PXBL",
             "ts": "1608218342.000000"
@@ -346,16 +33,16 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "i think collections and branching are the two hardest things for a stack language to pull off ergonomically. \n\nhere\u2019s how factor handles them: "
+                                "text": "i think collections and branching are the two hardest things for a stack language to pull off ergonomically. \n\nhere’s how factor handles them: "
                             },
                             {
                                 "type": "link",
-                                "url": "https://docs.factorcode.org/content/article-cookbook-combinators.html",
-                                "text": "https://docs.factorcode.org/content/article-cookbook-combinators.html"
+                                "url": "https:\/\/docs.factorcode.org\/content\/article-cookbook-combinators.html",
+                                "text": "https:\/\/docs.factorcode.org\/content\/article-cookbook-combinators.html"
                             },
                             {
                                 "type": "text",
-                                "text": " . i like the approach of using quotations for control flow, although it could get hairy since your quotations would also have variable names in them. \n\ni may have some harebrained ideas incoming on a couple of these fronts, although they may be nonstandard (example preview: you should have a stack language, an array language, and a hash/record/dictionary language, and their editors should just compose/nest )"
+                                "text": " . i like the approach of using quotations for control flow, although it could get hairy since your quotations would also have variable names in them. \n\ni may have some harebrained ideas incoming on a couple of these fronts, although they may be nonstandard (example preview: you should have a stack language, an array language, and a hash\/record\/dictionary language, and their editors should just compose\/nest )"
                             }
                         ]
                     }
@@ -372,6 +59,19 @@
         "user": "UCUSW7WVD",
         "ts": "1608219697.346000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",

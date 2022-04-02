@@ -2,24 +2,37 @@
     {
         "client_msg_id": "a72507ce-67d0-4e04-90d8-f6647b3fcd88",
         "type": "message",
-        "text": "PyFl \u2013 new functional programming language from Bill Wadge - <https://billwadge.com/2022/01/13/functional-programming-for-the-rest-of-us-get-pyfl-now/|https://billwadge.com/2022/01/13/functional-programming-for-the-rest-of-us-get-pyfl-now/>",
+        "text": "PyFl – new functional programming language from Bill Wadge - <https:\/\/billwadge.com\/2022\/01\/13\/functional-programming-for-the-rest-of-us-get-pyfl-now\/|https:\/\/billwadge.com\/2022\/01\/13\/functional-programming-for-the-rest-of-us-get-pyfl-now\/>",
         "user": "UPVBV34EL",
         "ts": "1642168001.000100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "259a1e56ad2e",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-10-28\/811814014976_259a1e56ad2e11fe3d56_72.jpg",
+            "first_name": "",
+            "real_name": "Shubhadeep Roychowdhury",
+            "display_name": "Shubhadeep Roychowdhury",
+            "team": "T5TCAFTA9",
+            "name": "shubhadeeproychowdhur",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
-                "from_url": "https://billwadge.com/2022/01/13/functional-programming-for-the-rest-of-us-get-pyfl-now/",
-                "service_icon": "https://s2.wp.com/i/webclip.png",
+                "from_url": "https:\/\/billwadge.com\/2022\/01\/13\/functional-programming-for-the-rest-of-us-get-pyfl-now\/",
+                "service_icon": "https:\/\/s2.wp.com\/i\/webclip.png",
                 "id": 1,
-                "original_url": "https://billwadge.com/2022/01/13/functional-programming-for-the-rest-of-us-get-pyfl-now/",
+                "original_url": "https:\/\/billwadge.com\/2022\/01\/13\/functional-programming-for-the-rest-of-us-get-pyfl-now\/",
                 "fallback": "Bill Wadge's Blog Link: Functional Programming for the Rest of  Us &#8211; get PyFL&nbsp;Now!",
                 "text": "It was developed in a secret lab and released, after which it spread rapidly. COVID? (maybe &hellip;). But I&rsquo;m talking about the new PyFL interpreter. It&rsquo;s finally available for the general public at\n\nTo make things simple, in the form of a zip file &nbsp; &ndash; &nbsp;I&rsquo;ll put it &nbsp;on GitHub if there&rsquo;s enough interest.\nJust read README.txt and follow the instructions. As it says you need Python 3, 3.10.1 being the latest &nbsp;stable version. . It all should work straight out of the box.\nA quick summary of PyFL\nIt&rdquo;s all implemented on top of Basic PyFL, a &nbsp;stripped down lazy functional language. Basic PyFL has the data &nbsp;types and infix operators of POP-11, lambda expressions, and valof clauses (basically where clauses), and function application. Function application uses conventional mathematical notation, e.g. f(a,b) instead of (f a b) as in Haskell.\nBasic PyFL was implemented from scratch using function closures and similar standard techniques. It is &nbsp;dynamically typed &ndash; &nbsp;no type declarations and no constraints on application (self application in particular &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;is &nbsp;supported).\nOnce Basic PyFL was implemented I proceeded to add more and more extensions, some quite novel.\nConventional function definitions\nMathematicians don&rsquo;t normally use lambda expressions to define functions. Instead of writing\n\n\nsumsq = lambda (x,y) x*x+y*y;\n\n\nthey are more likely to write\n\n\nsumsq(x,y) = x*x+y*y;\n\n\nThis notation is implemented by simple translation &ndash; definitions using conventional notation are replaced by the version using lambda. Naturally this involves a complete &lsquo;tree walk&rsquo; of the entire program because conventional definitions may occur in values deeply nested in other expressions.\nThe next feature added is where clauses. These are stylistically more convenient but cause parsing problems and so are not a basic feature. They, too, are implemented by a simple translation. A where clause with subject (head) s and set body of definitions is rewritten as a valof with the same body except that the definition result=s is &nbsp;added.\nWith where and lambda we can write a non recursive factorial &nbsp;program:\n\n\nfac(7)\n where\n  fac = Y(A);\n  A(f) = lambda (n) if n==0 then 1 else n*f(n-1) fi;\n  Y(a) = g(g) where g(x) = a(x(x));\n end\n\n\nNotice that no variable is defined directly or indirectly in terms of itself. This definition of the fixed point combinator Y &nbsp;clearly depends on self-application, which &nbsp;Haskell&rsquo;s &nbsp;type system won&rsquo;t allow. I was pretty happy when the PyFL interpreter produced 5040, the &nbsp;correct answer.\nAnother feature added was multiple returns, so that you can write e.g.\nmin, max = bounds(x)\nThis is implemented with a simple translation but I won&rsquo;t go in to it.\nThe next feature added was VBOs &ndash; variable binding operators, like the existential quantifier &exist; or the sigma (summation) operator &sum;. They work exactly like their math counterparts except the ranges are lists and they are expressed in ASCII &nbsp;notation. Thus we can compute &nbsp;the primes less than 100 &nbsp; a\n\n\nres = [2 3 5 7] \nthose n in rg(2,100):\n forall p in [2 3 5 7] :\n  n mod p != 0\n end\nend\nwhere  \n rg(l,u) = \n    if l&gt;u then [] \n           else l :: rg(l+1,u)\n    fi;\nend;\n\n\nThese VBOs are disguised loops, even though PyFL is a &nbsp;functional language. They are implemented by translating into expressions using map, filter, and reduce.\nMy next step was to jump right in and add genuine while loops. We can use a while clause to compute the primes less than 100 as follows\n\n\nres =\nwhile n \n\n\n\nThere are three loop variables, n, primes, and nprime. The first is a counter that enumerates the odd numbers starting at 3, the second is a (reverse) list of the primes we have found so far, and prime is  true or false depending on whether or not the current value of n is a prime (not divisible by any prime we&rsquo;ve found so far).\n\n\n\nIt looks like Lucid (as intended) but is not Lucid; fby is just a syntax word that separates the initial expression from the next value expression of the recurrence relation. It&rsquo;s translated into a tail recursion with the loop variables becoming formal parameters of the tail recursively defined function.\n\n\n\nNext I took a break from innovating and produced a REPL program &ndash; REPL stands for Read, Evaluate, Print, Loop. The REPL is invoked by the command repl and when run it  prints a  welcome message and a   list of real commands. It declares the current input file, if any, then gives a prompt consisting of a % proceeded by the name of the current import, if any. For example you might see\n\n\n\nexp%\n\n\n\nwhich means the current input file is exp.\n\n\n\nThe various commands allow you to manipulate the current import, whose source is stored in the file  buffer and whose name is in the file currentimport (don&rsquo;t touch these files directly). For example, to see the source use the command b or better yet, f, which invokes the pretty printer to format it. If you want to edit the file in the buffer use v, which invokes vi.\n\n\n\nThe file in the buffer is a set of definitions, not a program, so it doesn&rsquo;t make sense to &lsquo;run&rsquo; it. Instead, you can evaluate a PyFL expression  and the evaluator will take the definitions into account if need be. What I usually do, as in the program given above, is equate the variable res to the expression of interest and use the command\n\n\n\nprimes% e res\n\n\n\nThe evaluator evaluates the expression following the e and prints the result, followed by some statistics.You can enter any PyFL expression, it doesn&rsquo;t have to use the definitions in the buffer.\n\n\n\nThere&rsquo;s more but you can discover it for yourself. PyFL is well documented by README.txt file, the REPL, and  my numerous blog posts (my blog can now be found at )\n\n\n\nA few notes. If you pay attention to the statistics, it&rsquo;s obvious that for some programs the evaluator is ridiculously inefficient &ndash; huge numbers of list operations. This will be fixed in a  future release. Also, I overlooked some vital opportunities for caching. I discovered, to my disgust, that   evaluating res*res takes  twice as long as evaluating res or res**2. This will also be fixed.\n\n\n\nI put a lot of  work into catching and handling errors, but not enough.  It&rsquo;s still easy to crash the  software (generate a traceback). This will get  harder in future releases.\n\n\n\nSo please download the zip file and try it out. Write your own PyFL programs, and, if you&rsquo;re feeling adventurous, modify the source of the interpreter for e.g. better error handling or new features. Let me know of any interesting results and I&rsquo;ll discuss them in my blog and maybe incorporate them in a future release (with appropriate credit given).",
-                "title": "Functional Programming for the Rest of  Us \u2013 get PyFL\u00a0Now!",
-                "title_link": "https://billwadge.com/2022/01/13/functional-programming-for-the-rest-of-us-get-pyfl-now/",
+                "title": "Functional Programming for the Rest of  Us – get PyFL Now!",
+                "title_link": "https:\/\/billwadge.com\/2022\/01\/13\/functional-programming-for-the-rest-of-us-get-pyfl-now\/",
                 "author_name": "Bill Wadge",
-                "author_link": "https://billwadge.com/author/billwadge/",
+                "author_link": "https:\/\/billwadge.com\/author\/billwadge\/",
                 "service_name": "Bill Wadge's Blog",
-                "service_url": "http://billwadge.com/"
+                "service_url": "http:\/\/billwadge.com\/"
             }
         ],
         "blocks": [
@@ -32,12 +45,12 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "PyFl \u2013 new functional programming language from Bill Wadge - "
+                                "text": "PyFl – new functional programming language from Bill Wadge - "
                             },
                             {
                                 "type": "link",
-                                "url": "https://billwadge.com/2022/01/13/functional-programming-for-the-rest-of-us-get-pyfl-now/",
-                                "text": "https://billwadge.com/2022/01/13/functional-programming-for-the-rest-of-us-get-pyfl-now/"
+                                "url": "https:\/\/billwadge.com\/2022\/01\/13\/functional-programming-for-the-rest-of-us-get-pyfl-now\/",
+                                "text": "https:\/\/billwadge.com\/2022\/01\/13\/functional-programming-for-the-rest-of-us-get-pyfl-now\/"
                             }
                         ]
                     }
@@ -52,6 +65,16 @@
             "U02U0AS3J49",
             "UCGR73CAY"
         ],
+        "replies": [
+            {
+                "user": "U02U0AS3J49",
+                "ts": "1642194000.000500"
+            },
+            {
+                "user": "UCGR73CAY",
+                "ts": "1642199493.000800"
+            }
+        ],
         "is_locked": false,
         "subscribed": false
     },
@@ -62,6 +85,19 @@
         "user": "U02U0AS3J49",
         "ts": "1642194000.000500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g5247a9c6cbb",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/5247a9c6cbb943683c9e2e2cef6eba79.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0022-72.png",
+            "first_name": "Jason",
+            "real_name": "Jason Morris",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jason",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -89,6 +125,19 @@
         "user": "UCGR73CAY",
         "ts": "1642199493.000800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "60840a70b1da",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2022-03-29\/3313499509682_60840a70b1da2b9e5b4a_72.png",
+            "first_name": "Corey",
+            "real_name": "Corey Montella",
+            "display_name": "Corey",
+            "team": "T5TCAFTA9",
+            "name": "cmontella",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",

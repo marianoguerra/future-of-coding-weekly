@@ -1,0 +1,664 @@
+[
+    {
+        "client_msg_id": "BF1138E5-8E9B-48A8-B9DC-71D7BB473BEF",
+        "type": "message",
+        "text": "<@UCUSW7WVD> I read your _A new way of testing_ and I think you’re onto something that I can make a connection to in a totally different context but it feels like the same pattern to me.\n\nWhat you see in “white-box testing” is what I see in declarative frameworks like SwiftUI or React, or in the application of monads (as in Haskell’s IO), or in effect systems: I think it’s also what you call “obvious architecture” above. It’s not obvious at all, but I think I know what you mean. :-)\n\nI see a subtle trend in programming uncovering distinct layers, I would call them _layers of scale_ in the Alexander sense, and designing more and more systems around those, by increasing the expressiveness within each of these layers with algebraic composition.\n\nWhen you declaratively specify a UI with SwiftUI, you don’t tell the system what to do directly (that’s the declarative part, but that’s not quite my point here), but you create a data structure that will be “parsed” and transformed into the view hierarchy at runtime. You’re kind of programming within programming, but not just in an eDSL sense, but more in an Inception sense. There are two distinct scales here, although you don’t really see them if you don’t look for them.\n\nWhen you use the IO monad in Haskell, you don’t cause the side effects to happen directly, but you assemble a data structure that will eventually become the “real program” and then reduce down to calculating all the side effects. Again, two separate scales.\n\nBoth concepts look very similar to me. As does what you do with your “trace-based tests”. You’re separating levels of scale, slicing the system into different domains, but not in an elaborate manual way, designing each layer individually, but by exploiting a structure that already exists.\n\nI find it hard to describe, even though the pattern makes total sense in my head… we look for something like a pivot point to rotate the whole system around and at certain angles everything aligns neatly and we can see different aspects of the same thing clearly. It’s like splitting your system into distinct layers, but simpler — a lot less effort than designing the layers explicitly — and yet more powerful. These are the tree approximations derived from a lattice structure. They are not designed, but derived. They are already there and therefore don’t have to be designed, just discovered. And if we could understand better how to discover them, we could cope with much more complex systems.\n\nI find as we tumble down our rabbit holes and get quite deep into them, it becomes harder and harder to convey what we learn as what makes sense to us is just totally incomprehensible to others who have not been down the same rabbit hole as far as we have. Words with meanings obvious to us lead others down a completely wrong path. I felt like this when trying to decipher your Fourier transform analogy, and I wouldn’t be surprised if you will feel like this with what I just wrote.",
+        "user": "U5STGTB3J",
+        "ts": "1574323870.283300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1574069038.213900",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "98A967F9-3AFB-494A-A687-041F29989D97",
+        "type": "message",
+        "text": "<https:\/\/www.lesswrong.com\/posts\/tMhEv28KJYWsu6Wdo\/kensh>\n\nThis is pretty much how I feel about Christopher Alexander — he’s telling me to “look up”, and I do but I still can’t quite see what he means because there’s nothing above the menu bar on my screen… :-)",
+        "user": "U5STGTB3J",
+        "ts": "1574323999.285500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Kenshō - LessWrong 2.0",
+                "title_link": "https:\/\/www.lesswrong.com\/posts\/tMhEv28KJYWsu6Wdo\/kensh",
+                "text": "Follow-up to: Gears in Understanding [<http:\/\/lesswrong.com\/lw\/ozz\/gears_in_understanding\/>], Fake Frameworks [<http:\/\/lesswrong.com\/lw\/p80\/in_praise_of_fake_frameworks\/>] This last September, I experienced enlightenment. I mean to share this as a simple fact to set context. I don’t claim I am enlightened, as though I have some amazing property that makes me better than people who don’t have it. I mean simply that there’s something vaguely like a state that our culture calls “enlightenment” that I’ve been in and have returned to a few times over the last four months. In Rinzai Zen [<https:\/\/en.wikipedia.org\/wiki\/Rinzai_school>] one would say that I had a kenshō [<https:\/\/en.wikipedia.org\/wiki\/Kensh%C5%8D>]: a moment of understanding that makes the path clear but is not yet full attainment. Over the last several months I’ve tried to share what I now see so clearly. And this has mostly just failed. People who’ve had a kenshō follow what I’m saying just fine, but most people just get really confused. It feels a bit like being one of the only people around who understand scientific thinking: most people can see that the behavior of a gyroscope [<https:\/\/www.youtube.com\/watch?v=8H98BgRzpOM>] is weird [<http:\/\/lesswrong.com\/lw\/hs\/think_like_reality\/>] when you show them, but most can’t really see its behavior through the lens of scientific epistemology. They just keep translating what you’re saying into e.g. isolated facts [<http:\/\/lesswrong.com\/lw\/iq\/guessing_the_teachers_password\/>]. This is particularly vexing in the case of kenshō because enlightenment isn’t an insight. I claim it’s not a matter of inferential distance [<https:\/\/wiki.lesswrong.com\/wiki\/Inferential_distance>]. It’s more like bothering to notice what you already know. When the moment of seeing struck me, I fell over laughing and basically didn’t stop laughing for two days, because it was so incredibly stunningly obvious. There isn’t something to learn: it’s already always here. And what is “it”, you might ask? W",
+                "fallback": "Kenshō - LessWrong 2.0",
+                "thumb_url": "https:\/\/res.cloudinary.com\/lesswrong-2-0\/image\/upload\/v1503704344\/sequencesgrid\/h6vrwdypijqgsop7xwa0.jpg",
+                "from_url": "https:\/\/www.lesswrong.com\/posts\/tMhEv28KJYWsu6Wdo\/kensh",
+                "thumb_width": 696,
+                "thumb_height": 274,
+                "service_icon": "https:\/\/res.cloudinary.com\/lesswrong-2-0\/image\/upload\/v1497915096\/favicon_lncumn.ico",
+                "service_name": "lesswrong.com",
+                "id": 1,
+                "original_url": "https:\/\/www.lesswrong.com\/posts\/tMhEv28KJYWsu6Wdo\/kensh"
+            }
+        ],
+        "thread_ts": "1574069038.213900",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "267e2c61-0942-4c82-8d76-d9a4abb8232c",
+        "type": "message",
+        "text": "Yeah, that's indeed my reaction. I'll try to reflect more on your comment.",
+        "user": "UCUSW7WVD",
+        "ts": "1574324589.285800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1574069038.213900",
+        "parent_user_id": "U5STGTB3J"
+    },
+    {
+        "client_msg_id": "1490fe3f-5503-4742-b75e-bded28863fe9",
+        "type": "message",
+        "text": "I hope some new kids get to use it and it inspires them like it did me, but I kinda figure kids nowadays are born as Unity expert game devs :joy:",
+        "user": "UNBPP291C",
+        "ts": "1574334567.286000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gcf29e340a09",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/cf29e340a09ac08ae262632ef9101046.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Ian Rumac",
+            "display_name": "Ian Rumac",
+            "team": "T5TCAFTA9",
+            "name": "ian.rumac",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "\/NY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I hope some new kids get to use it and it inspires them like it did me, but I kinda figure kids nowadays are born as Unity expert game devs "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "joy"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574195594.223400",
+        "parent_user_id": "UPVBV34EL"
+    },
+    {
+        "client_msg_id": "fbdb6e94-6339-4acf-88d4-e85d496ebeb7",
+        "type": "message",
+        "text": "Well said <@UNBPP291C> :smile:",
+        "user": "UPVBV34EL",
+        "ts": "1574337101.286200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "259a1e56ad2e",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-10-28\/811814014976_259a1e56ad2e11fe3d56_72.jpg",
+            "first_name": "",
+            "real_name": "Shubhadeep Roychowdhury",
+            "display_name": "Shubhadeep Roychowdhury",
+            "team": "T5TCAFTA9",
+            "name": "shubhadeeproychowdhur",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "b8pb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Well said "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UNBPP291C"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574195594.223400",
+        "parent_user_id": "UPVBV34EL"
+    },
+    {
+        "client_msg_id": "E29EF3C5-DFF4-47D9-9D53-12D2F91C930D",
+        "type": "message",
+        "text": "Have been researching the history of CS and the more I look into it, the more I feel it is deeply intertwined through the lives of people involved. For example Scott and Strachey worked together resulting in Denotational Semantics. Same Strachey used to be a classmate of Alan Turing, who was the student of Alonzo Church who made Lambda Calculus, who worked with Kleene resulting in Recursive Function Theory. Both of these mathematical models were used in the creation of Lisp by McCarthy. Peter Landin who used to work with Strachey creates the SECD machine which becomes an operational substrate for Lambda Calculus which is used along with Denotational Semantics to give a formal footing for today’s FP languages. To give a structure to this braided nature of CS history, I created a visualization here: <https:\/\/twitter.com\/prathyvsh\/status\/1197525794245009408?s=21>\n\nWould love to get any opinion on how I can improve this visualization!",
+        "user": "UDKTZSD6H",
+        "ts": "1574351989.294800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2b4594ccf61c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-06-03\/652459184852_2b4594ccf61c401763eb_72.png",
+            "first_name": "",
+            "real_name": "Prathyush",
+            "display_name": "Prathyush",
+            "team": "T5TCAFTA9",
+            "name": "prax08",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "fallback": "<https:\/\/twitter.com\/prathyvsh|@prathyvsh>: Created this timeline\/timebraid on how Alan Turing and peers collaborated to create Computer Science as we know it today! <https:\/\/pbs.twimg.com\/media\/EJ53WlXXYAALweH.jpg>",
+                "ts": 1574347372,
+                "author_name": "Prathyush",
+                "author_link": "https:\/\/twitter.com\/prathyvsh\/status\/1197525794245009408",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1157092207075061760\/v_xB---l_normal.jpg",
+                "author_subname": "@prathyvsh",
+                "text": "Created this timeline\/timebraid on how Alan Turing and peers collaborated to create Computer Science as we know it today! <https:\/\/pbs.twimg.com\/media\/EJ53WlXXYAALweH.jpg>",
+                "service_name": "twitter",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/prathyvsh\/status\/1197525794245009408?s=21",
+                "image_url": "https:\/\/pbs.twimg.com\/media\/EJ53WlXXYAALweH.jpg",
+                "image_width": 1200,
+                "image_height": 675,
+                "image_bytes": 77483,
+                "id": 1,
+                "original_url": "https:\/\/twitter.com\/prathyvsh\/status\/1197525794245009408?s=21",
+                "footer": "Twitter",
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
+            }
+        ],
+        "thread_ts": "1574351989.294800",
+        "reply_count": 10,
+        "reply_users_count": 4,
+        "latest_reply": "1574474924.313200",
+        "reply_users": [
+            "U5STGTB3J",
+            "UJN1TAYEQ",
+            "UDKTZSD6H",
+            "UJUQESQ1Z"
+        ],
+        "replies": [
+            {
+                "user": "U5STGTB3J",
+                "ts": "1574353346.302600"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1574355063.302900"
+            },
+            {
+                "user": "UDKTZSD6H",
+                "ts": "1574362919.303300"
+            },
+            {
+                "user": "UDKTZSD6H",
+                "ts": "1574363006.303500"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1574366215.303800"
+            },
+            {
+                "user": "UDKTZSD6H",
+                "ts": "1574367186.306600"
+            },
+            {
+                "user": "UDKTZSD6H",
+                "ts": "1574377834.306800"
+            },
+            {
+                "user": "UJUQESQ1Z",
+                "ts": "1574394034.307300"
+            },
+            {
+                "user": "UDKTZSD6H",
+                "ts": "1574474861.313000"
+            },
+            {
+                "user": "UDKTZSD6H",
+                "ts": "1574474924.313200"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "UFEQUBNNT",
+                    "U85HCL7JP",
+                    "UA14TGLTC",
+                    "UBN9AFS0N",
+                    "UML4ZEKDK"
+                ],
+                "count": 6
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9F2C5305-7029-4F08-96BC-36C3246FE953",
+        "type": "message",
+        "text": "This is powerful! Using people and timelines as an approachable overview of this field is super useful and I’m happy you put a lot of thought into this. The often invisible connections between people and how they influence each other add an additional dimension to how we can interpret their research and more often than not it’s these connections that give us the clues for deeper understanding.\n\nThere was a Flash-based _Ishkur’s Guide to Electronic Music_ that did something similar in a different domain, which I’d recommend looking at for inspiration (you’ll have to search for it and install a Flash plug-in, but it’s worth it). I’d love to see something like that as an interactive explorer through the history and the people of our field, with links to important presentations and papers sprinkled in.",
+        "user": "U5STGTB3J",
+        "ts": "1574353346.302600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1574351989.294800",
+        "parent_user_id": "UDKTZSD6H",
+        "reactions": [
+            {
+                "name": "+1::skin-tone-3",
+                "users": [
+                    "UFEQUBNNT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "b6c30eba-f7f0-4a22-8574-771bf967167b",
+        "type": "message",
+        "text": "Landin's 1965 paper \"The Next 700 Programming Languages\" was the original manifesto for functional programming, and Landin was pushing the idea, even as Strachey thought it was impractical. The paper introduced ISWIM. Some of the core ISWIM syntax (let, where, indentation as syntax) lives on in Haskell. I see \"ISWIM\" in the diagram, but not \"Functional Programming\".",
+        "user": "UJN1TAYEQ",
+        "ts": "1574355063.302900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OKoQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Landin's 1965 paper \"The Next 700 Programming Languages\" was the original manifesto for functional programming, and Landin was pushing the idea, even as Strachey thought it was impractical. The paper introduced ISWIM. Some of the core ISWIM syntax (let, where, indentation as syntax) lives on in Haskell. I see \"ISWIM\" in the diagram, but not \"Functional Programming\"."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574351989.294800",
+        "parent_user_id": "UDKTZSD6H"
+    },
+    {
+        "client_msg_id": "695868c4-b039-465c-b6f5-2376758ac09a",
+        "type": "message",
+        "text": "<@U5STGTB3J> Thank you for the comments! I think may be adding a geographical aspect as an extra dimension might be really helpful.\n\nI was aware of Ishkur's guide, but hadn't looked into it as a material for inspiration. Thanks for making the connection!\n\nAbout using papers and presentations mixed in, that's exactly where I want to take this. I would like to get this big picture of how we got to where we are with this map.",
+        "user": "UDKTZSD6H",
+        "ts": "1574362919.303300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2b4594ccf61c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-06-03\/652459184852_2b4594ccf61c401763eb_72.png",
+            "first_name": "",
+            "real_name": "Prathyush",
+            "display_name": "Prathyush",
+            "team": "T5TCAFTA9",
+            "name": "prax08",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sUdR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U5STGTB3J"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Thank you for the comments! I think may be adding a geographical aspect as an extra dimension might be really helpful.\n\nI was aware of Ishkur's guide, but hadn't looked into it as a material for inspiration. Thanks for making the connection!\n\nAbout using papers and presentations mixed in, that's exactly where I want to take this. I would like to get this big picture of how we got to where we are with this map."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574351989.294800",
+        "parent_user_id": "UDKTZSD6H"
+    },
+    {
+        "client_msg_id": "49ec5e00-2b6c-4aa8-87d9-4a29fee14180",
+        "type": "message",
+        "text": "<@UJN1TAYEQ> This is only a partial sampling and obviously I have left out quite a few events in there. I will add categories like FP\/Denotational Semantics as a first class category and try to link how it is linked with these luminaries. If you have any input tracing the history of FP, it would be a great help. Cheers!",
+        "user": "UDKTZSD6H",
+        "ts": "1574363006.303500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2b4594ccf61c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-06-03\/652459184852_2b4594ccf61c401763eb_72.png",
+            "first_name": "",
+            "real_name": "Prathyush",
+            "display_name": "Prathyush",
+            "team": "T5TCAFTA9",
+            "name": "prax08",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "COf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJN1TAYEQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " This is only a partial sampling and obviously I have left out quite a few events in there. I will add categories like FP\/Denotational Semantics as a first class category and try to link how it is linked with these luminaries. If you have any input tracing the history of FP, it would be a great help. Cheers!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574351989.294800",
+        "parent_user_id": "UDKTZSD6H"
+    },
+    {
+        "client_msg_id": "9fef723c-8424-4d95-b99c-aae09f042375",
+        "type": "message",
+        "text": "In 1952, Alick Glennie invented Mark I Autocode, the first practical compiler for a text based high level language. It was influential: an ancestor of Fortran and all the other high level languages used today.\n\nIf you like this kind of history, please read Donald Knuth's \"Early development of programming languages\". <http:\/\/bitsavers.trailing-edge.com\/pdf\/stanford\/cs_techReports\/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf>\n\nIn 1944, Konrad Zuse invented Plankalcul (Program Calculus in German). This was the first high level computer programming language, full of features decades ahead of its time, including nested data structures, and a 32 bit binary floating point format with Infinity and NaN.\n\nIn 1946, John von Neuman invented the first node-and-wire programming language. It was highly influential in its day, but today the kids think they invented this idea.",
+        "user": "UJN1TAYEQ",
+        "ts": "1574366215.303800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "eGCh9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In 1952, Alick Glennie invented Mark I Autocode, the first practical compiler for a text based high level language. It was influential: an ancestor of Fortran and all the other high level languages used today.\n\nIf you like this kind of history, please read Donald Knuth's \"Early development of programming languages\". "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/bitsavers.trailing-edge.com\/pdf\/stanford\/cs_techReports\/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nIn 1944, Konrad Zuse invented Plankalcul (Program Calculus in German). This was the first high level computer programming language, full of features decades ahead of its time, including nested data structures, and a 32 bit binary floating point format with Infinity and NaN.\n\nIn 1946, John von Neuman invented the first node-and-wire programming language. It was highly influential in its day, but today the kids think they invented this idea."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574351989.294800",
+        "parent_user_id": "UDKTZSD6H",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UDKTZSD6H"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6539E678-6C0F-4F6A-A6C6-CC9C56A27CE0",
+        "type": "message",
+        "text": "Thanks a lot for the info. Will read that Knuth paper. But one piece of info: I dont think it was Von Neumann but McCullough and Pitts that invented the notation. Neumann’s EDVAC paper borrowed that notation. Its beautiful btw!",
+        "user": "UDKTZSD6H",
+        "ts": "1574367186.306600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2b4594ccf61c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-06-03\/652459184852_2b4594ccf61c401763eb_72.png",
+            "first_name": "",
+            "real_name": "Prathyush",
+            "display_name": "Prathyush",
+            "team": "T5TCAFTA9",
+            "name": "prax08",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1574351989.294800",
+        "parent_user_id": "UDKTZSD6H"
+    },
+    {
+        "type": "message",
+        "text": "This is how it looked like.",
+        "files": [
+            {
+                "id": "FQWUGTHM4",
+                "created": 1574377829,
+                "timestamp": 1574377829,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "UDKTZSD6H",
+                "editable": false,
+                "size": 239829,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FQWUGTHM4\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-FQWUGTHM4\/download\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360_w": 304,
+                "thumb_360_h": 360,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480_w": 406,
+                "thumb_480_h": 480,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720_w": 608,
+                "thumb_720_h": 720,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800_w": 800,
+                "thumb_800_h": 947,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_960_w": 811,
+                "thumb_960_h": 960,
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-FQWUGTHM4-1585064052\/image_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_1024_w": 865,
+                "thumb_1024_h": 1024,
+                "image_exif_rotation": 1,
+                "original_w": 1342,
+                "original_h": 1588,
+                "thumb_tiny": "AwAwACjTNIKRycfKMmhSQ2CDjtQAu8UbhS4oxQAgOaWiigAPSmoMDGSfc048CkU8UALRRRQAUUUUANZQevT0pEGcNyCeuacWHQ0A47GgBaKTPsaM+xoAWigHPY0UAf\/Z",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/UDKTZSD6H\/FQWUGTHM4\/image.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-FQWUGTHM4-02131b00d1",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UDKTZSD6H",
+        "display_as_bot": false,
+        "ts": "1574377834.306800",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GNQp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is how it looked like."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "edited": {
+            "user": "UDKTZSD6H",
+            "ts": "1574377870.000000"
+        },
+        "client_msg_id": "64e84918-4a8f-457e-b2c3-daf01a928914",
+        "thread_ts": "1574351989.294800",
+        "parent_user_id": "UDKTZSD6H"
+    },
+    {
+        "client_msg_id": "c11c76f0-a715-4fe4-821f-963a72e12033",
+        "type": "message",
+        "text": "Is this the paper? <https:\/\/www.cs.cmu.edu\/~.\/epxing\/Class\/10715\/reading\/McCulloch.and.Pitts.pdf>",
+        "user": "UJUQESQ1Z",
+        "ts": "1574394034.307300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g52a48f76fc9",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e52a48f76fc911d40711f788d74773a0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0003-72.png",
+            "first_name": "",
+            "real_name": "Brendan Zabarauskas",
+            "display_name": "Brendan Zabarauskas",
+            "team": "T5TCAFTA9",
+            "name": "bjzaba",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GlHe",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Is this the paper? "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.cs.cmu.edu\/~.\/epxing\/Class\/10715\/reading\/McCulloch.and.Pitts.pdf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1574351989.294800",
+        "parent_user_id": "UDKTZSD6H"
+    }
+]

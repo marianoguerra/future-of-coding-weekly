@@ -1,0 +1,264 @@
+[
+    {
+        "client_msg_id": "6b534e71-f916-4042-ad0f-d6db0ec68501",
+        "type": "message",
+        "text": "Suppose that you are doing computer graphics, and you need to use linear algebra, vectors and matrices. Because that's an essential part of the problem domain. I have similar concerns about machine learning. How do you do vectors and matrices and N-dimensional arrays without data structures? Does this kind of logic programming only work in domains for which you don't need data structures?",
+        "user": "UJN1TAYEQ",
+        "ts": "1601761977.013500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6DDml",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Suppose that you are doing computer graphics, and you need to use linear algebra, vectors and matrices. Because that's an essential part of the problem domain. I have similar concerns about machine learning. How do you do vectors and matrices and N-dimensional arrays without data structures? Does this kind of logic programming only work in domains for which you don't need data structures?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422302.011400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "87DE0D39-EE10-429E-844C-49B5835EB9B1",
+        "type": "message",
+        "text": "Data structures are possible under my programming model, just not pointer-based ones (which I was alluding to by the term “hierarchical”). The problem with pointer-based data structures is that they demand certain traversal schemes: walking down the hierarchy from the “top-level pointer”. There’s no way to jump immediately to a node of interest, unless you hold a pointer to an interior node, but by relying on such a pointer you lose the ability to backtrack to the “earlier” nodes in the structure, and interior pointers are problematic in the presence of mutation. You can abstract over the boilerplate of certain kinds of traversals with a “map” or a “fold” function, but those functions are themselves boilerplate for every new data structure you introduce. You might start proposing generic, auto-derived “recursion schemes” for traversing recursively-defined data structures, but following this idea to its conclusion essentially gets you to logic programming with fixed-point semantics.",
+        "user": "UCGAK10LS",
+        "ts": "1601764227.024500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "I\/Dh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Data structures are possible under my programming model, just not pointer-based ones (which I was alluding to by the term “hierarchical”). The problem with pointer-based data structures is that they demand certain traversal schemes: walking down the hierarchy from the “top-level pointer”. There’s no way to jump immediately to a node of interest, unless you hold a pointer to an interior node, but by relying on such a pointer you lose the ability to backtrack to the “earlier” nodes in the structure, and interior pointers are problematic in the presence of mutation. You can abstract over the boilerplate of certain kinds of traversals with a “map” or a “fold” function, but those functions are themselves boilerplate for every new data structure you introduce. You might start proposing generic, auto-derived “recursion schemes” for traversing recursively-defined data structures, but following this idea to its conclusion essentially gets you to logic programming with fixed-point semantics."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422302.011400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "0DD23CBE-A01C-4B15-93FF-EBB5A0EAD92B",
+        "type": "message",
+        "text": "A “compound value” in my programming model is a tuple where some of its elements have been designated as representing its *identity*. The machine representation of those elements is not visible to the user, but conceptually they are “connections” to other tuples (which in turn, will have their own identity). Connections do not act like pointers, because a connection cannot “own” the tuples on either side. Every tuple is globally accessible via queries upon the “relations” (tuple sets) to which it belongs. Thus you don’t “walk along” connections, but you can ask for the set of tuples which appear on either side of a certain class of connection.",
+        "user": "UCGAK10LS",
+        "ts": "1601764593.030600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1601764914.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MmS4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "A “compound value” in my programming model is a tuple where some of its elements have been designated as representing its "
+                            },
+                            {
+                                "type": "text",
+                                "text": "identity",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". The machine representation of those elements is not visible to the user, but conceptually they are “connections” to other tuples (which in turn, will have their own identity). Connections do not act like pointers, because a connection cannot “own” the tuples on either side. Every tuple is globally accessible via queries upon the “relations” (tuple sets) to which it belongs. Thus you don’t “walk along” connections, but you can ask for the set of tuples which appear on either side of a certain class of connection."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422302.011400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "519cca4c-240f-4864-863f-177122edfa63",
+        "type": "message",
+        "text": "The way I understand it, in order to represent an NxM matrix (of numbers) in a relational language, I would need to create NxM 4-tuples. Each 4-tuple would contain a globally unique ID representing that particular matrix, a row coordinate, a column coordinate, and a number. That's 4x the memory requirement of the usual matrix representation (where the numbers would be stored in contiguous memory). Matrix multiplication would be very slow. With a normal matrix data structure, you can retrieve a row from a 4x4 matrix by loading a single cache line, but to retrieve the 4 numbers in a row from the tuple store would require significant computation and memory bandwidth. This problem becomes much worse for image manipulation, where each pixel in a photograph is represented by a 6-tuple {guid, x, y, r, g, b}. The naive representation that I'm describing would be too slow and memory inefficient to be practical. So my impression has been that pure relational languages must be a lot less general purpose than conventional languages, which can support efficient multi-dimensional arrays quite easily. To fix the problem, it appears that you would need to extend a relational language with support for data structures.",
+        "user": "UJN1TAYEQ",
+        "ts": "1601789433.031100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NfxXu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The way I understand it, in order to represent an NxM matrix (of numbers) in a relational language, I would need to create NxM 4-tuples. Each 4-tuple would contain a globally unique ID representing that particular matrix, a row coordinate, a column coordinate, and a number. That's 4x the memory requirement of the usual matrix representation (where the numbers would be stored in contiguous memory). Matrix multiplication would be very slow. With a normal matrix data structure, you can retrieve a row from a 4x4 matrix by loading a single cache line, but to retrieve the 4 numbers in a row from the tuple store would require significant computation and memory bandwidth. This problem becomes much worse for image manipulation, where each pixel in a photograph is represented by a 6-tuple {guid, x, y, r, g, b}. The naive representation that I'm describing would be too slow and memory inefficient to be practical. So my impression has been that pure relational languages must be a lot less general purpose than conventional languages, which can support efficient multi-dimensional arrays quite easily. To fix the problem, it appears that you would need to extend a relational language with support for data structures."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422302.011400",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "700bf3f7-80b4-4c9b-a5d7-646a28f6fecc",
+        "type": "message",
+        "text": "There's nothing about relational programming that demands a particular machine representation of information. In my explorations, I find it helpful to completely separate language features from possible machine representations.\n\nSo there are two questions here:\n1. What could the programming interface for matrices look like in my language? What language constructs could be used to define them?\n2. How are these particular language constructs compiled to machine code?\nI'm actually still working out the semantics of sequential and grid-like data, so I don't have a good answer yet. However, I aim for the language constructs to ultimately compile to the same machine code that conventional languages compile to.",
+        "user": "UCGAK10LS",
+        "ts": "1601790079.031300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1601790106.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uHlMN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There's nothing about relational programming that demands a particular machine representation of information. In my explorations, I find it helpful to completely separate language features from possible machine representations.\n\nSo there are two questions here:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "What could the programming interface for matrices look like in my language? What language constructs could be used to define them?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "How are these particular language constructs compiled to machine code?"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI'm actually still working out the semantics of sequential and grid-like data, so I don't have a good answer yet. However, I aim for the language constructs to ultimately compile to the same machine code that conventional languages compile to."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422302.011400",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UJN1TAYEQ"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

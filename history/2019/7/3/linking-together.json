@@ -1,0 +1,341 @@
+[
+    {
+        "client_msg_id": "e8e2bdbc-b415-4fb9-a13c-e0036cf8b5b5",
+        "type": "message",
+        "text": "A Signed Distance Field is a mathematical abstraction for representing geometric shapes. You represent a shape as an implicit equation, a function that maps an arbitrary point in space (x,y,z) onto the signed distance from that point to the shape's boundary (positive if (x,y,z) is outside the shape, 0 if on the boundary, negative if inside). The alternative is a boundary representation, like a triangle mesh or the bezier splines used by CAD programs.",
+        "user": "UJN1TAYEQ",
+        "ts": "1562145814.145600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "b02f6f4a-fbdb-4a70-a60e-cd6b99ec6a3e",
+        "type": "message",
+        "text": "SDFs provide an exact mathematical representation for a larger set of shapes than what can be represented using boundary rep. You can represent infinite shapes, and you can represent 3D fractals with infinite detail, and you can do deep zooms into fractals without generating and then storing quintillions of triangles in memory. SDFs support a rich set of operations, such as non-affine transformations (eg, bend and twist), blending, and morphing. CSG operations like union and intersection are fairly simple for the SDF representation, but are quite expensive and even computationally intractible for the triangle mesh representation.",
+        "user": "UJN1TAYEQ",
+        "ts": "1562146076.145800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJN1TAYEQ",
+            "ts": "1562146714.000000"
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "a3601444-326b-4352-b664-428fc1307252",
+        "type": "message",
+        "text": "Curv is a high level 2D and 3D modelling program that uses the SDF representation. The puzzle for me is, what's the best way of rendering a shape described by a Curv program? Since Curv is a custom DSL, I can write a custom optimizing compiler that transforms Curv programs into whatever representation is needed for optimal rendering.",
+        "user": "UJN1TAYEQ",
+        "ts": "1562146600.146000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "566240f5-8ab0-45cc-a2b8-44979bb5f8b0",
+        "type": "message",
+        "text": "So how do you union a thousand shapes using the union operator? One answer is: don't do that, use SDF repetition (or space folding) operators instead. A smart compiler could maybe do this transformation automatically, at least in some cases, but I haven't figured that out. Other answers involve using data structures. Accumulate the results of the union into a 3D texture, and then render the texture. Or, put all of the shapes into a bounding volume hierarchy (similar to a ray-tracing acceleration structure) and traverse that in the GPU. Or, convert the shape to a triangle mesh and render that. I didn't know about vertex shader hacking (thanks for the reference), so I need to think about how that could be used.",
+        "user": "UJN1TAYEQ",
+        "ts": "1562148035.146500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBSMEUXAA"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "ba3c8280-3b72-41bc-882e-45572cedd5f9",
+        "type": "message",
+        "text": "Curv is used for parametric design of procedurally generated shapes. The benefit of regenerating the shape in every frame is that you can hook up your numeric parameters to sliders and vary them in real time. This is very useful for interactively exploring a parameter space. If you have to build a data structure before you can display the shape, and if the data structure can't be built quickly, then you lose this capability.",
+        "user": "UJN1TAYEQ",
+        "ts": "1562148883.146700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "E133071E-C50A-43DF-A494-F48DA1ABCDB0",
+        "type": "message",
+        "text": "<@UJN1TAYEQ> This sounds a lot like composition over a monoidal structure is what you’re looking for. Like when you’re adding two integers you get another integer, which could be just calculated directly, or be stored lazily as a composition of the two original integers wrapped in a structure of the same type (this can be done as a function\/closure or type or class\/object, whatever your preferred implementation flavor is). \n\nOf course, integers are a simplistic example, but many more complex DSLs evaluate to a structure like this. I’ve been recently looking at how SwiftUI works, and it does this with composing transformation operations on views, which are views themselves. I assume React probably works similarly.\n\nIn some object graph libraries for 3D (and 2D as well, for that matter) this is used to apply transformations, for instance to apply a combination of translation, rotation, and skewing operations on an object, which can either be preserved as separate operations (e.g. if you need to visualize each operation in the UI) or can be merged into a single matrix transformation (e.g. if you want faster performance when rendering the object graph).\n\nI believe many functional reactive programming libraries use that pattern to transform and combine streams.\n\nParser combinators are another example, but it’s a little more complicated because they usually use monadic structures to wrap additional state or error handling into the same type.\n\nI’m not sure if I’m using the correct terminology and maybe this is something that’s well known under a different name. It’s just a pattern I see pop up everywhere, especially recently, and which I find extremely interesting, because it allows you to design a system with very few essential building blocks and very high composability — a recipe for building ultra-complex structures from just a few simple components that are easy to learn.",
+        "user": "U5STGTB3J",
+        "ts": "1562155840.164900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "8FFA198A-3148-479D-BDB1-39D77DBDB4BE",
+        "type": "message",
+        "text": "I love the community around shader programming and the demoscene, which pioneered many of the concepts for high-performance graphics that are part of architectures and libraries today. What I love is that they are driven by constraints. In the past it was the limited capabilities of the devices, today it’s the limitations of the massively-parallel programming paradigm for GPU programming (or alternatively arbitrarily set limits on binary size or memory usage, etc.) that requires you to think differently and find novel solutions.\n\nPart of that is that the solutions are often not the most readable, and there is a drive towards overly complicate and impressive tricks that show off the programmer’s competence and cleverness to make something work that was probably deemed impossible. It’s about pushing the boundaries and going off the beaten path to find new ways of doing things. Occasionally that leads to some breakthroughs that are useful in other domains.\n\nIn a way I think GPU programming gets easily overlooked when talking about the future of programming, but it’s going to be a very important part of it. Now that we discover more and more use cases for GPUs as they become more and more general computing devices, and even the smallest devices we carry around with us have powerful GPUs in them, the future will also be a lot more about distributing computation across multiple different computation devices, a few CPU cores, many GPU cores, cores optimized for machine learning, and a few highly-specialized algorithms implemented directly in hardware, e.g. for image manipulation, (de)compression, and cryptography.\n\nI worked with many game developers for who this is already a (sometimes painful) reality. It’s no longer that simple to say there’s graphics acceleration happening on the GPU and everything else on the CPU. As GPUs are a lot more programmable now, they can take over a lot more work, and the challenge becomes balancing out work done on CPU and GPU to deliver the best experience by utilizing and optimizing for the resources a specific architecture provides.",
+        "user": "U5STGTB3J",
+        "ts": "1562157055.183400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBSMEUXAA"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "052632cd-6819-41de-a45a-7a2a067e0ab9",
+        "type": "message",
+        "text": "The Curv language tries to make the difference between the CPU and the GPU invisible. When you run a Curv program, some of the code will run on the CPU, some will run on the GPU, and maybe some code will run in both contexts. It's up to the compiler and runtime to decide the execution context. There is no explicit \"GPU API\" analogous to OpenGL.",
+        "user": "UJN1TAYEQ",
+        "ts": "1562158579.183600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "f0ebf6b2-4635-4637-8f88-2ae740761118",
+        "type": "message",
+        "text": "Thanks <@UF71PR58X> - looks interesting, will check it out. The context I'm after is not just the name of the field and it's type, but also it's container type.",
+        "user": "U8A5MS6R1",
+        "ts": "1562172230.184100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562010026.133300",
+        "parent_user_id": "U8A5MS6R1"
+    },
+    {
+        "client_msg_id": "8da1e433-83fa-48f1-81c6-ecddf80226c4",
+        "type": "message",
+        "text": "The tension between machine types and domain types hasn't been satisfactorily resolved in any language afaik. Do 'types' declare how bits are laid out in memory or do they declare what the domain meaning is? Without a good solution here, what we have is excessive domain model corruption to appease the machine layout. Starting with C, you had struct packing where you'd suffle fields in a perfectly readable struct just to make it efficient. Then you have the 'array of structs' vs 'structs of arrays' problem. This happens in databases too - the question of how much to normalize. There is absolutely no change to the domain data model across many implementation choices, yet the 'domain logic' code ends up being so tightly coupled to these decisions that switching it requires changing code all over the place. I think what the essay is saying that they want to work more with the domain types than memory layout types. Languages that I know of don't actually separate these two ideas - I wonder if there are any languages that do. E.g. if you define your domain types in a high level type system that is not tied to a specific memory layout. Then separately you define mappings between the domain types and machine types...",
+        "user": "U8A5MS6R1",
+        "ts": "1562172714.184400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562010026.133300",
+        "parent_user_id": "U8A5MS6R1",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UFEQUBNNT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "65aa5bf2-9f6f-4d89-a1c2-82645e025407",
+        "type": "message",
+        "text": "<@U8A5MS6R1> Sounds like you might want to look at what I just posted in <#C5T9GPWFL|general>: <https:\/\/futureofcoding.slack.com\/conversation\/C5T9GPWFL\/p1562167414128600>",
+        "user": "U5STGTB3J",
+        "ts": "1562173299.184600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562010026.133300",
+        "parent_user_id": "U8A5MS6R1",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fdbefba9-18ca-4444-a9e4-0b5c4aabb219",
+        "type": "message",
+        "text": "<@U5STGTB3J> said \"This sounds a lot like composition over a monoidal structure is what you’re looking for.\" Yes. And <@UJPHQ8Z3N> recently reminded me of his need for a scene graph, which is different terminology for the same thing.",
+        "user": "UJN1TAYEQ",
+        "ts": "1562175561.184800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562107818.137200",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "37b99888-0d7f-42b0-ad8a-dfed2e1183fd",
+        "type": "message",
+        "text": "<@U8A5MS6R1> I like your categories better than 'nominal' and 'structural', which constantly slide past my brain.\n\nArguably your requirement is met even by Java, using interfaces. Perhaps interfaces are just under-used? Part of the problem is that they make it too easy to exit them because their methods often operate on memory layout types. What if we required types within interfaces to only be other interfaces? Is this a well-known 'design pattern' or something? It isn't quite a Facade. <http:\/\/wiki.c2.com\/?CategoryStructuralPatterns>",
+        "user": "UCUSW7WVD",
+        "ts": "1562181908.185100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562010026.133300",
+        "parent_user_id": "U8A5MS6R1"
+    }
+]

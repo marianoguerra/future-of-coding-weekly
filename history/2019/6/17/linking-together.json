@@ -1,0 +1,121 @@
+[
+    {
+        "client_msg_id": "6CCB34FE-9F85-4C6E-8E32-F4483C9C2244",
+        "type": "message",
+        "text": "interesting! reminding me of reactive programming in a way I'm not sure how to describe",
+        "user": "UHWC9PXBL",
+        "ts": "1560782627.111900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1560464067.077400",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "74f3d45b-0860-4074-b3d2-45a90cc58af2",
+        "type": "message",
+        "text": "<@UA14TGLTC> you aren't suggesting boxes and arrows, are you? :slightly_smiling_face:\n\nAll combinatorial programs are dataflow in essence. But the eternal question is how you represent them and work with them. And whether it scales.",
+        "user": "UCUSW7WVD",
+        "ts": "1560783971.112100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1560464067.077400",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "0475e48d-76b4-419a-85e6-90351fb0a44b",
+        "type": "message",
+        "text": "Instead of wires, names can do the same work `x x * y y * + y abs -`.  :open_mouth:",
+        "user": "UA14TGLTC",
+        "ts": "1560786176.112300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1560464067.077400",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "3bf3109d-d9f2-4cf2-bfe8-303e11f2d7b4",
+        "type": "message",
+        "text": "Store the intermediates to get something like:\n```\nx x * → x2\ny y * → y2\nx2 y2 + → x2py2\ny abs → yy\nx2py2 yy -\n```\nNow you end up close to A-normal form.  Of course, the concatenative feel is lost somewhere along the way :smirk:.",
+        "user": "UA14TGLTC",
+        "ts": "1560786809.112500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UA14TGLTC",
+            "ts": "1560786830.000000"
+        },
+        "thread_ts": "1560464067.077400",
+        "parent_user_id": "UHWC9PXBL"
+    },
+    {
+        "client_msg_id": "2e5fa32a-ffd1-4883-b0cd-83517ed35bea",
+        "type": "message",
+        "text": "Yeah. This is an interesting conversation, because we're both saying obvious things. And I know they're obvious to you, and you know they're obvious to me.\n\nYes, names and the stack are complementary. Some things are easier on one end of the spectrum, some on the other. Most don't care.\n\nConcatenative languages already have names: function names. The whole point of going concatenative is extremely flexible function boundaries. So I'm not sure this is a problem worth attacking. Even Factor's `locals` feel like something to be used _very_ sparingly. Better to go with the grain of the platform you chose.\n\nYes, some things are hard to write clearly. Then we do what we do in any language: wrap it in a function, slap on a comment and shove it under the carpet. And if you find yourself doing this a lot, look around. You're probably working in a large team inheriting an old codebase you aren't empowered to make radical changes to. In which case a new language or new syntax ideas aren't going to help you.",
+        "user": "UCUSW7WVD",
+        "ts": "1560788709.112800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1560464067.077400",
+        "parent_user_id": "UHWC9PXBL"
+    }
+]

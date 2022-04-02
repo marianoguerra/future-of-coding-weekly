@@ -1,0 +1,135 @@
+[
+    {
+        "client_msg_id": "280a46d5-43e1-4bd5-ae7c-44ed94ed93f0",
+        "type": "message",
+        "text": "MIDI is ubiquitous so we mostly end up using that system, there are usually abstractions on top of those numbers that are completely transposable. For example, here are a few helper functions to find the negative harmony counterparts for a chord progression:\n```(def the-notes\n  (cycle [:c :db :d :eb :e :f :gb :g :ab :a :bb :b]))\n\n(def key-offset\n  (zipmap (take 12 the-notes) (range)))\n\n(defn triads [the-key]\n  (let [offset (key-offset the-key)\n        scale (cycle [0 2 4 5 7 9 11])]\n    (map\n     (fn [note]\n       (mapv #(nth the-notes (+ offset (nth scale (+ note %)))) [0 2 4]))\n     (range 7))))\n\n(defn negative-harmony [the-key]\n  (let [offset (key-offset the-key)]\n    (reduce\n     (fn [m [a b]] (assoc m a b b a)) ; bi-directional\n     {}\n     (map vector\n          (take 6 (drop (+ offset 10) the-notes))\n          (reverse (take 6 (drop (+ offset 16) the-notes)))))))```",
+        "user": "U013ZLJARC7",
+        "ts": "1601633348.013600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U013ZLJARC7",
+            "ts": "1601633433.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "12j",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "MIDI is ubiquitous so we mostly end up using that system, there are usually abstractions on top of those numbers that are completely transposable. For example, here are a few helper functions to find the negative harmony counterparts for a chord progression:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(def the-notes\n  (cycle [:c :db :d :eb :e :f :gb :g :ab :a :bb :b]))\n\n(def key-offset\n  (zipmap (take 12 the-notes) (range)))\n\n(defn triads [the-key]\n  (let [offset (key-offset the-key)\n        scale (cycle [0 2 4 5 7 9 11])]\n    (map\n     (fn [note]\n       (mapv #(nth the-notes (+ offset (nth scale (+ note %)))) [0 2 4]))\n     (range 7))))\n\n(defn negative-harmony [the-key]\n  (let [offset (key-offset the-key)]\n    (reduce\n     (fn [m [a b]] (assoc m a b b a)) ; bi-directional\n     {}\n     (map vector\n          (take 6 (drop (+ offset 10) the-notes))\n          (reverse (take 6 (drop (+ offset 16) the-notes)))))))"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601575428.012600",
+        "parent_user_id": "UN9SCH5RD"
+    },
+    {
+        "client_msg_id": "be13aa17-1f12-4a9f-a287-e109a5290eea",
+        "type": "message",
+        "text": "Thx Jack, so you can convert between them both, but my point is that it could make sense to work with the simpler system, using just the distance between intervals",
+        "user": "UN9SCH5RD",
+        "ts": "1601674746.013900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gaa31b79aded",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aa31b79adedc3f60547769f1a8971ba6.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Emmanuel Oga",
+            "display_name": "Emmanuel Oga",
+            "team": "T5TCAFTA9",
+            "name": "emmanueloga",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LOm4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thx Jack, so you can convert between them both, but my point is that it could make sense to work with the simpler system, using just the distance between intervals"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601575428.012600",
+        "parent_user_id": "UN9SCH5RD"
+    },
+    {
+        "client_msg_id": "37f5f841-4c7a-4913-a420-80c6c09cce7b",
+        "type": "message",
+        "text": "I think is more of a cultural thing. There are a lot of reasons people come up with to change other ingrained things like number bases or calendars, but it is just difficult to change the status quo",
+        "user": "UN9SCH5RD",
+        "ts": "1601674976.014100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gaa31b79aded",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aa31b79adedc3f60547769f1a8971ba6.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Emmanuel Oga",
+            "display_name": "Emmanuel Oga",
+            "team": "T5TCAFTA9",
+            "name": "emmanueloga",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "V23OX",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think is more of a cultural thing. There are a lot of reasons people come up with to change other ingrained things like number bases or calendars, but it is just difficult to change the status quo"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1601575428.012600",
+        "parent_user_id": "UN9SCH5RD"
+    }
+]

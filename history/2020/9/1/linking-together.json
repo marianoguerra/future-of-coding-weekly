@@ -1,562 +1,5 @@
 [
     {
-        "client_msg_id": "7873d0cb-a470-4f7f-8799-b0839274caaf",
-        "type": "message",
-        "text": "&gt;  integration vs composition: I'm not entirely sure. It makes me feel like composition is like swallowing the other service like a library, while integrations are the icons on your landing page.\nThat's how I picture it too.\n\nAn example of \"integration-style\" programming that I deal with often, is the Node.js-style <https://nodejs.org/api/events.html#events_class_eventemitter|EventEmitter,> where there isn't much of a principle in event ordering, concurrency, propogation, scheduling, etc, and the topology of dataflow is more emergent rather than explicitly designed and very hard to debug. It is still possible to compose things that use EventEmitters, but it's just not ergonomic.\n\nThe composable counterpart to EventEmitter would be an FRP-style Observables like those in <https://rxjs.dev/guide/overview|Rx.js>. Observables there are just generalizations over functions and get the benefit of functions, such as recursion and explicit scope.",
-        "user": "UAHHWT22U",
-        "ts": "1598911307.035600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "WL===",
-                "elements": [
-                    {
-                        "type": "rich_text_quote",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": " integration vs composition: I'm not entirely sure. It makes me feel like composition is like swallowing the other service like a library, while integrations are the icons on your landing page."
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "That's how I picture it too.\n\nAn example of \"integration-style\" programming that I deal with often, is the Node.js-style "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://nodejs.org/api/events.html#events_class_eventemitter",
-                                "text": "EventEmitter,"
-                            },
-                            {
-                                "type": "text",
-                                "text": " where there isn't much of a principle in event ordering, concurrency, propogation, scheduling, etc, and the topology of dataflow is more emergent rather than explicitly designed and very hard to debug. It is still possible to compose things that use EventEmitters, but it's just not ergonomic.\n\nThe composable counterpart to EventEmitter would be an FRP-style Observables like those in "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://rxjs.dev/guide/overview",
-                                "text": "Rx.js"
-                            },
-                            {
-                                "type": "text",
-                                "text": ". Observables there are just generalizations over functions and get the benefit of functions, such as recursion and explicit scope."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UFPPABQ7P"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "4369d9f4-9be4-42d9-ae94-67e7fdcb1ba3",
-        "type": "message",
-        "text": "Another example of composition over integration (again from the JS world, sorry :slightly_smiling_face:) is React vs, say, jQuery.\n\nIn jQuery, there is a global namespace that is the DOM tree representing the HTML document, and interactivity is peppered on top of individual html elements, like: `$('ul').reorderable()` (this is supposed to turn all `&lt;ul&gt;` lists into lists that the user can re-order by drag/dropping their items).\n\nBut as soon as you need to nest two re-orderable lists, the code becomes quite awkward, especially if one list can _create_ more lists inside itself. It is not impossible, just hacky.\n\nCompare that with React, where a `&lt;ReorderableList&gt;` is just a component, which are themselves a generalization over functions. Suddenly it becomes easy to write and use nested lists like so: `&lt;ReorderableList&gt;...&lt;div&gt;&lt;ReorderableList&gt;...`.",
-        "user": "UAHHWT22U",
-        "ts": "1598912172.035900",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "3srmc",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Another example of composition over integration (again from the JS world, sorry "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": ") is React vs, say, jQuery.\n\nIn jQuery, there is a global namespace that is the DOM tree representing the HTML document, and interactivity is peppered on top of individual html elements, like: "
-                            },
-                            {
-                                "type": "text",
-                                "text": "$('ul').reorderable()",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " (this is supposed to turn all "
-                            },
-                            {
-                                "type": "text",
-                                "text": "<ul>",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " lists into lists that the user can re-order by drag/dropping their items).\n\nBut as soon as you need to nest two re-orderable lists, the code becomes quite awkward, especially if one list can "
-                            },
-                            {
-                                "type": "text",
-                                "text": "create",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " more lists inside itself. It is not impossible, just hacky.\n\nCompare that with React, where a "
-                            },
-                            {
-                                "type": "text",
-                                "text": "<ReorderableList>",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " is just a component, which are themselves a generalization over functions. Suddenly it becomes easy to write and use nested lists like so: "
-                            },
-                            {
-                                "type": "text",
-                                "text": "<ReorderableList>...<div><ReorderableList>...",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UFPPABQ7P"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "cba2c687-467f-4006-8730-ab3e65f61f54",
-        "type": "message",
-        "text": "In integration, _things_ have IDs that have to be book-kept. In composition, things are _addressable_ through their position in the topology (parent can reference a child without having to assign a global ID to that child).",
-        "user": "UAHHWT22U",
-        "ts": "1598912299.036200",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Fkt3",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "In integration, "
-                            },
-                            {
-                                "type": "text",
-                                "text": "things",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " have IDs that have to be book-kept. In composition, things are "
-                            },
-                            {
-                                "type": "text",
-                                "text": "addressable",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " through their position in the topology (parent can reference a child without having to assign a global ID to that child)."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UHWC9PXBL"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "3f611c3e-735b-4298-8f99-91611153a6f9",
-        "type": "message",
-        "text": "(though topology doesn't need to be hierarchical in a composition).",
-        "user": "UAHHWT22U",
-        "ts": "1598912380.036400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "N92",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "(though topology doesn't need to be hierarchical in a composition)."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U"
-    },
-    {
-        "client_msg_id": "7fc3e2f6-7349-4666-aa88-61658cdd053a",
-        "type": "message",
-        "text": "<@UAHHWT22U>, are you familiar with using data-oriented programming? Esp that used in game development with entity-component-systems?",
-        "user": "UFPPABQ7P",
-        "ts": "1598912485.036600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "7iE",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UAHHWT22U"
-                            },
-                            {
-                                "type": "text",
-                                "text": ", are you familiar with using data-oriented programming? Esp that used in game development with entity-component-systems?"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U"
-    },
-    {
-        "client_msg_id": "36645bc2-8554-4be9-a850-5ad03de3b5ee",
-        "type": "message",
-        "text": "In a composition, the lifecycle of _things_ is again managed by the topology. If a _thing_ is no longer needed, it is removed, similar to how values on a function call stack get freed after the function is done running.\n\nIn react, `componentWillUnmount()` gets called. In refcounting, some sort of `object.free()` gets called.",
-        "user": "UAHHWT22U",
-        "ts": "1598912522.036800",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UAHHWT22U",
-            "ts": "1598912574.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "AS4iu",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "In a composition, the lifecycle of "
-                            },
-                            {
-                                "type": "text",
-                                "text": "things",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " is again managed by the topology. If a "
-                            },
-                            {
-                                "type": "text",
-                                "text": "thing",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " is no longer needed, it is removed, similar to how values on a function call stack get freed after the function is done running.\n\nIn react, "
-                            },
-                            {
-                                "type": "text",
-                                "text": "componentWillUnmount()",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " gets called. In refcounting, some sort of "
-                            },
-                            {
-                                "type": "text",
-                                "text": "object.free()",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " gets called."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U"
-    },
-    {
-        "client_msg_id": "dd42a842-b4e2-46cc-9a03-4c4ce3806f95",
-        "type": "message",
-        "text": "&gt; are you familiar with using data-oriented programming? Esp that used in game development with entity-component-systems?\n<@UFPPABQ7P> Haven't used ECS in anything bigger than a toy, so not very familiar.",
-        "user": "UAHHWT22U",
-        "ts": "1598912660.037100",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UAHHWT22U",
-            "ts": "1598912673.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "hDIvY",
-                "elements": [
-                    {
-                        "type": "rich_text_quote",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "are you familiar with using data-oriented programming? Esp that used in game development with entity-component-systems?"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UFPPABQ7P"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Haven't used ECS in anything bigger than a toy, so not very familiar."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U"
-    },
-    {
-        "client_msg_id": "781f5c12-c767-4458-9e08-7bfd4c8e4cd5",
-        "type": "message",
-        "text": "You might find this sort of intro to ECS interesting. It's not super Rust heavy, so the concepts are the focus <https://www.youtube.com/watch?v=aKLntZcp27M>",
-        "user": "UFPPABQ7P",
-        "ts": "1598912802.037400",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UFPPABQ7P",
-            "ts": "1598912807.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "N9Opm",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "You might find this sort of intro to ECS interesting. It's not super Rust heavy, so the concepts are the focus "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://www.youtube.com/watch?v=aKLntZcp27M"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U"
-    },
-    {
-        "client_msg_id": "f7d1af49-4a4d-48e3-949c-32704c78f64b",
-        "type": "message",
-        "text": "Essentially, data oriented tech is all about the state of the world is accessible by all systems, and each system will look at the data in the world to make a decision to make an update or not based on what they see. Kinda like the <https://en.wikipedia.org/wiki/Blackboard_(design_pattern)|blackboard design pattern>.\n\nBut, in this way each system can be written in a pure functional way with effects coming into the top of the funnel",
-        "user": "UFPPABQ7P",
-        "ts": "1598912953.037800",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UFPPABQ7P",
-            "ts": "1598912990.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "H+y",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Essentially, data oriented tech is all about the state of the world is accessible by all systems, and each system will look at the data in the world to make a decision to make an update or not based on what they see. Kinda like the "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://en.wikipedia.org/wiki/Blackboard_(design_pattern)",
-                                "text": "blackboard design pattern"
-                            },
-                            {
-                                "type": "text",
-                                "text": ".\n\nBut, in this way each system can be written in a pure functional way with effects coming into the top of the funnel"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U"
-    },
-    {
-        "client_msg_id": "72597834-828f-45f2-88f4-70e2594058fe",
-        "type": "message",
-        "text": "&gt;  You might find this sort of intro to ECS interesting.\n<@UFPPABQ7P> Thank you! I was actually building another ECS toy yesterday and looking for a good intro.",
-        "user": "UAHHWT22U",
-        "ts": "1598913016.038200",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "LmQ4",
-                "elements": [
-                    {
-                        "type": "rich_text_quote",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": " You might find this sort of intro to ECS interesting."
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UFPPABQ7P"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Thank you! I was actually building another ECS toy yesterday and looking for a good intro."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598907048.031900",
-        "parent_user_id": "UAHHWT22U",
-        "reactions": [
-            {
-                "name": "clap",
-                "users": [
-                    "UFPPABQ7P"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "5d3a7480-04a3-40e5-97f9-f4be4a8c5af5",
-        "type": "message",
-        "text": "Heh yeah I recommend all the videos on <http://subtext-lang.org|subtext-lang.org> for other gems.",
-        "user": "U8A5MS6R1",
-        "ts": "1598917426.038600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "QgB",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Heh yeah I recommend all the videos on "
-                            },
-                            {
-                                "type": "link",
-                                "url": "http://subtext-lang.org",
-                                "text": "subtext-lang.org"
-                            },
-                            {
-                                "type": "text",
-                                "text": " for other gems."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1598389212.095300",
-        "parent_user_id": "U8A5MS6R1"
-    },
-    {
         "type": "message",
         "text": "<@UDQBTJ211> I can only surmise from this reply that you did not read the paper. Nonetheless, as a sign of good will, I made you some art inspired by the phrase \"architecture astronaut\"...",
         "files": [
@@ -566,7 +9,7 @@
                 "timestamp": 1598944703,
                 "name": "astronaut-2.png",
                 "title": "astronaut-2.png",
-                "mimetype": "image/png",
+                "mimetype": "image\/png",
                 "filetype": "png",
                 "pretty_type": "PNG",
                 "user": "U013ZLJARC7",
@@ -579,39 +22,43 @@
                 "public_url_shared": false,
                 "display_as_bot": false,
                 "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01A19HUE5S/astronaut-2.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01A19HUE5S/download/astronaut-2.png",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_360.png",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01A19HUE5S\/astronaut-2.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01A19HUE5S\/download\/astronaut-2.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_360_w": 360,
                 "thumb_360_h": 203,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_480.png",
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_480_w": 480,
                 "thumb_480_h": 270,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_720.png",
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_720_w": 720,
                 "thumb_720_h": 405,
-                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_800.png",
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_800_w": 800,
                 "thumb_800_h": 450,
-                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_960.png",
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_960_w": 960,
                 "thumb_960_h": 540,
-                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F01A19HUE5S-fb31c9f799/astronaut-2_1024.png",
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01A19HUE5S-fb31c9f799\/astronaut-2_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_1024_w": 1024,
                 "thumb_1024_h": 576,
                 "original_w": 1920,
                 "original_h": 1080,
-                "thumb_tiny": "AwAbADDOHapDTF6inmgCVxwn0qsRirT/AMH0qs/UfSgBtJS0lAD16in1EDTsmgCzIeV+lVn7fSl3H1NIST1NADe9FFGT60Af/9k=",
-                "permalink": "https://futureofcoding.slack.com/files/U013ZLJARC7/F01A19HUE5S/astronaut-2.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01A19HUE5S-5d61b97774",
+                "thumb_tiny": "AwAbADDOHapDTF6inmgCVxwn0qsRirT\/AMH0qs\/UfSgBtJS0lAD16in1EDTsmgCzIeV+lVn7fSl3H1NIST1NADe9FFGT60Af\/9k=",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U013ZLJARC7\/F01A19HUE5S\/astronaut-2.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F01A19HUE5S-5d61b97774",
                 "is_starred": false,
                 "has_rich_preview": false
             }
         ],
         "upload": false,
+        "user": "U013ZLJARC7",
+        "display_as_bot": false,
+        "ts": "1598944750.038900",
         "blocks": [
             {
                 "type": "rich_text",
@@ -633,9 +80,6 @@
                 ]
             }
         ],
-        "user": "U013ZLJARC7",
-        "display_as_bot": false,
-        "ts": "1598944750.038900",
         "thread_ts": "1598876731.022700",
         "parent_user_id": "U013ZLJARC7",
         "reactions": [
@@ -655,6 +99,19 @@
         "user": "UDQBTJ211",
         "ts": "1598945505.039300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -682,6 +139,19 @@
         "user": "U013ZLJARC7",
         "ts": "1598946313.039500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "U013ZLJARC7",
             "ts": "1598946343.000000"
@@ -735,6 +205,19 @@
         "user": "UDQBTJ211",
         "ts": "1598953244.039900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -762,6 +245,19 @@
         "user": "UDQBTJ211",
         "ts": "1598953791.040100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "2624b1e78c0a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-14\/551655871797_2624b1e78c0a9eaed529_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Knott",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "chrisknott",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -785,30 +281,43 @@
     {
         "client_msg_id": "553a6fa3-0296-4fbe-9f05-9ecdc2d874d2",
         "type": "message",
-        "text": "I've been thinking for awhile of writing something about the historical user interfaces that aren't much talked about (i.e. not the Alto -&gt; Mac -&gt; Windows lineage). In this instance, I decided to do a \"tweet storm\" instead of a blog post to see if that would be a more effective way to get the ideas into the world. As this is probably of interest to the community, I thought I should link to it here as well. The entrance to this particular Garden of Forking Paths:\n<https://twitter.com/jackrusher/status/1300737671497691136?s=20>",
+        "text": "I've been thinking for awhile of writing something about the historical user interfaces that aren't much talked about (i.e. not the Alto -&gt; Mac -&gt; Windows lineage). In this instance, I decided to do a \"tweet storm\" instead of a blog post to see if that would be a more effective way to get the ideas into the world. As this is probably of interest to the community, I thought I should link to it here as well. The entrance to this particular Garden of Forking Paths:\n<https:\/\/twitter.com\/jackrusher\/status\/1300737671497691136?s=20>",
         "user": "U013ZLJARC7",
         "ts": "1598973182.044600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
-                "fallback": "<https://twitter.com/jackrusher|@jackrusher>: I've been thinking about roads not taken lately, wondering whether we should revisit some of them... <https://pbs.twimg.com/media/Eg0l3uGXsAAD_Aa.png>",
+                "fallback": "<https:\/\/twitter.com\/jackrusher|@jackrusher>: I've been thinking about roads not taken lately, wondering whether we should revisit some of them... <https:\/\/pbs.twimg.com\/media\/Eg0l3uGXsAAD_Aa.png>",
                 "ts": 1598955002,
-                "author_name": "\u2e18Jack Rusher\u203d",
-                "author_link": "https://twitter.com/jackrusher/status/1300737671497691136",
-                "author_icon": "https://pbs.twimg.com/profile_images/931507447088500736/j50JPYN5_normal.jpg",
+                "author_name": "⸘Jack Rusher‽",
+                "author_link": "https:\/\/twitter.com\/jackrusher\/status\/1300737671497691136",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/931507447088500736\/j50JPYN5_normal.jpg",
                 "author_subname": "@jackrusher",
-                "text": "I've been thinking about roads not taken lately, wondering whether we should revisit some of them... <https://pbs.twimg.com/media/Eg0l3uGXsAAD_Aa.png>",
+                "text": "I've been thinking about roads not taken lately, wondering whether we should revisit some of them... <https:\/\/pbs.twimg.com\/media\/Eg0l3uGXsAAD_Aa.png>",
                 "service_name": "twitter",
-                "service_url": "https://twitter.com/",
-                "from_url": "https://twitter.com/jackrusher/status/1300737671497691136?s=20",
-                "image_url": "https://pbs.twimg.com/media/Eg0l3uGXsAAD_Aa.png",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/jackrusher\/status\/1300737671497691136?s=20",
+                "image_url": "https:\/\/pbs.twimg.com\/media\/Eg0l3uGXsAAD_Aa.png",
                 "image_width": 1200,
                 "image_height": 1003,
                 "image_bytes": 292341,
                 "id": 1,
-                "original_url": "https://twitter.com/jackrusher/status/1300737671497691136?s=20",
+                "original_url": "https:\/\/twitter.com\/jackrusher\/status\/1300737671497691136?s=20",
                 "footer": "Twitter",
-                "footer_icon": "https://a.slack-edge.com/80588/img/services/twitter_pixel_snapped_32.png"
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
             }
         ],
         "blocks": [
@@ -825,7 +334,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://twitter.com/jackrusher/status/1300737671497691136?s=20"
+                                "url": "https:\/\/twitter.com\/jackrusher\/status\/1300737671497691136?s=20"
                             }
                         ]
                     }
@@ -833,14 +342,55 @@
             }
         ],
         "thread_ts": "1598973182.044600",
-        "reply_count": 6,
-        "reply_users_count": 3,
-        "latest_reply": "1599033295.051300",
+        "reply_count": 9,
+        "reply_users_count": 5,
+        "latest_reply": "1623243507.062300",
         "reply_users": [
             "UEBG0NPDK",
             "U013ZLJARC7",
-            "UHWC9PXBL"
+            "UHWC9PXBL",
+            "UJFN50C00",
+            "U014S3TQ221"
         ],
+        "replies": [
+            {
+                "user": "UEBG0NPDK",
+                "ts": "1598976632.045300"
+            },
+            {
+                "user": "UEBG0NPDK",
+                "ts": "1598976710.045500"
+            },
+            {
+                "user": "U013ZLJARC7",
+                "ts": "1598988094.046600"
+            },
+            {
+                "user": "U013ZLJARC7",
+                "ts": "1598989405.046900"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1599002854.050600"
+            },
+            {
+                "user": "U013ZLJARC7",
+                "ts": "1599033295.051300"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1599481344.078100"
+            },
+            {
+                "user": "U014S3TQ221",
+                "ts": "1623237850.060800"
+            },
+            {
+                "user": "U013ZLJARC7",
+                "ts": "1623243507.062300"
+            }
+        ],
+        "is_locked": false,
         "subscribed": false,
         "reactions": [
             {
@@ -860,19 +410,34 @@
                     "UJBAJNFLK",
                     "UBSMEUXAA",
                     "UHWC9PXBL",
-                    "UN9SCH5RD"
+                    "UN9SCH5RD",
+                    "UML4ZEKDK",
+                    "UFQQ3P867"
                 ],
-                "count": 15
+                "count": 17
             }
         ]
     },
     {
         "client_msg_id": "7f5c05b0-c8e1-4b6d-906d-c1d6fd54c26c",
         "type": "message",
-        "text": "I love going back and looking at this stuff, and I\u2019ve been thinking a lot about what a modern text-focused interface would be like. It feels like there\u2019s a bunch of neat stuff we should be able to do now that just wouldn\u2019t have been feasible at the time. It\u2019s especially interesting to imagine using something like GPT-3 to get the interface to react to you much more naturally than it would otherwise.",
+        "text": "I love going back and looking at this stuff, and I’ve been thinking a lot about what a modern text-focused interface would be like. It feels like there’s a bunch of neat stuff we should be able to do now that just wouldn’t have been feasible at the time. It’s especially interesting to imagine using something like GPT-3 to get the interface to react to you much more naturally than it would otherwise.",
         "user": "UEBG0NPDK",
         "ts": "1598976632.045300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9e85c7bdd45b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-25\/487455880658_9e85c7bdd45b1d2d4721_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Granger",
+            "display_name": "ibdknox",
+            "team": "T5TCAFTA9",
+            "name": "ibdknox",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -883,7 +448,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "I love going back and looking at this stuff, and I\u2019ve been thinking a lot about what a modern text-focused interface would be like. It feels like there\u2019s a bunch of neat stuff we should be able to do now that just wouldn\u2019t have been feasible at the time. It\u2019s especially interesting to imagine using something like GPT-3 to get the interface to react to you much more naturally than it would otherwise."
+                                "text": "I love going back and looking at this stuff, and I’ve been thinking a lot about what a modern text-focused interface would be like. It feels like there’s a bunch of neat stuff we should be able to do now that just wouldn’t have been feasible at the time. It’s especially interesting to imagine using something like GPT-3 to get the interface to react to you much more naturally than it would otherwise."
                             }
                         ]
                     }
@@ -905,10 +470,23 @@
     {
         "client_msg_id": "2e03f175-4258-45cd-9443-4ceeacc53a37",
         "type": "message",
-        "text": "<@U013ZLJARC7> you mentioned you worked on lifestreams! I\u2019d love to hear more about what you learned in that experience. It was the primary model we wanted for history and search for Eve, we just never got to the point where it was time to invest in it.",
+        "text": "<@U013ZLJARC7> you mentioned you worked on lifestreams! I’d love to hear more about what you learned in that experience. It was the primary model we wanted for history and search for Eve, we just never got to the point where it was time to invest in it.",
         "user": "UEBG0NPDK",
         "ts": "1598976710.045500",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9e85c7bdd45b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-25\/487455880658_9e85c7bdd45b1d2d4721_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Granger",
+            "display_name": "ibdknox",
+            "team": "T5TCAFTA9",
+            "name": "ibdknox",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -923,7 +501,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " you mentioned you worked on lifestreams! I\u2019d love to hear more about what you learned in that experience. It was the primary model we wanted for history and search for Eve, we just never got to the point where it was time to invest in it."
+                                "text": " you mentioned you worked on lifestreams! I’d love to hear more about what you learned in that experience. It was the primary model we wanted for history and search for Eve, we just never got to the point where it was time to invest in it."
                             }
                         ]
                     }
@@ -940,6 +518,19 @@
         "user": "U013ZLJARC7",
         "ts": "1598988094.046600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -987,6 +578,19 @@
         "user": "U013ZLJARC7",
         "ts": "1598989405.046900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1010,9 +614,68 @@
             {
                 "name": "smile",
                 "users": [
-                    "UEBG0NPDK"
+                    "UEBG0NPDK",
+                    "UML4ZEKDK"
                 ],
-                "count": 1
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "BE2282A9-20C7-4713-8FE8-59CC4D8C74CB",
+        "type": "message",
+        "text": "<@U013ZLJARC7> your “similar system” to lifestreams is an accurate description of at least four separate projects in this community—if you have any write ups or talks or posts about that experience anywhere lots of us would read or watch with interest!",
+        "user": "UHWC9PXBL",
+        "ts": "1599002854.050600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UHWC9PXBL",
+            "ts": "1599002873.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rXr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U013ZLJARC7"
+                            },
+                            {
+                                "type": "text",
+                                "text": " your “similar system” to lifestreams is an accurate description of at least four separate projects in this community—if you have any write ups or talks or posts about that experience anywhere lots of us would read or watch with interest!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1598973182.044600",
+        "parent_user_id": "U013ZLJARC7",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UAHHWT22U",
+                    "U013ZLJARC7"
+                ],
+                "count": 2
             }
         ]
     }

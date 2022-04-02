@@ -1,0 +1,122 @@
+[
+    {
+        "client_msg_id": "b407e514-8a1a-4039-8ae8-887bf0b08e96",
+        "type": "message",
+        "text": "C'mon, you can force strict eval with Haskell any time if you need to worry about performance! Dually, in OCaml you can decorate a function to be lazy when you want to avoid calculating values you may not need.\n\nThe real answer to \"how do you do laziness\" is usually compiling to a smaller core language (systemF in Haskell, OCaml bytecode, and QTT in Idris2) that does the eval, otherwise you trip over corner cases.",
+        "user": "UN57U8V53",
+        "ts": "1597484528.033100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "3447742b735b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-09\/753296041488_3447742b735b104a7ff2_72.png",
+            "first_name": "",
+            "real_name": "Don Abrams",
+            "display_name": "Don Abrams",
+            "team": "T5TCAFTA9",
+            "name": "donabrams",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8H1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "C'mon, you can force strict eval with Haskell any time if you need to worry about performance! Dually, in OCaml you can decorate a function to be lazy when you want to avoid calculating values you may not need.\n\nThe real answer to \"how do you do laziness\" is usually compiling to a smaller core language (systemF in Haskell, OCaml bytecode, and QTT in Idris2) that does the eval, otherwise you trip over corner cases."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "519dd075-549b-4b3b-b08f-97c064d03e69",
+        "type": "message",
+        "text": "You can, but then you cannot re-use a whole lot of the standard library which is pervasively lazy, and have to pay attention to every single sub-expression which can hide lazy thunks within it.\n\nI think (have no empirical data to back it up) that starting with an overly strict solution, you typically need to decorate a lot less subexpressions as lazy to reach an efficient algorithm, than vice versa.\n\nIn other words, the right amount of laziness is usually within just a few subexpressions - that are expensive to compute and not always needed. So a default where all subexpressions are lazy is very difficult to start with.",
+        "user": "U78TZ437S",
+        "ts": "1597485286.033300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga3a20a76a69",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/da3a20a76a69532fa83e790e89cb4c6c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "Eyal",
+            "real_name": "Eyal Lotem",
+            "display_name": "eyal",
+            "team": "T5TCAFTA9",
+            "name": "eyal.lotem",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rMxv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You can, but then you cannot re-use a whole lot of the standard library which is pervasively lazy, and have to pay attention to every single sub-expression which can hide lazy thunks within it.\n\nI think (have no empirical data to back it up) that starting with an overly strict solution, you typically need to decorate a lot less subexpressions as lazy to reach an efficient algorithm, than vice versa.\n\nIn other words, the right amount of laziness is usually within just a few subexpressions - that are expensive to compute and not always needed. So a default where all subexpressions are lazy is very difficult to start with."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "aa0adeae-f3b4-4aa3-9008-d8dbc4b30a93",
+        "type": "message",
+        "text": "Also: The \"strictness analyzer\" adds eagerness where it can detect that laziness won't help. That's useful, but it makes things even harder - innocent changes can break the optimization.",
+        "user": "U78TZ437S",
+        "ts": "1597489763.033500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga3a20a76a69",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/da3a20a76a69532fa83e790e89cb4c6c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "Eyal",
+            "real_name": "Eyal Lotem",
+            "display_name": "eyal",
+            "team": "T5TCAFTA9",
+            "name": "eyal.lotem",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "v4On",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Also: The \"strictness analyzer\" adds eagerness where it can detect that laziness won't help. That's useful, but it makes things even harder - innocent changes can break the optimization."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    }
+]

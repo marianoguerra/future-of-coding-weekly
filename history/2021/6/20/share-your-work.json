@@ -1,0 +1,964 @@
+[
+    {
+        "client_msg_id": "7d40daca-15a4-4305-9952-5922697ed27e",
+        "type": "message",
+        "text": "Well, I've got something set up on localhost that loads the Game of Life image in the browser and boots it, but it crashes immediately with some VGA memory corruption. I think part of the problem is that Mu wants a rather large heap for the sort of machine that this code emulates.",
+        "user": "U013ZLJARC7",
+        "ts": "1624181528.088500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U013ZLJARC7",
+            "ts": "1624181558.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kY7eG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Well, I've got something set up on localhost that loads the Game of Life image in the browser and boots it, but it crashes immediately with some VGA memory corruption. I think part of the problem is that Mu wants a rather large heap for the sort of machine that this code emulates."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "d0b574cf-5f9c-4571-878f-d08d2aae5d4e",
+        "type": "message",
+        "text": "Thanks for trying it and the bug reports! GoL doesn't require much heap. Could you try dropping the `-m 2G` from the Qemu command? If that doesn't work, could you send me the generated image?",
+        "user": "UCUSW7WVD",
+        "ts": "1624184040.088800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4d7Y",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for trying it and the bug reports! GoL doesn't require much heap. Could you try dropping the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "-m 2G",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " from the Qemu command? If that doesn't work, could you send me the generated image?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "707a2ba3-9416-4ecf-b230-d9187a73d7fa",
+        "type": "message",
+        "text": "Ohhh, I just noticed the words \"in the browser\"!",
+        "user": "UCUSW7WVD",
+        "ts": "1624205415.089100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "j7PV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ohhh, I just noticed the words \"in the browser\"!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "029ab761-568c-4ce7-838d-7a576688fc68",
+        "type": "message",
+        "text": "Looks like Qemu runs with 128MB of RAM by default. I just tried Game of Life with 64MB and that works. 32MB fails.\n\n```qemu-system-i386 -m 64M code.img```",
+        "user": "UCUSW7WVD",
+        "ts": "1624205511.089300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1624205532.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2mimP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Looks like Qemu runs with 128MB of RAM by default. I just tried Game of Life with 64MB and that works. 32MB fails.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "qemu-system-i386 -m 64M code.img"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "09e5f37b-87a7-45bf-b0ae-6c3ee29210bc",
+        "type": "message",
+        "text": "I just refreshed my memory of why. My heap _starts_ at 32MB: <http:\/\/akkartik.github.io\/mu\/html\/120allocate.subx.html#L27>\n\nI was just trying to find a large open space in <https:\/\/wiki.osdev.org\/Memory_Map_(x86)#Extended_Memory_.28.3E_1_MiB.29>\n\nAnd I reserved 16MB-32MB for the stack: <http:\/\/akkartik.github.io\/mu\/html\/boot.subx.html#L236>\n\nThis is all open to adjustment.",
+        "user": "UCUSW7WVD",
+        "ts": "1624205818.089600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1624205921.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7BhJ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I just refreshed my memory of why. My heap "
+                            },
+                            {
+                                "type": "text",
+                                "text": "starts",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " at 32MB: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/akkartik.github.io\/mu\/html\/120allocate.subx.html#L27"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI was just trying to find a large open space in "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/wiki.osdev.org\/Memory_Map_(x86)#Extended_Memory_.28.3E_1_MiB.29"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nAnd I reserved 16MB-32MB for the stack: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/akkartik.github.io\/mu\/html\/boot.subx.html#L236"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nThis is all open to adjustment."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "8b651719-b3aa-4a64-be22-7c38142dbbbb",
+        "type": "message",
+        "text": "I can now run GoL with 3MB RAM:\n```$ .\/translate_emulated <http:\/\/life.mu|life.mu>\n$ qemu-system-i386 -m 3M code.img```\nHere's my patch to grow the stack down from 2MB, and the heap up from 2MB:\n```$ git diff\ndiff --git a\/120allocate.subx b\/120allocate.subx\nindex 26d2a74bb..0063515c2 100644\n--- a\/120allocate.subx\n+++ b\/120allocate.subx\n@@ -26,7 +26,7 @@ Handle-size:  # (addr int)\n # A default allocation descriptor for programs to use.\n Heap:  # allocation-descriptor\n   # curr\n-  0x02000000\/imm32  # 32 MB\n+  0x00200000\/imm32  # 2 MB\n   # limit\n   0x80000000\/imm32  # 2 GB\n \ndiff --git a\/boot.subx b\/boot.subx\nindex 31d79d4fb..9b2896baa 100644\n--- a\/boot.subx\n+++ b\/boot.subx\n@@ -243,7 +243,7 @@ initialize_32bit_mode:\n   8e\/-&gt;seg 3\/mod\/direct 0\/rm32\/ax 4\/r32\/fs\n   8e\/-&gt;seg 3\/mod\/direct 0\/rm32\/ax 5\/r32\/gs\n \n-  bc\/copy-to-esp 0x02000000\/imm32\n+  bc\/copy-to-esp 0x00200000\/imm32\n \n   ## load interrupt handlers\n   # We can't refer to the label directly because SubX doesn't do the right```",
+        "user": "UCUSW7WVD",
+        "ts": "1624206491.089900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1624206608.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tdvL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I can now run GoL with 3MB RAM:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "$ .\/translate_emulated life.mu\n$ qemu-system-i386 -m 3M code.img"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Here's my patch to grow the stack down from 2MB, and the heap up from 2MB:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "$ git diff\ndiff --git a\/120allocate.subx b\/120allocate.subx\nindex 26d2a74bb..0063515c2 100644\n--- a\/120allocate.subx\n+++ b\/120allocate.subx\n@@ -26,7 +26,7 @@ Handle-size:  # (addr int)\n # A default allocation descriptor for programs to use.\n Heap:  # allocation-descriptor\n   # curr\n-  0x02000000\/imm32  # 32 MB\n+  0x00200000\/imm32  # 2 MB\n   # limit\n   0x80000000\/imm32  # 2 GB\n \ndiff --git a\/boot.subx b\/boot.subx\nindex 31d79d4fb..9b2896baa 100644\n--- a\/boot.subx\n+++ b\/boot.subx\n@@ -243,7 +243,7 @@ initialize_32bit_mode:\n   8e\/->seg 3\/mod\/direct 0\/rm32\/ax 4\/r32\/fs\n   8e\/->seg 3\/mod\/direct 0\/rm32\/ax 5\/r32\/gs\n \n-  bc\/copy-to-esp 0x02000000\/imm32\n+  bc\/copy-to-esp 0x00200000\/imm32\n \n   ## load interrupt handlers\n   # We can't refer to the label directly because SubX doesn't do the right"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "type": "message",
+        "text": "I had tried chaging the Heap (because the docs mentioned it), but didn't look at boot :slightly_smiling_face: In any case, it's still failing with noisey VGA corruption like this",
+        "files": [
+            {
+                "id": "F025HRR59B7",
+                "created": 1624207561,
+                "timestamp": 1624207561,
+                "name": "Screen Shot 2021-06-20 at 18.45.31.png",
+                "title": "Screen Shot 2021-06-20 at 18.45.31.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U013ZLJARC7",
+                "editable": false,
+                "size": 21584,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F025HRR59B7\/screen_shot_2021-06-20_at_18.45.31.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F025HRR59B7\/download\/screen_shot_2021-06-20_at_18.45.31.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360_w": 360,
+                "thumb_360_h": 68,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480_w": 480,
+                "thumb_480_h": 90,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720_w": 720,
+                "thumb_720_h": 135,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800_w": 800,
+                "thumb_800_h": 150,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_960_w": 960,
+                "thumb_960_h": 180,
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F025HRR59B7-48ff8139ae\/screen_shot_2021-06-20_at_18.45.31_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 192,
+                "original_w": 2066,
+                "original_h": 388,
+                "thumb_tiny": "AwAJADCgZpMn5zSedJ\/fNMPU0U7sB\/nSf3zR50n980yii7Af50n980qzSbh8561HSr94fWi7A\/\/Z",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U013ZLJARC7\/F025HRR59B7\/screen_shot_2021-06-20_at_18.45.31.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F025HRR59B7-b0239f7559",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "user": "U013ZLJARC7",
+        "display_as_bot": false,
+        "ts": "1624207567.090300",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tCTa9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I had tried chaging the Heap (because the docs mentioned it), but didn't look at boot "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": " In any case, it's still failing with noisey VGA corruption like this"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "cebf6c3c-ed2c-4399-9add-ac6286b8e755",
+        "type": "message",
+        "text": "Can you recommend a good text mode demo to try?",
+        "user": "U013ZLJARC7",
+        "ts": "1624207588.090500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "x4EV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Can you recommend a good text mode demo to try?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "29702d5d-ea3d-4afa-bce8-fcb82316976e",
+        "type": "message",
+        "text": "Mu doesn't use text mode at all outside the linux\/ subdirectory. Even the apparent text is all drawn using the one font in the disk image.",
+        "user": "UCUSW7WVD",
+        "ts": "1624208498.090800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5gE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Mu doesn't use text mode at all outside the linux\/ subdirectory. Even the apparent text is all drawn using the one font in the disk image."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "3ba1d670-bf35-47fb-914a-3b2d90f6f145",
+        "type": "message",
+        "text": "It's interesting that this SVGA mode isn't supported. I thought it was pretty bare-bones. Are you running v86?",
+        "user": "UCUSW7WVD",
+        "ts": "1624208543.091000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1624208565.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hanIl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It's interesting that this SVGA mode isn't supported. I thought it was pretty bare-bones. Are you running v86?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "1834652a-ba4d-4642-ada7-041038e16aea",
+        "type": "message",
+        "text": "I do have a backup mode, hold on..",
+        "user": "UCUSW7WVD",
+        "ts": "1624208586.091300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xO0vR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I do have a backup mode, hold on.."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "b1bca7f2-826b-4ce4-846a-64d2530824a9",
+        "type": "message",
+        "text": "Yeah, experimenting with v86. I can get a bunch of other OSs to work fine, including Oberon (!).",
+        "user": "U013ZLJARC7",
+        "ts": "1624208618.091500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mhB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, experimenting with v86. I can get a bunch of other OSs to work fine, including Oberon (!)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "0378505e-fe2a-45af-814f-0b4d4611bcac",
+        "type": "message",
+        "text": "One option may be to iterate over the simplest examples: ex*.mu. Each adds just one feature.",
+        "user": "UCUSW7WVD",
+        "ts": "1624208950.091700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1624208994.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fze\/3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One option may be to iterate over the simplest examples: ex*.mu. Each adds just one feature."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "1395cf4d-de4e-4d65-b48d-6c8f18635bbc",
+        "type": "message",
+        "text": "I'm working on a different SVGA mode, but I'm starting to think that's a red herring..",
+        "user": "UCUSW7WVD",
+        "ts": "1624208976.091900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "r7J",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm working on a different SVGA mode, but I'm starting to think that's a red herring.."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "ab71e15f-ca38-4b8f-b9eb-822c43f14cd8",
+        "type": "message",
+        "text": "what resolution are you expecting? I have to specify the memory size of the \"video card\"",
+        "user": "U013ZLJARC7",
+        "ts": "1624209093.092200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U013ZLJARC7",
+            "ts": "1624209113.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nBZu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "what resolution are you expecting? I have to specify the memory size of the \"video card\""
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "ccfe9722-5ca8-45c5-8b9e-1d67acf10c57",
+        "type": "message",
+        "text": "Oh interesting. It's 1024x768 with 256 colors. So 768KB should do it?",
+        "user": "UCUSW7WVD",
+        "ts": "1624209182.092500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1624209381.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "48=rf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh interesting. It's 1024x768 with 256 colors. So 768KB should do it?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "13e3c751-d470-430a-a5bd-e172744e9435",
+        "type": "message",
+        "text": "<http:\/\/ex2.mu|ex2.mu> might be a good test. It should yield this: <https:\/\/merveilles.town\/@akkartik\/105453700021972721>",
+        "user": "UCUSW7WVD",
+        "ts": "1624209244.092700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Merveilles",
+                "title": "Kartik Agaram (@akkartik@merveilles.town)",
+                "title_link": "https:\/\/merveilles.town\/@akkartik\/105453700021972721",
+                "text": "Attached: 1 image *Switching gears to pure graphics* Until now Mu has followed classic Unix: stdin, stdout, pure text mode. But giving up an OS kernel requires controlling the screen myself. Which requires various complicated probing for hardware. Then programs handling various screen sizes. Easier: just always assume some common graphics mode. Say 1024x768 with 256 colors. Interestingly, the default palette has far fewer than 256 colors. (Pic: 1024 cols each contain color `col%256`.) <http:\/\/akkartik.github.io\/mu\/html\/baremetal\/ex2.hex.html>",
+                "fallback": "Merveilles: Kartik Agaram (@akkartik@merveilles.town)",
+                "image_url": "https:\/\/assets.merveilles.town\/media_attachments\/files\/105\/453\/689\/017\/380\/417\/original\/b5f6571dec47a902.png",
+                "image_width": 336,
+                "image_height": 250,
+                "ts": 1609095764,
+                "from_url": "https:\/\/merveilles.town\/@akkartik\/105453700021972721",
+                "image_bytes": 11335,
+                "service_icon": "https:\/\/merveilles.town\/favicon.ico",
+                "id": 1,
+                "original_url": "https:\/\/merveilles.town\/@akkartik\/105453700021972721"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "HaSQp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "http:\/\/ex2.mu",
+                                "text": "ex2.mu"
+                            },
+                            {
+                                "type": "text",
+                                "text": " might be a good test. It should yield this: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/merveilles.town\/@akkartik\/105453700021972721"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "f5ecafa5-9a47-4a37-a01a-c7d5ec898aa9",
+        "type": "message",
+        "text": "Same screen. I've also noticed that there are several \"Uncaught Unimplemented: #NP handler\" errors before the VM gives up. I'll try to investigate a bit tomorrow, other obligations allowing. :slightly_smiling_face:",
+        "user": "U013ZLJARC7",
+        "ts": "1624209774.093100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "u=qpv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Same screen. I've also noticed that there are several \"Uncaught Unimplemented: #NP handler\" errors before the VM gives up. I'll try to investigate a bit tomorrow, other obligations allowing. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "a80c4316-d69b-4fa8-8137-028796af9c95",
+        "type": "message",
+        "text": "Thank you! Do you have a set of prebuilt html\/js files from v86? If you send them to me I'll play around as well.",
+        "user": "UCUSW7WVD",
+        "ts": "1624209860.093300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JNg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thank you! Do you have a set of prebuilt html\/js files from v86? If you send them to me I'll play around as well."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1623303727.066300",
+        "parent_user_id": "UCUSW7WVD"
+    }
+]

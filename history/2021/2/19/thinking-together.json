@@ -1,846 +1,38 @@
 [
     {
-        "type": "message",
-        "text": "I'm playing around with the interface for an NLP recognition framework at Storyscript (in Rust), and was wondering if anyone has seen this kind of design executed in any other contexts",
-        "files": [
-            {
-                "id": "F01NMEGUKL2",
-                "created": 1613690071,
-                "timestamp": 1613690132,
-                "name": "layered-nlp_draft",
-                "title": "layered-nlp draft",
-                "mimetype": "application/vnd.slack-docs",
-                "filetype": "docs",
-                "pretty_type": "Arugula",
-                "user": "UFPPABQ7P",
-                "editable": true,
-                "size": 1483,
-                "mode": "docs",
-                "is_external": false,
-                "external_type": "",
-                "is_public": true,
-                "public_url_shared": false,
-                "display_as_bot": false,
-                "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01NMEGUKL2/layered-nlp_draft",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01NMEGUKL2/download/layered-nlp_draft",
-                "permalink": "https://futureofcoding.slack.com/files/T5TCAFTA9/F01NMEGUKL2",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01NMEGUKL2-987d0fe10a",
-                "preview": "<p>Incrementally build up recognizers over an abstract token that combine to create _multiple_ possible interpretations.<br/><br/>Key features:<br/><br/>- Abstract over token type to support &quot;rich&quot; tokens like we have at Storyscript.<br/>- May generate multiple interpretations of the same token span.<br/>- Produces a set of ranges over the input token list with different attributes, for example:<br/><br/>### Layering<br/><br/>The key idea here is to enable starting from a bunch of vague tags and slowly building meaning up through incrementally adding information that builds on itself.<br/><br/>Simplification: <code>Money(&#x27;$&#x27;, Amt) = &#x27;$&#x27; + Amt</code><br/></p><pre>    $   123   .     00\n                    \u2570Natural\n              \u2570Punct\n        \u2570Natural\n        \u2570Amt(Decimal)\u256f\n    \u2570Money($&#x2F;\u00a3, Num)\u2500\u256f</pre><p><br/>Simplification:<br/><br/>- <code>Location(NYC) = &#x27;New&#x27; + &#x27;York&#x27; + &#x27;City&#x27;</code><br/>- <code>Location(AMS) = &#x27;Amsterdam&#x27;</code><br/>- <code>Address(Person, Location) = Person + Verb(&#x27;live&#x27;) + Predicate(&#x27;in&#x27;) + Location</code><br/></p><pre>   I     live      in      New York City\n                                     \u2570Noun\n                                \u2570Noun\n                            \u2570Adj\n                    \u2570Predicate\n          \u2570Verb\n    \u2570Noun\n    \u2570Person(Self)\n                            \u2570\u2500\u2500Location\u2500\u256f\n    \u2570\u2500\u2500\u2500\u2500Address(Person, Location)\u2500\u2500\u2500\u2500\u2500\u256f</pre><p><br/></p>",
-                "editor": "UFPPABQ7P",
-                "last_editor": "UFPPABQ7P",
-                "non_owner_editable": false,
-                "updated": 1613690132,
-                "is_starred": false,
-                "has_rich_preview": false
-            }
-        ],
-        "upload": false,
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "pGU",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I'm playing around with the interface for an NLP recognition framework at Storyscript (in Rust), and was wondering if anyone has seen this kind of design executed in any other contexts"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "user": "UFPPABQ7P",
-        "display_as_bot": false,
-        "ts": "1613690148.252700",
-        "thread_ts": "1613690148.252700",
-        "reply_count": 10,
-        "reply_users_count": 5,
-        "latest_reply": "1613825985.022900",
-        "reply_users": [
-            "UFB8STN7K",
-            "UFPPABQ7P",
-            "U01KZQEQVUP",
-            "U013ZLJARC7",
-            "UHWC9PXBL"
-        ],
-        "subscribed": false
-    },
-    {
-        "client_msg_id": "be95917a-1ec7-4e54-8c29-9ac2be9e9b3f",
-        "type": "message",
-        "text": "So we're using state diagrams in a peculiar way which is likely different. We kinda took the concept and added a ton of bells and whistles to it and made the state diagram the backbone of defining the behaviours of your backend. The state diagram is hyper away of the rest of our abstraction (our pre-built auth system, our permissioning system) and that's a big part of how we decrease the surface area of code.",
-        "user": "U01DX39SB33",
-        "ts": "1613692116.252900",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "ao=",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "So we're using state diagrams in a peculiar way which is likely different. We kinda took the concept and added a ton of bells and whistles to it and made the state diagram the backbone of defining the behaviours of your backend. The state diagram is hyper away of the rest of our abstraction (our pre-built auth system, our permissioning system) and that's a big part of how we decrease the surface area of code."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "e6874042-7905-47a5-8718-765b1c9b6da0",
-        "type": "message",
-        "text": "<https://www.loom.com/share/69299656a8c04c329a4a225961026f7c>",
-        "user": "U01DX39SB33",
-        "ts": "1613692118.253100",
-        "team": "T5TCAFTA9",
-        "attachments": [
-            {
-                "service_name": "Loom",
-                "service_url": "https://www.loom.com",
-                "title": "User - Storage - mo-test-123 - Gadget",
-                "title_link": "https://www.loom.com/share/69299656a8c04c329a4a225961026f7c",
-                "thumb_url": "https://cdn.loom.com/sessions/thumbnails/69299656a8c04c329a4a225961026f7c-00001.gif",
-                "thumb_width": 1024,
-                "thumb_height": 640,
-                "fallback": "Loom Video: User - Storage - mo-test-123 - Gadget",
-                "video_html": "<iframe src=\"https://www.loom.com/embed/69299656a8c04c329a4a225961026f7c?autoplay=1\" frameborder=\"0\" width=\"1152\" height=\"864\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>",
-                "video_html_width": 1152,
-                "video_html_height": 864,
-                "from_url": "https://www.loom.com/share/69299656a8c04c329a4a225961026f7c",
-                "id": 1,
-                "original_url": "https://www.loom.com/share/69299656a8c04c329a4a225961026f7c"
-            }
-        ],
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "5da",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "link",
-                                "url": "https://www.loom.com/share/69299656a8c04c329a4a225961026f7c"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UC2A2ARPT",
-                    "U016VUZGUUQ"
-                ],
-                "count": 2
-            }
-        ]
-    },
-    {
-        "client_msg_id": "ebb28109-9bdd-4744-ade0-a5474581e41a",
-        "type": "message",
-        "text": "I don't usually do this but I figured shooting a real raw video might work. I tried to keep it short (8 min) and I go through my entire problem. Turns out, I actually had three of em. Apologies if this thread is now in the wrong place. Sounds like thinking together is where it now belongs.",
-        "user": "U01DX39SB33",
-        "ts": "1613692142.253400",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "U01DX39SB33",
-            "ts": "1613692169.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "JtC2",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I don't usually do this but I figured shooting a real raw video might work. I tried to keep it short (8 min) and I go through my entire problem. Turns out, I actually had three of em. Apologies if this thread is now in the wrong place. Sounds like thinking together is where it now belongs."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UC2A2ARPT"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "8F96711E-6C3E-4E31-A8D7-FD6CEC4F5A02",
-        "type": "message",
-        "text": "Have you read Harel\u2019s original paper? It has visuals for both problem 2 and 3 in your video.",
-        "user": "UEBG0NPDK",
-        "ts": "1613693256.255200",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "L2n",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Have you read Harel\u2019s original paper? It has visuals for both problem 2 and 3 in your video."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33",
-        "reactions": [
-            {
-                "name": "raised_hands",
-                "users": [
-                    "U01DX39SB33"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "991b586a-c27f-40d8-a01c-51cd4d1ca3ef",
-        "type": "message",
-        "text": "I'm actually reading through right now",
-        "user": "U01DX39SB33",
-        "ts": "1613694013.255400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "3qmDL",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I'm actually reading through right now"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "d29b8465-1bba-47d6-94e9-655f9a8b985b",
-        "type": "message",
-        "text": "Great recommendations everyone.",
-        "user": "U01DX39SB33",
-        "ts": "1613694021.255600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "O=0Q",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Great recommendations everyone."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "95a9dae4-efb4-4885-ac7b-fbe322886ba5",
-        "type": "message",
-        "text": "This is essentially parsing where a given string can have multiple parses, yes?",
-        "user": "UFB8STN7K",
-        "ts": "1613694024.255800",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "rn+AL",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "This is essentially parsing where a given string can have multiple parses, yes?"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613690148.252700",
-        "parent_user_id": "UFPPABQ7P"
-    },
-    {
-        "client_msg_id": "0d3c8b06-ae1f-4c3a-a756-e521436eb4e4",
-        "type": "message",
-        "text": "This might sound glib, but I'm 100% serious. The best solution I've seen to problem #1 (_how do you get people past the initial unfamiliarity / reluctance?_) is to make your GUI look enviably cool. Make the GUI just explode charm, style, je ne sais quoi, mystery. Make it draw people in. Make it look like nothing they've ever seen before. Make it elicit and reward curiosity. Don't allow people to grossly assume that they know what this GUI is, what it does, and that it's not worth the 20 minutes of attention to learn how it really works.\n\nThis is a very hard problem, but it's not an NP hard problem. It's do-able, and people do it all the time.\n\n(I answered a slight variation of your question, because the other half of the question \u2014 _how do you make the GUI self-revealing to new users \u2014_\u00a0is something it sounds like you already have a good idea of how to do. Click targets, tooltips, progressive disclosure... typical UI design jazz.)",
-        "user": "UC2A2ARPT",
-        "ts": "1613698167.256500",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UC2A2ARPT",
-            "ts": "1613698598.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "pYJk",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "This might sound glib, but I'm 100% serious. The best solution I've seen to problem #1 ("
-                            },
-                            {
-                                "type": "text",
-                                "text": "how do you get people past the initial unfamiliarity / reluctance?",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ") is to make your GUI look enviably cool. Make the GUI just explode charm, style, je ne sais quoi, mystery. Make it draw people in. Make it look like nothing they've ever seen before. Make it elicit and reward curiosity. Don't allow people to grossly assume that they know what this GUI is, what it does, and that it's not worth the 20 minutes of attention to learn how it really works.\n\nThis is a very hard problem, but it's not an NP hard problem. It's do-able, and people do it all the time.\n\n(I answered a slight variation of your question, because the other half of the question \u2014 "
-                            },
-                            {
-                                "type": "text",
-                                "text": "how do you make the GUI self-revealing to new users \u2014\u00a0",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "is something it sounds like you already have a good idea of how to do. Click targets, tooltips, progressive disclosure... typical UI design jazz.)"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33",
-        "reactions": [
-            {
-                "name": "100",
-                "users": [
-                    "UEBG0NPDK",
-                    "U01DX39SB33",
-                    "U013ZLJARC7"
-                ],
-                "count": 3
-            }
-        ]
-    },
-    {
-        "client_msg_id": "0183a4fc-cfea-4b1c-ba93-e299e7f4b4f1",
-        "type": "message",
-        "text": "<@UFB8STN7K>, maybe. I've experienced mostly models that all operate on text to tags (spans) or in other places, tokens to tags.\nI'm trying to understand if the process of incrementally building up layered spans with attributes has a name. I think this is closer to something like a parser combinator that can produce multiple results and fold over itself",
-        "user": "UFPPABQ7P",
-        "ts": "1613698505.257000",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Gs5L1",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UFB8STN7K"
-                            },
-                            {
-                                "type": "text",
-                                "text": ", maybe. I've experienced mostly models that all operate on text to tags (spans) or in other places, tokens to tags.\nI'm trying to understand if the process of incrementally building up layered spans with attributes has a name. I think this is closer to something like a parser combinator that can produce multiple results and fold over itself"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613690148.252700",
-        "parent_user_id": "UFPPABQ7P"
-    },
-    {
-        "client_msg_id": "11487393-0584-4403-a133-b339529c102c",
-        "type": "message",
-        "text": "So, yes. I suppose it's parsing with multiple parsed outcomes. But, the interface to building this parser for extensibility is what interests me.",
-        "user": "UFPPABQ7P",
-        "ts": "1613698640.257300",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "LHGr",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "So, yes. I suppose it's parsing with multiple parsed outcomes. But, the interface to building this parser for extensibility is what interests me."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613690148.252700",
-        "parent_user_id": "UFPPABQ7P"
-    },
-    {
-        "client_msg_id": "55596a0c-e251-4343-9b50-3d7ba1727338",
-        "type": "message",
-        "text": "^ great feedback. I should have added one crazy caveat, we have a \"no progressive disclosures\" rule right now which makes every design challenge infinitely harder. The reason for this is we think there's going to be some weening required to get devs acclimated to even the slightest GUI mostly cause of legacy rhetoric. So the idea behind our UI is that it has to be entirely keyboard navigatable. So we figured that out on storage with great difficulty. On the behaviour page (the statechart) obviously it's impossible. But we're still holding out in hopes that we'll come up with a way to structure this diagram to make it more auto-layout and then, hopefully intuitively keyboard navigatable.\n\nThere aren't that many great ways to do a progressive disclosure and still keep the hand away from the mouse.",
-        "user": "U01DX39SB33",
-        "ts": "1613700614.257700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "g9zh",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "^ great feedback. I should have added one crazy caveat, we have a \"no progressive disclosures\" rule right now which makes every design challenge infinitely harder. The reason for this is we think there's going to be some weening required to get devs acclimated to even the slightest GUI mostly cause of legacy rhetoric. So the idea behind our UI is that it has to be entirely keyboard navigatable. So we figured that out on storage with great difficulty. On the behaviour page (the statechart) obviously it's impossible. But we're still holding out in hopes that we'll come up with a way to structure this diagram to make it more auto-layout and then, hopefully intuitively keyboard navigatable.\n\nThere aren't that many great ways to do a progressive disclosure and still keep the hand away from the mouse."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "7fa098cc-d363-4217-b02f-08e5e9725d94",
-        "type": "message",
-        "text": "^ I know this goal might sound insane, but I'd rather exhaust all other options and only then introduce progressive disclosures just to keep the principle alive",
-        "user": "U01DX39SB33",
-        "ts": "1613700652.257900",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "fNJd",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "^ I know this goal might sound insane, but I'd rather exhaust all other options and only then introduce progressive disclosures just to keep the principle alive"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "db658043-39d5-48cc-9a7c-c92ff1dde31f",
-        "type": "message",
-        "text": "maybe the keyboard navigatable state diagram is the enviably cool UI you're talking about",
-        "user": "U01DX39SB33",
-        "ts": "1613700692.258100",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "nU/kk",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "maybe the keyboard navigatable state diagram is the enviably cool UI you're talking about"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "22469efd-0926-4d7e-b5db-33dedee80c10",
-        "type": "message",
-        "text": "You might consider more of a railroad-diagram look (or at least organizing principle). Maybe oriented vertically rather than horizonal like the common examples (it will be more compact and look more like code that way for skeptical devs). I agree that auto-layout is really important for something like this, as I never ever want to fiddle with box positions.",
-        "user": "U016VUZGUUQ",
-        "ts": "1613716011.259500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "rdg2p",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "You might consider more of a railroad-diagram look (or at least organizing principle). Maybe oriented vertically rather than horizonal like the common examples (it will be more compact and look more like code that way for skeptical devs). I agree that auto-layout is really important for something like this, as I never ever want to fiddle with box positions."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "d0e89225-262f-47c8-9730-28911d7736ee",
-        "type": "message",
-        "text": "The first place I heard of such a feature was Charles Simonyi's \"Intentional Domain Workbench\". Here's a video about that, and he talks about identity apart from naming at about 45min in:\n\n<https://youtu.be/UBI33yXJZxg|https://youtu.be/UBI33yXJZxg>",
-        "user": "UAVCC2X70",
-        "ts": "1613716407.259700",
-        "team": "T5TCAFTA9",
-        "attachments": [
-            {
-                "service_name": "YouTube",
-                "service_url": "https://www.youtube.com/",
-                "title": "The Intentional Domain Workbench",
-                "title_link": "https://youtu.be/UBI33yXJZxg",
-                "author_name": "UW Video",
-                "author_link": "https://www.youtube.com/user/UWTV",
-                "thumb_url": "https://i.ytimg.com/vi/UBI33yXJZxg/hqdefault.jpg",
-                "thumb_width": 480,
-                "thumb_height": 360,
-                "fallback": "YouTube Video: The Intentional Domain Workbench",
-                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https://www.youtube.com/embed/UBI33yXJZxg?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
-                "video_html_width": 400,
-                "video_html_height": 300,
-                "from_url": "https://youtu.be/UBI33yXJZxg",
-                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
-                "id": 1,
-                "original_url": "https://youtu.be/UBI33yXJZxg"
-            }
-        ],
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "m//J",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "The first place I heard of such a feature was Charles Simonyi's \"Intentional Domain Workbench\". Here's a video about that, and he talks about identity apart from naming at about 45min in:\n\n"
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://youtu.be/UBI33yXJZxg",
-                                "text": "https://youtu.be/UBI33yXJZxg"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613629318.245700",
-        "parent_user_id": "UDQKHNP51"
-    },
-    {
-        "client_msg_id": "890579df-f9b7-4560-9fd4-746448f20fa2",
-        "type": "message",
-        "text": "This sounds quite similar to the multiple (logical) layers of annotations provided by modern NLP frameworks (e.g. <https://stanfordnlp.github.io/CoreNLP/|CoreNLP>, <https://spacy.io/|spaCy>). The natural language \"parsing\" there is mostly probabilistic so you can access multiple interpretations of a token span if you want to. Notably, these interpretations don't really cascade / explode up the logical layers, but it may be something to look at",
-        "user": "U01KZQEQVUP",
-        "ts": "1613718828.260000",
-        "team": "T5TCAFTA9",
-        "attachments": [
-            {
-                "service_name": "CoreNLP",
-                "title": "Overview",
-                "title_link": "https://stanfordnlp.github.io/CoreNLP/",
-                "text": "NLP Processing In Java",
-                "fallback": "CoreNLP: Overview",
-                "thumb_url": "https://stanfordnlp.github.io/CoreNLP/assets/images/corenlp-logo.png",
-                "from_url": "https://stanfordnlp.github.io/CoreNLP/",
-                "thumb_width": 1080,
-                "thumb_height": 360,
-                "service_icon": "https://stanfordnlp.github.io/CoreNLP/favicon.ico",
-                "id": 1,
-                "original_url": "https://stanfordnlp.github.io/CoreNLP/"
-            },
-            {
-                "title": "spaCy \u00b7 Industrial-strength Natural Language Processing in Python",
-                "title_link": "https://spacy.io/",
-                "text": "spaCy is a free open-source library for Natural Language Processing in Python. It features NER, POS tagging, dependency parsing, word vectors and more.",
-                "fallback": "spaCy \u00b7 Industrial-strength Natural Language Processing in Python",
-                "image_url": "https://spacy.io/static/social_default-1d3b50b1eba4c2b06244425ff0c49570.jpg",
-                "from_url": "https://spacy.io/",
-                "image_width": 476,
-                "image_height": 250,
-                "image_bytes": 372379,
-                "service_icon": "https://spacy.io/icons/icon-48x48.png",
-                "service_name": "spacy.io",
-                "id": 2,
-                "original_url": "https://spacy.io/"
-            }
-        ],
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "vo0G",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "This sounds quite similar to the multiple (logical) layers of annotations provided by modern NLP frameworks (e.g. "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://stanfordnlp.github.io/CoreNLP/",
-                                "text": "CoreNLP"
-                            },
-                            {
-                                "type": "text",
-                                "text": ", "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://spacy.io/",
-                                "text": "spaCy"
-                            },
-                            {
-                                "type": "text",
-                                "text": "). The natural language \"parsing\" there is mostly probabilistic so you can access multiple interpretations of a token span if you want to. Notably, these interpretations don't really cascade / explode up the logical layers, but it may be something to look at"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613690148.252700",
-        "parent_user_id": "UFPPABQ7P",
-        "reactions": [
-            {
-                "name": "heavy_plus_sign",
-                "users": [
-                    "U013ZLJARC7"
-                ],
-                "count": 1
-            },
-            {
-                "name": "heart",
-                "users": [
-                    "UFPPABQ7P"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "c665bb4d-6e54-44ed-8568-97f59dec0f28",
-        "type": "message",
-        "text": "I seriously doubt that xstate is the \"state of the art\" of statecharts. I bet you'll probably find more inspiration looking at Yakindu that is a really polished (alas, non-free) implementation of statecharts (including <https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/quick_ref_orthogonality#quick_ref_orthogonality|modeling orthogonal states>).\n\nWhen it comes to GUI, I like the <https://github.com/enso-org/enso/tree/main/docs/syntax|Enso approach>: hybrid/bidirectional visual _and_ textual syntax. There are lots of projects like <http://smc.sourceforge.net/|SMC> that define a special DSL. I imagine I'd spend most of my time on the textual mode if I had that, and then use the visual one to browse. A good textual DSL with a cool browsable visual representation (perhaps even retaining just _some_ interactive editable elements) seems like an easier sell than a \"1000-clicks-no-code-ui\", but that's just me :slightly_smiling_face: .\n\nGood luck with your project! Looks pretty cool.",
-        "user": "UN9SCH5RD",
-        "ts": "1613719086.260300",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UN9SCH5RD",
-            "ts": "1613719163.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "gg3rS",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I seriously doubt that xstate is the \"state of the art\" of statecharts. I bet you'll probably find more inspiration looking at Yakindu that is a really polished (alas, non-free) implementation of statecharts (including "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/quick_ref_orthogonality#quick_ref_orthogonality",
-                                "text": "modeling orthogonal states"
-                            },
-                            {
-                                "type": "text",
-                                "text": ").\n\nWhen it comes to GUI, I like the "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://github.com/enso-org/enso/tree/main/docs/syntax",
-                                "text": "Enso approach"
-                            },
-                            {
-                                "type": "text",
-                                "text": ": hybrid/bidirectional visual "
-                            },
-                            {
-                                "type": "text",
-                                "text": "and",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " textual syntax. There are lots of projects like "
-                            },
-                            {
-                                "type": "link",
-                                "url": "http://smc.sourceforge.net/",
-                                "text": "SMC"
-                            },
-                            {
-                                "type": "text",
-                                "text": " that define a special DSL. I imagine I'd spend most of my time on the textual mode if I had that, and then use the visual one to browse. A good textual DSL with a cool browsable visual representation (perhaps even retaining just "
-                            },
-                            {
-                                "type": "text",
-                                "text": "some",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " interactive editable elements) seems like an easier sell than a \"1000-clicks-no-code-ui\", but that's just me "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": " .\n\nGood luck with your project! Looks pretty cool."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "e307240a-ea28-40a7-979a-94920b923952",
-        "type": "message",
-        "text": "Ah, forgot to mention <http://mbeddr.com/|mbeddr>. It is a language with a projectional editor implemented in MPS that has <https://vimeo.com/78412221|support for state machines>. So an example of a mostly textual UI with some cool visual elements on top.",
-        "user": "UN9SCH5RD",
-        "ts": "1613720670.261000",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UN9SCH5RD",
-            "ts": "1613720681.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "66/R",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Ah, forgot to mention "
-                            },
-                            {
-                                "type": "link",
-                                "url": "http://mbeddr.com/",
-                                "text": "mbeddr"
-                            },
-                            {
-                                "type": "text",
-                                "text": ". It is a language with a projectional editor implemented in MPS that has "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://vimeo.com/78412221",
-                                "text": "support for state machines"
-                            },
-                            {
-                                "type": "text",
-                                "text": ". So an example of a mostly textual UI with some cool visual elements on top."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
         "client_msg_id": "87d99351-9c46-4435-88e7-cbeb36e9498e",
         "type": "message",
-        "text": "Hard agree with <@UC2A2ARPT> on the value of aesthetics here. See: Don Norman's book on Emotional Design for a longer treatment, with a brief preview of the material here:\n<https://www.interaction-design.org/literature/topics/emotional-design>",
+        "text": "Hard agree with <@UC2A2ARPT> on the value of aesthetics here. See: Don Norman's book on Emotional Design for a longer treatment, with a brief preview of the material here:\n<https:\/\/www.interaction-design.org\/literature\/topics\/emotional-design>",
         "user": "U013ZLJARC7",
         "ts": "1613722134.261700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "service_name": "The Interaction Design Foundation",
                 "title": "What is Emotional Design?",
-                "title_link": "https://www.interaction-design.org/literature/topics/emotional-design",
+                "title_link": "https:\/\/www.interaction-design.org\/literature\/topics\/emotional-design",
                 "text": "What is Emotional Design? Emotional design is the concept of how to create designs that evoke emotions which result in positive user experiences. Designers aim to reach users on three co...",
                 "fallback": "The Interaction Design Foundation: What is Emotional Design?",
-                "thumb_url": "https://public-media.interaction-design.org/images/website-thumbnail-image.png",
-                "from_url": "https://www.interaction-design.org/literature/topics/emotional-design",
+                "thumb_url": "https:\/\/public-media.interaction-design.org\/images\/website-thumbnail-image.png",
+                "from_url": "https:\/\/www.interaction-design.org\/literature\/topics\/emotional-design",
                 "thumb_width": 400,
                 "thumb_height": 400,
-                "service_icon": "https://public-media.interaction-design.org/images/app/apple-touch-icon.png",
+                "service_icon": "https:\/\/public-media.interaction-design.org\/images\/app\/apple-touch-icon.png",
                 "id": 1,
-                "original_url": "https://www.interaction-design.org/literature/topics/emotional-design"
+                "original_url": "https:\/\/www.interaction-design.org\/literature\/topics\/emotional-design"
             }
         ],
         "blocks": [
@@ -865,7 +57,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://www.interaction-design.org/literature/topics/emotional-design"
+                                "url": "https:\/\/www.interaction-design.org\/literature\/topics\/emotional-design"
                             }
                         ]
                     }
@@ -882,6 +74,19 @@
         "user": "U013ZLJARC7",
         "ts": "1613722485.262100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -905,10 +110,23 @@
     {
         "client_msg_id": "a8b9ed54-b5dc-4cd4-8bf0-6421d01ccdbe",
         "type": "message",
-        "text": "(I failed to add a link to my reading of the StateCharts paper: <https://guitarvydas.github.io/2020/12/09/StateCharts.html>) (HTH).",
+        "text": "(I failed to add a link to my reading of the StateCharts paper: <https:\/\/guitarvydas.github.io\/2020\/12\/09\/StateCharts.html>) (HTH).",
         "user": "UGWUJUZHT",
         "ts": "1613736311.262400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g222ae5c0173",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8222ae5c01730d4dba6a358e4d5f9031.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Paul Tarvydas",
+            "display_name": "guitarvydas",
+            "team": "T5TCAFTA9",
+            "name": "paultarvydas",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -923,7 +141,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://guitarvydas.github.io/2020/12/09/StateCharts.html"
+                                "url": "https:\/\/guitarvydas.github.io\/2020\/12\/09\/StateCharts.html"
                             },
                             {
                                 "type": "text",
@@ -953,6 +171,19 @@
         "user": "U01DX39SB33",
         "ts": "1613745000.262600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "a91484b52662",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-10-28\/1460486128034_a91484b526620f0ec494_72.jpg",
+            "first_name": "Mo",
+            "real_name": "Mo",
+            "display_name": "Mo",
+            "team": "T5TCAFTA9",
+            "name": "mo",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "U01DX39SB33",
             "ts": "1613745007.000000"
@@ -984,6 +215,19 @@
         "user": "U01KZQEQVUP",
         "ts": "1613749526.262900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9ff8c2de03db",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-01-30\/1694828418931_9ff8c2de03dba11dab1d_72.jpg",
+            "first_name": "",
+            "real_name": "Florian Cäsar",
+            "display_name": "Florian Cäsar",
+            "team": "T5TCAFTA9",
+            "name": "florian.caesar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1011,6 +255,19 @@
         "user": "UDQKHNP51",
         "ts": "1613749635.263100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3074e1515db",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/b3074e1515db1a3d79acf5d954eac0d1.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Lucian Ursu",
+            "display_name": "elbear",
+            "team": "T5TCAFTA9",
+            "name": "lucian.ursu",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1034,10 +291,23 @@
     {
         "client_msg_id": "4d756603-f493-4b19-b24b-44ca7c146c42",
         "type": "message",
-        "text": "I just remembered that I made this thing long ago, and it seems to have links in code fragments: <http://akkartik.name/countPaths.html|http://akkartik.name/countPaths.html>",
+        "text": "I just remembered that I made this thing long ago, and it seems to have links in code fragments: <http:\/\/akkartik.name\/countPaths.html|http:\/\/akkartik.name\/countPaths.html>",
         "user": "UCUSW7WVD",
         "ts": "1613751365.263300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -1052,8 +322,8 @@
                             },
                             {
                                 "type": "link",
-                                "url": "http://akkartik.name/countPaths.html",
-                                "text": "http://akkartik.name/countPaths.html"
+                                "url": "http:\/\/akkartik.name\/countPaths.html",
+                                "text": "http:\/\/akkartik.name\/countPaths.html"
                             }
                         ]
                     }
@@ -1062,5 +332,918 @@
         ],
         "thread_ts": "1613629318.245700",
         "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "f080a2f7-9804-48bd-a2aa-6ff6b0e3bf63",
+        "type": "message",
+        "text": "<@UN06QADNV> <@UF71PR58X> Ok, so I've investigated implicits in Scala 3, and the related features in other languages (traits, protocols...) including Coq and Agda. All of them have one thing in common: they use the *type system* to deduce which arguments should be passed implicitly. Most languages do this in a _very messy_ way: they look at all the implicits\/traits\/protocols in the current module, submodule, imported modules etc., and the compiler picks one of those. *This is a _static_ selection strategy*. In my proposal, the implicit is provided _on the stack_ like any other variable. There's no fancy \"resolution algorithm\" involved, and the implicit value *can be constructed _dynamically_,* which is a whole different kettle of fish.\n\nNow, Scala 3 offers something similar: there's a command to specify a \"given Int\" or a \"given Bool\" on the stack that should be used as an implicit argument. The problem with this is that *you can only declare one implicit value _per type_* (in a given scope), whereas my proposal doesn't care about types at all: it uses unique parameter names instead. Also, Scala's \"given\" declarations can't shadow (i.e. override) each other, whereas variables obviously can. This allows you to implement the equivalent of \"default arguments\", and override them on specific invocations.\n\nIn conclusion: I think I've proposed a simpler, more general, and more intuitive approach to implicits than all the other manifestations I've seen.",
+        "user": "UCGAK10LS",
+        "ts": "1613782208.000100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613784559.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ull",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UN06QADNV"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UF71PR58X"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Ok, so I've investigated implicits in Scala 3, and the related features in other languages (traits, protocols...) including Coq and Agda. All of them have one thing in common: they use the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "type system",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to deduce which arguments should be passed implicitly. Most languages do this in a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "very messy",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " way: they look at all the implicits\/traits\/protocols in the current module, submodule, imported modules etc., and the compiler picks one of those. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "This is a ",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "static",
+                                "style": {
+                                    "bold": true,
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " selection strategy",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". In my proposal, the implicit is provided "
+                            },
+                            {
+                                "type": "text",
+                                "text": "on the stack",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " like any other variable. There's no fancy \"resolution algorithm\" involved, and the implicit value "
+                            },
+                            {
+                                "type": "text",
+                                "text": "can be constructed ",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "dynamically",
+                                "style": {
+                                    "bold": true,
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ",",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " which is a whole different kettle of fish.\n\nNow, Scala 3 offers something similar: there's a command to specify a \"given Int\" or a \"given Bool\" on the stack that should be used as an implicit argument. The problem with this is that "
+                            },
+                            {
+                                "type": "text",
+                                "text": "you can only declare one implicit value ",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "per type",
+                                "style": {
+                                    "bold": true,
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (in a given scope), whereas my proposal doesn't care about types at all: it uses unique parameter names instead. Also, Scala's \"given\" declarations can't shadow (i.e. override) each other, whereas variables obviously can. This allows you to implement the equivalent of \"default arguments\", and override them on specific invocations.\n\nIn conclusion: I think I've proposed a simpler, more general, and more intuitive approach to implicits than all the other manifestations I've seen."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "C5CCDC02-FAFF-4920-A539-ABD58F6A080E",
+        "type": "message",
+        "text": "the format im familiar with for this kind of work is called stand-off annotation. the codex editor project is based on it",
+        "user": "UHWC9PXBL",
+        "ts": "1613786295.001500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nlzb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the format im familiar with for this kind of work is called stand-off annotation. the codex editor project is based on it"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613690148.252700",
+        "parent_user_id": "UFPPABQ7P",
+        "reactions": [
+            {
+                "name": "thought_balloon",
+                "users": [
+                    "UFPPABQ7P"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "EA60F99C-DE95-4991-B99F-E02074DF8B6D",
+        "type": "message",
+        "text": "nick. i regret to inform you that this is _exactly_ how rebol and infra work",
+        "user": "UHWC9PXBL",
+        "ts": "1613786598.002400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6TR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "nick. i regret to inform you that this is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "exactly",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " how rebol and infra work"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "ce73fe13-12d0-4fa9-b138-764b593f3c1d",
+        "type": "message",
+        "text": "If by _exactly_, you mean dynamic scoping, we discussed that higher up in the thread.",
+        "user": "UCGAK10LS",
+        "ts": "1613786661.003400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Klq",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If by "
+                            },
+                            {
+                                "type": "text",
+                                "text": "exactly",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", you mean dynamic scoping, we discussed that higher up in the thread."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "38ef6446-889c-4ff4-aac5-bb0906cb0398",
+        "type": "message",
+        "text": "Though I do remember Rebol's approach to scoping is unique, so now I'd better revisit it, you're right.",
+        "user": "UCGAK10LS",
+        "ts": "1613786923.006800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Iwn9u",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Though I do remember Rebol's approach to scoping is unique, so now I'd better revisit it, you're right."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "52843B44-FD26-4FD2-80AC-696CC33EB487",
+        "type": "message",
+        "text": "nope! dynamic scoping looks up symbols based on where they’re called from, right? infra and rebol let you do whatever you want with your substitution semantics. could be “look up lexically” or “look up the call stack” or  “evaluate to a UUID and consult the editor for what the last-clicked on object was”. so i guess that the part that’s exact is the “absence of a parameter list” part, and the part where you’re performing arbitrary substitutions based on a set of rules from user input. they also work recursively, too",
+        "user": "UHWC9PXBL",
+        "ts": "1613787099.009300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "HN9L",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "nope! dynamic scoping looks up symbols based on where they’re called from, right? infra and rebol let you do whatever you want with your substitution semantics. could be “look up lexically” or “look up the call stack” or  “evaluate to a UUID and consult the editor for what the last-clicked on object was”. so i guess that the part that’s exact is the “absence of a parameter list” part, and the part where you’re performing arbitrary substitutions based on a set of rules from user input. they also work recursively, too"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7",
+                    "UEDDR6L5Q"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "04D4DD9A-CF9E-4165-802E-5486E61DC795",
+        "type": "message",
+        "text": "for the record: i think it’s an extremely good idea. oh and the relation between uuids and functions in the same package sounds like the path infra would take—your modules have a structure, and you’re reflecting that structure via encoding it in otherwise arbitrary data. idk, smells like it’s almost a binary format to me :wink:",
+        "user": "UHWC9PXBL",
+        "ts": "1613787306.012900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "n+aAh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "for the record: i think it’s an extremely good idea. oh and the relation between uuids and functions in the same package sounds like the path infra would take—your modules have a structure, and you’re reflecting that structure via encoding it in otherwise arbitrary data. idk, smells like it’s almost a binary format to me "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "e16a68bb-0c88-456d-9e74-1f0aee27a76a",
+        "type": "message",
+        "text": "Yes I believe under dynamic scoping you resolve _all_ identifiers when a function is invoked, but I'm aiming for something in-between (which I'm not sure I've clearly described yet).\n\nMy proposal has nothing to do with a binary format: users of the language won't give a damn about how a program or process is stored in RAM or disk, and the language won't expose it :slightly_smiling_face: (Unless they're profiling performance.)",
+        "user": "UCGAK10LS",
+        "ts": "1613787546.013600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YyDJ1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes I believe under dynamic scoping you resolve "
+                            },
+                            {
+                                "type": "text",
+                                "text": "all",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " identifiers when a function is invoked, but I'm aiming for something in-between (which I'm not sure I've clearly described yet).\n\nMy proposal has nothing to do with a binary format: users of the language won't give a damn about how a program or process is stored in RAM or disk, and the language won't expose it "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (Unless they're profiling performance.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "FCB365EC-55AB-48AF-8F56-3677CEFCFCC6",
+        "type": "message",
+        "text": "didn’t github add this feature for some languages using some incremental parser they open sourced? can’t remember off the top of my head",
+        "user": "UHWC9PXBL",
+        "ts": "1613787565.014400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mIPZl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "didn’t github add this feature for some languages using some incremental parser they open sourced? can’t remember off the top of my head"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613629318.245700",
+        "parent_user_id": "UDQKHNP51"
+    },
+    {
+        "client_msg_id": "1b423237-9bfb-4696-a473-d52535b3e319",
+        "type": "message",
+        "text": "A program definitely won't be serialized as ASCII, but that an implementation detail.",
+        "user": "UCGAK10LS",
+        "ts": "1613787577.014600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Hi3t",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "A program definitely won't be serialized as ASCII, but that an implementation detail."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "7ED3DE5F-E145-4AA5-9D65-DDCDAE736433",
+        "type": "message",
+        "text": "<@U01DX39SB33> the loom video 404’s now, but i’m extremely interested in this, especially the keyboard-navigability part. one of the things i harp on a lot is that you can in fact design a set of ui primitives that match the primitives of the algebra for the data you’re working with (vim pretty much does this for text, although the actual commands tend to be obscure and not right for editing most code)",
+        "user": "UHWC9PXBL",
+        "ts": "1613787910.018700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xTLdo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U01DX39SB33"
+                            },
+                            {
+                                "type": "text",
+                                "text": " the loom video 404’s now, but i’m extremely interested in this, especially the keyboard-navigability part. one of the things i harp on a lot is that you can in fact design a set of ui primitives that match the primitives of the algebra for the data you’re working with (vim pretty much does this for text, although the actual commands tend to be obscure and not right for editing most code)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613680693.247800",
+        "parent_user_id": "U01DX39SB33"
+    },
+    {
+        "client_msg_id": "76c4e86e-df60-4ec4-b3ee-59d900e92144",
+        "type": "message",
+        "text": "Ok, conclusion on Rebol: it's not the same as my plan. In particular, the following code prints \"2\" in Rebol (and in languages with *dynamic scoping*), but I mentioned earlier that I want to preserve lexical\/syntactic reasoning, so I'd have it print \"1\" instead:\nx: 1\nfoo: [ print x ]\nx: 2\ndo foo",
+        "user": "UCGAK10LS",
+        "ts": "1613789693.018900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613790618.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QyWW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ok, conclusion on Rebol: it's not the same as my plan. In particular, the following code prints \"2\" in Rebol (and in languages with "
+                            },
+                            {
+                                "type": "text",
+                                "text": "dynamic scoping",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "), but I mentioned earlier that I want to preserve lexical\/syntactic reasoning, so I'd have it print \"1\" instead:\nx: 1\nfoo: [ print x ]\nx: 2\ndo foo"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "cf5d257a-eaac-4ec4-ad52-478d40ccb24d",
+        "type": "message",
+        "text": "`foo` would only look for `x` on the stack if it wasn't found at the definition site. So if you delete the first line, `foo` would print \"2\". This brings you closer to Scala's implicits than dynamic scoping, but it's still different, as I described a few posts up.",
+        "user": "UCGAK10LS",
+        "ts": "1613789742.019100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613791014.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Yb3k",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "foo",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " would only look for "
+                            },
+                            {
+                                "type": "text",
+                                "text": "x",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " on the stack if it wasn't found at the definition site. So if you delete the first line, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "foo",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " would print \"2\". This brings you closer to Scala's implicits than dynamic scoping, but it's still different, as I described a few posts up."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "1497532b-ddae-4e1d-839c-5a0d5b77629d",
+        "type": "message",
+        "text": "Having the source of the variable definition change based on the context of the function definition makes me nervous. It's the same feeling as accidentally declaring a new variable when trying to assign to an existing one (almost a dual problem). That's the kind of thing for which I prefer an error message (at whichever phase) rather than unexpected runtime behavior. For a text language, I would probably nope out on seeing that in the docs. I guess it's less of a problem if all your variables are secretly UUIDs, though. For text, I would be happy with a declaration at the function level that a particular var always comes from dynamic scope.",
+        "user": "U016VUZGUUQ",
+        "ts": "1613797039.020000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gaee3c99144d",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aee3c99144dfc6644c6c1f1303683140.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "Andrew F",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "andrewflnr",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LcBSS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Having the source of the variable definition change based on the context of the function definition makes me nervous. It's the same feeling as accidentally declaring a new variable when trying to assign to an existing one (almost a dual problem). That's the kind of thing for which I prefer an error message (at whichever phase) rather than unexpected runtime behavior. For a text language, I would probably nope out on seeing that in the docs. I guess it's less of a problem if all your variables are secretly UUIDs, though. For text, I would be happy with a declaration at the function level that a particular var always comes from dynamic scope."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "50fd3512-aaaa-40d3-a14e-d50a2f65f2e1",
+        "type": "message",
+        "text": "Yes, I agree it would be a mess for a textual language to try this. But in a structure-based language, I think it will work quite nicely, because you're *never* going to _accidentally_ shadow a variable through naming coincidences. For every variable assignment you write, you're going to know what that variable _means_, and the places in your program that are able to \"receive\" it.",
+        "user": "UCGAK10LS",
+        "ts": "1613797351.021400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Tui",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, I agree it would be a mess for a textual language to try this. But in a structure-based language, I think it will work quite nicely, because you're "
+                            },
+                            {
+                                "type": "text",
+                                "text": "never",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " going to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "accidentally",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " shadow a variable through naming coincidences. For every variable assignment you write, you're going to know what that variable "
+                            },
+                            {
+                                "type": "text",
+                                "text": "means",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and the places in your program that are able to \"receive\" it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "44d224ee-c2bd-45b5-a753-355b0d0a0da9",
+        "type": "message",
+        "text": "(Side question: is there an existing name for \"non-text-string-based\" languages? I'm using words like \"structure\" willy nilly.)",
+        "user": "UCGAK10LS",
+        "ts": "1613797498.021600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1613797520.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "J9i",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(Side question: is there an existing name for \"non-text-string-based\" languages? I'm using words like \"structure\" willy nilly.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1613528098.183700",
+        "parent_user_id": "UCGAK10LS"
     }
 ]

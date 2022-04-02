@@ -1,160 +1,24 @@
 [
     {
-        "client_msg_id": "d36c2e43-7b4d-41e6-a99b-6e2cc3c4d19d",
-        "type": "message",
-        "text": "I really like the design prompt here:\u00a0_Filament is a tool for thinking about things, not shipping production software._\n\nTwo open-ended feedbacky thoughts that spring to mind from that:\n\n1:\n\nI think the language could push much more radically in the direction of the design prompt, and away from conventional programming practice.\n\nSome (easy, top-of-mind) ideas... Rather than:\n```select(contacts, where: (a) =&gt; a.type == DB.person and a.category == DB.contacts)\n  &gt;&gt; for((f) =&gt; f.latlon = lookup_lat_lon(f.address))\n  &gt;&gt; draw_geomap( coord: (f)=&gt; f.latlon, label: (f)=&gt;f.avatar)```\nWhy not:\n```contacts\nwhere(.type == DB.person and .category == DB.contacts)\neach(.latlon = lookup_lat_lon(.address))\ndraw_geomap(coord: .latlon, label: .avatar)```\nWhat's changed?\n\u2022 Rather than explicit lambdas with named parameters, any expression can just refer to an unknown input object. (So `.type == DB.person and .category == DB.contacts` is a function) This isn't actually even that radical: <https://dplyr.tidyverse.org/|R's dplyr> does something like this. But it's a nice increase in speed-of-thought fluidity, at the expense of things software engineers care about, like explicitness and infinitely-nestable composability.\n\u2022 Perhaps the pipe operator (&gt;&gt;) will be so common it will be better to have successive lines automatically connected with a pipe. (If you want to stop a pipeline, just add a blank line in the middle.)\n\u2022 [other minor changes]\nI think much more radical &amp; less obvious changes are possible, but it all starts with breaking away from something that looks so much like JavaScript.\n\n2:\n\nMaybe <@UKFSDUCH2> is already thinking about this, but the design prompt also calls strongly for a new interface for using this language. In particular, these pipey step-by-step calculations really want automatic visualization of the data at every step! And a really slick keyboard-driven interface that lets you move around the pipelines at will! Etc.\n\nI hope this work continues to evolve \u2013\u00a0would be great to see where it goes!",
-        "user": "UBKNXPBAB",
-        "ts": "1612754911.078300",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UBKNXPBAB",
-            "ts": "1612755149.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "vMEv",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "I really like the design prompt here:\u00a0"
-                            },
-                            {
-                                "type": "text",
-                                "text": "Filament is a tool for thinking about things, not shipping production software.",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n\nTwo open-ended feedbacky thoughts that spring to mind from that:\n\n1:\n\nI think the language could push much more radically in the direction of the design prompt, and away from conventional programming practice.\n\nSome (easy, top-of-mind) ideas... Rather than:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_preformatted",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "select(contacts, where: (a) => a.type == DB.person and a.category == DB.contacts)\n  >> for((f) => f.latlon = lookup_lat_lon(f.address))\n  >> draw_geomap( coord: (f)=> f.latlon, label: (f)=>f.avatar)"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Why not:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_preformatted",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "contacts\nwhere(.type == DB.person and .category == DB.contacts)\neach(.latlon = lookup_lat_lon(.address))\ndraw_geomap(coord: .latlon, label: .avatar)"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "What's changed?\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_list",
-                        "elements": [
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "Rather than explicit lambdas with named parameters, any expression can just refer to an unknown input object. (So "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": ".type == DB.person and .category == DB.contacts",
-                                        "style": {
-                                            "code": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " is a function) This isn't actually even that radical: "
-                                    },
-                                    {
-                                        "type": "link",
-                                        "url": "https://dplyr.tidyverse.org/",
-                                        "text": "R's dplyr"
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " does something like this. But it's a nice increase in speed-of-thought fluidity, at the expense of things software engineers care about, like explicitness and infinitely-nestable composability."
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "Perhaps the pipe operator (>>) will be so common it will be better to have successive lines automatically connected with a pipe. (If you want to stop a pipeline, just add a blank line in the middle.)"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "[other minor changes]"
-                                    }
-                                ]
-                            }
-                        ],
-                        "style": "bullet",
-                        "indent": 0
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\nI think much more radical & less obvious changes are possible, but it all starts with breaking away from something that looks so much like JavaScript.\n\n2:\n\nMaybe "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UKFSDUCH2"
-                            },
-                            {
-                                "type": "text",
-                                "text": " is already thinking about this, but the design prompt also calls strongly for a new interface for using this language. In particular, these pipey step-by-step calculations really want automatic visualization of the data at every step! And a really slick keyboard-driven interface that lets you move around the pipelines at will! Etc.\n\nI hope this work continues to evolve \u2013\u00a0would be great to see where it goes!"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1612719185.075900",
-        "parent_user_id": "U85HCL7JP"
-    },
-    {
         "client_msg_id": "653f5381-12d3-4b21-858c-2e72ad33876a",
         "type": "message",
         "text": "Strong R+tidyverse vibes in the examples. :slightly_smiling_face:",
         "user": "U013ZLJARC7",
         "ts": "1612805541.078900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -182,42 +46,55 @@
     {
         "client_msg_id": "faeb3fb3-f773-42f5-a619-49d4314232a8",
         "type": "message",
-        "text": "<https://www.youtube.com/watch?v=UH0A2iujtY8>",
+        "text": "<https:\/\/www.youtube.com\/watch?v=UH0A2iujtY8>",
         "user": "UBN9AFS0N",
         "ts": "1612812336.079300",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "service_name": "YouTube",
-                "service_url": "https://www.youtube.com/",
+                "service_url": "https:\/\/www.youtube.com\/",
                 "title": "\"What even is code? Building a non-code coding interface\" - Katie Bell (LCA 2021 Online)",
-                "title_link": "https://www.youtube.com/watch?v=UH0A2iujtY8",
+                "title_link": "https:\/\/www.youtube.com\/watch?v=UH0A2iujtY8",
                 "author_name": "linux.conf.au",
-                "author_link": "https://www.youtube.com/c/linuxconfau",
-                "thumb_url": "https://i.ytimg.com/vi/UH0A2iujtY8/hqdefault.jpg",
+                "author_link": "https:\/\/www.youtube.com\/c\/linuxconfau",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/UH0A2iujtY8\/hqdefault.jpg",
                 "thumb_width": 480,
                 "thumb_height": 360,
                 "fallback": "YouTube Video: \"What even is code? Building a non-code coding interface\" - Katie Bell (LCA 2021 Online)",
-                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/UH0A2iujtY8?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/UH0A2iujtY8?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
                 "video_html_width": 400,
                 "video_html_height": 225,
-                "from_url": "https://www.youtube.com/watch?v=UH0A2iujtY8",
-                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "from_url": "https:\/\/www.youtube.com\/watch?v=UH0A2iujtY8",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
                 "id": 1,
-                "original_url": "https://www.youtube.com/watch?v=UH0A2iujtY8"
+                "original_url": "https:\/\/www.youtube.com\/watch?v=UH0A2iujtY8"
             }
         ],
         "blocks": [
             {
                 "type": "rich_text",
-                "block_id": "i/98",
+                "block_id": "i\/98",
                 "elements": [
                     {
                         "type": "rich_text_section",
                         "elements": [
                             {
                                 "type": "link",
-                                "url": "https://www.youtube.com/watch?v=UH0A2iujtY8"
+                                "url": "https:\/\/www.youtube.com\/watch?v=UH0A2iujtY8"
                             }
                         ]
                     }
@@ -232,19 +109,33 @@
                     "U016VUZGUUQ",
                     "U01JNTE35QS",
                     "U013ZLJARC7",
-                    "UJ6LDMMN0"
+                    "UJ6LDMMN0",
+                    "U01EKU0UM24"
                 ],
-                "count": 5
+                "count": 6
             }
         ]
     },
     {
         "client_msg_id": "76aa8d46-a55c-4b2d-abc5-bbec69004c09",
         "type": "message",
-        "text": "A tree-structured visual coding interface <https://splootcode.io/>",
+        "text": "A tree-structured visual coding interface <https:\/\/splootcode.io\/>",
         "user": "UBN9AFS0N",
         "ts": "1612812367.079700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -259,7 +150,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://splootcode.io/"
+                                "url": "https:\/\/splootcode.io\/"
                             }
                         ]
                     }
@@ -280,29 +171,42 @@
     {
         "client_msg_id": "dd4cdfe3-a996-4c13-be25-6403c821af15",
         "type": "message",
-        "text": "<https://www.youtube.com/watch?v=L4FLWSt9Px4>",
+        "text": "<https:\/\/www.youtube.com\/watch?v=L4FLWSt9Px4>",
         "user": "UBN9AFS0N",
         "ts": "1612817279.080000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "service_name": "YouTube",
-                "service_url": "https://www.youtube.com/",
+                "service_url": "https:\/\/www.youtube.com\/",
                 "title": "A Short History of Live Programming - Forward 3 Web Summit",
-                "title_link": "https://www.youtube.com/watch?v=L4FLWSt9Px4",
+                "title_link": "https:\/\/www.youtube.com\/watch?v=L4FLWSt9Px4",
                 "author_name": "InfoQ",
-                "author_link": "https://www.youtube.com/nctv",
-                "thumb_url": "https://i.ytimg.com/vi/L4FLWSt9Px4/hqdefault.jpg",
+                "author_link": "https:\/\/www.youtube.com\/nctv",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/L4FLWSt9Px4\/hqdefault.jpg",
                 "thumb_width": 480,
                 "thumb_height": 360,
                 "fallback": "YouTube Video: A Short History of Live Programming - Forward 3 Web Summit",
-                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/L4FLWSt9Px4?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/L4FLWSt9Px4?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
                 "video_html_width": 400,
                 "video_html_height": 225,
-                "from_url": "https://www.youtube.com/watch?v=L4FLWSt9Px4",
-                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "from_url": "https:\/\/www.youtube.com\/watch?v=L4FLWSt9Px4",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
                 "id": 1,
-                "original_url": "https://www.youtube.com/watch?v=L4FLWSt9Px4"
+                "original_url": "https:\/\/www.youtube.com\/watch?v=L4FLWSt9Px4"
             }
         ],
         "blocks": [
@@ -315,7 +219,7 @@
                         "elements": [
                             {
                                 "type": "link",
-                                "url": "https://www.youtube.com/watch?v=L4FLWSt9Px4"
+                                "url": "https:\/\/www.youtube.com\/watch?v=L4FLWSt9Px4"
                             }
                         ]
                     }
@@ -330,8 +234,26 @@
             "UJFN50C00",
             "UBN9AFS0N"
         ],
-        "subscribed": true,
-        "last_read": "1612877877.082800",
+        "replies": [
+            {
+                "user": "UJFN50C00",
+                "ts": "1612870132.082100"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1612870303.082300"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1612877868.082600"
+            },
+            {
+                "user": "UBN9AFS0N",
+                "ts": "1612877877.082800"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false,
         "reactions": [
             {
                 "name": "heart",
@@ -343,6 +265,138 @@
                     "U01FM9NJPRN"
                 ],
                 "count": 5
+            }
+        ]
+    },
+    {
+        "client_msg_id": "58fd0d65-59e6-428a-84c5-e17a70365b63",
+        "type": "message",
+        "text": "Interesting! I don't think I had seen this one before. Thanks <@UAJKEBGP8>!",
+        "user": "UMVFWPZ36",
+        "ts": "1612826032.080900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "cbd558604a21",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-03-22\/1871363334903_cbd558604a21b23211c3_72.png",
+            "first_name": "",
+            "real_name": "Breck Yunits",
+            "display_name": "Breck Yunits",
+            "team": "T5TCAFTA9",
+            "name": "breck7",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=Sw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Interesting! I don't think I had seen this one before. Thanks "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UAJKEBGP8"
+                            },
+                            {
+                                "type": "text",
+                                "text": "!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1611334382.005500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "09F12A85-2D32-4359-A88B-5D5D37F1F014",
+        "type": "message",
+        "text": "<https:\/\/twitter.com\/jnybgr\/status\/1358824089960542208?s=21|https:\/\/twitter.com\/jnybgr\/status\/1358824089960542208?s=21> i’m extremely excited about this",
+        "user": "UHWC9PXBL",
+        "ts": "1612828568.081600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "fallback": "<https:\/\/twitter.com\/JNYBGR|@JNYBGR>: :movie_camera: Announcing Remotion - a framework for making videos in React!\n\nThe video below was written entirely in React, here is the source code! <https:\/\/github.com\/JonnyBurger\/remotion-trailer>\n\n:ledger: Docs: <https:\/\/remotion.dev>\n:atom_symbol: Github: <https:\/\/github.com\/JonnyBurger\/remotion>\n\n:computer: Quickstart: yarn create video <https:\/\/pbs.twimg.com\/ext_tw_video_thumb\/1358824033169661954\/pu\/img\/1nWmFSCQl5ayr1-k.jpg>",
+                "ts": 1612803883,
+                "author_name": "Jonny Burger",
+                "author_link": "https:\/\/twitter.com\/JNYBGR\/status\/1358824089960542208",
+                "author_icon": "https:\/\/pbs.twimg.com\/profile_images\/1340738393400074245\/otycZZbo_normal.png",
+                "author_subname": "@JNYBGR",
+                "text": ":movie_camera: Announcing Remotion - a framework for making videos in React!\n\nThe video below was written entirely in React, here is the source code! <https:\/\/github.com\/JonnyBurger\/remotion-trailer>\n\n:ledger: Docs: <https:\/\/remotion.dev>\n:atom_symbol: Github: <https:\/\/github.com\/JonnyBurger\/remotion>\n\n:computer: Quickstart: yarn create video",
+                "service_name": "twitter",
+                "service_url": "https:\/\/twitter.com\/",
+                "from_url": "https:\/\/twitter.com\/jnybgr\/status\/1358824089960542208?s=21",
+                "thumb_url": "https:\/\/pbs.twimg.com\/ext_tw_video_thumb\/1358824033169661954\/pu\/img\/1nWmFSCQl5ayr1-k.jpg",
+                "thumb_width": 1200,
+                "thumb_height": 675,
+                "video_html_width": 1200,
+                "video_html_height": 675,
+                "video_html": "<video controls poster=\"https:\/\/pbs.twimg.com\/ext_tw_video_thumb\/1358824033169661954\/pu\/img\/1nWmFSCQl5ayr1-k.jpg\" width=\"1200\" height=\"675\"><source type=\"video\/mp4\" src=\"https:\/\/video.twimg.com\/ext_tw_video\/1358824033169661954\/pu\/vid\/1280x720\/DUJUdj0Ho0q1v_eW.mp4?tag=10\"><\/video>",
+                "id": 1,
+                "original_url": "https:\/\/twitter.com\/jnybgr\/status\/1358824089960542208?s=21",
+                "footer": "Twitter",
+                "footer_icon": "https:\/\/a.slack-edge.com\/80588\/img\/services\/twitter_pixel_snapped_32.png"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "K8y",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https:\/\/twitter.com\/jnybgr\/status\/1358824089960542208?s=21",
+                                "text": "https:\/\/twitter.com\/jnybgr\/status\/1358824089960542208?s=21"
+                            },
+                            {
+                                "type": "text",
+                                "text": " i’m extremely excited about this"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UEQ7QL15F",
+                    "UAL7940NM"
+                ],
+                "count": 2
+            },
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
             }
         ]
     }

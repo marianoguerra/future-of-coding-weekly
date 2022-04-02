@@ -1,0 +1,74 @@
+[
+    {
+        "client_msg_id": "802f1503-15a9-4f81-9ad4-27f28cd50b31",
+        "type": "message",
+        "text": "Oh, I didn't know they had switched CEOs.\nYeah, the choice to come up with their own language was definitely an interesting one. From the outside, it seems like a choice that greatly increased the barriers to entry and risk of lock in.\n\nI'm also working towards a \"different layer of abstraction\". You can see my explanation here and check out the link to the (very provisional) mockup.\n<https:\/\/futureofcoding.slack.com\/archives\/CCL5VVBAN\/p1604167001125100?thread_ts=1604155452.122300&amp;cid=CCL5VVBAN|https:\/\/futureofcoding.slack.com\/archives\/CCL5VVBAN\/p1604167001125100?thread_ts=1604155452.122300&amp;cid=CCL5VVBAN>\nThe GUI vs real estate utilization is in need of a lot of work, design wise.\n\nAnd I would love to check out what you're working on as well! Is there anything public yet or that you'd be willing to share?",
+        "user": "U01BAS8GU86",
+        "ts": "1604495018.144200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "24e71f2ba4a9",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-10-23\/1445768371157_24e71f2ba4a9059b8c54_72.jpg",
+            "first_name": "",
+            "real_name": "Everett Pompeii",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "epompeii",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "from_url": "https:\/\/futureofcoding.slack.com\/archives\/CCL5VVBAN\/p1604167001125100?thread_ts=1604155452.122300&amp;cid=CCL5VVBAN",
+                "fallback": "[October 31st, 2020 10:56 AM] epompeii: Great thought on a new thread, <@UJ6LDMMN0>!\nAnd I’ll also tag <@UAVCC2X70> if he’s interested in joining in.\n\nYour demo looks super cool! I think it’s a great visual representation of what the CRDT is doing. I’m still very much a novice in the CRDT space, once I get more up to speed I look forward to digging into the code to help me learn :male-technologist::skin-tone-4:\nI also have Kleppmann’s Designing Data-Intensive Applications sitting on my shelf waiting to be read.\n\nAs for my project, TableFlow, I built a basic dummy demo of it in React if you want to check it out: <http:\/\/tableflow.org\/studio\/flow\/#a>\n\nThe motivation behind it is to build a “better Excel” for power users and also software developers who would rather not deal with all the incidental complexity of modern app development for a project with complex logic, ie not just some CRUD app.\n\nThere are four core concepts: Tables, Flows, Subflows, and Decisions:\n• Tables are the core data type. Depending on how they are configured they can be algebraic data types (ADTs\/enums), structs\/maps, lists, values, and\/or an arbitrary nesting of any of these. Sort of like a statically typed version of JS objects with ADTs and a shorthand for tabular data built in.\n• Flows are pure functions. A Flow can be called by any other Flow or via a REST (or possibly gRPC) call to an endpoint from outside of TableFlow. A Flow can contain zero to any number of Subflows.\n• Subflows are functions just like Flows, but they can only be called once and by their parent. They’re sort of the opposite of a closure in that scope must be explicitly passed into them. They are very similar to Brian Will’s concept of a “use” function. They help break up Flows both visually and in terms of size\/scope. At any point in the future a Subflow can be converted into a standalone Flow if necessary.\n• Decisions are DMN decision tables on steroids. They are where conditional logic, Flow branching, and auto-iteration over all the rows in a table happen. Good example of the first two: <https:\/\/docs.appian.com\/suite\/help\/20.3\/Appian_Decisions.html>\nThere would be live data supplied to a Flow by filling in the input Tables. There would be a slider at the top of this input to time travel through the input history. Some of these inputs can be saved as “snapshots” along with their corresponding outputs. TDD would be built in, so every time a change is made, all applicable snapshots are run against the change and its outputs.\n\nOnce a run occurs, there would be a built in time traveling debugger. Each piece of computed\/output data would have its own slider that jumps between when there was actually a change to that piece of data in the last run. Recursion is possible so there may be multiple time points.\n\nI also want Tables to be reusable between Flows. The software engineer in me really wants to add public and private “Table Subflows” (ie methods) and then I’m like, well why not interfaces too!\nI will probably settle for reusable Tables with methods. Having interfaces would be great, but then I remind myself that even power users of Excel aren’t use to being able to write their own functions natively!\n\nThe eventual goal would be to build a TableFlow config =&gt; Rust compiler that would spit out a production grade Rust server.\nCan you see me drowning in my own ambition yet?  :man-swimming::skin-tone-4::shark:\n\nI played around with doing the UI in Elm, looked at ReasonML, and I’m currently giving Seed (seed-rs) a spin. I like The Elm Architecture for the frontend, but I’m just going to try doubling down on the Rust-&gt;wasm ecosystem and hopefully the wasm DOM API becomes a thing down the road and closes the performance gap.",
+                "ts": "1604167001.125100",
+                "author_id": "U01BAS8GU86",
+                "author_subname": "Everett Pompeii",
+                "channel_id": "CCL5VVBAN",
+                "channel_name": "share-your-work",
+                "is_msg_unfurl": true,
+                "is_reply_unfurl": true,
+                "text": "Great thought on a new thread, <@UJ6LDMMN0>!\nAnd I’ll also tag <@UAVCC2X70> if he’s interested in joining in.\n\nYour demo looks super cool! I think it’s a great visual representation of what the CRDT is doing. I’m still very much a novice in the CRDT space, once I get more up to speed I look forward to digging into the code to help me learn :male-technologist::skin-tone-4:\nI also have Kleppmann’s Designing Data-Intensive Applications sitting on my shelf waiting to be read.\n\nAs for my project, TableFlow, I built a basic dummy demo of it in React if you want to check it out: <http:\/\/tableflow.org\/studio\/flow\/#a>\n\nThe motivation behind it is to build a “better Excel” for power users and also software developers who would rather not deal with all the incidental complexity of modern app development for a project with complex logic, ie not just some CRUD app.\n\nThere are four core concepts: Tables, Flows, Subflows, and Decisions:\n• Tables are the core data type. Depending on how they are configured they can be algebraic data types (ADTs\/enums), structs\/maps, lists, values, and\/or an arbitrary nesting of any of these. Sort of like a statically typed version of JS objects with ADTs and a shorthand for tabular data built in.\n• Flows are pure functions. A Flow can be called by any other Flow or via a REST (or possibly gRPC) call to an endpoint from outside of TableFlow. A Flow can contain zero to any number of Subflows.\n• Subflows are functions just like Flows, but they can only be called once and by their parent. They’re sort of the opposite of a closure in that scope must be explicitly passed into them. They are very similar to Brian Will’s concept of a “use” function. They help break up Flows both visually and in terms of size\/scope. At any point in the future a Subflow can be converted into a standalone Flow if necessary.\n• Decisions are DMN decision tables on steroids. They are where conditional logic, Flow branching, and auto-iteration over all the rows in a table happen. Good example of the first two: <https:\/\/docs.appian.com\/suite\/help\/20.3\/Appian_Decisions.html>\nThere would be live data supplied to a Flow by filling in the input Tables. There would be a slider at the top of this input to time travel through the input history. Some of these inputs can be saved as “snapshots” along with their corresponding outputs. TDD would be built in, so every time a change is made, all applicable snapshots are run against the change and its outputs.\n\nOnce a run occurs, there would be a built in time traveling debugger. Each piece of computed\/output data would have its own slider that jumps between when there was actually a change to that piece of data in the last run. Recursion is possible so there may be multiple time points.\n\nI also want Tables to be reusable between Flows. The software engineer in me really wants to add public and private “Table Subflows” (ie methods) and then I’m like, well why not interfaces too!\nI will probably settle for reusable Tables with methods. Having interfaces would be great, but then I remind myself that even power users of Excel aren’t use to being able to write their own functions natively!\n\nThe eventual goal would be to build a TableFlow config =&gt; Rust compiler that would spit out a production grade Rust server.\nCan you see me drowning in my own ambition yet?  :man-swimming::skin-tone-4::shark:\n\nI played around with doing the UI in Elm, looked at ReasonML, and I’m currently giving Seed (seed-rs) a spin. I like The Elm Architecture for the frontend, but I’m just going to try doubling down on the Rust-&gt;wasm ecosystem and hopefully the wasm DOM API becomes a thing down the road and closes the performance gap.",
+                "author_name": "Everett Pompeii",
+                "author_link": "https:\/\/futureofcoding.slack.com\/team\/U01BAS8GU86",
+                "author_icon": "https:\/\/avatars.slack-edge.com\/2020-10-23\/1445768371157_24e71f2ba4a9059b8c54_48.jpg",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "id": 1,
+                "original_url": "https:\/\/futureofcoding.slack.com\/archives\/CCL5VVBAN\/p1604167001125100?thread_ts=1604155452.122300&amp;cid=CCL5VVBAN",
+                "footer": "From a thread in #share-your-work"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "c1+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh, I didn't know they had switched CEOs.\nYeah, the choice to come up with their own language was definitely an interesting one. From the outside, it seems like a choice that greatly increased the barriers to entry and risk of lock in.\n\nI'm also working towards a \"different layer of abstraction\". You can see my explanation here and check out the link to the (very provisional) mockup.\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/futureofcoding.slack.com\/archives\/CCL5VVBAN\/p1604167001125100?thread_ts=1604155452.122300&cid=CCL5VVBAN",
+                                "text": "https:\/\/futureofcoding.slack.com\/archives\/CCL5VVBAN\/p1604167001125100?thread_ts=1604155452.122300&cid=CCL5VVBAN"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nThe GUI vs real estate utilization is in need of a lot of work, design wise.\n\nAnd I would love to check out what you're working on as well! Is there anything public yet or that you'd be willing to share?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1603914065.120200",
+        "parent_user_id": "U01DX39SB33"
+    }
+]

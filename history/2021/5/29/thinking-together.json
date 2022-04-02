@@ -2,7 +2,7 @@
     {
         "type": "message",
         "subtype": "thread_broadcast",
-        "text": "<@UEBG0NPDK> Thank you for bringing up _Out of the Tar Pit_! I've tried several times to appreciate it, and mostly failed to do so in the past[1]. Your nudge in this context got me to do so one more time, and I got a lot further. This time I went past the preliminaries in chapters 1-7 which had given me a lot of trouble before, and focused on their solution outline in chapters 8-10.\n\nI don't think I'd ever noticed before that their FRP is not Conal Elliott's FRP! Functional _Relational_ Programming, not Functional Reactive Programming. Did everybody else know this? This is the kind of stuff that reminds me that my brain is just a jumble of wires, and all my seeming insights are illusory. I'll call it a Moseley-Marks or MM system, just to get past the camouflage.\n\nHave there been any attempts to build an MM system? Pretty much every FRP mention out there seems to be reactive rather than relational. The closest I got was systems inspired directly by Codd rather than MM: <https://wiki.c2.com/?TutorialDee>\n\nAnyways, once I pruned away the stuff I was distracted by in the past, I see now a kernel of ideas that seem very useful. It's not essential vs accidental complexity that an MM system manages, because I'm skeptical of our ability to separate those categories, but rather functional invariants vs cross-cutting concerns:\n\n\u2022 Base state consisting of immutable value types and relations between them (subsets of points in tuple space).\n\u2022 Functions over value types.\n\u2022 Derived relations that aren't needed to describe the problem, but useful to a specific implementation.\n\u2022 Integrity constraints for base and derived relations.\n\u2022 Hints on what to store, what order to store it, indexes, etc. A Prolog-like search strategy would fit in here, I think.\nThe critical new insight for me: this doesn't have to be an all-encompassing framework. Calling it Functional makes it hard to see that I can actually use the framework even in an imperative setting. Set up a phase of a program where it goes through deriving relations from the input, then query the relation store in various ways to create the desired output. Unlike properties like referential transparency, a little impurity here doesn't actually make it impossible to assess the remainder. I can imagine a fairly conventional language toolchain that adds a `relvar` type, along with operations to insert into, query and clear relational variables. Use them in the \"lumpy\" parts of your program, where you're tempted to duplicate code or no obvious new abstractions present themselves. The toolchain could even give feedback in a complexity score every time it rebuilds a program. The only new domain-independent constraint: you can't mutate a value in the relation store.\n\nThis framework feels enormously useful once I stop expecting it to be a silver bullet, and start thinking of it instead as _a stepping stone to the right architecture_. A dynamically typed store of global state that is easy to query. The problem with mutable global state is really just one of UX: it's too easy to get into situations where mutations get squirreled away where they're easy to forget. Creating immutable copies and local variables can lead to the same pathologies; _they just tend to do so less often_. Given the gradual nature of the benefits, requiring 100% purity to get any benefits feels like a bad trade. The MM system permits more graceful trade-offs.\n\n[1] My opinion of it as of last week, mostly honed in the course of discussions here: <https://lobste.rs/s/1yfrup/into_tar_pit#c_3ikuv9>",
+        "text": "<@UEBG0NPDK> Thank you for bringing up _Out of the Tar Pit_! I've tried several times to appreciate it, and mostly failed to do so in the past[1]. Your nudge in this context got me to do so one more time, and I got a lot further. This time I went past the preliminaries in chapters 1-7 which had given me a lot of trouble before, and focused on their solution outline in chapters 8-10.\n\nI don't think I'd ever noticed before that their FRP is not Conal Elliott's FRP! Functional _Relational_ Programming, not Functional Reactive Programming. Did everybody else know this? This is the kind of stuff that reminds me that my brain is just a jumble of wires, and all my seeming insights are illusory. I'll call it a Moseley-Marks or MM system, just to get past the camouflage.\n\nHave there been any attempts to build an MM system? Pretty much every FRP mention out there seems to be reactive rather than relational. The closest I got was systems inspired directly by Codd rather than MM: <https:\/\/wiki.c2.com\/?TutorialDee>\n\nAnyways, once I pruned away the stuff I was distracted by in the past, I see now a kernel of ideas that seem very useful. It's not essential vs accidental complexity that an MM system manages, because I'm skeptical of our ability to separate those categories, but rather functional invariants vs cross-cutting concerns:\n\n• Base state consisting of immutable value types and relations between them (subsets of points in tuple space).\n• Functions over value types.\n• Derived relations that aren't needed to describe the problem, but useful to a specific implementation.\n• Integrity constraints for base and derived relations.\n• Hints on what to store, what order to store it, indexes, etc. A Prolog-like search strategy would fit in here, I think.\nThe critical new insight for me: this doesn't have to be an all-encompassing framework. Calling it Functional makes it hard to see that I can actually use the framework even in an imperative setting. Set up a phase of a program where it goes through deriving relations from the input, then query the relation store in various ways to create the desired output. Unlike properties like referential transparency, a little impurity here doesn't actually make it impossible to assess the remainder. I can imagine a fairly conventional language toolchain that adds a `relvar` type, along with operations to insert into, query and clear relational variables. Use them in the \"lumpy\" parts of your program, where you're tempted to duplicate code or no obvious new abstractions present themselves. The toolchain could even give feedback in a complexity score every time it rebuilds a program. The only new domain-independent constraint: you can't mutate a value in the relation store.\n\nThis framework feels enormously useful once I stop expecting it to be a silver bullet, and start thinking of it instead as _a stepping stone to the right architecture_. A dynamically typed store of global state that is easy to query. The problem with mutable global state is really just one of UX: it's too easy to get into situations where mutations get squirreled away where they're easy to forget. Creating immutable copies and local variables can lead to the same pathologies; _they just tend to do so less often_. Given the gradual nature of the benefits, requiring 100% purity to get any benefits feels like a bad trade. The MM system permits more graceful trade-offs.\n\n[1] My opinion of it as of last week, mostly honed in the course of discussions here: <https:\/\/lobste.rs\/s\/1yfrup\/into_tar_pit#c_3ikuv9>",
         "user": "UCUSW7WVD",
         "ts": "1622304307.031200",
         "thread_ts": "1622048775.021900",
@@ -64,9 +64,9 @@
                 }
             ],
             "thread_ts": "1622048775.021900",
-            "reply_count": 18,
-            "reply_users_count": 9,
-            "latest_reply": "1622373659.035300",
+            "reply_count": 26,
+            "reply_users_count": 11,
+            "latest_reply": "1623086310.080300",
             "reply_users": [
                 "UBN9AFS0N",
                 "UCUSW7WVD",
@@ -76,11 +76,118 @@
                 "UKDM3GLAJ",
                 "UEBG0NPDK",
                 "UC2A2ARPT",
-                "UJN1TAYEQ"
+                "UJN1TAYEQ",
+                "UE6EFEPTQ",
+                "U0112C10V4Y"
+            ],
+            "replies": [
+                {
+                    "user": "UBN9AFS0N",
+                    "ts": "1622052235.022100"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1622053311.022300"
+                },
+                {
+                    "user": "UBN9AFS0N",
+                    "ts": "1622054892.022600"
+                },
+                {
+                    "user": "UBN9AFS0N",
+                    "ts": "1622055181.023400"
+                },
+                {
+                    "user": "UGWUJUZHT",
+                    "ts": "1622057526.024800"
+                },
+                {
+                    "user": "UKFNXF0F9",
+                    "ts": "1622077005.026300"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1622078083.026500"
+                },
+                {
+                    "user": "UKFNXF0F9",
+                    "ts": "1622078370.026800"
+                },
+                {
+                    "user": "UJBAJNFLK",
+                    "ts": "1622090502.027300"
+                },
+                {
+                    "user": "UKDM3GLAJ",
+                    "ts": "1622124581.027600"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1622125343.027800"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1622125853.028000"
+                },
+                {
+                    "user": "UEBG0NPDK",
+                    "ts": "1622135596.028500"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1622304307.031200"
+                },
+                {
+                    "user": "UC2A2ARPT",
+                    "ts": "1622318190.031900"
+                },
+                {
+                    "user": "UJN1TAYEQ",
+                    "ts": "1622340174.032500"
+                },
+                {
+                    "user": "UEBG0NPDK",
+                    "ts": "1622349149.035000"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1622373659.035300"
+                },
+                {
+                    "user": "UE6EFEPTQ",
+                    "ts": "1622634140.037500"
+                },
+                {
+                    "user": "U0112C10V4Y",
+                    "ts": "1622643804.037700"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1622658803.038100"
+                },
+                {
+                    "user": "UJN1TAYEQ",
+                    "ts": "1622930374.041300"
+                },
+                {
+                    "user": "UGWUJUZHT",
+                    "ts": "1623037292.066200"
+                },
+                {
+                    "user": "UJBAJNFLK",
+                    "ts": "1623045043.066700"
+                },
+                {
+                    "user": "UGWUJUZHT",
+                    "ts": "1623068147.075900"
+                },
+                {
+                    "user": "UJBAJNFLK",
+                    "ts": "1623086310.080300"
+                }
             ],
             "is_locked": false,
-            "subscribed": true,
-            "last_read": "1622373659.035300"
+            "subscribed": false
         },
         "blocks": [
             {
@@ -122,7 +229,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://wiki.c2.com/?TutorialDee"
+                                "url": "https:\/\/wiki.c2.com\/?TutorialDee"
                             },
                             {
                                 "type": "text",
@@ -224,7 +331,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://lobste.rs/s/1yfrup/into_tar_pit#c_3ikuv9"
+                                "url": "https:\/\/lobste.rs\/s\/1yfrup\/into_tar_pit#c_3ikuv9"
                             }
                         ]
                     }
@@ -236,7 +343,232 @@
             {
                 "name": "heart",
                 "users": [
-                    "UC2A2ARPT"
+                    "UC2A2ARPT",
+                    "UKJGU23KP"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c342c511-7a32-433a-b78d-bce42ed7dcfe",
+        "type": "message",
+        "text": "&gt; I don't think I'd ever noticed before that their FRP is not Conal Elliott's FRP! Functional _Relational_ Programming, not Functional Reactive Programming. Did everybody else know this?\n*nod*\n\n&gt; Have there been any attempts to build an MM system?\nLast time I asked \/ researched this, I only heard\/saw \"no\" beyond the example in the paper. I think a lot of folks (myself included) have made feints in that direction, before diverting off elsewhere for whatever reason.\n\n&gt; It's not essential vs accidental complexity that an MM system manages, *because I'm skeptical of our ability to separate those categories*\nNeed one of those room-scale \":100:\" buttons I can jump up and down on.",
+        "user": "UC2A2ARPT",
+        "ts": "1622318190.031900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1622318304.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "83s",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't think I'd ever noticed before that their FRP is not Conal Elliott's FRP! Functional "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Relational",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " Programming, not Functional Reactive Programming. Did everybody else know this?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\n*nod*\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Have there been any attempts to build an MM system?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nLast time I asked \/ researched this, I only heard\/saw \"no\" beyond the example in the paper. I think a lot of folks (myself included) have made feints in that direction, before diverting off elsewhere for whatever reason.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It's not essential vs accidental complexity that an MM system manages, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "because I'm skeptical of our ability to separate those categories",
+                                "style": {
+                                    "bold": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nNeed one of those room-scale \""
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "100"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\" buttons I can jump up and down on."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1622048775.021900",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "05a19c64-3cef-4439-89ec-2f2ee6b29e79",
+        "type": "message",
+        "text": "I think that the Cell language is MM inspired. I'd guess heavily inspired, except that the author doesn't cite the tarpit paper. <http:\/\/cell-lang.net\/>",
+        "user": "UJN1TAYEQ",
+        "ts": "1622340174.032500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Y4Mb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think that the Cell language is MM inspired. I'd guess heavily inspired, except that the author doesn't cite the tarpit paper. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/cell-lang.net\/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1622048775.021900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1778B166-0C6A-478B-8768-AE02D28194E7",
+        "type": "message",
+        "text": "Many versions of Eve were essentially MM systems that tried out different points in the implementation space. From pure log + view to various forms of mutable. ",
+        "user": "UEBG0NPDK",
+        "ts": "1622349149.035000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9e85c7bdd45b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-11-25\/487455880658_9e85c7bdd45b1d2d4721_72.jpg",
+            "first_name": "Chris",
+            "real_name": "Chris Granger",
+            "display_name": "ibdknox",
+            "team": "T5TCAFTA9",
+            "name": "ibdknox",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "x\/h",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Many versions of Eve were essentially MM systems that tried out different points in the implementation space. From pure log + view to various forms of mutable. "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1622048775.021900",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
                 ],
                 "count": 1
             }

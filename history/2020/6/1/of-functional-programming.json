@@ -1,0 +1,208 @@
+[
+    {
+        "client_msg_id": "abf8df98-74cf-41c9-b0e9-fdb25a6de575",
+        "type": "message",
+        "text": "Anyone here implementing a functional language themselves?\n\nI'm interested in: how you do lazy evaluation and how you do any parallelisation (or is that concurrency?)",
+        "user": "UE6EFEPTQ",
+        "ts": "1591010264.028900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "i2\/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Anyone here implementing a functional language themselves?\n\nI'm interested in: how you do lazy evaluation and how you do any parallelisation (or is that concurrency?)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "reply_count": 12,
+        "reply_users_count": 4,
+        "latest_reply": "1597489763.033500",
+        "reply_users": [
+            "U78TZ437S",
+            "UJN1TAYEQ",
+            "UE6EFEPTQ",
+            "UN57U8V53"
+        ],
+        "replies": [
+            {
+                "user": "U78TZ437S",
+                "ts": "1591011718.029000"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1591033694.029300"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1591090165.029500"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1591090207.029700"
+            },
+            {
+                "user": "U78TZ437S",
+                "ts": "1591095684.029900"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1591095731.030100"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1591095799.030300"
+            },
+            {
+                "user": "U78TZ437S",
+                "ts": "1591095853.030500"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1591097607.030700"
+            },
+            {
+                "user": "UN57U8V53",
+                "ts": "1597484528.033100"
+            },
+            {
+                "user": "U78TZ437S",
+                "ts": "1597485286.033300"
+            },
+            {
+                "user": "U78TZ437S",
+                "ts": "1597489763.033500"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "4ae9679c-4715-4067-b79a-71c233f687cf",
+        "type": "message",
+        "text": "We're implementing an eager language (Lamdu), with explicit laziness (actually call by name) via ordinary lam-of-unit.\n\nFor example, a lazy \"List\" type uses a lam-of-unit around the \"rest of list elements\".\n\nFor concurrency, we compile to nodejs, and use its concurrency model behind the scenes. But we hide the callbacks behind our \"IO\" monad (called Mut) so that the callbacks are just the ordinary monadic bind arguments",
+        "user": "U78TZ437S",
+        "ts": "1591011718.029000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ga3a20a76a69",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/da3a20a76a69532fa83e790e89cb4c6c.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "Eyal",
+            "real_name": "Eyal Lotem",
+            "display_name": "eyal",
+            "team": "T5TCAFTA9",
+            "name": "eyal.lotem",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "R+rT",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "We're implementing an eager language (Lamdu), with explicit laziness (actually call by name) via ordinary lam-of-unit.\n\nFor example, a lazy \"List\" type uses a lam-of-unit around the \"rest of list elements\".\n\nFor concurrency, we compile to nodejs, and use its concurrency model behind the scenes. But we hide the callbacks behind our \"IO\" monad (called Mut) so that the callbacks are just the ordinary monadic bind arguments"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U79HM6726"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "ae699aba-2a36-4d89-8bca-8f75038cdcbe",
+        "type": "message",
+        "text": "I am implementing a dynamically typed, pure functional language (<http:\/\/github.com\/curv3d\/curv|github.com\/curv3d\/curv>). It's a work in progress.\n\nData parallelism and concurrency are quite different.\n\nMy language is data parallel. It compiles into data parallel GPU code (GLSL shader programs) or C++. Curv is an array language with array operations that can be executed in parallel, eg using hardware vector instructions. And since all functions are pure, there is no problem mapping a function over each element of an array, and executing all of the function calls in parallel on different cores (calls to pure functions can't interfere with each other via side effects).\n\nGeneral purpose concurrent programming isn't a goal, although I am planning to add support for creating user interfaces via some form of Functional Reactive Programming, and UI programming normally involves concurrency.\n\nHaskell style lazy evaluation is incompatible with my design goals, so it probably won't be added to Curv. As a result, I'm biased, and I don't consider Haskell-style lazy evaluation to be essential to pure functional programming. The real essence is denotative semantics, referential transparency, equational reasoning.\n\nA key problem is that Haskell's model of lazy evaluation is inherently single threaded. It can't be implemented efficiently on a GPU. It is incompatible with data parallelism. There are also problems relating to ease of use, debuggability, the developers ability to understand memory consumption and performance.\n\nFunction calls are strict in Curv. Aside from this being a requirement for GPU compilation, I also think that the downsides of lazy function calls outweigh the benefits, and I don't think that normal order evaluation should be the default.\n\nHaskell lazy lists are a special case of a more general idea of \"procedural data structures\". These are values that behave like data structures, but code is executed when you access data structure elements. Haskell lazy lists are inherently sequential and single threaded, and are impossible to implement on a GPU. I am more interested in exploring a general notion of procedural data that supports data parallelism and can be executed on a GPU.\n\n<@U78TZ437S> mentions that explicit laziness in Lamdu is actually \"call by name\". This is a form of laziness that is compatible with data parallelism. There is some \"call by name\" semantics buried in the Curv implementation, but I so far haven't found the need to document it and expose it in a language primitive. But that might happen once the language is fully designed and implemented.",
+        "user": "UJN1TAYEQ",
+        "ts": "1591033694.029300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vCgLb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I am implementing a dynamically typed, pure functional language ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/github.com\/curv3d\/curv",
+                                "text": "github.com\/curv3d\/curv"
+                            },
+                            {
+                                "type": "text",
+                                "text": "). It's a work in progress.\n\nData parallelism and concurrency are quite different.\n\nMy language is data parallel. It compiles into data parallel GPU code (GLSL shader programs) or C++. Curv is an array language with array operations that can be executed in parallel, eg using hardware vector instructions. And since all functions are pure, there is no problem mapping a function over each element of an array, and executing all of the function calls in parallel on different cores (calls to pure functions can't interfere with each other via side effects).\n\nGeneral purpose concurrent programming isn't a goal, although I am planning to add support for creating user interfaces via some form of Functional Reactive Programming, and UI programming normally involves concurrency.\n\nHaskell style lazy evaluation is incompatible with my design goals, so it probably won't be added to Curv. As a result, I'm biased, and I don't consider Haskell-style lazy evaluation to be essential to pure functional programming. The real essence is denotative semantics, referential transparency, equational reasoning.\n\nA key problem is that Haskell's model of lazy evaluation is inherently single threaded. It can't be implemented efficiently on a GPU. It is incompatible with data parallelism. There are also problems relating to ease of use, debuggability, the developers ability to understand memory consumption and performance.\n\nFunction calls are strict in Curv. Aside from this being a requirement for GPU compilation, I also think that the downsides of lazy function calls outweigh the benefits, and I don't think that normal order evaluation should be the default.\n\nHaskell lazy lists are a special case of a more general idea of \"procedural data structures\". These are values that behave like data structures, but code is executed when you access data structure elements. Haskell lazy lists are inherently sequential and single threaded, and are impossible to implement on a GPU. I am more interested in exploring a general notion of procedural data that supports data parallelism and can be executed on a GPU.\n\n"
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U78TZ437S"
+                            },
+                            {
+                                "type": "text",
+                                "text": " mentions that explicit laziness in Lamdu is actually \"call by name\". This is a form of laziness that is compatible with data parallelism. There is some \"call by name\" semantics buried in the Curv implementation, but I so far haven't found the need to document it and expose it in a language primitive. But that might happen once the language is fully designed and implemented."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1591010264.028900",
+        "parent_user_id": "UE6EFEPTQ"
+    }
+]

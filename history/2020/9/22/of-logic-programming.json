@@ -1,0 +1,909 @@
+[
+    {
+        "client_msg_id": "AE14D1CD-E2F5-464E-AEBF-406025E2266B",
+        "type": "message",
+        "text": "<@UBSMEUXAA> My plan is to expose a declarative vector graphics API as the canonical API for 2D graphics. That should be pretty easy in a logic language: every line\/shape is a fact. For 3D, we’ll need a different model.",
+        "user": "UCGAK10LS",
+        "ts": "1600759607.061300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "\/hOU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UBSMEUXAA"
+                            },
+                            {
+                                "type": "text",
+                                "text": " My plan is to expose a declarative vector graphics API as the canonical API for 2D graphics. That should be pretty easy in a logic language: every line\/shape is a fact. For 3D, we’ll need a different model."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422685.015800",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "4FB24F50-6E3A-4273-9FEF-7C670BC5E621",
+        "type": "message",
+        "text": "Perhaps there is a more general solution than vectors, but declarative pixel-level rendering that compiles to GPU shaders seems unrealistic in the medium term.",
+        "user": "UCGAK10LS",
+        "ts": "1600759714.063300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8bw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Perhaps there is a more general solution than vectors, but declarative pixel-level rendering that compiles to GPU shaders seems unrealistic in the medium term."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422685.015800",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "880733b3-5d51-4f5c-b51d-9749598f957e",
+        "type": "message",
+        "text": "I purpose that logic programming is about decoupling how information was added to a system from re-actively taking action on that information. This model is particularly important in traditional browser\/front-end applications. The current front end ecosystem structures applications in terms of the DOM, but its also valuable to view\n\nBut really we need tools that can view the system through either the DOM view or the Action based view.\n\nTo be concrete:\n\ntraditional dom view:\n\nhtml\n   when\n       event\n   then\n        html\/action\/etc...\n\naction view\n\naction\n  when\n     event\n  then\n     html\/action\/etc...\n\nThe key to having both these views is that the system be encoded in such a way that it can read itself and produce multiple views. The closest implementation i have seen to realizing an efficient version of this is <https:\/\/github.com\/oakes\/odoyle-rum-todo>. Though it doesn't actively try to realize multiple views, the data centric approach gives me how that <https:\/\/github.com\/oakes\/odoyle-rum-todo\/issues\/1|tools> can easily read it to provide this.\n\n<https:\/\/github.com\/oakes\/odoyle-rum-todo\/blob\/8bd1ea6e066a169aff0e1cf2fe9b2e239bbb4c69\/src\/odoyle_rum_todo\/core.cljc#L90|Here>\nwe see the action that effects the footer.\n```[:what\n      [::global ::all-todos all-todos]\n      [::global ::showing showing]\n      :then\n      (let [*session (orum\/prop)\n            active-todos (remove :done all-todos)\n            completed-todos (filter :done all-todos)\n            active (count active-todos)\n            completed (count completed-todos)\n            filter-attrs (fn [filter-kw]\n                           {:class (when (= filter-kw showing) \"selected\")\n                            :on-click #(insert! *session ::global {::showing filter-kw})})]\n        [:footer#footer\n         [:span#todo-count\n          [:strong active] \" \" (case active 1 \"item\" \"items\") \" left\"]\n         [:ul#filters\n          [:li [:a (filter-attrs :all) \"All\"]]\n          [:li [:a (filter-attrs :active) \"Active\"]]\n          [:li [:a (filter-attrs :completed) \"Completed\"]]]\n         (when (pos? completed)\n           [:button#clear-completed {:on-click #(run! (partial retract! *session)\n                                                      (map :id completed-todos))}\n            \"Clear completed\"])])]```",
+        "user": "UJNJQD2AC",
+        "ts": "1600779847.064300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gd7dd06bd18b",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8d7dd06bd18b8fce6a4c04dfede7f616.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "",
+            "real_name": "Drewverlee",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "drew.verlee",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJNJQD2AC",
+            "ts": "1600780036.000000"
+        },
+        "attachments": [
+            {
+                "service_name": "GitHub",
+                "title": "oakes\/odoyle-rum-todo",
+                "title_link": "https:\/\/github.com\/oakes\/odoyle-rum-todo",
+                "text": "Contribute to oakes\/odoyle-rum-todo development by creating an account on GitHub.",
+                "fallback": "GitHub: oakes\/odoyle-rum-todo",
+                "thumb_url": "https:\/\/avatars0.githubusercontent.com\/u\/216147?s=400&v=4",
+                "from_url": "https:\/\/github.com\/oakes\/odoyle-rum-todo",
+                "thumb_width": 400,
+                "thumb_height": 400,
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/github.png",
+                "id": 1,
+                "original_url": "https:\/\/github.com\/oakes\/odoyle-rum-todo"
+            },
+            {
+                "service_name": "GitHub",
+                "title": "oakes\/odoyle-rum-todo",
+                "title_link": "https:\/\/github.com\/oakes\/odoyle-rum-todo\/blob\/8bd1ea6e066a169aff0e1cf2fe9b2e239bbb4c69\/src\/odoyle_rum_todo\/core.cljc#L90",
+                "text": "Contribute to oakes\/odoyle-rum-todo development by creating an account on GitHub.",
+                "fallback": "GitHub: oakes\/odoyle-rum-todo",
+                "thumb_url": "https:\/\/avatars0.githubusercontent.com\/u\/216147?s=400&v=4",
+                "from_url": "https:\/\/github.com\/oakes\/odoyle-rum-todo\/blob\/8bd1ea6e066a169aff0e1cf2fe9b2e239bbb4c69\/src\/odoyle_rum_todo\/core.cljc#L90",
+                "thumb_width": 400,
+                "thumb_height": 400,
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/github.png",
+                "id": 2,
+                "original_url": "https:\/\/github.com\/oakes\/odoyle-rum-todo\/blob\/8bd1ea6e066a169aff0e1cf2fe9b2e239bbb4c69\/src\/odoyle_rum_todo\/core.cljc#L90"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "B=BS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I purpose that logic programming is about decoupling how information was added to a system from re-actively taking action on that information. This model is particularly important in traditional browser\/front-end applications. The current front end ecosystem structures applications in terms of the DOM, but its also valuable to view\n\nBut really we need tools that can view the system through either the DOM view or the Action based view.\n\nTo be concrete:\n\ntraditional dom view:\n\nhtml\n   when\n       event\n   then\n        html\/action\/etc...\n\naction view\n\naction\n  when\n     event\n  then\n     html\/action\/etc...\n\nThe key to having both these views is that the system be encoded in such a way that it can read itself and produce multiple views. The closest implementation i have seen to realizing an efficient version of this is "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/github.com\/oakes\/odoyle-rum-todo"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Though it doesn't actively try to realize multiple views, the data centric approach gives me how that "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/github.com\/oakes\/odoyle-rum-todo\/issues\/1",
+                                "text": "tools"
+                            },
+                            {
+                                "type": "text",
+                                "text": " can easily read it to provide this.\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/github.com\/oakes\/odoyle-rum-todo\/blob\/8bd1ea6e066a169aff0e1cf2fe9b2e239bbb4c69\/src\/odoyle_rum_todo\/core.cljc#L90",
+                                "text": "Here"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nwe see the action that effects the footer.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "[:what\n      [::global ::all-todos all-todos]\n      [::global ::showing showing]\n      :then\n      (let [*session (orum\/prop)\n            active-todos (remove :done all-todos)\n            completed-todos (filter :done all-todos)\n            active (count active-todos)\n            completed (count completed-todos)\n            filter-attrs (fn [filter-kw]\n                           {:class (when (= filter-kw showing) \"selected\")\n                            :on-click #(insert! *session ::global {::showing filter-kw})})]\n        [:footer#footer\n         [:span#todo-count\n          [:strong active] \" \" (case active 1 \"item\" \"items\") \" left\"]\n         [:ul#filters\n          [:li [:a (filter-attrs :all) \"All\"]]\n          [:li [:a (filter-attrs :active) \"Active\"]]\n          [:li [:a (filter-attrs :completed) \"Completed\"]]]\n         (when (pos? completed)\n           [:button#clear-completed {:on-click #(run! (partial retract! *session)\n                                                      (map :id completed-todos))}\n            \"Clear completed\"])])]"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600779847.064300",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1600866033.001700",
+        "reply_users": [
+            "UCGAK10LS",
+            "UJNJQD2AC"
+        ],
+        "replies": [
+            {
+                "user": "UCGAK10LS",
+                "ts": "1600833182.000500"
+            },
+            {
+                "user": "UJNJQD2AC",
+                "ts": "1600866033.001700"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "c6431e3f-3d69-4ed7-821c-5ea94aabac07",
+        "type": "message",
+        "text": "For an explicit link between types and logic programming, see the <http:\/\/shenlanguage.org\/|Shen> language. It's a dialect of Lisp with optional type checking. And it comes with a built-in Prolog-like sublanguage for writing type checkers. There is a default type checker of course, but my understanding is that you could replace it with your own (I didn't try). Types can thus be defined by a wide range of predicates.",
+        "user": "UJBAJNFLK",
+        "ts": "1600786844.065100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e169f54bbaf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-03-12\/1859691333940_e169f54bbaf8b9b36b12_72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5Mm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "For an explicit link between types and logic programming, see the "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/shenlanguage.org\/",
+                                "text": "Shen"
+                            },
+                            {
+                                "type": "text",
+                                "text": " language. It's a dialect of Lisp with optional type checking. And it comes with a built-in Prolog-like sublanguage for writing type checkers. There is a default type checker of course, but my understanding is that you could replace it with your own (I didn't try). Types can thus be defined by a wide range of predicates."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600398283.002600",
+        "parent_user_id": "UA14TGLTC",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "be19f93b-7180-41ec-ae79-eca0ef1e0e5d",
+        "type": "message",
+        "text": "Oh yeah I agree that it'd be a big undertaking and a bad idea to start with",
+        "user": "UBSMEUXAA",
+        "ts": "1600794463.065300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0edf98a60210",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-26\/774747080560_0edf98a60210d3ab07ea_72.jpg",
+            "first_name": "",
+            "real_name": "Scott Anderson",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "scottan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MAanP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh yeah I agree that it'd be a big undertaking and a bad idea to start with"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422685.015800",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "e08188ba-fd82-4d90-89ed-aa922862e519",
+        "type": "message",
+        "text": "Mostly speculating about what future evolution might look like, how you get more functionality while still keeping a declarative core",
+        "user": "UBSMEUXAA",
+        "ts": "1600794548.065500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0edf98a60210",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-26\/774747080560_0edf98a60210d3ab07ea_72.jpg",
+            "first_name": "",
+            "real_name": "Scott Anderson",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "scottan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TI2a",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Mostly speculating about what future evolution might look like, how you get more functionality while still keeping a declarative core"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422685.015800",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCGAK10LS"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "183492fc-15d5-4e66-8866-e5e408d30794",
+        "type": "message",
+        "text": "I was planning to work on <http:\/\/aima.cs.berkeley.edu\/> at some point. Section 3 Knowledge, reasoning, and planning covers first order logic and has algorithm implementations in java and python (and other languages) <https:\/\/github.com\/aimacode>",
+        "user": "UN9SCH5RD",
+        "ts": "1600799261.065900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gaa31b79aded",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aa31b79adedc3f60547769f1a8971ba6.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Emmanuel Oga",
+            "display_name": "Emmanuel Oga",
+            "team": "T5TCAFTA9",
+            "name": "emmanueloga",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "GitHub",
+                "title": "aimacode",
+                "title_link": "https:\/\/github.com\/aimacode",
+                "text": "Code for the book \"Artificial Intelligence: A Modern Approach\" - aimacode",
+                "fallback": "GitHub: aimacode",
+                "from_url": "https:\/\/github.com\/aimacode",
+                "thumb_url": "https:\/\/avatars3.githubusercontent.com\/u\/17015933?s=280&v=4",
+                "thumb_width": 74,
+                "thumb_height": 74,
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/github.png",
+                "id": 1,
+                "original_url": "https:\/\/github.com\/aimacode"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yz8t8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I was planning to work on "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/aima.cs.berkeley.edu\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": " at some point. Section 3 Knowledge, reasoning, and planning covers first order logic and has algorithm implementations in java and python (and other languages) "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/github.com\/aimacode"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600708178.052000",
+        "parent_user_id": "USH01JEDQ",
+        "reactions": [
+            {
+                "name": "eyes",
+                "users": [
+                    "UHWC9PXBL"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "5889f849-a48b-4c10-a224-32cef34244a7",
+        "type": "message",
+        "text": "has anybody here worked through that book? It is massive :grimacing:",
+        "user": "UN9SCH5RD",
+        "ts": "1600799298.066200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gaa31b79aded",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aa31b79adedc3f60547769f1a8971ba6.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Emmanuel Oga",
+            "display_name": "Emmanuel Oga",
+            "team": "T5TCAFTA9",
+            "name": "emmanueloga",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "CNo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "has anybody here worked through that book? It is massive "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "grimacing"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600708178.052000",
+        "parent_user_id": "USH01JEDQ"
+    },
+    {
+        "client_msg_id": "1b3ed5cd-c4b3-41e4-9aa6-5f520e84bce0",
+        "type": "message",
+        "text": "but the prose looks very approachable",
+        "user": "UN9SCH5RD",
+        "ts": "1600799316.066400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gaa31b79aded",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aa31b79adedc3f60547769f1a8971ba6.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Emmanuel Oga",
+            "display_name": "Emmanuel Oga",
+            "team": "T5TCAFTA9",
+            "name": "emmanueloga",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+gEAU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "but the prose looks very approachable"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600708178.052000",
+        "parent_user_id": "USH01JEDQ"
+    },
+    {
+        "client_msg_id": "E19BC3CF-FA1F-41B6-9C43-1691CC849B5E",
+        "type": "message",
+        "text": "shen is really cool! here’s a video on it: <https:\/\/youtu.be\/lMcRBdSdO_U|https:\/\/youtu.be\/lMcRBdSdO_U>",
+        "user": "UHWC9PXBL",
+        "ts": "1600801656.067200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "\"Shen: A Sufficiently Advanced Lisp\" by Aditya Siram",
+                "title_link": "https:\/\/youtu.be\/lMcRBdSdO_U",
+                "author_name": "Strange Loop",
+                "author_link": "https:\/\/www.youtube.com\/channel\/UC_QIfHvN9auy2CoOdSfMWDw",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/lMcRBdSdO_U\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: \"Shen: A Sufficiently Advanced Lisp\" by Aditya Siram",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/lMcRBdSdO_U?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/lMcRBdSdO_U",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/lMcRBdSdO_U"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "B4mgb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "shen is really cool! here’s a video on it: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/youtu.be\/lMcRBdSdO_U",
+                                "text": "https:\/\/youtu.be\/lMcRBdSdO_U"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600398283.002600",
+        "parent_user_id": "UA14TGLTC"
+    },
+    {
+        "client_msg_id": "a5c12a0e-43f7-490d-9fb1-11df55784bb5",
+        "type": "message",
+        "text": "I'm struggling to see what this has to do with Logic Programming in particular. The \"decoupling\" you mention is a characteristic of well-written programs in any language, and you're talking about reactive GUIs (React, Vue...), which can be (and are) described using non-Logic languages.",
+        "user": "UCGAK10LS",
+        "ts": "1600833182.000500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "H8x",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm struggling to see what this has to do with Logic Programming in particular. The \"decoupling\" you mention is a characteristic of well-written programs in any language, and you're talking about reactive GUIs (React, Vue...), which can be (and are) described using non-Logic languages."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600779847.064300",
+        "parent_user_id": "UJNJQD2AC"
+    },
+    {
+        "client_msg_id": "0256a7f4-b07f-4263-81d5-fa324760cb2e",
+        "type": "message",
+        "text": "If it's a graphics API that naturally fits with logic programming, the question for me becomes how to match logic programming constructs to the API naturally.  Say, for illustration, we use predicates with the same expressive power as a SVG document:\n```<!DOCTYPE html>\n&lt;html&gt;\n&lt;body&gt;\n\n&lt;svg height=\"100\" width=\"100\"&gt;\n  &lt;circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" stroke-width=\"3\" fill=\"red\" \/&gt;\n  Sorry, your browser does not support inline SVG.  \n&lt;\/svg&gt; \n \n&lt;\/body&gt;\n&lt;\/html&gt;```\nBecomes something like this:\n```svg(document).\nheight(document, 100).\nwidth(document, 100).\nin(document, c).\ncircle(c).\ncx(c, 50).\ncy(c, 50).\nr(c, 40).\nstroke(c, black).\nstroke-width(c, 3).\nfill(c, red).```\nIs this natural?  Do the things you want to do with the document correspond to the constructs that the Logic language have?\n```fill(S, red) :- bold-red(S).\nstroke(S, black) :- bold-red(S).\nstroke-width(S, 3) :- bold-red(S).```\nMaybe.  That's promising.  What would this mean?\n```bold-red(c).\nfill(c, blue).```\nKeep following this and you might discover some new features you want in your logic programming language.",
+        "user": "UA14TGLTC",
+        "ts": "1600839453.000900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "71H",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If it's a graphics API that naturally fits with logic programming, the question for me becomes how to match logic programming constructs to the API naturally.  Say, for illustration, we use predicates with the same expressive power as a SVG document:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "<!DOCTYPE html>\n<html>\n<body>\n\n<svg height=\"100\" width=\"100\">\n  <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" stroke-width=\"3\" fill=\"red\" \/>\n  Sorry, your browser does not support inline SVG.  \n<\/svg> \n \n<\/body>\n<\/html>"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Becomes something like this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "svg(document).\nheight(document, 100).\nwidth(document, 100).\nin(document, c).\ncircle(c).\ncx(c, 50).\ncy(c, 50).\nr(c, 40).\nstroke(c, black).\nstroke-width(c, 3).\nfill(c, red)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Is this natural?  Do the things you want to do with the document correspond to the constructs that the Logic language have?\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "fill(S, red) :- bold-red(S).\nstroke(S, black) :- bold-red(S).\nstroke-width(S, 3) :- bold-red(S)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Maybe.  That's promising.  What would this mean?\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "bold-red(c).\nfill(c, blue)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Keep following this and you might discover some new features you want in your logic programming language."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422685.015800",
+        "parent_user_id": "UCGAK10LS",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UCGAK10LS",
+                    "UBSMEUXAA"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "981f2395-28f5-4c0d-8a6d-913a812b014d",
+        "type": "message",
+        "text": "In another thread, I was just saying something about modeling SVG in a logic language.  Had a bit like this:\n```fill(S, red) :- bold-red(S).\nstroke(S, black) :- bold-red(S).\nstroke-width(S, 3) :- bold-red(S).```\nThen I stopped short of a neat sort of puzzle.  With a similar definition `cool-blue` (specifying a fill and a stroke, make it a dashed one):\n```fill(S, blue) :- cool-blue(S).\nstroke(S, cornflowerblue) :- cool-blue(```\n... Slack, you just lost my edit!",
+        "user": "UA14TGLTC",
+        "ts": "1600840348.001200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UA14TGLTC",
+            "ts": "1600840634.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WEqQo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In another thread, I was just saying something about modeling SVG in a logic language.  Had a bit like this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "fill(S, red) :- bold-red(S).\nstroke(S, black) :- bold-red(S).\nstroke-width(S, 3) :- bold-red(S)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Then I stopped short of a neat sort of puzzle.  With a similar definition "
+                            },
+                            {
+                                "type": "text",
+                                "text": "cool-blue",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (specifying a fill and a stroke, make it a dashed one):\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "fill(S, blue) :- cool-blue(S).\nstroke(S, cornflowerblue) :- cool-blue("
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "... Slack, you just lost my edit!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422424.013200",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "9bde9a97-bba4-4937-b0e8-f51857e09160",
+        "type": "message",
+        "text": "Anyway, if you wrote:\n```bold-red(s).\ncool-blue(s).```\nyou would kind of expect a mix and match of bold-red and cool-blue qualities, and you would kind long for a way to say that `s` is bold-red and\/or cool-blue.",
+        "user": "UA14TGLTC",
+        "ts": "1600841017.001500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "F+M",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Anyway, if you wrote:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "bold-red(s).\ncool-blue(s)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "you would kind of expect a mix and match of bold-red and cool-blue qualities, and you would kind long for a way to say that "
+                            },
+                            {
+                                "type": "text",
+                                "text": "s",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is bold-red and\/or cool-blue."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1600422424.013200",
+        "parent_user_id": "UCGAK10LS"
+    }
+]

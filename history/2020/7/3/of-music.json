@@ -1,0 +1,112 @@
+[
+    {
+        "client_msg_id": "02da4ce2-1816-43cb-a78d-708ef6467482",
+        "type": "message",
+        "text": "yes, currently 512.  I have various investigations to do, and there are trade offs to be considered.\n• As you can see, there isn't much startup delay assigning work to the threadpool, especially compared to the processing time for an individual graph\/synth.\n• With less samples (as you were possibly hinting at), the dynamics would change.\n• The graph is optimised for flexibility, but making nodes that did combined work might be prudent at some point.  Each node effectively means that the memory is passed over again, and in general is copied.  The effect chain that works on the stereo path could be an optional single node that combines delay, phaser, reverb, etc.  Since it will often be the same.\n• I've actually spent very little time optimising anything; just the bigger picture stuff; using memory pools for buffers, ensuring the audio thread doesn't have to wait for anything.\n• I have to also make this work in the context of the overall app where graphics\/rendering are also occurring.   I may have mentioned before, that making a unified app has interesting challenges because the process boundaries have gone.  Sonic Pi for example has a ruby process that is working on the notes, and SuperCollider.  This is effectively 'free' threading once the communication is worked out.  In a single app, you have to manage more threading issues to get it all to work together.\nIn short, lots of tuning to do.  But I'm going for the bigger picture 'get it all working\/stable', ship it, and work on the details once people can play with it.",
+        "user": "UUQ2EQW21",
+        "ts": "1593763333.015600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "Chris",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "AOeq",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yes, currently 512.  I have various investigations to do, and there are trade offs to be considered.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "As you can see, there isn't much startup delay assigning work to the threadpool, especially compared to the processing time for an individual graph\/synth."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "With less samples (as you were possibly hinting at), the dynamics would change."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The graph is optimised for flexibility, but making nodes that did combined work might be prudent at some point.  Each node effectively means that the memory is passed over again, and in general is copied.  The effect chain that works on the stereo path could be an optional single node that combines delay, phaser, reverb, etc.  Since it will often be the same."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I've actually spent very little time optimising anything; just the bigger picture stuff; using memory pools for buffers, ensuring the audio thread doesn't have to wait for anything."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I have to also make this work in the context of the overall app where graphics\/rendering are also occurring.   I may have mentioned before, that making a unified app has interesting challenges because the process boundaries have gone.  Sonic Pi for example has a ruby process that is working on the notes, and SuperCollider.  This is effectively 'free' threading once the communication is worked out.  In a single app, you have to manage more threading issues to get it all to work together."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In short, lots of tuning to do.  But I'm going for the bigger picture 'get it all working\/stable', ship it, and work on the details once people can play with it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1593716423.014000",
+        "parent_user_id": "UUQ2EQW21",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

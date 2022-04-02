@@ -1,0 +1,239 @@
+[
+    {
+        "type": "message",
+        "text": "Whew, I'm not sure where to begin. I have assorted complaints and ideas on various levels of the stack, but I haven't put in the time to gather them into something coherent yet. If I write about it now, it'll be a badly researched stream-of-consciousness rant with bad english, so bear with me. I should probably also admit that I'm not very knowledgeable about hardware or kernels, so I might suggest unrealistic changes to them. Once we get up to the user level, I'm a bit more confident about what's possible.\n\nThis is one of the best talks I've seen about the hardware and OS problems at the bottom of the stack: <https:\/\/youtu.be\/kZRE7HIO3vk> - The Thirty Million Line Problem, Casey Muratori\n\nSecurity and privacy need to be built into the design from the start, instead of tacked-on later in a patchwork. All apps should be sandboxed by default. The user should be able to grant permissions in a fine-grained way, for example let the app read one specific file, but not write. This would instantly disable 99% of the danger of ransomware. Also resource limits like CPU, memory consumption, ports, network bandwidth etc. I know this is mostly already possible in various OSes today, but only for very advanced users. It needs to be designed for everyone. There should be one place to get an overview of all permissions granted to all apps. Even something like sound volume can be changed there. The iphone OS is half right in this regard, but also half wrong because Apple holds all the power. The user should hold all the power!\n\nConfig files in plain text format should die, because they enforce a single linear \/ one-dimensional order, and because they're unstructured data. That data should be stored in a structured way, similar to how many people here wish for code to be stored in a structured way. So do I prefer the windows registry over plain text config files? No, that's not what I want either. I want the best of both worlds.\n\nSpeaking of which, settings in the OS interface can be thought of from several \"angles\".\n1. \"I want to change the volume of something\", so you open the sound settings, and the next question is \"For which app or output device do I want to change it?\"\n2. The opposite. You start in a list of apps, you open one of them, and think \"Given this app, I want to change the volume.\"\n3. You start in a list of attached devices (printers, speakers, headphones, keyboards), you open one of them, and think \"given these headphones, what do I want to configure about them? Volume!\"\nAll 3 ways of approaching the problem make logical sense and should be valid paths. OS interfaces today are mostly structured like trees, where there's only one path to a node, but they need to be structured like graphs instead. However, graphs are more disorienting than trees, so the design needs to communicate well to compensate.\n\nSpeaking of which, all user interfaces, without exception, should be searchable with fuzzy string matching and synonyms. Mac OS is good here, all settings in the menu system are automatically searchable, but this is undermined by the fact that we spend most of our time inside the web browser, and website interfaces are not searchable, and things move around with every damn update, and today's cryptic icon design trends don't exactly help. These people have the right idea: <https:\/\/blog.repl.it\/clui>\n\nThere should be no such thing as \"installing\" an app. Apps simply exist in a global address space. The first time you use one, it's automatically downloaded and cached locally. Kinda like web apps? Yes! But the web sucks in other ways. The web browser is a behemoth. No one can make a new one from scratch to compete with Google's dominance. I've seen suggestions for a new, better architecture, but I can't seem to find the talk again right now.\n\nAnd the layout model in CSS is an overcomplicated mess. The Subform team invented the best alternative I've seen so far, beautifully simple: <https:\/\/www.deconstructconf.com\/2017\/kevin-lynagh-choosing-features>\n\nToday, for non-technical users, the filesystem is on its way out. Most information they use is stored in silos per app, or maybe stored in the filesystem but never accessed that way in practice. On Windows, each user is given a single folder which is supposed to be their own, like C:\/Users\/Emil\/, and the rest of the disk is full of crap which they don't understand. And even the user folder is full of crap placed there by apps. No wonder people don't learn to use the filesystem. The consequence is that they lose data often. Full backups are super complicated because each app does it differently. This is completely backwards. The filesystem should primarily serve the user! Let's tuck away all \"app-generated\" crap in a single folder, and give users full control of the rest, let them own it and organize it.\n\nSpeaking of which, the filesystem needs to become more like a structured database than a tree of opaque blobs. I know people have tried this already, like <https:\/\/en.wikipedia.org\/wiki\/WinFS> and I know the approach hasn't been very successful yet, but I still believe it's possible, and the potential benefits are huge.\n\nLetting programs communicate with each other, like with piping in the linux shell, is a great feature, but can we please get rid of the plain text format? Command-line programs should produce and consume structured data. I know this already exists in some dusty corner, but it needs to become dominant. The most common structures (1d lists, 2d tables, trees, graphs) should have a specification which everyone follows, so that there can be competing, intercompatible visualizers of such data.\n\nIt needs to be much easier to send stuff between two computers or smartphones in the same room. Today, sending files over a local network is an \"expert\" feature, while the simplest way is often to upload it to some cloud service and download again on the other device - that's ridiculous! I might be sending stuff across the atlantic ocean! The exhaustion of the IPv4 address space, and the widespread use of NAT, probably contributed to the success of the \"send via a central server\" business model. I wish the advent of IPv6 can help make direct peer communication more viable again.\n\nMost corporate firewalls block UDP traffic by default. That's crippling! So even when UDP would be a better fit, app developers send data over TCP instead because that's what all the simple frameworks support. I've met many web developers who have no idea what UDP does. The only way to send such data inside a web browser is through WebRTC which is complex and hard to learn. This post says it better: <https:\/\/www.gafferongames.com\/post\/why_cant_i_send_udp_packets_from_a_browser\/>\n\nAlways blows my mind that even huge companies with huge budgets produce UI designs which are easy to misunderstand. Maybe there's no amount of \"reinventing the stack\" that could prevent bad design from occuring, but maybe a stronger set of primitives and guidelines could help a little bit. I mean primitives like checkboxes, radio buttons, scrollbars etc. And maybe just a culture of calling out bad design when we see it. So let me do that now. Some examples I encountered personally:\n\n1st pic. I want to share my screen in Google Meet in the Chrome browser. Why is the share button disabled? Answer: because you first have to select _which_ screen you want to share. But when you only have 1 screen, it's very confusing.\n\n2nd pic. I got on this train with a ticket for seat number 250. Should I go left or right?\n\n3rd pic. The controls for my combined fridge &amp; freezer. The fridge is on top, the freezer in the bottom. If I want to make the fridge cooler, which knob do I turn? The symbols try to illustrate it, but they're black and white. Does the black area symbolize the thing I'm changing, or the white area? Most people will probably guess correctly, but we shouldn't have to guess at all!\n\nThe knob is almost symmetrical. Which side of it is the \"pointer\"? Answer: the slightly thinner side. But it's subtle and hard to see.\n\nWhat does \"max\" mean? Max effect, or max temperature? Answer: max effect. But it's not obvious.\n\nI'll take a break here. Each point I brought up ofc has a ton of caveats and deserve a full-length essay. :sweat_smile:",
+        "files": [
+            {
+                "id": "F01QFA26211",
+                "created": 1615123452,
+                "timestamp": 1615123452,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U01NQ4945N1",
+                "editable": false,
+                "size": 15445,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01QFA26211\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01QFA26211\/download\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QFA26211-536e0a97c5\/image_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QFA26211-536e0a97c5\/image_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QFA26211-536e0a97c5\/image_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360_w": 360,
+                "thumb_360_h": 256,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QFA26211-536e0a97c5\/image_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480_w": 480,
+                "thumb_480_h": 342,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QFA26211-536e0a97c5\/image_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QFA26211-536e0a97c5\/image_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720_w": 720,
+                "thumb_720_h": 513,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QFA26211-536e0a97c5\/image_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800_w": 800,
+                "thumb_800_h": 570,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QFA26211-536e0a97c5\/image_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_960_w": 960,
+                "thumb_960_h": 683,
+                "original_w": 965,
+                "original_h": 687,
+                "thumb_tiny": "AwAiADBftln\/AM8n\/L\/69Wo0hljV1j4YZGaw6uyXEsMFuI32gpk8e9O7FZGl5EX9yjyIv7lZf2+coBvwc8tir9hM80bl33YbAOMcUXYWRKYIgM7KpfbLP\/nk\/wCX\/wBetFvun6VzlF2FkFbFvbRTWsJkXJC461j1KtzMihVlYAdBSGa32C2\/55\/qalhhjgUiNcAnPWsb7Xcf89mo+13H\/PZqANxiNp+lc5U32u4\/57NUNABRRRQAUUUUAFFFFAH\/2Q==",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U01NQ4945N1\/F01QFA26211\/image.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F01QFA26211-34f1db1ee9",
+                "is_starred": false,
+                "has_rich_preview": false
+            },
+            {
+                "id": "F01Q8AN48MU",
+                "created": 1615123476,
+                "timestamp": 1615123476,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U01NQ4945N1",
+                "editable": false,
+                "size": 1780523,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01Q8AN48MU\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01Q8AN48MU\/download\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360_w": 360,
+                "thumb_360_h": 270,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480_w": 480,
+                "thumb_480_h": 360,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720_w": 720,
+                "thumb_720_h": 540,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800_w": 800,
+                "thumb_800_h": 600,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_960_w": 960,
+                "thumb_960_h": 720,
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01Q8AN48MU-073762f8e9\/image_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 768,
+                "original_w": 1024,
+                "original_h": 768,
+                "thumb_tiny": "AwAkADCUagneMj8RThfRH+A\/pWazBwMgDHsMmk3KDyP0\/wDr0hmn9ug7qfyprXds3UN+VZZajdRYLmut1bY4z+VO8+3Pf9Kx9wI5pwwrHGOfYf40WC408HG0HHejk\/wipIl3zBT0Jq4LeNTgoT+NNJsTaRn8\/wB0UYP90VLLjdlQQOCBUsG0nbsDMeOaSu3YbslcqYPoKlVcjJ6+uKnu4DGoO0AZxxUCcDFDBNCw8TqferM0jfNz2NVof9cv1qeb+L6H+laRMZ\/EiCQY\/SnR8SDHrSS\/0FKn3x9ahfEav4SxeMTHj3qmOv41bvPu\/jVQdfxpyJjsf\/\/Z",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U01NQ4945N1\/F01Q8AN48MU\/image.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F01Q8AN48MU-14a699ae2e",
+                "is_starred": false,
+                "has_rich_preview": false
+            },
+            {
+                "id": "F01QC1J4NJH",
+                "created": 1615123481,
+                "timestamp": 1615123481,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U01NQ4945N1",
+                "editable": false,
+                "size": 2049456,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01QC1J4NJH\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01QC1J4NJH\/download\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360_w": 360,
+                "thumb_360_h": 195,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480_w": 480,
+                "thumb_480_h": 259,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720_w": 720,
+                "thumb_720_h": 389,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800_w": 800,
+                "thumb_800_h": 432,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_960_w": 960,
+                "thumb_960_h": 519,
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01QC1J4NJH-4293065fa3\/image_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 554,
+                "original_w": 1700,
+                "original_h": 919,
+                "thumb_tiny": "AwAZADCXikyDQQQc4+vFIw5HFAgpCRTqYRznFACZpMigkA0g5PFAF9kGO9VLguoO0Zx7VdbpVW4+4frULcorK+GG9gPrQ0sY\/iz9Kgm6r9KjqkhFgzJ2UmmmduwAqLvQKdgP\/9k=",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U01NQ4945N1\/F01QC1J4NJH\/image.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F01QC1J4NJH-0d09563f56",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "user": "U01NQ4945N1",
+        "ts": "1615123523.027400",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WeV3l",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Whew, I'm not sure where to begin. I have assorted complaints and ideas on various levels of the stack, but I haven't put in the time to gather them into something coherent yet. If I write about it now, it'll be a badly researched stream-of-consciousness rant with bad english, so bear with me. I should probably also admit that I'm not very knowledgeable about hardware or kernels, so I might suggest unrealistic changes to them. Once we get up to the user level, I'm a bit more confident about what's possible.\n\nThis is one of the best talks I've seen about the hardware and OS problems at the bottom of the stack: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/youtu.be\/kZRE7HIO3vk"
+                            },
+                            {
+                                "type": "text",
+                                "text": " - The Thirty Million Line Problem, Casey Muratori\n\nSecurity and privacy need to be built into the design from the start, instead of tacked-on later in a patchwork. All apps should be sandboxed by default. The user should be able to grant permissions in a fine-grained way, for example let the app read one specific file, but not write. This would instantly disable 99% of the danger of ransomware. Also resource limits like CPU, memory consumption, ports, network bandwidth etc. I know this is mostly already possible in various OSes today, but only for very advanced users. It needs to be designed for everyone. There should be one place to get an overview of all permissions granted to all apps. Even something like sound volume can be changed there. The iphone OS is half right in this regard, but also half wrong because Apple holds all the power. The user should hold all the power!\n\nConfig files in plain text format should die, because they enforce a single linear \/ one-dimensional order, and because they're unstructured data. That data should be stored in a structured way, similar to how many people here wish for code to be stored in a structured way. So do I prefer the windows registry over plain text config files? No, that's not what I want either. I want the best of both worlds.\n\nSpeaking of which, settings in the OS interface can be thought of from several \"angles\".\n1. \"I want to change the volume of something\", so you open the sound settings, and the next question is \"For which app or output device do I want to change it?\"\n2. The opposite. You start in a list of apps, you open one of them, and think \"Given this app, I want to change the volume.\"\n3. You start in a list of attached devices (printers, speakers, headphones, keyboards), you open one of them, and think \"given these headphones, what do I want to configure about them? Volume!\"\nAll 3 ways of approaching the problem make logical sense and should be valid paths. OS interfaces today are mostly structured like trees, where there's only one path to a node, but they need to be structured like graphs instead. However, graphs are more disorienting than trees, so the design needs to communicate well to compensate.\n\nSpeaking of which, all user interfaces, without exception, should be searchable with fuzzy string matching and synonyms. Mac OS is good here, all settings in the menu system are automatically searchable, but this is undermined by the fact that we spend most of our time inside the web browser, and website interfaces are not searchable, and things move around with every damn update, and today's cryptic icon design trends don't exactly help. These people have the right idea: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/blog.repl.it\/clui"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nThere should be no such thing as \"installing\" an app. Apps simply exist in a global address space. The first time you use one, it's automatically downloaded and cached locally. Kinda like web apps? Yes! But the web sucks in other ways. The web browser is a behemoth. No one can make a new one from scratch to compete with Google's dominance. I've seen suggestions for a new, better architecture, but I can't seem to find the talk again right now.\n\nAnd the layout model in CSS is an overcomplicated mess. The Subform team invented the best alternative I've seen so far, beautifully simple: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.deconstructconf.com\/2017\/kevin-lynagh-choosing-features"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nToday, for non-technical users, the filesystem is on its way out. Most information they use is stored in silos per app, or maybe stored in the filesystem but never accessed that way in practice. On Windows, each user is given a single folder which is supposed to be their own, like C:\/Users\/Emil\/, and the rest of the disk is full of crap which they don't understand. And even the user folder is full of crap placed there by apps. No wonder people don't learn to use the filesystem. The consequence is that they lose data often. Full backups are super complicated because each app does it differently. This is completely backwards. The filesystem should primarily serve the user! Let's tuck away all \"app-generated\" crap in a single folder, and give users full control of the rest, let them own it and organize it.\n\nSpeaking of which, the filesystem needs to become more like a structured database than a tree of opaque blobs. I know people have tried this already, like "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/en.wikipedia.org\/wiki\/WinFS"
+                            },
+                            {
+                                "type": "text",
+                                "text": " and I know the approach hasn't been very successful yet, but I still believe it's possible, and the potential benefits are huge.\n\nLetting programs communicate with each other, like with piping in the linux shell, is a great feature, but can we please get rid of the plain text format? Command-line programs should produce and consume structured data. I know this already exists in some dusty corner, but it needs to become dominant. The most common structures (1d lists, 2d tables, trees, graphs) should have a specification which everyone follows, so that there can be competing, intercompatible visualizers of such data.\n\nIt needs to be much easier to send stuff between two computers or smartphones in the same room. Today, sending files over a local network is an \"expert\" feature, while the simplest way is often to upload it to some cloud service and download again on the other device - that's ridiculous! I might be sending stuff across the atlantic ocean! The exhaustion of the IPv4 address space, and the widespread use of NAT, probably contributed to the success of the \"send via a central server\" business model. I wish the advent of IPv6 can help make direct peer communication more viable again.\n\nMost corporate firewalls block UDP traffic by default. That's crippling! So even when UDP would be a better fit, app developers send data over TCP instead because that's what all the simple frameworks support. I've met many web developers who have no idea what UDP does. The only way to send such data inside a web browser is through WebRTC which is complex and hard to learn. This post says it better: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.gafferongames.com\/post\/why_cant_i_send_udp_packets_from_a_browser\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nAlways blows my mind that even huge companies with huge budgets produce UI designs which are easy to misunderstand. Maybe there's no amount of \"reinventing the stack\" that could prevent bad design from occuring, but maybe a stronger set of primitives and guidelines could help a little bit. I mean primitives like checkboxes, radio buttons, scrollbars etc. And maybe just a culture of calling out bad design when we see it. So let me do that now. Some examples I encountered personally:\n\n1st pic. I want to share my screen in Google Meet in the Chrome browser. Why is the share button disabled? Answer: because you first have to select "
+                            },
+                            {
+                                "type": "text",
+                                "text": "which",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " screen you want to share. But when you only have 1 screen, it's very confusing.\n\n2nd pic. I got on this train with a ticket for seat number 250. Should I go left or right?\n\n3rd pic. The controls for my combined fridge & freezer. The fridge is on top, the freezer in the bottom. If I want to make the fridge cooler, which knob do I turn? The symbols try to illustrate it, but they're black and white. Does the black area symbolize the thing I'm changing, or the white area? Most people will probably guess correctly, but we shouldn't have to guess at all!\n\nThe knob is almost symmetrical. Which side of it is the \"pointer\"? Answer: the slightly thinner side. But it's subtle and hard to see.\n\nWhat does \"max\" mean? Max effect, or max temperature? Answer: max effect. But it's not obvious.\n\nI'll take a break here. Each point I brought up ofc has a ton of caveats and deserve a full-length essay. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "edited": {
+            "user": "U01NQ4945N1",
+            "ts": "1615123879.000000"
+        },
+        "thread_ts": "1613857840.000600",
+        "parent_user_id": "U01NQ4945N1"
+    }
+]

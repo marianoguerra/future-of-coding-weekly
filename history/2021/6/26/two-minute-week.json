@@ -1,0 +1,242 @@
+[
+    {
+        "client_msg_id": "9542e9fb-cf29-47f5-8a45-0e57a099a215",
+        "type": "message",
+        "text": "Thanks <@UCUSW7WVD> I’ve looked at FRP in the past, in relation to Tidal Cycles which was heavily influenced by it, IIRC. I’ll take another look.\nIn my current node implementation (for the demos you've seen before), I have 2 distinct types of 'pin'\n• Simple data: (bool, int, double, etc.)  Currently these are always 'inputs'; but I don't technically have a limitation on them being outputs too.\n• Flow Data - a generic representation of data flowing around the graph.  \nFlow data is effectively vectors of simple data types.  For example, 2 audio waves would be represented as:\n    ◦ [float, float, float....]\n    ◦ [float, float, float...]\nIn my graph, this means that playing a 3-note chord on an input instrument (for the audio case), may well result in several types of flow data running around the graph, typically containing 3 arrays of data, each array being a single 'frame' of audio; say 512 samples.   Important point - this is output\/input on a single 'flow' pin, and contains 3 unique 'channels' of 512 float samples:\nFlowData\n{\n     map&lt;int, vector&lt;float&gt;&gt; channels;\n}\nIt is up to the application to determine what 'Flow' data actually means; but the important point is that the graph is evaluated based on finding the output flow and walking back into the graph to satisfy the data flow through it; by finding dependencies and walking back through the graph to fulfil them before computing each node.\n\nThe tricky part is something like an 'Adder' node.  Suppose it wants to take in 2 numbers and produce a result.  In my system, currently, that means that a node outputting a number must convert it to a 1-dimension flow data to output it.  Then the Adder node can read the flow data and extract the number.  This means that you could effectively add 2 arrays of numbers in one compute step in the adder; or multiple entries.  You could also, in theory route 2 seperate flow sources to the same target and multiplex them on arrival.\n\nBut I'm still thinking about if it is appropriate to enforce this transform of scalar values to flow data when outputting from a node, and how this feels to the user.  There is a certain uniformity I like if all data flowing through the graph is represented the same way; but then what if you output from a node 3 streams of numbers in the flow data, but the user hooks that up to a single input number in a node.    Which to pick?  Or is that just an illegal operation?  Is a single-entry flow data valid, but a multi entry not?  Essentially the implicit transforms from simple to flow look like:\n\n[Scalar -&gt; FlowData[Scalar Array, size 1]]                                  Example: output=1.0 input=vector&lt;float&gt;{1.0}\n[FlowData[..] -&gt; Scalar] (only if flow data is dimension 1?)      Example: output=vector&lt;float&gt;{1.0} input=1.0\n[FlowData, FlowData -&gt; FlowData]                                           Example: input=2 * flow data, output=muxed flow data.\n\nThere are technical reasons why I like this design, and flexibility reasons; it accomodates the parallel data flow model which works well for audio\/graphics.  It is easy to evaluate the graph, and for the user to reason the direction of evaluation.  What it gives up is the simple ability to wire simple scalar values to simple scalar values directly; that operation is allowed by under the covers it is effectively a conversion.\nIn the UI\/demo I am trying to hint at this by having flow data pins sit on the outside of nodes, and conversion from flow data to number be shown as an arrow inside the node next to the number in question.  As well as having arrows for flow data direction.",
+        "user": "UUQ2EQW21",
+        "ts": "1624709563.023400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "Chris",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "eE9kq",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I’ve looked at FRP in the past, in relation to Tidal Cycles which was heavily influenced by it, IIRC. I’ll take another look.\nIn my current node implementation (for the demos you've seen before), I have 2 distinct types of 'pin'\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Simple data: (bool, int, double, etc.)  Currently these are always 'inputs'; but I don't technically have a limitation on them being outputs too."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Flow Data - a generic representation of data flowing around the graph.  "
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nFlow data is effectively vectors of simple data types.  For example, 2 audio waves would be represented as:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "[float, float, float....]"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "[float, float, float...]"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 1
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nIn my graph, this means that playing a 3-note chord on an input instrument (for the audio case), may well result in several types of flow data running around the graph, typically containing 3 arrays of data, each array being a single 'frame' of audio; say 512 samples.   Important point - this is output\/input on a single 'flow' pin, and contains 3 unique 'channels' of 512 float samples:\nFlowData\n{\n     map<int, vector<float>> channels;\n}\nIt is up to the application to determine what 'Flow' data actually means; but the important point is that the graph is evaluated based on finding the output flow and walking back into the graph to satisfy the data flow through it; by finding dependencies and walking back through the graph to fulfil them before computing each node.\n\nThe tricky part is something like an 'Adder' node.  Suppose it wants to take in 2 numbers and produce a result.  In my system, currently, that means that a node outputting a number must convert it to a 1-dimension flow data to output it.  Then the Adder node can read the flow data and extract the number.  This means that you could effectively add 2 arrays of numbers in one compute step in the adder; or multiple entries.  You could also, in theory route 2 seperate flow sources to the same target and multiplex them on arrival.\n\nBut I'm still thinking about if it is appropriate to enforce this transform of scalar values to flow data when outputting from a node, and how this feels to the user.  There is a certain uniformity I like if all data flowing through the graph is represented the same way; but then what if you output from a node 3 streams of numbers in the flow data, but the user hooks that up to a single input number in a node.    Which to pick?  Or is that just an illegal operation?  Is a single-entry flow data valid, but a multi entry not?  Essentially the implicit transforms from simple to flow look like:\n\n[Scalar -> FlowData[Scalar Array, size 1]]                                  Example: output=1.0 input=vector<float>{1.0}\n[FlowData[..] -> Scalar] (only if flow data is dimension 1?)      Example: output=vector<float>{1.0} input=1.0\n[FlowData, FlowData -> FlowData]                                           Example: input=2 * flow data, output=muxed flow data.\n\nThere are technical reasons why I like this design, and flexibility reasons; it accomodates the parallel data flow model which works well for audio\/graphics.  It is easy to evaluate the graph, and for the user to reason the direction of evaluation.  What it gives up is the simple ability to wire simple scalar values to simple scalar values directly; that operation is allowed by under the covers it is effectively a conversion.\nIn the UI\/demo I am trying to hint at this by having flow data pins sit on the outside of nodes, and conversion from flow data to number be shown as an arrow inside the node next to the number in question.  As well as having arrows for flow data direction."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1624624587.019900",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "type": "message",
+        "text": "Here's a diagram I did; this is actually how some of the synth currently works.  Forgive my handwriting :wink:",
+        "files": [
+            {
+                "id": "F026ZL0P256",
+                "created": 1624709636,
+                "timestamp": 1624709636,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image\/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "UUQ2EQW21",
+                "editable": false,
+                "size": 1927890,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F026ZL0P256\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F026ZL0P256\/download\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360_w": 360,
+                "thumb_360_h": 251,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480_w": 480,
+                "thumb_480_h": 335,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720_w": 720,
+                "thumb_720_h": 503,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800_w": 800,
+                "thumb_800_h": 559,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_960_w": 960,
+                "thumb_960_h": 671,
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F026ZL0P256-cdfcf08577\/image_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 715,
+                "original_w": 2388,
+                "original_h": 1668,
+                "thumb_tiny": "AwAhADC+pYOQeR2OP0qSmKv+03HvTsUAGQR1FICM4GM0oUCmiNQcgGgB2aCM9MUYHXFLSQDccinHpxRRTAZg45OaXbyTzmlIzQFwc5P0oAQAgsc9elLS0UAFFFFABRRRQAUUUUAf\/9k=",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/UUQ2EQW21\/F026ZL0P256\/image.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F026ZL0P256-2bab309c58",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "user": "UUQ2EQW21",
+        "display_as_bot": false,
+        "ts": "1624709659.023600",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sTEG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Here's a diagram I did; this is actually how some of the synth currently works.  Forgive my handwriting "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1624624587.019900",
+        "parent_user_id": "UUQ2EQW21"
+    },
+    {
+        "client_msg_id": "002f54e6-19ba-4daf-b7b2-c075b0756591",
+        "type": "message",
+        "text": "Oh, and I didn't find much of David Barbour's writing; a shame the blog is down.  I'm a member of lines community too; some good stuff on there.",
+        "user": "UUQ2EQW21",
+        "ts": "1624709821.023800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "Chris",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BX49",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh, and I didn't find much of David Barbour's writing; a shame the blog is down.  I'm a member of lines community too; some good stuff on there."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1624624587.019900",
+        "parent_user_id": "UUQ2EQW21"
+    }
+]

@@ -1,715 +1,24 @@
 [
     {
-        "client_msg_id": "f080a2f7-9804-48bd-a2aa-6ff6b0e3bf63",
-        "type": "message",
-        "text": "<@UN06QADNV> <@UF71PR58X> Ok, so I've investigated implicits in Scala 3, and the related features in other languages (traits, protocols...) including Coq and Agda. All of them have one thing in common: they use the *type system* to deduce which arguments should be passed implicitly. Most languages do this in a _very messy_ way: they look at all the implicits/traits/protocols in the current module, submodule, imported modules etc., and the compiler picks one of those. *This is a _static_ selection strategy*. In my proposal, the implicit is provided _on the stack_ like any other variable. There's no fancy \"resolution algorithm\" involved, and the implicit value *can be constructed _dynamically_,* which is a whole different kettle of fish.\n\nNow, Scala 3 offers something similar: there's a command to specify a \"given Int\" or a \"given Bool\" on the stack that should be used as an implicit argument. The problem with this is that *you can only declare one implicit value _per type_* (in a given scope), whereas my proposal doesn't care about types at all: it uses unique parameter names instead. Also, Scala's \"given\" declarations can't shadow (i.e. override) each other, whereas variables obviously can. This allows you to implement the equivalent of \"default arguments\", and override them on specific invocations.\n\nIn conclusion: I think I've proposed a simpler, more general, and more intuitive approach to implicits than all the other manifestations I've seen.",
-        "user": "UCGAK10LS",
-        "ts": "1613782208.000100",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1613784559.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "ull",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "UN06QADNV"
-                            },
-                            {
-                                "type": "text",
-                                "text": " "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UF71PR58X"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Ok, so I've investigated implicits in Scala 3, and the related features in other languages (traits, protocols...) including Coq and Agda. All of them have one thing in common: they use the "
-                            },
-                            {
-                                "type": "text",
-                                "text": "type system",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " to deduce which arguments should be passed implicitly. Most languages do this in a "
-                            },
-                            {
-                                "type": "text",
-                                "text": "very messy",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " way: they look at all the implicits/traits/protocols in the current module, submodule, imported modules etc., and the compiler picks one of those. "
-                            },
-                            {
-                                "type": "text",
-                                "text": "This is a ",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "static",
-                                "style": {
-                                    "bold": true,
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " selection strategy",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ". In my proposal, the implicit is provided "
-                            },
-                            {
-                                "type": "text",
-                                "text": "on the stack",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " like any other variable. There's no fancy \"resolution algorithm\" involved, and the implicit value "
-                            },
-                            {
-                                "type": "text",
-                                "text": "can be constructed ",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "dynamically",
-                                "style": {
-                                    "bold": true,
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ",",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " which is a whole different kettle of fish.\n\nNow, Scala 3 offers something similar: there's a command to specify a \"given Int\" or a \"given Bool\" on the stack that should be used as an implicit argument. The problem with this is that "
-                            },
-                            {
-                                "type": "text",
-                                "text": "you can only declare one implicit value ",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "per type",
-                                "style": {
-                                    "bold": true,
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " (in a given scope), whereas my proposal doesn't care about types at all: it uses unique parameter names instead. Also, Scala's \"given\" declarations can't shadow (i.e. override) each other, whereas variables obviously can. This allows you to implement the equivalent of \"default arguments\", and override them on specific invocations.\n\nIn conclusion: I think I've proposed a simpler, more general, and more intuitive approach to implicits than all the other manifestations I've seen."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "C5CCDC02-FAFF-4920-A539-ABD58F6A080E",
-        "type": "message",
-        "text": "the format im familiar with for this kind of work is called stand-off annotation. the codex editor project is based on it",
-        "user": "UHWC9PXBL",
-        "ts": "1613786295.001500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "nlzb",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "the format im familiar with for this kind of work is called stand-off annotation. the codex editor project is based on it"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613690148.252700",
-        "parent_user_id": "UFPPABQ7P",
-        "reactions": [
-            {
-                "name": "thought_balloon",
-                "users": [
-                    "UFPPABQ7P"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "EA60F99C-DE95-4991-B99F-E02074DF8B6D",
-        "type": "message",
-        "text": "nick. i regret to inform you that this is _exactly_ how rebol and infra work",
-        "user": "UHWC9PXBL",
-        "ts": "1613786598.002400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "6TR",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "nick. i regret to inform you that this is "
-                            },
-                            {
-                                "type": "text",
-                                "text": "exactly",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " how rebol and infra work"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "ce73fe13-12d0-4fa9-b138-764b593f3c1d",
-        "type": "message",
-        "text": "If by _exactly_, you mean dynamic scoping, we discussed that higher up in the thread.",
-        "user": "UCGAK10LS",
-        "ts": "1613786661.003400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Klq",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "If by "
-                            },
-                            {
-                                "type": "text",
-                                "text": "exactly",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ", you mean dynamic scoping, we discussed that higher up in the thread."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "38ef6446-889c-4ff4-aac5-bb0906cb0398",
-        "type": "message",
-        "text": "Though I do remember Rebol's approach to scoping is unique, so now I'd better revisit it, you're right.",
-        "user": "UCGAK10LS",
-        "ts": "1613786923.006800",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Iwn9u",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Though I do remember Rebol's approach to scoping is unique, so now I'd better revisit it, you're right."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "52843B44-FD26-4FD2-80AC-696CC33EB487",
-        "type": "message",
-        "text": "nope! dynamic scoping looks up symbols based on where they\u2019re called from, right? infra and rebol let you do whatever you want with your substitution semantics. could be \u201clook up lexically\u201d or \u201clook up the call stack\u201d or  \u201cevaluate to a UUID and consult the editor for what the last-clicked on object was\u201d. so i guess that the part that\u2019s exact is the \u201cabsence of a parameter list\u201d part, and the part where you\u2019re performing arbitrary substitutions based on a set of rules from user input. they also work recursively, too",
-        "user": "UHWC9PXBL",
-        "ts": "1613787099.009300",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "HN9L",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "nope! dynamic scoping looks up symbols based on where they\u2019re called from, right? infra and rebol let you do whatever you want with your substitution semantics. could be \u201clook up lexically\u201d or \u201clook up the call stack\u201d or  \u201cevaluate to a UUID and consult the editor for what the last-clicked on object was\u201d. so i guess that the part that\u2019s exact is the \u201cabsence of a parameter list\u201d part, and the part where you\u2019re performing arbitrary substitutions based on a set of rules from user input. they also work recursively, too"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "U013ZLJARC7"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "04D4DD9A-CF9E-4165-802E-5486E61DC795",
-        "type": "message",
-        "text": "for the record: i think it\u2019s an extremely good idea. oh and the relation between uuids and functions in the same package sounds like the path infra would take\u2014your modules have a structure, and you\u2019re reflecting that structure via encoding it in otherwise arbitrary data. idk, smells like it\u2019s almost a binary format to me :wink:",
-        "user": "UHWC9PXBL",
-        "ts": "1613787306.012900",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "n+aAh",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "for the record: i think it\u2019s an extremely good idea. oh and the relation between uuids and functions in the same package sounds like the path infra would take\u2014your modules have a structure, and you\u2019re reflecting that structure via encoding it in otherwise arbitrary data. idk, smells like it\u2019s almost a binary format to me "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "wink"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "e16a68bb-0c88-456d-9e74-1f0aee27a76a",
-        "type": "message",
-        "text": "Yes I believe under dynamic scoping you resolve _all_ identifiers when a function is invoked, but I'm aiming for something in-between (which I'm not sure I've clearly described yet).\n\nMy proposal has nothing to do with a binary format: users of the language won't give a damn about how a program or process is stored in RAM or disk, and the language won't expose it :slightly_smiling_face: (Unless they're profiling performance.)",
-        "user": "UCGAK10LS",
-        "ts": "1613787546.013600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "YyDJ1",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Yes I believe under dynamic scoping you resolve "
-                            },
-                            {
-                                "type": "text",
-                                "text": "all",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " identifiers when a function is invoked, but I'm aiming for something in-between (which I'm not sure I've clearly described yet).\n\nMy proposal has nothing to do with a binary format: users of the language won't give a damn about how a program or process is stored in RAM or disk, and the language won't expose it "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": " (Unless they're profiling performance.)"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "FCB365EC-55AB-48AF-8F56-3677CEFCFCC6",
-        "type": "message",
-        "text": "didn\u2019t github add this feature for some languages using some incremental parser they open sourced? can\u2019t remember off the top of my head",
-        "user": "UHWC9PXBL",
-        "ts": "1613787565.014400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "mIPZl",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "didn\u2019t github add this feature for some languages using some incremental parser they open sourced? can\u2019t remember off the top of my head"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613629318.245700",
-        "parent_user_id": "UDQKHNP51"
-    },
-    {
-        "client_msg_id": "1b423237-9bfb-4696-a473-d52535b3e319",
-        "type": "message",
-        "text": "A program definitely won't be serialized as ASCII, but that an implementation detail.",
-        "user": "UCGAK10LS",
-        "ts": "1613787577.014600",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Hi3t",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "A program definitely won't be serialized as ASCII, but that an implementation detail."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "7ED3DE5F-E145-4AA5-9D65-DDCDAE736433",
-        "type": "message",
-        "text": "<@U01DX39SB33> the loom video 404\u2019s now, but i\u2019m extremely interested in this, especially the keyboard-navigability part. one of the things i harp on a lot is that you can in fact design a set of ui primitives that match the primitives of the algebra for the data you\u2019re working with (vim pretty much does this for text, although the actual commands tend to be obscure and not right for editing most code)",
-        "user": "UHWC9PXBL",
-        "ts": "1613787910.018700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "xTLdo",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "user",
-                                "user_id": "U01DX39SB33"
-                            },
-                            {
-                                "type": "text",
-                                "text": " the loom video 404\u2019s now, but i\u2019m extremely interested in this, especially the keyboard-navigability part. one of the things i harp on a lot is that you can in fact design a set of ui primitives that match the primitives of the algebra for the data you\u2019re working with (vim pretty much does this for text, although the actual commands tend to be obscure and not right for editing most code)"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613680693.247800",
-        "parent_user_id": "U01DX39SB33"
-    },
-    {
-        "client_msg_id": "76c4e86e-df60-4ec4-b3ee-59d900e92144",
-        "type": "message",
-        "text": "Ok, conclusion on Rebol: it's not the same as my plan. In particular, the following code prints \"2\" in Rebol (and in languages with *dynamic scoping*), but I mentioned earlier that I want to preserve lexical/syntactic reasoning, so I'd have it print \"1\" instead:\nx: 1\nfoo: [ print x ]\nx: 2\ndo foo",
-        "user": "UCGAK10LS",
-        "ts": "1613789693.018900",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1613790618.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "QyWW",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Ok, conclusion on Rebol: it's not the same as my plan. In particular, the following code prints \"2\" in Rebol (and in languages with "
-                            },
-                            {
-                                "type": "text",
-                                "text": "dynamic scoping",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "), but I mentioned earlier that I want to preserve lexical/syntactic reasoning, so I'd have it print \"1\" instead:\nx: 1\nfoo: [ print x ]\nx: 2\ndo foo"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "cf5d257a-eaac-4ec4-ad52-478d40ccb24d",
-        "type": "message",
-        "text": "`foo` would only look for `x` on the stack if it wasn't found at the definition site. So if you delete the first line, `foo` would print \"2\". This brings you closer to Scala's implicits than dynamic scoping, but it's still different, as I described a few posts up.",
-        "user": "UCGAK10LS",
-        "ts": "1613789742.019100",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1613791014.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Yb3k",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "foo",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " would only look for "
-                            },
-                            {
-                                "type": "text",
-                                "text": "x",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " on the stack if it wasn't found at the definition site. So if you delete the first line, "
-                            },
-                            {
-                                "type": "text",
-                                "text": "foo",
-                                "style": {
-                                    "code": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " would print \"2\". This brings you closer to Scala's implicits than dynamic scoping, but it's still different, as I described a few posts up."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "1497532b-ddae-4e1d-839c-5a0d5b77629d",
-        "type": "message",
-        "text": "Having the source of the variable definition change based on the context of the function definition makes me nervous. It's the same feeling as accidentally declaring a new variable when trying to assign to an existing one (almost a dual problem). That's the kind of thing for which I prefer an error message (at whichever phase) rather than unexpected runtime behavior. For a text language, I would probably nope out on seeing that in the docs. I guess it's less of a problem if all your variables are secretly UUIDs, though. For text, I would be happy with a declaration at the function level that a particular var always comes from dynamic scope.",
-        "user": "U016VUZGUUQ",
-        "ts": "1613797039.020000",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "LcBSS",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Having the source of the variable definition change based on the context of the function definition makes me nervous. It's the same feeling as accidentally declaring a new variable when trying to assign to an existing one (almost a dual problem). That's the kind of thing for which I prefer an error message (at whichever phase) rather than unexpected runtime behavior. For a text language, I would probably nope out on seeing that in the docs. I guess it's less of a problem if all your variables are secretly UUIDs, though. For text, I would be happy with a declaration at the function level that a particular var always comes from dynamic scope."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "50fd3512-aaaa-40d3-a14e-d50a2f65f2e1",
-        "type": "message",
-        "text": "Yes, I agree it would be a mess for a textual language to try this. But in a structure-based language, I think it will work quite nicely, because you're *never* going to _accidentally_ shadow a variable through naming coincidences. For every variable assignment you write, you're going to know what that variable _means_, and the places in your program that are able to \"receive\" it.",
-        "user": "UCGAK10LS",
-        "ts": "1613797351.021400",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Tui",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Yes, I agree it would be a mess for a textual language to try this. But in a structure-based language, I think it will work quite nicely, because you're "
-                            },
-                            {
-                                "type": "text",
-                                "text": "never",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " going to "
-                            },
-                            {
-                                "type": "text",
-                                "text": "accidentally",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " shadow a variable through naming coincidences. For every variable assignment you write, you're going to know what that variable "
-                            },
-                            {
-                                "type": "text",
-                                "text": "means",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ", and the places in your program that are able to \"receive\" it."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
-        "client_msg_id": "44d224ee-c2bd-45b5-a753-355b0d0a0da9",
-        "type": "message",
-        "text": "(Side question: is there an existing name for \"non-text-string-based\" languages? I'm using words like \"structure\" willy nilly.)",
-        "user": "UCGAK10LS",
-        "ts": "1613797498.021600",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UCGAK10LS",
-            "ts": "1613797520.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "J9i",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "(Side question: is there an existing name for \"non-text-string-based\" languages? I'm using words like \"structure\" willy nilly.)"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1613528098.183700",
-        "parent_user_id": "UCGAK10LS"
-    },
-    {
         "client_msg_id": "936356ba-4473-46c5-8f8f-2a69c7f9a3a3",
         "type": "message",
         "text": "<@U01KZQEQVUP> I'll dig around to see if I kept any screenshots :slightly_smiling_face:",
         "user": "U013ZLJARC7",
         "ts": "1613808090.022000",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -751,10 +60,23 @@
     {
         "client_msg_id": "ac816218-ec2b-4be1-82d9-9fa08e533133",
         "type": "message",
-        "text": "the general idea is that I\u2019d like a knowledge management system that would allow me to link to things from code\nmost likely I need to write a plugin that looks for link markers in a code block as a pre-processing step",
+        "text": "the general idea is that I’d like a knowledge management system that would allow me to link to things from code\nmost likely I need to write a plugin that looks for link markers in a code block as a pre-processing step",
         "user": "UDQKHNP51",
         "ts": "1613815722.022400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3074e1515db",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/b3074e1515db1a3d79acf5d954eac0d1.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Lucian Ursu",
+            "display_name": "elbear",
+            "team": "T5TCAFTA9",
+            "name": "lucian.ursu",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -765,7 +87,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "the general idea is that I\u2019d like a knowledge management system that would allow me to link to things from code\nmost likely I need to write a plugin that looks for link markers in a code block as a pre-processing step"
+                                "text": "the general idea is that I’d like a knowledge management system that would allow me to link to things from code\nmost likely I need to write a plugin that looks for link markers in a code block as a pre-processing step"
                             }
                         ]
                     }
@@ -785,7 +107,7 @@
                 "timestamp": 1613815210,
                 "name": "Screen Shot 2021-02-20 at 10.54.41.png",
                 "title": "Screen Shot 2021-02-20 at 10.54.41.png",
-                "mimetype": "image/png",
+                "mimetype": "image\/png",
                 "filetype": "png",
                 "pretty_type": "PNG",
                 "user": "U013ZLJARC7",
@@ -798,39 +120,43 @@
                 "public_url_shared": false,
                 "display_as_bot": false,
                 "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01NPQZKP0D/screen_shot_2021-02-20_at_10.54.41.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01NPQZKP0D/download/screen_shot_2021-02-20_at_10.54.41.png",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_360.png",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01NPQZKP0D\/screen_shot_2021-02-20_at_10.54.41.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01NPQZKP0D\/download\/screen_shot_2021-02-20_at_10.54.41.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_360_w": 360,
                 "thumb_360_h": 157,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_480.png",
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_480_w": 480,
                 "thumb_480_h": 210,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_720.png",
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_720_w": 720,
                 "thumb_720_h": 315,
-                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_800.png",
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_800_w": 800,
                 "thumb_800_h": 350,
-                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_960.png",
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_960_w": 960,
                 "thumb_960_h": 419,
-                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66/screen_shot_2021-02-20_at_10.54.41_1024.png",
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01NPQZKP0D-4e1d8f4d66\/screen_shot_2021-02-20_at_10.54.41_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_1024_w": 1024,
                 "thumb_1024_h": 447,
                 "original_w": 2980,
                 "original_h": 1302,
-                "thumb_tiny": "AwAUADDSA9sUjMFxnvS5/wA4pGG7B54oAdTVcN0pQeOlA4HAxQAZ56UtJk+lLQAUZpKKAFopKKAFopKKAP/Z",
-                "permalink": "https://futureofcoding.slack.com/files/U013ZLJARC7/F01NPQZKP0D/screen_shot_2021-02-20_at_10.54.41.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01NPQZKP0D-b22030243b",
+                "thumb_tiny": "AwAUADDSA9sUjMFxnvS5\/wA4pGG7B54oAdTVcN0pQeOlA4HAxQAZ56UtJk+lLQAUZpKKAFopKKAFopKKAP\/Z",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U013ZLJARC7\/F01NPQZKP0D\/screen_shot_2021-02-20_at_10.54.41.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F01NPQZKP0D-b22030243b",
                 "is_starred": false,
                 "has_rich_preview": false
             }
         ],
         "upload": false,
+        "user": "U013ZLJARC7",
+        "display_as_bot": false,
+        "ts": "1613815735.022600",
         "blocks": [
             {
                 "type": "rich_text",
@@ -852,9 +178,6 @@
                 ]
             }
         ],
-        "user": "U013ZLJARC7",
-        "display_as_bot": false,
-        "ts": "1613815735.022600",
         "thread_ts": "1613690148.252700",
         "parent_user_id": "UFPPABQ7P",
         "reactions": [
@@ -875,6 +198,19 @@
         "user": "U01KZQEQVUP",
         "ts": "1613825985.022900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "9ff8c2de03db",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-01-30\/1694828418931_9ff8c2de03dba11dab1d_72.jpg",
+            "first_name": "",
+            "real_name": "Florian Cäsar",
+            "display_name": "Florian Cäsar",
+            "team": "T5TCAFTA9",
+            "name": "florian.caesar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",

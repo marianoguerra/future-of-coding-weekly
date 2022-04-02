@@ -1,0 +1,242 @@
+[
+    {
+        "client_msg_id": "a53a4955-8404-482c-82c8-4b95cc62d5af",
+        "type": "message",
+        "text": "Seconding SLY, I use it every day. It is great. Another interesting piece of software is clouseau: <https:\/\/www.youtube.com\/watch?v=-1LzFxTbU9E|https:\/\/www.youtube.com\/watch?v=-1LzFxTbU9E>\n\nI actually don't think the tooling for CL is all that great, as a user of the language. Most of the interesting workflows, etc that you can do aren't so much provided by tooling as augmented by tooling. More or less all the functionality exposed by stuff like SLY (including the debugger) is part of the base language standard. And I think that's the really interesting part about CL if you're trying to learn from it.\n\nIn particular, CL is designed as a whole to support interactive workflows, there's no one design decision you can point to here, but the combination of how it is image-based, the package system, use of late-binding, the ability to have dynamic binding, all work together to make it possible. It would be quite difficult to replicate what CL does without any one of those things. (Though it seems like clojure has managed to to some extent? I haven't used it so I don't know)\n\nTake the example of editing your code while it's running: a common workflow when working with event driven code (a webserver, game, etc) is to have the event loop running, and then recompile event handlers as you change them so that you can mould the program on the fly. For that to be possible you need to be able to patch out the function calls in the old code to point to new code, and the CL runtime supports this, since it's runtime is image-based—all functions work this way, any file related metadata is incidental.\n\nAnother example is post-mortem debugging. I actually learnt this term from a C programmer, and it's considered a pretty esoteric technique. Debugging coredumps after your program crashes. In CL, this workflow doesn't warrant a term because that is just how everyone writes code—you let your program fail, it drops into the debugger, and then you fix the issue and move on. In particular the conditions and restarts system In addition to the ability to recompile stuff on the fly is necessary here, and the former is implemented with dynamically bound (so-called \"special\") variables.\n\nAs a final note, while I said the tooling in CL isn't all that amazing, I meant that in absolute terms. I would say it's about par with other ecosystems that have put work into tooling. The interesting thing is that CL tooling is mostly (entirely?) hobby projects, whereas for example, stuff like asan, dtrace, or rr that let you replicate these workflows in other languages are multimillion dollar projects. So CL lets people be very productive when building tooling around the language, because it provides the tools to build tooling.\n\nIf you're interested in what the debugger workflow looks like, this is a good series walking through it: <https:\/\/malisper.me\/debugging-lisp-part-1-recompilation\/|https:\/\/malisper.me\/debugging-lisp-part-1-recompilation\/>",
+        "user": "UT60XSVCN",
+        "ts": "1624717227.170700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gbc3e6041047",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/bc3e6041047849518d1b042f0a29d5af.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "S.M Mukarram Nainar",
+            "display_name": "S.M Mukarram Nainar",
+            "team": "T5TCAFTA9",
+            "name": "nainars",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UT60XSVCN",
+            "ts": "1624717465.000000"
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Clouseau - The McCLIM inspector - Online Lisp Meeting #6, 05.08.2020",
+                "title_link": "https:\/\/www.youtube.com\/watch?v=-1LzFxTbU9E",
+                "author_name": "Online Lisp Meetings",
+                "author_link": "https:\/\/www.youtube.com\/c\/OnlineLispMeetings",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/-1LzFxTbU9E\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Clouseau - The McCLIM inspector - Online Lisp Meeting #6, 05.08.2020",
+                "video_html": "<iframe width=\"400\" height=\"300\" src=\"https:\/\/www.youtube.com\/embed\/-1LzFxTbU9E?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 300,
+                "from_url": "https:\/\/www.youtube.com\/watch?v=-1LzFxTbU9E",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/www.youtube.com\/watch?v=-1LzFxTbU9E"
+            },
+            {
+                "service_name": "malisper.me",
+                "title": "Debugging Lisp Part 1: Recompilation - malisper.me",
+                "title_link": "https:\/\/malisper.me\/debugging-lisp-part-1-recompilation\/",
+                "text": "This post is the start of a series on how to debug Common Lisp code, specifically with Emacs, Slime, and SBCL. If you do not understand Common Lisp, you should still be able to follow along and recognize just how powerful the facilities provided by the Common Lisp debugger are. Nathan Marz asked me to […]",
+                "fallback": "malisper.me: Debugging Lisp Part 1: Recompilation - malisper.me",
+                "image_url": "https:\/\/malisper.me\/wp-content\/uploads\/2015\/07\/ezgif.com-crop.gif",
+                "ts": 1436243858,
+                "from_url": "https:\/\/malisper.me\/debugging-lisp-part-1-recompilation\/",
+                "image_width": 456,
+                "image_height": 250,
+                "image_bytes": 1070363,
+                "service_icon": "https:\/\/malisper.me\/wp-content\/uploads\/fbrfg\/apple-touch-icon.png",
+                "id": 2,
+                "original_url": "https:\/\/malisper.me\/debugging-lisp-part-1-recompilation\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zMw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Seconding SLY, I use it every day. It is great. Another interesting piece of software is clouseau: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.youtube.com\/watch?v=-1LzFxTbU9E",
+                                "text": "https:\/\/www.youtube.com\/watch?v=-1LzFxTbU9E"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI actually don't think the tooling for CL is all that great, as a user of the language. Most of the interesting workflows, etc that you can do aren't so much provided by tooling as augmented by tooling. More or less all the functionality exposed by stuff like SLY (including the debugger) is part of the base language standard. And I think that's the really interesting part about CL if you're trying to learn from it.\n\nIn particular, CL is designed as a whole to support interactive workflows, there's no one design decision you can point to here, but the combination of how it is image-based, the package system, use of late-binding, the ability to have dynamic binding, all work together to make it possible. It would be quite difficult to replicate what CL does without any one of those things. (Though it seems like clojure has managed to to some extent? I haven't used it so I don't know)\n\nTake the example of editing your code while it's running: a common workflow when working with event driven code (a webserver, game, etc) is to have the event loop running, and then recompile event handlers as you change them so that you can mould the program on the fly. For that to be possible you need to be able to patch out the function calls in the old code to point to new code, and the CL runtime supports this, since it's runtime is image-based—all functions work this way, any file related metadata is incidental.\n\nAnother example is post-mortem debugging. I actually learnt this term from a C programmer, and it's considered a pretty esoteric technique. Debugging coredumps after your program crashes. In CL, this workflow doesn't warrant a term because that is just how everyone writes code—you let your program fail, it drops into the debugger, and then you fix the issue and move on. In particular the conditions and restarts system In addition to the ability to recompile stuff on the fly is necessary here, and the former is implemented with dynamically bound (so-called \"special\") variables.\n\nAs a final note, while I said the tooling in CL isn't all that amazing, I meant that in absolute terms. I would say it's about par with other ecosystems that have put work into tooling. The interesting thing is that CL tooling is mostly (entirely?) hobby projects, whereas for example, stuff like asan, dtrace, or rr that let you replicate these workflows in other languages are multimillion dollar projects. So CL lets people be very productive when building tooling around the language, because it provides the tools to build tooling.\n\nIf you're interested in what the debugger workflow looks like, this is a good series walking through it: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/malisper.me\/debugging-lisp-part-1-recompilation\/",
+                                "text": "https:\/\/malisper.me\/debugging-lisp-part-1-recompilation\/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1624541467.166400",
+        "parent_user_id": "U01R76LELBT"
+    },
+    {
+        "client_msg_id": "aac7b7af-1c2f-4ad2-8436-2fc2f7465462",
+        "type": "message",
+        "text": "<@UCGAK10LS> fyi the successor to Pony is a microsoft research project called \"Project Verona\". I think it's one of the most interesting research projects in the more traditional PL world right now. It might not be what you're looking for but I think the heap model it uses is a lot more generalised and flexible than the actor model.",
+        "user": "U01T2EYBH0T",
+        "ts": "1624746824.171400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "450fb2024c92",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-04-01\/1917217507589_450fb2024c928cead6b9_72.jpg",
+            "first_name": "",
+            "real_name": "Andrew Martin",
+            "display_name": "Andrew Martin",
+            "team": "T5TCAFTA9",
+            "name": "0andrewmartin0",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fNspY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCGAK10LS"
+                            },
+                            {
+                                "type": "text",
+                                "text": " fyi the successor to Pony is a microsoft research project called \"Project Verona\". I think it's one of the most interesting research projects in the more traditional PL world right now. It might not be what you're looking for but I think the heap model it uses is a lot more generalised and flexible than the actor model."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1624437161.147900",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "44af4c1a-c47d-4dc6-8490-4b81a7652774",
+        "type": "message",
+        "text": "<https:\/\/www.microsoft.com\/en-us\/research\/project\/project-verona\/|https:\/\/www.microsoft.com\/en-us\/research\/project\/project-verona\/>\n\nthere's not much information up yet, but i think there are some talks explaining the memory model a bit, if you're interested.",
+        "user": "U01T2EYBH0T",
+        "ts": "1624747117.171600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "450fb2024c92",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-04-01\/1917217507589_450fb2024c928cead6b9_72.jpg",
+            "first_name": "",
+            "real_name": "Andrew Martin",
+            "display_name": "Andrew Martin",
+            "team": "T5TCAFTA9",
+            "name": "0andrewmartin0",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Microsoft Research",
+                "title": "Project Verona - Microsoft Research",
+                "title_link": "https:\/\/www.microsoft.com\/en-us\/research\/project\/project-verona\/",
+                "text": "Project Verona: a programming language for the modern cloud Adoption of the cloud requires trust, but software vulnerabilities can quickly erode that trust. There is a real drive in the industry to make memory safety vulnerabilities a thing of the past. Project Verona is a highly ambitious research project to make that a reality for […]",
+                "fallback": "Microsoft Research: Project Verona - Microsoft Research",
+                "thumb_url": "https:\/\/www.microsoft.com\/en-us\/research\/uploads\/prod\/2020\/05\/Verona.jpg",
+                "from_url": "https:\/\/www.microsoft.com\/en-us\/research\/project\/project-verona\/",
+                "thumb_width": 1920,
+                "thumb_height": 720,
+                "service_icon": "https:\/\/www.microsoft.com\/favicon.ico",
+                "id": 1,
+                "original_url": "https:\/\/www.microsoft.com\/en-us\/research\/project\/project-verona\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZrFL8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.microsoft.com\/en-us\/research\/project\/project-verona\/",
+                                "text": "https:\/\/www.microsoft.com\/en-us\/research\/project\/project-verona\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nthere's not much information up yet, but i think there are some talks explaining the memory model a bit, if you're interested."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1624437161.147900",
+        "parent_user_id": "UCGAK10LS"
+    },
+    {
+        "client_msg_id": "c2e8b2ad-96ee-45c3-98d8-36e5a1522a5e",
+        "type": "message",
+        "text": "in reference to your original question, I would say that both Pony and Verona have type systems that are comparable to Rust's in fanciness (they also rely on concepts like linearity), but they aim to find a sweet spot in usability by permitting a more free-form programming style within regions.",
+        "user": "U01T2EYBH0T",
+        "ts": "1624747824.171900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "450fb2024c92",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-04-01\/1917217507589_450fb2024c928cead6b9_72.jpg",
+            "first_name": "",
+            "real_name": "Andrew Martin",
+            "display_name": "Andrew Martin",
+            "team": "T5TCAFTA9",
+            "name": "0andrewmartin0",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hz=VR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "in reference to your original question, I would say that both Pony and Verona have type systems that are comparable to Rust's in fanciness (they also rely on concepts like linearity), but they aim to find a sweet spot in usability by permitting a more free-form programming style within regions."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1624437161.147900",
+        "parent_user_id": "UCGAK10LS"
+    }
+]

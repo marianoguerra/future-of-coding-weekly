@@ -1,0 +1,326 @@
+[
+    {
+        "client_msg_id": "856ea8df-7e35-412e-b370-ea856dab212c",
+        "type": "message",
+        "text": "The simplest implementation of CPS is just replacing call &amp; return semantics with passing callback functions (lambdas) into tailcalls. This can be done explicitly in source code, or compiled from what looks like standard call syntax.\n\nBut I think I've heard of it also implemented by manually copying and restoring actual call-stacks \/ activation records.\n\nIs one of those more or less relevant?",
+        "user": "UAVCC2X70",
+        "ts": "1564734436.063900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1564567151.055300",
+        "parent_user_id": "ULZA8HA4F"
+    },
+    {
+        "client_msg_id": "30ec09f8-e5b1-494d-9554-86f0c6f24e2b",
+        "type": "message",
+        "text": "Hi <@UAVCC2X70>\n\nThis used to be called cooperative multitasking.  It was discredited in Windows 3.1, and then never(?) tried in an application setting (instead of in an O\/S setting).\n\nI believe that we need to get rid of the call-stack.  Esp. in a world where “everything is smart” and cpus are cheap.  The only (reasonable) way in which things can talk to each other is over a wire, not using a call-stack (for the comms\/IPC part).\n\nIn that kind of world, all software components must be designed to be concurrent.  [Hence, my interest in FBP.  I used to conflate “concurrency” with “parallelism” until I saw Rob Pike’s talk “Concurrency is not Parallelism (It’s Better)“.  (If you search for the talk, note that it has been renamed to drop the parenthsized bit)].\n\nIt is nearly trivial to implement cooperative multitasking using closures. A list of closures is randomly walked by a single routine - the Dispatcher.  The Dispatcher calls a closure.  Then, when the closure returns, the Dispatcher calls another closure.  The closures cannot (must not) directly call each other, they can communicate only by leaving events (short messages) in queues.  In this way, the call-stack only becomes 1 level deep.\n\nCooperative multitasking works in an application setting because, a bug - anywhere in the app - is - just a bug.  We don’t need MMUs to protect one subroutine from another inside an app.\n\nThis matches the FBP model and the thing I’m working on (incl. a set of rules to “structure” message passing).\n\nIf early OS developers didn’t have a disdain for Lisp and friends, they might have used closures instead of manually building closures in C and assembler (aka multiple stacks).",
+        "user": "UGWUJUZHT",
+        "ts": "1564750193.064300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g222ae5c0173",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/8222ae5c01730d4dba6a358e4d5f9031.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Paul Tarvydas",
+            "display_name": "guitarvydas",
+            "team": "T5TCAFTA9",
+            "name": "paultarvydas",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UGWUJUZHT",
+            "ts": "1564760763.000000"
+        },
+        "thread_ts": "1564567151.055300",
+        "parent_user_id": "ULZA8HA4F",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UAVCC2X70"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4e343490-cde0-4626-a152-4adf198775f0",
+        "type": "message",
+        "text": "Why is the cost of porting to a new platform important? Do you need to run on obscure platforms?",
+        "user": "UD6EXQVM0",
+        "ts": "1564772623.065200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557149248.080900",
+        "parent_user_id": "UHS9K1N6A"
+    },
+    {
+        "client_msg_id": "6d7badf1-0464-4308-8919-dc30db7896e0",
+        "type": "message",
+        "text": "(I mean, I agree it's a good and interesting thing, but not in terms of the business case for using it)",
+        "user": "UD6EXQVM0",
+        "ts": "1564772688.065400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1557149248.080900",
+        "parent_user_id": "UHS9K1N6A"
+    },
+    {
+        "client_msg_id": "d0657f6e-3a32-4751-a2ae-b64bf624fbda",
+        "type": "message",
+        "text": "There was this \"look-see wellington\" thing where you send in videos of you talking about yourself and hope that a NZ company is interested in you. Apparently none of the companies took my bait (and there were an unexpectedly high number of applicants.) It's too late for me to go there now.",
+        "user": "UD6EXQVM0",
+        "ts": "1564772992.065600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558011582.177300",
+        "parent_user_id": "UJPHQ8Z3N"
+    },
+    {
+        "client_msg_id": "c0169623-1469-4248-9893-8896d2ed4253",
+        "type": "message",
+        "text": "I'm puzzled that you talk about \"parsing\" and then mention \"disambiguation\". In my mental model, parsing and semantic analysis are clearly separated; parsing does not imply disambiguation. I find it is often useful to write code that is both syntactically and semantically invalid; I can imagine a structured editor that keeps the syntax tree valid without getting in the programmer's way, but it's hard to imagine achieving that for semantics.",
+        "user": "UD6EXQVM0",
+        "ts": "1564774274.065800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1560804566.036200",
+        "parent_user_id": "UKFSDUCH2"
+    },
+    {
+        "client_msg_id": "7d81c982-07f4-43f8-bd76-0346be723313",
+        "type": "message",
+        "text": "How would you describe this new type of software development platform?",
+        "user": "UD6EXQVM0",
+        "ts": "1564775076.066100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1558004847.169100",
+        "parent_user_id": "UJQRDCZRA"
+    },
+    {
+        "client_msg_id": "43facb4d-8e67-4b92-9d0e-6da03caae9fe",
+        "type": "message",
+        "text": "Ahh, Mozilla, I've always wanted to work there. (Also have always wondered what its business model is and how it can survive in such a costly location..)",
+        "user": "UD6EXQVM0",
+        "ts": "1564777514.066400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1559590984.009900",
+        "parent_user_id": "UK9SUT9HU"
+    },
+    {
+        "client_msg_id": "4c39c371-f7b4-4db0-8df6-c49f936b28fb",
+        "type": "message",
+        "text": "Command lines are one of my pet peeves. There may be nothing wrong with a stream of commands and responses per se, but how is it still based on fixed-width plain text?! I'd like to see it reformulated based on web standards ... but ideally, I think, not the real web with its enormous infrastructure and API surface, its reliance on JavaScript. Even that long-winded language where every punctuation mark has its own special name... &amp;amp; &amp;lt; &amp;quot; &amp;apos; &amp;num;... it's a bit clunky. But I'd like to see a terminal based on a standard that was distilled from the most useful parts of the web - tree-structured (or better DAG-structured) information, the box model for display, styling, word wrapping, etc...",
+        "user": "UD6EXQVM0",
+        "ts": "1564778386.066600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1564778571.000000"
+        },
+        "thread_ts": "1560804414.035100",
+        "parent_user_id": "UKFSDUCH2"
+    },
+    {
+        "client_msg_id": "34249088-c074-4dff-9a06-b7b1cbdec1a5",
+        "type": "message",
+        "text": "As I sit here reading this essay, various technical solutions come to mind for the problems presented. So why can't I work on implementing these solutions? One is obvious - an OS is under the control of the companies that make it. A third party cannot simply add a feature to Windows that allows two concurrent users with their own screens, mouse and keyboard, let alone a system where two users share the same screens; MS wouldn't want to redesign the OS to allow things like that because it might reduce their revenue (two users should buy two licenses!)\n\nMore subtly, I'm not a businessman, I'm a developer, and I have no interest in the business side of launching a startup. I have ideas that no businessperson could possibly have (extensibility and interoperability being technical problems), but without a business model and a business guy that can dream up a path to profitability and find investors, I can't implement my ideas. (UBI FTW?)\n\nMore broadly, while the business side is always a challenge, for a great many \"future of coding\" problems, it seems to me that the current world order is structurally against solving them (the incentives are missing, and we need those incentives to buy food). Which is not to say that the problems won't get solved, just that it will be a very slow, painful, annoying process that we will have to fight hard to be involved with.",
+        "user": "UD6EXQVM0",
+        "ts": "1564779619.067000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1564783281.000000"
+        },
+        "thread_ts": "1560808403.039100",
+        "parent_user_id": "U85HCL7JP"
+    },
+    {
+        "client_msg_id": "cb46c741-3d60-4f3b-9c05-a9b1a9319327",
+        "type": "message",
+        "text": "Josh's blog on Why I'm a Climate Change Optimist: \"Sure, we have had plenty of close calls, but somehow humanity managed to step back from the edge. In retrospect this is incredible.\"\n\nGood luck in the past doesn't imply continued good luck. I am reminded of the anthropic principle: if we were dead, we wouldn't notice. Life may not exist in 99.99% of the universe, and where it arises it may die out in 99% of all cases. Whatever life is left over notices that it is still alive, but this is actually not a reason for optimism. (See also: The Great Filter)\n\nGlobal warming is totally solvable and I like to talk to people about how to solve it... but I'm concerned because we're not on the right path yet.",
+        "user": "UD6EXQVM0",
+        "ts": "1564783687.068000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UD6EXQVM0",
+            "ts": "1564783746.000000"
+        },
+        "thread_ts": "1560804414.035100",
+        "parent_user_id": "UKFSDUCH2"
+    },
+    {
+        "client_msg_id": "72ebc1f7-d4bd-4e29-bb38-9afa9f07c729",
+        "type": "message",
+        "text": "I'd love to see what APL would look like if all its archaic and non-useful parts were refurbished with modern equivalents... as I have little time to memorize unusual syntax and semantics that don't help me solve problems, so I don't bother to learn about K or APL. I studied LISP briefly, but only enough to figure out how to add a lisp-style macro system on C# (see <http:\/\/ecsharp.net|ecsharp.net>).",
+        "user": "UD6EXQVM0",
+        "ts": "1564784446.068400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1560804591.036400",
+        "parent_user_id": "UKFSDUCH2"
+    },
+    {
+        "client_msg_id": "1c5f0b9a-9808-4e24-93b6-732a10ce8b67",
+        "type": "message",
+        "text": "\"In fact our brains are so good at picking up patterns that we can read most English words with all of the letters scrambled as long as the first and last letters are correct.\" I dergasie. In retiliay ttah's icerocnrt. (I disagree. In reality that's incorrect.)",
+        "user": "UD6EXQVM0",
+        "ts": "1564784767.068600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4a9957508aa",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/e4a9957508aa1bdb16018793cfc1bb40.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0020-72.png",
+            "first_name": "",
+            "real_name": "David Piepgrass",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "qwertie256",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1560804591.036400",
+        "parent_user_id": "UKFSDUCH2"
+    }
+]

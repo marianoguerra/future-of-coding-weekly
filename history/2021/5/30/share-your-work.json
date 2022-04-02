@@ -1,0 +1,57 @@
+[
+    {
+        "client_msg_id": "da1f9a17-9d40-48b8-b9a9-c84bb412c492",
+        "type": "message",
+        "text": "<@UC2A2ARPT> On couple of last episodes you talk about message fibers and synchronization.\n\nFirst I think you don't have to worry about message streaming from outside world queue problem while using slow motion. When you are at slow motion you can think it as real slow motion observation. So real world data can be queueing somewhere but _from observation point of view_ it's not existing yet (aka runtime implementation detail).\n\nSecondly related to how data moves, consider scenario.\n-Signal splits for two paths, A and B.\n-Signal path A splits conditionally either to A-short or A-long (for whatever definition of short or long).\n-Then A-short and A-long merges and path finally merges with B with some operation requiring values from both.\n\nOk now we push two data messages to program: At first x1 and then x2.\nWhat if message x1 A part decide to choose A-long and x2 chooses A-short.\nIs it allowed to at any circumistances that value from x2 overtake value from x1?\nLeading on finally merging x2 A part with x1 B part.\n\nOne option could be normalize speed so that whenever signal splits every branch run exact speed that merging happens always simultaneously.\n(This for sure would make speed much more artificial.)",
+        "user": "U7C7B75R6",
+        "ts": "1622408651.014000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "be27878783b4",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-10\/604262911488_be27878783b4b23a5ed4_72.png",
+            "first_name": "",
+            "real_name": "Niko Autio",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "niko.elmari",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pXhtX",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UC2A2ARPT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " On couple of last episodes you talk about message fibers and synchronization.\n\nFirst I think you don't have to worry about message streaming from outside world queue problem while using slow motion. When you are at slow motion you can think it as real slow motion observation. So real world data can be queueing somewhere but "
+                            },
+                            {
+                                "type": "text",
+                                "text": "from observation point of view",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " it's not existing yet (aka runtime implementation detail).\n\nSecondly related to how data moves, consider scenario.\n-Signal splits for two paths, A and B.\n-Signal path A splits conditionally either to A-short or A-long (for whatever definition of short or long).\n-Then A-short and A-long merges and path finally merges with B with some operation requiring values from both.\n\nOk now we push two data messages to program: At first x1 and then x2.\nWhat if message x1 A part decide to choose A-long and x2 chooses A-short.\nIs it allowed to at any circumistances that value from x2 overtake value from x1?\nLeading on finally merging x2 A part with x1 B part.\n\nOne option could be normalize speed so that whenever signal splits every branch run exact speed that merging happens always simultaneously.\n(This for sure would make speed much more artificial.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1619467654.051900",
+        "parent_user_id": "UC2A2ARPT"
+    }
+]

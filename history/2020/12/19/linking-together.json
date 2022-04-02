@@ -1,0 +1,175 @@
+[
+    {
+        "client_msg_id": "f3459195-7691-4286-9a96-338cac63cae3",
+        "type": "message",
+        "text": "Extremely useful talk. I really liked how candid the speaker was about the challenges of debugging low-level systems like device drivers. According to them, Scheme gives you a nice REPL for debugging hard-to-reproduce bugs in low-level code like device drivers. However, the cost at the moment is that you have to deal with GC occurring at inopportune times, something a less capable language would shield you from.\n\nI'm just starting to get into OS development, and I'm acutely aware of the benefits on the other side of the fence (bootstrapping OS capabilities using a language, rather than bootstrapping language capabilities using an OS, as Mu does). This is a useful project to keep on my radar, if only to better understand the sort of debugging they've had to learn to do.",
+        "user": "UCUSW7WVD",
+        "ts": "1608444596.403000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1608446200.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7ZI\/+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Extremely useful talk. I really liked how candid the speaker was about the challenges of debugging low-level systems like device drivers. According to them, Scheme gives you a nice REPL for debugging hard-to-reproduce bugs in low-level code like device drivers. However, the cost at the moment is that you have to deal with GC occurring at inopportune times, something a less capable language would shield you from.\n\nI'm just starting to get into OS development, and I'm acutely aware of the benefits on the other side of the fence (bootstrapping OS capabilities using a language, rather than bootstrapping language capabilities using an OS, as Mu does). This is a useful project to keep on my radar, if only to better understand the sort of debugging they've had to learn to do."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608325299.400800",
+        "parent_user_id": "U013ZLJARC7",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fd726a1f-2bf0-4bdc-9545-911dfe5ef6b1",
+        "type": "message",
+        "text": "Number of processes on my Mac as I read this: 409 :joy:\n\nBut I don't really get why number of processes is such an obvious metric here. He gets into the need for kernels to be small and most work to be done in userland, which is reasonable. But when we have billions of cycles to work with, it seems reasonable to have lots of user processes doing useful work for, you know, the user. And user processes benefit just as much from shared libraries as kernel processes.\n\n---\n\nYou're right that his desire for processes to communicate via shared memory without any marshalling or unmarshalling is straight out of the Smalltalk playbook.\n\nMore than STEPS, the work I'd point him at is <https:\/\/arcan-fe.com>. Particularly principle 6 of <https:\/\/www.divergent-desktop.org\/blog\/2020\/08\/10\/principles-overview\/#p6>:\n\n&gt; An application does not get to disturb you by ‘asking for permission’ just to steal data from a sensor – it always gets some kind of data. You decide, dynamically, which sensor that is actually sampled and what that entails. Access the ‘camera’ does not automatically imply sampling the actual device, it means being routed a video stream. The user decide what that stream covers and when.\nSo yes, apps should be able to read the file system. They just shouldn't ever be sure it's the _real_ file system.\n\nAccessing the file system is the least of our privacy or security worries on a modern computer. All our data is over the network. Malicious code could read your data from one remote location and exfiltrate it to another remote location without ever hitting the local file system. Arcan thinks about the _entire_ security envelope.\n\n---\n\nI feel for his desire to do away with device drivers and graphics accelerators, but it just doesn't reconcile with geopolitical realities. Companies control the hardware they produce. Consumers don't prioritize openness of interfaces. Incumbents don't care about enabling new OSs.\n\nHe's a game programmer and he needs the graphics acceleration. Sucks to be in that position. I feel fortunate that I can just say, \"a pox on all your houses,\" and want less from my graphics card.",
+        "user": "UCUSW7WVD",
+        "ts": "1608446049.403200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1608446073.000000"
+        },
+        "attachments": [
+            {
+                "title": "12 Principles for a Diverging Desktop Future",
+                "title_link": "https:\/\/www.divergent-desktop.org\/blog\/2020\/08\/10\/principles-overview\/#p6",
+                "text": "12 Principles for a Diverging Desktop Future 10 Aug 2020 ...",
+                "fallback": "12 Principles for a Diverging Desktop Future",
+                "from_url": "https:\/\/www.divergent-desktop.org\/blog\/2020\/08\/10\/principles-overview\/#p6",
+                "service_name": "divergent-desktop.org",
+                "id": 2,
+                "original_url": "https:\/\/www.divergent-desktop.org\/blog\/2020\/08\/10\/principles-overview\/#p6"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0mhd3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Number of processes on my Mac as I read this: 409 "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "joy"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nBut I don't really get why number of processes is such an obvious metric here. He gets into the need for kernels to be small and most work to be done in userland, which is reasonable. But when we have billions of cycles to work with, it seems reasonable to have lots of user processes doing useful work for, you know, the user. And user processes benefit just as much from shared libraries as kernel processes.\n\n---\n\nYou're right that his desire for processes to communicate via shared memory without any marshalling or unmarshalling is straight out of the Smalltalk playbook.\n\nMore than STEPS, the work I'd point him at is "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/arcan-fe.com"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Particularly principle 6 of "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.divergent-desktop.org\/blog\/2020\/08\/10\/principles-overview\/#p6"
+                            },
+                            {
+                                "type": "text",
+                                "text": ":\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "An application does not get to disturb you by ‘asking for permission’ just to steal data from a sensor – it always gets some kind of data. You decide, dynamically, which sensor that is actually sampled and what that entails. Access the ‘camera’ does not automatically imply sampling the actual device, it means being routed a video stream. The user decide what that stream covers and when."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nSo yes, apps should be able to read the file system. They just shouldn't ever be sure it's the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "real",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " file system.\n\nAccessing the file system is the least of our privacy or security worries on a modern computer. All our data is over the network. Malicious code could read your data from one remote location and exfiltrate it to another remote location without ever hitting the local file system. Arcan thinks about the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "entire",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " security envelope.\n\n---\n\nI feel for his desire to do away with device drivers and graphics accelerators, but it just doesn't reconcile with geopolitical realities. Companies control the hardware they produce. Consumers don't prioritize openness of interfaces. Incumbents don't care about enabling new OSs.\n\nHe's a game programmer and he needs the graphics acceleration. Sucks to be in that position. I feel fortunate that I can just say, \"a pox on all your houses,\" and want less from my graphics card."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1608322429.399200",
+        "parent_user_id": "UAJKEBGP8"
+    }
+]

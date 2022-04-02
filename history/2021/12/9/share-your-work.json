@@ -1,0 +1,206 @@
+[
+    {
+        "client_msg_id": "7bc2bddb-27c0-40e7-9bf4-6c6250a89e5a",
+        "type": "message",
+        "text": "Thanks <@U02E4DAQGSZ>, those are all very good arguments! But I have to admit that some sound too good to be true. A one-click fork to get an Oauth server? I need to set up some server first, right? There must be some physical machine doing the work, and also hosting my domain. Also, I doubt many practically useful server applications can do without any preinstalled dependencies. Sure, I can in theory rewrite everything as notebooks, but in practice everything is based on a lot of existing code.",
+        "user": "UJBAJNFLK",
+        "ts": "1639036960.089100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e169f54bbaf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-03-12\/1859691333940_e169f54bbaf8b9b36b12_72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0+f",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U02E4DAQGSZ"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", those are all very good arguments! But I have to admit that some sound too good to be true. A one-click fork to get an Oauth server? I need to set up some server first, right? There must be some physical machine doing the work, and also hosting my domain. Also, I doubt many practically useful server applications can do without any preinstalled dependencies. Sure, I can in theory rewrite everything as notebooks, but in practice everything is based on a lot of existing code."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1638518880.058900",
+        "parent_user_id": "U02E4DAQGSZ"
+    },
+    {
+        "client_msg_id": "7240a6d5-6bac-45ee-8b4f-c90d8cdd70e2",
+        "type": "message",
+        "text": "&gt;  I need to set up some server first, right?\nNo! The webcode runtime is a *generic* container [1] that knows how to run notebooks (it has puppeteer inside it). So that one container runs *all* the notebooks. If you looks at the outbound requests to webcode, the URL encodes which notebook to dynamically lookup. The Oath implementation is at the application level in a notebook. Often, you also need persistence, so I use Firebase as that works well with browser. The server is pupeteer, i.e., also a browser.  So if you want to run your own Oauth server you need to bring-your-own-firebase after forking my notebook.\n\n[1] <https:\/\/github.com\/endpointservices\/webcode.run\/blob\/main\/Dockerfile>\n\n&gt;  practically useful server applications can do without any preinstalled dependencies.\nAll dependencies come in via normal Javascript imports.\n\nThe major limitations is that many javascript dependencies are node only, but that is changing to ES6 modules (if no other reason than to support Deno). It's kind of like Deno but when you mix in Observablehq you have a whole IDE and its trivial to switch the execution from serverside to clientside and vice versa as they are all just browsers.\n\nWhen you turn on \"live debugging\", a tunnel is setup like ngrok, that tunnels production traffic to the developers machine. The developers browser processes the request (giving opportunity for debugging) and sends back the response. This is how code changes are immediate with 0 latency, the developers latest code is the server when in live mode. This is enabled by the browser being the normalized environment.",
+        "user": "U02E4DAQGSZ",
+        "ts": "1639037933.089300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "27dffd0e73bd",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2483463922595_27dffd0e73bd6f709927_72.gif",
+            "first_name": "Tom",
+            "real_name": "Tom Larkworthy",
+            "display_name": "Tom Larkworthy",
+            "team": "T5TCAFTA9",
+            "name": "tom.larkworthy",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U02E4DAQGSZ",
+            "ts": "1639038411.000000"
+        },
+        "attachments": [
+            {
+                "from_url": "https:\/\/github.com\/endpointservices\/webcode.run\/blob\/main\/Dockerfile",
+                "image_url": "https:\/\/opengraph.githubassets.com\/4ab69736c5fa5bbd50471a376c6339acc40c31d3766f8426d2d29cb86bf39cd1\/endpointservices\/webcode.run",
+                "image_width": 500,
+                "image_height": 250,
+                "image_bytes": 79302,
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/github.png",
+                "id": 1,
+                "original_url": "https:\/\/github.com\/endpointservices\/webcode.run\/blob\/main\/Dockerfile",
+                "fallback": "GitHub: webcode.run\/Dockerfile at main · endpointservices\/webcode.run",
+                "text": "Runtime for <https:\/\/observablehq.com\/@tomlarkworthy\/webcode> - webcode.run\/Dockerfile at main · endpointservices\/webcode.run",
+                "title": "webcode.run\/Dockerfile at main · endpointservices\/webcode.run",
+                "title_link": "https:\/\/github.com\/endpointservices\/webcode.run\/blob\/main\/Dockerfile",
+                "service_name": "GitHub"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1q3",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": " I need to set up some server first, right?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "No! The webcode runtime is a *generic* container [1] that knows how to run notebooks (it has puppeteer inside it). So that one container runs "
+                            },
+                            {
+                                "type": "text",
+                                "text": "all",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " the notebooks. If you looks at the outbound requests to webcode, the URL encodes which notebook to dynamically lookup. The Oath implementation is at the application level in a notebook. Often, you also need persistence, so I use Firebase as that works well with browser. The server is pupeteer, i.e., also a browser.  So if you want to run your own Oauth server you need to bring-your-own-firebase after forking my notebook.\n\n[1] "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/github.com\/endpointservices\/webcode.run\/blob\/main\/Dockerfile"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": " practically useful server applications can do without any preinstalled dependencies."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAll dependencies come in via normal Javascript imports.\n\nThe major limitations is that many javascript dependencies are node only, but that is changing to ES6 modules (if no other reason than to support Deno). It's kind of like Deno but when you mix in Observablehq you have a whole IDE and its trivial to switch the execution from serverside to clientside and vice versa as they are all just browsers.\n\nWhen you turn on \"live debugging\", a tunnel is setup like ngrok, that tunnels production traffic to the developers machine. The developers browser processes the request (giving opportunity for debugging) and sends back the response. This is how code changes are immediate with 0 latency, the developers latest code is the server when in live mode. This is enabled by the browser being the normalized environment."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1638518880.058900",
+        "parent_user_id": "U02E4DAQGSZ",
+        "reactions": [
+            {
+                "name": "eyes",
+                "users": [
+                    "U01ULEWACPP"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "59f30e14-125c-4d23-aa22-0b2cb6843820",
+        "type": "message",
+        "text": "Oh another headwind is if your server needs a TCP connection, like a postgres db connection. There is no easy way to achieve that, you are limited to HTTP and websocket comms. I do have a plan to get TCP deployed but not currently",
+        "user": "U02E4DAQGSZ",
+        "ts": "1639048379.090000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "27dffd0e73bd",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2483463922595_27dffd0e73bd6f709927_72.gif",
+            "first_name": "Tom",
+            "real_name": "Tom Larkworthy",
+            "display_name": "Tom Larkworthy",
+            "team": "T5TCAFTA9",
+            "name": "tom.larkworthy",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "IYM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh another headwind is if your server needs a TCP connection, like a postgres db connection. There is no easy way to achieve that, you are limited to HTTP and websocket comms. I do have a plan to get TCP deployed but not currently"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1638518880.058900",
+        "parent_user_id": "U02E4DAQGSZ"
+    }
+]

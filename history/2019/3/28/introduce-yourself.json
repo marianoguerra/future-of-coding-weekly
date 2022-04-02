@@ -1,0 +1,178 @@
+[
+    {
+        "client_msg_id": "05971161-6d6a-4166-aadd-8918953abda0",
+        "type": "message",
+        "text": "Hi Wouter, welcome! We chatted a bit about Lobster's `while` sometime back. I still find Lobster one of the most promising languages, just don't have time to explore or work with it :smile:. One really interesting feature is the typing (is there a name for this? verified duck typing? flow based?) The ability to write fairly flexible code with only a  few annotations, and the compiler will verify (whole program analysis?) that there is no AttributeError. Specifically each branch is specialized for invocation with different types. It appears you end up with Python like semantics and code patterns, except AttributeErrors are checked at compile time? Even the null checks are very nice because if something can be null or a number, you can just do\n```\nif a:\n  a += 1\n```\nAnd the compiler wont complain. No 'unpacking sum type' is necessary, and no danger of accidentally doing `a+=1` in an unchecked branch (compiler will complain). This is kind of a sweet spot between the current mainstream static and dynamic typing ideas. Is this a correct understanding of the features?\n\nWhare areas of Lobster are under active development?\n\n(For folks interested in the type system see <https:\/\/htmlpreview.github.io\/?https:\/\/raw.githubusercontent.com\/aardappel\/lobster\/master\/lobster\/docs\/type_checker.html>)",
+        "user": "U8A5MS6R1",
+        "ts": "1553793976.000600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1553794428.000000"
+        },
+        "thread_ts": "1553729620.097600",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "1adbba83-51e7-4721-b8b6-584b24b1b78d",
+        "type": "message",
+        "text": "Also I really like that control structures are just functions. This is a more controversial idea, I believe, because folks argue we should only have a small set of well known control flows. But I think this is really powerful and also keeps the language core really small.",
+        "user": "U8A5MS6R1",
+        "ts": "1553794399.000900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553729620.097600",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "1104df38-bb7a-4a70-855e-a8ce93c81bf3",
+        "type": "message",
+        "text": "Yup, you have a pretty good picture of the type system. The goal is Python like comfort and productivity with a C# or even Rust-like safety net :slightly_smiling_face:",
+        "user": "UHDQ62M4P",
+        "ts": "1553830901.001500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553729620.097600",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "51aaf049-abd5-4906-9e39-5db92ff6bdf7",
+        "type": "message",
+        "text": "The magic in the type system is that it does flow sensitive specialization, so the type checking is relative to the compile-time call-graph, as if it evaluates each possible path for every type combination",
+        "user": "UHDQ62M4P",
+        "ts": "1553830966.001700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553729620.097600",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "4fe68e80-9ef3-424d-b5ae-85132ed74b7b",
+        "type": "message",
+        "text": "One area that changed recently (and I yet have to document) is memory management: I implemented a lifetime\/borrow checker similar to Rust, but unlike Rust it is mostly transparent to the programmer. In the base case it results in compile-time reference counting. Also it gained \"zero-cost abstraction\" in the sense that it has inline structs now",
+        "user": "UHDQ62M4P",
+        "ts": "1553833383.001900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553729620.097600",
+        "parent_user_id": "UHDQ62M4P",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U8A5MS6R1",
+                    "UA14TGLTC",
+                    "UBSMEUXAA"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "941d540d-635f-4a78-a6c7-96891f5cdf99",
+        "type": "message",
+        "text": "Also the beginnings of concurrency, in fully distributed, coordinated tuple space fashion",
+        "user": "UHDQ62M4P",
+        "ts": "1553833523.002100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "465336060ae8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-27\/582042668721_465336060ae83dc74288_72.jpg",
+            "first_name": "Wouter",
+            "real_name": "Wouter van Oortmerssen",
+            "display_name": "Wouter",
+            "team": "T5TCAFTA9",
+            "name": "aardappel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553729620.097600",
+        "parent_user_id": "UHDQ62M4P"
+    },
+    {
+        "client_msg_id": "1f6b7152-b98f-4926-9703-2296c43326b1",
+        "type": "message",
+        "text": "Sounds awesome. Modules would be nice too :smile:.",
+        "user": "U8A5MS6R1",
+        "ts": "1553836630.002400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1553729620.097600",
+        "parent_user_id": "UHDQ62M4P"
+    }
+]

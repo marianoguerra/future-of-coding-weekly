@@ -1,0 +1,272 @@
+[
+    {
+        "client_msg_id": "11e4c506-fad3-4e1a-91cb-7019e7c39537",
+        "type": "message",
+        "text": "Is anyone aware of a data structure that supports SQL-like operations on bags such as projection, selection, and join? I wrote something in Java patterned vaguely on Guava's Table interface, but my first crack at the API was too unreadable to actually submit. :sweat_smile: The important part for me was that it had a join that was implemented as the application of an arbitrary mapping function (input row → 0 or more values for the new column).",
+        "user": "UFEQUBNNT",
+        "ts": "1568145003.063900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "565c54a4fa91",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2508698086192_565c54a4fa91a0c8c75a_72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1568145003.063900",
+        "reply_count": 9,
+        "reply_users_count": 2,
+        "latest_reply": "1568210262.069600",
+        "reply_users": [
+            "UFEQUBNNT",
+            "UN57U8V53"
+        ],
+        "replies": [
+            {
+                "user": "UFEQUBNNT",
+                "ts": "1568146018.064000"
+            },
+            {
+                "user": "UN57U8V53",
+                "ts": "1568150911.065000"
+            },
+            {
+                "user": "UFEQUBNNT",
+                "ts": "1568152128.065200"
+            },
+            {
+                "user": "UFEQUBNNT",
+                "ts": "1568152230.065600"
+            },
+            {
+                "user": "UFEQUBNNT",
+                "ts": "1568152316.065800"
+            },
+            {
+                "user": "UFEQUBNNT",
+                "ts": "1568157761.066000"
+            },
+            {
+                "user": "UFEQUBNNT",
+                "ts": "1568158056.066200"
+            },
+            {
+                "user": "UN57U8V53",
+                "ts": "1568183093.066800"
+            },
+            {
+                "user": "UFEQUBNNT",
+                "ts": "1568210262.069600"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "afbb8805-b872-4d13-baca-4433ced1aa7f",
+        "type": "message",
+        "text": "For example, you might want a table like &lt;country, account, agent, agent-is-active&gt; with restrictions like the agent is located in the country, and whether an agent is active is account-specific. So it doesn't compress nicely into countries.map().map().map(), unless you either make a record type for each intermediate result so you can refer back to the country later in the computation, or one big record type where each field's validity depends on the current level of nesting. You can alternatively use for-loops if you're willing to nest a bunch of for-loops.",
+        "user": "UFEQUBNNT",
+        "ts": "1568146018.064000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "565c54a4fa91",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2508698086192_565c54a4fa91a0c8c75a_72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFEQUBNNT",
+            "ts": "1568146051.000000"
+        },
+        "thread_ts": "1568145003.063900",
+        "parent_user_id": "UFEQUBNNT"
+    },
+    {
+        "client_msg_id": "F80995F4-931E-49CA-B2B4-B18F714A245A",
+        "type": "message",
+        "text": "I’m confused; is the data structure a bag?",
+        "user": "UN57U8V53",
+        "ts": "1568150911.065000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "3447742b735b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-09\/753296041488_3447742b735b104a7ff2_72.png",
+            "first_name": "",
+            "real_name": "Don Abrams",
+            "display_name": "Don Abrams",
+            "team": "T5TCAFTA9",
+            "name": "donabrams",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1568145003.063900",
+        "parent_user_id": "UFEQUBNNT"
+    },
+    {
+        "client_msg_id": "fea40526-edf6-42a5-a636-b6675718dc3d",
+        "type": "message",
+        "text": "I wanted to make sure people knew that I wasn't talking about sets even though I was using relational algebra terms... From the way the Wikipedia page is worded, it seems that relational algebra fans are generally sad that SQL operates on bags instead of sets: \"Even the query language of SQL is loosely based on a relational algebra, though the operands in SQL (tables) are not exactly relations ... (arguably to the detriment of optimisers and\/or users). The SQL table model is a bag (multiset), rather than a set.\" <https:\/\/en.wikipedia.org\/wiki\/Relational_algebra#Implementations>",
+        "user": "UFEQUBNNT",
+        "ts": "1568152128.065200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "565c54a4fa91",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2508698086192_565c54a4fa91a0c8c75a_72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFEQUBNNT",
+            "ts": "1568152133.000000"
+        },
+        "thread_ts": "1568145003.063900",
+        "parent_user_id": "UFEQUBNNT"
+    },
+    {
+        "client_msg_id": "0b92ca44-6e19-4bef-909b-3670d3538d95",
+        "type": "message",
+        "text": "But the container of rows is only half the data structure, since you also need to describe the columns...",
+        "user": "UFEQUBNNT",
+        "ts": "1568152230.065600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "565c54a4fa91",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2508698086192_565c54a4fa91a0c8c75a_72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1568145003.063900",
+        "parent_user_id": "UFEQUBNNT"
+    },
+    {
+        "client_msg_id": "6cc45f9f-9a6d-4254-9b26-6a5513cdabdd",
+        "type": "message",
+        "text": "Eh, maybe I need to publish a draft of the library for it to be concrete enough for anyone to know what I'm talking about. :stuck_out_tongue:",
+        "user": "UFEQUBNNT",
+        "ts": "1568152316.065800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "565c54a4fa91",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2508698086192_565c54a4fa91a0c8c75a_72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1568145003.063900",
+        "parent_user_id": "UFEQUBNNT"
+    },
+    {
+        "client_msg_id": "9b706fb4-5e81-4a79-9579-5d763b11aa40",
+        "type": "message",
+        "text": "<https:\/\/observablehq.com\/@alltom\/relational-algebra>",
+        "user": "UFEQUBNNT",
+        "ts": "1568157761.066000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "565c54a4fa91",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2508698086192_565c54a4fa91a0c8c75a_72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1568145003.063900",
+        "parent_user_id": "UFEQUBNNT"
+    },
+    {
+        "client_msg_id": "6bcaee33-afd6-4979-b609-05b7ffcd42df",
+        "type": "message",
+        "text": "flatMap but you get to keep the left side of the map for reference in future maps.",
+        "user": "UFEQUBNNT",
+        "ts": "1568158056.066200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "565c54a4fa91",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-09-13\/2508698086192_565c54a4fa91a0c8c75a_72.png",
+            "first_name": "Tom",
+            "real_name": "Tom Lieber",
+            "display_name": "alltom",
+            "team": "T5TCAFTA9",
+            "name": "tom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1568145003.063900",
+        "parent_user_id": "UFEQUBNNT"
+    },
+    {
+        "client_msg_id": "498104E4-D927-49D0-B65B-98D637B5BCB5",
+        "type": "message",
+        "text": "Looks an awful lot like CQL",
+        "user": "UN57U8V53",
+        "ts": "1568183093.066800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "3447742b735b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-09\/753296041488_3447742b735b104a7ff2_72.png",
+            "first_name": "",
+            "real_name": "Don Abrams",
+            "display_name": "Don Abrams",
+            "team": "T5TCAFTA9",
+            "name": "donabrams",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1568145003.063900",
+        "parent_user_id": "UFEQUBNNT"
+    }
+]

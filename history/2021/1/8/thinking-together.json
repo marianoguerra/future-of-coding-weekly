@@ -1,450 +1,38 @@
 [
     {
-        "client_msg_id": "cc8b2baf-eb16-455b-94d8-dd0345584bb3",
-        "type": "message",
-        "text": "It's not the same as AOP, but \"Data-Oriented\" programming with Entity-Component-Systems is something that feels adjacent to these ideas.\n\nAt my co, we've leveraged the \"data\" focused part of an ECS to make it trivial to cut through \"call-graphs\" and instead just look at the underlying shared state of our application.\n\nSee the following demo I've just recorded:\n<https://www.loom.com/share/b4997d40f9814144940008c51584b926>\n\ncc <@UHWC9PXBL>",
-        "user": "UFPPABQ7P",
-        "ts": "1610065610.448100",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UFPPABQ7P",
-            "ts": "1610065693.000000"
-        },
-        "attachments": [
-            {
-                "service_name": "Loom",
-                "service_url": "https://www.loom.com",
-                "title": "ECS / Data-oriented programming in response to AOP",
-                "title_link": "https://www.loom.com/share/b4997d40f9814144940008c51584b926",
-                "thumb_url": "https://cdn.loom.com/sessions/thumbnails/b4997d40f9814144940008c51584b926-00001.gif",
-                "thumb_width": 1024,
-                "thumb_height": 885,
-                "fallback": "Loom Video: ECS / Data-oriented programming in response to AOP",
-                "video_html": "<iframe src=\"https://www.loom.com/embed/b4997d40f9814144940008c51584b926?autoplay=1\" frameborder=\"0\" width=\"1248\" height=\"936\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>",
-                "video_html_width": 1248,
-                "video_html_height": 936,
-                "from_url": "https://www.loom.com/share/b4997d40f9814144940008c51584b926",
-                "id": 1,
-                "original_url": "https://www.loom.com/share/b4997d40f9814144940008c51584b926"
-            }
-        ],
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "/+AIM",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "It's not the same as AOP, but \"Data-Oriented\" programming with Entity-Component-Systems is something that feels adjacent to these ideas.\n\nAt my co, we've leveraged the \"data\" focused part of an ECS to make it trivial to cut through \"call-graphs\" and instead just look at the underlying shared state of our application.\n\nSee the following demo I've just recorded:\n"
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://www.loom.com/share/b4997d40f9814144940008c51584b926"
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n\ncc "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UHWC9PXBL"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1608395248.354400",
-        "parent_user_id": "UHWC9PXBL",
-        "reactions": [
-            {
-                "name": "heart",
-                "users": [
-                    "UHWC9PXBL"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "6eb90d45-ef86-4b77-9ccb-723f5373e4bc",
-        "type": "message",
-        "text": "Hello, I'm trying to wrap my head around the implementation for a platform for developing self describing \"services\" or as we might call them \"drivers\".\n\nThe basic lifecycle of a \"driver\" is essentially:\n1. *Driver describes Service registration requirements*: Announce what registration info (keys, permissions, web-hook URLs, etc) it needs to register\n2. *User adds Service*: Register an instance of Service X by providing \"registration info\" that were asked for by the driver\n3. *Driver describes Service interfaces*: Use \"registration info\" to imperatively declare its interfaces (I have these functions, that take these types, that provide these representations, etc)\n4. *User* can begin using this *Service* from their own code.\nThis cycle exists to enable something like registering an Airtable database through a driver. We aim to allow for generative interface based on the Airtable's columns. You could just as easily replace \"Airtable\" as an example with an \"SQL DB driver\" even.\n\nThe main problem I'm wrestling with is mostly in how I would design the Driver SDK for step \"3. *Driver describes Service interfaces*\". In some respects, I want to allow the SDK developer (myself and my team members for now) to have a lot of flexibility with how they end up describing the Service interfaces &amp; provide that service interface's implementation. But, when it comes to considering how deployment, versioning, and development and debugging for SDK dev I feel quite naive.\n\nDoes anyone have reference material or admirable examples of this kind of problem? Even things adjacent could be very inspiring.\ncc <@UHWC9PXBL> <@UG0EL18H3> <@UKFNXF0F9>\n\nP.S. This seems tangential to: reflective type systems / declarative type providers (like building <https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/type-providers/|FSharp Type providers>); VS Code Language Server protocol; game dev modding; and maybe <#C01CD90V1NF|of-glam-school>.",
-        "user": "UFPPABQ7P",
-        "ts": "1610067746.465300",
-        "team": "T5TCAFTA9",
-        "edited": {
-            "user": "UFPPABQ7P",
-            "ts": "1610068088.000000"
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "lR9DV",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Hello, I'm trying to wrap my head around the implementation for a platform for developing self describing \"services\" or as we might call them \"drivers\".\n\nThe basic lifecycle of a \"driver\" is essentially:\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_list",
-                        "elements": [
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "Driver describes Service registration requirements",
-                                        "style": {
-                                            "bold": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": ": Announce what registration info (keys, permissions, web-hook URLs, etc) it needs to register"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "User adds Service",
-                                        "style": {
-                                            "bold": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": ": Register an instance of Service X by providing \"registration info\" that were asked for by the driver"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "Driver describes Service interfaces",
-                                        "style": {
-                                            "bold": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": ": Use \"registration info\" to imperatively declare its interfaces (I have these functions, that take these types, that provide these representations, etc)"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "rich_text_section",
-                                "elements": [
-                                    {
-                                        "type": "text",
-                                        "text": "User",
-                                        "style": {
-                                            "bold": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " can begin using this "
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "Service",
-                                        "style": {
-                                            "bold": true
-                                        }
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": " from their own code."
-                                    }
-                                ]
-                            }
-                        ],
-                        "style": "ordered",
-                        "indent": 0
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\nThis cycle exists to enable something like registering an Airtable database through a driver. We aim to allow for generative interface based on the Airtable's columns. You could just as easily replace \"Airtable\" as an example with an \"SQL DB driver\" even.\n\nThe main problem I'm wrestling with is mostly in how I would design the Driver SDK for step \"3. "
-                            },
-                            {
-                                "type": "text",
-                                "text": "Driver describes Service interfaces",
-                                "style": {
-                                    "bold": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": "\". In some respects, I want to allow the SDK developer (myself and my team members for now) to have a lot of flexibility with how they end up describing the Service interfaces & provide that service interface's implementation. But, when it comes to considering how deployment, versioning, and development and debugging for SDK dev I feel quite naive.\n\nDoes anyone have reference material or admirable examples of this kind of problem? Even things adjacent could be very inspiring.\ncc "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UHWC9PXBL"
-                            },
-                            {
-                                "type": "text",
-                                "text": " "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UG0EL18H3"
-                            },
-                            {
-                                "type": "text",
-                                "text": " "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "UKFNXF0F9"
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n\nP.S. This seems tangential to: reflective type systems / declarative type providers (like building "
-                            },
-                            {
-                                "type": "link",
-                                "url": "https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/type-providers/",
-                                "text": "FSharp Type providers"
-                            },
-                            {
-                                "type": "text",
-                                "text": "); VS Code Language Server protocol; game dev modding; and maybe "
-                            },
-                            {
-                                "type": "channel",
-                                "channel_id": "C01CD90V1NF"
-                            },
-                            {
-                                "type": "text",
-                                "text": "."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1610067746.465300",
-        "reply_count": 9,
-        "reply_users_count": 6,
-        "latest_reply": "1610199993.482700",
-        "reply_users": [
-            "UKFNXF0F9",
-            "UG0EL18H3",
-            "UN9SCH5RD",
-            "UHWC9PXBL",
-            "UCGAK10LS",
-            "UFPPABQ7P"
-        ],
-        "subscribed": false
-    },
-    {
-        "client_msg_id": "2d15a24c-f561-4d78-8901-8c75ed48a4e8",
-        "type": "message",
-        "text": "There are two kind of services, service for read, service for write. There is no standard way to write, writing into a external service need various properties according to the need. Expose the write interface as a generic interface such as SQL INSERT is a mistake, it will not work in cross domain setting. To protect the data integrity, some kind of stored procedure is always needed to validate business constraint.",
-        "user": "UKFNXF0F9",
-        "ts": "1610076524.466100",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "AZXG",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "There are two kind of services, service for read, service for write. There is no standard way to write, writing into a external service need various properties according to the need. Expose the write interface as a generic interface such as SQL INSERT is a mistake, it will not work in cross domain setting. To protect the data integrity, some kind of stored procedure is always needed to validate business constraint."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1610067746.465300",
-        "parent_user_id": "UFPPABQ7P",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UFPPABQ7P"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "f255c873-d02b-43af-afc6-9af12ec7a437",
-        "type": "message",
-        "text": "Service for read can be standard, expose query by example, query by filter or query by sql. The schema of information returned can also be defined in protobuf or json schema.",
-        "user": "UKFNXF0F9",
-        "ts": "1610076620.466300",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "sV1",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "Service for read can be standard, expose query by example, query by filter or query by sql. The schema of information returned can also be defined in protobuf or json schema."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1610067746.465300",
-        "parent_user_id": "UFPPABQ7P"
-    },
-    {
-        "client_msg_id": "229ceead-d828-4e93-9107-59ee41f7c2bd",
-        "type": "message",
-        "text": "In terms of generating UI automatically, you can generate the UI of form submission, which will call the write service after submit button clicked. You can also generate the UI of the read side, list/detail/...",
-        "user": "UKFNXF0F9",
-        "ts": "1610076666.466500",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "cNm6l",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "In terms of generating UI automatically, you can generate the UI of form submission, which will call the write service after submit button clicked. You can also generate the UI of the read side, list/detail/..."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1610067746.465300",
-        "parent_user_id": "UFPPABQ7P"
-    },
-    {
-        "client_msg_id": "ecdab9a1-3c1c-4123-b840-3fd82b6a8751",
-        "type": "message",
-        "text": "The data schema could be encoded as static file, such as protobuf, json schema, typescript .d.ts / .ts class. It could also be encoded as data to allow dynamic reflection. Generate can happen statically, or dynamically.",
-        "user": "UKFNXF0F9",
-        "ts": "1610076774.466700",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "F0BN",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "The data schema could be encoded as static file, such as protobuf, json schema, typescript .d.ts / .ts class. It could also be encoded as data to allow dynamic reflection. Generate can happen statically, or dynamically."
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1610067746.465300",
-        "parent_user_id": "UFPPABQ7P",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UFPPABQ7P"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
-        "client_msg_id": "FD67B8B4-184C-47C9-99F1-5F607F3C1DCE",
-        "type": "message",
-        "text": "First thing that comes to mind whenever people talk about the future of versioning, SDKs and a malleable public API ecosystem is the Unison project: I believe <@U01F5UR4R1C> would be the guy to ask about that. Seems like a particularly good model for your app domain as you will be the ones controlling the entire stack for the development of these drivers (correct me if I'm wrong). On the topic of service announcement and registration, unfortunately only WSDL comes to mind (sadly). ",
-        "user": "UG0EL18H3",
-        "ts": "1610084994.472000",
-        "team": "T5TCAFTA9",
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "Mr+V3",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "First thing that comes to mind whenever people talk about the future of versioning, SDKs and a malleable public API ecosystem is the Unison project: I believe "
-                            },
-                            {
-                                "type": "user",
-                                "user_id": "U01F5UR4R1C"
-                            },
-                            {
-                                "type": "text",
-                                "text": " would be the guy to ask about that. Seems like a particularly good model for your app domain as you will be the ones controlling the entire stack for the development of these drivers (correct me if I'm wrong). On the topic of service announcement and registration, unfortunately only WSDL comes to mind (sadly). "
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1610067746.465300",
-        "parent_user_id": "UFPPABQ7P",
-        "reactions": [
-            {
-                "name": "+1",
-                "users": [
-                    "UFPPABQ7P"
-                ],
-                "count": 1
-            }
-        ]
-    },
-    {
         "client_msg_id": "1c2c07fc-8d96-45c6-b3cd-df35adcb9776",
         "type": "message",
-        "text": "Not sure I understand what you are trying to build.\nDo you intend to proxy the calls through the \"platform\"? Something like an <https://microservices.io/patterns/apigateway.html|API Gateway>?\nFor service specification I imagine you would have to use some form of IDL.",
+        "text": "Not sure I understand what you are trying to build.\nDo you intend to proxy the calls through the \"platform\"? Something like an <https:\/\/microservices.io\/patterns\/apigateway.html|API Gateway>?\nFor service specification I imagine you would have to use some form of IDL.",
         "user": "UN9SCH5RD",
         "ts": "1610099905.472600",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gaa31b79aded",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aa31b79adedc3f60547769f1a8971ba6.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Emmanuel Oga",
+            "display_name": "Emmanuel Oga",
+            "team": "T5TCAFTA9",
+            "name": "emmanueloga",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "service_name": "microservices.io",
                 "title": "Microservices Pattern: API gateway pattern",
-                "title_link": "https://microservices.io/patterns/apigateway.html",
+                "title_link": "https:\/\/microservices.io\/patterns\/apigateway.html",
                 "text": "An API gateway acts a single entry point into the application, routing and composing requests to services",
                 "fallback": "microservices.io: Microservices Pattern: API gateway pattern",
-                "image_url": "http://microservices.io/i/apigateway.jpg",
-                "from_url": "https://microservices.io/patterns/apigateway.html",
+                "image_url": "http:\/\/microservices.io\/i\/apigateway.jpg",
+                "from_url": "https:\/\/microservices.io\/patterns\/apigateway.html",
                 "image_width": 339,
                 "image_height": 250,
                 "image_bytes": 119785,
                 "id": 1,
-                "original_url": "https://microservices.io/patterns/apigateway.html"
+                "original_url": "https:\/\/microservices.io\/patterns\/apigateway.html"
             }
         ],
         "blocks": [
@@ -461,7 +49,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://microservices.io/patterns/apigateway.html",
+                                "url": "https:\/\/microservices.io\/patterns\/apigateway.html",
                                 "text": "API Gateway"
                             },
                             {
@@ -483,6 +71,19 @@
         "user": "UJFN50C00",
         "ts": "1610101000.472900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e35958b94f07",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-05-06\/616300651267_e35958b94f07da17cf17_72.png",
+            "first_name": "Andreas",
+            "real_name": "Andreas S.",
+            "display_name": "curious_reader",
+            "team": "T5TCAFTA9",
+            "name": "andreas.scheinert",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -510,10 +111,23 @@
     {
         "client_msg_id": "D6B82F90-853B-401C-90E5-52F39980CBE9",
         "type": "message",
-        "text": "yeah! i\u2019m talking about exactly the part where you\u2019re working out whether tree indexing or scope determination comes first\u2014that\u2019s the part i was curious about whether there were any examples of languages with those tools built in",
+        "text": "yeah! i’m talking about exactly the part where you’re working out whether tree indexing or scope determination comes first—that’s the part i was curious about whether there were any examples of languages with those tools built in",
         "user": "UHWC9PXBL",
         "ts": "1610121870.474900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -524,7 +138,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "yeah! i\u2019m talking about exactly the part where you\u2019re working out whether tree indexing or scope determination comes first\u2014that\u2019s the part i was curious about whether there were any examples of languages with those tools built in"
+                                "text": "yeah! i’m talking about exactly the part where you’re working out whether tree indexing or scope determination comes first—that’s the part i was curious about whether there were any examples of languages with those tools built in"
                             }
                         ]
                     }
@@ -537,24 +151,37 @@
     {
         "client_msg_id": "83C0CD31-E745-4DC9-B7F5-73B1625AFB9D",
         "type": "message",
-        "text": "hm. this smells like cambria to me: <https://www.inkandswitch.com/cambria.html|https://www.inkandswitch.com/cambria.html> (at least as far as versioning goes)",
+        "text": "hm. this smells like cambria to me: <https:\/\/www.inkandswitch.com\/cambria.html|https:\/\/www.inkandswitch.com\/cambria.html> (at least as far as versioning goes)",
         "user": "UHWC9PXBL",
         "ts": "1610122434.475900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "attachments": [
             {
                 "title": "Project Cambria: Translate your data with lenses",
-                "title_link": "https://www.inkandswitch.com/cambria.html",
+                "title_link": "https:\/\/www.inkandswitch.com\/cambria.html",
                 "text": "Changing schemas in distributed software is hard. Could adopting bidirectional lenses help?",
                 "fallback": "Project Cambria: Translate your data with lenses",
-                "image_url": "https://inkandswitch.com/media/cambria/unfurl.jpg",
-                "from_url": "https://www.inkandswitch.com/cambria.html",
+                "image_url": "https:\/\/inkandswitch.com\/media\/cambria\/unfurl.jpg",
+                "from_url": "https:\/\/www.inkandswitch.com\/cambria.html",
                 "image_width": 419,
                 "image_height": 250,
                 "image_bytes": 88127,
                 "service_name": "inkandswitch.com",
                 "id": 1,
-                "original_url": "https://www.inkandswitch.com/cambria.html"
+                "original_url": "https:\/\/www.inkandswitch.com\/cambria.html"
             }
         ],
         "blocks": [
@@ -571,8 +198,8 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://www.inkandswitch.com/cambria.html",
-                                "text": "https://www.inkandswitch.com/cambria.html"
+                                "url": "https:\/\/www.inkandswitch.com\/cambria.html",
+                                "text": "https:\/\/www.inkandswitch.com\/cambria.html"
                             },
                             {
                                 "type": "text",
@@ -594,5 +221,49 @@
                 "count": 1
             }
         ]
+    },
+    {
+        "client_msg_id": "E3BFF80D-71CE-4DAB-8668-45CD33D51606",
+        "type": "message",
+        "text": "I don’t really understand what you’re trying to build. The API is going to be different depending on the registration info provided? The registration info is provided programmatically (by client software) and you want the client to be able to compute the resultant API’s type\/interface so static checking can be performed? If so, it sounds like your language needs a specially-crafted type system. The next step would be to show some examples of the types you want to be computed for specific registration info (inputs).",
+        "user": "UCGAK10LS",
+        "ts": "1610150064.482300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "770c193fd379",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-17\/1092364753072_770c193fd379ebbced3f_72.jpg",
+            "first_name": "",
+            "real_name": "Nick Smith",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "nmsmith65",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCGAK10LS",
+            "ts": "1610150095.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LnXY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don’t really understand what you’re trying to build. The API is going to be different depending on the registration info provided? The registration info is provided programmatically (by client software) and you want the client to be able to compute the resultant API’s type\/interface so static checking can be performed? If so, it sounds like your language needs a specially-crafted type system. The next step would be to show some examples of the types you want to be computed for specific registration info (inputs)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1610067746.465300",
+        "parent_user_id": "UFPPABQ7P"
     }
 ]

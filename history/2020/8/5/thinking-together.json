@@ -1,0 +1,3823 @@
+[
+    {
+        "client_msg_id": "2f5285a4-fae2-40bb-932d-d7fce58e673d",
+        "type": "message",
+        "text": "I don't know how deep you want to go with this question, but the best web-visible resource regarding continuations of which I'm aware is:\n<http:\/\/okmij.org\/ftp\/continuations\/>\n... in particular, on the topic of `call\/cc`, I recommend:\n<http:\/\/okmij.org\/ftp\/continuations\/against-callcc.html>",
+        "user": "U013ZLJARC7",
+        "ts": "1596611463.149500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Continuations and delimited control",
+                "title_link": "http:\/\/okmij.org\/ftp\/continuations\/",
+                "text": "A collection of articles on delimited and undelimited continuations and context-passing programming.",
+                "fallback": "Continuations and delimited control",
+                "from_url": "http:\/\/okmij.org\/ftp\/continuations\/",
+                "service_name": "okmij.org",
+                "id": 1,
+                "original_url": "http:\/\/okmij.org\/ftp\/continuations\/"
+            },
+            {
+                "title": "An argument against call\/cc",
+                "title_link": "http:\/\/okmij.org\/ftp\/continuations\/against-callcc.html",
+                "text": "Why a programming language should not offer a primitive to capture undelimited continuations (call\/cc).",
+                "fallback": "An argument against call\/cc",
+                "from_url": "http:\/\/okmij.org\/ftp\/continuations\/against-callcc.html",
+                "service_name": "okmij.org",
+                "id": 2,
+                "original_url": "http:\/\/okmij.org\/ftp\/continuations\/against-callcc.html"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "U7AdG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't know how deep you want to go with this question, but the best web-visible resource regarding continuations of which I'm aware is:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/okmij.org\/ftp\/continuations\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n... in particular, on the topic of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "call\/cc",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", I recommend:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/okmij.org\/ftp\/continuations\/against-callcc.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596399249.077700",
+        "parent_user_id": "U01003H81UM",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U01003H81UM"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "68a6c242-b446-49a0-93da-9e6c2e5d1e17",
+        "type": "message",
+        "text": "I second Hickey's talk - interesting questions in there.\n\nI have more than a few things to say about this topic. My position is that the generic nullability is bad. Also, empty strings are bad. Yes. Think about this: we've had the concept of 'zero' for 1000s of years but only very recently added the concept of 'empty string' - why? Could it be mainly for modeling in computers? There is no zero-like symbol you can write in a paper form where text is expected. Yes you could write `N\/A` but that conflates null and \"\". Sometimes you might be asked to write _why_ it is `N\/A`.\n\nConsider that there are valid questions for which the _meaningful_ _answer_ is zero: \"How many toilet paper rolls are there in the store?\", \"What is the temperature of the snow?\" etc. There are no questions where the 'empty string' answer has a clear-cut meaning: \"What is your spouse's name?\", \"What city do you live in?\" etc. What does an answer of `\"\"` mean? It could mean _\"I don't know\"_ or _\"I dont want to tell you\"_ or _\"There isn't one\"_. Can these always be mapped to null or \"\"? I don't think so.\n\nIn type systems that have both, the empty string and null, you end up with the question of 'what does null mean' vs 'what does empty string mean'. Sometimes when you have two missing values in the world that you want to model - you end up mapping these to '' and null. But really this has nothing to do with a generic solution - it's often just a reality twisted to fit the types. If you want to model _three_ missing values e.g. 'unknown', 'non-existent', 'secret\/intentionally-blank' - how do you map these to \"\" and null? Maybe the best solution here is to model the value as an enum? `unknown, non_existent, intentionally_blank, value(real_string_here)` . AFAIK no systems, languages have a great solution. However I feel better solutions lie in exploring the 'information modeling' space - RDF etc (perhaps with some kind of versioned schemas to describe what is possible and necessary.) Basically we don't want multiple data representations to correspond to a single reality (which is what happens in null vs \"\", or sometimes with nested `option&lt;option&lt;option&lt;t&gt;&gt;&gt;`).",
+        "user": "U8A5MS6R1",
+        "ts": "1596613703.150600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U8A5MS6R1",
+            "ts": "1596614051.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MrOt",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I second Hickey's talk - interesting questions in there.\n\nI have more than a few things to say about this topic. My position is that the generic nullability is bad. Also, empty strings are bad. Yes. Think about this: we've had the concept of 'zero' for 1000s of years but only very recently added the concept of 'empty string' - why? Could it be mainly for modeling in computers? There is no zero-like symbol you can write in a paper form where text is expected. Yes you could write "
+                            },
+                            {
+                                "type": "text",
+                                "text": "N\/A",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " but that conflates null and \"\". Sometimes you might be asked to write "
+                            },
+                            {
+                                "type": "text",
+                                "text": "why",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " it is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "N\/A",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nConsider that there are valid questions for which the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "meaningful",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "answer",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is zero: \"How many toilet paper rolls are there in the store?\", \"What is the temperature of the snow?\" etc. There are no questions where the 'empty string' answer has a clear-cut meaning: \"What is your spouse's name?\", \"What city do you live in?\" etc. What does an answer of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\"\"",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " mean? It could mean "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\"I don't know\"",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " or "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\"I dont want to tell you\"",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " or "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\"There isn't one\"",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Can these always be mapped to null or \"\"? I don't think so.\n\nIn type systems that have both, the empty string and null, you end up with the question of 'what does null mean' vs 'what does empty string mean'. Sometimes when you have two missing values in the world that you want to model - you end up mapping these to '' and null. But really this has nothing to do with a generic solution - it's often just a reality twisted to fit the types. If you want to model "
+                            },
+                            {
+                                "type": "text",
+                                "text": "three",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " missing values e.g. 'unknown', 'non-existent', 'secret\/intentionally-blank' - how do you map these to \"\" and null? Maybe the best solution here is to model the value as an enum? "
+                            },
+                            {
+                                "type": "text",
+                                "text": "unknown, non_existent, intentionally_blank, value(real_string_here)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " . AFAIK no systems, languages have a great solution. However I feel better solutions lie in exploring the 'information modeling' space - RDF etc (perhaps with some kind of versioned schemas to describe what is possible and necessary.) Basically we don't want multiple data representations to correspond to a single reality (which is what happens in null vs \"\", or sometimes with nested "
+                            },
+                            {
+                                "type": "text",
+                                "text": "option<option<option<t>>>",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ")."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "95881B1E-3D8E-49C5-B283-3F239395E0E3",
+        "type": "message",
+        "text": "<@U8A5MS6R1> to add to your points on how reality and implementation play into our constructs of strings. If we take away implementation and ways to model them, strings are really just symbols in a <https:\/\/en.wikipedia.org\/wiki\/Total_order|total order>. In that context, spaces don’t make much sense, neither do tabs, empty strings too. In my humble opinion we need to build a construct for _orders_ and _symbols_ (not just text, but any symbol you can imagine) and then modern string types can be considered special cases where we are talking about a total order of ‘text’ symbols.",
+        "user": "U014WA16VNJ",
+        "ts": "1596614333.158700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "12ac8e70899f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-22\/1269623799473_12ac8e70899f200f402b_72.png",
+            "first_name": "Orion",
+            "real_name": "Orion Reed",
+            "display_name": "Orion Reed",
+            "team": "T5TCAFTA9",
+            "name": "orionreedt",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U014WA16VNJ",
+            "ts": "1596614414.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "62PE9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U8A5MS6R1"
+                            },
+                            {
+                                "type": "text",
+                                "text": " to add to your points on how reality and implementation play into our constructs of strings. If we take away implementation and ways to model them, strings are really just symbols in a "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/en.wikipedia.org\/wiki\/Total_order",
+                                "text": "total order"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". In that context, spaces don’t make much sense, neither do tabs, empty strings too. In my humble opinion we need to build a construct for "
+                            },
+                            {
+                                "type": "text",
+                                "text": "orders ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "and"
+                            },
+                            {
+                                "type": "text",
+                                "text": " symbols",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (not just text, but any symbol you can imagine) and then modern string types can be considered special cases where we are talking about a total order of ‘text’ symbols."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "d74ad85c-9984-4d6a-9737-ea1309e4129f",
+        "type": "message",
+        "text": "Experimenting with podcast. Would love to learn what you think about it: <https:\/\/foc-new-podcast-player.netlify.app>.\n\nAsking since I converted Ep 31 with my tool, and the community survey reveals a high concentration of podcast-transcript readers.\n\nEndgoal: to have a text format similar to SRT\/WebVTT, but allow HTML content. Have a CLI or website to convert audio + text to this interactive app.\n\nBasic features:\n\n- Mapping between HTML\/audio, vertical-distance\/audio-time.\n- Click audio progress bar to find corresponding HTML\n- Click HTML to jump to audio position\n- Click HTML to get a sharable URL-with-hash\n\nI edited first few paragraphs to include `&lt;a&gt;`, but you can put any HTML there, including `&lt;img&gt;` etc. All HTML can be then linked against audio.\n\nSome things I like:\n\n- Easily talk about visual things with `&lt;img&gt;`\n- Reference without having to explain with `&lt;a&gt;`\n- You can read-listen (Cmd+F -&gt; Play)\n- Each piece of audio dialogue is referenceable\n\nI noticed some common shortcomings in podcasts:\n\n- can't talk about visual matters\n- linerality (as you can't easily reference)\n\nI think these limitations exclude certain topics and ways-of-talking. I'm making a podcast myself. Being aware of these shortcomings, I first made this tool\/presentation before recording my podcast.\n\nMy questions are:\n\n- Would you like to listen to such podcasts?\n- In what way would you listen to them differently?",
+        "user": "UMPQ9A65N",
+        "ts": "1596614507.159400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g65ecdf18e50",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/65ecdf18e50934634898dd3eaa310a69.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Pine Wu",
+            "display_name": "Pine Wu",
+            "team": "T5TCAFTA9",
+            "name": "octref",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Future of Coding",
+                "title": "31 Sustaining the Underfunded - Nadia Eghbal",
+                "title_link": "https:\/\/foc-new-podcast-player.netlify.app\/",
+                "text": "Are you looking for the real computer revolution? Join the club! Future of Coding is a podcast and community of toolmakers, researchers, and creators working together to reimagine computing.",
+                "fallback": "Future of Coding: 31 Sustaining the Underfunded - Nadia Eghbal",
+                "image_url": "https:\/\/user-images.githubusercontent.com\/2288939\/57971688-1b7a6f80-7989-11e9-8866-330f00db1db9.jpg",
+                "from_url": "https:\/\/foc-new-podcast-player.netlify.app\/",
+                "image_width": 250,
+                "image_height": 250,
+                "image_bytes": 10965,
+                "id": 1,
+                "original_url": "https:\/\/foc-new-podcast-player.netlify.app"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZO\/b6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Experimenting with podcast. Would love to learn what you think about it: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/foc-new-podcast-player.netlify.app"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nAsking since I converted Ep 31 with my tool, and the community survey reveals a high concentration of podcast-transcript readers.\n\nEndgoal: to have a text format similar to SRT\/WebVTT, but allow HTML content. Have a CLI or website to convert audio + text to this interactive app.\n\nBasic features:\n\n- Mapping between HTML\/audio, vertical-distance\/audio-time.\n- Click audio progress bar to find corresponding HTML\n- Click HTML to jump to audio position\n- Click HTML to get a sharable URL-with-hash\n\nI edited first few paragraphs to include "
+                            },
+                            {
+                                "type": "text",
+                                "text": "<a>",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", but you can put any HTML there, including "
+                            },
+                            {
+                                "type": "text",
+                                "text": "<img>",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " etc. All HTML can be then linked against audio.\n\nSome things I like:\n\n- Easily talk about visual things with "
+                            },
+                            {
+                                "type": "text",
+                                "text": "<img>",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n- Reference without having to explain with "
+                            },
+                            {
+                                "type": "text",
+                                "text": "<a>",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n- You can read-listen (Cmd+F -> Play)\n- Each piece of audio dialogue is referenceable\n\nI noticed some common shortcomings in podcasts:\n\n- can't talk about visual matters\n- linerality (as you can't easily reference)\n\nI think these limitations exclude certain topics and ways-of-talking. I'm making a podcast myself. Being aware of these shortcomings, I first made this tool\/presentation before recording my podcast.\n\nMy questions are:\n\n- Would you like to listen to such podcasts?\n- In what way would you listen to them differently?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "reply_count": 14,
+        "reply_users_count": 7,
+        "latest_reply": "1596766550.235200",
+        "reply_users": [
+            "ULK0Z4MPV",
+            "UHWC9PXBL",
+            "UH85W1ML1",
+            "UCUSW7WVD",
+            "UJ6LDMMN0",
+            "UMPQ9A65N",
+            "UJFN50C00"
+        ],
+        "replies": [
+            {
+                "user": "ULK0Z4MPV",
+                "ts": "1596638239.166900"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1596638322.168200"
+            },
+            {
+                "user": "UH85W1ML1",
+                "ts": "1596640419.176100"
+            },
+            {
+                "user": "UH85W1ML1",
+                "ts": "1596640447.176400"
+            },
+            {
+                "user": "UH85W1ML1",
+                "ts": "1596640474.176700"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1596644269.178500"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1596644986.178800"
+            },
+            {
+                "user": "UMPQ9A65N",
+                "ts": "1596646926.179400"
+            },
+            {
+                "user": "UMPQ9A65N",
+                "ts": "1596647260.179700"
+            },
+            {
+                "user": "UMPQ9A65N",
+                "ts": "1596647359.180000"
+            },
+            {
+                "user": "UMPQ9A65N",
+                "ts": "1596647596.180400"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1596714132.218300"
+            },
+            {
+                "user": "UH85W1ML1",
+                "ts": "1596719138.219000"
+            },
+            {
+                "user": "UMPQ9A65N",
+                "ts": "1596766550.235200"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UAHHWT22U",
+                    "U013ZLJARC7",
+                    "UUQ2EQW21",
+                    "UHWC9PXBL",
+                    "ULK0Z4MPV",
+                    "UJ6LDMMN0",
+                    "UBSMEUXAA",
+                    "UA14TGLTC",
+                    "UJFN50C00"
+                ],
+                "count": 9
+            },
+            {
+                "name": "point_up_2",
+                "users": [
+                    "UJFN50C00"
+                ],
+                "count": 1
+            },
+            {
+                "name": "bulb",
+                "users": [
+                    "UJFN50C00"
+                ],
+                "count": 1
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "U013KEPEJ2H"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2a456603-a21c-499e-91a5-8b3fa9840ac8",
+        "type": "message",
+        "text": "In Onex I have no empty string concept and also no control characters (space is a control character in that statement)",
+        "user": "UE6EFEPTQ",
+        "ts": "1596615553.159700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "n4s",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In Onex I have no empty string concept and also no control characters (space is a control character in that statement)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "E70028B3-7999-4DFC-A835-7CCA606C6C82",
+        "type": "message",
+        "text": "<@UE6EFEPTQ> sounds interesting! Do you have a link?",
+        "user": "U014WA16VNJ",
+        "ts": "1596615749.160400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "12ac8e70899f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-22\/1269623799473_12ac8e70899f200f402b_72.png",
+            "first_name": "Orion",
+            "real_name": "Orion Reed",
+            "display_name": "Orion Reed",
+            "team": "T5TCAFTA9",
+            "name": "orionreedt",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1089",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UE6EFEPTQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " sounds interesting! Do you have a link?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "577e8728-4cf4-49fb-9881-ea89c5831720",
+        "type": "message",
+        "text": "I have *unknown* (perhaps like undefined) and *nothing* (maybe that's null) as distinct concepts or special symbols",
+        "user": "UE6EFEPTQ",
+        "ts": "1596615753.160600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yu=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I have "
+                            },
+                            {
+                                "type": "text",
+                                "text": "unknown",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (perhaps like undefined) and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "nothing",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (maybe that's null) as distinct concepts or special symbols"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "ac43d6ca-535a-4378-94e8-847f4183a8b7",
+        "type": "message",
+        "text": "Oh hai Orion, um, documentation is a little thin and\/or dated :anguished:",
+        "user": "UE6EFEPTQ",
+        "ts": "1596615800.160800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JNOFo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh hai Orion, um, documentation is a little thin and\/or dated "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "anguished"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "e9f3a546-416f-4819-b779-b631ce94343d",
+        "type": "message",
+        "text": "Other shocking things about Onex: a property can be a single symbol but you can add more symbols, at which point it becomes a list. Indexed from 1. :blush:",
+        "user": "UE6EFEPTQ",
+        "ts": "1596616131.161000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3x6hH",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Other shocking things about Onex: a property can be a single symbol but you can add more symbols, at which point it becomes a list. Indexed from 1. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "blush"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "9cc0a0a1-5d59-49ea-bd4e-44b2f0606bd7",
+        "type": "message",
+        "text": "Maybe I should write an up to date description of this..",
+        "user": "UE6EFEPTQ",
+        "ts": "1596616201.161200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SZf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Maybe I should write an up to date description of this.."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U8A5MS6R1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c70c8d77-fdaf-45df-921c-58144479ae73",
+        "type": "message",
+        "text": "<@U014WA16VNJ> I assume you mean a total order on words? Yes that could be one way to model strings. 'Text' however is a widespread concept outside computers and often mixed in with presentation as well (are paragraph boundaries important? Are underlines important?) So in some sense having a flexible 'container' of media provided by the user is reasonable too. Kinda like a 'bitmap drawing' or even 'rich text'. I don't think strings are particularly fundamental - they model some aspects of _text_ (e.g. paragraphs) but not others (_color, underline)._ In any case, the system won't look inside this media object to make decisions - it will just pass this object around and the meaning is entirely interpreted by another person at some other time. This is where I think \"\" and null become interesting: often we write `if text is none: ...` . So the system does look inside this shape.",
+        "user": "U8A5MS6R1",
+        "ts": "1596616594.161400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "gIK",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U014WA16VNJ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I assume you mean a total order on words? Yes that could be one way to model strings. 'Text' however is a widespread concept outside computers and often mixed in with presentation as well (are paragraph boundaries important? Are underlines important?) So in some sense having a flexible 'container' of media provided by the user is reasonable too. Kinda like a 'bitmap drawing' or even 'rich text'. I don't think strings are particularly fundamental - they model some aspects of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "text",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (e.g. paragraphs) but not others ("
+                            },
+                            {
+                                "type": "text",
+                                "text": "color, underline). ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "In any case, the system won't look inside this media object to make decisions - it will just pass this object around and the meaning is entirely interpreted by another person at some other time. This is where I think \"\" and null become interesting: often we write "
+                            },
+                            {
+                                "type": "text",
+                                "text": "if text is none: ...",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " . So the system does look inside this shape."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "059df9a3-fe27-4516-9d70-0caf90f321c5",
+        "type": "message",
+        "text": "The 'auto-list' model is interesting, and probably right. \"I have one apple\" should only be represented one way, so `apple` vs `[apple]`  looks suspicious.",
+        "user": "U8A5MS6R1",
+        "ts": "1596616976.161700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7vjEu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The 'auto-list' model is interesting, and probably right. \"I have one apple\" should only be represented one way, so "
+                            },
+                            {
+                                "type": "text",
+                                "text": "apple",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " vs "
+                            },
+                            {
+                                "type": "text",
+                                "text": "[apple]",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "  looks suspicious."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "1d5b1737-eb01-4f1e-8fde-c974a5f5f22e",
+        "type": "message",
+        "text": "The thing I find interesting is that if a single value is not a special (and default case) then you don't need null or similar",
+        "user": "UBN9AFS0N",
+        "ts": "1596617177.161900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xSh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The thing I find interesting is that if a single value is not a special (and default case) then you don't need null or similar"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "5f848a2c-0c03-4d68-afe5-f6e74a081db5",
+        "type": "message",
+        "text": "if everything is a sequence (of potentially zero or one items), then an empty sequence would be \"null\", the cool thing is that if operations on values internally translate to map then handling the empty case comes for free. This sounds a little bit like \"nil punning\" in clojure, which is a pain when you find a nil and don't know where it became nil since everyone is passing it around happily",
+        "user": "UBN9AFS0N",
+        "ts": "1596617261.162200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "7f0f1c0238ec",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-09\/395086754178_7f0f1c0238ec02befdab_72.jpg",
+            "first_name": "Mariano",
+            "real_name": "Mariano Guerra",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "mariano",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "b6l",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "if everything is a sequence (of potentially zero or one items), then an empty sequence would be \"null\", the cool thing is that if operations on values internally translate to map then handling the empty case comes for free. This sounds a little bit like \"nil punning\" in clojure, which is a pain when you find a nil and don't know where it became nil since everyone is passing it around happily"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "2bda7af7-4184-4992-a3ea-58ac7012cadb",
+        "type": "message",
+        "text": "In Onex, empty sequence=empty symbol=*nothing* =the whole property isn't there. In an object property, if you empty the value or clear the list, the property itself is deleted; if you want a placeholder you just use *unknown*",
+        "user": "UE6EFEPTQ",
+        "ts": "1596620410.162400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qoAeY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In Onex, empty sequence=empty symbol="
+                            },
+                            {
+                                "type": "text",
+                                "text": "nothing",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " =the whole property isn't there. In an object property, if you empty the value or clear the list, the property itself is deleted; if you want a placeholder you just use "
+                            },
+                            {
+                                "type": "text",
+                                "text": "unknown",
+                                "style": {
+                                    "bold": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "c3d6ebbd-acb0-417c-85b8-6b78ee4d78ca",
+        "type": "message",
+        "text": "conflating *nothing* with *unknown* is a source of uncountable glitches in the history of software",
+        "user": "UE6EFEPTQ",
+        "ts": "1596620478.162600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "KU4C",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "conflating "
+                            },
+                            {
+                                "type": "text",
+                                "text": "nothing",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " with "
+                            },
+                            {
+                                "type": "text",
+                                "text": "unknown",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is a source of uncountable glitches in the history of software"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "amiga-tick",
+                "users": [
+                    "U014WA16VNJ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "08782f76-34c3-4ab0-94da-10cbb7c69a46",
+        "type": "message",
+        "text": "Note that this is *all* to help non-techies feel at home. Yes, non-techies would wonder why `apple` isn't the same as `[apple]`, or even why have those brackets",
+        "user": "UE6EFEPTQ",
+        "ts": "1596620546.162800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "V\/SN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Note that this is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "all",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to help non-techies feel at home. Yes, non-techies would wonder why "
+                            },
+                            {
+                                "type": "text",
+                                "text": "apple",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " isn't the same as "
+                            },
+                            {
+                                "type": "text",
+                                "text": "[apple]",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", or even why have those brackets"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "34384a05-e80e-4219-be19-de1de673afa9",
+        "type": "message",
+        "text": "so I have `fruit: apple` then `fruit: apple pear` and no brackets, no \"list type\"",
+        "user": "UE6EFEPTQ",
+        "ts": "1596620597.163100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iOfe",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "so I have "
+                            },
+                            {
+                                "type": "text",
+                                "text": "fruit: apple",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " then "
+                            },
+                            {
+                                "type": "text",
+                                "text": "fruit: apple pear",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and no brackets, no \"list type\""
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N"
+    },
+    {
+        "client_msg_id": "861df7af-aadc-4e65-b15f-bd50fc5f6943",
+        "type": "message",
+        "text": "and so `fruit:[1]` will always be `apple`",
+        "user": "UE6EFEPTQ",
+        "ts": "1596620645.163300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE6EFEPTQ",
+            "ts": "1596620745.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OXEp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "and so "
+                            },
+                            {
+                                "type": "text",
+                                "text": "fruit:[1]",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " will always be "
+                            },
+                            {
+                                "type": "text",
+                                "text": "apple",
+                                "style": {
+                                    "code": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596539310.135400",
+        "parent_user_id": "UBN9AFS0N",
+        "reactions": [
+            {
+                "name": "point_up",
+                "users": [
+                    "U8A5MS6R1",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c2ccfba9-7628-406d-a5b4-77c01988dc2e",
+        "type": "message",
+        "text": "I've just encountered this old thread on no-code and open-source in the newsletter and i wonder if anyone has thoughts on monetisation  based on content creation similar to how assets and learning materials used in e.g. 3d graphics industry <https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1591214873399000>",
+        "user": "UEH5JQS0J",
+        "ts": "1596631327.165600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge4f9c735542",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e4f9c7355428e644388f09261a52191.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0023-72.png",
+            "first_name": "Marcin",
+            "real_name": "Marcin Ignac",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "marcin",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "from_url": "https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1591214873399000",
+                "fallback": "[June 3rd, 2020 1:07 PM] paulgb: What are people's thoughts on the future of no-code platforms with regards to open source? These days as a developer I see that languages where the only compiler is proprietary are increasingly niche, while widely adopted languages have an open source stack. Will the same thing happen with no-code platforms, or are the dynamics different?",
+                "ts": "1591214873.399000",
+                "author_id": "UR482RFPY",
+                "author_subname": "Paul Butler",
+                "channel_id": "C5T9GPWFL",
+                "channel_name": "general",
+                "is_msg_unfurl": true,
+                "is_thread_root_unfurl": true,
+                "text": "What are people's thoughts on the future of no-code platforms with regards to open source? These days as a developer I see that languages where the only compiler is proprietary are increasingly niche, while widely adopted languages have an open source stack. Will the same thing happen with no-code platforms, or are the dynamics different?",
+                "author_name": "Paul Butler",
+                "author_link": "https:\/\/futureofcoding.slack.com\/team\/UR482RFPY",
+                "author_icon": "https:\/\/secure.gravatar.com\/avatar\/0c5674099527c19ca0eccac4f2309515.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0005-48.png",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "id": 1,
+                "original_url": "https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1591214873399000",
+                "footer": "Thread in #general"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SnIc",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've just encountered this old thread on no-code and open-source in the newsletter and i wonder if anyone has thoughts on monetisation  based on content creation similar to how assets and learning materials used in e.g. 3d graphics industry "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/futureofcoding.slack.com\/archives\/C5T9GPWFL\/p1591214873399000"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596631327.165600",
+        "reply_count": 5,
+        "reply_users_count": 2,
+        "latest_reply": "1596638892.175900",
+        "reply_users": [
+            "UEH5JQS0J",
+            "UHWC9PXBL"
+        ],
+        "replies": [
+            {
+                "user": "UEH5JQS0J",
+                "ts": "1596631335.165800"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1596638652.170300"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1596638710.172000"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1596638787.173200"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1596638892.175900"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "18327719-19e4-4a5c-8db3-543a03cda458",
+        "type": "message",
+        "text": "Context: as we are working on <https:\/\/nodes.io> and hit similar questions i can share what approach we are taking now.\n\nOut platform is based on JavaScript and npm so it allows extensibility and bring-your-own-lib as you wish. Because of that and the nature of our own work (data viz with big or sensitive datasets) we decided to go for desktop app where you own your code and data. To enable git, graph layout is stored in json (ok not the best format) and each Node's code is in it's own CommonJS module. Additionally you can compile or export your app to one bundle.js+html+assets package for deployment to static hosting.\n\nAs we enter the public beta soon we are left with dilemma on making this sustainable. This is internal tool that pays the bills by supporting our project so in theory we could open source it but there is no resources for full support, PRs, community etc atm. So our current idea is to have free but proprietary IDE app with licensing limiting commercial use (\"pay if you earn\") and open source runtime allowing you to compile your project from command line to safeguard your projects even more.\n\nI can see two ways forward:\n- Nodes Pro where we have some advance or niche-specific features in the IDE (e.g. realtime collaboration, cloud hosting)\n- Content: where you try to leverage your know-how and provide value through paid nodes bundles (e.g. for architectural visualisation or ML) or courses and premium learning materials\n\nAs mentioned in the original thread going free and open means anybody can do two above but there are benefits in community, opportunity gain for parent company, paid customisation gigs etc.",
+        "user": "UEH5JQS0J",
+        "ts": "1596631335.165800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge4f9c735542",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/0e4f9c7355428e644388f09261a52191.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0023-72.png",
+            "first_name": "Marcin",
+            "real_name": "Marcin Ignac",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "marcin",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Nodes",
+                "title_link": "https:\/\/nodes.io\/",
+                "text": "Nodes is a new way to create with code",
+                "fallback": "Nodes",
+                "image_url": "https:\/\/nodes.io\/assets\/video-cover.jpg",
+                "from_url": "https:\/\/nodes.io\/",
+                "image_width": 444,
+                "image_height": 250,
+                "image_bytes": 108139,
+                "service_name": "nodes.io",
+                "id": 1,
+                "original_url": "https:\/\/nodes.io"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "IUoBg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Context: as we are working on "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/nodes.io"
+                            },
+                            {
+                                "type": "text",
+                                "text": " and hit similar questions i can share what approach we are taking now.\n\nOut platform is based on JavaScript and npm so it allows extensibility and bring-your-own-lib as you wish. Because of that and the nature of our own work (data viz with big or sensitive datasets) we decided to go for desktop app where you own your code and data. To enable git, graph layout is stored in json (ok not the best format) and each Node's code is in it's own CommonJS module. Additionally you can compile or export your app to one bundle.js+html+assets package for deployment to static hosting.\n\nAs we enter the public beta soon we are left with dilemma on making this sustainable. This is internal tool that pays the bills by supporting our project so in theory we could open source it but there is no resources for full support, PRs, community etc atm. So our current idea is to have free but proprietary IDE app with licensing limiting commercial use (\"pay if you earn\") and open source runtime allowing you to compile your project from command line to safeguard your projects even more.\n\nI can see two ways forward:\n- Nodes Pro where we have some advance or niche-specific features in the IDE (e.g. realtime collaboration, cloud hosting)\n- Content: where you try to leverage your know-how and provide value through paid nodes bundles (e.g. for architectural visualisation or ML) or courses and premium learning materials\n\nAs mentioned in the original thread going free and open means anybody can do two above but there are benefits in community, opportunity gain for parent company, paid customisation gigs etc."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596631327.165600",
+        "parent_user_id": "UEH5JQS0J",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2a7bfd3a-8aa9-43e0-a930-67764090986b",
+        "type": "message",
+        "text": "What's great about podcasts is I can listen to them whilst doing other things (lately cooking and cleaning). So I feel like this runs against the grain of what makes podcasts successful.\n\nHowever, I agree that podcasts do lack these features. For example I really enjoyed the FoC episode on Orca but at some point I needed to stop and research what Orca was. And a lot of 99 Percent Invisible episodes come with an attached article with visual references.\n\nMaybe there's an opportunity here to allow me to stop what I'm doing and have a quick glimpse at my phone to get a visual reference (eg. an Orca gif) so the podcast can continue uninterrupted.",
+        "user": "ULK0Z4MPV",
+        "ts": "1596638239.166900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "84fdccb39d9b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-05-07\/1111736156419_84fdccb39d9b31c2626b_72.jpg",
+            "first_name": "",
+            "real_name": "Ryan King",
+            "display_name": "Ryan King",
+            "team": "T5TCAFTA9",
+            "name": "ryan.king1809",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "ULK0Z4MPV",
+            "ts": "1596638378.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yMP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What's great about podcasts is I can listen to them whilst doing other things (lately cooking and cleaning). So I feel like this runs against the grain of what makes podcasts successful.\n\nHowever, I agree that podcasts do lack these features. For example I really enjoyed the FoC episode on Orca but at some point I needed to stop and research what Orca was. And a lot of 99 Percent Invisible episodes come with an attached article with visual references.\n\nMaybe there's an opportunity here to allow me to stop what I'm doing and have a quick glimpse at my phone to get a visual reference (eg. an Orca gif) so the podcast can continue uninterrupted."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N"
+    },
+    {
+        "client_msg_id": "84A623B6-6ADC-488A-8029-0008AFEE96ED",
+        "type": "message",
+        "text": "yeah i would love a podcast player that let me tap or yell at siri for bookmarks, especially if those bookmarks connected up to a transcript and links",
+        "user": "UHWC9PXBL",
+        "ts": "1596638322.168200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TvQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yeah i would love a podcast player that let me tap or yell at siri for bookmarks, especially if those bookmarks connected up to a transcript and links"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "ULK0Z4MPV",
+                    "UCUSW7WVD",
+                    "UA14TGLTC"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0CAC8748-1CFB-4370-8832-95D0B0FDB6A0",
+        "type": "message",
+        "text": "i think the biggest deal for open source and platforms is not getting bitten if the company goes out of business",
+        "user": "UHWC9PXBL",
+        "ts": "1596638652.170300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bpNTm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i think the biggest deal for open source and platforms is not getting bitten if the company goes out of business"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596631327.165600",
+        "parent_user_id": "UEH5JQS0J"
+    },
+    {
+        "client_msg_id": "4BCDBDEE-979B-4E98-A5A2-2E06E469889B",
+        "type": "message",
+        "text": "i think that’s why a lot of the success stories (wordpress, red hat) have to do with support contracts and hosting—those are businesses that others could take over if say automattic went out of business ",
+        "user": "UHWC9PXBL",
+        "ts": "1596638710.172000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6aBvk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i think that’s why a lot of the success stories (wordpress, red hat) have to do with support contracts and hosting—those are businesses that others could take over if say automattic went out of business "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596631327.165600",
+        "parent_user_id": "UEH5JQS0J"
+    },
+    {
+        "client_msg_id": "596293F1-AFD2-4FE5-AF77-A1CC361176A1",
+        "type": "message",
+        "text": "i think collaboration makes a lot of sense too (and i wouldn’t describe these as “niche features”)",
+        "user": "UHWC9PXBL",
+        "ts": "1596638787.173200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UHWC9PXBL",
+            "ts": "1596638794.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Xwo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i think collaboration makes a lot of sense too (and i wouldn’t describe these as “niche features”)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596631327.165600",
+        "parent_user_id": "UEH5JQS0J"
+    },
+    {
+        "client_msg_id": "56487E9F-5BD0-40BA-85F7-BA5AC8FA8794",
+        "type": "message",
+        "text": "but as far as development environments go, id rather see them be open source with a plugin architecture—then hosting and collaboration could just be two default available plugins you provide, developers could make their own (a la figma) and you could run the default marketplace, too",
+        "user": "UHWC9PXBL",
+        "ts": "1596638892.175900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vEldg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "but as far as development environments go, id rather see them be open source with a plugin architecture—then hosting and collaboration could just be two default available plugins you provide, developers could make their own (a la figma) and you could run the default marketplace, too"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596631327.165600",
+        "parent_user_id": "UEH5JQS0J"
+    },
+    {
+        "client_msg_id": "356274cf-df99-4774-b2e4-01ab77bd0a52",
+        "type": "message",
+        "text": "I've done something similar with a presentation, but allowing scrubbing through at the word and image (slide) level: <http:\/\/vitor.io\/uxr101>",
+        "user": "UH85W1ML1",
+        "ts": "1596640419.176100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gef147bc0aa6",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aef147bc0aa69f2f103f3d436613a4e2.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0007-72.png",
+            "first_name": "",
+            "real_name": "Vitorio Miliano",
+            "display_name": "vitorio",
+            "team": "T5TCAFTA9",
+            "name": "vito_futureofcoding",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "User Research 101, a hypertranscript",
+                "title_link": "http:\/\/vitor.io\/uxr101",
+                "text": "A ~40m talk presented internally to product managers and development leads, discussing the business value of user research.",
+                "fallback": "User Research 101, a hypertranscript",
+                "image_url": "http:\/\/vitor.io\/uxr101\/Slide011.jpg",
+                "image_width": 333,
+                "image_height": 250,
+                "from_url": "http:\/\/vitor.io\/uxr101",
+                "image_bytes": 172148,
+                "service_name": "vitor.io",
+                "id": 1,
+                "original_url": "http:\/\/vitor.io\/uxr101"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+u1P",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've done something similar with a presentation, but allowing scrubbing through at the word and image (slide) level: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/vitor.io\/uxr101"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N",
+        "reactions": [
+            {
+                "name": "amiga-tick",
+                "users": [
+                    "ULK0Z4MPV"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2d27d982-4a25-42da-829f-dd2193ddde9b",
+        "type": "message",
+        "text": "\"hyperaudio\" and \"hypertranscript\" are terms of art that'll turn up other related implementations",
+        "user": "UH85W1ML1",
+        "ts": "1596640447.176400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gef147bc0aa6",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aef147bc0aa69f2f103f3d436613a4e2.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0007-72.png",
+            "first_name": "",
+            "real_name": "Vitorio Miliano",
+            "display_name": "vitorio",
+            "team": "T5TCAFTA9",
+            "name": "vito_futureofcoding",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FxTiI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\"hyperaudio\" and \"hypertranscript\" are terms of art that'll turn up other related implementations"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N",
+        "reactions": [
+            {
+                "name": "amiga-tick",
+                "users": [
+                    "ULK0Z4MPV",
+                    "UJFN50C00"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "1800c752-20b2-465f-91ec-5eb751efdcbd",
+        "type": "message",
+        "text": "and their slack is <http:\/\/hyperaudio.slack.com|hyperaudio.slack.com>",
+        "user": "UH85W1ML1",
+        "ts": "1596640474.176700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gef147bc0aa6",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/aef147bc0aa69f2f103f3d436613a4e2.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0007-72.png",
+            "first_name": "",
+            "real_name": "Vitorio Miliano",
+            "display_name": "vitorio",
+            "team": "T5TCAFTA9",
+            "name": "vito_futureofcoding",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sEf9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "and their slack is "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/hyperaudio.slack.com",
+                                "text": "hyperaudio.slack.com"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N"
+    },
+    {
+        "client_msg_id": "5281D96A-CA94-4E4D-9732-D51C6B29F5EC",
+        "type": "message",
+        "text": "Another awesome talk at #PLHCISwimmer school. Slides here - defo a lot of FOC here <https:\/\/docs.google.com\/presentation\/d\/1GmFNZd4pBD973w78I9msFaOw6zWIeKjdoMvXoZ4eQwE\/edit#slide=id.g8e32c468c4_0_182|https:\/\/docs.google.com\/presentation\/d\/1GmFNZd4pBD973w78I9msFaOw6zWIeKjdoMvXoZ4eQwE\/edit#slide=id.g8e32c468c4_0_182>",
+        "user": "UKP3B2J5D",
+        "ts": "1596644130.178200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "4980e1f3e51a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-03\/1220847671058_4980e1f3e51a273b630a_72.png",
+            "first_name": "Ope",
+            "real_name": "Ope",
+            "display_name": "opeispo",
+            "team": "T5TCAFTA9",
+            "name": "ogunks900",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RVKnx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Another awesome talk at #PLHCISwimmer school. Slides here - defo a lot of FOC here "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/docs.google.com\/presentation\/d\/1GmFNZd4pBD973w78I9msFaOw6zWIeKjdoMvXoZ4eQwE\/edit#slide=id.g8e32c468c4_0_182",
+                                "text": "https:\/\/docs.google.com\/presentation\/d\/1GmFNZd4pBD973w78I9msFaOw6zWIeKjdoMvXoZ4eQwE\/edit#slide=id.g8e32c468c4_0_182"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0",
+                    "UHWC9PXBL"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "796dbcc4-159e-4d28-8478-5a7949e81501",
+        "type": "message",
+        "text": "What does the minimap on the right represent? Distance in text vs audio?",
+        "user": "UCUSW7WVD",
+        "ts": "1596644269.178500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "gyw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What does the minimap on the right represent? Distance in text vs audio?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N"
+    },
+    {
+        "client_msg_id": "d3b87db6-b55e-4bfb-bf9e-e78f5004af6b",
+        "type": "message",
+        "text": "This is really useful for me. I generally read the transcript and sometime read and listen. I never only listen to it. The reason? I am more fluent at reading English than listening to it. And you can read at your own pace slower, faster, or read diagonally.\n\nSo for me this is great tool, I can jump to some paragraph and have the equivalent audio playing right away.\n\nAnd +1 for the links and images of course.",
+        "user": "UJ6LDMMN0",
+        "ts": "1596644986.178800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0c210ee2df74",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-11-13\/2722434855730_0c210ee2df74838f8683_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "F=H",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is really useful for me. I generally read the transcript and sometime read and listen. I never only listen to it. The reason? I am more fluent at reading English than listening to it. And you can read at your own pace slower, faster, or read diagonally.\n\nSo for me this is great tool, I can jump to some paragraph and have the equivalent audio playing right away.\n\nAnd +1 for the links and images of course."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N"
+    },
+    {
+        "client_msg_id": "1ad606a1-1ae4-4dc0-8ed9-ae92d0ca1170",
+        "type": "message",
+        "text": "<@ULK0Z4MPV>\n&gt; have a quick glimpse at my phone to get a visual reference (eg. an Orca gif) so the podcast can continue uninterrupted\nYeah, I think that'd be useful — not necessarily need to include full transcript, just mapping some images against specific audio periods is useful enough. Thinking about slides + audio, could be a great way to record lectures, esp visually intensive ones such as <https:\/\/cmsw.mit.edu\/podcast-gediminas-urbonas\/>",
+        "user": "UMPQ9A65N",
+        "ts": "1596646926.179400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g65ecdf18e50",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/65ecdf18e50934634898dd3eaa310a69.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Pine Wu",
+            "display_name": "Pine Wu",
+            "team": "T5TCAFTA9",
+            "name": "octref",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "MIT Comparative Media Studies\/Writing",
+                "title": "Podcast, Gediminas Urbonas - MIT Comparative Media Studies\/Writing",
+                "title_link": "https:\/\/cmsw.mit.edu\/podcast-gediminas-urbonas\/",
+                "text": "Gediminas Urbonas is artist and educator, and co-founder of Urbonas Studio, a research program that advocates for the reclamation of public culture.",
+                "fallback": "MIT Comparative Media Studies\/Writing: Podcast, Gediminas Urbonas - MIT Comparative Media Studies\/Writing",
+                "image_url": "https:\/\/cmsw.mit.edu\/wp\/wp-content\/uploads\/2012\/10\/urbonas.jpg",
+                "image_width": 200,
+                "image_height": 215,
+                "ts": 1350907093,
+                "from_url": "https:\/\/cmsw.mit.edu\/podcast-gediminas-urbonas\/",
+                "image_bytes": 48618,
+                "service_icon": "https:\/\/cmsw.mit.edu\/wp\/wp-content\/uploads\/2016\/08\/cropped-cmsw-site-icon-180x180.png",
+                "id": 1,
+                "original_url": "https:\/\/cmsw.mit.edu\/podcast-gediminas-urbonas\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6bsC",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "ULK0Z4MPV"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "have a quick glimpse at my phone to get a visual reference (eg. an Orca gif) so the podcast can continue uninterrupted"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nYeah, I think that'd be useful — not necessarily need to include full transcript, just mapping some images against specific audio periods is useful enough. Thinking about slides + audio, could be a great way to record lectures, esp visually intensive ones such as "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/cmsw.mit.edu\/podcast-gediminas-urbonas\/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "ULK0Z4MPV"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0eabb7aa-1a73-458b-abee-d3fafa47ffdc",
+        "type": "message",
+        "text": "<@UH85W1ML1> Great work! Reminds me of <https:\/\/www.dougengelbart.org\/content\/view\/374\/464\/>.\nHyperaudio seems interesting, will check it out. Although I don't like the website app approach. I'd want to have a open standard for a language, similar to WebVTT\/SRT, for writing HTML (as opposed to text) against audio time.",
+        "user": "UMPQ9A65N",
+        "ts": "1596647260.179700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g65ecdf18e50",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/65ecdf18e50934634898dd3eaa310a69.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Pine Wu",
+            "display_name": "Pine Wu",
+            "team": "T5TCAFTA9",
+            "name": "octref",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "1968 Demo Interactive - Doug Engelbart Institute",
+                "title_link": "https:\/\/www.dougengelbart.org\/content\/view\/374\/464\/",
+                "text": "A cool new way to experience the 1968 \"Mother of All Demos\" with the late Doug Engelbart and his incredible team. Test drive today.",
+                "fallback": "1968 Demo Interactive - Doug Engelbart Institute",
+                "from_url": "https:\/\/www.dougengelbart.org\/content\/view\/374\/464\/",
+                "service_icon": "https:\/\/www.dougengelbart.org\/images\/favicon.ico",
+                "service_name": "dougengelbart.org",
+                "id": 1,
+                "original_url": "https:\/\/www.dougengelbart.org\/content\/view\/374\/464\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "b7buU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UH85W1ML1"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Great work! Reminds me of "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.dougengelbart.org\/content\/view\/374\/464\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\nHyperaudio seems interesting, will check it out. Although I don't like the website app approach. I'd want to have a open standard for a language, similar to WebVTT\/SRT, for writing HTML (as opposed to text) against audio time."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UH85W1ML1"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "58172a56-5502-441b-abbf-b40190a47fc9",
+        "type": "message",
+        "text": "<@UCUSW7WVD>\nLeft side: Each paragraph's vertical position, measured against the full height of the container of all paragraphs\nRight side: Each paragraph's starttime, measured against the full audio duration",
+        "user": "UMPQ9A65N",
+        "ts": "1596647359.180000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g65ecdf18e50",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/65ecdf18e50934634898dd3eaa310a69.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Pine Wu",
+            "display_name": "Pine Wu",
+            "team": "T5TCAFTA9",
+            "name": "octref",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "H5N",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nLeft side: Each paragraph's vertical position, measured against the full height of the container of all paragraphs\nRight side: Each paragraph's starttime, measured against the full audio duration"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "866284eb-68c7-426f-ac5b-9bea2fd25626",
+        "type": "message",
+        "text": "<@UJ6LDMMN0>\n&gt; So for me this is great tool, I can jump to some paragraph and have the equivalent audio playing right away.\nexactly, i enjoy being able to use Cmd+F to find what I want to hear, read 1-2 paragraph and start listening from specific points\ni also like that I can share you a URL with you like \"hey, this is an FoC episode where they talk about letting government fund OSS with tax money\": <https:\/\/foc-new-podcast-player.netlify.app\/#00:38:16>",
+        "user": "UMPQ9A65N",
+        "ts": "1596647596.180400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g65ecdf18e50",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/65ecdf18e50934634898dd3eaa310a69.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0025-72.png",
+            "first_name": "",
+            "real_name": "Pine Wu",
+            "display_name": "Pine Wu",
+            "team": "T5TCAFTA9",
+            "name": "octref",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Future of Coding",
+                "title": "31 Sustaining the Underfunded - Nadia Eghbal",
+                "title_link": "https:\/\/foc-new-podcast-player.netlify.app\/#00:38:16",
+                "text": "Are you looking for the real computer revolution? Join the club! Future of Coding is a podcast and community of toolmakers, researchers, and creators working together to reimagine computing.",
+                "fallback": "Future of Coding: 31 Sustaining the Underfunded - Nadia Eghbal",
+                "image_url": "https:\/\/user-images.githubusercontent.com\/2288939\/57971688-1b7a6f80-7989-11e9-8866-330f00db1db9.jpg",
+                "from_url": "https:\/\/foc-new-podcast-player.netlify.app\/#00:38:16",
+                "image_width": 250,
+                "image_height": 250,
+                "image_bytes": 10965,
+                "id": 1,
+                "original_url": "https:\/\/foc-new-podcast-player.netlify.app\/#00:38:16"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GSeW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJ6LDMMN0"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So for me this is great tool, I can jump to some paragraph and have the equivalent audio playing right away."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "exactly, i enjoy being able to use Cmd+F to find what I want to hear, read 1-2 paragraph and start listening from specific points\ni also like that I can share you a URL with you like \"hey, this is an FoC episode where they talk about letting government fund OSS with tax money\": "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/foc-new-podcast-player.netlify.app\/#00:38:16"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596614507.159400",
+        "parent_user_id": "UMPQ9A65N",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD",
+                    "ULK0Z4MPV",
+                    "UHWC9PXBL"
+                ],
+                "count": 3
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UJ6LDMMN0"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "33b4c1d3-54d7-4032-a5bd-6647d32fa0d9",
+        "type": "message",
+        "text": "A few things that may seem out of place on this forum, but are nonetheless within the question's territorial boundaries:\n• reading fiction -- a distressingly large number of people think non-fiction is how one learns about the world, but (good) fiction is tremendously instructive about what it is to be a person \n• physical culture -- in addition to health and wellbeing, there are lessons about the value of daily practice, the way imperceptible improvement can become tremendous over time, &amp;c.\n• meditation -- combines some of the benefits of the two aforementioned things\n• art -- or really any practice that operates more on intuition than reason (both are human superpowers, best used together)",
+        "user": "U013ZLJARC7",
+        "ts": "1596648129.182000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf4ae9e5b293",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f4ae9e5b29386489b18b3bc6b1f41a22.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "",
+            "real_name": "Jack Rusher",
+            "display_name": "Jack Rusher",
+            "team": "T5TCAFTA9",
+            "name": "jack529",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zm0i2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "A few things that may seem out of place on this forum, but are nonetheless within the question's territorial boundaries:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "reading fiction -- a distressingly large number of people think non-fiction is how one learns about the world, but (good) fiction is tremendously instructive about what it is to be a person "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "physical culture -- in addition to health and wellbeing, there are lessons about the value of daily practice, the way imperceptible improvement can become tremendous over time, &c."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "meditation -- combines some of the benefits of the two aforementioned things"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "art -- or really any practice that operates more on intuition than reason (both are human superpowers, best used together)"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1595931112.162500",
+        "parent_user_id": "UKP3B2J5D",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UKP3B2J5D",
+                    "U85HCL7JP",
+                    "UGX9MS77V",
+                    "UR482RFPY"
+                ],
+                "count": 4
+            },
+            {
+                "name": "100",
+                "users": [
+                    "UC2A2ARPT",
+                    "UGX9MS77V"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7e08cb80-30ad-44a4-8695-70f4579b4217",
+        "type": "message",
+        "text": "Hello folks, with <@UPVBV34EL> we are happy to release the latest version of tree-hugger library : <https:\/\/github.com\/autosoft-dev\/tree-hugger>\n:trophy: With a single API call, tree-hugger enables you to mine source code accross 5 languages:\n• Python, \n• PHP, \n• Java, \n• JavaScript, \n• C++\n:fire:  Build your own dataset of code in seconds (e.g. Code Search Net, Py150...)\nWe are looking for feedbacks on it, feel free to shoot any issues",
+        "user": "UPU0YJ1CM",
+        "ts": "1596648362.184600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b88e30c8a541",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-20\/870238505987_b88e30c8a541a7725a6d_72.png",
+            "first_name": "",
+            "real_name": "Maeliza",
+            "display_name": "Maeliza",
+            "team": "T5TCAFTA9",
+            "name": "maeliza.seymour",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "GitHub",
+                "title": "autosoft-dev\/tree-hugger",
+                "title_link": "https:\/\/github.com\/autosoft-dev\/tree-hugger",
+                "text": "A light-weight, extendable, high level, universal code parser built on top of tree-sitter - autosoft-dev\/tree-hugger",
+                "fallback": "GitHub: autosoft-dev\/tree-hugger",
+                "from_url": "https:\/\/github.com\/autosoft-dev\/tree-hugger",
+                "thumb_url": "https:\/\/repository-images.githubusercontent.com\/244139058\/009d4e80-b85d-11ea-8e84-3f75772743ac",
+                "thumb_width": 250,
+                "thumb_height": 250,
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/github.png",
+                "id": 1,
+                "original_url": "https:\/\/github.com\/autosoft-dev\/tree-hugger"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6Jk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hello folks, with "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UPVBV34EL"
+                            },
+                            {
+                                "type": "text",
+                                "text": " we are happy to release the latest version of tree-hugger library : "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/github.com\/autosoft-dev\/tree-hugger"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "trophy"
+                            },
+                            {
+                                "type": "text",
+                                "text": " With a single API call, tree-hugger enables you to mine source code accross 5 languages:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Python, "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "PHP, "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Java, "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "JavaScript, "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "C++"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "emoji",
+                                "name": "fire"
+                            },
+                            {
+                                "type": "text",
+                                "text": "  Build your own dataset of code in seconds (e.g. Code Search Net, Py150...)\nWe are looking for feedbacks on it, feel free to shoot any issues"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596648362.184600",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1598084021.019900",
+        "reply_users": [
+            "UBKNXPBAB"
+        ],
+        "replies": [
+            {
+                "user": "UBKNXPBAB",
+                "ts": "1598084021.019900"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "tada",
+                "users": [
+                    "UKP3B2J5D",
+                    "UUQ2EQW21",
+                    "UJ6LDMMN0",
+                    "U013ZLJARC7",
+                    "UJKKBAMLL",
+                    "UPVBV34EL",
+                    "UFB8STN7K",
+                    "UHWC9PXBL",
+                    "USA54AECX",
+                    "UPU0YJ1CM"
+                ],
+                "count": 10
+            }
+        ]
+    },
+    {
+        "client_msg_id": "b02c24dd-cee0-47ae-883e-51a557546209",
+        "type": "message",
+        "text": "If you're doing low level graphics programming C or C++, followed by Rust, followed by C# are probably your best options just in terms of ecosystems, platforms you can target, examples available, etc.",
+        "user": "UBSMEUXAA",
+        "ts": "1596650957.185500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0edf98a60210",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-26\/774747080560_0edf98a60210d3ab07ea_72.jpg",
+            "first_name": "",
+            "real_name": "Scott Anderson",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "scottan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8D+j3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If you're doing low level graphics programming C or C++, followed by Rust, followed by C# are probably your best options just in terms of ecosystems, platforms you can target, examples available, etc."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596459342.091100",
+        "parent_user_id": "U017P07TA8L"
+    },
+    {
+        "client_msg_id": "6fa56c65-a5ea-4dfb-8c01-7bbf87cedbd8",
+        "type": "message",
+        "text": "you can do other languages of course",
+        "user": "UBSMEUXAA",
+        "ts": "1596650965.185700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0edf98a60210",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-26\/774747080560_0edf98a60210d3ab07ea_72.jpg",
+            "first_name": "",
+            "real_name": "Scott Anderson",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "scottan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pqS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "you can do other languages of course"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596459342.091100",
+        "parent_user_id": "U017P07TA8L"
+    },
+    {
+        "client_msg_id": "818ae29b-efba-429a-b4b9-f724823c2d4e",
+        "type": "message",
+        "text": "js is probably better than most, but the lowest level you can go with js is WebGL\\WebGPU",
+        "user": "UBSMEUXAA",
+        "ts": "1596650995.186000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0edf98a60210",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-09-26\/774747080560_0edf98a60210d3ab07ea_72.jpg",
+            "first_name": "",
+            "real_name": "Scott Anderson",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "scottan",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OtB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "js is probably better than most, but the lowest level you can go with js is WebGL\\WebGPU"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596459342.091100",
+        "parent_user_id": "U017P07TA8L"
+    },
+    {
+        "client_msg_id": "A5EB1A65-EB9C-483C-A30B-2F3FB046251F",
+        "type": "message",
+        "text": "What are some essential talks about the _future of coding?_ Talks that ask questions like _what could the future look like? Why is it important that it’s different? Why should we all care? What is possible? What is so wrong with computing today?_\n\nPlaylists or links to similar conversations are okay here too if you think it fits the criteria.",
+        "user": "U014WA16VNJ",
+        "ts": "1596651885.195800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "12ac8e70899f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-22\/1269623799473_12ac8e70899f200f402b_72.png",
+            "first_name": "Orion",
+            "real_name": "Orion Reed",
+            "display_name": "Orion Reed",
+            "team": "T5TCAFTA9",
+            "name": "orionreedt",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U014WA16VNJ",
+            "ts": "1596661483.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QdH",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What are some essential talks about the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "future of coding? ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "Talks that ask questions like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "what could the future look like? Why is it important that it’s different? Why should we all care? What is possible? What is so wrong with computing today?",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nPlaylists or links to similar conversations are okay here too if you think it fits the criteria."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596651885.195800",
+        "reply_count": 8,
+        "reply_users_count": 6,
+        "latest_reply": "1596745330.226800",
+        "reply_users": [
+            "U014WA16VNJ",
+            "UHWC9PXBL",
+            "UKP3B2J5D",
+            "U013ZLJARC7",
+            "UAVCC2X70",
+            "UJFN50C00"
+        ],
+        "replies": [
+            {
+                "user": "U014WA16VNJ",
+                "ts": "1596653772.196900"
+            },
+            {
+                "user": "UHWC9PXBL",
+                "ts": "1596666597.203700"
+            },
+            {
+                "user": "UKP3B2J5D",
+                "ts": "1596670620.205800"
+            },
+            {
+                "user": "U013ZLJARC7",
+                "ts": "1596698500.212100"
+            },
+            {
+                "user": "UAVCC2X70",
+                "ts": "1596702294.214000"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1596707676.217100"
+            },
+            {
+                "user": "U014WA16VNJ",
+                "ts": "1596727805.222800"
+            },
+            {
+                "user": "UJFN50C00",
+                "ts": "1596745330.226800"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UKP3B2J5D",
+                    "USH01JEDQ",
+                    "UP28ETUSE",
+                    "UHWC9PXBL",
+                    "UCGAK10LS"
+                ],
+                "count": 5
+            }
+        ]
+    },
+    {
+        "client_msg_id": "822a8567-da4e-4e2d-bc87-1d0a5b1d6fd2",
+        "type": "message",
+        "text": "I’ll start!\nBret Victor’s _<https:\/\/www.youtube.com\/watch?v=8pTEmbeENF4|The Future of Programming>_ is a fun and historical retrospective (retrofuture?) and the one everyone should watch until they _get it_, then watch it all over again -&gt; <https:\/\/www.youtube.com\/watch?v=PUv66718DII&amp;feature=emb_title|Inventing on Principle>\n\nAlan Kay’s _<https:\/\/www.youtube.com\/watch?v=oKg1hTOQXoY|The Computer Revolution Hasn’t Happened Yet>_ is not only a superb title, but also packed full of important and impactful ideas.\n\nJoe Armstrong’s seminal talk, _<https:\/\/www.youtube.com\/watch?v=lKXe3HUG2l4|The Mess We’re In>_ makes a strong case that we are, in fact, in a mess.\n\nLastly, a talk I was not expecting to find so much value in, but one that clarified and fortified my ideas around decentralised tech i.e. blockchain. <https:\/\/www.youtube.com\/watch?v=G0rZcpfF5dU|Crypto - The Future of Trust>\n\n“The most dangerous thought you can have as a creative person is to think you know what you’re doing.” — Bret Victor\n“In the last 40 years we have written billions of line of code that will keep programmers employed for trillions of man hours in the next few thousand years to clean up the mess we’ve made” — Joe Armstrong",
+        "user": "U014WA16VNJ",
+        "ts": "1596653772.196900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "12ac8e70899f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-22\/1269623799473_12ac8e70899f200f402b_72.png",
+            "first_name": "Orion",
+            "real_name": "Orion Reed",
+            "display_name": "Orion Reed",
+            "team": "T5TCAFTA9",
+            "name": "orionreedt",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U014WA16VNJ",
+            "ts": "1596654011.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jccs",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I’ll start!\nBret Victor’s "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.youtube.com\/watch?v=8pTEmbeENF4",
+                                "text": "The Future of Programming",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "is a fun and historical retrospective (retrofuture?) and the one everyone should watch until they "
+                            },
+                            {
+                                "type": "text",
+                                "text": "get it",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", then watch it all over again -> "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.youtube.com\/watch?v=PUv66718DII&feature=emb_title",
+                                "text": "Inventing on Principle"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nAlan Kay’s "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.youtube.com\/watch?v=oKg1hTOQXoY",
+                                "text": "The Computer Revolution Hasn’t Happened Yet",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "is not only a superb title, but also packed full of important and impactful ideas.\n\nJoe Armstrong’s seminal talk, "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.youtube.com\/watch?v=lKXe3HUG2l4",
+                                "text": "The Mess We’re In",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "makes a strong case that we are, in fact, in a mess.\n\nLastly, a talk I was not expecting to find so much value in, but one that clarified and fortified my ideas around decentralised tech i.e. blockchain. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.youtube.com\/watch?v=G0rZcpfF5dU",
+                                "text": "Crypto - The Future of Trust"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n“The most dangerous thought you can have as a creative person is to think you know what you’re doing.” — Bret Victor\n“In the last 40 years we have written billions of line of code that will keep programmers employed for trillions of man hours in the next few thousand years to clean up the mess we’ve made” — Joe Armstrong"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596651885.195800",
+        "parent_user_id": "U014WA16VNJ",
+        "reactions": [
+            {
+                "name": "star",
+                "users": [
+                    "USH01JEDQ",
+                    "U8A5MS6R1",
+                    "UHWC9PXBL"
+                ],
+                "count": 3
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT",
+                    "ULK0Z4MPV"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "9F11E8B5-17C7-495E-BB29-5E5F28782FAA",
+        "type": "message",
+        "text": "“Experienced programmers don’t think in text at all”",
+        "user": "UKP3B2J5D",
+        "ts": "1596655056.198600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "4980e1f3e51a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-03\/1220847671058_4980e1f3e51a273b630a_72.png",
+            "first_name": "Ope",
+            "real_name": "Ope",
+            "display_name": "opeispo",
+            "team": "T5TCAFTA9",
+            "name": "ogunks900",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BRh3p",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "“Experienced programmers don’t think in text at all”"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596559806.145700",
+        "parent_user_id": "UJKKBAMLL"
+    },
+    {
+        "client_msg_id": "f3c2f83c-f1f3-4088-86b8-cf377d496d10",
+        "type": "message",
+        "text": "I argue the premise of that statement is flawed. It’s misleading, suggesting that “programming languages” are flawed because they are text.\nHere is an example.\n1. *Send a text message.* In order to model that out we may need some tool for entering data, import Twilio package, get an access token, call an API, store some data in the database. In this domain of abstraction perhaps we can say Jonathan is correct because it’s very non-linear — However, I detailed the high level steps in plain English. I also could write those down in a backlog, in text… so I kinda am thinking in text, but it’s not the final nor exclusive step.\n2. Take the same example in another product; Alexa or Siri (just for example) — Do you still “think” in text? \nI say the premise if flawed because it’s misleading. It’s not about “how you think” it’s about how you understand (read) and how you create (write). The “think” part is more personal and cerebral.\n&gt;  I wrote this feedback in text. Are you “thinking” in text when reading it? Likely not… you likely have emotions, feelings, “thoughts” — not text.",
+        "user": "UJKKBAMLL",
+        "ts": "1596656108.198900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6b9db1f76eed",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-06-12\/662675221668_6b9db1f76eed746965ca_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Peak",
+            "display_name": "Steve",
+            "team": "T5TCAFTA9",
+            "name": "steve727",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UJKKBAMLL",
+            "ts": "1596656220.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "no4Qj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I argue the premise of that statement is flawed. It’s misleading, suggesting that “programming languages” are flawed because they are text.\nHere is an example.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Send a text message.",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " In order to model that out we may need some tool for entering data, import Twilio package, get an access token, call an API, store some data in the database. In this domain of abstraction perhaps we can say Jonathan is correct because it’s very non-linear — However, I detailed the high level steps in plain English. I also could write those down in a backlog, in text… so I kinda am thinking in text, but it’s not the final nor exclusive step."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Take the same example in another product; Alexa or Siri (just for example) — Do you still “think” in text? "
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I say the premise if flawed because it’s misleading. It’s not about “how you think” it’s about how you understand (read) and how you create (write). The “think” part is more personal and cerebral.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": " I wrote this feedback in text. Are you “thinking” in text when reading it? Likely not… you likely have emotions, feelings, “thoughts” — not text."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596559806.145700",
+        "parent_user_id": "UJKKBAMLL"
+    },
+    {
+        "client_msg_id": "f6319b1e-1031-4328-bc5f-6da0b6a329a8",
+        "type": "message",
+        "text": "TL;DR No one “thinks” in text or diagrams — they *think* and then translate *thoughts* into a medium that can be shared.",
+        "user": "UJKKBAMLL",
+        "ts": "1596656158.199300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6b9db1f76eed",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-06-12\/662675221668_6b9db1f76eed746965ca_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Peak",
+            "display_name": "Steve",
+            "team": "T5TCAFTA9",
+            "name": "steve727",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WaeDf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "TL;DR No one “thinks” in text or diagrams — they "
+                            },
+                            {
+                                "type": "text",
+                                "text": "think",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and then translate "
+                            },
+                            {
+                                "type": "text",
+                                "text": "thoughts",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " into a medium that can be shared."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596559806.145700",
+        "parent_user_id": "UJKKBAMLL"
+    },
+    {
+        "client_msg_id": "2B13DDDE-2D7B-45EB-B7B8-EF1547B95949",
+        "type": "message",
+        "text": "I interpreted it to mean think at a higher level than text. Like not in detail, in the overall structure. So doesn’t mean it’s not composed of small chunks aka “text”",
+        "user": "UKP3B2J5D",
+        "ts": "1596656214.201100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "4980e1f3e51a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-03\/1220847671058_4980e1f3e51a273b630a_72.png",
+            "first_name": "Ope",
+            "real_name": "Ope",
+            "display_name": "opeispo",
+            "team": "T5TCAFTA9",
+            "name": "ogunks900",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "V0fyf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I interpreted it to mean think at a higher level than text. Like not in detail, in the overall structure. So doesn’t mean it’s not composed of small chunks aka “text”"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596559806.145700",
+        "parent_user_id": "UJKKBAMLL",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJKKBAMLL",
+                    "UDQBTJ211"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "EC0B14A3-CBFF-46A4-841F-2B3DD5A5B13C",
+        "type": "message",
+        "text": "we need our slack solution so i can properly collect the right talks for this question lol",
+        "user": "UHWC9PXBL",
+        "ts": "1596666597.203700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g0d754210ed4",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/10d754210ed4e4706eba3d063cdf99f0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0019-72.png",
+            "first_name": "",
+            "real_name": "Garth Goldwater",
+            "display_name": "Garth Goldwater",
+            "team": "T5TCAFTA9",
+            "name": "garth",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "y0kx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "we need our slack solution so i can properly collect the right talks for this question lol"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596651885.195800",
+        "parent_user_id": "U014WA16VNJ",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UKP3B2J5D",
+                    "U013ZLJARC7"
+                ],
+                "count": 2
+            },
+            {
+                "name": "watch",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "719FDCD2-701B-404C-AC00-5EE2662357E5",
+        "type": "message",
+        "text": "Totally!!! There is so much knowledge and community insights and right now not good enough search even on my own threads.",
+        "user": "UKP3B2J5D",
+        "ts": "1596670620.205800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "4980e1f3e51a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-07-03\/1220847671058_4980e1f3e51a273b630a_72.png",
+            "first_name": "Ope",
+            "real_name": "Ope",
+            "display_name": "opeispo",
+            "team": "T5TCAFTA9",
+            "name": "ogunks900",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mtP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Totally!!! There is so much knowledge and community insights and right now not good enough search even on my own threads."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596651885.195800",
+        "parent_user_id": "U014WA16VNJ"
+    },
+    {
+        "client_msg_id": "8674056d-3605-4dd4-b3b8-67a66177a65e",
+        "type": "message",
+        "text": "I feel like I’m getting old and crotchety. Every time I go back and watch the canon of FoC videos, I more and more disagree with statements of the form:\n\n_If only everyone had followed this good old idea, everything would be great by now!_\n\nExamples:\n- Alan Kay in “The Computer Revolution Hasn’t Happened Yet” says HTML and browser wars are stupid because we should be shipping the renderer _with the file itself._ \n- Bret Victor in “The Future of Programming” says it’s crazy that we’re programming in text files because Smalltalk had a function-centered IDE.\n\nBut I feel these examples always miss some important context. Social context, technical context, economic context. Shipping a rendering engine with an HTML file would be a technical nightmare. Programming still happens in text files because text files are an incredibly durable, universal format that can be passed around to dozens of auxiliary tools (e.g. code review -- see why everybody hates collaborating on Jupyter).\n\nThese talks are still obviously insightful, both for reminding us of computing history, and pointing out important issues in the status quo. But I’m always extremely skeptical when they don’t address _why_ programming became the way it is. I have yet to see a talk that grapples with the messy reality of the world, how we have to daily work with huge systems coded by thousands of people who we barely trust. Gone are the days where 10 smart people at PARC can hack together an OS themselves with absolutely no concerns for security, accessibility, backwards-compatibility, …\n\nI would love to see more visions for FoC that take these realities into account.",
+        "user": "UFB8STN7K",
+        "ts": "1596672397.209600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UFB8STN7K",
+            "ts": "1596672488.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WO8LK",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I feel like I’m getting old and crotchety. Every time I go back and watch the canon of FoC videos, I more and more disagree with statements of the form:\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "If only everyone had followed this good old idea, everything would be great by now!",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nExamples:\n- Alan Kay in “The Computer Revolution Hasn’t Happened Yet” says HTML and browser wars are stupid because we should be shipping the renderer "
+                            },
+                            {
+                                "type": "text",
+                                "text": "with the file itself. ",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n- Bret Victor in “The Future of Programming” says it’s crazy that we’re programming in text files because Smalltalk had a function-centered IDE.\n\nBut I feel these examples always miss some important context. Social context, technical context, economic context. Shipping a rendering engine with an HTML file would be a technical nightmare. Programming still happens in text files because text files are an incredibly durable, universal format that can be passed around to dozens of auxiliary tools (e.g. code review -- see why everybody hates collaborating on Jupyter).\n\nThese talks are still obviously insightful, both for reminding us of computing history, and pointing out important issues in the status quo. But I’m always extremely skeptical when they don’t address "
+                            },
+                            {
+                                "type": "text",
+                                "text": "why",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " programming became the way it is. I have yet to see a talk that grapples with the messy reality of the world, how we have to daily work with huge systems coded by thousands of people who we barely trust. Gone are the days where 10 smart people at PARC can hack together an OS themselves with absolutely no concerns for security, accessibility, backwards-compatibility, …\n\nI would love to see more visions for FoC that take these realities into account."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596672397.209600",
+        "reply_count": 11,
+        "reply_users_count": 10,
+        "latest_reply": "1596981330.346400",
+        "reply_users": [
+            "UE1JQM9HQ",
+            "UA14TGLTC",
+            "U013ZLJARC7",
+            "UJ6LDMMN0",
+            "U5STGTB3J",
+            "UJN1TAYEQ",
+            "U8A5MS6R1",
+            "UE6EFEPTQ",
+            "UCUSW7WVD",
+            "UN57U8V53"
+        ],
+        "replies": [
+            {
+                "user": "UE1JQM9HQ",
+                "ts": "1596691748.210300"
+            },
+            {
+                "user": "UA14TGLTC",
+                "ts": "1596693006.210800"
+            },
+            {
+                "user": "U013ZLJARC7",
+                "ts": "1596699499.213000"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1596700112.213200"
+            },
+            {
+                "user": "U5STGTB3J",
+                "ts": "1596702829.214400"
+            },
+            {
+                "user": "UJN1TAYEQ",
+                "ts": "1596715628.218500"
+            },
+            {
+                "user": "U8A5MS6R1",
+                "ts": "1596737595.224200"
+            },
+            {
+                "user": "UE6EFEPTQ",
+                "ts": "1596754344.227200"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1596777384.236100"
+            },
+            {
+                "user": "UN57U8V53",
+                "ts": "1596981030.346200"
+            },
+            {
+                "user": "UN57U8V53",
+                "ts": "1596981330.346400"
+            }
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "U01554W5BS5",
+                    "UCUSW7WVD",
+                    "UFPH678P4",
+                    "UA14TGLTC",
+                    "UP28ETUSE",
+                    "UKP3B2J5D",
+                    "UJKKBAMLL",
+                    "U014WA16VNJ",
+                    "UBSMEUXAA",
+                    "U017AAMDG3B",
+                    "ULM3U6275",
+                    "UE0ETTCG7",
+                    "UBUFWBGNN",
+                    "UP3FH4CLU",
+                    "UAL7940NM"
+                ],
+                "count": 15
+            },
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UJ6LDMMN0",
+                    "UKP3B2J5D",
+                    "UETJZ9V0T",
+                    "UCXR52MU2"
+                ],
+                "count": 4
+            },
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UAVCC2X70"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3ee13fb9-e5a3-4f01-9bc4-5d14bc907d4a",
+        "type": "message",
+        "text": "I am certainly biased in this conversation.\n\nI do agree that world is inevitably messy and that we have to deal with it. It is for this reason that I believe a new language to create systems, while well intended, is unlikely to address the problem of existing systems already out there.\n\nAt the same time, I do believe that we can make significant advances by focusing on the reverse part. The skill of reading the code we have is essential. And that cannot be improved significantly if the only form we have to read is text.\n\nWe should distinguish between a storage or exchange format for a content, and the interface through which we interact with the content. I can send an HTML file around, and still choose to view it in a browser. The two are distinct and still can coexist. The way we read doesn’t have to, and should not be the same as the way we edit.",
+        "user": "UE1JQM9HQ",
+        "ts": "1596691748.210300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g48924f215ef",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/f48924f215efa665f3c87affcdb14278.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "Tudor",
+            "real_name": "Tudor Girba",
+            "display_name": "Tudor Girba",
+            "team": "T5TCAFTA9",
+            "name": "tudor",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xKLg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I am certainly biased in this conversation.\n\nI do agree that world is inevitably messy and that we have to deal with it. It is for this reason that I believe a new language to create systems, while well intended, is unlikely to address the problem of existing systems already out there.\n\nAt the same time, I do believe that we can make significant advances by focusing on the reverse part. The skill of reading the code we have is essential. And that cannot be improved significantly if the only form we have to read is text.\n\nWe should distinguish between a storage or exchange format for a content, and the interface through which we interact with the content. I can send an HTML file around, and still choose to view it in a browser. The two are distinct and still can coexist. The way we read doesn’t have to, and should not be the same as the way we edit."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596672397.209600",
+        "parent_user_id": "UFB8STN7K",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UKP3B2J5D",
+                    "UCGAK10LS",
+                    "U014WA16VNJ"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6971a47f-00fa-479a-9d64-69bacf7f61ba",
+        "type": "message",
+        "text": "Here's a fellow crotchety old Will.  :wine_glass:  I do like to factor in why-are-things-the-way-they-are when thinking how they might be different.  Sometimes it's an accident.  Sometimes there are deep reasons.  Text is awfully flexible.  Once you get into it, there's quite the gravitational pull.",
+        "user": "UA14TGLTC",
+        "ts": "1596693006.210800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gae6d55db9d1",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/3ae6d55db9d15b79bc683a8031fc2588.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "",
+            "real_name": "William Taysom",
+            "display_name": "wtaysom",
+            "team": "T5TCAFTA9",
+            "name": "wtaysom",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2O1Am",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Here's a fellow crotchety old Will.  "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wine_glass"
+                            },
+                            {
+                                "type": "text",
+                                "text": "  I do like to factor in why-are-things-the-way-they-are when thinking how they might be different.  Sometimes it's an accident.  Sometimes there are deep reasons.  Text is awfully flexible.  Once you get into it, there's quite the gravitational pull."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1596672397.209600",
+        "parent_user_id": "UFB8STN7K",
+        "reactions": [
+            {
+                "name": "clinking_glasses",
+                "users": [
+                    "UFB8STN7K",
+                    "UKP3B2J5D",
+                    "UE6EFEPTQ",
+                    "UDQKHNP51"
+                ],
+                "count": 4
+            }
+        ]
+    },
+    {
+        "client_msg_id": "07393dfe-bb72-4474-b056-b4b4c68ef896",
+        "type": "message",
+        "text": "<@UD6EXQVM0> - There might be some overlap \/ similarity between what you described, and <@U018DRGAC5S>'s \"first class implementations\"",
+        "user": "UAVCC2X70",
+        "ts": "1596695765.211200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1596695797.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qGXat",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UD6EXQVM0"
+                            },
+                            {
+                                "type": "text",
+                                "text": " - There might be some overlap \/ similarity between what you described, and "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U018DRGAC5S"
+                            },
+                            {
+                                "type": "text",
+                                "text": "'s \"first class implementations\""
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1594276999.116700",
+        "parent_user_id": "UC2A2ARPT",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U018DRGAC5S"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

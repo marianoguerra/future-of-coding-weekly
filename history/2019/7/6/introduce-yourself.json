@@ -1,0 +1,279 @@
+[
+    {
+        "client_msg_id": "a8b8e359-ec57-4572-8699-ee28402a4040",
+        "type": "message",
+        "text": "<@U6KQ2S410> I guess you're not up yet, so I've got a bit of time to come up with a simple example! Hold on..",
+        "user": "UE6EFEPTQ",
+        "ts": "1562410515.125100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "07efe06d-c127-462d-b150-b8870133a00a",
+        "type": "message",
+        "text": "The matching, left-hand-side of a rewrite describes a set of possible matching values.\n\nThat set can be described in many ways:\n\n - listing them explicitly (`banana|mango` means anything from the set { `banana mango` })\n - regular expresssion (`a*` means the set {`a, aa, ab, ..`})\n - single symbol (`number`, `integer`, `list`)\n\nI am also working out how to best to allow user-defined sets to be assigned to a single new symbol.\n\nData \"types\" are thus \"in the eye of the beholder\" - if your matching \"type\" says it's \"in\", then it belongs to that \"type\".\n\nSince I also don't assign internal, implementation-specific types to data, a positive integer can be matched by either `positive-integer` or `[1-9][0-9]*`.\n\nExample:\n\nThree versions of a banana maker that all work the same way:\n```\n{\n  is: banana maker rule\n  make: positive-integer =&gt; @make - 1\n  bananas: =&gt; @bananas banana\n}\n\n{\n  is: banana maker rule\n  make: \/[1-9][0-9]*\/ =&gt; @make - 1\n  bananas: =&gt; @bananas banana\n}\n\n{\n  is: banana maker rule\n  make: integer &gt; 0 =&gt; @make - 1\n  bananas: =&gt; @bananas banana\n}\n```\nSo:\n```\n{ is: banana maker\n  make: 3\n}\n\n{ is: banana maker\n  make: 3 - 1\n  bananas: banana\n}\n```\n\"3-1\" fails to match the positive integer type,\nbut does match a built-in subtraction rewrite\n```\n{ is: banana maker\n  make: 2\n  bananas: banana\n}\n\n:\n\n{ is: banana maker\n  make: 0\n  bananas: banana banana banana\n}\n```\n\"0\" fails to match anything, so rewrite cycle terminates",
+        "user": "UE6EFEPTQ",
+        "ts": "1562413154.125300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UE6EFEPTQ",
+            "ts": "1562413643.000000"
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "ceafc387-973e-45fe-82a5-8457238189ac",
+        "type": "message",
+        "text": "Well, <https:\/\/github.com\/noprompt\/meander> is a lot more comprehensive than my (Java implementation of my) Onex rewrite language!",
+        "user": "UE6EFEPTQ",
+        "ts": "1562414269.126300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562351516.121100",
+        "parent_user_id": "UL7UQJ87R",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UL7UQJ87R"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0aa02908-ecdf-4607-9bb8-b5f6e92cd747",
+        "type": "message",
+        "text": "OK, so guarded rewrite rules. Technically not a type system because you can’t infer anything before runtime. But very flexible.",
+        "user": "U6KQ2S410",
+        "ts": "1562417915.126500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "8fe15f98-b557-4c72-8ef1-8960dbb8d3c7",
+        "type": "message",
+        "text": "There's loads you can infer: the IDE can autocomplete and suggest based on what shapes of structure it recognises and the property names (e.g. `date` property is usually a date)",
+        "user": "UE6EFEPTQ",
+        "ts": "1562425300.127000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "d212166b-c0f8-4beb-96b3-1a464dbde628",
+        "type": "message",
+        "text": "Right. By infer I meant decidable logic. Indeed IDEs can do lots of useful heuristic inference, as they do in dynamically typed languages. But that is not typically called a type system.",
+        "user": "U6KQ2S410",
+        "ts": "1562425899.127200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U6KQ2S410",
+            "ts": "1562426379.000000"
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "c73d3bb8-829e-468f-b64e-fe9d4a1fa7a7",
+        "type": "message",
+        "text": "Isn't that the kind of thing beloved by PL theorists, Jonathan? :rolling_on_the_floor_laughing:\n\nI said \"effectively that's its type system!\" I'm not bothered if it fits any formal definition.",
+        "user": "UE6EFEPTQ",
+        "ts": "1562427209.127500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "625a57a1-bf59-4987-a147-57188a67713b",
+        "type": "message",
+        "text": "I tried to look up \"guarded rewrite rules\" but only got lots of dense academic stuff and results for \"non-guarded rewrite rules\" :face_with_rolling_eyes:, so not sure what they are still..",
+        "user": "UE6EFEPTQ",
+        "ts": "1562427331.127700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "4a256359-54eb-4f46-b869-7045dcc3d0c8",
+        "type": "message",
+        "text": "Fair enough. “guards” are common CS terminology for predicates that enable something. Goes back to Dijkstra’s Guarded Commands.",
+        "user": "U6KQ2S410",
+        "ts": "1562427711.127900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e8f4c2151d2b",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-09\/225308926294_e8f4c2151d2b70ebfae3_72.jpg",
+            "first_name": "Jonathan",
+            "real_name": "Jonathan Edwards",
+            "display_name": "jonathoda",
+            "team": "T5TCAFTA9",
+            "name": "jonathoda",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "fa92cf68-37da-4c7e-b86a-78a1f313029b",
+        "type": "message",
+        "text": "ah ok .. I'll search that, thx!",
+        "user": "UE6EFEPTQ",
+        "ts": "1562427737.128100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    },
+    {
+        "client_msg_id": "10111297-ddf7-49f5-8b25-269245c6aa39",
+        "type": "message",
+        "text": "yup, I see the connection now",
+        "user": "UE6EFEPTQ",
+        "ts": "1562427890.128300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "8073c43d5d8d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-18\/508431502471_8073c43d5d8dd3d3b4b2_72.jpg",
+            "first_name": "Duncan",
+            "real_name": "Duncan Cragg",
+            "display_name": "Duncan Cragg",
+            "team": "T5TCAFTA9",
+            "name": "fp",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1562367368.123200",
+        "parent_user_id": "UE6EFEPTQ"
+    }
+]

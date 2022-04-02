@@ -2,10 +2,23 @@
     {
         "client_msg_id": "cbc244dc-ece4-46d2-a786-f0ee886d9d30",
         "type": "message",
-        "text": "<@U016VUZGUUQ> I was thinking about cut &amp; paste with overlapping ranges (which I interpreted as something we talked about above), considering the selection to be one of the ranges. My comment was meant conceptually, not talking about implementation. There are many different ways to implement it, and it doesn't have to end up in an actual tree data structure, but conceptually it seems to me that there is a line that's crossed when you need to deal with overlapping ranges where you cross over into a different complexity class.\n\nIf I'd be better at math, I'd probably be able to explain that better with algebraic structures and the operations defined on them. I think it has to do with the total order requirement on the character sequence, which makes ranges work, but then as soon as you start handling ranges as their own entities with their own operations defined on them, you are introducing another\u2026 hmm\u2026 _layer_ that has different requirements. And that's what I mean by hierarchy \u2014 layers are _above_ the sequence conceptually and allow certain operations, doesn't matter how you implement them.\n\nAh, well, that probably doesn't help, sorry. I wish I could explain it better. Right now it just _feels_ to me that there are some use cases, like cut &amp; paste of arbitrary ranges which don't correspond exactly to layer range boundaries, that can't be represented unambiguously with a pure linear sequence + a set of ranges into that sequence. It could probably be worked around though with some heuristics that'll translate the edge cases into weird/unintuitive behavior from the user's perspective, and perhaps that's totally acceptable.\n\nBut I'd love to be proven wrong and maybe there's a better way! This would solve one of my current problems too\u2026",
+        "text": "<@U016VUZGUUQ> I was thinking about cut &amp; paste with overlapping ranges (which I interpreted as something we talked about above), considering the selection to be one of the ranges. My comment was meant conceptually, not talking about implementation. There are many different ways to implement it, and it doesn't have to end up in an actual tree data structure, but conceptually it seems to me that there is a line that's crossed when you need to deal with overlapping ranges where you cross over into a different complexity class.\n\nIf I'd be better at math, I'd probably be able to explain that better with algebraic structures and the operations defined on them. I think it has to do with the total order requirement on the character sequence, which makes ranges work, but then as soon as you start handling ranges as their own entities with their own operations defined on them, you are introducing another… hmm… _layer_ that has different requirements. And that's what I mean by hierarchy — layers are _above_ the sequence conceptually and allow certain operations, doesn't matter how you implement them.\n\nAh, well, that probably doesn't help, sorry. I wish I could explain it better. Right now it just _feels_ to me that there are some use cases, like cut &amp; paste of arbitrary ranges which don't correspond exactly to layer range boundaries, that can't be represented unambiguously with a pure linear sequence + a set of ranges into that sequence. It could probably be worked around though with some heuristics that'll translate the edge cases into weird\/unintuitive behavior from the user's perspective, and perhaps that's totally acceptable.\n\nBut I'd love to be proven wrong and maybe there's a better way! This would solve one of my current problems too…",
         "user": "U5STGTB3J",
         "ts": "1599733199.206900",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -20,7 +33,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " I was thinking about cut & paste with overlapping ranges (which I interpreted as something we talked about above), considering the selection to be one of the ranges. My comment was meant conceptually, not talking about implementation. There are many different ways to implement it, and it doesn't have to end up in an actual tree data structure, but conceptually it seems to me that there is a line that's crossed when you need to deal with overlapping ranges where you cross over into a different complexity class.\n\nIf I'd be better at math, I'd probably be able to explain that better with algebraic structures and the operations defined on them. I think it has to do with the total order requirement on the character sequence, which makes ranges work, but then as soon as you start handling ranges as their own entities with their own operations defined on them, you are introducing another\u2026 hmm\u2026 "
+                                "text": " I was thinking about cut & paste with overlapping ranges (which I interpreted as something we talked about above), considering the selection to be one of the ranges. My comment was meant conceptually, not talking about implementation. There are many different ways to implement it, and it doesn't have to end up in an actual tree data structure, but conceptually it seems to me that there is a line that's crossed when you need to deal with overlapping ranges where you cross over into a different complexity class.\n\nIf I'd be better at math, I'd probably be able to explain that better with algebraic structures and the operations defined on them. I think it has to do with the total order requirement on the character sequence, which makes ranges work, but then as soon as you start handling ranges as their own entities with their own operations defined on them, you are introducing another… hmm… "
                             },
                             {
                                 "type": "text",
@@ -31,7 +44,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " that has different requirements. And that's what I mean by hierarchy \u2014 layers are "
+                                "text": " that has different requirements. And that's what I mean by hierarchy — layers are "
                             },
                             {
                                 "type": "text",
@@ -53,7 +66,7 @@
                             },
                             {
                                 "type": "text",
-                                "text": " to me that there are some use cases, like cut & paste of arbitrary ranges which don't correspond exactly to layer range boundaries, that can't be represented unambiguously with a pure linear sequence + a set of ranges into that sequence. It could probably be worked around though with some heuristics that'll translate the edge cases into weird/unintuitive behavior from the user's perspective, and perhaps that's totally acceptable.\n\nBut I'd love to be proven wrong and maybe there's a better way! This would solve one of my current problems too\u2026"
+                                "text": " to me that there are some use cases, like cut & paste of arbitrary ranges which don't correspond exactly to layer range boundaries, that can't be represented unambiguously with a pure linear sequence + a set of ranges into that sequence. It could probably be worked around though with some heuristics that'll translate the edge cases into weird\/unintuitive behavior from the user's perspective, and perhaps that's totally acceptable.\n\nBut I'd love to be proven wrong and maybe there's a better way! This would solve one of my current problems too…"
                             }
                         ]
                     }
@@ -66,10 +79,23 @@
     {
         "client_msg_id": "3a640aa4-f323-49bc-9a20-f8701a5da58d",
         "type": "message",
-        "text": "The simplest way I'm thinking about this conceptually is that each character has attached metadata - the layer name. It travels with the character where ever it goes. So editing as usual just moves the characters around. Contiguous is more of an incidental feature - many consecutive characters have the same layer. As an optimization, you can only store entire spans as Andrew suggested above. The only new features, which are outside of editing the text, are 'attach layer to character (or span.. as optimization)' and 'show/hide layer'.",
+        "text": "The simplest way I'm thinking about this conceptually is that each character has attached metadata - the layer name. It travels with the character where ever it goes. So editing as usual just moves the characters around. Contiguous is more of an incidental feature - many consecutive characters have the same layer. As an optimization, you can only store entire spans as Andrew suggested above. The only new features, which are outside of editing the text, are 'attach layer to character (or span.. as optimization)' and 'show\/hide layer'.",
         "user": "U8A5MS6R1",
         "ts": "1599753490.207100",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "b7c63cc07373",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-03-21\/584465935395_b7c63cc07373326ec6ea_72.jpg",
+            "first_name": "Shalabh",
+            "real_name": "Shalabh",
+            "display_name": "shalabh",
+            "team": "T5TCAFTA9",
+            "name": "shalabh.chaturvedi",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -80,7 +106,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "The simplest way I'm thinking about this conceptually is that each character has attached metadata - the layer name. It travels with the character where ever it goes. So editing as usual just moves the characters around. Contiguous is more of an incidental feature - many consecutive characters have the same layer. As an optimization, you can only store entire spans as Andrew suggested above. The only new features, which are outside of editing the text, are 'attach layer to character (or span.. as optimization)' and 'show/hide layer'."
+                                "text": "The simplest way I'm thinking about this conceptually is that each character has attached metadata - the layer name. It travels with the character where ever it goes. So editing as usual just moves the characters around. Contiguous is more of an incidental feature - many consecutive characters have the same layer. As an optimization, you can only store entire spans as Andrew suggested above. The only new features, which are outside of editing the text, are 'attach layer to character (or span.. as optimization)' and 'show\/hide layer'."
                             }
                         ]
                     }
@@ -92,7 +118,7 @@
     },
     {
         "type": "message",
-        "text": "Hey all,\n\nI want to present you my new project, <https://adacraft.org/|adacraft>! Which is a slightly modified Scratch with new extensions.\n\nThis project can be seen as a first step for me to gather user feedback and experiment things on \"easier programming\".\n\nUsing Scratch gives a ready to use programming environment for \"non-experts\" and adding new extensions and modifying Scratch a bit allows to quickly experiment new use cases, new tools, new way to program. Of course at some point Scratch will be limiting, but I am sure there is enough room for fun experiments!\n\nSo far, I have added some AI extensions and a <https://www.croquet.io/|Croquet> extension. An AI extension that uses <https://teachablemachine.withgoogle.com/|Teachable Machine> models for image classification and an other for face recognition (based on ml5.js, more to come from this library). The Croquet one is very experimental but it is usable for very basic inter-project communication, and the main contribution (nearly all) comes from Yoshiki Ohshima, of the Croquet team.\n\nI have some ideas for new extensions (like, why not, generating HTML/DOM, and, why not, \u00e0 la Vue.js) and would love to hear from you if you think of something to experiments with some Scratch \"constraints\".\n\nAnd of course any feedback and thoughts are very welcome! :pray: :relaxed:",
+        "text": "Hey all,\n\nI want to present you my new project, <https:\/\/adacraft.org\/|adacraft>! Which is a slightly modified Scratch with new extensions.\n\nThis project can be seen as a first step for me to gather user feedback and experiment things on \"easier programming\".\n\nUsing Scratch gives a ready to use programming environment for \"non-experts\" and adding new extensions and modifying Scratch a bit allows to quickly experiment new use cases, new tools, new way to program. Of course at some point Scratch will be limiting, but I am sure there is enough room for fun experiments!\n\nSo far, I have added some AI extensions and a <https:\/\/www.croquet.io\/|Croquet> extension. An AI extension that uses <https:\/\/teachablemachine.withgoogle.com\/|Teachable Machine> models for image classification and an other for face recognition (based on ml5.js, more to come from this library). The Croquet one is very experimental but it is usable for very basic inter-project communication, and the main contribution (nearly all) comes from Yoshiki Ohshima, of the Croquet team.\n\nI have some ideas for new extensions (like, why not, generating HTML\/DOM, and, why not, à la Vue.js) and would love to hear from you if you think of something to experiments with some Scratch \"constraints\".\n\nAnd of course any feedback and thoughts are very welcome! :pray: :relaxed:",
         "files": [
             {
                 "id": "F01AG53G3T5",
@@ -100,7 +126,7 @@
                 "timestamp": 1599766819,
                 "name": "adacraft_home.png",
                 "title": "adacraft_home.png",
-                "mimetype": "image/png",
+                "mimetype": "image\/png",
                 "filetype": "png",
                 "pretty_type": "PNG",
                 "user": "UJ6LDMMN0",
@@ -113,39 +139,43 @@
                 "public_url_shared": false,
                 "display_as_bot": false,
                 "username": "",
-                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F01AG53G3T5/adacraft_home.png",
-                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F01AG53G3T5/download/adacraft_home.png",
-                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_64.png",
-                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_80.png",
-                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_360.png",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01AG53G3T5\/adacraft_home.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F01AG53G3T5\/download\/adacraft_home.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "media_display_type": "unknown",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_360_w": 360,
                 "thumb_360_h": 130,
-                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_480.png",
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_480_w": 480,
                 "thumb_480_h": 173,
-                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_160.png",
-                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_720.png",
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_720_w": 720,
                 "thumb_720_h": 260,
-                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_800.png",
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_800_w": 800,
                 "thumb_800_h": 289,
-                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_960.png",
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_960_w": 960,
                 "thumb_960_h": 347,
-                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F01AG53G3T5-39b06e5312/adacraft_home_1024.png",
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F01AG53G3T5-39b06e5312\/adacraft_home_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
                 "thumb_1024_w": 1024,
                 "thumb_1024_h": 370,
                 "original_w": 1141,
                 "original_h": 412,
-                "thumb_tiny": "AwARADDSPXrTDv5+77cmnkc9KMewoAB0qJJizY2/rUisGzj+VRxwbTkgUMZKxI6DNGecUm0ce1AUg9sUCHUUUUAFFFFABRRRQB//2Q==",
-                "permalink": "https://futureofcoding.slack.com/files/UJ6LDMMN0/F01AG53G3T5/adacraft_home.png",
-                "permalink_public": "https://slack-files.com/T5TCAFTA9-F01AG53G3T5-1f7b52b92a",
+                "thumb_tiny": "AwARADDSPXrTDv5+77cmnkc9KMewoAB0qJJizY2\/rUisGzj+VRxwbTkgUMZKxI6DNGecUm0ce1AUg9sUCHUUUUAFFFFABRRRQB\/\/2Q==",
+                "permalink": "https:\/\/futureofcoding.slack.com\/files\/UJ6LDMMN0\/F01AG53G3T5\/adacraft_home.png",
+                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F01AG53G3T5-1f7b52b92a",
                 "is_starred": false,
                 "has_rich_preview": false
             }
         ],
         "upload": false,
+        "user": "UJ6LDMMN0",
+        "display_as_bot": false,
+        "ts": "1599766866.224700",
         "blocks": [
             {
                 "type": "rich_text",
@@ -160,7 +190,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://adacraft.org/",
+                                "url": "https:\/\/adacraft.org\/",
                                 "text": "adacraft"
                             },
                             {
@@ -169,7 +199,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://www.croquet.io/",
+                                "url": "https:\/\/www.croquet.io\/",
                                 "text": "Croquet"
                             },
                             {
@@ -178,12 +208,12 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://teachablemachine.withgoogle.com/",
+                                "url": "https:\/\/teachablemachine.withgoogle.com\/",
                                 "text": "Teachable Machine"
                             },
                             {
                                 "type": "text",
-                                "text": " models for image classification and an other for face recognition (based on ml5.js, more to come from this library). The Croquet one is very experimental but it is usable for very basic inter-project communication, and the main contribution (nearly all) comes from Yoshiki Ohshima, of the Croquet team.\n\nI have some ideas for new extensions (like, why not, generating HTML/DOM, and, why not, \u00e0 la Vue.js) and would love to hear from you if you think of something to experiments with some Scratch \"constraints\".\n\nAnd of course any feedback and thoughts are very welcome! "
+                                "text": " models for image classification and an other for face recognition (based on ml5.js, more to come from this library). The Croquet one is very experimental but it is usable for very basic inter-project communication, and the main contribution (nearly all) comes from Yoshiki Ohshima, of the Croquet team.\n\nI have some ideas for new extensions (like, why not, generating HTML\/DOM, and, why not, à la Vue.js) and would love to hear from you if you think of something to experiments with some Scratch \"constraints\".\n\nAnd of course any feedback and thoughts are very welcome! "
                             },
                             {
                                 "type": "emoji",
@@ -202,19 +232,77 @@
                 ]
             }
         ],
-        "user": "UJ6LDMMN0",
-        "display_as_bot": false,
-        "ts": "1599766866.224700",
         "thread_ts": "1599766866.224700",
-        "reply_count": 10,
-        "reply_users_count": 4,
-        "latest_reply": "1599813298.228900",
+        "reply_count": 14,
+        "reply_users_count": 6,
+        "latest_reply": "1601388236.034800",
         "reply_users": [
             "UFB8STN7K",
             "UJ6LDMMN0",
             "UCUSW7WVD",
-            "UJBAJNFLK"
+            "UJBAJNFLK",
+            "UJM9NG84Q",
+            "U01BSAKUDJQ"
         ],
+        "replies": [
+            {
+                "user": "UFB8STN7K",
+                "ts": "1599768724.225700"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1599769458.226400"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1599772424.226800"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1599805367.227400"
+            },
+            {
+                "user": "UJBAJNFLK",
+                "ts": "1599808759.227600"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1599811365.227900"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1599811799.228100"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1599812943.228300"
+            },
+            {
+                "user": "UCUSW7WVD",
+                "ts": "1599813274.228700"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1599813298.228900"
+            },
+            {
+                "user": "UJM9NG84Q",
+                "ts": "1600557855.004900"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1600622995.005900"
+            },
+            {
+                "user": "U01BSAKUDJQ",
+                "ts": "1601386068.034000"
+            },
+            {
+                "user": "UJ6LDMMN0",
+                "ts": "1601388236.034800"
+            }
+        ],
+        "is_locked": false,
         "subscribed": false,
         "reactions": [
             {
@@ -250,6 +338,19 @@
         "user": "UFB8STN7K",
         "ts": "1599768724.225700",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ge240a8e5a8f",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/ce240a8e5a8fdc65e86bbb869975ccfe.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0009-72.png",
+            "first_name": "Will",
+            "real_name": "Will Crichton",
+            "display_name": "Will",
+            "team": "T5TCAFTA9",
+            "name": "wcrichto",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "edited": {
             "user": "UFB8STN7K",
             "ts": "1599768751.000000"
@@ -286,10 +387,23 @@
     {
         "client_msg_id": "c9f9cb25-6d29-4fa0-824b-17701e5a8166",
         "type": "message",
-        "text": "I have created ScratchX extensions in the past, and in fact it is that experience that made me think that writing Scratch extension is an \"easy\" way to explore new end-user programming use cases. But ScratchX is based on the \"old\" flash implementation while Scratch 3 is a pure HTML/JavaScript/CSS which I know better.\n\nAnd why not Blockly? Well I thought of using Blockly, particularly because you can design any block programming system with it, which opens more possible experiments than with Scratch. But for now I wanted to have a complete environment set up quickly, Scratch is usable now for project useful to users. With Blockly, you have to implement lots of things.",
+        "text": "I have created ScratchX extensions in the past, and in fact it is that experience that made me think that writing Scratch extension is an \"easy\" way to explore new end-user programming use cases. But ScratchX is based on the \"old\" flash implementation while Scratch 3 is a pure HTML\/JavaScript\/CSS which I know better.\n\nAnd why not Blockly? Well I thought of using Blockly, particularly because you can design any block programming system with it, which opens more possible experiments than with Scratch. But for now I wanted to have a complete environment set up quickly, Scratch is usable now for project useful to users. With Blockly, you have to implement lots of things.",
         "user": "UJ6LDMMN0",
         "ts": "1599769458.226400",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0c210ee2df74",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-11-13\/2722434855730_0c210ee2df74838f8683_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -300,7 +414,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "I have created ScratchX extensions in the past, and in fact it is that experience that made me think that writing Scratch extension is an \"easy\" way to explore new end-user programming use cases. But ScratchX is based on the \"old\" flash implementation while Scratch 3 is a pure HTML/JavaScript/CSS which I know better.\n\nAnd why not Blockly? Well I thought of using Blockly, particularly because you can design any block programming system with it, which opens more possible experiments than with Scratch. But for now I wanted to have a complete environment set up quickly, Scratch is usable now for project useful to users. With Blockly, you have to implement lots of things."
+                                "text": "I have created ScratchX extensions in the past, and in fact it is that experience that made me think that writing Scratch extension is an \"easy\" way to explore new end-user programming use cases. But ScratchX is based on the \"old\" flash implementation while Scratch 3 is a pure HTML\/JavaScript\/CSS which I know better.\n\nAnd why not Blockly? Well I thought of using Blockly, particularly because you can design any block programming system with it, which opens more possible experiments than with Scratch. But for now I wanted to have a complete environment set up quickly, Scratch is usable now for project useful to users. With Blockly, you have to implement lots of things."
                             }
                         ]
                     }
@@ -323,10 +437,23 @@
     {
         "client_msg_id": "4691a536-4bb9-48c0-868e-6bcfa7c5caa6",
         "type": "message",
-        "text": "This example is extremely thought-provoking: <https://create.adacraft.org/?view=63e29a12>",
+        "text": "This example is extremely thought-provoking: <https:\/\/create.adacraft.org\/?view=63e29a12>",
         "user": "UCUSW7WVD",
         "ts": "1599772424.226800",
         "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
         "blocks": [
             {
                 "type": "rich_text",
@@ -341,7 +468,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https://create.adacraft.org/?view=63e29a12"
+                                "url": "https:\/\/create.adacraft.org\/?view=63e29a12"
                             }
                         ]
                     }
@@ -359,5 +486,45 @@
                 "count": 1
             }
         ]
+    },
+    {
+        "client_msg_id": "a373f13f-1fd4-47b9-b8df-d28073f2545e",
+        "type": "message",
+        "text": "In what way?",
+        "user": "UJ6LDMMN0",
+        "ts": "1599805367.227400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "0c210ee2df74",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-11-13\/2722434855730_0c210ee2df74838f8683_72.png",
+            "first_name": "nicolas",
+            "real_name": "nicolas decoster",
+            "display_name": "ogadaki",
+            "team": "T5TCAFTA9",
+            "name": "nicolas.decoster",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1s\/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In what way?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1599766866.224700",
+        "parent_user_id": "UJ6LDMMN0"
     }
 ]

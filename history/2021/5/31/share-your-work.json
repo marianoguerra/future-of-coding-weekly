@@ -1,0 +1,290 @@
+[
+    {
+        "client_msg_id": "c3ba1982-fba7-4221-a3eb-50706e26d7d0",
+        "type": "message",
+        "text": "<@U7C7B75R6> Thanks for the ideas!\n\n&gt; First I think you don't have to worry about message streaming from outside world queue problem while using slow motion. When you are at slow motion you can think it as real slow motion observation. So real world data can be queueing somewhere but _from observation point of view_ it's not existing yet (aka runtime implementation detail).\nIt's likely you could spend _hours_ continuously working in slow motion \/ reverse, so you wouldn't want something constantly trying to push data to Hest filling a queue that whole time. You're gonna have to throw some data away eventually (or, alternatively, just treat data coming into Hest as a pull rather than a push). All of that is fine... so long as you don't care about the resulting discontinuities. I worry about these discontinuities, because it introduces a bit of artificiality into the slow-mo debugging experience that doesn't match what you'd get out of the eventual full-speed execution. For example, if you're writing a system that conditions \/ smooths an input signal from a sensor, knowing that there's a limit to how much the value will change from one sample to the next is really useful.\n\nAnother option would be to keep a (large) queue, like you suggest, but rather than silently throwing away data when the queue gets too full, tell the programmer that they've spent too long in slow-motion so the data coming in is no longer going to be realistic.\n\n&gt; Is it allowed to at any circumistances that value from x2 overtake value from x1?\nYes, absolutely, that's something that is currently possible. I'd love to hear whether you think it'd be a good idea to restrict this.\n\n&gt; One option could be normalize speed so that whenever signal splits every branch run exact speed that merging happens always simultaneously.\nYeah, that's an interesting line of thinking. Even if it's good to (eg) allow x2 to overtake x1, there's still possibly a lot of expressive power that would come from saying \"Hey Hest, take these two paths and adjust their conveyance rate so that points arrive at the end in sync\".\n\nI'm also really warming up to the idea that all paths should take a unit amount of time to convey along. So it doesn't matter how visually long a path is drawn, a point will (by default) go from one end to the other in 1 unit of time. That makes things _so much simpler_ to reason about. The reason I've been reluctant to go this route is that I think the strong _pulse_ of all these points moving all with the same cadence would potentially be nauseating to look at, _especially_ in \"focus mode\" (where the camera is pinned to follow a single point).",
+        "user": "UC2A2ARPT",
+        "ts": "1622493153.026900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "gf94d2ed5e18",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/6f94d2ed5e188be9865a531021b0afcd.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0013-72.png",
+            "first_name": "Ivan",
+            "real_name": "Ivan Reese",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ivanreese",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JCL\/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U7C7B75R6"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Thanks for the ideas!\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "First I think you don't have to worry about message streaming from outside world queue problem while using slow motion. When you are at slow motion you can think it as real slow motion observation. So real world data can be queueing somewhere but "
+                            },
+                            {
+                                "type": "text",
+                                "text": "from observation point of view",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " it's not existing yet (aka runtime implementation detail)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nIt's likely you could spend "
+                            },
+                            {
+                                "type": "text",
+                                "text": "hours",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " continuously working in slow motion \/ reverse, so you wouldn't want something constantly trying to push data to Hest filling a queue that whole time. You're gonna have to throw some data away eventually (or, alternatively, just treat data coming into Hest as a pull rather than a push). All of that is fine... so long as you don't care about the resulting discontinuities. I worry about these discontinuities, because it introduces a bit of artificiality into the slow-mo debugging experience that doesn't match what you'd get out of the eventual full-speed execution. For example, if you're writing a system that conditions \/ smooths an input signal from a sensor, knowing that there's a limit to how much the value will change from one sample to the next is really useful.\n\nAnother option would be to keep a (large) queue, like you suggest, but rather than silently throwing away data when the queue gets too full, tell the programmer that they've spent too long in slow-motion so the data coming in is no longer going to be realistic.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Is it allowed to at any circumistances that value from x2 overtake value from x1?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nYes, absolutely, that's something that is currently possible. I'd love to hear whether you think it'd be a good idea to restrict this.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One option could be normalize speed so that whenever signal splits every branch run exact speed that merging happens always simultaneously."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nYeah, that's an interesting line of thinking. Even if it's good to (eg) allow x2 to overtake x1, there's still possibly a lot of expressive power that would come from saying \"Hey Hest, take these two paths and adjust their conveyance rate so that points arrive at the end in sync\".\n\nI'm also really warming up to the idea that all paths should take a unit amount of time to convey along. So it doesn't matter how visually long a path is drawn, a point will (by default) go from one end to the other in 1 unit of time. That makes things "
+                            },
+                            {
+                                "type": "text",
+                                "text": "so much simpler",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to reason about. The reason I've been reluctant to go this route is that I think the strong "
+                            },
+                            {
+                                "type": "text",
+                                "text": "pulse",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " of all these points moving all with the same cadence would potentially be nauseating to look at, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "especially",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in \"focus mode\" (where the camera is pinned to follow a single point)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1619467654.051900",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "e1782311-5676-41fc-a095-e2743ed04caf",
+        "type": "message",
+        "text": "<@UC2A2ARPT> thanks for yourself :smiley:\n\n&gt; It's likely you could spend hours continuously working in slow motion \/ reverse, so you wouldn't want something constantly trying to push data to Hest filling a queue that whole time.\nHmm, I might lost the idea how fibers would solve this. I think this is \"wrong problem to solve\". If there is realtime source of data and which should be observable throught time, data must be saved or sacrify ability to observe everything by dropping data no matter what(?). :thinking_face:\n\n&gt; Yes, absolutely, that's something that is currently possible. I'd love to hear whether you think it'd be a good idea to restrict this.\nIt's quite distinctive feature from classic programming and it's quite easy to come up with scary scenarios.\nExample two sequential web requests take rare paths, one exceptionally short and one exceptionally long resulting users data being mixed in responses.\nStill this is new paradigm and therefore I don't have final answer to you right now :grin:\nQuestion is what are practical benefits of that behaviour and do they outweight disadvantages.\n\n&gt; So it doesn't matter how visually long a path is drawn, a point will (by default) go from one end to the other in 1 unit of time.\nTo be clear merging in sync require that paths will take uniform time independently how many edges and operations there is. In another words distinction between uniform time per edges VS uniform time per paths.",
+        "user": "U7C7B75R6",
+        "ts": "1622499211.027100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "be27878783b4",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-10\/604262911488_be27878783b4b23a5ed4_72.png",
+            "first_name": "",
+            "real_name": "Niko Autio",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "niko.elmari",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "U7C7B75R6",
+            "ts": "1622499444.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ujW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UC2A2ARPT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " thanks for yourself "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smiley"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It's likely you could spend hours continuously working in slow motion \/ reverse, so you wouldn't want something constantly trying to push data to Hest filling a queue that whole time."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nHmm, I might lost the idea how fibers would solve this. I think this is \"wrong problem to solve\". If there is realtime source of data and which should be observable throught time, data must be saved or sacrify ability to observe everything by dropping data no matter what(?). "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "thinking_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, absolutely, that's something that is currently possible. I'd love to hear whether you think it'd be a good idea to restrict this."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nIt's quite distinctive feature from classic programming and it's quite easy to come up with scary scenarios.\nExample two sequential web requests take rare paths, one exceptionally short and one exceptionally long resulting users data being mixed in responses.\nStill this is new paradigm and therefore I don't have final answer to you right now "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "grin"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nQuestion is what are practical benefits of that behaviour and do they outweight disadvantages.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So it doesn't matter how visually long a path is drawn, a point will (by default) go from one end to the other in 1 unit of time."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nTo be clear merging in sync require that paths will take uniform time independently how many edges and operations there is. In another words distinction between uniform time per edges VS uniform time per paths."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1619467654.051900",
+        "parent_user_id": "UC2A2ARPT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

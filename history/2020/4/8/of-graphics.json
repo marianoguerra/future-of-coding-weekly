@@ -1,0 +1,172 @@
+[
+    {
+        "client_msg_id": "13702e5e-9f99-4334-848b-327629ae8bea",
+        "type": "message",
+        "text": "<@UCUSW7WVD> sounds like you are on the right track.... I had thought you earlier mentioned you had some kind of framebuffer already - hence the software rasterizer.  To me, a framebuffer is a GPU memory surface that gets copied to the screen - I work for NVIDIA, so I have hardware bias :wink:.  The approach of using a memory buffer then copying it to the screen using an OS specific path, as <@UJN1TAYEQ> suggests sounds good to me :slightly_smiling_face:\nOpenGL remains the best supported way to do that on any platform.  Any version of it will be able to take a memory surface and copy it to the display, and it is still the first graphics API that most platforms support.   There are other ways to get a framebuffer that would work without creating an OpenGL context though.  My easy render repo has a really simple example of displaying memory pixels on the display in windows.  There are probably similar ways to do such things on other OS.  There may even be a cross platform header library that will accomplish the same thing:\n<https:\/\/github.com\/cmaughan\/easyrender\/blob\/master\/src\/devices\/windows\/device.cpp>",
+        "user": "UUQ2EQW21",
+        "ts": "1586329794.018700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g2266cacc8f3",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/2266cacc8f3c9964e7bfb1c357bf6873.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0024-72.png",
+            "first_name": "Chris",
+            "real_name": "Chris Maughan",
+            "display_name": "Chris Maughan",
+            "team": "T5TCAFTA9",
+            "name": "mornymorny",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UUQ2EQW21",
+            "ts": "1586329802.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ojVj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " sounds like you are on the right track.... I had thought you earlier mentioned you had some kind of framebuffer already - hence the software rasterizer.  To me, a framebuffer is a GPU memory surface that gets copied to the screen - I work for NVIDIA, so I have hardware bias "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".  The approach of using a memory buffer then copying it to the screen using an OS specific path, as "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UJN1TAYEQ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " suggests sounds good to me "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nOpenGL remains the best supported way to do that on any platform.  Any version of it will be able to take a memory surface and copy it to the display, and it is still the first graphics API that most platforms support.   There are other ways to get a framebuffer that would work without creating an OpenGL context though.  My easy render repo has a really simple example of displaying memory pixels on the display in windows.  There are probably similar ways to do such things on other OS.  There may even be a cross platform header library that will accomplish the same thing:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/github.com\/cmaughan\/easyrender\/blob\/master\/src\/devices\/windows\/device.cpp"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585682016.001200",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "88f9cc3c-d4e5-40f4-bd20-5ff9bef89720",
+        "type": "message",
+        "text": "<http:\/\/sixpak.org\/fbe|sixpak.org\/fbe> contains a loop that runs every millisecond and copies the framebuffer into a X pixmap using XSetPixel(). Although this code contains optimizations, I would still choose to write a framebuffer emulator in OpenGL, updating once per frame instead of once per millisecond. I think efficiency and power consumption could be an issue. (I still have work to do in Curv to prevent laptops from heating up and turning on their fan unnecessarily, which is why I'm sensitive to this issue.)",
+        "user": "UJN1TAYEQ",
+        "ts": "1586371594.019200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xXx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "http:\/\/sixpak.org\/fbe",
+                                "text": "sixpak.org\/fbe"
+                            },
+                            {
+                                "type": "text",
+                                "text": " contains a loop that runs every millisecond and copies the framebuffer into a X pixmap using XSetPixel(). Although this code contains optimizations, I would still choose to write a framebuffer emulator in OpenGL, updating once per frame instead of once per millisecond. I think efficiency and power consumption could be an issue. (I still have work to do in Curv to prevent laptops from heating up and turning on their fan unnecessarily, which is why I'm sensitive to this issue.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585682016.001200",
+        "parent_user_id": "UC2A2ARPT",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c487bd28-f6b5-4d34-8e25-4f9c67597eb6",
+        "type": "message",
+        "text": "I want to correct a statement I made about WebGPU native. There was a checkin today to support both SPIR-V and WGSL as shader languages (even though web browsers will not support SPIR-V). People using existing game-programming toolchains will want to use SPIR-V.",
+        "user": "UJN1TAYEQ",
+        "ts": "1586371756.019400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4185a542241",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/34185a5422416f82b3e4a62964f2866b.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0008-72.png",
+            "first_name": "",
+            "real_name": "Doug Moen",
+            "display_name": "Doug Moen",
+            "team": "T5TCAFTA9",
+            "name": "doug",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "N6vv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I want to correct a statement I made about WebGPU native. There was a checkin today to support both SPIR-V and WGSL as shader languages (even though web browsers will not support SPIR-V). People using existing game-programming toolchains will want to use SPIR-V."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585682016.001200",
+        "parent_user_id": "UC2A2ARPT"
+    }
+]

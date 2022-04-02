@@ -1,0 +1,51 @@
+[
+    {
+        "client_msg_id": "5145edb7-f809-44ba-983f-4df49c061e5a",
+        "type": "message",
+        "text": "I don't personally think game companies worry so much about APIs. They are all effectively the same. They all have a way to write shaders, they all have a way to provide streamed data to those shaders (typically vertex data), they all have a way to read from sampled arrays (textures) and to write to arrays (textures). The rest is mostly trivial differences in APIs.\n\nThe major engines (unreal\/unity) already generate their shaders per platform so it's relatively trivial to output a different shader language. The rest isn't all that much work.\n\nThere are perf issues, like for a large number of draw calls OpenGL is much slower than Vulkan\/Metal\/DirectX12 but most engines already optimized for draw calls because it was important in the older APIs (OpenGL\/DirectX9) so when they upgraded to Vulkan\/Metal\/DirectX12 they didn't see much of an improvement (plenty of GDC presentations on this)\n\nSure, a company making their own engine might complain about the extra work for supporting another API but in the large scheme of a game it's a tiny amount of work.\n\nAs for tile based renderers they have pluses and minuses. The plus is they help with overdraw for opaque pixels. The minus is they often hit a perf cliff for translucent pixels since they gambled on the tradeoff, slower pixel options by trying to optimize away extra pixel operations. When it becomes impossible to optimize those operations away (like for particle effects, smoke, glows, transparent windows) suddenly that tradeoff fails. There are also plenty of places where they run out of memory for their internal structures and then have to rasterize what they have so far, you then get a big perf hit.",
+        "user": "UC6997THT",
+        "ts": "1594017606.236200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f3eb3ca69d86",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-13\/414472553296_f3eb3ca69d86feb77929_72.png",
+            "first_name": "Gregg",
+            "real_name": "Gregg Tavares",
+            "display_name": "gman",
+            "team": "T5TCAFTA9",
+            "name": "slack1",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iWbMn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't personally think game companies worry so much about APIs. They are all effectively the same. They all have a way to write shaders, they all have a way to provide streamed data to those shaders (typically vertex data), they all have a way to read from sampled arrays (textures) and to write to arrays (textures). The rest is mostly trivial differences in APIs.\n\nThe major engines (unreal\/unity) already generate their shaders per platform so it's relatively trivial to output a different shader language. The rest isn't all that much work.\n\nThere are perf issues, like for a large number of draw calls OpenGL is much slower than Vulkan\/Metal\/DirectX12 but most engines already optimized for draw calls because it was important in the older APIs (OpenGL\/DirectX9) so when they upgraded to Vulkan\/Metal\/DirectX12 they didn't see much of an improvement (plenty of GDC presentations on this)\n\nSure, a company making their own engine might complain about the extra work for supporting another API but in the large scheme of a game it's a tiny amount of work.\n\nAs for tile based renderers they have pluses and minuses. The plus is they help with overdraw for opaque pixels. The minus is they often hit a perf cliff for translucent pixels since they gambled on the tradeoff, slower pixel options by trying to optimize away extra pixel operations. When it becomes impossible to optimize those operations away (like for particle effects, smoke, glows, transparent windows) suddenly that tradeoff fails. There are also plenty of places where they run out of memory for their internal structures and then have to rasterize what they have so far, you then get a big perf hit."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1593840778.209800",
+        "parent_user_id": "U5STGTB3J",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UHDQ62M4P"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

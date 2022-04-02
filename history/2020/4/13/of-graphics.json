@@ -1,0 +1,136 @@
+[
+    {
+        "client_msg_id": "D4518EDF-E329-40DF-8675-7F8DB5FEA5C4",
+        "type": "message",
+        "text": "I thought the new thing is that quaternion are better explained by geometric algebra\n\n\n<http:\/\/www.geometricalgebra.net\/quaternions.html|http:\/\/www.geometricalgebra.net\/quaternions.html>\n",
+        "user": "UC6997THT",
+        "ts": "1586812986.021200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f3eb3ca69d86",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-13\/414472553296_f3eb3ca69d86feb77929_72.png",
+            "first_name": "Gregg",
+            "real_name": "Gregg Tavares",
+            "display_name": "gman",
+            "team": "T5TCAFTA9",
+            "name": "slack1",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lxP4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I thought the new thing is that quaternion are better explained by geometric algebra\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/www.geometricalgebra.net\/quaternions.html",
+                                "text": "http:\/\/www.geometricalgebra.net\/quaternions.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1583030995.008300",
+        "parent_user_id": "UE0H4170F"
+    },
+    {
+        "client_msg_id": "BD31F5BD-3637-43A0-9444-FDB808D29B38",
+        "type": "message",
+        "text": "some more references\n\n\n<https:\/\/probablydance.com\/2017\/08\/05\/intuitive-quaternions\/|https:\/\/probablydance.com\/2017\/08\/05\/intuitive-quaternions\/>\n\n<https:\/\/bivector.net|https:\/\/bivector.net>",
+        "user": "UC6997THT",
+        "ts": "1586814142.022300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "f3eb3ca69d86",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-13\/414472553296_f3eb3ca69d86feb77929_72.png",
+            "first_name": "Gregg",
+            "real_name": "Gregg Tavares",
+            "display_name": "gman",
+            "team": "T5TCAFTA9",
+            "name": "slack1",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "Probably Dance",
+                "service_url": "http:\/\/probablydance.com",
+                "title": "Less Weird Quaternions",
+                "title_link": "https:\/\/probablydance.com\/2017\/08\/05\/intuitive-quaternions\/",
+                "author_name": "Malte Skarupke",
+                "author_link": "https:\/\/probablydance.com\/author\/sagan1338\/",
+                "thumb_url": "https:\/\/probablydance.files.wordpress.com\/2017\/08\/90_degree_rotations.png?fit=200%2C150",
+                "thumb_width": 200,
+                "thumb_height": 141,
+                "text": "I&rsquo;ve always been frustrated by how mysterious quaternions are. They arise from weird equations that you just have to memorize, and are difficult to debug because as soon as you deviate too far from the identity quaternion, the numbers are really hard to interpret. Most people implement quaternions once and then treat them as a black box forever after. So I had put quaternions off as one of those weird complicated 4D mathematical constructs that mathematicians sometimes invent that magically works as long as I don&rsquo;t mess with it.\nThat is until recently, when I came across the paper Imaginary Numbers are not Real &ndash; the Geometric Algebra of Spacetime which arrives at quaternions using only 3D math, using no imaginary numbers, and in a form that generalizes to 2D, 3D, 4D or any other number of dimensions. (and quaternions just happen to be a special case of 3D rotations)\nIn the last couple weeks I finally took the time to work through the math enough that I am convinced that this is a much better way to think of quaternions. So in this blog post I will explain&hellip;\n&hellip; how quaternions are 3D constructs. The 4D interpretation just adds confusion\n&hellip; how you don&rsquo;t need imaginary numbers to arrive at quaternions. The term  will not come up (other than to point out the places where other people need it, and why we don&rsquo;t need it)\n&hellip; where the double cover of quaternions comes from, as well as how you can remove it if you want to (which makes quaternions a whole lot less weird)\n&hellip; why you actually want to keep the double cover, because the double cover is what makes quaternion interpolation great\nUnfortunately I will have to teach you a whole new algebra to get there: Geometric Algebra. I only know the basics though, so I&rsquo;ll stick to those and keep it simple. You will see that the geometric algebra interpretation of quaternions is much simpler than the 4D interpretation, so I can promise you that it&rsquo;s worth spending a little bit of time to learn the basics of Geometric Algebra to get to the good stuff.\n\nGeometric Algebra\nOK so what is this Geometric Algebra? It&rsquo;s an alternative to linear algebra. Instead of matrices, there are multiple kinds of vectors, and there is a more powerful vector multiplication.\nLet&rsquo;s start with vector multiplication. In linear algebra we know two ways to multiply vectors: The dot product (producing a scalar) and the cross product (producing a vector). Where the dot product works for any number of dimensions, and the cross product only works in 3D. Geometric algebra also uses the dot product, but it adds a new product, the wedge product: . The result of the wedge product is not a vector or a scalar, but a plane. Specifically it&rsquo;s the plane spanned by the two vectors. This plane is called a bivector because it&rsquo;s the result of the wedge product of two vectors. There is also a trivector  which describes a volume. The general principle is that the wedge product increases the dimension of the vectors by one. Vectors (lines) turn into bivectors (planes), and bivectors turn into trivectors (volumes). When we do math in more than 3 dimensions, we can go even higher, but I&rsquo;ll stick to 2D and 3D for this blog post.\nBefore I tell you how to actually evaluate the wedge product, I first have to tell you the properties that it has:\nIt&rsquo;s anti-commutative: \nThe wedge product of a vector with itself is 0: \nThe first property will make sense when we talk about rotations. The second product should already make sense if we just think of a bivector as a plane. There is no plane between a vector and itself, so it&rsquo;s 0.\nThe other thing I have to explain is how vector multiplication works: In geometric algebra, the vector product is defined as the dot product plus the wedge product:\n\nThe result of the dot product  is a scalar, and the result of the wedge product  is a bivector. So how do we add a scalar to a bivector? We don&rsquo;t, we just leave them as is. It works the same way as when adding polynomials  or when adding apples and oranges  or when working with complex numbers: . We just leave both terms.\nNote that usually I will leave out the star and just write .\nIn 3D space we have three basis vectors:\n\n\n\nWhen multiplying these with each other we notice three properties of this new way of multiplying:\n\n\n\nSo when multiplying the basis vectors with each other, either the dot product or the wedge product is zero. We are left only with one of the two.\nAll other vectors can be expressed using the basis vectors. So the vector  can also be written as  and I will use the second notation more often, because it makes multiplication easier.\nWith that out of the way, we can finally give one real example of how vector multiplication works in geometric algebra. It&rsquo;s actually pretty simple because we just multiply every component with every other component:\n\n\n\n\nLet&rsquo;s walk through a few of the steps I did there:\n because .\n because , so the scalar part is zero, and can write the wedge product of basis-vectors shorter as . This short-hand notation is only valid for vectors which are orthogonal to each other.\n because \nSo as promised the result of multiplying two vectors is a scalar () and a bivector (). A sum of different components like this is called a multivector.\nWhen doing these multiplications you quickly notice that just as all vectors can be represented as combinations of ,  and , all bivectors can be represented as combinations of ,  and . So I&rsquo;ll just use these as my basis-bivectors. We could make different choices here, for example we could use  instead of  but I like how the bivectors circle around like that. The choice of bivectors doesn&rsquo;t really matter, just as the choice of basis-vectors doesn&rsquo;t really matter. We could for example have also chosen ,  and  as our basis vectors. All the math works out the same, we just get different signs in a few places.\nOnce we have three basis-vectors and three basis-bivectors, we notice that we can represent all 3D multivectors as combinations of 8 numbers: 1 scalar, 3 vector-coefficients, 3 bivector-coefficients and 1 trivector-coefficient. If we did the same exercise in a different number of dimensions, we would find similar sets of numbers. In 2D space for example we have 1 scalar, 2 vector-coefficients and 1 bivector-coefficient. That makes sense, because in 2D there are only 2 directions, only 1 plane and no trivector because there is no volume. If we went to 4D we would have 1 scalar, 4 vector-coefficients, 6 bivector-coefficients, 4 trivector-coefficients and 1 quadvector-coefficient. I&rsquo;m sure you can spot the pattern that would allow you to go to any number of dimensions. (but really these come out naturally depending on how many orthogonal basis-vectors you start with)\nWe&rsquo;re almost finished with our introduction to geometric algebra, so I need to mention one final important property: vector multiplication is associative. Meaning  so we can choose which multiplication we want to do first.\nOK with that we&rsquo;re finished with the introduction, but I want to practice a few more multiplications so that you get the hang of it. Maybe do a few yourself. It takes a couple minutes, but then you have the rules ingrained into muscle memory. This practice section is optional though.\nVector Multiplication Practice\nLet&rsquo;s do some practice runs to build up an intuition for how these vectors and bivectors behave. You can skip this section entirely if you don&rsquo;t care about geometric algebra and just want to get to rotations.\nWhat happens if we multiply two similar bivectors?\n\nSo what I did there is I used  to re-order the basis-elements. Then everything collapses down because . So what we see here is that the dot product of a bivector is a negative number. Isn&rsquo;t that interesting? In particular if we have a bivector of length 1 and multiply it with itself:  we s…",
+                "fallback": "Probably Dance Link: Less Weird Quaternions",
+                "from_url": "https:\/\/probablydance.com\/2017\/08\/05\/intuitive-quaternions\/",
+                "service_icon": "https:\/\/s2.wp.com\/i\/webclip.png",
+                "id": 1,
+                "original_url": "https:\/\/probablydance.com\/2017\/08\/05\/intuitive-quaternions\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "e4qF4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "some more references\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/probablydance.com\/2017\/08\/05\/intuitive-quaternions\/",
+                                "text": "https:\/\/probablydance.com\/2017\/08\/05\/intuitive-quaternions\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/bivector.net",
+                                "text": "https:\/\/bivector.net"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1583030995.008300",
+        "parent_user_id": "UE0H4170F"
+    }
+]

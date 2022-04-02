@@ -1,0 +1,397 @@
+[
+    {
+        "client_msg_id": "8c27cac0-da53-4d15-acb1-4354cfea15cf",
+        "type": "message",
+        "text": "Dear Jason, Okay i see from the later responses you imagine a tree format. Not sure why you mentioned emacs. Emacs is a disaster for ordinary users. Plenty of people had  Emacs available for free, they threw it aside the minute they got to see WordStar, WordPerfect, MS Word, etc. for text editing, because 99.999% of people will never write a Lisp program in their text editor. Look at Postscript; it is a domain specific language that perfectly describes static pages, but never really handled colored font rendering well, and is not convenient at all for graphical interactive work because it lacks an event model. Most applications do not need dynamic code. 99.99% of mobile apps have no dynamic code, and they work just fine. Dynamic code is painful to debug, and the more dynamic the language, the more skill and restraint it requires. Emacs is un-ergonomic, and would lose against almost any other editor you can mention in an A-B comparison preference test with new users. Why build a cathedral on a mud pit? Sorry to be the splash of cold water, but ask yourself, why would George RR Martin, who is very rich, still be using WordStar? Was it the convenience of the CTRL-S, CTRL-D,  keys etc. to move the cursor, so that one never leaves the home row? The ergonomics of WordStar were tremendous, and no product since can beat it for simple typing input. Really since programming is a human task, study the masterworks of the past, things that were beloved and insanely popular in their day, rather than some elitist tool that Project Mac at MIT was so fond of.",
+        "user": "UEQ6M68H0",
+        "ts": "1555581378.036400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UEQ6M68H0",
+            "ts": "1555643209.000000"
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "44ac695e-f03b-45b7-a9e3-99bae3f20b3d",
+        "type": "message",
+        "text": "&gt; Meta question: How does it feel to get flood of responses like “Heyy it’s pretty much I am working on.“?\n\nIn some ways isn’t this the point of this slack? This undertaking is probably too large for any individual to tackle, and hopefully this slack can help like minded people find each other and collaborate.\n\nOn that note, if anyone’s interested in contributing to Lamdu, talk to me! :slightly_smiling_face:",
+        "user": "U79HM6726",
+        "ts": "1555589706.036600",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g4ac39488e9c",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/24ac39488e9c4f2833d087a1343707dc.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0015-72.png",
+            "first_name": "",
+            "real_name": "Yair Chuchem",
+            "display_name": "yairchu",
+            "team": "T5TCAFTA9",
+            "name": "yairchu",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "9fbfb49e-ff3a-4c37-a6df-ad27cb52b526",
+        "type": "message",
+        "text": "Feels great to get all this feedback. Most people I've talked to about this don't understand what I'm getting at. It's super exciting to see other people with similar vision.\n\nI'm by no means opposed to static types, but for my prototype I'm trying to cut out any work that isn't essential to embodying my vision and static types don't make the cut. They seem to considerably complicate structure editing and the specific benefits I'm after don't rely on them. That said, I agree that there are considerable synergies between type systems and structure editing, so I can see how that could be a core component of some of your projects.\n\nNiko your point about getting a UI from an API is a really good one and gets at part of the core value of my approach. Suppose I write a library and API for image editing. The user gets nothing from this. To expose the API to the user I have to do additional work for every object and function in the UI.\n\nIn my system, the user can immediately use the whole API. The UI can be specialized gradually to add more friendly interactions, like dragging to create a rect. Think of how in emacs, the generic text-editing interface lives alongside buffers that are specialized to show a bespoke UI with specific commands, e.g. magit.\n\nEdward a few points. First of all I appreciate the critique. A few points. First of all code in my system is not text but trees, and since any data format can be encoded in a tree you could write MS Word in my system if you wanted to. However I do see people writing much less monolithic apps in my system, and bringing the ui muh closer to an IDE in many ways, so this does not really invalidate the body of your critique.\n\nFirst time users and casual users will never want powerful software and should not be forced to use it. They aren't the target audience for my system, if everyone switches to my system I imagine they will still be using bespoke UIs per task with little hint that they are editing code (my system can perfectly well embed such experiences). The target for my system is the \"power user\" ranging up to the programmer.\n\nNow if you look at the activities of such power users, in apps like photoshop, word, or excel, they are in fact spending a lot of their time on the manipulation of abstract data. For example, layer management and smart objects in photoshop, track changes, macro and template systems, formulas in excel, files and sheets ... this is all like a pidgin programming language, but built up inside each program at enormous cost, following no overall principles, and lacking interoperability.\n\nI don't disagree that crafted, graphical interactions are vastly superior to old-school UI like emacs, and beloved for good reason. I neither want to force users to code or force programmets to drag-and-drop etc. Where I want to change things is the user-programmer dynamic. Right now you have your nice WIMP interface to edit you document, and if something isn't covered in that interface then you call up a programmer, who opens the same program in an entirely different interface, adds the feature almost blindly to the interface, compiles it and sends you a new version. In my system you would first of all already be able to do your new task by dropping down into a lower level of the interface; and then you could save that code into the program in the same interaction.",
+        "user": "UH84GQ3CZ",
+        "ts": "1555601957.036900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "590662e8a2ae",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-16\/610501525696_590662e8a2ae7b2c73e9_72.jpg",
+            "first_name": "",
+            "real_name": "Jason Priestley",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jasonhpriestley",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U79HM6726",
+                    "U7C7B75R6",
+                    "UA14TGLTC"
+                ],
+                "count": 3
+            }
+        ]
+    },
+    {
+        "client_msg_id": "42c005c0-7fa3-4a3c-8a84-83a0b082229b",
+        "type": "message",
+        "text": "One more thought on the API\/UI connection. The API always impacts the UI, the notion of the \"hidden implementation details\" are a bit of a myth. But with my system the two become almost identical. So this is one reason that so much of my work on this is trying to get the UI library, persistence library etc. to have great APIs. If I'm just exposing git, sql, HTML\/CSS to the user then this isn't going to be able to show the advantages of the overall approach very well",
+        "user": "UH84GQ3CZ",
+        "ts": "1555602450.037100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "590662e8a2ae",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-16\/610501525696_590662e8a2ae7b2c73e9_72.jpg",
+            "first_name": "",
+            "real_name": "Jason Priestley",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jasonhpriestley",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "dd3992da-158e-4df9-9ad2-663da1d6de7c",
+        "type": "message",
+        "text": "cc <@UD6EXQVM0> now that I notice the emphasis on interoperability. We're both interested there.\n\nIt sounds like your approach is best suited to domains that have obvious visualizations, particularly UIs and graphics, but perhaps also sound. Do you care about how the great APIs you mentioned are arrived at? Is that with your ideal system, or do you assume they're built outside your system?\n\nOne problem the current stack struggles with is the proliferation of languages within even text-based programs. As a programmer building something much simpler than the sort of thing you're envisioning, I often find myself needing to know many different languages, each with their own syntax and semantics. Often I'm learning these on demand, and discovering the depths of my ignorance at the worst possible time. I think your system will also have this problem. Do you disagree or have a sense for how your more powerful UI will avoid this problem? It feels like precious experience available to learn from.",
+        "user": "UCUSW7WVD",
+        "ts": "1555603159.037300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "9a786337-9f35-4384-98b7-fdcc82338ecf",
+        "type": "message",
+        "text": "Yeah so the current system is a mess. It's just a shambles honestly. The amount of stuff you're supposed to learn to build a simple application is staggering.\n\nI don't think this is a tooling problem and I don't think that my tool will solve it. Simpler systems have been built, they've failed in the market. It's really an economic problem - good code comes from shared efforts, profits come from walled gardens. I have ideas for how to fix this as well, which would get into the details of what a \"wikipedia for code\" would mean and who would pay for it, but it's not the focus of my current efforts (it's a lot harder to prototype and prove an economic system with limited personal resources versus a programming system)\n\nStill, if I expose the awful complexity of application programming to the user, no matter how slick my packaging, then this will be a non-starter; so I'm left having to build some kind of simple and comprehensible alternative to the current tangle.",
+        "user": "UH84GQ3CZ",
+        "ts": "1555604440.037500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "590662e8a2ae",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-16\/610501525696_590662e8a2ae7b2c73e9_72.jpg",
+            "first_name": "",
+            "real_name": "Jason Priestley",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jasonhpriestley",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "8c7a30f7-a76a-4bf4-acfb-c75d0ba66412",
+        "type": "message",
+        "text": "I totally agree with all that, particularly the problem of walled gardens being more profitable and therefore more adaptive.\n\nBut I'm still left feeling you haven't answered my questions. Will your system support (only in principle) building the \"back end\" for itself? Ignore the recursion. Will your system in principle support building a system as complex as itself, including all of the back end?\n\n(I tend to implicitly assume that the back end of a system is sized like the underwater part of an iceberg. Do others agree?)",
+        "user": "UCUSW7WVD",
+        "ts": "1555605149.037700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "7dba8057-b9ff-41b3-9c2c-b5088827e0cc",
+        "type": "message",
+        "text": "My system would not be capable of building itself, no. Much as a programming language is written in C or assembly, my system will be written using existing programming tooling; it will attempt to be \"complete\" in the sense that any particular interaction you want to construct is possible (like you can write any program in a high-level language), but I'll be choosing usefulness and coherence over completeness where they conflict. I'll also be trying to \"bootstrap\" as much of it as possible so that the amount of the system that can't be introspected and modified is kept at a minimum.",
+        "user": "UH84GQ3CZ",
+        "ts": "1555605346.037900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "590662e8a2ae",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-16\/610501525696_590662e8a2ae7b2c73e9_72.jpg",
+            "first_name": "",
+            "real_name": "Jason Priestley",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jasonhpriestley",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "05775137-1d1e-413d-baf3-13e983eefc7e",
+        "type": "message",
+        "text": "You might be able to achieve 100% bootstrapping with a built-in compiler (JIT or otherwise). Initially, you create your tool as you are now; but then you create the equivalent code\/representation inside itself, and a way to regenerate the machine-runnable code from it.\n\nAnd if you can find a way to wrap\/nest low-level generated code in the high level structure of your tool, and if you can add that wrapping to the actual running program (either initially or at startup), then your actual running tool is just one of various other user-accesible components in the tool. You can then change the high-level code from within, compile it to generate a second copy, and then just delete the first -- all at runtime.\n\n(This is the approach I'm taking with my tool)",
+        "user": "UAVCC2X70",
+        "ts": "1555617383.038300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1555617788.000000"
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "7c49d559-7535-4d62-9ea7-d46823cd5690",
+        "type": "message",
+        "text": "<@UAVCC2X70> interesting, I haven't actually thought through the bootstrapping angle very deeply. Is there a description or demo of your tool anywhere?",
+        "user": "UH84GQ3CZ",
+        "ts": "1555628097.038700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "590662e8a2ae",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-04-16\/610501525696_590662e8a2ae7b2c73e9_72.jpg",
+            "first_name": "",
+            "real_name": "Jason Priestley",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jasonhpriestley",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "e40a7a4a-878d-4dab-be45-9e1fdfe8d0b6",
+        "type": "message",
+        "text": "It's far from complete or demo-able for what it's ultimately supposed to do, and progressing slowly (life is busy). It's actually 2 projects.\n\nThe first one started with the bootstrapping, interpreter, and compiler, and left the UI as an afterthought. I got most of the way through recoding it in itself before hitting complications that made it hard to keep going:\n\n<https:\/\/github.com\/d-cook\/Objects>\n\nThe second one is starting with the UI and working downward. It's partly a redo of the first from a different angle, but also an experiment for a specific UI model of programming:\n\n<https:\/\/github.com\/d-cook\/Interact>\n\nI may stitch these two projects back together some day, but for now I consider Interact to be \"it\".\n\nThere's not much to see in the UI just yet, but I've laid out my plans &amp; consideration in the form of \"issues\". Also, the UI is intentionally crude to begin with. The idea is to get a fully working model first, and then explore options to improve or alter it -- using the UI itself to do so.",
+        "user": "UAVCC2X70",
+        "ts": "1555631012.039100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "ec35ac5b251f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-05-22\/369438371830_ec35ac5b251f37e26aca_72.jpg",
+            "first_name": "",
+            "real_name": "Dan Cook",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "dcook0819",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UAVCC2X70",
+            "ts": "1555697243.000000"
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "35b77ac5-dfb8-4fa9-a65b-5a915642fd59",
+        "type": "message",
+        "text": "Okay i see better your approach. Very hard to comment without an example. I get triggered by people who marvel at Emacs or Lisp, both ancient technologies that follow no ergonomic principles, and were products of a priesthood mentality which kept programming a tiny field. I can remember the academics refusing to publish algorithms in a language in actual common use (they all published in Algol) so nobody outside the priesthood could learn, and also they used languages like LISP and arcane editors like Emacs which forced you to use lisp to do find\/replace. We now share running code, and with YouTube tutorials we have 20 million active programmers instead of 20 thousand",
+        "user": "UEQ6M68H0",
+        "ts": "1555643590.039900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "326328f75c3f",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-02-05\/542651515888_326328f75c3f2a08544c_72.jpg",
+            "first_name": "Edward",
+            "real_name": "Edward de Jong",
+            "display_name": "Edward de Jong \/ Beads Project",
+            "team": "T5TCAFTA9",
+            "name": "magicmouse94937",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UFV8P4472"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0621fc29-89f8-435c-a4e7-49b4d78f1732",
+        "type": "message",
+        "text": "that sounds very sinister",
+        "user": "UC25EFSJC",
+        "ts": "1555646273.040100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3d532659753",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/a3d5326597534f22b23c8da60e0509a0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-72.png",
+            "first_name": "",
+            "real_name": "Cyrus Omar",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "cyrus.omar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    },
+    {
+        "client_msg_id": "8dd16f6e-3224-487a-a6a6-00f2fdaea495",
+        "type": "message",
+        "text": "I don't think most people who advocate for Lisp are doing so because they want to exclude people. you can actually just like a design, even that of Emacs\/Lisp",
+        "user": "UC25EFSJC",
+        "ts": "1555646319.040300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3d532659753",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/a3d5326597534f22b23c8da60e0509a0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-72.png",
+            "first_name": "",
+            "real_name": "Cyrus Omar",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "cyrus.omar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U79HM6726"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e62e1ef3-d351-4b4b-8fe7-bf91f2b20016",
+        "type": "message",
+        "text": "(fwiw, I also don't find Lisp\/Emacs to be very well designed, but I don't think of people who do as sinister elitists)",
+        "user": "UC25EFSJC",
+        "ts": "1555646381.040500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "g3d532659753",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/a3d5326597534f22b23c8da60e0509a0.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0026-72.png",
+            "first_name": "",
+            "real_name": "Cyrus Omar",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "cyrus.omar",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1555514720.025900",
+        "parent_user_id": "UH84GQ3CZ"
+    }
+]

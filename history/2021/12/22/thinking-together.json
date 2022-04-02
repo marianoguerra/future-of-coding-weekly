@@ -1,15 +1,202 @@
 [
     {
+        "client_msg_id": "022cb761-9408-494e-b88a-634dc22193c5",
+        "type": "message",
+        "text": "<@UK3LH8CF5> Thanks for the writeup! Your mentioning of `spec` as a failure piqued my interest. I’m not inside Clojure, just read about `spec` and found a lot of beautiful ideas went into it, so how has it failed in your perspective? (I found no easily googleable online content on the topic)",
+        "user": "U02M6PM725T",
+        "ts": "1640198512.326700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "46b1d789abee",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-11-14\/2726013476404_46b1d789abee49842525_72.jpg",
+            "first_name": "Henning",
+            "real_name": "Henning Sato von Rosen",
+            "display_name": "hvrosen",
+            "team": "T5TCAFTA9",
+            "name": "henning.von.rosen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "EHCi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UK3LH8CF5"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Thanks for the writeup! Your mentioning of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "spec",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " as a failure piqued my interest. I’m not inside Clojure, just read about "
+                            },
+                            {
+                                "type": "text",
+                                "text": "spec",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and found a lot of beautiful ideas went into it, so how has it failed in your perspective? (I found no easily googleable online content on the topic)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1638792666.189800",
+        "parent_user_id": "U02M6PM725T"
+    },
+    {
+        "client_msg_id": "c575fc65-28ce-4c42-8c35-be5ceca04b68",
+        "type": "message",
+        "text": "There are definitely a lot of good ideas in spec. But the implementation has caused a lot of issues.\n\nIts status as alpha means that there have been a number of breaking changes. But yet, Clojure itself depends on spec! (even though it is alpha) So it ships with clojure. Meaning you as a library author you don’t have a stable interface to work with. It has been 5 years and the alpha status hasn’t changed and in fact, it looks like the future will be spec.alpha2. Still unclear what that means.\n\nSpec by its very nature wants to allow you to have incomplete specs. But if a library decides to do this and you in your application want to check your specs, you will now get errors. That’s fine if you just want to enabling instrumentation for a certain namespace, but s\/check-asserts is global. So now if someone has a broken assert in a library, there is nothing you can do. Kind of ruining this whole gradualness spec pitched.\n\nRequiring namespace qualified keywords for everything made it really hard to model real world systems. I worked on a medical system that went all in on spec. Trying to contort the data we had coming in to fit into the way spec wanted to think about things was a nightmare. This problem is even leading to new language features in clojure, to me a sign that it might not be the right approach.\n\nThe error messages produced by spec are simply unreadable.\n\n```(defn get-x [{:x x}] x)\n=&gt; Error ;; Shortened from actual output\nSyntax error macroexpanding clojure.core\/defn at (REPL:1:1).\n{:x x} - failed: vector? at: [:fn-tail :arity-n :bodies :params] spec: :clojure.core.specs.alpha\/param-list\n({:x x}) - failed: Extra input at: [:fn-tail :arity-1 :params] spec: :clojure.core.specs.alpha\/param-list\n[{:path [:fn-tail :arity-1 :params],\n :reason \"Extra input\",\n :pred (clojure.spec.alpha\/cat\n        :params\n        (clojure.spec.alpha\/* :clojure.core.specs.alpha\/binding-form)\n        :var-params\n        (clojure.spec.alpha\/?\n         (clojure.spec.alpha\/cat\n          :ampersand\n          #{(quote &amp;)}\n          :var-form\n          :clojure.core.specs.alpha\/binding-form))),\n :val ({:x x}),\n :via [:clojure.core.specs.alpha\/defn-args\n       :clojure.core.specs.alpha\/params+body\n       :clojure.core.specs.alpha\/param-list\n       :clojure.core.specs.alpha\/param-list],\n :in [1 0]}\n{:path [:fn-tail :arity-n :bodies :params],\n :pred clojure.core\/vector?,\n :val {:x x},\n :via [:clojure.core.specs.alpha\/defn-args\n       :clojure.core.specs.alpha\/params+body\n       :clojure.core.specs.alpha\/params+body\n       :clojure.core.specs.alpha\/params+body\n       :clojure.core.specs.alpha\/param-list\n       :clojure.core.specs.alpha\/param-list],\n :in [1 0]}]```\nThere are a number of other issues. But overall I think spec really missed the mark. I don’t know of anyone who really is a big advocate of it. I really was excited when it came out. Really wanted to love it. But now avoid it.",
+        "user": "UK3LH8CF5",
+        "ts": "1640200618.327200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "4377ee2417eb",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-25\/886144219253_4377ee2417eb9eaacd4b_72.jpg",
+            "first_name": "Jimmy",
+            "real_name": "Jimmy Miller",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jimmyhmiller",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UK3LH8CF5",
+            "ts": "1640200636.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lk9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There are definitely a lot of good ideas in spec. But the implementation has caused a lot of issues.\n\nIts status as alpha means that there have been a number of breaking changes. But yet, Clojure itself depends on spec! (even though it is alpha) So it ships with clojure. Meaning you as a library author you don’t have a stable interface to work with. It has been 5 years and the alpha status hasn’t changed and in fact, it looks like the future will be spec.alpha2. Still unclear what that means.\n\nSpec by its very nature wants to allow you to have incomplete specs. But if a library decides to do this and you in your application want to check your specs, you will now get errors. That’s fine if you just want to enabling instrumentation for a certain namespace, but s\/check-asserts is global. So now if someone has a broken assert in a library, there is nothing you can do. Kind of ruining this whole gradualness spec pitched.\n\nRequiring namespace qualified keywords for everything made it really hard to model real world systems. I worked on a medical system that went all in on spec. Trying to contort the data we had coming in to fit into the way spec wanted to think about things was a nightmare. This problem is even leading to new language features in clojure, to me a sign that it might not be the right approach.\n\nThe error messages produced by spec are simply unreadable.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(defn get-x [{:x x}] x)\n=> Error ;; Shortened from actual output\nSyntax error macroexpanding clojure.core\/defn at (REPL:1:1).\n{:x x} - failed: vector? at: [:fn-tail :arity-n :bodies :params] spec: :clojure.core.specs.alpha\/param-list\n({:x x}) - failed: Extra input at: [:fn-tail :arity-1 :params] spec: :clojure.core.specs.alpha\/param-list\n[{:path [:fn-tail :arity-1 :params],\n :reason \"Extra input\",\n :pred (clojure.spec.alpha\/cat\n        :params\n        (clojure.spec.alpha\/* :clojure.core.specs.alpha\/binding-form)\n        :var-params\n        (clojure.spec.alpha\/?\n         (clojure.spec.alpha\/cat\n          :ampersand\n          #{(quote &)}\n          :var-form\n          :clojure.core.specs.alpha\/binding-form))),\n :val ({:x x}),\n :via [:clojure.core.specs.alpha\/defn-args\n       :clojure.core.specs.alpha\/params+body\n       :clojure.core.specs.alpha\/param-list\n       :clojure.core.specs.alpha\/param-list],\n :in [1 0]}\n{:path [:fn-tail :arity-n :bodies :params],\n :pred clojure.core\/vector?,\n :val {:x x},\n :via [:clojure.core.specs.alpha\/defn-args\n       :clojure.core.specs.alpha\/params+body\n       :clojure.core.specs.alpha\/params+body\n       :clojure.core.specs.alpha\/params+body\n       :clojure.core.specs.alpha\/param-list\n       :clojure.core.specs.alpha\/param-list],\n :in [1 0]}]"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThere are a number of other issues. But overall I think spec really missed the mark. I don’t know of anyone who really is a big advocate of it. I really was excited when it came out. Really wanted to love it. But now avoid it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1638792666.189800",
+        "parent_user_id": "U02M6PM725T",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U02M6PM725T",
+                    "UJFN50C00"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4c0fc857-9d49-4418-ab6b-ca21398440aa",
+        "type": "message",
+        "text": "<@U02M6PM725T>",
+        "user": "UK3LH8CF5",
+        "ts": "1640200674.327500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "4377ee2417eb",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-25\/886144219253_4377ee2417eb9eaacd4b_72.jpg",
+            "first_name": "Jimmy",
+            "real_name": "Jimmy Miller",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "jimmyhmiller",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0Lwt",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U02M6PM725T"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1638792666.189800",
+        "parent_user_id": "U02M6PM725T",
+        "reactions": [
+            {
+                "name": "pray",
+                "users": [
+                    "U02M6PM725T"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
         "type": "message",
         "subtype": "thread_broadcast",
-        "text": "I really like your \u201chome cooking\u201d analogy and frequently share a very similar one regarding cooking that I think goes one step further.\n\nThe issue with \u201chome cooking\u201d as a goal is that in relation to computing most people are consumers/diners/users and not programmers/chefs. So it\u2019s not that we need more programmers and home chefs, I think the problem is that the gap between a home chef and a restaurant owner is so massive and exists the same way in software.\n\nTo extrapolate, let\u2019s consider an example:\n\nYou\u2019re a talented home cook that has an awesome new dish that you have perfected and want to share with the world. Great! Now how can you actually do that? You basically have two main options:\n\n1. Publish your recipe online (equivalent to open-sourcing on Github)\nPros:\n- Free to distribute\n- Unlimited reach\nCons:\n- Your users have be a home-cooks themselves to consume the recipe\n- You don\u2019t make any money\n\n2. Start your own restaurant and serve your dish to patrons (equivalent to creating your own SaaS startup)\nPros:\n- You actually make money\n- Your users can be anyone (no cooking required)\nCons:\n- Extremely costly and risky to pursue\n- Requires *many* more skills and responsibilities to pursue (like hiring staff, renting a space, accepting credit cards, supply chain optimizing, etc)\n- Limited initial scale (usually just one location to start)\n\nSo what if there was a third option...\n\nWhat if every person had their own personal chef that could make any recipe your request and shop for the required ingredients on your behalf...\n\nWe wouldn\u2019t need to rely on restaurants to enjoy highly skilled culinary creations. This would be awesome but clearly unfeasible in this cooking example but is entirely feasible in the software space. If each person had their own personal server, we could build and share full stack apps (and monetize them!) without having to build VS-funded software services.\n\nI\u2019m currently working on this project with the aim to allow us \u201chome cooks\u201d to build apps for each other without storing each others data but also make those easy to use for the people that just want to eat and not cook. We\u2019re doing this by creating a space for general purpose personal cloud computing that developers can target and user can install with just one-click.",
+        "text": "I really like your “home cooking” analogy and frequently share a very similar one regarding cooking that I think goes one step further.\n\nThe issue with “home cooking” as a goal is that in relation to computing most people are consumers\/diners\/users and not programmers\/chefs. So it’s not that we need more programmers and home chefs, I think the problem is that the gap between a home chef and a restaurant owner is so massive and exists the same way in software.\n\nTo extrapolate, let’s consider an example:\n\nYou’re a talented home cook that has an awesome new dish that you have perfected and want to share with the world. Great! Now how can you actually do that? You basically have two main options:\n\n1. Publish your recipe online (equivalent to open-sourcing on Github)\nPros:\n- Free to distribute\n- Unlimited reach\nCons:\n- Your users have be a home-cooks themselves to consume the recipe\n- You don’t make any money\n\n2. Start your own restaurant and serve your dish to patrons (equivalent to creating your own SaaS startup)\nPros:\n- You actually make money\n- Your users can be anyone (no cooking required)\nCons:\n- Extremely costly and risky to pursue\n- Requires *many* more skills and responsibilities to pursue (like hiring staff, renting a space, accepting credit cards, supply chain optimizing, etc)\n- Limited initial scale (usually just one location to start)\n\nSo what if there was a third option...\n\nWhat if every person had their own personal chef that could make any recipe your request and shop for the required ingredients on your behalf...\n\nWe wouldn’t need to rely on restaurants to enjoy highly skilled culinary creations. This would be awesome but clearly unfeasible in this cooking example but is entirely feasible in the software space. If each person had their own personal server, we could build and share full stack apps (and monetize them!) without having to build VS-funded software services.\n\nI’m currently working on this project with the aim to allow us “home cooks” to build apps for each other without storing each others data but also make those easy to use for the people that just want to eat and not cook. We’re doing this by creating a space for general purpose personal cloud computing that developers can target and user can install with just one-click.",
         "user": "U02C3SH9L2J",
         "ts": "1640202672.327900",
         "thread_ts": "1640129361.326500",
         "root": {
             "client_msg_id": "c017372f-ecee-4bf3-86c7-d64d15feb1c2",
             "type": "message",
-            "text": "My answer to this question got to the top of the thread: <https://news.ycombinator.com/item?id=29625625>\n\nIt was a hurried response for sure, but I guess it was still a nice reminder",
+            "text": "My answer to this question got to the top of the thread: <https:\/\/news.ycombinator.com\/item?id=29625625>\n\nIt was a hurried response for sure, but I guess it was still a nice reminder",
             "user": "UAJKEBGP8",
             "ts": "1640129361.326500",
             "team": "T5TCAFTA9",
@@ -27,7 +214,7 @@
                                 },
                                 {
                                     "type": "link",
-                                    "url": "https://news.ycombinator.com/item?id=29625625"
+                                    "url": "https:\/\/news.ycombinator.com\/item?id=29625625"
                                 },
                                 {
                                     "type": "text",
@@ -39,13 +226,60 @@
                 }
             ],
             "thread_ts": "1640129361.326500",
-            "reply_count": 8,
-            "reply_users_count": 3,
-            "latest_reply": "1640335573.330000",
+            "reply_count": 11,
+            "reply_users_count": 4,
+            "latest_reply": "1641211840.345900",
             "reply_users": [
                 "U02C3SH9L2J",
                 "UCUSW7WVD",
-                "UJBAJNFLK"
+                "UJBAJNFLK",
+                "UJFN50C00"
+            ],
+            "replies": [
+                {
+                    "user": "U02C3SH9L2J",
+                    "ts": "1640202672.327900"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1640206934.328300"
+                },
+                {
+                    "user": "U02C3SH9L2J",
+                    "ts": "1640216874.328500"
+                },
+                {
+                    "user": "UCUSW7WVD",
+                    "ts": "1640219724.328700"
+                },
+                {
+                    "user": "UJBAJNFLK",
+                    "ts": "1640246821.328900"
+                },
+                {
+                    "user": "UJBAJNFLK",
+                    "ts": "1640256507.329100"
+                },
+                {
+                    "user": "U02C3SH9L2J",
+                    "ts": "1640272340.329300"
+                },
+                {
+                    "user": "UJBAJNFLK",
+                    "ts": "1640335573.330000"
+                },
+                {
+                    "user": "UJFN50C00",
+                    "ts": "1641211624.345400"
+                },
+                {
+                    "user": "UJFN50C00",
+                    "ts": "1641211755.345700"
+                },
+                {
+                    "user": "UJFN50C00",
+                    "ts": "1641211840.345900"
+                }
             ],
             "is_locked": false,
             "subscribed": false
@@ -60,7 +294,7 @@
                         "elements": [
                             {
                                 "type": "text",
-                                "text": "I really like your \u201chome cooking\u201d analogy and frequently share a very similar one regarding cooking that I think goes one step further.\n\nThe issue with \u201chome cooking\u201d as a goal is that in relation to computing most people are consumers/diners/users and not programmers/chefs. So it\u2019s not that we need more programmers and home chefs, I think the problem is that the gap between a home chef and a restaurant owner is so massive and exists the same way in software.\n\nTo extrapolate, let\u2019s consider an example:\n\nYou\u2019re a talented home cook that has an awesome new dish that you have perfected and want to share with the world. Great! Now how can you actually do that? You basically have two main options:\n\n1. Publish your recipe online (equivalent to open-sourcing on Github)\nPros:\n- Free to distribute\n- Unlimited reach\nCons:\n- Your users have be a home-cooks themselves to consume the recipe\n- You don\u2019t make any money\n\n2. Start your own restaurant and serve your dish to patrons (equivalent to creating your own SaaS startup)\nPros:\n- You actually make money\n- Your users can be anyone (no cooking required)\nCons:\n- Extremely costly and risky to pursue\n- Requires *many* more skills and responsibilities to pursue (like hiring staff, renting a space, accepting credit cards, supply chain optimizing, etc)\n- Limited initial scale (usually just one location to start)\n\nSo what if there was a third option...\n\nWhat if every person had their own personal chef that could make any recipe your request and shop for the required ingredients on your behalf...\n\nWe wouldn\u2019t need to rely on restaurants to enjoy highly skilled culinary creations. This would be awesome but clearly unfeasible in this cooking example but is entirely feasible in the software space. If each person had their own personal server, we could build and share full stack apps (and monetize them!) without having to build VS-funded software services.\n\nI\u2019m currently working on this project with the aim to allow us \u201chome cooks\u201d to build apps for each other without storing each others data but also make those easy to use for the people that just want to eat and not cook. We\u2019re doing this by creating a space for general purpose personal cloud computing that developers can target and user can install with just one-click."
+                                "text": "I really like your “home cooking” analogy and frequently share a very similar one regarding cooking that I think goes one step further.\n\nThe issue with “home cooking” as a goal is that in relation to computing most people are consumers\/diners\/users and not programmers\/chefs. So it’s not that we need more programmers and home chefs, I think the problem is that the gap between a home chef and a restaurant owner is so massive and exists the same way in software.\n\nTo extrapolate, let’s consider an example:\n\nYou’re a talented home cook that has an awesome new dish that you have perfected and want to share with the world. Great! Now how can you actually do that? You basically have two main options:\n\n1. Publish your recipe online (equivalent to open-sourcing on Github)\nPros:\n- Free to distribute\n- Unlimited reach\nCons:\n- Your users have be a home-cooks themselves to consume the recipe\n- You don’t make any money\n\n2. Start your own restaurant and serve your dish to patrons (equivalent to creating your own SaaS startup)\nPros:\n- You actually make money\n- Your users can be anyone (no cooking required)\nCons:\n- Extremely costly and risky to pursue\n- Requires *many* more skills and responsibilities to pursue (like hiring staff, renting a space, accepting credit cards, supply chain optimizing, etc)\n- Limited initial scale (usually just one location to start)\n\nSo what if there was a third option...\n\nWhat if every person had their own personal chef that could make any recipe your request and shop for the required ingredients on your behalf...\n\nWe wouldn’t need to rely on restaurants to enjoy highly skilled culinary creations. This would be awesome but clearly unfeasible in this cooking example but is entirely feasible in the software space. If each person had their own personal server, we could build and share full stack apps (and monetize them!) without having to build VS-funded software services.\n\nI’m currently working on this project with the aim to allow us “home cooks” to build apps for each other without storing each others data but also make those easy to use for the people that just want to eat and not cook. We’re doing this by creating a space for general purpose personal cloud computing that developers can target and user can install with just one-click."
                             }
                         ]
                     }
@@ -78,5 +312,142 @@
                 "count": 2
             }
         ]
+    },
+    {
+        "client_msg_id": "b29a976d-e49c-45ef-876b-689f42f167f0",
+        "type": "message",
+        "text": "Sounds like <http:\/\/sandstorm.io|sandstorm.io>? I was recently reminded of it..",
+        "user": "UCUSW7WVD",
+        "ts": "1640206934.328300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4+1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sounds like "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http:\/\/sandstorm.io",
+                                "text": "sandstorm.io"
+                            },
+                            {
+                                "type": "text",
+                                "text": "? I was recently reminded of it.."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1640129361.326500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "1ff7b7fa-2298-495d-a5b4-5cbfa64a0add",
+        "type": "message",
+        "text": "Yes a similar idea with more of a focus on developer experience and end-user-programming",
+        "user": "U02C3SH9L2J",
+        "ts": "1640216874.328500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "1de4791b2cc3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-12-20\/2888348949616_1de4791b2cc3996ef56c_72.png",
+            "first_name": "Matthew",
+            "real_name": "Matthew Linkous",
+            "display_name": "Matthew Linkous",
+            "team": "T5TCAFTA9",
+            "name": "matt386",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "s2a",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes a similar idea with more of a focus on developer experience and end-user-programming"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1640129361.326500",
+        "parent_user_id": "UAJKEBGP8"
+    },
+    {
+        "client_msg_id": "3d8ec20c-e88d-49cd-b461-fcf7ef70ab94",
+        "type": "message",
+        "text": "That's an interesting take :smile: I'm curious to hear more about how you're thinking about it.",
+        "user": "UCUSW7WVD",
+        "ts": "1640219724.328700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "axsPl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That's an interesting take "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I'm curious to hear more about how you're thinking about it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1640129361.326500",
+        "parent_user_id": "UAJKEBGP8"
     }
 ]

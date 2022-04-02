@@ -1,0 +1,203 @@
+[
+    {
+        "client_msg_id": "45be7581-c419-4421-8a8e-49211a9efc9b",
+        "type": "message",
+        "text": "Thanks for the pointer to the code, together with <https:\/\/meta.wikimedia.org\/wiki\/Abstract_Wikipedia> that fills in some blanks! You actually use the term \"abstract programming language\", which sounds fitting.\n\nBasically your abstract programming language is a data model and a function composition model. The data model seems to be a slight extension of JSON though I wonder about some details, in particular number semantics. JSON only specifies number syntax, to which JavaScript adds floating-point semantics, which I think is a bad choice. The function composition model seems to be basically eager evaluation, but I wonder if there is a mechanism for error handling, which I'd expect to be practically necessary, though not in principle. Type checking would also have to be a part of the function composition model, and I guess that implies choosing a uniform type system (nominal vs. structural, parametricity, ...).\n\nAs for scientific models, I'd say their place is data structures in Wikidata, not functions in Wikilambda. That doesn't preclude having associated executable code for illustration, running demos, etc. BTW, that's how Leibniz is implemented in Racket. It's not code that compiles to functions, but an embedded data language that compiles to a few data structures representing symbols, terms, rules, and equations. I could easily map the data structures to Wikidata and write Wikilambda functions for rendering. Which might actually make sense one day, though my immediate use case is doing research, rather than documenting scientific concensus in Wikipedia.\n\nBTW, I wonder if you know about Unison (<https:\/\/www.unisonweb.org\/>), which has some overlap with your idea for Wikilambda as well, in particular the separation of the actual code from the identifiers that name pieces of code and data. That leads to a rather different development workflow, which may be adapted to Wikilambda as well.",
+        "user": "UJBAJNFLK",
+        "ts": "1600069863.070700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "e169f54bbaf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2021-03-12\/1859691333940_e169f54bbaf8b9b36b12_72.png",
+            "first_name": "Konrad",
+            "real_name": "Konrad Hinsen",
+            "display_name": "Konrad Hinsen",
+            "team": "T5TCAFTA9",
+            "name": "konrad.hinsen",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "The Unison language",
+                "title_link": "https:\/\/www.unisonweb.org\/",
+                "text": "A friendly programming language from the future.",
+                "fallback": "The Unison language",
+                "from_url": "https:\/\/www.unisonweb.org\/",
+                "service_name": "unisonweb.org",
+                "id": 1,
+                "original_url": "https:\/\/www.unisonweb.org\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4Ue",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for the pointer to the code, together with "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/meta.wikimedia.org\/wiki\/Abstract_Wikipedia"
+                            },
+                            {
+                                "type": "text",
+                                "text": " that fills in some blanks! You actually use the term \"abstract programming language\", which sounds fitting.\n\nBasically your abstract programming language is a data model and a function composition model. The data model seems to be a slight extension of JSON though I wonder about some details, in particular number semantics. JSON only specifies number syntax, to which JavaScript adds floating-point semantics, which I think is a bad choice. The function composition model seems to be basically eager evaluation, but I wonder if there is a mechanism for error handling, which I'd expect to be practically necessary, though not in principle. Type checking would also have to be a part of the function composition model, and I guess that implies choosing a uniform type system (nominal vs. structural, parametricity, ...).\n\nAs for scientific models, I'd say their place is data structures in Wikidata, not functions in Wikilambda. That doesn't preclude having associated executable code for illustration, running demos, etc. BTW, that's how Leibniz is implemented in Racket. It's not code that compiles to functions, but an embedded data language that compiles to a few data structures representing symbols, terms, rules, and equations. I could easily map the data structures to Wikidata and write Wikilambda functions for rendering. Which might actually make sense one day, though my immediate use case is doing research, rather than documenting scientific concensus in Wikipedia.\n\nBTW, I wonder if you know about Unison ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/www.unisonweb.org\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), which has some overlap with your idea for Wikilambda as well, in particular the separation of the actual code from the identifiers that name pieces of code and data. That leads to a rather different development workflow, which may be adapted to Wikilambda as well."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1599681751.047400",
+        "parent_user_id": "U01AD80KMLK"
+    },
+    {
+        "client_msg_id": "a05ae87c-08fb-4217-97d6-1a60577f317b",
+        "type": "message",
+        "text": "Thank you for the rich comment! We don't use the number semantics from JSON nor the floating point extension from JS, but either must be a new type created by the community. So numbers in the prototype are literally strings with the base 10 representation (but then get converted for the actual evaluation). But in the end, the type system for numbers will be created by the community, it is not a core part.  The prototype evaluates mostly lazy for the composed functions, only for the parts implemented in a different programming language it may be eager. That's a little bit fishy still, to be honest, and one of the pieces that could benefit from more scrutiny.  There is error handling, as e.g. for division by zero, or for stack overflows, etc.  The type system is nominal. In the prototype it is not parametric, but that's no good, we will make it parametric for the next implementation. The current state of the function model is here: <https:\/\/meta.wikimedia.org\/wiki\/Abstract_Wikipedia\/Function_model>",
+        "user": "U01AD80KMLK",
+        "ts": "1600096254.071000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "a07cdcb6d037",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-09-09\/1376906509376_a07cdcb6d037bf7b6a5e_72.jpg",
+            "first_name": "",
+            "real_name": "Denny Vrandečić",
+            "display_name": "Denny Vrandečić",
+            "team": "T5TCAFTA9",
+            "name": "dvrandecic",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mlZ8C",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thank you for the rich comment! We don't use the number semantics from JSON nor the floating point extension from JS, but either must be a new type created by the community. So numbers in the prototype are literally strings with the base 10 representation (but then get converted for the actual evaluation). But in the end, the type system for numbers will be created by the community, it is not a core part.  The prototype evaluates mostly lazy for the composed functions, only for the parts implemented in a different programming language it may be eager. That's a little bit fishy still, to be honest, and one of the pieces that could benefit from more scrutiny.  There is error handling, as e.g. for division by zero, or for stack overflows, etc.  The type system is nominal. In the prototype it is not parametric, but that's no good, we will make it parametric for the next implementation. The current state of the function model is here: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/meta.wikimedia.org\/wiki\/Abstract_Wikipedia\/Function_model"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1599681751.047400",
+        "parent_user_id": "U01AD80KMLK",
+        "reactions": [
+            {
+                "name": "heart_eyes",
+                "users": [
+                    "USL4R0T61"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "352e2e43-ef39-466c-951d-1452d8263591",
+        "type": "message",
+        "text": "Regarding scientific models, this all sounds good. Happy to see this grow closer together through Wikidata and Wikilambda in the future!",
+        "user": "U01AD80KMLK",
+        "ts": "1600096290.071200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "a07cdcb6d037",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-09-09\/1376906509376_a07cdcb6d037bf7b6a5e_72.jpg",
+            "first_name": "",
+            "real_name": "Denny Vrandečić",
+            "display_name": "Denny Vrandečić",
+            "team": "T5TCAFTA9",
+            "name": "dvrandecic",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "f+S",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Regarding scientific models, this all sounds good. Happy to see this grow closer together through Wikidata and Wikilambda in the future!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1599681751.047400",
+        "parent_user_id": "U01AD80KMLK"
+    },
+    {
+        "client_msg_id": "140a34c7-713e-43f4-b14f-a707cba89095",
+        "type": "message",
+        "text": "I remember having read the Unison webpage a while ago, but will take another look. Thank you for the reference!",
+        "user": "U01AD80KMLK",
+        "ts": "1600096357.071400",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "a07cdcb6d037",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-09-09\/1376906509376_a07cdcb6d037bf7b6a5e_72.jpg",
+            "first_name": "",
+            "real_name": "Denny Vrandečić",
+            "display_name": "Denny Vrandečić",
+            "team": "T5TCAFTA9",
+            "name": "dvrandecic",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fNVg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I remember having read the Unison webpage a while ago, but will take another look. Thank you for the reference!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1599681751.047400",
+        "parent_user_id": "U01AD80KMLK"
+    }
+]

@@ -1,0 +1,1257 @@
+[
+    {
+        "client_msg_id": "50aec3ce-84cb-4231-a0c0-6cb57f1526c5",
+        "type": "message",
+        "text": "Hi Vladimir, you mentioned several times that you use a DAG data structure. However the examples in your videos are all trees. Do you have any examples that benefit from the sub-tree sharing that characterizes DAGs?",
+        "user": "UCUSW7WVD",
+        "ts": "1586244000.066000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rI=9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi Vladimir, you mentioned several times that you use a DAG data structure. However the examples in your videos are all trees. Do you have any examples that benefit from the sub-tree sharing that characterizes DAGs?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "ace20f37-3344-4aeb-88ea-28e143cfeddb",
+        "type": "message",
+        "text": "Hey <@UCUSW7WVD>!\n\nThe trees that are shown in the video were stored as a DAG with hashes as keys (just like in Git), if same tree node is used in several places, only one instance is stored. However, for now this reuse is not displayed in UI in any way.\n\nActually, I am not sure I understand about which benefits exactly you are talking. I have following thoughts in mind:\n\n---\n\nIt is good to show that some subtree is used somewhere else. This way you can explore how this or that function is used in other places.\n\nFor example we have following DAG:\n\n```place1:\n  subtree1: {foobar: baz}\nplace2:\n  subtree2: {foobar: baz}```\nWe can somehow display connection between `subtree1` and `subtree2` and navigate from one to the other.\n\nHowever, if user decides to modify `place1\/subtree1`, then editor should allow it for the sake of good user experience. It should feel like text and should not break things in other parts of the system by default. Thus, this connection between subtrees will be broken, because they are not equal anymore.\n\nTo have subtrees that are actually pointing to one thing and change simultaneously I plan to use explicit references to a subtree, for example:\n\n```references-list-keyword:\n  ref1: {foobar: baz}\nplace1:\n  subtree1: {reference-keyword: ref1}\nplace2:\n  subtree2: {reference-keyword: ref1}```\nTree editor should recognize this referencing and display references to the trees as actual trees (with some highlighting that would indicate referencing).\n\nThis referencing can be made nested, which would start to look like lexical scoping in many PLs.",
+        "user": "UCKRZS3DZ",
+        "ts": "1586246108.066200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCKRZS3DZ",
+            "ts": "1586246267.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NVi\/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hey "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": "!\n\nThe trees that are shown in the video were stored as a DAG with hashes as keys (just like in Git), if same tree node is used in several places, only one instance is stored. However, for now this reuse is not displayed in UI in any way.\n\nActually, I am not sure I understand about which benefits exactly you are talking. I have following thoughts in mind:\n\n---\n\nIt is good to show that some subtree is used somewhere else. This way you can explore how this or that function is used in other places.\n\nFor example we have following DAG:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "place1:\n  subtree1: {foobar: baz}\nplace2:\n  subtree2: {foobar: baz}"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nWe can somehow display connection between "
+                            },
+                            {
+                                "type": "text",
+                                "text": "subtree1",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "subtree2",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and navigate from one to the other.\n\nHowever, if user decides to modify "
+                            },
+                            {
+                                "type": "text",
+                                "text": "place1\/subtree1",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", then editor should allow it for the sake of good user experience. It should feel like text and should not break things in other parts of the system by default. Thus, this connection between subtrees will be broken, because they are not equal anymore.\n\nTo have subtrees that are actually pointing to one thing and change simultaneously I plan to use explicit references to a subtree, for example:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "references-list-keyword:\n  ref1: {foobar: baz}\nplace1:\n  subtree1: {reference-keyword: ref1}\nplace2:\n  subtree2: {reference-keyword: ref1}"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nTree editor should recognize this referencing and display references to the trees as actual trees (with some highlighting that would indicate referencing).\n\nThis referencing can be made nested, which would start to look like lexical scoping in many PLs."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "8a6ea64d-d551-411a-add8-c351fb9e06b8",
+        "type": "message",
+        "text": "It sounds like you're mostly using a DAG instead of a tree as a space-saving optimization. Am I understanding correctly?",
+        "user": "UCUSW7WVD",
+        "ts": "1586246554.066800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1586246628.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Y=wsL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It sounds like you're mostly using a DAG instead of a tree as a space-saving optimization. Am I understanding correctly?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "d860b9ea-368b-419b-a25e-873274bdc279",
+        "type": "message",
+        "text": "For now DAG structure is not used for anything except storage saving, yes. Differences from simple trees may show up on the level above, in PL.\n\nFor example you have two different functions that expect trees with two different interfaces:\n```func1(Value):\n  {title: S} = Value\n  do_something(S)\n\nfunc2(Value):\n  {asString: S} = Value\n  do_something(S)```\nBecause we work with dags we can create a value that satisfies both interfaces with single value:\n```asString: \"a string value\"\ntitle: \"a string value\"```\nOr, because it is a DAG, we can display it like that:\n```asString:\n   title: \"a string value\"```\nTwo keys, but one value.\n\nThat kind of thing will be really useful only on PL level, which I haven't reached yet.",
+        "user": "UCKRZS3DZ",
+        "ts": "1586247240.067100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCKRZS3DZ",
+            "ts": "1586247637.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mQV9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "For now DAG structure is not used for anything except storage saving, yes. Differences from simple trees may show up on the level above, in PL.\n\nFor example you have two different functions that expect trees with two different interfaces:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "func1(Value):\n  {title: S} = Value\n  do_something(S)\n\nfunc2(Value):\n  {asString: S} = Value\n  do_something(S)"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nBecause we work with dags we can create a value that satisfies both interfaces with single value:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "asString: \"a string value\"\ntitle: \"a string value\""
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nOr, because it is a DAG, we can display it like that:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "asString:\n   title: \"a string value\""
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nTwo keys, but one value.\n\nThat kind of thing will be really useful only on PL level, which I haven't reached yet."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "025553fd-14b5-40f5-92bf-bbae2a4aa716",
+        "type": "message",
+        "text": "What benefits you had in mind? <@UCUSW7WVD>",
+        "user": "UCKRZS3DZ",
+        "ts": "1586247458.067900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5txbj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What benefits you had in mind? "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "f98a0313-cf71-462e-b00a-2f5bd1ba690e",
+        "type": "message",
+        "text": "I didn't really. I asked about benefits because you mentioned the power of a DAG several times in the video.\n\nThe space savings don't seem very important. And since you don't use it yet in any externally visible way, I wonder if the complications this will cause in the UX are worth side-stepping for now.\n\nThe sense I'm getting is that you chose a content-addressable representation for trees that naturally ended up supporting DAGs. I might consider undoing that decision just to avoid having to jump through hoops to ensure that edits in one place don't affect other places. Just create a new id for every node, and never reuse nodes. Periodically garbage-collect if you need to, to save space. But really, disk is cheap.\n\nVery interesting project! What are you building it in?",
+        "user": "UCUSW7WVD",
+        "ts": "1586247706.068300",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6e649a383cf8",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
+            "first_name": "Kartik",
+            "real_name": "Kartik Agaram",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "ak",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Z7H",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I didn't really. I asked about benefits because you mentioned the power of a DAG several times in the video.\n\nThe space savings don't seem very important. And since you don't use it yet in any externally visible way, I wonder if the complications this will cause in the UX are worth side-stepping for now.\n\nThe sense I'm getting is that you chose a content-addressable representation for trees that naturally ended up supporting DAGs. I might consider undoing that decision just to avoid having to jump through hoops to ensure that edits in one place don't affect other places. Just create a new id for every node, and never reuse nodes. Periodically garbage-collect if you need to, to save space. But really, disk is cheap.\n\nVery interesting project! What are you building it in?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "981a18d4-aee3-47a6-a44c-4bad82b8aec7",
+        "type": "message",
+        "text": "Currently I just write it in JavaScript + React.js.\nI plan to create Git storage backend with Python (likely) or Go.\n\nI am trying to avoid non-trendy languages and frameworks :smiley:",
+        "user": "UCKRZS3DZ",
+        "ts": "1586248179.068500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lLt3e",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Currently I just write it in JavaScript + React.js.\nI plan to create Git storage backend with Python (likely) or Go.\n\nI am trying to avoid non-trendy languages and frameworks "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smiley"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ",
+        "reactions": [
+            {
+                "name": "rolling_on_the_floor_laughing",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "E6DD099D-B713-4CF3-8C7C-635CBF972972",
+        "type": "message",
+        "text": "<@UCKRZS3DZ> How do you distinguish what elements of the data tree\/graph are considered equal? It seems like if you represent everything as reference types, which you seem to do because you use content-addressable storage, what happens if shared content is equal (as in identical content\/hash), but doesn’t really represent the same thing (you want to change it in one place but not in the other) — is that something that came up (yet)?",
+        "user": "U5STGTB3J",
+        "ts": "1586254074.083000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jR2xs",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCKRZS3DZ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " How do you distinguish what elements of the data tree\/graph are considered equal? It seems like if you represent everything as reference types, which you seem to do because you use content-addressable storage, what happens if shared content is equal (as in identical content\/hash), but doesn’t really represent the same thing (you want to change it in one place but not in the other) — is that something that came up (yet)?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "64C81F4C-13A1-4168-8FA3-56D785B2DF79",
+        "type": "message",
+        "text": "I guess I just asked what <@UCUSW7WVD> had just pointed out above…",
+        "user": "U5STGTB3J",
+        "ts": "1586254217.084200",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "A8K",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I guess I just asked what "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " had just pointed out above…"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "BBF7AF81-CA46-4FBB-9D73-34CBF417D202",
+        "type": "message",
+        "text": "From <@UCKRZS3DZ>’s example above it does seem like the use case is closer to wanting the same thing to change everywhere (reference type) instead of only in the place you change it (which would favor value types).\n\nWhat I’d be interested in is: is your use case either\/or, or do you need both?",
+        "user": "U5STGTB3J",
+        "ts": "1586254381.086900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mY23t",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "From "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UCKRZS3DZ"
+                            },
+                            {
+                                "type": "text",
+                                "text": "’s example above it does seem like the use case is closer to wanting the same thing to change everywhere (reference type) instead of only in the place you change it (which would favor value types).\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "What I’d be interested in is: is your use case either\/or, or do you need both?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ",
+        "reactions": [
+            {
+                "name": "eyes",
+                "users": [
+                    "UCKRZS3DZ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6343676c-6489-4aff-b605-c8dfe505051a",
+        "type": "message",
+        "text": "<@U5STGTB3J>\n\n&gt; What I’d be interested in is: is your use case either\/or, or do you need both?\nI need both. By default I expect people to change things in place and not affect anything else. But sometimes they will need to change something available by reference, which is less safe for user to do, becacause it can break things.",
+        "user": "UCKRZS3DZ",
+        "ts": "1586254886.087100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UCKRZS3DZ",
+            "ts": "1586254928.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PSx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U5STGTB3J"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What I’d be interested in is: is your use case either\/or, or do you need both?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI need both. By default I expect people to change things in place and not affect anything else. But sometimes they will need to change something available by reference, which is less safe for user to do, becacause it can break things."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "ffa2f179-65b1-4a7d-aa35-252a858a88d6",
+        "type": "message",
+        "text": "&gt; what happens if shared content is equal (as in identical content\/hash), but doesn’t really represent the same thing\nI have a terrible thing in mind: I don't want to provide content addressability. Thus, this problem of equal hashes but not equal content is a problem inside single storage and can be resolved by some additional checks.\n\nI want to deny content addressability because I want to work with trees that are not necessarily stored as DAG. As I mentioned in video, trees may represent file system or a database. Providing correct hash for a table that constantly changes might be a problem.",
+        "user": "UCKRZS3DZ",
+        "ts": "1586255422.087500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "E70",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "what happens if shared content is equal (as in identical content\/hash), but doesn’t really represent the same thing"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI have a terrible thing in mind: I don't want to provide content addressability. Thus, this problem of equal hashes but not equal content is a problem inside single storage and can be resolved by some additional checks.\n\nI want to deny content addressability because I want to work with trees that are not necessarily stored as DAG. As I mentioned in video, trees may represent file system or a database. Providing correct hash for a table that constantly changes might be a problem."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "dd26cd57-f34c-4592-b555-69af97c83333",
+        "type": "message",
+        "text": "Thus, tree editor works with repository, that has arbitrary toplevel key-value entries.",
+        "user": "UCKRZS3DZ",
+        "ts": "1586255623.087800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "aBt",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thus, tree editor works with repository, that has arbitrary toplevel key-value entries."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "07480E3B-757A-434E-B74C-0339113E55E9",
+        "type": "message",
+        "text": "&gt; By default I expect people to change things in place and not affect anything else. But sometimes they will need to change something available by reference, which is less safe for user to do, becacause it can break things.\n&gt; \n&gt; \nThought so. Have you thought about how that distinction can surface in the user interface? What affordances are you going to offer for users to choose between change in place only vs. change everywhere? Assuming you want\/need to give users ultimately the bower to do both.",
+        "user": "U5STGTB3J",
+        "ts": "1586255951.091000",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rVY",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "By default I expect people to change things in place and not affect anything else. But sometimes they will need to change something available by reference, which is less safe for user to do, becacause it can break things.\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thought so. Have you thought about how that distinction can surface in the user interface? What affordances are you going to offer for users to choose between change in place only vs. change everywhere? Assuming you want\/need to give users ultimately the bower to do both."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "EA2FC95F-F6B3-4BAC-AA8C-11CFCC13AB58",
+        "type": "message",
+        "text": "Unrelated I was wondering about properties that hold collections: in the video you spend quite some time explaining that keys need to be unique and only the first value of each key will be stored. Have you considered turning multiple values for the same key into a collection? And if you did, what made you decide against it?",
+        "user": "U5STGTB3J",
+        "ts": "1586256067.093700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "649181907e06",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2017-08-20\/228447816352_649181907e06ec450c64_72.jpg",
+            "first_name": "Stefan",
+            "real_name": "Stefan Lesser",
+            "display_name": "Stefan",
+            "team": "T5TCAFTA9",
+            "name": "stefanlesser",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZXVkn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Unrelated I was wondering about properties that hold collections: in the video you spend quite some time explaining that keys need to be unique and only the first value of each key will be stored. Have you considered turning multiple values for the same key into a collection? And if you did, what made you decide against it?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "7f503747-2883-41dd-9402-259f836e6c7e",
+        "type": "message",
+        "text": "&gt; Have you thought about how that distinction can surface in the user interface?\nI don't have a ready sketch for that. What I know is that visually it will be very different, pretty much two different modes of editing.\n\nRight now I am thinking to add a side window for editing data from reference.\n\n&gt; Have you considered turning multiple values for the same key into a collection? And if you did, what made you decide against it?\nI wanted to use simplest possible data structure, from which everything else can be constructured.\n\nI can express this:\n```key1: value1\nkey1: value2\nkey1: value3```\nAs this:\n```key1:\n  0: value1\n  1: value2\n  3: value3```\nAllowing several values for same key may make UI for pattern matching much more complicated. It also adds ambiguity -- what if several values do fit the pattern?",
+        "user": "UCKRZS3DZ",
+        "ts": "1586257738.093900",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sOM0Q",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Have you thought about how that distinction can surface in the user interface?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't have a ready sketch for that. What I know is that visually it will be very different, pretty much two different modes of editing.\n\nRight now I am thinking to add a side window for editing data from reference.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Have you considered turning multiple values for the same key into a collection? And if you did, what made you decide against it?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI wanted to use simplest possible data structure, from which everything else can be constructured.\n\nI can express this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "key1: value1\nkey1: value2\nkey1: value3"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "As this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "key1:\n  0: value1\n  1: value2\n  3: value3"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAllowing several values for same key may make UI for pattern matching much more complicated. It also adds ambiguity -- what if several values do fit the pattern?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U5STGTB3J"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "8125c622-cb15-4157-b48f-9f39adb4f7d3",
+        "type": "message",
+        "text": "&gt; What affordances are you going to offer for users to choose between change in place only vs. change everywhere? \nUser would be able to turn any subtree intro a reference and detach value from reference.",
+        "user": "UCKRZS3DZ",
+        "ts": "1586258062.094100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "H9p",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What affordances are you going to offer for users to choose between change in place only vs. change everywhere? "
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "User would be able to turn any subtree intro a reference and detach value from reference."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U5STGTB3J"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c20167f1-745d-4f1f-9e05-debfa2d504eb",
+        "type": "message",
+        "text": "Thank you for sharing <@UHWC9PXBL> this reminds me of Iris — <https:\/\/youtu.be\/3VZZbKoXDVM>",
+        "user": "UJKKBAMLL",
+        "ts": "1586264775.094500",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "6b9db1f76eed",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-06-12\/662675221668_6b9db1f76eed746965ca_72.jpg",
+            "first_name": "Steve",
+            "real_name": "Steve Peak",
+            "display_name": "Steve",
+            "team": "T5TCAFTA9",
+            "name": "steve727",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "service_name": "YouTube",
+                "service_url": "https:\/\/www.youtube.com\/",
+                "title": "Iris: A Conversational Agent for Complex Tasks",
+                "title_link": "https:\/\/youtu.be\/3VZZbKoXDVM",
+                "author_name": "ACM SIGCHI",
+                "author_link": "https:\/\/www.youtube.com\/user\/acmsigchi",
+                "thumb_url": "https:\/\/i.ytimg.com\/vi\/3VZZbKoXDVM\/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "fallback": "YouTube Video: Iris: A Conversational Agent for Complex Tasks",
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https:\/\/www.youtube.com\/embed\/3VZZbKoXDVM?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen><\/iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "from_url": "https:\/\/youtu.be\/3VZZbKoXDVM",
+                "service_icon": "https:\/\/a.slack-edge.com\/80588\/img\/unfurl_icons\/youtube.png",
+                "id": 1,
+                "original_url": "https:\/\/youtu.be\/3VZZbKoXDVM"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Ad+W",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thank you for sharing "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UHWC9PXBL"
+                            },
+                            {
+                                "type": "text",
+                                "text": " this reminds me of Iris — "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/youtu.be\/3VZZbKoXDVM"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585750452.046800",
+        "parent_user_id": "UJKKBAMLL"
+    },
+    {
+        "client_msg_id": "285c8d49-a71a-4653-b937-7145d9d48059",
+        "type": "message",
+        "text": "I’d be really interested to learn more about the API. Would it be possible to specify a protocol in line with <https:\/\/microsoft.github.io\/language-server-protocol\/> but where the AST is in focus and not the text file? More than just the editor I guess it would be possible to do better search, autocomplete and version control if the dependencies from each expression is known or even more fine grained incremental compilation. One important compromise I suppose you must have put some thought into is the requirements you put on the language in terms of order vs chaos to put it in your words.",
+        "user": "U0118UBB41G",
+        "ts": "1586268278.094800",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "54bcb9e9e68c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-07\/1045585854007_54bcb9e9e68c590ce5c5_72.jpg",
+            "first_name": "",
+            "real_name": "Joel Wikström",
+            "display_name": "Joel Wikström",
+            "team": "T5TCAFTA9",
+            "name": "joel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "attachments": [
+            {
+                "title": "Official page for Language Server Protocol",
+                "title_link": "https:\/\/microsoft.github.io\/language-server-protocol\/",
+                "text": "Language Server Protocol documentation and specification page.",
+                "fallback": "Official page for Language Server Protocol",
+                "from_url": "https:\/\/microsoft.github.io\/language-server-protocol\/",
+                "service_icon": "https:\/\/microsoft.github.io\/language-server-protocol\/img\/favicon.png",
+                "service_name": "microsoft.github.io",
+                "id": 1,
+                "original_url": "https:\/\/microsoft.github.io\/language-server-protocol\/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3aO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I’d be really interested to learn more about the API. Would it be possible to specify a protocol in line with "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https:\/\/microsoft.github.io\/language-server-protocol\/"
+                            },
+                            {
+                                "type": "text",
+                                "text": " but where the AST is in focus and not the text file? More than just the editor I guess it would be possible to do better search, autocomplete and version control if the dependencies from each expression is known or even more fine grained incremental compilation. One important compromise I suppose you must have put some thought into is the requirements you put on the language in terms of order vs chaos to put it in your words."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "782d0631-cd31-45dd-b3cc-54751532235d",
+        "type": "message",
+        "text": "Hey! Currently I store DAG in localStorage in browser, just for demo. I don't have ready API, I haven't designed it yet.\nYeah, making API similar to LSP (or even just mostly copying it) is a great idea. It also may help the adoption. I will try to do that.\n\n&gt; One important compromise I suppose you must have put some thought into is the requirements you put on the language in terms of order vs chaos to \n&gt; put it in your words.\nIf you mean the language that I want to create than yes. Did I understood you correctly?\nI don't expect to create successful language on first attempt.\nI think about this generic tree editor as a platform for many different languages.",
+        "user": "UCKRZS3DZ",
+        "ts": "1586269452.095100",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "222a2870915d",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2019-12-15\/861537614034_222a2870915d24ec10cc_72.jpg",
+            "first_name": "Vladimir",
+            "real_name": "Vladimir Gordeev",
+            "display_name": "",
+            "team": "T5TCAFTA9",
+            "name": "gordeev.vladimir.v",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Atx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hey! Currently I store DAG in localStorage in browser, just for demo. I don't have ready API, I haven't designed it yet.\nYeah, making API similar to LSP (or even just mostly copying it) is a great idea. It also may help the adoption. I will try to do that.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One important compromise I suppose you must have put some thought into is the requirements you put on the language in terms of order vs chaos to \nput it in your words."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If you mean the language that I want to create than yes. Did I understood you correctly?\nI don't expect to create successful language on first attempt.\nI think about this generic tree editor as a platform for many different languages."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    },
+    {
+        "client_msg_id": "d986d2af-5153-4bb9-b4b4-2d88b8b7b2d0",
+        "type": "message",
+        "text": "Good artists copy; great artists steal. :smile:  I think it might be hard to design an API that all languages can implement. Immutable variables might make it easier to compute up and downstream dependencies and if the order of the declarations doesn’t matter you could perhaps order them alphabetically or something like that. LSP is pretty nice in that you can choose what part of the API you support.",
+        "user": "U0118UBB41G",
+        "ts": "1586293219.095700",
+        "team": "T5TCAFTA9",
+        "user_team": "T5TCAFTA9",
+        "source_team": "T5TCAFTA9",
+        "user_profile": {
+            "avatar_hash": "54bcb9e9e68c",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2020-04-07\/1045585854007_54bcb9e9e68c590ce5c5_72.jpg",
+            "first_name": "",
+            "real_name": "Joel Wikström",
+            "display_name": "Joel Wikström",
+            "team": "T5TCAFTA9",
+            "name": "joel",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9MeM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Good artists copy; great artists steal. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile"
+                            },
+                            {
+                                "type": "text",
+                                "text": "  I think it might be hard to design an API that all languages can implement. Immutable variables might make it easier to compute up and downstream dependencies and if the order of the declarations doesn’t matter you could perhaps order them alphabetically or something like that. LSP is pretty nice in that you can choose what part of the API you support."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1585660982.034100",
+        "parent_user_id": "UCKRZS3DZ"
+    }
+]
