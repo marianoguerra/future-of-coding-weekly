@@ -1,7 +1,7 @@
 [
     {
         "type": "message",
-        "text": "Good question about production errors... and timely. I had an issue popup. I thought the fact I can debug and step through the server code would be enough, but retrospectively obvious in hindsight, of course that does not help for those heisenberg bugs that happen in production for unexpected situations. I had just such an issue occur.\n\nAnyway, the bug was that the server would break against malformed requests. A classic case of not checking my preconditions. It was quite easy to generate a malformed request as anyone who clicked the API link in the backend notebook source would generate such a request. But all I saw was the server would break after a while randomly. Turns out even though I had Sentry setup, it does not notify *caught* exceptions and Observable's runtime catches errors.\n\nTo find the error I resorted to exporting a notebooks state using flatdata. I had to create a method for exporting a notebooks state first (<https:\/\/observablehq.com\/@tomlarkworthy\/notebook-snapshot>)\n\nOnce I could see the cell \"validatedConfig\" was unexpectedly throwing it was fairly obvious what the programming mistake was. Then it became obvious why Sentry was not detecting it. So I created a generic catchAll method that creates a global notebook error handler (<https:\/\/observablehq.com\/@tomlarkworthy\/catch-all>), and from there I could upgrade my Sentry integration to capture notebook runtime exceptions too (<https:\/\/observablehq.com\/@endpointservices\/sentry>)\n\nSo now those random errors in prod *should* be picked up by sentry, and sentry is awesome because it includes the context and line numbers (pictured)\n\nSo now the answer to detecting bugs in prod is to just use Sentry! What's cool about using a browser as the backend is that a single Sentry installation covers both frontend AND backend monitoring. That same sentry setup is present and active regardless of whether using the whitelabel domain (<https:\/\/thetarot.online>) the front end notebook (<https:\/\/observablehq.com\/@tomlarkworthy\/tarot>) the backend notebook (<https:\/\/observablehq.com\/@tomlarkworthy\/tarot-backend>), the webcode API endpoint (<https:\/\/webcode.run\/observablehq.com\/@tomlarkworthy\/tarot-backend;api>) or the application embedded in Medium (<https:\/\/medium.com\/@tom-larkworthy\/gpt-3-knows-tarot-385d935662a3>). You integrate a single state-of-the-art production monitoring solution and cover all bases with a single tool.",
+        "text": "Good question about production errors... and timely. I had an issue popup. I thought the fact I can debug and step through the server code would be enough, but retrospectively obvious in hindsight, of course that does not help for those heisenberg bugs that happen in production for unexpected situations. I had just such an issue occur.\n\nAnyway, the bug was that the server would break against malformed requests. A classic case of not checking my preconditions. It was quite easy to generate a malformed request as anyone who clicked the API link in the backend notebook source would generate such a request. But all I saw was the server would break after a while randomly. Turns out even though I had Sentry setup, it does not notify *caught* exceptions and Observable's runtime catches errors.\n\nTo find the error I resorted to exporting a notebooks state using flatdata. I had to create a method for exporting a notebooks state first (<https://observablehq.com/@tomlarkworthy/notebook-snapshot>)\n\nOnce I could see the cell \"validatedConfig\" was unexpectedly throwing it was fairly obvious what the programming mistake was. Then it became obvious why Sentry was not detecting it. So I created a generic catchAll method that creates a global notebook error handler (<https://observablehq.com/@tomlarkworthy/catch-all>), and from there I could upgrade my Sentry integration to capture notebook runtime exceptions too (<https://observablehq.com/@endpointservices/sentry>)\n\nSo now those random errors in prod *should* be picked up by sentry, and sentry is awesome because it includes the context and line numbers (pictured)\n\nSo now the answer to detecting bugs in prod is to just use Sentry! What's cool about using a browser as the backend is that a single Sentry installation covers both frontend AND backend monitoring. That same sentry setup is present and active regardless of whether using the whitelabel domain (<https://thetarot.online>) the front end notebook (<https://observablehq.com/@tomlarkworthy/tarot>) the backend notebook (<https://observablehq.com/@tomlarkworthy/tarot-backend>), the webcode API endpoint (<https://webcode.run/observablehq.com/@tomlarkworthy/tarot-backend;api>) or the application embedded in Medium (<https://medium.com/@tom-larkworthy/gpt-3-knows-tarot-385d935662a3>). You integrate a single state-of-the-art production monitoring solution and cover all bases with a single tool.",
         "files": [
             {
                 "id": "F039RF11C21",
@@ -9,7 +9,7 @@
                 "timestamp": 1648913848,
                 "name": "image.png",
                 "title": "image.png",
-                "mimetype": "image\/png",
+                "mimetype": "image/png",
                 "filetype": "png",
                 "pretty_type": "PNG",
                 "user": "U02E4DAQGSZ",
@@ -22,36 +22,36 @@
                 "public_url_shared": false,
                 "display_as_bot": false,
                 "username": "",
-                "url_private": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F039RF11C21\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
-                "url_private_download": "https:\/\/files.slack.com\/files-pri\/T5TCAFTA9-F039RF11C21\/download\/image.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F039RF11C21/image.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F039RF11C21/download/image.png",
                 "media_display_type": "unknown",
-                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_64.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
-                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_80.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
-                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_360.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_360.png",
                 "thumb_360_w": 360,
                 "thumb_360_h": 103,
-                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_480.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_480.png",
                 "thumb_480_w": 480,
                 "thumb_480_h": 137,
-                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_160.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
-                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_720.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_720.png",
                 "thumb_720_w": 720,
                 "thumb_720_h": 206,
-                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_800.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_800.png",
                 "thumb_800_w": 800,
                 "thumb_800_h": 228,
-                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_960.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_960.png",
                 "thumb_960_w": 960,
                 "thumb_960_h": 274,
-                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/T5TCAFTA9-F039RF11C21-76f1a9f046\/image_1024.png?t=xoxe-197418537349-3334460411954-3327810370486-8408fa93380fad4df07aa2b554429b02",
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F039RF11C21-76f1a9f046/image_1024.png",
                 "thumb_1024_w": 1024,
                 "thumb_1024_h": 292,
                 "image_exif_rotation": 1,
                 "original_w": 1688,
                 "original_h": 482,
-                "thumb_tiny": "AwANADDR4Jzn9aXP40hXJ60bfegB2aKbtPrRtPrQA7NFJg+v6UY96AP\/2Q==",
-                "permalink": "https:\/\/futureofcoding.slack.com\/files\/U02E4DAQGSZ\/F039RF11C21\/image.png",
-                "permalink_public": "https:\/\/slack-files.com\/T5TCAFTA9-F039RF11C21-2b1b75d224",
+                "thumb_tiny": "AwANADDR4Jzn9aXP40hXJ60bfegB2aKbtPrRtPrQA7NFJg+v6UY96AP/2Q==",
+                "permalink": "https://futureofcoding.slack.com/files/U02E4DAQGSZ/F039RF11C21/image.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F039RF11C21-2b1b75d224",
                 "is_starred": false,
                 "has_rich_preview": false
             }
@@ -85,7 +85,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https:\/\/observablehq.com\/@tomlarkworthy\/notebook-snapshot"
+                                "url": "https://observablehq.com/@tomlarkworthy/notebook-snapshot"
                             },
                             {
                                 "type": "text",
@@ -93,7 +93,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https:\/\/observablehq.com\/@tomlarkworthy\/catch-all"
+                                "url": "https://observablehq.com/@tomlarkworthy/catch-all"
                             },
                             {
                                 "type": "text",
@@ -101,7 +101,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https:\/\/observablehq.com\/@endpointservices\/sentry"
+                                "url": "https://observablehq.com/@endpointservices/sentry"
                             },
                             {
                                 "type": "text",
@@ -120,7 +120,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https:\/\/thetarot.online"
+                                "url": "https://thetarot.online"
                             },
                             {
                                 "type": "text",
@@ -128,7 +128,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https:\/\/observablehq.com\/@tomlarkworthy\/tarot"
+                                "url": "https://observablehq.com/@tomlarkworthy/tarot"
                             },
                             {
                                 "type": "text",
@@ -136,7 +136,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https:\/\/observablehq.com\/@tomlarkworthy\/tarot-backend"
+                                "url": "https://observablehq.com/@tomlarkworthy/tarot-backend"
                             },
                             {
                                 "type": "text",
@@ -144,7 +144,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https:\/\/webcode.run\/observablehq.com\/@tomlarkworthy\/tarot-backend;api"
+                                "url": "https://webcode.run/observablehq.com/@tomlarkworthy/tarot-backend;api"
                             },
                             {
                                 "type": "text",
@@ -152,7 +152,7 @@
                             },
                             {
                                 "type": "link",
-                                "url": "https:\/\/medium.com\/@tom-larkworthy\/gpt-3-knows-tarot-385d935662a3"
+                                "url": "https://medium.com/@tom-larkworthy/gpt-3-knows-tarot-385d935662a3"
                             },
                             {
                                 "type": "text",
@@ -170,7 +170,7 @@
         "root": {
             "client_msg_id": "618c9d70-9261-424a-9d18-7e7e664cb208",
             "type": "message",
-            "text": "So the AI tarot reading app is done: <https:\/\/thetarot.online\/index.html>\nIt has been programmed entirely within Observable. Production traffic is routed through the developers notebook if you have it open, so you can observe the system live. I exploit observables dataflow so each step of the processing pipeline is cached, so you can see exactly where a problem occurred, and thanks to hot code reload, you can fix a bug and have the pipeline continue without rerunning prior steps allowing easy iterative programming workflows. Of course, because Observable notebooks are executing Javascript, you can attach a debugger too (even programmatically)\nOne click forkable, MIT licensed.\n\nThis is what I think the future of software development should look like. But I am struggling to communicate this well. The idea is to make cloud programming feel local, to exclusively test in prod, because when you are hitting third party APIs its a waste of effort mocking a staging environment, or a local environment. I want to remove the thick layers of indirection in the development process that no longer make sense. Forget git, forget toolchains, just straight to prod using modern Javascript, debugged with the authoritative debuggers built into browsers.",
+            "text": "So the AI tarot reading app is done: <https://thetarot.online/index.html>\nIt has been programmed entirely within Observable. Production traffic is routed through the developers notebook if you have it open, so you can observe the system live. I exploit observables dataflow so each step of the processing pipeline is cached, so you can see exactly where a problem occurred, and thanks to hot code reload, you can fix a bug and have the pipeline continue without rerunning prior steps allowing easy iterative programming workflows. Of course, because Observable notebooks are executing Javascript, you can attach a debugger too (even programmatically)\nOne click forkable, MIT licensed.\n\nThis is what I think the future of software development should look like. But I am struggling to communicate this well. The idea is to make cloud programming feel local, to exclusively test in prod, because when you are hitting third party APIs its a waste of effort mocking a staging environment, or a local environment. I want to remove the thick layers of indirection in the development process that no longer make sense. Forget git, forget toolchains, just straight to prod using modern Javascript, debugged with the authoritative debuggers built into browsers.",
             "user": "U02E4DAQGSZ",
             "ts": "1647859090.612199",
             "team": "T5TCAFTA9",
@@ -180,17 +180,17 @@
             },
             "attachments": [
                 {
-                    "from_url": "https:\/\/thetarot.online\/index.html",
-                    "image_url": "https:\/\/storage.googleapis.com\/larkworthy-dfb11.appspot.com\/%40tomlarkworthy\/tarot-backend\/images\/-MyWC6L4ZE1HtVWM1SRc",
+                    "from_url": "https://thetarot.online/index.html",
+                    "image_url": "https://storage.googleapis.com/larkworthy-dfb11.appspot.com/%40tomlarkworthy/tarot-backend/images/-MyWC6L4ZE1HtVWM1SRc",
                     "image_width": 492,
                     "image_height": 250,
                     "image_bytes": 283204,
                     "id": 1,
-                    "original_url": "https:\/\/thetarot.online\/index.html",
+                    "original_url": "https://thetarot.online/index.html",
                     "fallback": "Tarot Reader",
                     "text": "Ask a question for the cards",
                     "title": "Tarot Reader",
-                    "title_link": "https:\/\/thetarot.online\/index.html",
+                    "title_link": "https://thetarot.online/index.html",
                     "service_name": "thetarot.online"
                 }
             ],
@@ -208,7 +208,7 @@
                                 },
                                 {
                                     "type": "link",
-                                    "url": "https:\/\/thetarot.online\/index.html"
+                                    "url": "https://thetarot.online/index.html"
                                 },
                                 {
                                     "type": "text",
@@ -230,64 +230,6 @@
                 "U01FAFPDFL4",
                 "UCUSW7WVD"
             ],
-            "replies": [
-                {
-                    "user": "U01HKV85Y1J",
-                    "ts": "1647871366.750349"
-                },
-                {
-                    "user": "U02E4DAQGSZ",
-                    "ts": "1647879356.372639"
-                },
-                {
-                    "user": "U01HKV85Y1J",
-                    "ts": "1647881232.049159"
-                },
-                {
-                    "user": "U02E4DAQGSZ",
-                    "ts": "1647893747.370529"
-                },
-                {
-                    "user": "UFPPABQ7P",
-                    "ts": "1647916342.174759"
-                },
-                {
-                    "user": "U01HKV85Y1J",
-                    "ts": "1647922364.069599"
-                },
-                {
-                    "user": "U02E4DAQGSZ",
-                    "ts": "1647941729.403759"
-                },
-                {
-                    "user": "U02E4DAQGSZ",
-                    "ts": "1648360894.525169"
-                },
-                {
-                    "user": "U01FAFPDFL4",
-                    "ts": "1648364667.146339"
-                },
-                {
-                    "user": "U02E4DAQGSZ",
-                    "ts": "1648371685.506629"
-                },
-                {
-                    "user": "UCUSW7WVD",
-                    "ts": "1648875252.597709"
-                },
-                {
-                    "user": "UCUSW7WVD",
-                    "ts": "1648875394.776299"
-                },
-                {
-                    "user": "U02E4DAQGSZ",
-                    "ts": "1648914344.453699"
-                },
-                {
-                    "user": "UCUSW7WVD",
-                    "ts": "1648917094.583549"
-                }
-            ],
             "is_locked": false,
             "subscribed": false
         },
@@ -300,113 +242,5 @@
                 "count": 1
             }
         ]
-    },
-    {
-        "client_msg_id": "b6e459cd-c0ca-4b35-a545-b642ad86c393",
-        "type": "message",
-        "text": "That was a fun read. I look forward to hearing more when you next run into a problem Sentry can't handle :slightly_smiling_face:\n\nThis reminded me of something I wrote a couple of years ago (2019-11-19; <#CLYCGTCPL|of-end-user-programming>; deep in our Slack archives by now):\n\n&gt; After banging my head on a problem at work all day, the answer came to me in a flash of insight on the way home. I spent all day repeatedly running experiments on my program, inserting complex sequences of breakpoints, emitting large traces, gradually refining and automating a whole complex workflow so it could be more easily repeated after making changes to my program. I had more ideas for things to try later in the night, but the insight short-circuited them.\n&gt; \n&gt; One voice in my head (the one often active when interacting in this forum) whispers that if only I had better tools the process could have been shortened.\n&gt; \n&gt; Another voice in my head whispers that I'm stupid for taking so long to figure out something some putative body else would find obvious. (\"If deleting no-op nodes in a dependency graph causes nodes to fire before they're ready, that means some edges are being spuriously cut.\") Or maybe I'm rusty, because I don't work anymore with graphs 12 years after finishing grad school.\n&gt; \n&gt; But the dominant voice in my head is just elation, the flush of insight, of having tamed a small portion of the wilderness around me and inside my own head. And it wouldn't have happened without struggling for a while with the wilderness, no matter what tools I had. A big portion of today was spent trying to visualize graphs and finding them too large for my tools to handle. So I had to resort to progressively more and more precise tools. Text-mode scalpels over graphical assistants. And that process of going beyond what my regular tools can handle is a key characteristic of going out into the wilderness. When tools fail, the only thing left is to try something, see what happens, and _think_. No improvement in tools can substitute for the _experience_ of having gone beyond your tools, over and over again.\n&gt; \n&gt; There's a famous saying that insights come to the prepared mind. It's easy to read and watch Bret Victor and imagine that we are in the insight delivery business. But we're really in the mind preparing business.\nBut this isn't quite right either, because we're really never without tools. What we have is levels on levels of tools that tend to accrete upwards, with tools at lower levels getting used less and less frequently until they're forgotten and lost.\n\nPeriodically ripping out swathes of tools and trying to start afresh is a great thing to try. God knows I've done my share of that :slightly_smiling_face: Even though you can't ever really leave the midden[1], it's clarifying to take stock of your tools and identify dead weight. And if what seemed like dead weight turns out to have use, well that's good to know as well.\n\n[1] <http:\/\/akkartik.name\/post\/deepness>",
-        "user": "UCUSW7WVD",
-        "ts": "1648917094.583549",
-        "team": "T5TCAFTA9",
-        "user_team": "T5TCAFTA9",
-        "source_team": "T5TCAFTA9",
-        "user_profile": {
-            "avatar_hash": "6e649a383cf8",
-            "image_72": "https:\/\/avatars.slack-edge.com\/2019-07-14\/687915485201_6e649a383cf8f9e366e3_72.png",
-            "first_name": "Kartik",
-            "real_name": "Kartik Agaram",
-            "display_name": "",
-            "team": "T5TCAFTA9",
-            "name": "ak",
-            "is_restricted": false,
-            "is_ultra_restricted": false
-        },
-        "blocks": [
-            {
-                "type": "rich_text",
-                "block_id": "F+1jd",
-                "elements": [
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "That was a fun read. I look forward to hearing more when you next run into a problem Sentry can't handle "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": "\n\nThis reminded me of something I wrote a couple of years ago (2019-11-19; "
-                            },
-                            {
-                                "type": "channel",
-                                "channel_id": "CLYCGTCPL"
-                            },
-                            {
-                                "type": "text",
-                                "text": "; deep in our Slack archives by now):\n\n"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_quote",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "After banging my head on a problem at work all day, the answer came to me in a flash of insight on the way home. I spent all day repeatedly running experiments on my program, inserting complex sequences of breakpoints, emitting large traces, gradually refining and automating a whole complex workflow so it could be more easily repeated after making changes to my program. I had more ideas for things to try later in the night, but the insight short-circuited them.\n\nOne voice in my head (the one often active when interacting in this forum) whispers that if only I had better tools the process could have been shortened.\n\nAnother voice in my head whispers that I'm stupid for taking so long to figure out something some putative body else would find obvious. (\"If deleting no-op nodes in a dependency graph causes nodes to fire before they're ready, that means some edges are being spuriously cut.\") Or maybe I'm rusty, because I don't work anymore with graphs 12 years after finishing grad school.\n\nBut the dominant voice in my head is just elation, the flush of insight, of having tamed a small portion of the wilderness around me and inside my own head. And it wouldn't have happened without struggling for a while with the wilderness, no matter what tools I had. A big portion of today was spent trying to visualize graphs and finding them too large for my tools to handle. So I had to resort to progressively more and more precise tools. Text-mode scalpels over graphical assistants. And that process of going beyond what my regular tools can handle is a key characteristic of going out into the wilderness. When tools fail, the only thing left is to try something, see what happens, and "
-                            },
-                            {
-                                "type": "text",
-                                "text": "think",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": ". No improvement in tools can substitute for the "
-                            },
-                            {
-                                "type": "text",
-                                "text": "experience",
-                                "style": {
-                                    "italic": true
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": " of having gone beyond your tools, over and over again.\n\nThere's a famous saying that insights come to the prepared mind. It's easy to read and watch Bret Victor and imagine that we are in the insight delivery business. But we're really in the mind preparing business."
-                            }
-                        ]
-                    },
-                    {
-                        "type": "rich_text_section",
-                        "elements": [
-                            {
-                                "type": "text",
-                                "text": "\nBut this isn't quite right either, because we're really never without tools. What we have is levels on levels of tools that tend to accrete upwards, with tools at lower levels getting used less and less frequently until they're forgotten and lost.\n\nPeriodically ripping out swathes of tools and trying to start afresh is a great thing to try. God knows I've done my share of that "
-                            },
-                            {
-                                "type": "emoji",
-                                "name": "slightly_smiling_face"
-                            },
-                            {
-                                "type": "text",
-                                "text": " Even though you can't ever really leave the midden[1], it's clarifying to take stock of your tools and identify dead weight. And if what seemed like dead weight turns out to have use, well that's good to know as well.\n\n[1] "
-                            },
-                            {
-                                "type": "link",
-                                "url": "http:\/\/akkartik.name\/post\/deepness"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "thread_ts": "1647859090.612199",
-        "parent_user_id": "U02E4DAQGSZ"
     }
 ]
