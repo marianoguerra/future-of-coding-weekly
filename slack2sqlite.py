@@ -36,7 +36,6 @@ INSERT_MSG_QUERY = f"INSERT INTO message ({', '.join(FIELD_NAMES)}) VALUES ({', 
 INSERT_REPLY_QUERY = "INSERT INTO reply (user, ts, msg_ts) VALUES (?, ?, ?)"
 INSERT_REACTION_QUERY = "INSERT INTO reaction (user, name, msg_ts) VALUES (?, ?, ?)"
 INSERT_BLOCK_QUERY = "INSERT INTO msg_block (type, block_id, raw, msg_ts) VALUES (?, ?, ?, ?)"
-INSERT_BLOCK_ELEMENT_QUERY = "INSERT INTO block_element (type, text, raw, block_id) VALUES (?, ?, ?, ?)"
 
 def setup_db(db_path):
     con = sqlite3.connect(db_path)
@@ -47,7 +46,6 @@ def setup_db(db_path):
     cur.execute('''CREATE TABLE IF NOT EXISTS reply (user text, ts text, msg_ts text)''')
     cur.execute('''CREATE TABLE IF NOT EXISTS reaction (user text, name text, msg_ts text)''')
     cur.execute('''CREATE TABLE IF NOT EXISTS msg_block (type text, block_id text, raw text, msg_ts text)''')
-    cur.execute('''CREATE TABLE IF NOT EXISTS block_element (type text, text text, raw text, block_id text)''')
 
     con.commit()
 
@@ -59,6 +57,7 @@ def insert_msg(cur, msg):
               else msg.get('user_profile', {}).get('name', '?')
               for (key, def_val)
               in FIELD_DEFAULTS.items()]
+
     cur.execute(INSERT_MSG_QUERY, values)
 
     msg_ts = msg.get('ts', '?')
@@ -74,8 +73,6 @@ def insert_msg(cur, msg):
         elements = block.get('elements', [])
         block_id = block.get('block_id', '?')
         cur.execute(INSERT_BLOCK_QUERY, [block.get('type', '?'), block_id, json.dumps(elements), msg_ts])
-        for element in elements:
-            cur.execute(INSERT_BLOCK_ELEMENT_QUERY, [element.get('type', '?'), element.get('text', '?'), json.dumps(element), block_id])
 
 
 if __name__ == '__main__':

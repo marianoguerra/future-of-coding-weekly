@@ -8,8 +8,9 @@ mkShell {
     gnumake
     python39
     python39Packages.pip
-    pkgs.nodejs-14_x
-    pkgs.git
+    nodejs-14_x
+    git
+    sqlite
   ];
   shellHook = ''
     export LC_ALL=en_US.UTF-8
