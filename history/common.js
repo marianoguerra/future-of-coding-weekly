@@ -164,6 +164,7 @@ const AUTHORS = {
   'Orion Reed': '[Orion Reed](https://twitter.com/OrionReedOne)',
   'Christopher Shank': '[Christopher Shank](https://mobile.twitter.com/chrisshank23)',
   'Jason Morris': '[Jason Morris](https://twitter.com/RoundTableLaw)',
+  'Danny O’Brien': '[Danny O’Brien](https://www.spesh.com/danny)',
   //'': '[]()',
 };
 
