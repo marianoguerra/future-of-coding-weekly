@@ -58,7 +58,7 @@ function downloadAs(exportObj, exportName, contentType) {
 }
 
 function mdLink(label, url) {
-  return `[${label}](${url})`;
+  return `[${humanizeUrl(label)}](${url})`;
 }
 
 function findFirstLink(msg) {
@@ -446,7 +446,7 @@ function elementToMd(element, args) {
     case 'rich_text_preformatted':
       return '\n```\n' + mapElements(element, nodeToMd, args, '') + '\n```\n\n';
     case 'rich_text_quote':
-      return '\n> ' + mapElements(element, nodeToMd, args, '> ');
+      return '\n> ' + mapElements(element, nodeToMd, args, '');
     case 'rich_text_section':
       return mapElements(element, nodeToMd, args, '');
     default:
@@ -468,19 +468,43 @@ function mdUser(id, {users}) {
   return AUTHORS[name] || `**@${name}**`;
 }
 
+function humanizeUrl(url) {
+  if (url.startsWith('http')) {
+    return url
+      .replace(/(^https:\/\/|^http:\/\/)/, '')
+      .replace(/^www\./, '')
+      .replace(/\/$/, '');
+  } else {
+    return url;
+  }
+}
+
 const SLACK_MSG_LINK_REGEX =
     /https:\/\/futureofcoding\.slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)/g,
   SLACK_MSG_REPLY_REGEX =
-    /https:\/\/futureofcoding\.slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)\?thread_ts=([0-9.]+)&cid=([A-Z0-9]+)/g;
+    /https:\/\/futureofcoding\.slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)\?thread_ts=([0-9.]+)&cid=([A-Z0-9]+)/g,
+  INLINE_MARKUP = {code: '`', italic: '_', strike: '~', bold: '*'};
 function nodeToMd(node, args) {
   switch (node.type) {
     case 'text': {
       const {style} = node;
-      if (style && style.code) {
-        return '`' + node.text + '`';
-      } else {
-        return node.text.replace(/\n/g, '\n\n');
+      let s = node.text,
+        hasStyle = false;
+      for (let k in style) {
+        const formatStr = INLINE_MARKUP[k];
+        if (formatStr) {
+          s = formatStr + s.trim() + formatStr;
+          hasStyle = true;
+        } else {
+          console.warn('unknown format', k, 'in node');
+        }
       }
+
+      if (hasStyle) {
+        s = ' ' + s + ' ';
+      }
+
+      return s.replace(/\n/g, '\n\n');
     }
     case 'link': {
       const url = node.url || '',
