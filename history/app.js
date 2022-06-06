@@ -285,6 +285,7 @@ function main() {
             `${month}/${week}/${this.channel}.html`,
             title
           );
+          this.exportAsHTML();
         },
         exportAsNewsletter: function (linkSuffix, title) {
           const linkPrefix = `https://marianoguerra.github.io/future-of-coding-weekly/history/weekly/${new Date().getFullYear()}/${linkSuffix}`,
