@@ -1,0 +1,187 @@
+[
+    {
+        "client_msg_id": "30867368-bdb1-4066-946b-0e21bb906345",
+        "type": "message",
+        "text": "I've updated webcode so that owners of endpoints can configure \"public livecoding\", which allows any logged in user to grab the public traffic to that endpoint (well, each logged in user gets their own fingerprinted endpoint, so traffix is not mixed between users). So finally I can write a public demo of livecoding. This article is maybe too long but its how to implement a webserver including: serving and responding to web forms, serving a dynamic image (e.g. dashboard), and streamed responses.\n\nwebcode offers a fairly low level HTTP interface so achieving most of those things requires a fair amount of HTTP knowledge, hence I thought I would just write it up.\n\n<https://observablehq.com/@endpointservices/livecode>",
+        "user": "U02E4DAQGSZ",
+        "ts": "1656333620.475639",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "p72ze",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've updated webcode so that owners of endpoints can configure \"public livecoding\", which allows any logged in user to grab the public traffic to that endpoint (well, each logged in user gets their own fingerprinted endpoint, so traffix is not mixed between users). So finally I can write a public demo of livecoding. This article is maybe too long but its how to implement a webserver including: serving and responding to web forms, serving a dynamic image (e.g. dashboard), and streamed responses.\n\nwebcode offers a fairly low level HTTP interface so achieving most of those things requires a fair amount of HTTP knowledge, hence I thought I would just write it up.\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://observablehq.com/@endpointservices/livecode"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1656333620.475639",
+        "reply_count": 4,
+        "reply_users_count": 3,
+        "latest_reply": "1656493980.509039",
+        "reply_users": [
+            "UC2A2ARPT",
+            "U02E4DAQGSZ",
+            "U03LMRE6MQE"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "8d6c6b7d-fe6e-429d-91d5-b478e6c69d29",
+        "type": "message",
+        "text": "[Moved from top level. Original post by <@U03LMRE6MQE>]\n\nThis is cool. Certainly, the first time i've seen anyone else make the client a server. I made a proof of concept of a similar thing a while back. <https://spotless.run/>\nThough I had no idea of making it a business, and the notebook angle is cool.",
+        "user": "UC2A2ARPT",
+        "ts": "1656346356.143639",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+Qy/u",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "[Moved from top level. Original post by "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U03LMRE6MQE"
+                            },
+                            {
+                                "type": "text",
+                                "text": "]\n\nThis is cool. Certainly, the first time i've seen anyone else make the client a server. I made a proof of concept of a similar thing a while back. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://spotless.run/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nThough I had no idea of making it a business, and the notebook angle is cool."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1656333620.475639",
+        "parent_user_id": "U02E4DAQGSZ"
+    },
+    {
+        "client_msg_id": "f5e93f44-03c2-4a14-a1d0-d8bdd17bdaae",
+        "type": "message",
+        "text": "Thanks <@U03LMRE6MQE>. spotless is very interesting. How did you do the custom domain per function thing? I really need to do that too.\nI've had the idea for dynamic functions in my head for many years (since working on Firebase Functions and hearing every customer complain about deploy times), but it wasn't until I met Observable that there was enough external infrastructure around to make doing it worthwhile. You need a good editor for code content that is URL addressable... though these days there are other options like <http://vscode.dev|vscode.dev> so I am wondering if I should branch out and make it a library.",
+        "user": "U02E4DAQGSZ",
+        "ts": "1656482191.122529",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LAF",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U03LMRE6MQE"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". spotless is very interesting. How did you do the custom domain per function thing? I really need to do that too.\nI've had the idea for dynamic functions in my head for many years (since working on Firebase Functions and hearing every customer complain about deploy times), but it wasn't until I met Observable that there was enough external infrastructure around to make doing it worthwhile. You need a good editor for code content that is URL addressable... though these days there are other options like "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://vscode.dev",
+                                "text": "vscode.dev"
+                            },
+                            {
+                                "type": "text",
+                                "text": " so I am wondering if I should branch out and make it a library."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1656333620.475639",
+        "parent_user_id": "U02E4DAQGSZ"
+    },
+    {
+        "client_msg_id": "fc41a0c5-a0c4-4127-8d97-bc4c067f073b",
+        "type": "message",
+        "text": "Hey. I just use a wildcard domain and then make the domain part of the routing logic here <https://github.com/midas-framework/spotless/blob/master/proxy/lib/spotless/router.ex#L53>",
+        "user": "U03LMRE6MQE",
+        "ts": "1656493107.400289",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SgczD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hey. I just use a wildcard domain and then make the domain part of the routing logic here "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/midas-framework/spotless/blob/master/proxy/lib/spotless/router.ex#L53"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1656333620.475639",
+        "parent_user_id": "U02E4DAQGSZ"
+    },
+    {
+        "client_msg_id": "b9a93af9-0855-4627-9f73-ee1e18ae2654",
+        "type": "message",
+        "text": "Which wildcard hosting provider do you get? Or you running you own vm with letsencrypt",
+        "user": "U02E4DAQGSZ",
+        "ts": "1656493980.509039",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PNv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Which wildcard hosting provider do you get? Or you running you own vm with letsencrypt"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1656333620.475639",
+        "parent_user_id": "U02E4DAQGSZ"
+    }
+]
