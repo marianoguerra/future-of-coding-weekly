@@ -69,7 +69,23 @@ function onCommentsFinished(_contributors, authors) {
     ce('hr', {style: 'border:0;border-top:1px solid #cccccc'})
   );
 
-  console.log(authorsSorted.map((name) => '@' + name).join(' '));
+  window.setTimeout(() => {
+    const twitterHandles = authorsSorted.map((name) => '@' + name).join(' '),
+      textArea = document.getElementById('output-help'),
+      textAreaMd = document.getElementById('output-md');
+    console.log(twitterHandles);
+
+    textArea.innerHTML = textArea.innerHTML.replace('%TWITTER_HANDLES%', twitterHandles).replace(/%TOPICS%/g, textAreaMd.innerHTML.trim().split('\n')[0]);
+  }, 500);
+
+  outputNode.appendChild(
+    ce(
+      'p',
+      {},
+      'By ',
+      link('https://twitter.com/warianoguerra', '@warianoguerra')
+    )
+  );
 
   outputNode.appendChild(
     ce(
