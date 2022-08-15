@@ -1,0 +1,777 @@
+[
+    {
+        "client_msg_id": "cfda005b-d432-4901-8f54-2ea95b553e8f",
+        "type": "message",
+        "text": "Hey all! I\u2019m looking for a bit of help solving (what I think is) a really simple problem, but I just can\u2019t seem to find someone - or the right article - to help me figure it out. It\u2019s a simple graphics vector problem, and my inexperience in the space is doing me no favors in abstracting the problem to do the right maths. Does anyone here happen to know a good place to ask technical questions in that space, or, would anyone happen to know of friendly soul(s) with time to walk through the issue? StackOverflow and the dregs from days of search engine digging is chock full of answers that revolve around but don\u2019t tackle exactly what I need, and the one solution I _have_ found doesn\u2019t seem to apply to my current state of code.\n\nI consider help like this of the highest form of validation and \u201craising up\u201d, and would happily compensate said helper or producer of article in any reasonably requested way :heart:",
+        "user": "U03E4LY27FS",
+        "ts": "1660513026.932579",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03E4LY27FS",
+            "ts": "1660513046.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XkpMu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hey all! I\u2019m looking for a bit of help solving (what I think is) a really simple problem, but I just can\u2019t seem to find someone - or the right article - to help me figure it out. It\u2019s a simple graphics vector problem, and my inexperience in the space is doing me no favors in abstracting the problem to do the right maths. Does anyone here happen to know a good place to ask technical questions in that space, or, would anyone happen to know of friendly soul(s) with time to walk through the issue? StackOverflow and the dregs from days of search engine digging is chock full of answers that revolve around but don\u2019t tackle exactly what I need, and the one solution I _have_ found doesn\u2019t seem to apply to my current state of code.\n\nI consider help like this of the highest form of validation and \u201craising up\u201d, and would happily compensate said helper or producer of article in any reasonably requested way "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "heart",
+                                "unicode": "2764-fe0f"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "reply_count": 16,
+        "reply_users_count": 5,
+        "latest_reply": "1660546331.940939",
+        "reply_users": [
+            "UFBQNBYER",
+            "U03E4LY27FS",
+            "UFPRPSA4S",
+            "UCUSW7WVD",
+            "U02E4DAQGSZ"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "A69E0F37-573D-4181-925E-FF3AFC175A33",
+        "type": "message",
+        "text": "Here is probably quite good. There are mathematicians here, and plenty of graphics experts\u2026. Is it easy to explain?",
+        "user": "UFBQNBYER",
+        "ts": "1660514093.696449",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tgBcO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Here is probably quite good. There are mathematicians here, and plenty of graphics experts\u2026. Is it easy to explain?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS",
+        "reactions": [
+            {
+                "name": "star2",
+                "users": [
+                    "U03E4LY27FS"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0e6eb5de-a5ae-4d25-8458-c260dad288b8",
+        "type": "message",
+        "text": "I think it is, yeah. It really seems so darn trivial, but I just\u2026 can\u2019t get it! Let me type it out, and if it\u2019s helpful, I can upload some of the sketches I have trying to break it down. So, here\u2019s the gist:\n\n`Keywords: Texture / glyph atlas, macOS, Swift, Metal, iOS, vector space transforms`\n\nGiven: I\u2019ve got a set of \u201cvertices\u201d (x, y) in normalized space, from (-1, 1) on the domain and range. Just a simple cartesian space. I\u2019ve also got a set of \u201ctexture coordinates\u201d (u, v), which instead map to (0, 1) on the domain and range, with (0, 1) on the range an x-axis flip. This is apparently really common, and it\u2019s the way the Metal shading language defines its coordinate spaces.\n\nI also know how to convert from vertex-space to uv-space:\n\n```u = (x + 1) / 2\nv = -(y - 1) / 2```\nAlso given: I have a texture in UV space where I want to define arbitrary rectangles. These rectangles are glyph-stamps in the [(0,1), (0,1)] bounding box range. These are easily computed given the full size of the texture I am creating rectangles from.\n\nThe problem: I have a single set of vertices that define a quad. Top left / right, bottom left / right. These are always centered around the origin. Meaning, I can have a square that fills the vector space with these coordinates:\n```(-1,  1)\n(-1, -1)\n( 1,  1)\n( 1, -1)```\nAssume we will \u201cresize\u201d those in some way by symmetrically bringing in the sides as needed - again, all around the origin.\n\nGiven that I have those precomputed coordinates above which map to UV space, how do I take those arbitrary vertices in vertex space and map them to the \u2018rectangular sections\u2019 of uv-space?",
+        "user": "U03E4LY27FS",
+        "ts": "1660515004.118389",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03E4LY27FS",
+            "ts": "1660515035.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "VLrHF",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think it is, yeah. It really seems so darn trivial, but I just\u2026 can\u2019t get it! Let me type it out, and if it\u2019s helpful, I can upload some of the sketches I have trying to break it down. So, here\u2019s the gist:\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Keywords: Texture / glyph atlas, macOS, Swift, Metal, iOS, vector space transforms",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nGiven: I\u2019ve got a set of \u201cvertices\u201d (x, y) in normalized space, from (-1, 1) on the domain and range. Just a simple cartesian space. I\u2019ve also got a set of \u201ctexture coordinates\u201d (u, v), which instead map to (0, 1) on the domain and range, with (0, 1) on the range an x-axis flip. This is apparently really common, and it\u2019s the way the Metal shading language defines its coordinate spaces.\n\nI also know how to convert from vertex-space to uv-space:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "u = (x + 1) / 2\nv = -(y - 1) / 2"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAlso given: I have a texture in UV space where I want to define arbitrary rectangles. These rectangles are glyph-stamps in the [(0,1), (0,1)] bounding box range. These are easily computed given the full size of the texture I am creating rectangles from.\n\nThe problem: I have a single set of vertices that define a quad. Top left / right, bottom left / right. These are always centered around the origin. Meaning, I can have a square that fills the vector space with these coordinates:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(-1,  1)\n(-1, -1)\n( 1,  1)\n( 1, -1)"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Assume we will \u201cresize\u201d those in some way by symmetrically bringing in the sides as needed - again, all around the origin.\n\nGiven that I have those precomputed coordinates above which map to UV space, how do I take those arbitrary vertices in vertex space and map them to the \u2018rectangular sections\u2019 of uv-space?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    },
+    {
+        "client_msg_id": "8185ED2F-BC52-4FF0-B78A-9D70F11182B6",
+        "type": "message",
+        "text": "Not sure I followed that completely. Surely all the mappings from x,y space to u,v space will be given by your formulae or their inverses. Ie x=2u-1;y=-2v+1. \nBit unclear about your use of the words \u2018domain\u2019 and \u2018range\u2019 in this context. ",
+        "user": "UFBQNBYER",
+        "ts": "1660516704.278099",
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UFBQNBYER",
+            "ts": "1660516786.000000"
+        },
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "a=C",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Not sure I followed that completely. Surely all the mappings from x,y space to u,v space will be given by your formulae or their inverses. Ie x=2u-1;y=-2v+1. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Bit unclear about your use of the words \u2018domain\u2019 and \u2018range\u2019 in this context. "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    },
+    {
+        "type": "message",
+        "text": "You asking the question in that way is helpful. Yeah, the inverse does give me the _expected_ vertex for a given uv coordinate, but the issue is that _inverse_ should always map to the same vertices.\n\nThis is a terrible sketch, but let me shame myself anyway:",
+        "files": [
+            {
+                "id": "F03TLMN4PEF",
+                "created": 1660516926,
+                "timestamp": 1660516926,
+                "name": "Untitled 5.jpg",
+                "title": "Untitled 5.jpg",
+                "mimetype": "image/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "U03E4LY27FS",
+                "editable": false,
+                "size": 2907029,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F03TLMN4PEF/untitled_5.jpg",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F03TLMN4PEF/download/untitled_5.jpg",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_64.jpg",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_80.jpg",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_360.jpg",
+                "thumb_360_w": 360,
+                "thumb_360_h": 289,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_480.jpg",
+                "thumb_480_w": 480,
+                "thumb_480_h": 386,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_160.jpg",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_720.jpg",
+                "thumb_720_w": 720,
+                "thumb_720_h": 578,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_800.jpg",
+                "thumb_800_w": 800,
+                "thumb_800_h": 643,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_960.jpg",
+                "thumb_960_w": 960,
+                "thumb_960_h": 771,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F03TLMN4PEF-bafe6df709/untitled_5_1024.jpg",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 823,
+                "original_w": 5981,
+                "original_h": 4805,
+                "thumb_tiny": "AwAmADCjRRRTAKKKO9ABRRRQAUUUUAFFFFAgooooAKKKKBhRRRQAUUUUAf/Z",
+                "permalink": "https://futureofcoding.slack.com/files/U03E4LY27FS/F03TLMN4PEF/untitled_5.jpg",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F03TLMN4PEF-a20fcab401",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": false,
+        "user": "U03E4LY27FS",
+        "display_as_bot": false,
+        "ts": "1660516934.999629",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Olc",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You asking the question in that way is helpful. Yeah, the inverse does give me the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "expected",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " vertex for a given uv coordinate, but the issue is that "
+                            },
+                            {
+                                "type": "text",
+                                "text": "inverse",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " should always map to the same vertices.\n\nThis is a terrible sketch, but let me shame myself anyway:"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "client_msg_id": "f0c89161-40d4-4f7e-814b-54e3097b349e",
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    },
+    {
+        "client_msg_id": "0c357920-dc18-40c5-81c9-5f60a855e84d",
+        "type": "message",
+        "text": "Given the yellow vertices, I need to \u201ctransform\u201d them to the matching UVs such that it \u2018fills their space\u2019, and the rasterizer can interpolate between the values.",
+        "user": "U03E4LY27FS",
+        "ts": "1660516987.747189",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mCO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Given the yellow vertices, I need to \u201ctransform\u201d them to the matching UVs such that it \u2018fills their space\u2019, and the rasterizer can interpolate between the values."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    },
+    {
+        "client_msg_id": "2C1D78CB-3E37-4C61-9418-D62E1717A93C",
+        "type": "message",
+        "text": "No. Sorry you've lost me. Now I'm unclear why points on your diagram are marked as apparent products of u and v, and why the other points have only v on them. \n\nYou said earlier there was a square centred on the coordinate centre doing something. If this is some transform of one of the coordinate systems about the centre point I'd expect that scaling factor to appear in front of the u and v (or its reciprocal) in the relevant formulae. \n\nOtherwise I'm baffled, and since it\u2019s gone midnight here I'm hoping to see a lovely solution to your problem when someone picks up the story from another time zone while I'm asleep\u2026 :blush:",
+        "user": "UFBQNBYER",
+        "ts": "1660518909.858349",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RHP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "No. Sorry you've lost me. Now I'm unclear why points on your diagram are marked as apparent products of u and v, and why the other points have only v on them. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "You said earlier there was a square centred on the coordinate centre doing something. If this is some transform of one of the coordinate systems about the centre point I'd expect that scaling factor to appear in front of the u and v (or its reciprocal) in the relevant formulae. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nOtherwise I'm baffled, and since it\u2019s gone midnight here I'm hoping to see a lovely solution to your problem when someone picks up the story from another time zone while I'm asleep\u2026 "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "blush",
+                                "unicode": "1f60a"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U03E4LY27FS"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "53e4123b-ab86-4168-9aea-08aab94857a9",
+        "type": "message",
+        "text": "You\u2019re wonderful for your thinking and time anyway, and no worries friend! It\u2019s rough when I can\u2019t even _explain_ the problem well, lol. That probably means if I dig in the question better, I\u2019ll get closer to the answer implicitly\u2026",
+        "user": "U03E4LY27FS",
+        "ts": "1660518976.103929",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vrRX",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You\u2019re wonderful for your thinking and time anyway, and no worries friend! It\u2019s rough when I can\u2019t even "
+                            },
+                            {
+                                "type": "text",
+                                "text": "explain",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " the problem well, lol. That probably means if I dig in the question better, I\u2019ll get closer to the answer implicitly\u2026"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    },
+    {
+        "client_msg_id": "60e6b064-df86-478b-96b0-1a6019f530bf",
+        "type": "message",
+        "text": "(I think present-company. is probably the channel for this. From the member handbook \"If you\u2019d like help with your homework, this is the place to ask.\" Not that this is necessarily homework. But anyway.)\nIs the question how to define a transformation that sends four coordinates v1,v2,v3,v4 to the four coordinates (0.25,0.25), (0.25, 0.75), (0.75, 0.25), (0.75, 0.75)?",
+        "user": "UFPRPSA4S",
+        "ts": "1660522015.198799",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "==6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(I think present-company. is probably the channel for this. From the member handbook \"If you\u2019d like help with your homework, this is the place to ask.\" Not that this is necessarily homework. But anyway.)\nIs the question how to define a transformation that sends four coordinates v1,v2,v3,v4 to the four coordinates (0.25,0.25), (0.25, 0.75), (0.75, 0.25), (0.75, 0.75)?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS",
+        "reactions": [
+            {
+                "name": "amiga-tick",
+                "users": [
+                    "U03E4LY27FS"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2b8361d4-43b9-4937-9ac1-02886991aea3",
+        "type": "message",
+        "text": "I\u2019ll happily remove this and pop it over there. I didn\u2019t realize that was a line in there - my apologies for the break.\n\nI think that\u2019s my question, yeah\u2026 The target coordinates will vary, but that\u2019s the idea. And the reason being that the same vertices (v1-4) will always pipe through the graphics pipeline, but the vertices for each constant that defines the instance being drawn will be unique. I want to take an input vertex which is at one of those coordinates, and say, \u201cThis coordinate is at ___ u,v position within the bounds given by the constants that define this instance)\u201c.\n\nI think I haven\u2019t define the problem correctly, because the more I write it out, the more I think something is missing.. I\u2019m just not sure.",
+        "user": "U03E4LY27FS",
+        "ts": "1660522595.292599",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uTi6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I\u2019ll happily remove this and pop it over there. I didn\u2019t realize that was a line in there - my apologies for the break.\n\nI think that\u2019s my question, yeah\u2026 The target coordinates will vary, but that\u2019s the idea. And the reason being that the same vertices (v1-4) will always pipe through the graphics pipeline, but the vertices for each constant that defines the instance being drawn will be unique. I want to take an input vertex which is at one of those coordinates, and say, \u201cThis coordinate is at ___ u,v position within the bounds given by the constants that define this instance)\u201c.\n\nI think I haven\u2019t define the problem correctly, because the more I write it out, the more I think something is missing.. I\u2019m just not sure."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    },
+    {
+        "client_msg_id": "c9f83c1b-9339-4e40-ac93-f40802fc47a0",
+        "type": "message",
+        "text": "I'll describe how you can map vectors v1...v4 to vectors w1...w4 assuming they label the edges of rectangles in the order top-left, bottom-left, top-right, bottom-right. The mapping can be expressed as the composite of three simpler maps:\n(1) Translate the original rectangle to the origin. This is achieved by the mapping sending an arbitrary vector x to x-v1.\n(2) Scale the resulting rectangle so it is the same size as the rectangle w1...w4. In the horizontal direction you have to scale by |w3-w1|/|v3-v1|. In the vertical direction it is |w2-w1|/|v2-v1|.\n(3) Translate the resulting rectangle from the origin to w1. This is the mapping sending an arbitrary vector x to x+w1. Composing these three maps will map  v1...v4 to w1...w4.\n\nI hope this helps. I don't know graphics programming, but if you have any other math questions, or need some more detail, I'm glad to help.",
+        "user": "UFPRPSA4S",
+        "ts": "1660528616.583249",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4t=zw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'll describe how you can map vectors v1...v4 to vectors w1...w4 assuming they label the edges of rectangles in the order top-left, bottom-left, top-right, bottom-right. The mapping can be expressed as the composite of three simpler maps:\n(1) Translate the original rectangle to the origin. This is achieved by the mapping sending an arbitrary vector x to x-v1.\n(2) Scale the resulting rectangle so it is the same size as the rectangle w1...w4. In the horizontal direction you have to scale by |w3-w1|/|v3-v1|. In the vertical direction it is |w2-w1|/|v2-v1|.\n(3) Translate the resulting rectangle from the origin to w1. This is the mapping sending an arbitrary vector x to x+w1. Composing these three maps will map  v1...v4 to w1...w4.\n\nI hope this helps. I don't know graphics programming, but if you have any other math questions, or need some more detail, I'm glad to help."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U03E4LY27FS",
+                    "UCUSW7WVD"
+                ],
+                "count": 2
+            },
+            {
+                "name": "star2",
+                "users": [
+                    "U03E4LY27FS"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d3ec6b3c-ef1e-4efb-b7d3-d225e9124fc2",
+        "type": "message",
+        "text": "This is quite helpful Robin, I\u2019m going to save this snippet because I\u2019m going to be scaling nodes soon.. and this is exactly the math I think I\u2019ll need. I sincerely appreciate it.",
+        "user": "U03E4LY27FS",
+        "ts": "1660529481.122759",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "whP8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is quite helpful Robin, I\u2019m going to save this snippet because I\u2019m going to be scaling nodes soon.. and this is exactly the math I think I\u2019ll need. I sincerely appreciate it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UFPRPSA4S"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6db75450-81d2-4f3b-b127-a6f0b07fd22d",
+        "type": "message",
+        "text": "I'm personally quite happy to see this thread in this channel. I'm happy to give long-time members the benefit of the doubt that they're working on some sort of FoC project rather than extrinsically motivated \"home work\". It's not like there's a lot of thinking together going on here anyway :smile:",
+        "user": "UCUSW7WVD",
+        "ts": "1660531484.766349",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8y6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm personally quite happy to see this thread in this channel. I'm happy to give long-time members the benefit of the doubt that they're working on some sort of FoC project rather than extrinsically motivated \"home work\". It's not like there's a lot of thinking together going on here anyway "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile",
+                                "unicode": "1f604"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS",
+        "reactions": [
+            {
+                "name": "sparkles",
+                "users": [
+                    "U03E4LY27FS"
+                ],
+                "count": 1
+            },
+            {
+                "name": "beer",
+                "users": [
+                    "U03E4LY27FS"
+                ],
+                "count": 1
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "UFPRPSA4S"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "622177ca-dc1a-4093-bc91-4b965a4ed000",
+        "type": "message",
+        "text": "I love to read it Kartik, haha. This is something absolutely plan to share with FoC - as soon as I have it working. I\u2019ve been making leaps all this week, and I\u2019ve been reaching out more now I\u2019m getting closer to a wrap up of this next step.",
+        "user": "U03E4LY27FS",
+        "ts": "1660531674.443749",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yR=",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I love to read it Kartik, haha. This is something absolutely plan to share with FoC - as soon as I have it working. I\u2019ve been making leaps all this week, and I\u2019ve been reaching out more now I\u2019m getting closer to a wrap up of this next step."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "11ad47fa-1c8e-42c6-9585-6557df1a14cf",
+        "type": "message",
+        "text": "u want a simple matrix that maps between the two vector spaces (which you can invert if you need to go the other way). A simple 2x2 matrix can;t do translations, which is what homogeneous coordinates solves. Instead of a point (x,y) you make them (x,y,1) and multiply by a 3x3 matrix which has 0s in certain elements. That extra 1 on the end is leverage by the transformation matrix to move the origin. See <https://web.cse.ohio-state.edu/~shen.94/681/Site/Slides_files/transformation_review.pdf>",
+        "user": "U02E4DAQGSZ",
+        "ts": "1660542338.682429",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NHgD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "u want a simple matrix that maps between the two vector spaces (which you can invert if you need to go the other way). A simple 2x2 matrix can;t do translations, which is what homogeneous coordinates solves. Instead of a point (x,y) you make them (x,y,1) and multiply by a 3x3 matrix which has 0s in certain elements. That extra 1 on the end is leverage by the transformation matrix to move the origin. See "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://web.cse.ohio-state.edu/~shen.94/681/Site/Slides_files/transformation_review.pdf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    },
+    {
+        "client_msg_id": "737b14a9-d00e-45ba-acfe-01048fe2057e",
+        "type": "message",
+        "text": "I would say you don't want to break the transform down into translating then rotating etc. It's all covered by vector-matrix multiplication, and it's far more composable and effecient (and idiomatic graphics programming) to stick to the matrix representation of transforms.",
+        "user": "U02E4DAQGSZ",
+        "ts": "1660543865.718769",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uvu",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I would say you don't want to break the transform down into translating then rotating etc. It's all covered by vector-matrix multiplication, and it's far more composable and effecient (and idiomatic graphics programming) to stick to the matrix representation of transforms."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    },
+    {
+        "client_msg_id": "b998f765-f9f5-4cae-ab74-95bb0e1369e3",
+        "type": "message",
+        "text": "here is a very concrete example in practice that matches your problem <https://math.stackexchange.com/questions/296794/finding-the-transform-matrix-from-4-projected-points-with-javascript>",
+        "user": "U02E4DAQGSZ",
+        "ts": "1660546331.940939",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://math.stackexchange.com/questions/296794/finding-the-transform-matrix-from-4-projected-points-with-javascript",
+                "thumb_url": "https://cdn.sstatic.net/Sites/math/Img/apple-touch-icon@2.png?v=4ec1df2e49b1",
+                "thumb_width": 316,
+                "thumb_height": 316,
+                "service_icon": "https://cdn.sstatic.net/Sites/math/Img/apple-touch-icon.png?v=0ae50baa40ed",
+                "id": 1,
+                "original_url": "https://math.stackexchange.com/questions/296794/finding-the-transform-matrix-from-4-projected-points-with-javascript",
+                "fallback": "Mathematics Stack Exchange: Finding the Transform matrix from 4 projected points (with Javascript)",
+                "text": "I'm working on a project using Chrome - JS and Webkit 3D CSS3 transform matrix. The final goal is to create a tool for artistic projects using projectors and animation - somewhat far away from using",
+                "title": "Finding the Transform matrix from 4 projected points (with Javascript)",
+                "title_link": "https://math.stackexchange.com/questions/296794/finding-the-transform-matrix-from-4-projected-points-with-javascript",
+                "service_name": "Mathematics Stack Exchange"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FyMAT",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "here is a very concrete example in practice that matches your problem "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://math.stackexchange.com/questions/296794/finding-the-transform-matrix-from-4-projected-points-with-javascript"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "thread_ts": "1660513026.932579",
+        "parent_user_id": "U03E4LY27FS"
+    }
+]
