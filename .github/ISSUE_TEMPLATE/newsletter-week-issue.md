@@ -1,7 +1,7 @@
 ---
 name: Newsletter Week Issue
 about: This is the default issue to open each week to collect resources
-title: 'Future of Coding Weekly 2022/05 Week #'
+title: 'Future of Coding Weekly 2022/10 Week #'
 labels: ''
 assignees: marianoguerra
 
@@ -9,13 +9,14 @@ assignees: marianoguerra
 
 - [ ] Change Month and Week Number
 - [ ] focWeekExport "2022-01-19" "2022-01-26"
-- [ ] Summary
-- [ ] Hashtags
-- [ ] Check that comment links work (push weekly dump with channel summaries)
-- [ ] Check to mention right person for moved messages
 - [ ] Update Search Index
 - [ ] Download New Attachments
 - [ ] Update links
+- [ ] Check that comment links work (push weekly dump with channel summaries)
+- [ ] Check to mention right person for moved messages
+- [ ] Summary
+- [ ] Hashtags
+- [ ] Set title in newsletter
 
 - https://tinyletter.com/
 - https://tinyletter.com/marianoguerra/letters/
