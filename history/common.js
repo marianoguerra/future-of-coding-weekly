@@ -186,7 +186,8 @@ const AUTHORS = {
   'Patrick Dubroy': '[Patrick Dubroy](https://twitter.com/dubroy)',
   'Lu Wilson': '[Lu Wilson](https://twitter.com/TodePond)',
   'Pasha Sadri': '[Pasha Sadri](https://twitter.com/pashasadri)',
-  'Ketan Agrawal': '[Ketan Agrawal](https://twitter.com/_ketan0)'
+  'Ketan Agrawal': '[Ketan Agrawal](https://twitter.com/_ketan0)',
+  'Jan Ruzicka': '[Jan Ruzicka](https://github.com/ruza-net)'
   //'': '[]()',
 };
 
