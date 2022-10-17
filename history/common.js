@@ -179,6 +179,14 @@ const AUTHORS = {
   'Ryo Hirayama': '[Ryo Hirayama](https://github.com/ryo33)',
   'Parker Henderson': '[Parker Henderson](http://twitter.com/parkerhendo)',
   'Andrew Reece': '[Andrew Reece]( https://twitter.com/azmreece)',
+  'Oleksandr Kryvonos': '[Oleksandr Kryvonos](https://twitter.com/o_kryvonos)',
+  'Tony Worm': '[Tony Worm](https://twitter.com/verdverm)',
+  'Peter Saxton': '[Peter Saxton](https://twitter.com/CrowdHailer)',
+  'Szymon Kaliski': '[Szymon Kaliski](https://twitter.com/szymon_k)',
+  'Patrick Dubroy': '[Patrick Dubroy](https://twitter.com/dubroy)',
+  'Lu Wilson': '[Lu Wilson](https://twitter.com/TodePond)',
+  'Pasha Sadri': '[Pasha Sadri](https://twitter.com/pashasadri)',
+  'Ketan Agrawal': '[Ketan Agrawal](https://twitter.com/_ketan0)'
   //'': '[]()',
 };
 
