@@ -272,6 +272,8 @@ function main() {
               return mdTitle1('Reading Together');
             case 'thinking-together':
               return mdTitle1('Thinking Together');
+            case 'devlog-together':
+              return mdTitle1('Devlog Together');
             case 'linking-together':
               return mdTitle1('Content');
             default:
