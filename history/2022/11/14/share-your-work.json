@@ -1,0 +1,436 @@
+[
+    {
+        "client_msg_id": "f3e4e49f-2f00-4909-b457-e1856ef23da4",
+        "type": "message",
+        "text": "As promised in my intro, here\u2019s a little bit of current thinking I wrote up about what feels like I\u2019m going to end up building a DSL to let ecologists work on large datasets.\n\n<https://digitalflapjack.com/blog/yirgacheffe/>\n\nCurrently it\u2019s a Python library that lets ecologists just work with large geospatial files as if they\u2019re variables, like numpy does, but manages the memory side of things, as these files quickly can cause you to run out of memory even on a 1TB RAM machine like we have in the group.\n\nThe next thing I have in the wings is trying to hide Python multiprocessing support behind my library, for two reasons:\n\n\u2022 I\u2019m already chunking up the computation, so throwing it out to many cores to get concurrency seems like a natural fit. Early on in my time here I tried to encourage the ecologists to think in terms of small programs that would then be run concurrently, but that didn\u2019t really work for how they think of programming, so I think letting them think single threaded whilst I hide concurrency is probably easiest.\n\u2022 GDAL, the library used for a bunch of the actual geospatial transforms is leaky as anything (or rather, it\u2019s Python bindings are), and so pushing that into child processes is a win, as it\u2019s the only real way to clean up properly.\nBut at this point I think what I\u2019m not doing is a good fit for Python anymore, so I kind of envisage a Go backend, where I handle the concurrency side of things, and a small front end language where I let the ecologists reason about geospatial files as opaque blobs, and possibly have CSV as a natural thing.\n\nBut I also think this is a good fit for a visual programming language, where you connect the CSVs and geospatial files by the kind of operators you\u2019d do normally, and then having that be the ecologist view on the world.\n\nI guess my main aim is to try and not do everything though - if you imagine this was wildly successful, then all I\u2019m doing is making yet another data-processing system that is specialised in one thing that someone will then want to do what I\u2019ve done for some other metric down the line. So I think I want to deliberately keep this focussed/niche rather than accidentally drift into building something generic that will inevitably not be good for other purposes.",
+        "user": "U04AMFXENTF",
+        "ts": "1668422171.614689",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bLJ2k",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "As promised in my intro, here\u2019s a little bit of current thinking I wrote up about what feels like I\u2019m going to end up building a DSL to let ecologists work on large datasets.\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://digitalflapjack.com/blog/yirgacheffe/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nCurrently it\u2019s a Python library that lets ecologists just work with large geospatial files as if they\u2019re variables, like numpy does, but manages the memory side of things, as these files quickly can cause you to run out of memory even on a 1TB RAM machine like we have in the group.\n\nThe next thing I have in the wings is trying to hide Python multiprocessing support behind my library, for two reasons:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I\u2019m already chunking up the computation, so throwing it out to many cores to get concurrency seems like a natural fit. Early on in my time here I tried to encourage the ecologists to think in terms of small programs that would then be run concurrently, but that didn\u2019t really work for how they think of programming, so I think letting them think single threaded whilst I hide concurrency is probably easiest."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "GDAL, the library used for a bunch of the actual geospatial transforms is leaky as anything (or rather, it\u2019s Python bindings are), and so pushing that into child processes is a win, as it\u2019s the only real way to clean up properly."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nBut at this point I think what I\u2019m not doing is a good fit for Python anymore, so I kind of envisage a Go backend, where I handle the concurrency side of things, and a small front end language where I let the ecologists reason about geospatial files as opaque blobs, and possibly have CSV as a natural thing.\n\nBut I also think this is a good fit for a visual programming language, where you connect the CSVs and geospatial files by the kind of operators you\u2019d do normally, and then having that be the ecologist view on the world.\n\nI guess my main aim is to try and not do everything though - if you imagine this was wildly successful, then all I\u2019m doing is making yet another data-processing system that is specialised in one thing that someone will then want to do what I\u2019ve done for some other metric down the line. So I think I want to deliberately keep this focussed/niche rather than accidentally drift into building something generic that will inevitably not be good for other purposes."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1668422171.614689",
+        "reply_count": 7,
+        "reply_users_count": 3,
+        "latest_reply": "1668623558.965059",
+        "reply_users": [
+            "UCUSW7WVD",
+            "UJBAJNFLK",
+            "U04AMFXENTF"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "rainbow",
+                "users": [
+                    "USH01JEDQ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "996fd4f9-13d9-41d7-b170-4d8cea93b7dc",
+        "type": "message",
+        "text": "From <https://github.com/carboncredits/yirgacheffe#basic-layer-usage>:\n```elevation_layer = Layer.layer_from_file('elecation.tiff')\narea_layer = UniformAreaLayer('area.tiff')\nvalidity_layer = Layer.layer_from_file('validity.tiff')\n\n# Work out the common subsection of all these and apply it to the layers\nintersection = Layer.find_intersection(elecation_layer, area_layer, validity_layer)\nelevation_layer.set_window_for_intersection(intersection)\narea_layer.set_window_for_intersection(intersection)\nvalidity_layer.set_window_for_intersection(intersection)\n\n# Work out the area where the data is valid and over 3000ft\ndef is_munro(data):\n    return numpy.where(data &gt; 3000.0, 0.0, 1.0)\nresult = validity_layer * area_layer * elevation_layer.apply(is_munro)\n\nresult_band = result_gdal_dataset.GetRasterBand(1)\nresult.save(result_band)```\nI don't follow why the `area_layer` is in the computation of `result`. Or is it perhaps not needed in the definition of `intersection`, just `result`? Are the multiplications over matrices (so the ranks need to line up)? Just trying to make sure I understand the example. I don't know anything about GDAL.",
+        "user": "UCUSW7WVD",
+        "ts": "1668469980.922499",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PN0wf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "From "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/carboncredits/yirgacheffe#basic-layer-usage"
+                            },
+                            {
+                                "type": "text",
+                                "text": ":\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "elevation_layer = Layer.layer_from_file('elecation.tiff')\narea_layer = UniformAreaLayer('area.tiff')\nvalidity_layer = Layer.layer_from_file('validity.tiff')\n\n# Work out the common subsection of all these and apply it to the layers\nintersection = Layer.find_intersection(elecation_layer, area_layer, validity_layer)\nelevation_layer.set_window_for_intersection(intersection)\narea_layer.set_window_for_intersection(intersection)\nvalidity_layer.set_window_for_intersection(intersection)\n\n# Work out the area where the data is valid and over 3000ft\ndef is_munro(data):\n    return numpy.where(data > 3000.0, 0.0, 1.0)\nresult = validity_layer * area_layer * elevation_layer.apply(is_munro)\n\nresult_band = result_gdal_dataset.GetRasterBand(1)\nresult.save(result_band)"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't follow why the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "area_layer",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is in the computation of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "result",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Or is it perhaps not needed in the definition of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "intersection",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", just "
+                            },
+                            {
+                                "type": "text",
+                                "text": "result",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "? Are the multiplications over matrices (so the ranks need to line up)? Just trying to make sure I understand the example. I don't know anything about GDAL."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1668422171.614689",
+        "parent_user_id": "U04AMFXENTF"
+    },
+    {
+        "client_msg_id": "0afc1ad9-fade-4130-94bf-7db6ce6bfc72",
+        "type": "message",
+        "text": "Interesting stuff, I'll have to look at it in more detail (I am also in scientific computing). But a first reaction: isn't it surprising that ecologists have a hard time thinking in terms of small interacting programs? Isn't that very similar to an ecosystem in nature? In other words, shouldn't it be possible to present the situation in a way that they understand it?",
+        "user": "UJBAJNFLK",
+        "ts": "1668499651.363239",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wUMy9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Interesting stuff, I'll have to look at it in more detail (I am also in scientific computing). But a first reaction: isn't it surprising that ecologists have a hard time thinking in terms of small interacting programs? Isn't that very similar to an ecosystem in nature? In other words, shouldn't it be possible to present the situation in a way that they understand it?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1668422171.614689",
+        "parent_user_id": "U04AMFXENTF",
+        "reactions": [
+            {
+                "name": "joy",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c44582f0-e944-4d05-a457-82e8f52b9db0",
+        "type": "message",
+        "text": "<@UCUSW7WVD> Oh, I\u2019d not read too much into the example in detail, this was derived from a real example we worked on. The area_layer is a GeoTiff that contains in each pixel the real area of the planet covered by that pixel. So if that last pair of lines was replaced with:\n```result.sum()```\nThe number you\u2019d get would be the square meterage of planet covered by munros. (Assuming validity layer is a layer that just covers Scotland :slightly_smiling_face:\n\nFor the actual work we used this tiff in another set of calculations. In that work we\u2019re reasoning about area of habitat of species, so the result in that case is a GeoTIFF per species that has a 0 value where the species isn\u2019t, and an area of the pixel if the species is there.",
+        "user": "U04AMFXENTF",
+        "ts": "1668505600.782689",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2cJ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UCUSW7WVD"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Oh, I\u2019d not read too much into the example in detail, this was derived from a real example we worked on. The area_layer is a GeoTiff that contains in each pixel the real area of the planet covered by that pixel. So if that last pair of lines was replaced with:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "result.sum()"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The number you\u2019d get would be the square meterage of planet covered by munros. (Assuming validity layer is a layer that just covers Scotland "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nFor the actual work we used this tiff in another set of calculations. In that work we\u2019re reasoning about area of habitat of species, so the result in that case is a GeoTIFF per species that has a 0 value where the species isn\u2019t, and an area of the pixel if the species is there."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U04AMFXENTF",
+            "ts": "1668505721.000000"
+        },
+        "thread_ts": "1668422171.614689",
+        "parent_user_id": "U04AMFXENTF"
+    },
+    {
+        "client_msg_id": "6ab02db6-f2a7-4847-92da-0aebca70cc38",
+        "type": "message",
+        "text": "<@UJBAJNFLK> I think the problem is less that ecologists have hard time thinking about small programs, they\u2019re quite happy scripting away, but that the side effects of actions are not always apparent. This, trying to bring it around to the Future of Coding\u2019s most recent episode, to me is why I don\u2019t think you can \u201cDo The Right Thing\u201d as readily as people think - there\u2019s some unexpected side effect going to bite you that you didn\u2019t think of (unless you ground up wrote your OS and application in a provable language I guess, but I\u2019m not that person :slightly_smiling_face:\n\nIt\u2019s then less about capability, more about time to be experts? Knowing all those side-effects (if you run out memory Linux will vomit everywhere and die) is a computerists job to understand. The interaction of animal species and habitats is for the ecologists to understand, I don\u2019t know how to do that for similar reasons they don\u2019t know about lazy evaluation or such. But I don\u2019t think it should be that an ecologists needs me all the time - I want to build a system that Does The Right Thing by having me encode the grotty resource management inside.",
+        "user": "U04AMFXENTF",
+        "ts": "1668506119.627419",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/kr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJBAJNFLK"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I think the problem is less that ecologists have hard time thinking about small programs, they\u2019re quite happy scripting away, but that the side effects of actions are not always apparent. This, trying to bring it around to the Future of Coding\u2019s most recent episode, to me is why I don\u2019t think you can \u201cDo The Right Thing\u201d as readily as people think - there\u2019s some unexpected side effect going to bite you that you didn\u2019t think of (unless you ground up wrote your OS and application in a provable language I guess, but I\u2019m not that person "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nIt\u2019s then less about capability, more about time to be experts? Knowing all those side-effects (if you run out memory Linux will vomit everywhere and die) is a computerists job to understand. The interaction of animal species and habitats is for the ecologists to understand, I don\u2019t know how to do that for similar reasons they don\u2019t know about lazy evaluation or such. But I don\u2019t think it should be that an ecologists needs me all the time - I want to build a system that Does The Right Thing by having me encode the grotty resource management inside."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1668422171.614689",
+        "parent_user_id": "U04AMFXENTF"
+    },
+    {
+        "client_msg_id": "ff20e70c-2e8e-47e6-bb73-0b61933b463f",
+        "type": "message",
+        "text": "Doing \"the right thing\" is possible only if the abstractions you implement are actually implementable with the available resources and for the intended applications. Otherwise you implement leaky abstractions, which is not helping clients that much.",
+        "user": "UJBAJNFLK",
+        "ts": "1668525484.615959",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qpJ6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Doing \"the right thing\" is possible only if the abstractions you implement are actually implementable with the available resources and for the intended applications. Otherwise you implement leaky abstractions, which is not helping clients that much."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1668422171.614689",
+        "parent_user_id": "U04AMFXENTF"
+    },
+    {
+        "client_msg_id": "3a2a07fc-9818-4047-98e3-a80988f252b6",
+        "type": "message",
+        "text": "I read your post in the meantime... Some remarks on NumPy (I was part of the team that designed its predecessor, Numeric): the goal of Numeric (inherited by NumPy) was to provide 1) \"APL embedded into Python\" and 2) a Python interface to array data used in C extensions. APL, in turn, was originally designed to be a new mathematical notation for use by humans, and only later implemented on computers. This implies the \"right thing\" approach to arrays as a high-level data model. Back in those days (mid-1990s), scientific computing applications tended to be more CPU-limited than memory-limited, so we thought of an escape hatch for performance bottlenecks (C extensions, and later Cython), but not so much for memory bottelnecks. That was exactly what caused the fork called \"numarray\", which catered for large-memory use cases but turned out to be very inefficient for small arrays. NumPy re-united the two, at the cost of a more complex interface, but didn't extend \"large memory\" to \"doesn't fit into memory\" datasets.\nNone of that is clear from the documentation, as so often. So people like you discover the unwritten assumptions at some cost. Sorry!",
+        "user": "UJBAJNFLK",
+        "ts": "1668525966.843589",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3Vr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I read your post in the meantime... Some remarks on NumPy (I was part of the team that designed its predecessor, Numeric): the goal of Numeric (inherited by NumPy) was to provide 1) \"APL embedded into Python\" and 2) a Python interface to array data used in C extensions. APL, in turn, was originally designed to be a new mathematical notation for use by humans, and only later implemented on computers. This implies the \"right thing\" approach to arrays as a high-level data model. Back in those days (mid-1990s), scientific computing applications tended to be more CPU-limited than memory-limited, so we thought of an escape hatch for performance bottlenecks (C extensions, and later Cython), but not so much for memory bottelnecks. That was exactly what caused the fork called \"numarray\", which catered for large-memory use cases but turned out to be very inefficient for small arrays. NumPy re-united the two, at the cost of a more complex interface, but didn't extend \"large memory\" to \"doesn't fit into memory\" datasets.\nNone of that is clear from the documentation, as so often. So people like you discover the unwritten assumptions at some cost. Sorry!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1668422171.614689",
+        "parent_user_id": "U04AMFXENTF",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UA14TGLTC",
+                    "U04AMFXENTF"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fb0b2beb-aadc-44be-8437-6bb2581ad16c",
+        "type": "message",
+        "text": "<@UJBAJNFLK> that\u2019s super interesting, thanks for the insight! No need to apologise, I learned a lot along the way :slightly_smiling_face:",
+        "user": "U04AMFXENTF",
+        "ts": "1668623558.965059",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "px8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJBAJNFLK"
+                            },
+                            {
+                                "type": "text",
+                                "text": " that\u2019s super interesting, thanks for the insight! No need to apologise, I learned a lot along the way "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1668422171.614689",
+        "parent_user_id": "U04AMFXENTF",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
