@@ -1,0 +1,255 @@
+[
+    {
+        "client_msg_id": "6d5be394-a1bf-48a0-aa10-51c32eef2823",
+        "type": "message",
+        "text": "Hey I wrote up a blog post on tooling for programming languages, basically tools like tree-sitter that help programming language implementors provide higher quality user experience. I\u2019d love to see what people think of the post! It\u2019s in draft but I\u2019ll probably publish it soon. <https://github.com/NicholasLYang/uptointerpretation/blob/master/content/posts/tooling-for-tooling.md>",
+        "user": "U046LSVRN1H",
+        "ts": "1669496452.119769",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3Ae2d",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hey I wrote up a blog post on tooling for programming languages, basically tools like tree-sitter that help programming language implementors provide higher quality user experience. I\u2019d love to see what people think of the post! It\u2019s in draft but I\u2019ll probably publish it soon. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/NicholasLYang/uptointerpretation/blob/master/content/posts/tooling-for-tooling.md"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U046LSVRN1H",
+            "ts": "1669496464.000000"
+        },
+        "thread_ts": "1669496452.119769",
+        "reply_count": 3,
+        "reply_users_count": 2,
+        "latest_reply": "1669806888.110169",
+        "reply_users": [
+            "U013ZLJARC7",
+            "U046LSVRN1H"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "0f87bf06-4fc9-4bb2-9b41-51a7f9d64696",
+        "type": "message",
+        "text": "There's good and bad here. I like that you talk about incremental/error tolerant aspects of things, as these are very much required to build good tooling. OTOH:\n\u2022 the bit about language servers seems to come from the perspective that they're a good thing when they're really just a gnarly patch for languages that don't support interactive development\n\u2022 Treesitter generating C is one of the good things about it, as the C ABI is a sort of lingua franca on the operating systems we have available\n\u2022 You'll need to explain your pushback against (for example) bison and Racket in more detail to be taken seriously, it's currently just handwaving",
+        "user": "U013ZLJARC7",
+        "ts": "1669541145.997849",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "VCs",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There's good and bad here. I like that you talk about incremental/error tolerant aspects of things, as these are very much required to build good tooling. OTOH:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "the bit about language servers seems to come from the perspective that they're a good thing when they're really just a gnarly patch for languages that don't support interactive development"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Treesitter generating C is one of the good things about it, as the C ABI is a sort of lingua franca on the operating systems we have available"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "You'll need to explain your pushback against (for example) bison and Racket in more detail to be taken seriously, it's currently just handwaving"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1669496452.119769",
+        "parent_user_id": "U046LSVRN1H"
+    },
+    {
+        "client_msg_id": "76367003-A6FF-4D4E-9146-6C1CAE5DFC05",
+        "type": "message",
+        "text": "Thanks for the feedback! I\u2019d have to politely disagree about the point on language servers. I\u2019ve tried interactive development and I think it\u2019s a valid set of tradeoffs but not my personal cup of tea. \n\nTree sitter generating C is probably the right call, but I would be interested to see if generating Rust or Zig would be worthwhile, as you could keep the C ABI but make the build process way way easier. I\u2019ve been trying to compile a rust codebase with tree-sitter to wasm and because of the C code, I can\u2019t compile to wasm32-wasi without some messy patching, and wasm32-unknown-emscripten appears to be going out of date and has ABI incompatibilities with Rust compiled to wasm. If tree-sitter could generate rust it\u2019d make the composability a lot nicer.\n\nAs for your last point, yeah fair. I\u2019ll try to come up with good examples. Bison has quite poor documentation and an extremely poor dev experience but you\u2019re right, I need to iron that out concretely. Racket is almost worth an entire blog post on its own. I like it a lot but it\u2019s kind of too large and encompassing of an ecosystem to simply be a tool inside a compiler. You either use racket or you don\u2019t. \n\nThanks again! ",
+        "user": "U046LSVRN1H",
+        "ts": "1669752289.134639",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6YIVg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for the feedback! "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I\u2019d"
+                            },
+                            {
+                                "type": "text",
+                                "text": " have to politely disagree about the point on language servers. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I\u2019ve"
+                            },
+                            {
+                                "type": "text",
+                                "text": " tried interactive development and I think "
+                            },
+                            {
+                                "type": "text",
+                                "text": "it\u2019s"
+                            },
+                            {
+                                "type": "text",
+                                "text": " a valid set of tradeoffs but not my personal cup of tea. \n\nTree sitter generating C is probably the right call, but I would be interested to see if generating Rust or Zig would be worthwhile, as you could keep the C ABI but make the build process way way easier. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I\u2019ve"
+                            },
+                            {
+                                "type": "text",
+                                "text": " been trying to compile a rust codebase with tree-sitter to wasm and because of the C code, I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "can\u2019t"
+                            },
+                            {
+                                "type": "text",
+                                "text": " compile to wasm32-wasi without some messy patching, and wasm32-unknown-emscripten appears to be going out of date and has ABI incompatibilities with Rust compiled to wasm. If tree-sitter could generate rust "
+                            },
+                            {
+                                "type": "text",
+                                "text": "it\u2019d"
+                            },
+                            {
+                                "type": "text",
+                                "text": " make the composability a lot nicer.\n\nAs for your last point, yeah fair. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I\u2019ll"
+                            },
+                            {
+                                "type": "text",
+                                "text": " try to come up with good examples. Bison has quite poor documentation and an extremely poor dev experience but "
+                            },
+                            {
+                                "type": "text",
+                                "text": "you\u2019re"
+                            },
+                            {
+                                "type": "text",
+                                "text": " right, I need to iron that out concretely. Racket is almost worth an entire blog post on its own. I like it a lot but "
+                            },
+                            {
+                                "type": "text",
+                                "text": "it\u2019s"
+                            },
+                            {
+                                "type": "text",
+                                "text": " kind of too large and encompassing of an ecosystem to simply be a tool inside a compiler. You either use racket or you "
+                            },
+                            {
+                                "type": "text",
+                                "text": "don\u2019t"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". \n\nThanks again! "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1669496452.119769",
+        "parent_user_id": "U046LSVRN1H",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "8d0bb76c-c25a-4aa2-8901-7b4ac9ab1848",
+        "type": "message",
+        "text": "I'd be interested in hearing a bit about your experiences with interactive development! :teapot:",
+        "user": "U013ZLJARC7",
+        "ts": "1669806888.110169",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "HSFN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'd be interested in hearing a bit about your experiences with interactive development! "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "teapot",
+                                "unicode": "1fad6"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1669496452.119769",
+        "parent_user_id": "U046LSVRN1H"
+    }
+]
