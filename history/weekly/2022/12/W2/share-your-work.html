@@ -1,0 +1,226 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2022-12-06T21:30:32.776Z" class="post"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2022-12-03&amp;toDate=2022-12-09&amp;channel=share-your-work&amp;filter=#2022-12-06T21:30:32.776Z" class="date">2022-12-06 21:30:32</a> <div class="message"><p>An essay about the history of compiler-appeasement languages, meant for discussion.</p>
+<p>[meta: I would be glad to move this to another channel or to remove it completely.  One aspect of my “work” is to observe.  FWIW, I share this...]</p>
+<p>Type checkers are helpers for development.  Similar to parsing and syntax checkers.  Type checkers are - currently - more difficult to write than syntax checkers.  There was a time when syntax checking was not well understood and was difficult and was written in an ad-hoc manner.  Early FORTRAN had syntax that we would consider weird today.  Early FORTRAN did not treat spaces specially and went for the shortest match (I think).  For example  <code>IF</code>  and  <code>IFX</code>  were both parsed as the beginning of an  <code>IF</code>  statement.  Later, it was discovered that making spaces “special” would help in making parsers and would help in cleaning up silliness like  <code>IF</code>  and  <code>IFX</code> .  At the time, the character set consisted of ASCII (well, there was EBCDIC, championed by IBM, but, IBM was hated even more than Microsoft and Apple are hated today, so EBCDIC was mostly avoided by non-IBMers).  The fact that ASCII only has 128 characters to choose from (some 32 “unprintables” must be subtracted from this count) made for silly decisions like denoting strings with the same beginning and ending quote (which makes parsing more difficult) and not-allowing spaces to be embedded in names.  With Unicode, we have many more choices, but, we remain stuck with decisions made to appease 1950s hardware.  Aside: in 2022, we have hardware that can handle vector graphics and overlapping graphical elements, e.g. windows and very-small windows (“buttons”, “widgets”), but, we are stuck with decisions made to appease 1950s hardware.  I argue that we should be building languages based on vector graphics instead of non-overlapping characters.  SVG is a simple example of something that might work on this front (rectangles, ellipses, lines, text, groups). Aside: “declaration before use” is a result of 1950s thinking (save CPU time by making compilers 1-pass), even though, in 2022, we could easily burn CPU cycles to figure out “declaration after use”. Aside: declaration-checking (before or after use) is only a helper for developers. The machine doesn’t care if you make a typo.  “Declaration-checking” is an app to help developers stamp out simple errors (like typos).  Demanding that programmers rearrange their code so that the declarations ALL come before the code is compiler-appeasement (based on 1950s hardware).</p>
+<p>The best way to write a type checker is to use a Relational Language (like PROLOG, miniKanren, Datalog, etc., etc.).  Relational languages are shining examples of languages that don’t appease compilers.  In a relational language, you write relations (“truth”) and let the underlying system figure out how to implement the machinery for matching up the relations.  Other technologies that bark up this same tree: declarative languages and ML. (Aside: oh my, HTML is a declarative language.  But, HTML needs to lean on JavaScript to allow imperative break-outs).</p>
+<p>There is no “ideal language”.  The notation you use depends on the problem you are trying to solve.  A simple example would be the idea of Spreadsheets vs. Lambda Calculus.  Accountants and financial analysts like Spreadsheets.  Programming rigor analysts like Lambda Calculus.  Accountants would not want to use Lambda Calculus and rigor-ists would not want to use Spreadsheets.  Another example, closer to my heart, is the difference between using Language Theory to generate parsers and using PEG to generate parsers. Language Theory-based parsers cannot do what PEG-based parsers can do (for example, parse balanced parentheses).  Trying to force-fit language theory onto parsing has stagnated the field.  Most languages look the same, with minor differences. (Aside: PEG is Parser Theory, not Language Theory, despite the superficial similarities in syntax).  The fact that parsing is “difficult” has restricted programmers to using only a small number of programming languages, instead of using a zillion nano-languages and defining their own nano-languages (I call these SCNs (Solution Centric Notations)).</p>
+<p>“Dynamic” languages are “good” for fast turnaround on ideas, but are “bad” for producing end-user apps which are cost-optimized.  “Static languages” are “good” for Production Engineering apps, but, are “bad” for inventing new products.  Trying to force-fit all use-cases into one language results in a watered-down notation which isn’t particularly good for either use-case.  (Aside: at the moment, efforts to force-fit all use-cases into one language favour the Production Engineering side over the Design side of things, and, this is what I call “compiler appeasement”.  When programmers have to stop and rearrange their inventions to help the compiler figure out how to optimize, they are appeasing the compiler). (Aside: if Physicists  <em>ALL</em>  engaged in worshipping functional notation, we wouldn’t have Feynman Diagrams, nor Polyani’s “Order Out of Chaos”, etc.).</p>
+<p> <em>Barnacles</em>  might be invented for helping developers, e.g. type checkers and linters. Twisting a language design to appease  <em>only</em>  pre-compilation is  <em>not OK</em>  in my book. At the moment, most of our programming languages are compiler-appeasement languages and insist that developers waste time (and imagination) on dealing with compiler-appeasement and pre-compilation issues, long before the program works.</p>
+<p>Barnacle-like pre-compilation was researched in the mid-1900s with work like Fraser/Davidson peephole technologies. This was called RTL and formed the basis of  <em>gcc</em> . Cordy’s Orthogonal Code Generator is a generalization of this technique replete with declarative syntax for portability choice-trees (MISTs) and Data Descriptors and Condition Descriptors that improve on the virtual registers used by RTL.</p>
+<p>[This essay can be found in <a href="https://github.com/guitarvydas/py0d/issues/2">github.com/guitarvydas/py0d/issues/2</a>]</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2022-12-07T07:17:12.998Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2022-12-04&amp;toDate=2022-12-10&amp;channel=share-your-work&amp;filter=#2022-12-07T07:17:12.998Z" class="date">2022-12-07 07:17:12</a> <div class="message"><p>I tend to agree with most of this, except that I am not sure I understand your ideas about SVG. In mainstream programming, the ground-truth representation of code is text (a linear stream of characters), and the UI is a slightly rendered version of that text (syntax coloring etc.). I see how SVG could yield better UIs, but it sounds as if you want SVG to become the ground-truth representation of code. If that's the case, I don't see why.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2022-12-07T07:22:29.199Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2022-12-04&amp;toDate=2022-12-10&amp;channel=share-your-work&amp;filter=#2022-12-07T07:22:29.199Z" class="date">2022-12-07 07:22:29</a> <div class="message"><p>On a different topic, your essay contains the eternal "we are so stuck in the past, we need to move on" thread that comes up frequently here (and elsewhere). What I have yet to see is a realistic proposition for "moving on". If it's "start from scratch", it just won't happen. We are not stuck with 1950s hardware, we have built up an enormous IT edifice  <em>starting</em>  with 1950s hardware. We are still adding to it, and it has become infrastructure for other human endeavours. It won't go away (except maybe in a major civilization crash).</p>
+<p>A realistic scenario for moving on must either start from the present edifice and evolve it into something better, remaining functional along the way, or build a second, disconnected edifice to which the world can slowly migrate as it matures.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2022-12-07T07:58:26.320Z" class="reply"><span class="user">Kartik Agaram</span> <a href="./?fromDate=2022-12-04&amp;toDate=2022-12-10&amp;channel=share-your-work&amp;filter=#2022-12-07T07:58:26.320Z" class="date">2022-12-07 07:58:26</a> <div class="message"><p>Your point regarding declarations reminds me of my <a href="https://archive.org/details/akkartik-2min-2020-06-07">archive.org/details/akkartik-2min-2020-06-07</a></p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://archive.org/details/akkartik-2min-2020-06-07">2020-06-07: Stop specifying modules : Kartik Agaram : Free Download, Borrow, and Streaming : Internet Archive</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2022-12-09T02:34:23.601Z" class="reply"><span class="user">Nicholas Yang</span> <a href="./?fromDate=2022-12-06&amp;toDate=2022-12-12&amp;channel=share-your-work&amp;filter=#2022-12-09T02:34:23.601Z" class="date">2022-12-09 02:34:23</a> <div class="message"><p><a href="https://khinsen.net/">Konrad Hinsen</a> I really agree with this sentiment on the “we are so stuck in the past” thread. It’s a little cliche almost to complain about how software development is such a mess. And not necessarily the most productive mindset.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2022-12-09T14:01:13.668Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2022-12-06&amp;toDate=2022-12-12&amp;channel=share-your-work&amp;filter=#2022-12-09T14:01:13.668Z" class="date">2022-12-09 14:01:13</a> <div class="message"><p><a href="https://github.com/akkartik/mu">Kartik Agaram</a>  Yes.</p>
+<p>The machine does the work instead of asking programmers to rearrange their code.</p>
+<p>Your reminder reminds me of Holt’s Data Descriptors, which reminds me of Cordy’s Orthogonal Code Generator which reminds me of RTL (which is used in gcc).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2022-12-12T12:25:26.804Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2022-12-09&amp;toDate=2022-12-15&amp;channel=share-your-work&amp;filter=#2022-12-12T12:25:26.804Z" class="date">2022-12-12 12:25:26</a> <div class="message"><p><a href="https://raw.githubusercontent.com/guitarvydas/drawware/dev/sourcecodehelloworld.png">raw.githubusercontent.com/guitarvydas/drawware/dev/sourcecodehelloworld.png</a></p>
+</div> <div class="attachments"><blockquote><p>📷 <a href="https://raw.githubusercontent.com/guitarvydas/drawware/dev/sourcecodehelloworld.png">715x416px image</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2022-12-12T12:25:58.542Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2022-12-09&amp;toDate=2022-12-15&amp;channel=share-your-work&amp;filter=#2022-12-12T12:25:58.542Z" class="date">2022-12-12 12:25:58</a> <div class="message"><p>Thank you all, for your comments!  I find the insightful criticism to be quite helpful.</p>
+<p>Hoping to clarify some points:</p>
+<ul><li>IMO The Ground Truth is Programming, not Code.</li><li>IMO, change, even big change, is possible, especially in a young discipline like this.  We are witnessing big change right now - the conversion of gasoline-powered automobiles to electric-powered automobiles.  The enormous infrastructure for supplying gasoline is being replaced.  The figurehead for this huge change believes in “First Principles Thinking” [<a href="https://fs.blog/first-principles/">fs.blog/first-principles</a>].   Counter-arguments against big change might include:</li><li>The fact that electric cars still have 4 wheels and still have offset steering wheels (instead of centered steering sticks as in the first automobile)</li><li>The fact that the change-over from gas to electric is being facilitated by the existence of hybrid cars.</li><li><p>Computer keyboards are still QWERTY.  </p>
+<p>  IMO, change is driven by perceived orders-of-magnitude improvement (in process? ... in what?).  It remains incumbent on me to explain why I think that it is possible to improve on programming, noting that hardware has improved, and, noting that end-user apps have improved, while maintaining the assertion that programming languages have not improved proportionally.</p>
+</li></ul><ul><li>PEG blurs the line between characters in a Scanner vs. tokens in a Parser.  IMO this is important and may lead to change.</li><li>IMO, snipping ALL dependencies is important and may lead to change.  Hence, this long response to an issue in an experimental code repo. To my eyes even simple<code>f(x)</code> causes several kinds of dependencies that are ripe for snipping.</li><li>SVG.  This is the simplest (albeit useless) example of SVG as a “programming language” that I could imagine.  There’s more, and this is but a hint.  This useless example transpiles a diagram to running Python code. The live code is at <a href="https://github.com/guitarvydas/drawware">drawware</a>.</li></ul><p><a href="https://github.com/guitarvydas/drawware/blob/dev/sourcecodehelloworld.png?raw=true">github.com/guitarvydas/drawware/blob/dev/sourcecodehelloworld.png?raw=true</a></p>
+<pre><code>&lt;html&gt;
+
+  &lt;body&gt;
+
+    
+
+    &lt;h1&gt;My first SVG&lt;/h1&gt;
+
+    
+
+    &lt;svg&gt;
+
+      &lt;g id='myfunc'&gt;
+
+        &lt;rect x="20" y="0" width="280" height="130" rx="19.5" ry="19.5" fill="none" stroke="black"/&gt;
+
+        &lt;text x="120" y="19"&gt;myfunc&lt;/text&gt;
+
+
+
+        &lt;g&gt;
+
+          &lt;rect x="60" y="40" width="200" height="60" fill="#f8cecc" stroke="#b85450"/&gt;
+
+          &lt;text x="70" y="64"&gt;print ('Hello ', end='')&lt;/text&gt;
+
+          &lt;text x="70" y="84"&gt;print ('World')&lt;/text&gt;
+
+        &lt;/g&gt;
+
+        
+
+      &lt;/g&gt;
+
+    &lt;/svg&gt;
+
+    
+
+  &lt;/body&gt;
+
+&lt;/html&gt;</code></pre><p>the Ohm-JS grammar that I used is:</p>
+<pre><code>CodeDrawing {
+
+  Main = "&lt;html&gt;" "&lt;body&gt;" H1 Drawing "&lt;/body&gt;" "&lt;/html&gt;"
+
+  H1 = "&lt;h1&gt;" stuff "&lt;/h1&gt;"
+
+
+
+  Drawing = "&lt;svg" stuff "&gt;" CodeContainer "&lt;/svg&gt;"
+
+  
+
+  CodeContainer = "&lt;g" FunctionName "&gt;" Boundary Title CodeBlock "&lt;/g&gt;"
+
+  
+
+  Boundary = "&lt;rect" stuff "/&gt;"
+
+  Title = "&lt;text" stuff "&gt;" name "&lt;/text&gt;"
+
+  CodeBlock = "&lt;g&gt;" RedRect Text+ "&lt;/g&gt;"
+
+  RedRect = "&lt;rect" (~AttrRed any)* AttrRed stuff "/&gt;"
+
+
+
+  FunctionName = "id=" sq name sq
+
+  Text = "&lt;text" stuff "&gt;" stuff "&lt;/text&gt;"
+
+  AttrRed = "fill=" dq "#f8cecc" dq
+
+
+
+  stuff = notElementChar+
+
+  notElementChar = ~"&lt;" ~"&gt;" ~"/&gt;" any
+
+  name = letter alnum*
+
+  sq = "'"
+
+  dq = "\""
+
+}</code></pre><p>And my personal notation (“Fab”) that completes the transpiler is:</p>
+<pre><code>CodeDrawing {
+
+  Main [khtml kbody H1 Drawing kbodyend khtmlend] = ‛«Drawing»'
+
+  H1 [kh1 stuff kh1end] = ‛«kh1»«stuff»«kh1end»'
+
+
+
+  Drawing [ksvg CodeContainer ksvgend] = ‛«CodeContainer»'
+
+  
+
+  CodeContainer [kgroup FunctionName k Boundary Title CodeBlock kgroupend] = ‛def «FunctionName» ():«CodeBlock»
+
+«FunctionName» ()'
+
+  
+
+  Boundary [krect stuff kend] = ‛«krect»«stuff»«kend»'
+
+  Title [ktext stuff k name ktextend] = ‛«ktext»«stuff»«k»«name»«ktextend»'
+
+  CodeBlock [kgroup RedRect Texts+ kgroupend] = ‛\n(-«Texts»-)'
+
+  RedRect [krect cs* AttrRed stuff kend] = ‛«krect»«cs»«AttrRed»«stuff»«kend»'
+
+
+
+  FunctionName [kid sq1 name sq2] = ‛«name»'
+
+  Text [ktext stuff kend stuff2 ktextend] = ‛\n«stuff2»'
+
+  AttrRed [kfill dq kred dq2] = ‛«kfill»«dq»«kred»«dq2»'
+
+
+
+  stuff [cs+] = ‛«cs»'
+
+  notElementChar [c] = ‛«c»'
+
+  name [c1 cs*] = ‛«c1»«cs»'
+
+  sq  [c] = ‛«c»'
+
+  dq  [c] = ‛«c»'
+
+}</code></pre><p>The generated Python code (from the diagram) is:</p>
+<pre><code>def myfunc ():
+
+
+
+  print ('Hello ', end='')
+
+  print ('World')
+
+myfunc ()</code></pre><p>FYI - Fab transpiles to JavaScript code that can be used in conjunction with Ohm-JS.  I got tired of writing JavaScript, so I built an SCN (nano-DSL) for myself.</p>
+<p>I’ve chosen not to include the generated JavaScript code in this thread, but have pushed a working transpiler to the github listed above.</p>
+<p>[pardon the cave-man HTML, but I don’t know enough about building web pages, and, clearly, need help]</p>
+<p>31:50~ “In a ‘real’ Computer Science, the best languages of an era should serve as ’assembly code” for the next generation of expression.</p>
+<p><a href="https://www.youtube.com/watch?v=fhOHn9TClXY&amp;t=859s">youtube.com/watch?v=fhOHn9TClXY&amp;t=859s</a></p>
+<p>Alan Kay</p>
+</div> <div class="attachments"><blockquote><p>🔗 <a href="https://fs.blog/first-principles/">First Principles: The Building Blocks of True Knowledge - Farnam Street</a></p>
+</blockquote>
+</div> <div class="files"></div></div></div></div><div id="2022-12-09T02:35:44.548Z" class="post"><span class="user">Nicholas Yang</span> <a href="./?fromDate=2022-12-06&amp;toDate=2022-12-12&amp;channel=share-your-work&amp;filter=#2022-12-09T02:35:44.548Z" class="date">2022-12-09 02:35:44</a> <div class="message"><p>Hey all, this blog post has been kicking around in my drafts for a while. I finally decided to complete it. It’s about thinking about compilation, basically the strategies and techniques that I’ve learned in my short time writing compilers. It’s what I wish I had as a resource when I started. <a href="https://github.com/NicholasLYang/uptointerpretation/blob/master/content/posts/how-to-think-about-compiling.md">github.com/NicholasLYang/uptointerpretation/blob/master/content/posts/how-to-think-about-compiling.md</a></p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2022-12-09T03:39:31.693Z" class="reply"><span class="user">Andrew F</span> <a href="./?fromDate=2022-12-06&amp;toDate=2022-12-12&amp;channel=share-your-work&amp;filter=#2022-12-09T03:39:31.693Z" class="date">2022-12-09 03:39:31</a> <div class="message"><p>You lost me at "nice, elegant language like Java". ;) Just kidding, this seems like a nice survey of things to keep in mind. I liked the reminder in the IR section that an IR didn't necessarily have to be "closer" to the output language in an obvious way. I generally like this level of abstraction and detail, and I wish more writing took this approach.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2022-12-09T04:36:41.891Z" class="reply"><span class="user">Nicholas Yang</span> <a href="./?fromDate=2022-12-06&amp;toDate=2022-12-12&amp;channel=share-your-work&amp;filter=#2022-12-09T04:36:41.891Z" class="date">2022-12-09 04:36:41</a> <div class="message"><p>Haha I don’t even remember if i was being serious when I wrote that. Thanks for the feedback! </p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2022-12-09T03:00:45.886Z" class="post"><span class="user">Ivan Reese</span> <a href="./?fromDate=2022-12-06&amp;toDate=2022-12-12&amp;channel=share-your-work&amp;filter=#2022-12-09T03:00:45.886Z" class="date">2022-12-09 03:00:45</a> <div class="message"><p>Future of Coding • Episode 60</p>
+<p>Bret Victor • Magic Ink</p>
+<p>🔗 <a href="https://futureofcoding.org/episodes/060">futureofcoding.org/episodes/060</a></p>
+<p>Hey, ya'll ever hear of this guy? He posts some  <em>wild</em> stuff. Feels like it might be relevant to the folks here. Maybe a little fringe. For instance, he thinks that software could be — get this —  <em>better!</em>  You might be surprised to learn that I also think software could be better. Radical idea, yes, but it feels like it's finally time for us to take the idea seriously.</p>
+<p>Next month, we're reading Peter Naur's Programming as Theory Building, with a little bit of Gilbert Ryle's The Concept of Mind as background.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2022-12-10T06:08:39.724Z" class="reply"><span class="user">Personal Dynamic Media</span> <a href="./?fromDate=2022-12-07&amp;toDate=2022-12-13&amp;channel=share-your-work&amp;filter=#2022-12-10T06:08:39.724Z" class="date">2022-12-10 06:08:39</a> <div class="message"><p>Thank you so much for making this episode! I love Brett Victor's presentations and most of his essays, but I've never been able to get into Magic Ink. I'm not sure why, but I've always struggled both to follow that essay and to stay interested while reading it, so it's great to get your distillation of its contents.</p>
+<p>Several of the ideas that you discuss, such as showing the distributions of reviews with tick marks under the stars, remind me of Edward Tuft's wonderful work on presenting information graphically.</p>
+<p>I love Robot Odyssey, and also Rocky's Boots which was a similar game, also from The Learning Company, that dealt with solving puzzles by creating digital logic circuits.</p>
+<p>For good time, you can play both of them in your browser at <a href="http://archive.org">archive.org</a>.</p>
+<p><a href="https://archive.org/details/d098s1-robot-odyssey">archive.org/details/d098s1-robot-odyssey</a></p>
+<p><a href="https://archive.org/details/RockysBoots41">archive.org/details/RockysBoots41</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2022-12-10T16:25:11.455Z" class="reply"><span class="user">Personal Dynamic Media</span> <a href="./?fromDate=2022-12-07&amp;toDate=2022-12-13&amp;channel=share-your-work&amp;filter=#2022-12-10T16:25:11.455Z" class="date">2022-12-10 16:25:11</a> <div class="message"><p>It also occurs to me that part of why modern software, especially web sites, doesn't minimize interaction is because the authors are not actually focused on creating the best experience for the user.</p>
+<p>Facebook, YouTube, Google, and Amazon are all worse for users than they were ten years ago because they are trying to maximize advertising profits, which means maximizing "engagement," which means maximizing interaction.</p>
+<p>Their incentive isn't to create the best experience possible, but rather to create the worst experience that users will tolerate.</p>
+<p>This article from the Onion is focused on Facebook, but I think it sums up the whole problem nicely.</p>
+<p><a href="https://www.theonion.com/facebook-we-will-make-our-product-worse-you-will-be-1819575256">theonion.com/facebook-we-will-make-our-product-worse-you-will-be-1819575256</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2022-12-12T05:52:26.634Z" class="reply"><span class="user">William Taysom</span> <a href="./?fromDate=2022-12-09&amp;toDate=2022-12-15&amp;channel=share-your-work&amp;filter=#2022-12-12T05:52:26.634Z" class="date">2022-12-12 05:52:26</a> <div class="message"><p>Here's to Robot Odyssey and the Witness!</p>
+<p>The best views of data tend to combine perspectives, like a "three quarter view" <a href="https://en.wikipedia.org/wiki/Portrait_painting#three-quarter_view">en.wikipedia.org/wiki/Portrait_painting#three-quarter_view</a> does the face. It let you see the interaction of properties rather individual properties in isolation.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
