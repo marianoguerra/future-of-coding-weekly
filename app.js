@@ -75,15 +75,19 @@ function onCommentsFinished(_contributors, authors) {
       textAreaMd = document.getElementById('output-md');
     console.log(twitterHandles);
 
-    textArea.innerHTML = textArea.innerHTML.replace('%TWITTER_HANDLES%', twitterHandles).replace(/%TOPICS%/g, textAreaMd.innerHTML.trim().split('\n')[0]);
+    textArea.innerHTML = textArea.innerHTML
+      .replace('%TWITTER_HANDLES%', twitterHandles)
+      .replace(/%TOPICS%/g, textAreaMd.innerHTML.trim().split('\n')[0]);
   }, 500);
 
   outputNode.appendChild(
     ce(
       'p',
       {},
-      'By ',
-      link('https://twitter.com/warianoguerra', '@warianoguerra')
+      '👨🏽‍💻 By ',
+      link('https://vis.social/@marianoguerra', '🐘 @marianoguerra@vis.social'),
+      ' ',
+      link('https://twitter.com/warianoguerra', '🐦 @warianoguerra')
     )
   );
 
@@ -91,7 +95,7 @@ function onCommentsFinished(_contributors, authors) {
     ce(
       'p',
       {},
-      'Not a member yet? Check the ',
+      '💬 Not a member yet? Check the ',
       link('https://futureofcoding.org/', 'Future of Coding Community')
     )
   );
@@ -100,7 +104,7 @@ function onCommentsFinished(_contributors, authors) {
     ce(
       'p',
       {},
-      'Not subscribed yet? ',
+      '✉️ Not subscribed yet? ',
       link(
         'https://tinyletter.com/marianoguerra/',
         'Subscribe to the Newsletter'
@@ -114,9 +118,18 @@ function onCommentsFinished(_contributors, authors) {
     )
   );
 
-  document.getElementById(
-    'output-html'
-  ).textContent = outputNode.innerHTML.replace(/<p>/g, '\n\n<p>').trim();
+  outputNode.appendChild(
+    ce(
+      'p',
+      {},
+      '🎙 prefer podcasts? check the ',
+      link('https://futureofcoding.org/episodes/', 'Future of Coding Podcast')
+    )
+  );
+
+  document.getElementById('output-html').textContent = outputNode.innerHTML
+    .replace(/<p>/g, '\n\n<p>')
+    .trim();
   document.getElementById('output-md').textContent = mdOutput;
 }
 
@@ -216,17 +229,16 @@ const customRules = {
     paragraph: overrideDefaultHtml('paragraph', function (node, output, state) {
       return '<p>' + output(node.content, state) + '</p>\n';
     }),
-    blockQuote: overrideDefaultHtml('blockQuote', function (
-      node,
-      output,
-      state
-    ) {
-      return (
-        '<blockquote style="margin-left:1em;color:#555555;font-style:italic">' +
-        output(node.content, state) +
-        '</blockquote>\n'
-      );
-    }),
+    blockQuote: overrideDefaultHtml(
+      'blockQuote',
+      function (node, output, state) {
+        return (
+          '<blockquote style="margin-left:1em;color:#555555;font-style:italic">' +
+          output(node.content, state) +
+          '</blockquote>\n'
+        );
+      }
+    ),
   },
   rules = Object.assign({}, defaultRules, customRules),
   rawBuiltParser = SimpleMarkdown.parserFor(rules),

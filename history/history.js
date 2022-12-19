@@ -173,10 +173,10 @@ function enrichAttachment(att) {
       )
       .replace(/\n/g, '\n> ');
     att.$text = `\n> 🐦 [${att.author_name}](https://twitter.com/${att.author_subname}): ${text}`;
-  } else if (att.service_name === 'YouTube') {
+  } else if (att.service_name === 'YouTube' || att.service_name === 'Vimeo') {
     att.$text = `> 🎥 [${att.title}](${att.title_link})`;
   } else if (att.title && att.title_link) {
-    att.$text = `> 🔗 [${att.title}](${att.title_link})`;
+    att.$text = `> 📝 [${att.title}](${att.title_link})`;
   } else if (att.image_url) {
     att.$text = `> 📷 [${att.fallback || att.image_url}](${att.image_url})`;
   } else if (att.fallback) {
@@ -188,16 +188,25 @@ function enrichAttachment(att) {
 
 function attachmentCanBeFirstLink(att) {
   return (
-    att && (att.service_name === 'YouTube' || (att.title && att.title_link))
+    att &&
+    (att.service_name === 'YouTube' ||
+      att.service_name === 'Vimeo' ||
+      (att.title && att.title_link))
   );
 }
 
 function attachmentThumbnail(att) {
-  if (att && att.service_name === 'YouTube') {
-    return urlThumbnail(att.title_link);
-  } else {
+  if (!att) {
     return null;
   }
+
+  if (att.service_name === 'YouTube') {
+    return urlThumbnail(att.title_link);
+  } else if (att.service_name === 'Vimeo') {
+    return `![Vimeo Thumbnail](${att.thumb_url})`;
+  }
+
+  return null;
 }
 
 const YOUTUBE_REGEX = /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})/i;
@@ -205,7 +214,7 @@ function urlThumbnail(url) {
   const match = url.match(YOUTUBE_REGEX),
     id = match && match[1];
   if (id) {
-    return `![Thumbnail](https://img.youtube.com/vi/${id}/hqdefault.jpg)`;
+    return `![Youtube Thumbnail](https://img.youtube.com/vi/${id}/hqdefault.jpg)`;
   } else {
     return null;
   }
