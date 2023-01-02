@@ -10,7 +10,7 @@ history-index:
 
 update-search-index:
 	git pull
-	python3 search/tools/ingest.py 'history/20*' history/users.json
+	python3 search/tools/ingest.py 'history/202{2,3}' history/users.json
 
 download-message-files:
 	./attachmentdump.py "history/${HISTORY_YEAR}/*/*/*.json" history/msg_files/ ${SLACK_TOKEN}

@@ -1,0 +1,848 @@
+[
+    {
+        "client_msg_id": "17f1a23f-651c-4779-b83c-3995d9312377",
+        "type": "message",
+        "text": "It seems to me that the whole construct of _functions_ as primitives that take arguments and produce results leads to boilerplate and duplication because it needlessly privileges arguments as \"independent variables\". I'll use an example to elucidate:\n\nTake a rectangle of base `b` and height `h`. It's common to think of these as \"independent\" variables and define quantities like the following as \"dependent\":\n\n\u2022 `perimeter(b, h) =&gt; 2*(b+h)`\n\u2022 `area(b, h) =&gt; b*h`\n\u2022 `diagonal(b, h) =&gt; sqrt(b^2+h^2)`\nBut if I were to ask, what are the base and height of a rectangle whose area is `a` and diagonal is `d`, our programming languages have no tooling to do this (except the symbolic manipulation libraries for computer algebra). All the required information is there but we have privileged `b` and `h` over `area` and `diagonal` and thus, we now need to figure out the formula for side lengths and program it as the function `sides(a, d)`\n\nI should be able to describe a structure, and auto-generate all possible functions (including for currying and partial applications, and while we are at it, all the partial derivatives with respect to each other) so that i can just declare what is known and what I want to calculate. A rectangle can then be represented with any set of variables that make everything else determinable. I should get access to all possible constructors like  `new Rectangle(area: a, diagonal: d)`.\n\nAnd I want to see this be available for all programming tasks, not just algebra/math. For creating a graph, is the constructor `new Graph(Nodes[], Edges[])` really the privileged one? Why not build languages in a way that I automatically get the constructor `new Graph(AdjacencyMatrix)` and the instance methods `graph.getNodes()` and `graph.getEdges()?`",
+        "user": "U018S42NMMM",
+        "ts": "1672318746.147299",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "T6d",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It seems to me that the whole construct of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "functions",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " as primitives that take arguments and produce results leads to boilerplate and duplication because it needlessly privileges arguments as \"independent variables\". I'll use an example to elucidate:\n\nTake a rectangle of base "
+                            },
+                            {
+                                "type": "text",
+                                "text": "b",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and height "
+                            },
+                            {
+                                "type": "text",
+                                "text": "h",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". It's common to think of these as \"independent\" variables and define quantities like the following as \"dependent\":\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "perimeter(b, h) => 2*(b+h)",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "area(b, h) => b*h",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "diagonal(b, h) => sqrt(b^2+h^2)",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nBut if I were to ask, what are the base and height of a rectangle whose area is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "a",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and diagonal is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "d",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", our programming languages have no tooling to do this (except the symbolic manipulation libraries for computer algebra). All the required information is there but we have privileged "
+                            },
+                            {
+                                "type": "text",
+                                "text": "b",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "h",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " over "
+                            },
+                            {
+                                "type": "text",
+                                "text": "area",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "diagonal",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and thus, we now need to figure out the formula for side lengths and program it as the function "
+                            },
+                            {
+                                "type": "text",
+                                "text": "sides(a, d)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI should be able to describe a structure, and auto-generate all possible functions (including for currying and partial applications, and while we are at it, all the partial derivatives with respect to each other) so that i can just declare what is known and what I want to calculate. A rectangle can then be represented with any set of variables that make everything else determinable. I should get access to all possible constructors like  "
+                            },
+                            {
+                                "type": "text",
+                                "text": "new Rectangle(area: a, diagonal: d)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nAnd I want to see this be available for all programming tasks, not just algebra/math. For creating a graph, is the constructor "
+                            },
+                            {
+                                "type": "text",
+                                "text": "new Graph(Nodes[], Edges[])",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " really the privileged one? Why not build languages in a way that I automatically get the constructor "
+                            },
+                            {
+                                "type": "text",
+                                "text": "new Graph(AdjacencyMatrix)",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and the instance methods "
+                            },
+                            {
+                                "type": "text",
+                                "text": "graph.getNodes()",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "graph.getEdges()?",
+                                "style": {
+                                    "code": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U018S42NMMM",
+            "ts": "1672319287.000000"
+        },
+        "thread_ts": "1672318746.147299",
+        "reply_count": 10,
+        "reply_users_count": 7,
+        "latest_reply": "1672549026.270759",
+        "reply_users": [
+            "UNCP67JSK",
+            "UGWUJUZHT",
+            "UK3LH8CF5",
+            "U01AD80KMLK",
+            "U016VUZGUUQ",
+            "UJBAJNFLK",
+            "UA14TGLTC"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "fire",
+                "users": [
+                    "UNCP67JSK",
+                    "UFPRPSA4S"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "A9CEF4DC-642B-47DE-9DEC-72CB308B93B9",
+        "type": "message",
+        "text": "Yes! Another example: `range{start.inclusive, end.exclusive, domain is int{0..30}, end=start+length, midpoint?, length?}` ; By using constraints to define relations, and invertable/full on algebraic operations; an expression could be automatically reworked to isolate different set of variables; and provide ability to change them. Eg, here, changing the length will lead to an ambiguous case (&gt;1 free variable), but with a structural editor, it may show all possible interpretations for you to select (eg. keep end or start fixed, or scale track around certain point, or add custom interpretation logic (eg. using non-linear scaling)). Integrating this system deeply with the UI would allow pretty much auto-generation of it just from the expression/range concept, auto supporting all interaction (drag track, endpoints, scale around scalepoint, etc), which would otherwise have been pages of code in eg. current web development...",
+        "user": "UNCP67JSK",
+        "ts": "1672319944.798189",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5m5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes! Another example: "
+                            },
+                            {
+                                "type": "text",
+                                "text": "range{start.inclusive, end.exclusive, domain is int{0..30}, end=start+length, midpoint?, length?}",
+                                "style": {
+                                    "bold": false,
+                                    "italic": false,
+                                    "strike": false,
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ; By using constraints to define relations, and invertable/full on algebraic operations; an expression could be automatically reworked to isolate different set of variables; and provide ability to change them. Eg, here, changing the length will lead to an ambiguous case (>1 free variable), but with a structural editor, it may show all possible interpretations for you to select (eg. keep end or start fixed, or scale track around certain point, or add custom interpretation logic (eg. using non-linear scaling)). Integrating this system deeply with the UI would allow"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "pretty much auto-generation of it just from the expression/range concept"
+                            },
+                            {
+                                "type": "text",
+                                "text": ","
+                            },
+                            {
+                                "type": "text",
+                                "text": " auto supporting all interaction (drag track, endpoints, scale around scalepoint, etc), which would otherwise have been pages of code in eg. current web"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "development..."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM"
+    },
+    {
+        "client_msg_id": "09C47096-0416-48E4-9ABE-8832D661A550",
+        "type": "message",
+        "text": "(Instead of generating function... why not just keep everything declarative at its core? :)) )",
+        "user": "UNCP67JSK",
+        "ts": "1672320081.637449",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RaZWx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(Instead of generating function"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": ".. why not just keep everything declarative at its core? :)) )"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UGWUJUZHT",
+                    "UJBAJNFLK"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f18cbc00-cf99-40e5-ad62-dde40eb06086",
+        "type": "message",
+        "text": "See, also, PROLOG, miniKanren, constraints, unification.\n\nMy quickie tutorial <https://www.youtube.com/watch?v=QOYAHoLiyg0> includes converting a query result to JSON.",
+        "user": "UGWUJUZHT",
+        "ts": "1672323545.388619",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "gOL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "See, also, PROLOG, miniKanren, constraints, unification.\n\nMy quickie tutorial "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.youtube.com/watch?v=QOYAHoLiyg0"
+                            },
+                            {
+                                "type": "text",
+                                "text": " includes converting a query result to JSON."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://www.youtube.com/watch?v=QOYAHoLiyg0",
+                "thumb_url": "https://i.ytimg.com/vi/QOYAHoLiyg0/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/QOYAHoLiyg0?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen title=\"PROLOG for Programmers\"></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "id": 1,
+                "original_url": "https://www.youtube.com/watch?v=QOYAHoLiyg0",
+                "fallback": "YouTube Video: PROLOG for Programmers",
+                "title": "PROLOG for Programmers",
+                "title_link": "https://www.youtube.com/watch?v=QOYAHoLiyg0",
+                "author_name": "computingsimplicity computingsimplicity",
+                "author_link": "https://www.youtube.com/@computingsimplicitycomputi8095",
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/"
+            }
+        ],
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U013ZLJARC7",
+                    "UJBAJNFLK",
+                    "U0242H3GHHT"
+                ],
+                "count": 3
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "U018S42NMMM",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "E64CFA19-3EC9-4845-826E-0F50D30CEA37",
+        "type": "message",
+        "text": "You might enjoy <https://dl.acm.org/doi/10.1145/3397537.3397546|https://dl.acm.org/doi/10.1145/3397537.3397546>\n\nBut I\u2019ll also just mention term rewriting in case you aren\u2019t familiar. It\u2019s how Mathematica is able to do the sorts of things you listed. It\u2019s a shame there is no mainstream, non-proprietary language based on it. ",
+        "user": "UK3LH8CF5",
+        "ts": "1672327142.420499",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "T11Hp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You might enjoy "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://dl.acm.org/doi/10.1145/3397537.3397546",
+                                "text": "https://dl.acm.org/doi/10.1145/3397537.3397546"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nBut I\u2019ll also just mention term rewriting in case you aren\u2019t familiar. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "It\u2019s"
+                            },
+                            {
+                                "type": "text",
+                                "text": " how Mathematica is able to do the sorts of things you listed"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "It\u2019s"
+                            },
+                            {
+                                "type": "text",
+                                "text": " a shame there is no mainstream, non-proprietary language based on it"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U018S42NMMM",
+                    "UJBAJNFLK",
+                    "U03R0B9U1GD",
+                    "UA14TGLTC"
+                ],
+                "count": 4
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6ffb944e-93b4-47fd-8167-05eecce7628d",
+        "type": "message",
+        "text": "seems to me exactly what oo systems do, having different constructors, and providing methods on the objects?",
+        "user": "U01AD80KMLK",
+        "ts": "1672332259.123779",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3qG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "seems to me exactly what oo systems do, having different constructors, and providing methods on the objects?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM"
+    },
+    {
+        "client_msg_id": "a73200dd-0d66-4723-9fb0-3d9c22a76fc0",
+        "type": "message",
+        "text": "An OO system won't just casually reconstruct a side of a rectangle from the other side and the diagonal, no. TBH I'm leery of that sort of thing from a performance standpoint. I don't want to have to think too hard to know when my code is doing sqrt's. Logic programming is cool, but I definitely don't want it all the time.",
+        "user": "U016VUZGUUQ",
+        "ts": "1672336993.777759",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/f6h9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "An OO system won't just casually reconstruct a side of a rectangle from the other side and the diagonal, no. TBH I'm leery of that sort of thing from a performance standpoint. I don't want to have to think too hard to know when my code is doing sqrt's. Logic programming is cool, but I definitely don't want it all the time."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM"
+    },
+    {
+        "client_msg_id": "d470e14e-4de1-4806-b515-391f6c941154",
+        "type": "message",
+        "text": "aside: If you need to steal/get-ideas-from code: the yawningly easiest-to-understand implementation of PROLOG is Nils Holm\u2019s <http://www.t3x.org/bits/prolog6.html> (it\u2019s so easy, that I ported it to 2 other languages - JavaScript and CL). If you want to dig in and make an optimized PROLOG, look at WAM (Warren Abstract Machine).  Ait Kaci\u2019s tutorial is helpful <https://en.wikipedia.org/wiki/Warren_Abstract_Machine> (I had found a $0 download, but can\u2019t find it at this moment). Gprolog is implemented with WAM and can be forced to show what WAM it generates. MiniKanren is relational programming done without backtracking <http://minikanren.org>.",
+        "user": "UGWUJUZHT",
+        "ts": "1672342069.809789",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zxakx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "aside: If you need to steal/get-ideas-from code: the yawningly easiest-to-understand implementation of PROLOG is Nils Holm\u2019s "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://www.t3x.org/bits/prolog6.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (it\u2019s so easy, that I ported it to 2 other languages - JavaScript and CL). If you want to dig in and make an optimized PROLOG, look at WAM (Warren Abstract Machine).  Ait Kaci\u2019s tutorial is helpful "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://en.wikipedia.org/wiki/Warren_Abstract_Machine"
+                            },
+                            {
+                                "type": "text",
+                                "text": " (I had found a $0 download, but can\u2019t find it at this moment). Gprolog is implemented with WAM and can be forced to show what WAM it generates. MiniKanren is relational programming done without backtracking "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://minikanren.org"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UJBAJNFLK",
+                    "U018S42NMMM"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "5700519a-bf28-4cda-8092-1fa510fdc22d",
+        "type": "message",
+        "text": "This issue is quite serious in scientific computing. A mathematical equation is a lot more than a piece of code that implements a particular evaluation based on it. And yet, we see equations disappear, to be replaced by less valuable code.\n\nMy attempt to fix this is to move from _programming_ to _specification_ languages. You'd write equations defining the relations for a rectangle in the specification languages, and then either read them into your program, or derive your program from them.\n\nDetails: <http://blog.khinsen.net/posts/2020/12/10/the-structure-and-interpretation-of-scientific-models/>",
+        "user": "UJBAJNFLK",
+        "ts": "1672342311.312259",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iUn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This issue is quite serious in scientific computing. A mathematical equation is a lot more than a piece of code that implements a particular evaluation based on it. And yet, we see equations disappear, to be replaced by less valuable code.\n\nMy attempt to fix this is to move from "
+                            },
+                            {
+                                "type": "text",
+                                "text": "programming",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "specification",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " languages. You'd write equations defining the relations for a rectangle in the specification languages, and then either read them into your program, or derive your program from them.\n\nDetails: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://blog.khinsen.net/posts/2020/12/10/the-structure-and-interpretation-of-scientific-models/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "http://blog.khinsen.net/posts/2020/12/10/the-structure-and-interpretation-of-scientific-models/",
+                "id": 1,
+                "original_url": "http://blog.khinsen.net/posts/2020/12/10/the-structure-and-interpretation-of-scientific-models/",
+                "fallback": "The structure and interpretation of scientific models",
+                "text": "It is often said that science rests on two pillars, experiment and theory. Which has lead some to propose one or two additional pillars for the computing age: simulation and data analysis. However, the _real_ two pillars of science are observations and mo...",
+                "title": "The structure and interpretation of scientific models",
+                "title_link": "http://blog.khinsen.net/posts/2020/12/10/the-structure-and-interpretation-of-scientific-models/",
+                "service_name": "blog.khinsen.net"
+            }
+        ],
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U018S42NMMM",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a9925dcb-8c32-41f1-9d9a-a3d93439da09",
+        "type": "message",
+        "text": "Relatedly, most if not all validation concerns arise from data dependencies.  Take, for instance, an `Event` with a `start_date` and an `end_date`.  Naturally, we should have `start_date \u2264 end_date` in the end, but for a UI, it can be nice to choose them in either order or to have an `InconsistentEvent` that then gets fixed by the time you use it.  But some operations over regular events still sense for inconsistent events.",
+        "user": "UA14TGLTC",
+        "ts": "1672548569.820709",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yD9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Relatedly, most if not all validation concerns arise from data dependencies.  Take, for instance, an "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Event",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " with a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "start_date",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and an "
+                            },
+                            {
+                                "type": "text",
+                                "text": "end_date",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".  Naturally, we should have "
+                            },
+                            {
+                                "type": "text",
+                                "text": "start_date \u2264 end_date",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in the end, but for a UI, it can be nice to choose them in either order or to have an "
+                            },
+                            {
+                                "type": "text",
+                                "text": "InconsistentEvent",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " that then gets fixed by the time you use it.  But some operations over regular events still sense for inconsistent events."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UA14TGLTC",
+            "ts": "1672548574.000000"
+        },
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "U016VUZGUUQ",
+                    "UNCP67JSK"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "daa46c6b-1571-4a43-a042-ce7e866c4ead",
+        "type": "message",
+        "text": "Also thinking about scheduling dependencies from assembling LEGO with my son and his friend yesterday.  Friend's mind was blown to see son and I concurrently working on different steps.\n\nEarlier this year, concurrency concerns lead me down a path to radically improving the expressivity of my software's model layer because being explicit about data-dependencies allowed for context-based resolution of references.",
+        "user": "UA14TGLTC",
+        "ts": "1672549026.270759",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "emI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Also thinking about scheduling dependencies from assembling LEGO with my son and his friend yesterday.  Friend's mind was blown to see son and I concurrently working on different steps.\n\nEarlier this year, concurrency concerns lead me down a path to radically improving the expressivity of my software's model layer because being explicit about data-dependencies allowed for context-based resolution of references."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1672318746.147299",
+        "parent_user_id": "U018S42NMMM"
+    }
+]
