@@ -1,0 +1,49 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2023-01-06T10:55:04.972Z" class="post"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-01-03&amp;toDate=2023-01-09&amp;channel=thinking-together&amp;filter=#2023-01-06T10:55:04.972Z" class="date">2023-01-06 10:55:04</a> <div class="message"><p>Inspired by <a href="./?fromDate=2022-12-31&amp;toDate=2023-01-06&amp;channel=linking-together&amp;filter=#2023-01-03T14:27:40.085Z">💬 #linking-together@2023-01-03T14:27:40.085Z</a> and <a href="https://futureofcoding.slack.com/archives/C5U3SEW6A/p1672816690782479">futureofcoding.slack.com/archives/C5U3SEW6A/p1672816690782479</a>, plus my daily work with a Smalltalk system, I started thinking about high-level architectures of information processing systems.</p>
+<p>Spreadsheets are two-layer systems, with a data grid on top and a code grid below it. That's a good architecture for dealing with heterogeneous grid-shaped data and shallow computation. For homogeneous grid-shaped data (arrays, data frames) you'd prefer to compute with the grid as a whole, and for complex/deep computation, you want a more code-centric architecture. You can of course prepare the complex code in some other architecture and just call it from a spreadsheet. High-level architectures can be composed.</p>
+<p>Dataflow graphs, of which Data Rabbit is an amazing implementation, have nodes containing code and data flowing through the edges. They can deal with irregularly shaped data, even messy data, but, like spreadsheets, they are limited to shallow computation.</p>
+<p>A Smalltalk image is a code database built on top of a an unstructured "object lake". It's great for dealing with complex code, but has no high-level structure for data. You can, and have to, roll your own. From this point of view, a Smalltalk image is the perfect complement to a spreadsheet or a data flow graph, having opposite strengths and weaknesses.</p>
+<p>So... are they more such high-level structures that have proven useful in practice? Is there just a small set whose elements can be combined, or should we expect a large number of unrelated architectures being good for specific purposes? Note that I am thinking about "good for", not "applicable to". All Turing-complete systems are equivalent in principle, but that doesn't make them good tools for all purposes. My question is ultimately one of human-computer interaction.</p>
+</div> <div class="attachments"><blockquote><p>[January 3rd, 2023 6:27 AM] nilesh.tr: <a href="https://www.youtube.com/watch?v=U9uZlEqUQw0">https://www.youtube.com/watch?v=U9uZlEqUQw0</a> by &lt;@UNE19BRU4&gt;</p>
+<p>[January 3rd, 2023 11:18 PM] jack529: Loads of good FOC stuff here:
+<a href="https://www.youtube.com/watch?v=bXRDfxp_4H0">https://www.youtube.com/watch?v=bXRDfxp_4H0</a></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2023-01-06T11:22:43.236Z" class="reply"><span class="user">Duncan Cragg</span> <a href="./?fromDate=2023-01-03&amp;toDate=2023-01-09&amp;channel=thinking-together&amp;filter=#2023-01-06T11:22:43.236Z" class="date">2023-01-06 11:22:43</a> <div class="message"><p>I don't watch videos normally, because I can scan text in a tenth of the time, so I'm not entirely sure what you're asking here: do you mean are there architectures that structure both code and data in the UX?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-06T12:11:49.222Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-01-03&amp;toDate=2023-01-09&amp;channel=thinking-together&amp;filter=#2023-01-06T12:11:49.222Z" class="date">2023-01-06 12:11:49</a> <div class="message"><p>Could be UX, as in spreadsheets or in Data Rabbit, both of which target end users. But in a scenario where developers and users are distinct, it would be the top level at which developers work when assembling a system.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-06T17:00:41.662Z" class="reply"><span class="user">George Campbell</span> <a href="./?fromDate=2023-01-03&amp;toDate=2023-01-09&amp;channel=thinking-together&amp;filter=#2023-01-06T17:00:41.662Z" class="date">2023-01-06 17:00:41</a> <div class="message"><p>Have you looked into pandas python library. it has a data frames class that operates kind of like the data layer of a spread sheet. </p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-06T17:08:46.895Z" class="reply"><span class="user">Jack Rusher</span> <a href="./?fromDate=2023-01-03&amp;toDate=2023-01-09&amp;channel=thinking-together&amp;filter=#2023-01-06T17:08:46.895Z" class="date">2023-01-06 17:08:46</a> <div class="message"><p>The Smalltalk "object lake" (love the term) is, crucially, organized as a tree. There's a similar structure to the objects in CLOS. I would say that a tree of things that inherit (for some definition of "inherit") traits from their parents is one of these "mother sauce" sorts of things.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-06T18:11:47.753Z" class="reply"><span class="user">Jason Chan</span> <a href="./?fromDate=2023-01-03&amp;toDate=2023-01-09&amp;channel=thinking-together&amp;filter=#2023-01-06T18:11:47.753Z" class="date">2023-01-06 18:11:47</a> <div class="message"><p>I’ve actually been thinking a lot about this topic as we’ve been building a new spreadsheet web app. What we came up with was to nudge folks to input in their data properly and separate data from their analysis (all the math and functions). So that’s why our app looks like table grid blocks on an endless canvas vs the more traditional spreadsheet editor which is just one big table grid</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-07T09:01:41.095Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-01-04&amp;toDate=2023-01-10&amp;channel=thinking-together&amp;filter=#2023-01-07T09:01:41.095Z" class="date">2023-01-07 09:01:41</a> <div class="message"><p><strong>@Jason Chan</strong> Separating data from analysis is very much the mainstream approach. What's interesting to me is how they end up being put together in the end. The mainstream there is having the code manage the data in an ad-hoc fashion, through the OS' file system.</p>
+<p>So how does this work in your new spreadsheet? You have the data grid as in traditional spreadsheets. How is it hooked up with the code?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-07T09:03:59.964Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-01-04&amp;toDate=2023-01-10&amp;channel=thinking-together&amp;filter=#2023-01-07T09:03:59.964Z" class="date">2023-01-07 09:03:59</a> <div class="message"><p><a href="https://twitter.com/jackrusher">Jack Rusher</a> Yes, tree structures are important. But I don't agree that Smalltalk or CLOS objects form a tree. Cycles are permitted, and actually quite frequent, at least in Smalltalk. So at the lowest level, it's just objects pointing to each other.</p>
+<p>BTW, I didn't make up the term "object lake", I saw it somewhere, but don't remember where!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-07T09:05:57.409Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-01-04&amp;toDate=2023-01-10&amp;channel=thinking-together&amp;filter=#2023-01-07T09:05:57.409Z" class="date">2023-01-07 09:05:57</a> <div class="message"><p><a href="https://gibr.net/">George Campbell</a> Pandas works much like other data-frame-based languages and libraries (R, ...): the data takes the form of tables (homogeneous in rows, heterogeneous in columns), and the code operates on the aggregate (table, row, column), not the individual data item as in spreadsheets.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-07T16:01:16.558Z" class="reply"><span class="user">Jack Rusher</span> <a href="./?fromDate=2023-01-04&amp;toDate=2023-01-10&amp;channel=thinking-together&amp;filter=#2023-01-07T16:01:16.558Z" class="date">2023-01-07 16:01:16</a> <div class="message"><p>I'm talking about the tree (which can reticulate, of course) represented by (in the Smalltalk context) the class browser. The objects themselves relate to that tree-shaped thing in specific ways, &amp;c. There's similar stuff going on in CLOS, but with different affordances for navigating those relationships.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
