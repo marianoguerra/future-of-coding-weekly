@@ -122,7 +122,7 @@ function onCommentsFinished(_contributors, authors) {
     ce(
       'p',
       {},
-      '🎙 prefer podcasts? check the ',
+      '🎙 Prefer podcasts? check the ',
       link('https://futureofcoding.org/episodes/', 'Future of Coding Podcast')
     )
   );
