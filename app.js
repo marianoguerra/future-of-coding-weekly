@@ -59,6 +59,7 @@ function link(url, label) {
   return ce('a', {href: url, target: '_blank'}, label || url);
 }
 
+const TWITTER_HANDLES_TO_FILTER = new Set(['warianoguerra']);
 function onCommentsFinished(_contributors, authors) {
   console.log(authors);
   const outputNode = document.getElementById('output'),
@@ -71,12 +72,17 @@ function onCommentsFinished(_contributors, authors) {
   );
 
   window.setTimeout(() => {
-    const twitterHandles = authorsSorted.map((name) => '@' + name).join(' '),
+    const twitterHandles = authorsSorted
+        .filter((name) => !TWITTER_HANDLES_TO_FILTER.has(name))
+        .map((name) => '@' + name)
+        .join(' '),
       textArea = document.getElementById('output-help'),
-      textAreaMd = document.getElementById('output-md');
+      textAreaMd = document.getElementById('output-md'),
+      {newsletterUrl} = getInfoForWeekAndDay(new Date(), MONDAY);
     console.log(twitterHandles);
 
     textArea.innerHTML = textArea.innerHTML
+      .replace('%NEWSLETTER_URL%', newsletterUrl)
       .replace('%TWITTER_HANDLES%', twitterHandles)
       .replace(/%TOPICS%/g, textAreaMd.innerHTML.trim().split('\n')[0]);
   }, 500);

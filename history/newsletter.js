@@ -46,7 +46,9 @@ function getInfoForWeekAndDay(now, dayNumber) {
     weekStr = `W${weekNumber}`,
     monthStr = zeroPad(now.getMonth() + 1),
     curYear = now.getFullYear(),
-    issueTitle = `Future of Coding Weekly ${curYear}/${monthStr} Week ${weekNumber}`;
+    issueTitle = `Future of Coding Weekly ${curYear}/${monthStr} Week ${weekNumber}`,
+    newsletterUrl = `https://tinyletter.com/marianoguerra/letters/future-of-coding-weekly-${curYear}-${monthStr}-week-${weekNumber}`;
+
   prevDay.setDate(prevDay.getDate() - 7);
 
   const prevDateStr = formatDay(prevDay),
@@ -62,6 +64,7 @@ function getInfoForWeekAndDay(now, dayNumber) {
     monthStr,
     curYear,
     issueTitle,
+    newsletterUrl,
   };
 }
 
