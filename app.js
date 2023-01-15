@@ -26,7 +26,7 @@ function ce(tag, attrs, ...body) {
   return node;
 }
 
-let mdOutput = `# ${getInfoForWeekAndDay(new Date(), MONDAY).issueTitle}`;
+let mdOutput = `# ${getInfoForWeekAndDay(new Date(), MONDAY).issueTitle}\n\n`;
 function handleComment(comment, node, authors) {
   const container = ce('div', {style: 'margin-top:1em'}),
     markdown = comment.body,
