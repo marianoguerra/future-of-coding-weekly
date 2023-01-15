@@ -1,5 +1,5 @@
 //@format
-/*globals Vue, Set*/
+/*globals Vue, Set, Promise*/
 import {
   dateDayOffset,
   loadUsers,
@@ -19,6 +19,7 @@ import {
   EXPORT_HTML_SUFFIX,
   setHistoryPathBase,
 } from './history.js';
+import {getInfoForWeekAndDay, MONDAY} from './newsletter.js';
 import {AUTHORS} from './common.js';
 
 setHistoryPathBase('.');
@@ -73,7 +74,7 @@ function main() {
         ) {
           if (dateIsLessThanDate(fromDate, toDateFinal)) {
             const [year, month, day] = dateParts(fromDate),
-              path = `${year}/${month}/${day}/${channel}.json`;
+              path = `${year}/${month}/${day}/${channel}.json?t=${new Date().getTime()}`;
 
             this.loadingStatus = 'Loading ' + path;
 
@@ -121,13 +122,18 @@ function main() {
             toDate = addDays(fromDate, 1),
             olderMessagesToLoad = [];
 
-          this.loadChannelDate(
-            channel,
-            fromDate,
-            toDate,
-            toDateFinal,
-            olderMessagesToLoad,
-            (info) => this.onLoadChannelDateRangeFinished(info)
+          return new Promise((resolve) =>
+            this.loadChannelDate(
+              channel,
+              fromDate,
+              toDate,
+              toDateFinal,
+              olderMessagesToLoad,
+              (info) => {
+                this.onLoadChannelDateRangeFinished(info);
+                resolve(info);
+              }
+            )
           );
         },
         onLoadChannelDateRangeFinished: function ({
@@ -210,7 +216,7 @@ function main() {
           this.history.msgs = [];
           this.history.msgsByTs = {};
 
-          this.loadChannelDateRange(this.channel, fromDate, toDate);
+          return this.loadChannelDateRange(this.channel, fromDate, toDate);
         },
         getDumpFileName: function (extension) {
           return this.channel + '.' + extension;
@@ -353,7 +359,16 @@ function main() {
 
   app.updateQueryLink();
   if (someParam) {
-    infoProm.then((_) => app.loadSelected());
+    infoProm
+      .then((_) => app.loadSelected())
+      .then((info) => {
+        console.log('finished!', info);
+        if (query.forNewsletter !== undefined) {
+          // {prevDay, nextDay, weekNumber, weekStr, monthStr, curYear}
+          const {weekStr} = getInfoForWeekAndDay(new Date(), MONDAY);
+          app.exportThisAsNewsletterWithWeek(weekStr);
+        }
+      });
   }
 
   window.focApp = app;

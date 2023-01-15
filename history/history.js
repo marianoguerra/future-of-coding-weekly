@@ -22,7 +22,7 @@ function loadMsgsForDay(year, month0, day0, channel) {
 }
 
 function loadUsers() {
-  return fetch(`${historyPathBase}/users.json`)
+  return fetch(`${historyPathBase}/users.json?t=${new Date().getTime()}`)
     .then((resp) => resp.json())
     .then((usersData) => {
       return usersToUsersById(usersData);
@@ -30,7 +30,7 @@ function loadUsers() {
 }
 
 function loadChannels() {
-  return fetch(`${historyPathBase}/channels.json`)
+  return fetch(`${historyPathBase}/channels.json?t=${new Date().getTime()}`)
     .then((resp) => resp.json())
     .then((data) => {
       return channelsToChannelsById(data);

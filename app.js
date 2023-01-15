@@ -1,5 +1,6 @@
 //@format
 /*globals Set, SimpleMarkdown*/
+import {getInfoForWeekAndDay, MONDAY} from './history/newsletter.js';
 const USER = 'marianoguerra',
   REPO = 'future-of-coding-weekly',
   ISSUES_URL = `https://api.github.com/repos/${USER}/${REPO}/issues`;
@@ -25,7 +26,7 @@ function ce(tag, attrs, ...body) {
   return node;
 }
 
-let mdOutput = '';
+let mdOutput = `# ${getInfoForWeekAndDay(new Date(), MONDAY).issueTitle}`;
 function handleComment(comment, node, authors) {
   const container = ce('div', {style: 'margin-top:1em'}),
     markdown = comment.body,
@@ -126,6 +127,8 @@ function onCommentsFinished(_contributors, authors) {
       link('https://futureofcoding.org/episodes/', 'Future of Coding Podcast')
     )
   );
+
+  outputNode.appendChild(ce('p', {}, ''));
 
   document.getElementById('output-html').textContent = outputNode.innerHTML
     .replace(/<p>/g, '\n\n<p>')
