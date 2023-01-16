@@ -24,7 +24,7 @@
               <div class="field">
                 <label style="margin-right:1em" v-if="loading">Loading</label>
                 <label style="margin-right:1em" v-if="!loading">Search</label>
-                <input type="search" v-model="filter" v-on:input="doSearch()" placeholder="Type to search" autofocus>
+                <input id="search" type="search" v-model="filter" v-on:input="doSearch()" placeholder="Type to search" autofocus>
               </div>
             </div>
           </div>
@@ -37,6 +37,8 @@
             <button v-on:click="tableNext()">Next</button>
             <span style="display:inline-block;width:20em;text-align:center">{{ `${page * itemsPerPage} - ${(page + 1) * itemsPerPage} of ${links.length}` }}</span>
         </div>
+
+        <div style="color:#555;font-family:monospace;font-size:.6em;margin-bottom:1em">f: first, l: last, n: next, p: prev, N: page + 10, P: page - 10, s: focus search</div>
 
         <table class="links-table">
           <thead>

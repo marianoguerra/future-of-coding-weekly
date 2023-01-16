@@ -59,11 +59,25 @@ function main() {
         this.tableLinks = this.links.slice(from, to);
       },
       tablePrev() {
-        this.page = Math.max(0, this.page - 1);
+        this.tablePrevCount(1);
+      },
+      tablePrevCount(count) {
+        this.page = Math.max(0, this.page - count);
         this._updateTableLinks();
       },
       tableNext() {
-        this.page = this.page + 1;
+        this.tableNextCount(1);
+      },
+      tableNextCount(count) {
+        this.page = this.page + count;
+        this._updateTableLinks();
+      },
+      tableFirst() {
+        this.page = 0;
+        this._updateTableLinks();
+      },
+      tableLast() {
+        this.page = Math.floor(this.links.length / this.itemsPerPage);
         this._updateTableLinks();
       },
       doSearch() {
@@ -141,6 +155,37 @@ function main() {
       app.filter = search;
     }
     app.refilter();
+    document.body.addEventListener('keyup', (e) => {
+      if (e.target.nodeName === 'INPUT') {
+        return;
+      }
+
+      const {key} = e;
+      switch (key) {
+        case 'f':
+          app.tableFirst();
+          break;
+        case 'l':
+          app.tableLast();
+          break;
+        case 'n':
+          app.tableNext();
+          break;
+        case 'N':
+          app.tableNextCount(10);
+          break;
+        case 'p':
+          app.tablePrev();
+          break;
+        case 'P':
+          app.tablePrevCount(10);
+          break;
+        case 's':
+          document.getElementById('search').focus();
+          break;
+        default:
+      }
+    });
   }
 
   fetchUrlChunks('./links.txt', handleUrlsChunk, onUrlsFinish);
