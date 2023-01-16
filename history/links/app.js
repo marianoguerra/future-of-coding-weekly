@@ -17,12 +17,11 @@ function main() {
             clearTimeout(nextFilterId);
             nextFilterId = null;
           }
-          this._refilter(filter, this.allLinks, 0, 1000);
+          this._refilter(filter, this.allLinks, 0, 1000, []);
         }
       },
-      _refilter(filter, allLinks, i0, chunkSize) {
-        const len = Math.min(i0 + chunkSize, allLinks.length),
-          toAdd = [];
+      _refilter(filter, allLinks, i0, chunkSize, toAdd) {
+        const len = Math.min(i0 + chunkSize, allLinks.length);
         for (let i = i0; i < len; i++) {
           const link = allLinks[i];
           if (link._searchText.includes(filter)) {
@@ -30,15 +29,15 @@ function main() {
           }
         }
 
-        this.links = this.links.concat(toAdd);
         if (len < allLinks.length) {
           nextFilterId = setTimeout(
-            () => this._refilter(filter, allLinks, len, chunkSize),
+            () => this._refilter(filter, allLinks, len, chunkSize, toAdd),
             0
           );
         } else {
           nextFilterId = null;
           this.loading = false;
+          this.links = toAdd;
         }
       },
       doSearch() {
