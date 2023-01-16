@@ -68,6 +68,9 @@ function main() {
       doSearch() {
         this.refilter();
       },
+      _sortAllLinks() {
+        this.allLinks.sort((a, b) => b.date.localeCompare(a.date));
+      },
     },
   });
 
@@ -128,6 +131,7 @@ function main() {
   app.loading = true;
   function onUrlsFinish() {
     app.loading = false;
+    app._sortAllLinks();
     app.refilter();
   }
 
