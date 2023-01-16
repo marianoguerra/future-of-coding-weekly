@@ -1,5 +1,6 @@
 //@format
 /*globals Vue, TextDecoderStream*/
+
 function main() {
   let nextFilterId = null;
   const app = new Vue({
@@ -67,6 +68,7 @@ function main() {
       },
       doSearch() {
         this.refilter();
+        history.replaceState({}, null, '?search=' + this.filter);
       },
       _sortAllLinks() {
         this.allLinks.sort((a, b) => b.date.localeCompare(a.date));
@@ -132,6 +134,12 @@ function main() {
   function onUrlsFinish() {
     app.loading = false;
     app._sortAllLinks();
+    const query = new URLSearchParams(location.search),
+      search = query.get('search');
+
+    if (search) {
+      app.filter = search;
+    }
     app.refilter();
   }
 
