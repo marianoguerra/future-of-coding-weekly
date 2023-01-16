@@ -31,17 +31,23 @@
       </div>
 
       <div style="margin:1rem 0">
+        <div style="margin-bottom:1em">
+            <button v-on:click="tablePrev()">Prev</button>
+            <span>{{ `${page * itemsPerPage} / ${(page + 1) * itemsPerPage} ` }}</span>
+            <button v-on:click="tableNext()">Next</button>
+        </div>
+
         <table class="links-table">
           <thead>
             <tr>
-              <td>Count</td>
+              <td style="width:6em">Count</td>
               <td>Link</td>
-              <td>First Mention</td>
-              <td>Status</td>
+              <td style="width:15em">First Mention</td>
+              <td style="width:6em">Status</td>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="link in links" :key="link.url">
+            <tr v-for="link in tableLinks" :key="link.url">
               <td>{{link.count}}</td>
               <td style="text-align:left"><a :href="link.url" target="_blank">{{link.title}}</a></td>
               <td class="link-date">{{link.date}}</td>

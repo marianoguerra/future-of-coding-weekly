@@ -4,15 +4,25 @@ function main() {
   let nextFilterId = null;
   const app = new Vue({
     el: '#app',
-    data: {links: [], allLinks: [], filter: '', loading: false},
+    data: {
+      links: [],
+      tableLinks: [],
+      page: 0,
+      itemsPerPage: 50,
+      allLinks: [],
+      filter: '',
+      loading: false,
+    },
     methods: {
       refilter: function () {
         const filter = this.filter.toLowerCase().trim();
         this.links = [];
         if (filter === '') {
           this.links = this.allLinks;
+          this._updateTableLinks();
         } else {
           this.loading = true;
+          this.page = 0;
           if (nextFilterId) {
             clearTimeout(nextFilterId);
             nextFilterId = null;
@@ -38,7 +48,22 @@ function main() {
           nextFilterId = null;
           this.loading = false;
           this.links = toAdd;
+          this._updateTableLinks();
         }
+      },
+      _updateTableLinks() {
+        const from = this.page * this.itemsPerPage,
+          to = from + this.itemsPerPage;
+
+        this.tableLinks = this.links.slice(from, to);
+      },
+      tablePrev() {
+        this.page = Math.max(0, this.page - 1);
+        this._updateTableLinks();
+      },
+      tableNext() {
+        this.page = this.page + 1;
+        this._updateTableLinks();
       },
       doSearch() {
         this.refilter();
