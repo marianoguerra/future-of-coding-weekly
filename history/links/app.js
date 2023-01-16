@@ -23,7 +23,6 @@ function main() {
           this._updateTableLinks();
         } else {
           this.loading = true;
-          this.page = 0;
           if (nextFilterId) {
             clearTimeout(nextFilterId);
             nextFilterId = null;
@@ -56,7 +55,16 @@ function main() {
         const from = this.page * this.itemsPerPage,
           to = from + this.itemsPerPage;
 
-        this.tableLinks = this.links.slice(from, to);
+        if (from >= this.links.length) {
+          this.page = this.getLastPageNum();
+
+          const from = this.page * this.itemsPerPage,
+            to = from + this.itemsPerPage;
+
+          this.tableLinks = this.links.slice(from, to);
+        } else {
+          this.tableLinks = this.links.slice(from, to);
+        }
       },
       tablePrev() {
         this.tablePrevCount(1);
@@ -76,8 +84,11 @@ function main() {
         this.page = 0;
         this._updateTableLinks();
       },
+      getLastPageNum() {
+        return Math.floor(this.links.length / this.itemsPerPage);
+      },
       tableLast() {
-        this.page = Math.floor(this.links.length / this.itemsPerPage);
+        this.page = this.getLastPageNum();
         this._updateTableLinks();
       },
       doSearch() {
