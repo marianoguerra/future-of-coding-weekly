@@ -1,0 +1,237 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2023-01-20T19:08:49.054Z" class="post"><span class="user">Steve Dekorte</span> <a href="./?fromDate=2023-01-17&amp;toDate=2023-01-23&amp;channel=thinking-together&amp;filter=#2023-01-20T19:08:49.054Z" class="date">2023-01-20 19:08:49</a> <div class="message"><p>"Are there any languages with transactions as a first-class concept?" <a href="https://www.reddit.com/r/ProgrammingLanguages/comments/10gylhm/are_there_any_languages_with_transactions_as_a/">reddit.com/r/ProgrammingLanguages/comments/10gylhm/are_there_any_languages_with_transactions_as_a</a></p>
+<p>Would be interested to hear the thoughts of folks here on this thread.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2023-01-20T20:00:49.241Z" class="reply"><span class="user">Andrew F</span> <a href="./?fromDate=2023-01-17&amp;toDate=2023-01-23&amp;channel=thinking-together&amp;filter=#2023-01-20T20:00:49.241Z" class="date">2023-01-20 20:00:49</a> <div class="message"><p>"SQL" is not the answer the poster wanted, but arguably the correct one. :D</p>
+<p>Transactions do figure into my thoughts about language design, and OS/HCI design in general, but I haven't clarified it enough to talk much about it. I'm also very interested in the community's thoughts here.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-20T23:17:47.412Z" class="reply"><span class="user">Mariano Guerra</span> <a href="./?fromDate=2023-01-17&amp;toDate=2023-01-23&amp;channel=thinking-together&amp;filter=#2023-01-20T23:17:47.412Z" class="date">2023-01-20 23:17:47</a> <div class="message"><p>Clojure and Haskell with Software Transactional Memory?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-21T08:50:52.560Z" class="reply"><span class="user">Jack Rusher</span> <a href="./?fromDate=2023-01-18&amp;toDate=2023-01-24&amp;channel=thinking-together&amp;filter=#2023-01-21T08:50:52.560Z" class="date">2023-01-21 08:50:52</a> <div class="message"><p>The "predict the effect of this code without running this code" aspect of some of the examples runs afoul of the Halting Problem in the general case. 🤷‍♂️</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-21T15:51:59.528Z" class="reply"><span class="user">William HS Angell</span> <a href="./?fromDate=2023-01-18&amp;toDate=2023-01-24&amp;channel=thinking-together&amp;filter=#2023-01-21T15:51:59.528Z" class="date">2023-01-21 15:51:59</a> <div class="message"><p>Would multiparty session types fit the bill here?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2023-01-22T14:06:36.762Z" class="post"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2023-01-19&amp;toDate=2023-01-25&amp;channel=thinking-together&amp;filter=#2023-01-22T14:06:36.762Z" class="date">2023-01-22 14:06:36</a> <div class="message"><h1>Summary 2022</h1><p>For me 2022 was:</p>
+<ul><li>0D</li><li>transpiler pipelines</li></ul><p>Explanations below.</p>
+<p>There is nothing “new” here.   I believe that our crop of programming languages subtly discourages certain kinds of thoughts. You  <em>can</em>  do these things with our programming languages, but, you  <em>don’t bother</em> .</p>
+<p>[I wrote this on Jan 1/2023.  Then I promptly got sick and found new ways to procrastinate.  I will gladly remove this if it is inappropriate or too long...]</p>
+<h1>TL;DR</h1><h2>0D</h2><ul><li>0D is part of traditional parallelism (zero-dependency, total decoupling)</li><li>breaking 0D away from parallelism enables other uses</li><li>0D uses FIFOs, whereas functions use LIFOs (LIFOs are used by most modern programming languages, Python, Rust, etc. and stifle possible solutions)</li></ul><h2>Transpiler Pipelines</h2><ul><li>“skip over” uninteresting bits of syntax, whereas CFG requires full language specification</li><li>leads to a different class of tools -&gt; parser used for “quickie” matches instead of for building compilers ; different way of using parser DSLs ; like mathematical manipulation of notation</li><li>“skipping over” bits of syntax allows syntactic composition ; syntactic composition enables pipelines ;</li></ul><h1>0D</h1><p>0D is a short-hand for the phrase  <em>zero dependency</em> .  Total decoupling.</p>
+<p>Programmers already know how to write 0D code, but, they tangle this simple concept up with other concepts and call the result “parallelism”.</p>
+<p>At a very, very basic level, you can achieve 0D by using FIFOs instead of LIFOs (queues vs stacks).  LIFOs - callstacks - are good for expressing synchronous code.  LIFOs are less-good for expressing asynchronous code.</p>
+<p>Programmers often conflate nested, recursive functions with the notion of pipelines.  If a component sends itself a message, the message is queued up in FIFO order and there is a “delay” before the message is processed, whereas if a component recursively calls itself, the function parameters are pushed onto a stack and the processing happens immediately, in LIFO order.  This subtle difference in processing sequence manifests itself in design differences.  For example, in electronics - where all components are asynchronous by default - you often see the use of “negative feedback”, say in Op-Amp designs. You rarely see this technique used in software design.  In electronics, negative feedback is used by components to self-regulate, whereas in software, recursion is used as a form of divide and conquer.  Feedback loops make it possible to be explicit about software design, whereas recursion hides the key element - the callstack - of the design.</p>
+<p>EEs had this issue sussed out, before the advent of the “everything must be synchronized” mentality.</p>
+<p>All components in an electronic circuit are asynchronous by default.  Synchrony is judiciously, explicitly designed-in through the use of  <em>protocols</em> .  Synchrony is not designed-in everywhere  <em>by default</em>  and is explicitly designed in on an  <em>as needed</em>  basis.  There is a reason - a subtle reason - why it is easy to draw diagrams of computer networks and not-so-easy to draw diagrams of synchronous code.</p>
+<p>In EE designs, concurrency is so cheap that you can’t help but use it.  In software, concurrency implies difficulty and designers end up avoiding concurrency in their designs.</p>
+<p>This subtle difference has a trickle-down effect to end-user code.  When it is difficult to draw diagrams of programs and to snap components together, programmers tend not to provide such features to end-users.  Or, when they provide such features, they implement such features under duress.  If DaS and snappable components were abundantly available, such features would naturally leak through to end-user apps.</p>
+<p>0D can be implemented a lot more efficiently than by using operating system processes and IPCs.  Most modern programming languages support closures (anonymous functions) and make it easy to build queue data structures.  Stick one queue at the front of a closure - the “input queue” - and one queue at the tail of a closure - the “output queue” - and, you get 0D.  Then, you need to write a wrapper component that routes “messages” from the output queue of one closure to the input queue of another closure.  Can this concept be generalized?  This ain’t rocket science.</p>
+<p>When you build 0D software components, does the order-of-operation of components matter?  Nope.  Can a 0D component create more than one result during its operation?  Yep.  Can a 0D component directly refer to another 0D component?  Nope.  The best you can do is to compose networks of 0D components inside of routing wrappers.</p>
+<h1>Transpiler Pipelines</h1><p>It would be nice to build up solutions using pipelines of many little solutions and syntaxes made expressly for those solutions.</p>
+<p>What do you need to be able to do this?</p>
+<p>1) You need to be able to write grammars that are very, very small and that allow you to”ignore” bits of syntax that don’t pertain to a problem, e.g. kind-of like REGEX, but, better.</p>
+<p>2) Total isolation of building blocks.</p>
+<h2>Very Small Grammars That Ignore Uninteresting Items</h2><p>Ohm-JS - a derivative of PEG (Parsing Expression Grammars) - makes it possible to write grammars that skip over uninteresting bits of text.</p>
+<p>For example, if you want to write a quickie parser for C code, you might want to say:</p>
+<p> <code>... function-name (...) {...}</code> </p>
+<p>In Ohm-JS, you can say this, whereas in a CFG-based parser generator you need to over-specify all of the niggly bits of C syntax.  In Ohm-JS, this results in a few minutes of work and only a few lines of code.  The Ohm-Editor assists in developing the micro-grammar.</p>
+<p>In YACC and CFG-based approaches, though, you’re looking at a gargantuan job (days, weeks, months, ...) and you simply  <em>don’t bother</em>  to write such a quickie parser.  You either  <em>don’t bother</em>  with the whole idea, or you use something like REGEX which fails on a number of edge-cases for this kind of thing.  REGEX can’t search recursively for matching brackets, Ohm-JS can.  Using REGEX, you might get away with a partial solution, or, the project might grow larger as you hit unexpected speed bumps.  You either persevere or you just give up.</p>
+<p>For the record, the grammar plus the accompanying code fabricator specification  for the above simple example are shown in the appendix.</p>
+<h3>DaS Comes For Free</h3><p>When you can build totally isolated building blocks, you can draw sensible diagrams of how the building blocks should be snapped together to solve a problem.</p>
+<p>Later, you can steal (cut/copy/paste) chunks of previous solutions and use them as building blocks for new problems.</p>
+<p>DaS: Diagrams as Syntax.</p>
+<p>DaS is not diagrams as an Art Form.  DaS is diagrams as programming languages.  For example, instead of writing  <code>{...}</code> , you draw a rectangle.</p>
+<p>Programming languages were created by culling the English language and by choosing only the words and phrases that could be compiled to executable code.</p>
+<p>Can we cull diagrams in the same way to invent new programming languages?</p>
+<p>EE’s have done this and they call the resulting diagrams “schematics”.</p>
+<p>Building construction engineers have done this and call the resulting diagrams “blueprints”.</p>
+<h2>Don’t We Already Use Building Blocks?</h2><p>“Code Libraries”  <em>look</em>  like building blocks, but, contain subtle bits of coupling that discourage building-block-iness.</p>
+<p>For example, the very common idiom of a function call  <code>f(x)</code>  introduces at least 3 kinds of coupling:</p>
+<ul><li>The name  <code>f</code>  is hard-wired into the caller’s code.  The calling code cannot be cut/copy/pasted into some other solution without also dragging in the called code, or, by futzing with the source code.</li><li>The function call  <code>f(x)</code>  waits for the callee to return a value.  This is also known as  <em>blocking</em> .  Function call notation works fine on paper, where functions can be evaluated instantaneously.  It’s different when you map function call syntax onto hardware that has propagation delays wherein functions take finite amounts of time to “run”.  This subtle difference in behaviour leads to hidden gotchas.  A glaring example of the impact of such a difference can be seen in the Mars Pathfinder disaster[^pathfinder].</li><li>The function return  <code>v = f(x)</code>  hard-wires a routing decision into the callee’s code.  The callee  <em>must</em>  direct its response back to the caller.  This is called “returning a value”.  Again, this doesn’t look like a problem when you just want to build fancier calculators, but, this hard-wired routing decision discourages simple solutions to non-calculator problems, like machine control.</li></ul><p>When you don’t have complete isolation, you don’t have building blocks.  Imagine a LEGO® set where all the pieces are joined together with a single, long sewing thread glued to each LEGO® block.  Or, you have two real-world objects, e.g. one apple and one orange.  You cut the apple in half.  What happens to the orange?</p>
+<p>As humans, we are used to the idea that objects are completely isolated.  Programs don’t work that way.  We have to stop and think hard when writing programs.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2023-01-22T14:10:45.606Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2023-01-19&amp;toDate=2023-01-25&amp;channel=thinking-together&amp;filter=#2023-01-22T14:10:45.606Z" class="date">2023-01-22 14:10:45</a> <div class="message"><h1>Appendix</h1><p>If you want to play along with this experiment, the code is in <a href="https://github.com/guitarvydas/cfunc">github.com/guitarvydas/cfunc</a>.</p>
+<h2>c.ohm</h2><p>A quickie grammar that matches function declarations in a C file.</p>
+<p>Note that this grammar is longer than a REGEX, but, is significantly shorter than a CFG specification (LR(k), YACC, etc.) for the C programming language.</p>
+<pre><code>Cfunctions {
+
+  program = item+
+
+  item =
+
+    | comment
+
+    | string
+
+    | applySyntactic&lt;FunctionDecl&gt; -- decl
+
+    | any -- other
+
+  FunctionDecl = name "(" param+ ")" "{" block+ "}"
+
+
+
+    param =
+
+      | "(" param+ ")" -- nested
+
+      | ~"(" ~")" any  -- flat
+
+
+
+    block =
+
+      | "{" block+ "}" -- nested
+
+      | ~"{" ~"}" any  -- flat
+
+
+
+      name = letter (alnum | "_")*
+
+      comment =
+
+        | "//" (~nl any)* nl
+
+        | "/*" (~"*/" any)* "*/"
+
+      string =
+
+        | bqstring
+
+        | dqstring
+
+        | sqstring
+
+      bqstring = "`" (qbq | (~"`" any))* "`"
+
+      dqstring = "\"" (qdq | (~"\"" any))* "\""
+
+      sqstring = "'" (qsq | (~"'" any))* "'"
+
+      qbq = "\\" "`"
+
+      qdq = "\\" "\""
+
+      qsq = "\\" "'"
+
+      nl = "\n"
+
+      spaces += comment
+
+}</code></pre><p>Can this grammar be improved and optimized?  Probably.  But, why would you care?</p>
+<p>You would care only if you used this code in an end-user product.</p>
+<p>If you use this code in something like a batch-editing environment, “efficiency” takes on a different meaning.  End-users don’t care about the efficiency of your code editor and its Find-and-Replace function.  End-users don’t care how efficient your command line tools, like  <em>grep</em> , are.</p>
+<p>When you treat Ohm-JS + Fab as batch editors for development, then, only  <em>development efficiency</em>  matters.</p>
+<p>I strongly believe that one shouldn’t write code.  One should write code that writes code.  From this perspective, “efficiency” breaks down into 2 camps:</p>
+<ul><li>developer efficiency</li><li>end-user efficiency.</li></ul><p>Note that traditional  <em>compilers</em>  are simply apps that write code.  Developers use  <em>compilers</em> .  End-users don’t care if a developer created end-user app code by hand or by using a compiler.  The only things that end-users care about is if the app is cheap and runs on cheap hardware.  The final app is assembler, regardless of how it was created. Developers, on the other hand, do care about development time and effort.  Hand-writing apps requires much more effort than using high-level language compilers to generate the final app code.  Debugging apps is easier when using high-level languages with type-checkers.  On the other hand, developers usually buy fancier hardware than that which is used by end-users.  Developers can afford to burn CPU cycles on their fancy hardware to give themselves faster - and cheaper - development and debugging times.</p>
+<p>The final step in development is that of Production Engineering an app to make it cheap-enough to sell.  Up until that point, the development workflow should consist of  <em>anything</em>  that speeds up and cheapens development time, for example, dynamic language environments and REPLs.  For example,  <em>Rust</em>  is a Production Engineering language and needn’t be used until the last moment.</p>
+<h2>c.fab</h2><p>A  <code>.fab</code>  file is a specification that creates strings based on the above grammar.   <em>Fab</em>  is an experimental transpiler tool that works with Ohm-JS.  It generates JavaScript code required by Ohm-JS.  This could all be done by off-the-shelf Ohm-JS.   <em>Fab</em>  simply reduces the amount of keyboarding needed for creating JavaScript “semantics” code required by Ohm-JS.   <em>Fab</em>  is written in Ohm-JS.</p>
+<pre><code>Cfunctions {
+
+  program [item+] = ‛«item»'
+
+  item_decl [x] =  ‛«x»'
+
+  item_other [x] =  ‛'
+
+  FunctionDecl [name lp param+ rp lb block+ rb] = ‛\n«name»'
+
+    param_nested [lp param+ rp] = ‛'
+
+    param_flat [c] = ‛'
+
+    block_nested [lp block+ rp] = ‛'
+
+    block_flat [c] = ‛'
+
+      name [letter c*] = ‛«letter»«c»'
+
+      comment [begin cs end] = ‛'
+
+      nl [c] =  ‛«c»'
+
+      spaces [cs] =  ‛«cs»'
+
+      bqstring [begin cs* end] = ‛'
+
+      dqstring [begin cs* end] = ‛'
+
+      sqstring [begin cs* end] = ‛'
+
+      qbq [bslash c] = ‛'
+
+      qdq [bslash c] = ‛'
+
+      qsq [bslash c] = ‛'
+
+}</code></pre><h2>grep.c</h2><p>The above was tested against  <code>grep.c</code>  from the Gnu grep repo.</p>
+<p> <code>git clone</code> <a href="https://git.savannah.gnu.org/git/grep.git">git.savannah.gnu.org/git/grep.git</a></p>
+<h2>Even Smaller</h2><p>I’m playing with the design of a new tool that I call  <em>bred</em>  (bracket editor).  It’s like a super-simple batch editor that walks through text that contains bracketed constructs.</p>
+<p>The full specification consists of 2 strings</p>
+<ul><li>what to match</li><li>how to rewrite it.</li></ul><p>The above specifications might be re-expressed as:</p>
+<pre><code>‛«name» («params») {«block»}'
+
+‛«name»'</code></pre><p>which reads as:</p>
+<ul><li>match, recursively, anything that looks like  <code>«name» («params») {«block»}</code></li><li>then, throw away everything except the name</li></ul><p>Currently, my concepts have warts - what happens when a comment or a string or a character constant contains brackets, or, even worse, what happens if they contain unmatched brackets?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-22T18:44:08.780Z" class="reply"><span class="user">Kartik Agaram</span> <a href="./?fromDate=2023-01-19&amp;toDate=2023-01-25&amp;channel=thinking-together&amp;filter=#2023-01-22T18:44:08.780Z" class="date">2023-01-22 18:44:08</a> <div class="message"><p>Nice ideas.</p>
+<p>Re 0D, my next question is: how to decide at what granularity to stop using function calls? Or are you suggesting eliminating them entirely?</p>
+<p>Re transpiler pipelines: I tried this for a while a few years ago. The conclusion I reached was that they were great for adding capabilities but they can't add restrictions. In first class languages often a lot of value comes from guarantees that certain events won't occur. An int won't be assigned to a string. There you need a single coherent grammar. Does this seem right?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-22T22:39:55.703Z" class="reply"><span class="user">Vijay Chakravarthy</span> <a href="./?fromDate=2023-01-19&amp;toDate=2023-01-25&amp;channel=thinking-together&amp;filter=#2023-01-22T22:39:55.703Z" class="date">2023-01-22 22:39:55</a> <div class="message"><p>this talk is quite relevant —</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-22T22:39:58.559Z" class="reply"><span class="user">Vijay Chakravarthy</span> <a href="./?fromDate=2023-01-19&amp;toDate=2023-01-25&amp;channel=thinking-together&amp;filter=#2023-01-22T22:39:58.559Z" class="date">2023-01-22 22:39:58</a> <div class="message"><p><a href="https://youtu.be/JMZLBB_BFNg">youtu.be/JMZLBB_BFNg</a></p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://youtu.be/JMZLBB_BFNg">"Parser Parser Combinators for Program Transformation" by Rijnard van Tonder</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2023-01-23T12:19:49.286Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2023-01-20&amp;toDate=2023-01-26&amp;channel=thinking-together&amp;filter=#2023-01-23T12:19:49.286Z" class="date">2023-01-23 12:19:49</a> <div class="message"><p>... re: 0D ...</p>
+<p>ideal: use both, without letting language influence your thinking</p>
+<p>ideal: use both, but, remain aware of what each choice accomplishes</p>
+<p>ideal: 0D to be so cheap that it could be used on every line of code</p>
+<p>reality: 0D is entangled with Multiprocessing and the current grain size is “Process”</p>
+<p>alternate reality: 0D can be couched in terms of closures and FIFOs, hence, grain size is “function” (where closure is roughly equivalent to function)</p>
+<p>reality: CALL/RETURN and the callstack are hard-wired into CPUs (there used to be a time when CPUs didn’t have hard-wired callstacks)</p>
+<p>reality: 1950s IDEs for Programming were Programming Languages, but, in 2022++ IDEs include other stuff, like powerful programming editors</p>
+<p>CALL is used for 2 reasons: (1) compacting code size, (2) DRY (Don’t Repeat Yourself).  There is no good reason to allow CALL/RETURN to leak into end-user code except for case (1) compacting code size [corollary: case (2) should be entirely optimized away at “compile time” and “edit time”]</p>
+<p>x.f(x) is syntax with the meaning “mutate the global callstack and mutate the IP to point at the method function x.f” (and “return” means “put the return value in a special place, then mutate the global callstack, then mutate the IP to point at the caller’s continuation code”)</p>
+<p>but, there is no popular builtin syntax for Send()ing to an output queue and passing the finalized output queue back up to the parent Container</p>
+<p>... re: transpiler pipelines question ... thinking ...</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-01-24T10:11:31.488Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2023-01-21&amp;toDate=2023-01-27&amp;channel=thinking-together&amp;filter=#2023-01-24T10:11:31.488Z" class="date">2023-01-24 10:11:31</a> <div class="message"><p>... re: transpiler pipelines question, progress towards answering the question, WIP ...</p>
+<p>... this doesn’t necessarily answer the question, but might show where my thinking is going, while I try to figure out what is really being asked ...</p>
+<p>... I think of a PL as 2 issues: (1) data (2) control flow, i.e. (1) operands and (2) syntax ...</p>
+<p>... I am playing with Orthogonal Programming Languages, where (1) is OO, (2) is syntax ; based on Cordy’s Orthogonal Code Generator ideas and based on RTL and based on dataless PLs (like Holt’s S/SL (used in PT Pascal, Concurrent Euclid, Turing, etc.)) ...</p>
+<p>... I think that dataless languages boils down to 2 entities: (1) Things, (2) Lists of Things.  Types are opaque and cannot be defined at the dataless language-level (Types are defined and manipulated in other layers, implemented in common PLs (e.g. Python, C, etc.))</p>
+<h1>Src</h1><p>String s</p>
+<p>s &lt;- ‘abc’</p>
+<p>s &lt;- 7</p>
+<h1>Gather</h1><p>$defsynonym (‘s’, ⟨od, kind=var, type=“String”, key=‘s’⟩)</p>
+<p>s &lt;- ‘abc’</p>
+<p>s &lt;- 7</p>
+<h1>Normalize</h1><p>$defsynonym (‘s’, ⟨od-var, “String”, ‘s’⟩)</p>
+<p>$Assign s, ⟨od-lit, “String”, ‘abc’⟩</p>
+<p>$Assign s, ⟨od-lit, “int”, 7⟩</p>
+<p>... same as ...</p>
+<p>$Assign ⟨od-var, “String”, ‘s’⟩, ⟨od-lit, “String”, ‘abc’⟩</p>
+<p>$Assign ⟨od-var, “String”, ‘s’⟩, ⟨od-lit, “int”, 7⟩</p>
+<h1>Semantic Check</h1><p>“String” == “String” --&gt; OK</p>
+<p>“String” != “int” --&gt; Error</p>
+<p>This looks like simple name equivalence.  Lower layers are free to use structural equivalence instead (using names as keys to a map containing more detail for each type).</p>
+<p>[The goal here is to think of a compiler as a string of pearls on a pipeline instead of as a honking big tree].</p>
+<p>[od - oh-D, not zero-D, means “object descriptor”]</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
