@@ -1,4 +1,4 @@
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-21.11.tar.gz") {} }:
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz") {} }:
 with pkgs;
 
 mkShell {
@@ -6,9 +6,10 @@ mkShell {
   buildInputs = [
     glibcLocales
     gnumake
-    python39
-    python39Packages.pip
-    nodejs-14_x
+    python310
+    python310Packages.pip
+    python310Packages.Nikola
+    nodejs
     git
     sqlite
   ];
