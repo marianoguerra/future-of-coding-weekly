@@ -116,12 +116,10 @@ function onCommentsFinished(_contributors, authors) {
         'https://tinyletter.com/marianoguerra/',
         'Subscribe to the Newsletter'
       ),
-      ' (',
-      link(
-        'https://tinyletter.com/marianoguerra/archive',
-        'Newsletter Archive'
-      ),
-      ')'
+      ' / ',
+      link('https://tinyletter.com/marianoguerra/archive', 'Archive'),
+      ' / ',
+      link('https://history.futureofcoding.org/newsletter/rss.xml', 'RSS')
     )
   );
 
