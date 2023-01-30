@@ -20,10 +20,10 @@ BLOG_AUTHOR = "Mariano Guerra"  # (translatable)
 BLOG_TITLE = "Future of Coding Weekly"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "http://history.futureofcoding.org/newsletter/"
+SITE_URL = "http://newsletter.futureofcoding.org/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
-# BASE_URL = "http://history.futureofcoding.org/newsletter/"
+# BASE_URL = "http://newsletter.futureofcoding.org/"
 BLOG_EMAIL = "mariano@marianoguerra.org"
 BLOG_DESCRIPTION = "Future of Coding Weekly Newsletter"  # (translatable)
 
