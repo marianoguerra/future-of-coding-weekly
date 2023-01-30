@@ -47,7 +47,7 @@ function getInfoForWeekAndDay(now, dayNumber) {
     monthStr = zeroPad(now.getMonth() + 1),
     curYear = now.getFullYear(),
     issueTitle = `Future of Coding Weekly ${curYear}/${monthStr} Week ${weekNumber}`,
-    newsletterUrl = `https://tinyletter.com/marianoguerra/letters/future-of-coding-weekly-${curYear}-${monthStr}-week-${weekNumber}`;
+    newsletterUrl = `https://newsletter.futureofcoding.org/posts/future-of-coding-weekly-${curYear}${monthStr}-week-${weekNumber}/`;
 
   prevDay.setDate(prevDay.getDate() - 7);
 
