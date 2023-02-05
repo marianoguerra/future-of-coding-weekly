@@ -1,0 +1,773 @@
+[
+    {
+        "client_msg_id": "6be892b8-a3aa-4fcd-be9b-43746129d32d",
+        "type": "message",
+        "text": "Hi friends! I'm new to this slack, but I've been dabbling in this space off and on for a while. I've completed a draft of a blog post about type inference in my projectional language / structured editor, and I'd love to get your feedback! <https://gist.github.com/jaredly/13abec33c7576c4636ca87039a999cf2|\"Type inference that sticks\">. thanks! :slightly_smiling_face:",
+        "user": "U04MAEU6VHN",
+        "ts": "1675140821.935599",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pczPy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi friends! I'm new to this slack, but I've been dabbling in this space off and on for a while. I've completed a draft of a blog post about type inference in my projectional language / structured editor, and I'd love to get your feedback! "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://gist.github.com/jaredly/13abec33c7576c4636ca87039a999cf2",
+                                "text": "\"Type inference that sticks\""
+                            },
+                            {
+                                "type": "text",
+                                "text": ". thanks! "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U04MAEU6VHN",
+            "ts": "1675140856.000000"
+        },
+        "thread_ts": "1675140821.935599",
+        "reply_count": 13,
+        "reply_users_count": 5,
+        "latest_reply": "1675265095.798459",
+        "reply_users": [
+            "UJBAJNFLK",
+            "U0296ACR13M",
+            "U013ZLJARC7",
+            "U04MAEU6VHN",
+            "U79HM6726"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UJBAJNFLK",
+                    "UA14TGLTC",
+                    "U79HM6726"
+                ],
+                "count": 3
+            },
+            {
+                "name": "clap",
+                "users": [
+                    "U0296ACR13M"
+                ],
+                "count": 1
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "DE8B433D-5EC8-47A1-9516-418624D1CCC6",
+        "type": "message",
+        "text": "That looks very promising! Types are statements *about* code, so it makes sense to move them to an annotation layer and have tool support for that layer.\n\nNext: make that layer optional (perhaps it already is). Then: allow multiple type annotation layers for the same codebase. Allow programmers to add their own domain-specific type systems.",
+        "user": "UJBAJNFLK",
+        "ts": "1675146104.066659",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "c9w",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That looks very promising"
+                            },
+                            {
+                                "type": "text",
+                                "text": "!"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Types are statements *about* code, so it makes sense to move them to an annotation layer and have tool support for that layer.\n\nNext: make that layer optional (perhaps it already is). Then: allow multiple type annotation layers for the same codebase. Allow programmers to add their own domain-specific type systems."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "7907f051-fc90-40c9-98ce-35b11c72b160",
+        "type": "message",
+        "text": "Great stuff!\n\nMy favorite part, and I wonder if this would be *the* selling point for structure editors for pro-coders (I don't think it will ever be \"avoiding syntax errors\" etc.):\n\n&gt; the compiler is involved in the entire process of development, responding to programmer feedback, and giving context-aware feedback in return. In this model, the source code is enriched with the compiler's inferences along the way, which the programmer can inspect &amp; correct (but can also be elided from display for a more compact presentation).\nAbout this:\n&gt; When typing an identifier in Jerd, if you select something from autocomplete, the ID of that term is stuck onto the identifier node, and then the compilation pass doesn't need to do any name resolution -- it knows exactly what is being referenced. And, if you later change the name of a variable, none of the references are broken.\nHow do you plan on handling the case where a new higher precedence function overload is added after a id+arguments code has been 'bound' to an overload that should now be preceded by the new overload for the given id+arguments? So you could end up in a situation in which exactly the same function call expressions bind to different overload depending on which overloads existed at the time of writing (binding) of the call. I guess you could just run the overload resolution again for all the calls, but what if the result for a call depends on a (now hidden) user defined type annotation. You could still end visibly exactly the same function calls binding to different overloads. How would possible implicit casts/conversions fit in?",
+        "user": "U0296ACR13M",
+        "ts": "1675151094.806049",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hbZyi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Great stuff!\n\nMy favorite part, and I wonder if this would be "
+                            },
+                            {
+                                "type": "text",
+                                "text": "the",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " selling point for structure editors for pro-coders (I don't think it will ever be \"avoiding syntax errors\" etc.):\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the compiler is involved in the entire process of development, responding to programmer feedback, and giving context-aware feedback in return. In this model, the source code is enriched with the compiler's inferences along the way, which the programmer can inspect & correct (but can also be elided from display for a more compact presentation)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAbout this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "When typing an identifier in Jerd, if you select something from autocomplete, the ID of that term is stuck onto the identifier node, and then the compilation pass doesn't need to do any name resolution -- it knows exactly what is being referenced. And, if you later change the name of a variable, none of the references are broken."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nHow do you plan on handling the case where a new higher precedence function overload is added after a id+arguments code has been 'bound' to an overload that should now be preceded by the new overload for the given id+arguments? So you could end up in a situation in which exactly the same function call expressions bind to different overload depending on which overloads existed at the time of writing (binding) of the call. I guess you could just run the overload resolution again for all the calls, but what if the result for a call depends on a (now hidden) user defined type annotation. You could still end visibly exactly the same function calls binding to different overloads. How would possible implicit casts/conversions fit in?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U0296ACR13M",
+            "ts": "1675151127.000000"
+        },
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "c52e2bd8-a55f-4bc5-9ed6-6b4109b130a6",
+        "type": "message",
+        "text": "Glad to see you working on interactive approaches to this problem. :slightly_smiling_face: If you're looking into interesting prior art in the space, I strongly recommend this paper: <https://plover.com/~mjd/misc/hbaker-archive/TInference.html>",
+        "user": "U013ZLJARC7",
+        "ts": "1675151708.421689",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Oafct",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Glad to see you working on interactive approaches to this problem. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            },
+                            {
+                                "type": "text",
+                                "text": " If you're looking into interesting prior art in the space, I strongly recommend this paper: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://plover.com/~mjd/misc/hbaker-archive/TInference.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "141eda50-4e32-42a8-9bd8-e5f22e316a64",
+        "type": "message",
+        "text": "<@UJBAJNFLK> :exploding_head: domain-specific type systems? Do you have any more thoughts on what that would look like? As far as whether the layer is optional, it very much isn't as knowledge of types informs code generation :shrug: .\n<@U0296ACR13M> Thanks! So, in this system, we no longer have a notion of \"precedence\" in function overload resolution. If there is any ambiguity (multiple functions w/ the same signature), the answer is to always ask the user. `You could still end visibly exactly the same function calls binding to different overloads.` So that's already the case with `a + b` and `c + d`, if a &amp; b are ints, but c &amp; d are strings, right? Now I actually solve this by coloring all identifiers according to the hash of the definition, so the two function calls would very likely have different colors, allowing you to immediately recognize them as distinct.\n<@U013ZLJARC7> thanks for the link! fascinating read.",
+        "user": "U04MAEU6VHN",
+        "ts": "1675199807.657629",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ky6Xb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UJBAJNFLK"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "exploding_head",
+                                "unicode": "1f92f"
+                            },
+                            {
+                                "type": "text",
+                                "text": " domain-specific type systems? Do you have any more thoughts on what that would look like? As far as whether the layer is optional, it very much isn't as knowledge of types informs code generation "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "shrug",
+                                "unicode": "1f937"
+                            },
+                            {
+                                "type": "text",
+                                "text": " .\n"
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U0296ACR13M"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Thanks! So, in this system, we no longer have a notion of \"precedence\" in function overload resolution. If there is any ambiguity (multiple functions w/ the same signature), the answer is to always ask the user. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "You could still end visibly exactly the same function calls binding to different overloads.",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " So that's already the case with "
+                            },
+                            {
+                                "type": "text",
+                                "text": "a + b",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "c + d",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", if a & b are ints, but c & d are strings, right? Now I actually solve this by coloring all identifiers according to the hash of the definition, so the two function calls would very likely have different colors, allowing you to immediately recognize them as distinct.\n"
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U013ZLJARC7"
+                            },
+                            {
+                                "type": "text",
+                                "text": " thanks for the link! fascinating read."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "24ba1147-97a9-4cee-980d-1fea48c22aed",
+        "type": "message",
+        "text": "Okay, so say there exists a 'myfunc (double x, double y) -&gt; double' and an implicit conversion from int to double. the user writes the call 'myfunc(1, 2)' which binds to the function. now user adds 'myfunc (int x, int y) -&gt; int' and writes another call 'myfunc(1, 2)'. Do you ask the user which overload to use or bind to the int version? Do you ask the user to re-evaluate which overload to bind the first call to? Either way the user could end up in a situation that exactly the same calls (down to argument types) bind to different overloads, possibly without the user ever choosing that the first call should bind to the less-specific double overload. Of course if the only difference in the signature is numeric types, it's likely that the functions do the same thing, but you could end up with a more problematic case with user defined types.",
+        "user": "U0296ACR13M",
+        "ts": "1675232368.604429",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "S0ehc",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Okay, so say there exists a 'myfunc (double x, double y) -> double' and an implicit conversion from int to double. the user writes the call 'myfunc(1, 2)' which binds to the function. now user adds 'myfunc (int x, int y) -> int' and writes another call 'myfunc(1, 2)'. Do you ask the user which overload to use or bind to the int version? Do you ask the user to re-evaluate which overload to bind the first call to? Either way the user could end up in a situation that exactly the same calls (down to argument types) bind to different overloads, possibly without the user ever choosing that the first call should bind to the less-specific double overload. Of course if the only difference in the signature is numeric types, it's likely that the functions do the same thing, but you could end up with a more problematic case with user defined types."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "1493065f-3045-4aee-8b40-0bc55817b420",
+        "type": "message",
+        "text": "<@U04MAEU6VHN> My favorite example of a domain-specific type system is dimensional analysis in science and engineering (<https://en.wikipedia.org/wiki/Dimensional_analysis>). It illustrates the general characteristics of domain-specific typing: (1) types apply to some but not all data/variables in a program and (2) each piece of data and each variable can have types from another type system as well.",
+        "user": "UJBAJNFLK",
+        "ts": "1675247100.935179",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "A+3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U04MAEU6VHN"
+                            },
+                            {
+                                "type": "text",
+                                "text": " My favorite example of a domain-specific type system is dimensional analysis in science and engineering ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://en.wikipedia.org/wiki/Dimensional_analysis"
+                            },
+                            {
+                                "type": "text",
+                                "text": "). It illustrates the general characteristics of domain-specific typing: (1) types apply to some but not all data/variables in a program and (2) each piece of data and each variable can have types from another type system as well."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "c05ebbf3-8b2f-42c2-b239-41a3f75ca8e3",
+        "type": "message",
+        "text": "Regarding:\n&gt; *Prior Art*\n&gt; *\u2026*\n&gt; I don\u2019t know if they [Lamdu] store the inferred types in the syntax tree, or if they re-compute them on every edit.\nLamdu does a combination:\n\u2022 For every definition (global variable/function) it stores the types of every definition that it used, so that if that definition changes its old type is still used for inference until a manual (and informative!) \u201cupdate type\u201d action\n\u2022 Inside the definition it does re-infer it on every edit, and an edit that would had resulted in an error in a normal language gets inserted as wrapped in a \u201cfragment\u201d (aka \u201cnon-empty hole\u201d which was our old term and was also adopted by Hazel)\nAnd btw, Lamdu also has the option to mark the new usage with fragment as the correct one and push the error to other parts of the code.\n\nIt\u2019s all explained/demonstrated in more detail here: <https://youtu.be/viF1bVTOO6k>",
+        "user": "U79HM6726",
+        "ts": "1675258439.547849",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OR0D",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Regarding:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Prior Art",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\u2026",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nI don\u2019t know if they [Lamdu] store the inferred types in the syntax tree, or if they re-compute them on every edit."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nLamdu does a combination:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "For every definition (global variable/function) it stores the types of every definition that it used, so that if that definition changes its old type is still used for inference until a manual (and informative!) \u201cupdate type\u201d action"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Inside the definition it does re-infer it on every edit, and an edit that would had resulted in an error in a normal language gets inserted as wrapped in a \u201cfragment\u201d (aka \u201cnon-empty hole\u201d which was our old term and was also adopted by Hazel)"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAnd btw, Lamdu also has the option to mark the new usage with fragment as the correct one and push the error to other parts of the code.\n\nIt\u2019s all explained/demonstrated in more detail here: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://youtu.be/viF1bVTOO6k"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U79HM6726",
+            "ts": "1675258545.000000"
+        },
+        "attachments": [
+            {
+                "from_url": "https://youtu.be/viF1bVTOO6k",
+                "thumb_url": "https://i.ytimg.com/vi/viF1bVTOO6k/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/viF1bVTOO6k?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen title=\"Steady Typing\"></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "id": 1,
+                "original_url": "https://youtu.be/viF1bVTOO6k",
+                "fallback": "YouTube Video: Steady Typing",
+                "title": "Steady Typing",
+                "title_link": "https://youtu.be/viF1bVTOO6k",
+                "author_name": "Lamdu",
+                "author_link": "https://www.youtube.com/@Lamdu",
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/"
+            }
+        ],
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "271b0556-7cb0-48f7-b253-ae00744e4355",
+        "type": "message",
+        "text": "oh fantastic, thanks <@U79HM6726> for the more info! exactly what I was hoping for :slightly_smiling_face:",
+        "user": "U04MAEU6VHN",
+        "ts": "1675258855.596559",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4sj1G",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "oh fantastic, thanks "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U79HM6726"
+                            },
+                            {
+                                "type": "text",
+                                "text": " for the more info! exactly what I was hoping for "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "4465e04f-408d-4cc3-9342-f91bc88f72ba",
+        "type": "message",
+        "text": "<@U0296ACR13M> If there's the possibility of ambiguity, always ask the user! Also, adding a new function *never* changes previously defined code.",
+        "user": "U04MAEU6VHN",
+        "ts": "1675259012.544649",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4Fbzk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U0296ACR13M"
+                            },
+                            {
+                                "type": "text",
+                                "text": " If there's the possibility of ambiguity, always ask the user! Also, adding a new function "
+                            },
+                            {
+                                "type": "text",
+                                "text": "never",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " changes previously defined code."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "f48c529c-f140-4076-8457-1f971207803f",
+        "type": "message",
+        "text": "So in my example, user would have to go through all the calls to a previous overload and select the correct one? Could be quite a bit of work in a big codebase.",
+        "user": "U0296ACR13M",
+        "ts": "1675260029.611249",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "x18IA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So in my example, user would have to go through all the calls to a previous overload and select the correct one? Could be quite a bit of work in a big codebase."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    },
+    {
+        "client_msg_id": "05fd1f61-7223-445e-8d06-d5d7fa464abc",
+        "type": "message",
+        "text": "If you actually want to change the behavior of all of your code, it will take some work, yes :smile:  there'll be automated assistance however, that will allow you to \"re-base\" existing functions onto a new function (or indeed a changed definition of a previous function), while running any relevant tests. hash-based identification is definitely a different paradigm. By default, the behavior of a function is deeply immutable, but there are tools to migrate changes broadly if that is what you want.",
+        "user": "U04MAEU6VHN",
+        "ts": "1675261498.757329",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "UZ2t",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "If you actually want to change the behavior of all of your code, it will take some work, yes "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile",
+                                "unicode": "1f604"
+                            },
+                            {
+                                "type": "text",
+                                "text": "  there'll be automated assistance however, that will allow you to \"re-base\" existing functions onto a new function (or indeed a changed definition of a previous function), while running any relevant tests. hash-based identification is definitely a different paradigm. By default, the behavior of a function is deeply immutable, but there are tools to migrate changes broadly if that is what you want."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U04MAEU6VHN",
+            "ts": "1675261520.000000"
+        },
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U0296ACR13M"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7c950932-25b2-45d2-8f7d-3776a6a4dce0",
+        "type": "message",
+        "text": "You can think of it as pull-based vs push-based. The current general mode is pull-based (everything always auto-updates dependencies), but jerd (which takes inspiration from unison) is push-based (dependency updates are explicit). We're used to that pattern in external dependencies, and here it's applied to internal ones as well.",
+        "user": "U04MAEU6VHN",
+        "ts": "1675261620.920069",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9E8np",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You can think of it as pull-based vs push-based. The current general mode is pull-based (everything always auto-updates dependencies), but jerd (which takes inspiration from unison) is push-based (dependency updates are explicit). We're used to that pattern in external dependencies, and here it's applied to internal ones as well."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U79HM6726"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6d8b0bdc-c1f7-4ac3-b4d5-462225ba37e0",
+        "type": "message",
+        "text": "(this is all experimental of course, it may well turn out that operating this way is prohibitively annoying :sweat_smile: )",
+        "user": "U04MAEU6VHN",
+        "ts": "1675265095.798459",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8U4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(this is all experimental of course, it may well turn out that operating this way is prohibitively annoying "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile",
+                                "unicode": "1f605"
+                            },
+                            {
+                                "type": "text",
+                                "text": " )"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675140821.935599",
+        "parent_user_id": "U04MAEU6VHN"
+    }
+]

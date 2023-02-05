@@ -1,0 +1,609 @@
+[
+    {
+        "client_msg_id": "46169451-b7c4-4394-b9d2-87e9a198a661",
+        "type": "message",
+        "text": "Hi everyone I did a talk at the Peckham Digital festival yesterday! It's about spatial programming! I come in at 42:59   :) \n<https://www.youtube.com/live/L2U_Sd1qMJ4?feature=share&amp;t=2579|https://www.youtube.com/live/L2U_Sd1qMJ4?feature=share&amp;t=2579>",
+        "user": "U03R0B9U1GD",
+        "ts": "1675409540.909829",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "UUA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi everyone I did a talk at the Peckham Digital festival yesterday! It's about spatial programming! I come in at 42:59   :) \n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.youtube.com/live/L2U_Sd1qMJ4?feature=share&t=2579",
+                                "text": "https://www.youtube.com/live/L2U_Sd1qMJ4?feature=share&t=2579"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://www.youtube.com/live/L2U_Sd1qMJ4?feature=share&t=2579",
+                "thumb_url": "https://i.ytimg.com/vi/L2U_Sd1qMJ4/maxresdefault_live.jpg",
+                "thumb_width": 1280,
+                "thumb_height": 720,
+                "image_url": "https://i.ytimg.com/vi/L2U_Sd1qMJ4/maxresdefault_live.jpg",
+                "image_width": 1280,
+                "image_height": 720,
+                "image_bytes": 66487,
+                "service_icon": "https://www.youtube.com/s/desktop/156c3d3d/img/favicon.ico",
+                "id": 1,
+                "original_url": "https://www.youtube.com/live/L2U_Sd1qMJ4?feature=share&amp;t=2579",
+                "fallback": "YouTube: London Creative Coding - Feb 2023 :tada::tada::tada:",
+                "title": "London Creative Coding - Feb 2023 :tada::tada::tada:",
+                "title_link": "https://www.youtube.com/live/L2U_Sd1qMJ4?feature=share&t=2579",
+                "service_name": "YouTube"
+            }
+        ],
+        "thread_ts": "1675409540.909829",
+        "reply_count": 10,
+        "reply_users_count": 3,
+        "latest_reply": "1675528911.846879",
+        "reply_users": [
+            "U04MAEU6VHN",
+            "U03R0B9U1GD",
+            "UCUSW7WVD"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UA14TGLTC",
+                    "UGWUJUZHT",
+                    "U04717WKH5K",
+                    "U04MAEU6VHN"
+                ],
+                "count": 4
+            },
+            {
+                "name": "frog",
+                "users": [
+                    "UBN9AFS0N",
+                    "UC2A2ARPT",
+                    "U03GBV8B58V",
+                    "U03R0B9U1GD",
+                    "U013ZLJARC7",
+                    "U04MAEU6VHN"
+                ],
+                "count": 6
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fc406730-8314-416e-93f8-a957d81177bf",
+        "type": "message",
+        "text": "brilliant talk/demo! it seems like those rules work really well on the GPU (although the cell splitting would take some gymnastics) -- is that what you're doing / have you tried that?",
+        "user": "U04MAEU6VHN",
+        "ts": "1675456455.115099",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1eMnL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "brilliant talk/demo! it seems like those rules work really well on the GPU (although the cell splitting would take some gymnastics) -- is that what you're doing / have you tried that?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD"
+    },
+    {
+        "client_msg_id": "ca8027de-06e1-4f66-8a0f-c90b52cf3221",
+        "type": "message",
+        "text": "Thank you very much!\n\nYes I reckon there's some scope to run them on the GPU, but it might be harder than expected.\n\nSo, just for context - the engine's main bottleneck currently is rendering, because it's just using javascript canvas. The renderer could be sped up loads by using webgl instead, and then the bottleneck would become the computation behind it.\n\nAt that point, GPU would be a consideration! Cellular automatons are usually great for GPU optimisations, because all the classic (like game of life) involve rules where only the 'middle' of an 'event window' gets edited. Which is perfect for shaders.\n\nOne of the challenges of an engine like CellPond (which stems from Dave Ackley's <https://movablefeastmachine.org/|Moveable Feast Machine> engine) is this: When a rule gets applied, it can affect *any* cell in the event window. This doesn't work so well with shaders. However, with the rise of GPU compute, eg: webgpu, it might become easier to leverage the GPU for this kind of thing! I need to look into it more!\n\nAnother challenge is this: Most cellular automatons are deterministic. But CellPond (and the Moveable Feast Machine) are non-deterministic. So parallelising 'events' involves having to make sure that any randomly-picked locations don't overlap with each other. You can't just get away with a classic <https://en.wikipedia.org/wiki/Block_cellular_automaton|block cellular automata> approach.\n\nI did manage to do a dodgy solution to that once on the GPU with <https://github.com/TodePond/GPU-SandPond|this experiment> though. And I made two videos about it:\n\n1. <https://youtu.be/W7HRay9RPNg|The initial idea of using GPU to speed up one of these engines>.\n2. <https://youtu.be/9mbs0sx3z2A|Taking the idea to its logical conclusion>.\n\nBig answer but it's an interesting topic, thanks for asking :)",
+        "user": "U03R0B9U1GD",
+        "ts": "1675465494.658649",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JXOxX",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thank you very much!\n\nYes I reckon there's some scope to run them on the GPU, but it might be harder than expected.\n\nSo, just for context - the engine's main bottleneck currently is rendering, because it's just using javascript canvas. The renderer could be sped up loads by using webgl instead, and then the bottleneck would become the computation behind it.\n\nAt that point, GPU would be a consideration! Cellular automatons are usually great for GPU optimisations, because all the classic (like game of life) involve rules where only the 'middle' of an 'event window' gets edited. Which is perfect for shaders.\n\nOne of the challenges of an engine like CellPond (which stems from Dave Ackley's "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://movablefeastmachine.org/",
+                                "text": "Moveable Feast Machine"
+                            },
+                            {
+                                "type": "text",
+                                "text": " engine) is this: When a rule gets applied, it can affect *any* cell in the event window. This doesn't work so well with shaders. However, with the rise of GPU compute, eg: webgpu, it might become easier to leverage the GPU for this kind of thing! I need to look into it more!\n\nAnother challenge is this: Most cellular automatons are deterministic. But CellPond (and the Moveable Feast Machine) are non-deterministic. So parallelising 'events' involves having to make sure that any randomly-picked locations don't overlap with each other. You can't just get away with a classic "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://en.wikipedia.org/wiki/Block_cellular_automaton",
+                                "text": "block cellular automata"
+                            },
+                            {
+                                "type": "text",
+                                "text": " approach.\n\nI did manage to do a dodgy solution to that once on the GPU with "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/TodePond/GPU-SandPond",
+                                "text": "this experiment"
+                            },
+                            {
+                                "type": "text",
+                                "text": " though. And I made two videos about it:\n\n1. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://youtu.be/W7HRay9RPNg",
+                                "text": "The initial idea of using GPU to speed up one of these engines"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n2. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://youtu.be/9mbs0sx3z2A",
+                                "text": "Taking the idea to its logical conclusion"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nBig answer but it's an interesting topic, thanks for asking :)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD"
+    },
+    {
+        "client_msg_id": "09831bf8-d90c-4a53-83e4-6202e4f210cb",
+        "type": "message",
+        "text": "Oh fascinating, thanks for the details response! So these nondeterministic event windows; do they pick a single rule to evaluate at random? Or do they evaluate all available rules? And is it critical that the window be a fixed size, or could it adapt to the size of the largest rule?",
+        "user": "U04MAEU6VHN",
+        "ts": "1675515922.114959",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lGb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh fascinating, thanks for the details response! So these nondeterministic event windows; do they pick a single rule to evaluate at random? Or do they evaluate all available rules? And is it critical that the window be a fixed size, or could it adapt to the size of the largest rule?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD"
+    },
+    {
+        "client_msg_id": "1e713ccc-37c7-4aba-9ae8-288c89adfc95",
+        "type": "message",
+        "text": "(I see movable feast has some papers written,I can just go read those as well)",
+        "user": "U04MAEU6VHN",
+        "ts": "1675516027.231629",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZVOAn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(I see movable feast has some papers written,I can just go read those as well)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD"
+    },
+    {
+        "client_msg_id": "434757f1-8d66-411a-b507-c11273d4faa9",
+        "type": "message",
+        "text": "In the London creative coding video, say at one point that cell splitting was a big leap forward, because it allowed you to encode direction, which was difficult before. How is it different from encoding direction as a color (blue goes up, red goes down) or pairs of colors in a non-split grid? (For that matter, I bet split grids make event windows quite complicated :sweat_smile:)",
+        "user": "U04MAEU6VHN",
+        "ts": "1675516215.638109",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Z3o",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In the London creative coding video, say at one point that cell splitting was a big leap forward, because it allowed you to encode direction, which was difficult before. How is it different from encoding direction as a color (blue goes up, red goes down) or pairs of colors in a non-split grid? (For that matter, I bet split grids make event windows quite complicated "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile",
+                                "unicode": "1f605"
+                            },
+                            {
+                                "type": "text",
+                                "text": ")"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD"
+    },
+    {
+        "client_msg_id": "efe6e44d-ff14-41d6-8b7f-10ebf6ff931c",
+        "type": "message",
+        "text": "So, in CellPond, I was hoping to do this:\n1. Pick a random position (within the 0.0 -&gt; 1.0 range of x and y)\n2. Apply a random rule (if it matches).\nHowever, for some performance reasons, it actually does this:\n1. Pick a random position.\n2. Shuffle all rules.\n3. Apply the first rule that matches.\nThe 'variable event window size' was a key new thing for the engine to do! The Moveable Feast Machine (MFM) has a fixed diamond-shaped window. SandPond has a square shaped one.\n\nCellPond needs to be flexible. The way it gets around this is...\nWhen you make a rule with the drag-and-drop interface, it actually gets compiled down into multiple rules -- one for each cell in the diagram silhouette.\n\nThe classic sand rule...\n:large_yellow_square::arrow_right::black_large_square:\n:black_large_square::arrow_right::large_yellow_square:\n\n... would produce two rules on the virtual machine.\nOne where the top cell (yellow) is the 'center/origin' of the event window. And one where the bottom cell (black) is the origin.",
+        "user": "U03R0B9U1GD",
+        "ts": "1675519085.030009",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QvQA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So, in CellPond, I was hoping to do this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Pick a random position (within the 0.0 -> 1.0 range of x and y)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Apply a random rule (if it matches)."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nHowever, for some performance reasons, it actually does this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Pick a random position."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Shuffle all rules."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Apply the first rule that matches."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe 'variable event window size' was a key new thing for the engine to do! The Moveable Feast Machine (MFM) has a fixed diamond-shaped window. SandPond has a square shaped one.\n\nCellPond needs to be flexible. The way it gets around this is...\nWhen you make a rule with the drag-and-drop interface, it actually gets compiled down into multiple rules -- one for each cell in the diagram silhouette.\n\nThe classic sand rule...\n"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "large_yellow_square",
+                                "unicode": "1f7e8"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "arrow_right",
+                                "unicode": "27a1-fe0f"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "black_large_square",
+                                "unicode": "2b1b"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "black_large_square",
+                                "unicode": "2b1b"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "arrow_right",
+                                "unicode": "27a1-fe0f"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "large_yellow_square",
+                                "unicode": "1f7e8"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n... would produce two rules on the virtual machine.\nOne where the top cell (yellow) is the 'center/origin' of the event window. And one where the bottom cell (black) is the origin."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD"
+    },
+    {
+        "client_msg_id": "1ee6bbb1-28b8-42e6-924a-8a2f7c2e0884",
+        "type": "message",
+        "text": "Regarding the encoded direction... You certainly could encode direction as colour! And I did it a lot in <https://youtu.be/2qfjJ-0ZeVM|this video>!\n\nHowever, this isn't a very useful abstraction when it comes to writing rules. You'd need a rule for moving up, a rule for moving down, and so on.\n\nBy encoding direction as a spatial relationship, we can just make one rule: Move 'forward'.\n\nOther examples of this include:\nUsing a split cell where one cell indicates an element type, and the other cell indicates its temperature. You could make water that heats up and does something (eg: freeze/evaporate) when it hits a certain temperaure.\n\nCold water\n:large_blue_square:\n:white_large_square:\n\nHot water\n:large_blue_square:\n:black_large_square:\n\nTepid water\n:large_blue_square:\n(grey)\n\nIt's nice that it lets you 'quote' extra data in a way! We can use the black colour to mean temperature when attached with a blue cell, but it might mean different things in other places.\n\nYou could use a similar thing to make the 'demon horde sort' that Dave Ackley uses to exemplify the MFM too by the way!",
+        "user": "U03R0B9U1GD",
+        "ts": "1675519590.646779",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dwA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Regarding the encoded direction... You certainly could encode direction as colour! And I did it a lot in "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://youtu.be/2qfjJ-0ZeVM",
+                                "text": "this video"
+                            },
+                            {
+                                "type": "text",
+                                "text": "!\n\nHowever, this isn't a very useful abstraction when it comes to writing rules. You'd need a rule for moving up, a rule for moving down, and so on.\n\nBy encoding direction as a spatial relationship, we can just make one rule: Move 'forward'.\n\nOther examples of this include:\nUsing a split cell where one cell indicates an element type, and the other cell indicates its temperature. You could make water that heats up and does something (eg: freeze/evaporate) when it hits a certain temperaure.\n\nCold water\n"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "large_blue_square",
+                                "unicode": "1f7e6"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "white_large_square",
+                                "unicode": "2b1c"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nHot water\n"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "large_blue_square",
+                                "unicode": "1f7e6"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "black_large_square",
+                                "unicode": "2b1b"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nTepid water\n"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "large_blue_square",
+                                "unicode": "1f7e6"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n(grey)\n\nIt's nice that it lets you 'quote' extra data in a way! We can use the black colour to mean temperature when attached with a blue cell, but it might mean different things in other places.\n\nYou could use a similar thing to make the 'demon horde sort' that Dave Ackley uses to exemplify the MFM too by the way!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD"
+    },
+    {
+        "client_msg_id": "471d75c9-fa3d-46c2-9ee7-25b14d54c711",
+        "type": "message",
+        "text": "hmm yeah that's neat! I wonder how it would be to have one (or several!) \"hidden\" or \"background\" layers for metadata, and rules that could take them into account, but the fore-most layer is the one that gets rendered :thinking_face:",
+        "user": "U04MAEU6VHN",
+        "ts": "1675519808.058539",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0sp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "hmm yeah that's neat! I wonder how it would be to have one (or several!) \"hidden\" or \"background\" layers for metadata, and rules that could take them into account, but the fore-most layer is the one that gets rendered "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "thinking_face",
+                                "unicode": "1f914"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD"
+    },
+    {
+        "client_msg_id": "729aee2f-a3ec-4363-b1bd-5501294a4452",
+        "type": "message",
+        "text": "Yes that would be great to try out! I was originally planning for every cell to be controlled by its own mini 9x9 cellular automata world, and the middle cell was the only one that got rendered when zoomed out. But when I started trying it out, I got tempted by the dynamic splitting/merging idea :slightly_smiling_face:",
+        "user": "U03R0B9U1GD",
+        "ts": "1675519902.698449",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lw6xr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes that would be great to try out! I was originally planning for every cell to be controlled by its own mini 9x9 cellular automata world, and the middle cell was the only one that got rendered when zoomed out. But when I started trying it out, I got tempted by the dynamic splitting/merging idea "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD",
+        "reactions": [
+            {
+                "name": "white_check_mark",
+                "users": [
+                    "U04MAEU6VHN"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2f9218a0-22ef-411d-aa07-11f4968d9c40",
+        "type": "message",
+        "text": "Very interesting. I had no idea how large the influence of Dave Ackley and his MFM was here.",
+        "user": "UCUSW7WVD",
+        "ts": "1675528911.846879",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qFEAW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Very interesting. I had no idea how large the influence of Dave Ackley and his MFM was here."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1675409540.909829",
+        "parent_user_id": "U03R0B9U1GD",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U03R0B9U1GD"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
