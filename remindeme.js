@@ -19,11 +19,15 @@ function generateScriptForThisWeek(now, dayNumber) {
   console.log(issueTitle);
   console.log(`mkdir history/weekly/${curYear}/${monthStr}/${weekStr}/`);
   console.log(
-    `nix-shell;cd newsletter-content;nikola new_post -f markdown -t "${issueTitle}"`
+    `nix-shell`
   );
   console.log(
-    `nvim posts/future-of-coding-weekly-${curYear}${monthStr}-week-${weekNumber}.md`
+    `cd newsletter-content;nikola new_post -f markdown -t "${issueTitle}" -e`
   );
+  console.log(
+    `hx posts/future-of-coding-weekly-${curYear}${monthStr}-week-${weekNumber}.md`
+  );
+  console.log("nikola build");
   console.log(newsletterUrl);
 }
 

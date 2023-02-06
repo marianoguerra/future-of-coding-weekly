@@ -17,5 +17,6 @@ mkShell {
     export LC_ALL=en_US.UTF-8
     npm install
     export PATH=$PWD/node_modules/.bin:$PATH
+    export EDITOR=hx
   '';
 }
