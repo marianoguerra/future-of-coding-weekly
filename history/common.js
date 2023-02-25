@@ -25,7 +25,7 @@ const AUTHORS_DATA = {
   },
   "Ivan Reese": {
     name: "Ivan Reese",
-    url: "https://twitter.com/spiralganglion",
+    url: "http://ivanish.ca/",
   },
   "Chris Martens": {
     name: "Chris Martens",
