@@ -1,6 +1,6 @@
 //@format
 /*globals Vue*/
-import { AUTHORS_TABLE } from "../common.js";
+import { AUTHORS_TABLE } from "./common.js";
 function main() {
   const app = new Vue({
     el: "#app",
