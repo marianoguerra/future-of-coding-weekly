@@ -474,7 +474,8 @@ const AUTHORS_DATA = {
   "Jared Forsyth": { name: "Jared Forsyth", url: "https://jaredforsyth.com/" },
   "Jason Chan": { name: "Jason Chan", url: "https://twitter.com/thejasonchan" },
   "Ulysses Popple": { name: "Ulysses Popple", url: "https://nodysseus.io/" },
-  //'': '[]()',
+  "Josh Justice": { name: "Josh Justice", url: "https://codingitwrong.com/" },
+  //'': { name: "", url: "" },
 };
 
 const AUTHORS = Object.entries(AUTHORS_DATA).reduce(
