@@ -1,0 +1,56 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2023-04-04T15:39:18.013Z" class="post"><span class="user">Adriaan Leijnse</span> <a href="./?fromDate=2023-04-01&amp;toDate=2023-04-07&amp;channel=thinking-together&amp;filter=#2023-04-04T15:39:18.013Z" class="date">2023-04-04 15:39:18</a> <div class="message"><p>I've been thinking about how the state of a running program could be modeled as the definition of a program changing over time. This seems closely related to "image" based programming systems, right? Does anyone have thoughts or reading related to this?</p>
+<p>(I got there thinking about the branchable/forkable database trend which tries to tie program version to state version.)</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2023-04-04T18:21:02.878Z" class="reply"><span class="user">Chris Knott</span> <a href="./?fromDate=2023-04-01&amp;toDate=2023-04-07&amp;channel=thinking-together&amp;filter=#2023-04-04T18:21:02.878Z" class="date">2023-04-04 18:21:02</a> <div class="message"><p>I'm not sure I follow. Does the definition of a program change at runtime?</p>
+<p>Do you mean to include user inputs as part of the definition?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-04T18:24:47.062Z" class="reply"><span class="user">greg kavanagh</span> <a href="./?fromDate=2023-04-01&amp;toDate=2023-04-07&amp;channel=thinking-together&amp;filter=#2023-04-04T18:24:47.062Z" class="date">2023-04-04 18:24:47</a> <div class="message"><p>Would you consider something like Redux or Recoil and a React SPA as an image? </p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-04T21:00:20.570Z" class="reply"><span class="user">Andrew F</span> <a href="./?fromDate=2023-04-01&amp;toDate=2023-04-07&amp;channel=thinking-together&amp;filter=#2023-04-04T21:00:20.570Z" class="date">2023-04-04 21:00:20</a> <div class="message"><p>I do think about this a lot, particularly in the context of partial evaluation, where (in short) you can supply part of the arguments to a program and get a result program that has all the consequences of that argument baked in (as opposed to partial application, where you supplying an argument probably just builds a closure).</p>
+<p>I mean, a program changing over time is kind of how beta reduction is technically defined, right? Transformation from one lambda term to the next. The problem is, implementations using that strategy aren't (IMO) really feasible. They're not efficient, and there tends to be ambiguity as to the next step, where IIRC different choices determine whether the thing even converges.</p>
+<p>One of my goals is a computational formalism that efficiently supports partial evaluation and this sort of program -&gt; program mindset in general. (Key point: you want to be able to output "data", therefore data is a program)</p>
+<p>I'm not precisely sure what you mean by the forkable database trend. Can you give an example? I feel like I've heard of a couple different things that answer that description in very different ways.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-05T00:23:11.497Z" class="reply"><span class="user">Nick Smith</span> <a href="./?fromDate=2023-04-02&amp;toDate=2023-04-08&amp;channel=thinking-together&amp;filter=#2023-04-05T00:23:11.497Z" class="date">2023-04-05 00:23:11</a> <div class="message"><p><strong>@Adriaan Leijnse</strong> I <a href="https://twitter.com/NickSmit_/status/1563114360360222720">tweeted about this</a> a while ago. At some point in the future, I'd like to develop a programming environment based on this principle.</p>
+</div> <div class="attachments">
+<blockquote><p>🐦 <a href="https://twitter.com/@NickSmit_">Nick Smith</a>: Something I’ve recently realized: a running program is just a static program with some extra data (an event history). There’s no reason we shouldn’t be able to fork, edit, undo &amp;amp; redo running programs (and archive them) just as we do with static ones.</p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2023-04-05T10:22:26.248Z" class="reply"><span class="user">Jack Rusher</span> <a href="./?fromDate=2023-04-02&amp;toDate=2023-04-08&amp;channel=thinking-together&amp;filter=#2023-04-05T10:22:26.248Z" class="date">2023-04-05 10:22:26</a> <div class="message"><p>Do you mean this sort of thing? <a href="https://www.youtube.com/watch?v=72y2EC5fkcE">youtube.com/watch?v=72y2EC5fkcE</a></p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://www.youtube.com/watch?v=72y2EC5fkcE">Tomorrow Corporation Tech Demo</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2023-04-05T13:17:20.141Z" class="reply"><span class="user">Adriaan Leijnse</span> <a href="./?fromDate=2023-04-02&amp;toDate=2023-04-08&amp;channel=thinking-together&amp;filter=#2023-04-05T13:17:20.141Z" class="date">2023-04-05 13:17:20</a> <div class="message"><p><strong>@greg kavanagh</strong> An image in this sense would contain both code and the state. It's like your editor is a whole OS that you can modify at runtime: <a href="https://en.wikipedia.org/wiki/Smalltalk#Image-based_persistence">en.wikipedia.org/wiki/Smalltalk#Image-based_persistence</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-05T13:19:26.397Z" class="reply"><span class="user">Adriaan Leijnse</span> <a href="./?fromDate=2023-04-02&amp;toDate=2023-04-08&amp;channel=thinking-together&amp;filter=#2023-04-05T13:19:26.397Z" class="date">2023-04-05 13:19:26</a> <div class="message"><p>I think the difficulty I have with this is that there's no real model of change; it happens in this uncontrolled imperative kind of way that makes it hard to do version control and the things <a href="https://twitter.com/NickSmit_">Nick Smith</a> is talking about</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-05T13:27:10.373Z" class="reply"><span class="user">Andrew F</span> <a href="./?fromDate=2023-04-02&amp;toDate=2023-04-08&amp;channel=thinking-together&amp;filter=#2023-04-05T13:27:10.373Z" class="date">2023-04-05 13:27:10</a> <div class="message"><p>Maybe you want event sourcing baked in to the environment?  <a href="https://martinfowler.com/eaaDev/EventSourcing.html">martinfowler.com/eaaDev/EventSourcing.html</a></p>
+<p>You could explicitly treat the input as an event stream, and treat the program as a reducer over that stream. It does get interesting when that input depends on program output that depends on previous input.</p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a></p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2023-04-05T13:28:29.156Z" class="reply"><span class="user">Adriaan Leijnse</span> <a href="./?fromDate=2023-04-02&amp;toDate=2023-04-08&amp;channel=thinking-together&amp;filter=#2023-04-05T13:28:29.156Z" class="date">2023-04-05 13:28:29</a> <div class="message"><p><a href="https://twitter.com/NickSmit_">Nick Smith</a> love that thread!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-05T13:30:26.560Z" class="reply"><span class="user">Adriaan Leijnse</span> <a href="./?fromDate=2023-04-02&amp;toDate=2023-04-08&amp;channel=thinking-together&amp;filter=#2023-04-05T13:30:26.560Z" class="date">2023-04-05 13:30:26</a> <div class="message"><p><a href="http://github.com/andrewf">Andrew F</a> yep! FRP models this dependency just fine, but to make history editing work nicely you need to know about causality. I.e. "what past event is responsible for allowing some future event to happen?"</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-06T07:09:13.591Z" class="reply"><span class="user">Jarno Montonen</span> <a href="./?fromDate=2023-04-03&amp;toDate=2023-04-09&amp;channel=thinking-together&amp;filter=#2023-04-06T07:09:13.591Z" class="date">2023-04-06 07:09:13</a> <div class="message"><p>In my structure editor tech it is possible to store both logic and data in the same interpretable data structure fairly efficiently (I've written a custom sequential tree). Because of this, creating clones/forks and storing snapshots/images of both state and logic is trivial. Diffing and merging should be possible too, but obviously come with their caveats.</p>
+<p>Currently one use case I'm thinking for this would be stateful cloud functions. It should be easy and fast to write the snapshot to a persistent storage and then load it when the function needs to run, and then write the possibly changed version back to wait for the next run. Keeping the snapshots in storage would work as a free history of the program state (and logic) that you'd be able to open up in the structure editor. Of course, it won't just scale to infinity size persistent data and handling concurrent requests would be an extra hurdle. However, it should work fairly well for what is usually required of cloud functions. It is also able to keep much of the interpreted intermediate results and only recompute what's necessary.</p>
+<p>Emitting some kind of "rewind" messages to external systems still wouldn't be easy, but could be possible by diffing the snapshots and then constructing the rewind message from the diff..</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
