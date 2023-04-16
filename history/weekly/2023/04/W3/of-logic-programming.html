@@ -1,0 +1,39 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2023-04-11T09:22:11.985Z" class="post"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2023-04-08&amp;toDate=2023-04-14&amp;channel=of-logic-programming&amp;filter=#2023-04-11T09:22:11.985Z" class="date">2023-04-11 09:22:11</a> <div class="message"><p>I am trying to suss out what the significance-of/meaning is of “drop_amount...bwd” in the Dungeon Crawler source code (Ceptre). Line 50 <a href="https://github.com/guitarvydas/ceptre/blob/dev/dc/dc.cep">github.com/guitarvydas/ceptre/blob/dev/dc/dc.cep</a>.</p>
+<p>Comments?</p>
+<p>background: I’m building a Ceptre compiler - to Lisp (then “the world”).  I think that I can handle most rules by treating them as 3 parts: (1) a pattern to be matched (using PROLOG backtracking), (2) retractions (3) assertions (PROLOG meaning, imperitivized).  As it stands, the “compiler” transpiles Ceptre to RT (an intermediate language I created) then RT to Lisp.  The significance of forward chaining vs backward chaining is blurring in my mind, esp. the significance of  <code>drop_amount</code> .</p>
+<p>Then, I will need to figure out what  <code>z</code>  and  <code>none</code>  are ...</p>
+<p>Aside: I’m using Nils Holm’s “Prolog ... in 6 Slides” (Scheme code ported to CL (and JS)).</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2023-04-11T23:28:36.619Z" class="reply"><span class="user">Nick Smith</span> <a href="./?fromDate=2023-04-08&amp;toDate=2023-04-14&amp;channel=of-logic-programming&amp;filter=#2023-04-11T23:28:36.619Z" class="date">2023-04-11 23:28:36</a> <div class="message"><p>What are you unsure about? The meaning of the “bwd” acronym? (I don’t know Ceptre, so I can’t help with that.)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-12T03:38:57.249Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2023-04-09&amp;toDate=2023-04-15&amp;channel=of-logic-programming&amp;filter=#2023-04-12T03:38:57.249Z" class="date">2023-04-12 03:38:57</a> <div class="message"><p>“Bwd” means “backward chaining”.  Ceptre is mostly based on forward chaining but allows backward chaining when necessary.  Apparently  <code>drop_amount</code>  needs to be declared as a backward chaining predicate.  I don’t know why  <code>drop_amount</code>  is different.  I can tell that I don’t understand something here, and, I can’t evern formulate a coherent question.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-13T08:18:35.185Z" class="reply"><span class="user">Nick Smith</span> <a href="./?fromDate=2023-04-10&amp;toDate=2023-04-16&amp;channel=of-logic-programming&amp;filter=#2023-04-13T08:18:35.185Z" class="date">2023-04-13 08:18:35</a> <div class="message"><p>To the best of my knowledge,  <code>drop_amount</code>  tuples can't be generated using forward chaining, because there are infinitely-many of them, right? So backward chaining is the only evaluation scheme that makes sense.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-04-13T10:34:58.128Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2023-04-10&amp;toDate=2023-04-16&amp;channel=of-logic-programming&amp;filter=#2023-04-13T10:34:58.128Z" class="date">2023-04-13 10:34:58</a> <div class="message"><p>Thanks.</p>
+<p>Part of the problem is that I’m looking at a version of the source that has been modified for the paper.  Going back to the source code for the thesis shows Church numerology being used.  <a href="https://github.com/chrisamaphone/interactive-lp/blob/master/examples/rpg.cep">github.com/chrisamaphone/interactive-lp/blob/master/examples/rpg.cep</a>.  In the paper, numbers are used, but, in the thesis the numbers are written in bw chained Church notation.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
