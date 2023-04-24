@@ -1,0 +1,281 @@
+[
+    {
+        "client_msg_id": "1439382b-b337-41c8-94fc-abed4461ca96",
+        "type": "message",
+        "text": "Drawware using <http://draw.io|draw.io> - recent submission to Handmade Jam that I was involved with\n\n<https://handmade.network/p/374/odin0d/>",
+        "user": "UGWUJUZHT",
+        "ts": "1681811012.388819",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "02Z",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Drawware using "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://draw.io",
+                                "text": "draw.io"
+                            },
+                            {
+                                "type": "text",
+                                "text": " - recent submission to Handmade Jam that I was involved with\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://handmade.network/p/374/odin0d/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "image_url": "https://hmn-assets-2.ams3.cdn.digitaloceanspaces.com/d7fb34bb-f771-43b7-8bea-d3fc4a935f8b/HMNLogo.png",
+                "image_width": 400,
+                "image_height": 400,
+                "image_bytes": 96243,
+                "from_url": "https://handmade.network/p/374/odin0d/",
+                "service_icon": "https://handmade.network/public/logo.png?v=1681772613",
+                "id": 1,
+                "original_url": "https://handmade.network/p/374/odin0d/",
+                "fallback": "Handmade Network: Odin0D",
+                "text": "Visualize software components written in the Odin language and snap components together like LEGO blocks to form software systems.",
+                "title": "Odin0D",
+                "title_link": "https://handmade.network/p/374/odin0d/",
+                "service_name": "Handmade Network"
+            }
+        ],
+        "thread_ts": "1681811012.388819",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1682314437.051729",
+        "reply_users": [
+            "UCUSW7WVD"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "a2d0c171-fc7f-4ce9-a14f-21cf224e441a",
+        "type": "message",
+        "text": "Visualizing Text - recent submission to Handmade Jam that I was involved with\n\n<https://handmade.network/p/373/slider/>",
+        "user": "UGWUJUZHT",
+        "ts": "1681811030.595069",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "M7Qm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Visualizing Text - recent submission to Handmade Jam that I was involved with\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://handmade.network/p/373/slider/"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "image_url": "https://hmn-assets-2.ams3.cdn.digitaloceanspaces.com/d7fb34bb-f771-43b7-8bea-d3fc4a935f8b/HMNLogo.png",
+                "image_width": 400,
+                "image_height": 400,
+                "image_bytes": 96243,
+                "from_url": "https://handmade.network/p/373/slider/",
+                "service_icon": "https://handmade.network/public/logo.png?v=1681772613",
+                "id": 1,
+                "original_url": "https://handmade.network/p/373/slider/",
+                "fallback": "Handmade Network: Slider",
+                "text": "Visualizing Text",
+                "title": "Slider",
+                "title_link": "https://handmade.network/p/373/slider/",
+                "service_name": "Handmade Network"
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e27c37d6-dc7b-41c5-97c7-a18dde41c220",
+        "type": "message",
+        "text": "Where does the string \"hello world\" come from when you run the program?\n\nI went back and reread your earlier writings (seeing running code often causes me to focus on a thing). Some reactions:\n\u2022 Components include two concerns: what code runs inside them, and what queues are wired up to them. I think having to duplicate the code inside every time you clone a component is a non-starter. You say, \"deduplicating code is a compiler concern\" (<https://publish.obsidian.md/programmingsimplicity/2023-01-24-0D+Ideal+vs.+Reality>) which feels handwavy. Compilers are rocket science, and if we don't have the compilers to do this (we don't have compilers to do a lot, and it isn't obvious to me that compilers can deduplicate arbitrary code without risking lots of performance _regressions_) then somebody still has to do it.\n\u2022 As a consequence it seems to me that components are strictly higher level than functions. You don't want to put raw code inside components. Stick a function call into the component, and now copying the component is cheap and you don't need a complicated compiler to make it cheap. This is fine. I wouldn't get too hung up on this. Like you said, use both. The interesting question here is when we should wrap a function in a component abstraction.\n\u2022 Calling these things zero-dependency is not quite accurate. As you define it, hardwiring the name of a function call is a dependency. But you have names of components like `echo` hard-wired into your example. Again, this is fine. I wouldn't get too hung up on this. The technical idea is sound. You just need a better name and positioning to avoid these distracting quibbles and focus the audience's attention on the core idea.\n\u2022 Request for example #1: How might you perform dependency injection with components? Pass something into a port that causes a component with that name to be invoked? Does this help make things more decoupled? Dependency injection does help decouple functions.\n\u2022 Request for example #2: Check out the example of run-length encoding at <https://www.chiark.greenend.org.uk/~sgtatham/coroutines.html>. I'm curious how this program would look with your approach. Might you need coroutines? A component can have multiple inputs and outputs in parallel. Can it have multiple outputs _in series_? So that pumping in one input results in multiple outputs? Then this question has me wondering if it should have multiple inputs in series as well. What might that mean?\n\u2022 You've mentioned before that this looks like hardware. One challenge with designing hardware circuits is getting just right the timing of signals coming into a piece of combinatorial circuit, and debugging the weird errors when we don't. We need the sequential latches just so to make the circuit more robust. But the latches add latency. I wonder if your approach shares this problem. What are the semantics of a component with two inputs that receives a signal/value on only one of them? You could block and wait for the other, or not. Both seem to have trade-offs, and I think I can construct subtle bugs both ways.\n\u2022 There are still some gaps before this can be the notation for concurrency. As you said, you need both functions and components to coexist. And you need a way to go between them: wrap a series of function calls in some queues to turn it into a component, or wrap a set of components into a function so you can give it a name/address to combine with multiple sets of queues. Functions provide abstraction. Copying components does not.\nOn the whole, this needs a whole lot more examples. I'd forget the tooling initially and just hand-write a bunch of examples. Do they seem clear? Are there notational changes that might make them clearer? Etc.",
+        "user": "UCUSW7WVD",
+        "ts": "1682314437.051729",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kr7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Where does the string \"hello world\" come from when you run the program?\n\nI went back and reread your earlier writings (seeing running code often causes me to focus on a thing). Some reactions:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Components include two concerns: what code runs inside them, and what queues are wired up to them. I think having to duplicate the code inside every time you clone a component is a non-starter. You say, \"deduplicating code is a compiler concern\" ("
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://publish.obsidian.md/programmingsimplicity/2023-01-24-0D+Ideal+vs.+Reality"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ") which feels handwavy. Compilers are rocket science, and if we don't have the compilers to do this (we don't have compilers to do a lot, and it isn't obvious to me that compilers can deduplicate arbitrary code without risking lots of performance "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "regressions",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ") then somebody still has to do it."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "As a consequence it seems to me that components are strictly higher level than functions. You don't want to put raw code inside components. Stick a function call into the component, and now copying the component is cheap and you don't need a complicated compiler to make it cheap. This is fine. I wouldn't get too hung up on this. Like you said, use both. The interesting question here is when we should wrap a function in a component abstraction."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Calling these things zero-dependency is not quite accurate. As you define it, hardwiring the name of a function call is a dependency. But you have names of components like "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "echo",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " hard-wired into your example. Again, this is fine. I wouldn't get too hung up on this. The technical idea is sound. You just need a better name and positioning to avoid these distracting quibbles and focus the audience's attention on the core idea."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Request for example #1: How might you perform dependency injection with components? Pass something into a port that causes a component with that name to be invoked? Does this help make things more decoupled? Dependency injection does help decouple functions."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Request for example #2: Check out the example of run-length encoding at "
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://www.chiark.greenend.org.uk/~sgtatham/coroutines.html"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ". I'm curious how this program would look with your approach. Might you need coroutines? A component can have multiple inputs and outputs in parallel. Can it have multiple outputs "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "in series",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "? So that pumping in one input results in multiple outputs? Then this question has me wondering if it should have multiple inputs in series as well. What might that mean?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "You've mentioned before that this looks like hardware. One challenge with designing hardware circuits is getting just right the timing of signals coming into a piece of combinatorial circuit, and debugging the weird errors when we don't. We need the sequential latches just so to make the circuit more robust. But the latches add latency. I wonder if your approach shares this problem. What are the semantics of a component with two inputs that receives a signal/value on only one of them? You could block and wait for the other, or not. Both seem to have trade-offs, and I think I can construct subtle bugs both ways."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "There are still some gaps before this can be the notation for concurrency. As you said, you need both functions and components to coexist. And you need a way to go between them: wrap a series of function calls in some queues to turn it into a component, or wrap a set of components into a function so you can give it a name/address to combine with multiple sets of queues. Functions provide abstraction. Copying components does not."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nOn the whole, this needs a whole lot more examples. I'd forget the tooling initially and just hand-write a bunch of examples. Do they seem clear? Are there notational changes that might make them clearer? Etc."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1682314581.000000"
+        },
+        "thread_ts": "1681811012.388819",
+        "parent_user_id": "UGWUJUZHT"
+    }
+]

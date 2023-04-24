@@ -1,0 +1,222 @@
+[
+    {
+        "client_msg_id": "e1bf6668-cd22-4a44-9bbb-2665900baba6",
+        "type": "message",
+        "text": "*Befunge, but readable*\n\n<https://github.com/m-ender/hexagony> made the rounds of the internet yesterday, and caused me to swap in an old interest of mine that I've flailed ineffectually at in the past (e.g. <https://twitter.com/akkartik/status/1238349948074070017>): a way to display a program that makes its large-scale structure really obvious (rather than obfuscating it as Befunge does).\n\nOne problem I have with Befunge (not the one you're thinking of, ha) and other _fungeoids_ [1] is that you have a bunch of static information about a program visible in 2D on screen, but a key piece -- the stack -- is invisible. The question I keep returning to is how one might go about making the stack (or any other run-time state used by the program) visible without just bolting it on on the side. This time around, I got hooked on the following metaphor. Imagine a spaceship that contains some data, sets out on a voyage across an infinite 2D plane, and performs various operations depending on the objects it collides with.\n\nExample 1: The space ship contains a row of boxes. Colliding with a number pushes a box on to the nose,  colliding with an operator operates on the 1 or 2 front-most boxes in the front. This is a way to display a stack, but a stack in isolation doesn't seem to scale well to larger programs.\n\nExample 2: The spaceship contains a number. Colliding with the BF-inspired primitives `+` and `-` [2] causes the number to be incremented and decremented, respectively. Now build addition out of it. Zooming into a number `n` shows it to be a loop of n iterations. When the spaceship collides with `n` it loops through n times, and the number inside it has n added to it. At a high zoom, you see the spaceship loop n times before exiting the \"solar system\". At a low zoom you see the spaceship exit instantaneously with n added to its value. Now you can imagine a reduce operation as a series of solar systems that the spaceship visits one by one.\n\nExample 3: The spaceship contains a binary heap to insert and delete elements from depending on objects it collides with. Zooming into any single collision reveals the tree structure to be the \"space\" that a smaller spaceship containing a single number bounces among.\n\nTwo properties that seem important from these examples:\n\u2022 A hierarchical nature where space and spaceship are duals, and zooming in and out causes them to turn into each other.\n\u2022 Rendering the state of a spaceship needs to be extensible[3]. We need to leave Befunge's ASCII behind.\nAt the largest scale, state machines feel like a really powerful way to represent the state within a spaceship. I often find them to be the outermost architecture of a large program. But to _actually find_ the state machine I have to flail around for a long time. If we could use some visual paradigm at the largest scales but zoom into text as needed, programs might be much more comprehensible.\n\n[1] <https://esolangs.org/wiki/Fungeoid>\n[2] <https://en.wikipedia.org/wiki/Brainfuck#Language_design>\n[3] Like in my old Pong demo: <https://handmade.network/snippet/1561>",
+        "user": "UCUSW7WVD",
+        "ts": "1681698511.039269",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Zenfo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Befunge, but readable",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/m-ender/hexagony"
+                            },
+                            {
+                                "type": "text",
+                                "text": " made the rounds of the internet yesterday, and caused me to swap in an old interest of mine that I've flailed ineffectually at in the past (e.g. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://twitter.com/akkartik/status/1238349948074070017"
+                            },
+                            {
+                                "type": "text",
+                                "text": "): a way to display a program that makes its large-scale structure really obvious (rather than obfuscating it as Befunge does).\n\nOne problem I have with Befunge (not the one you're thinking of, ha) and other "
+                            },
+                            {
+                                "type": "text",
+                                "text": "fungeoids",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " [1] is that you have a bunch of static information about a program visible in 2D on screen, but a key piece -- the stack -- is invisible. The question I keep returning to is how one might go about making the stack (or any other run-time state used by the program) visible without just bolting it on on the side. This time around, I got hooked on the following metaphor. Imagine a spaceship that contains some data, sets out on a voyage across an infinite 2D plane, and performs various operations depending on the objects it collides with.\n\nExample 1: The space ship contains a row of boxes. Colliding with a number pushes a box on to the nose,  colliding with an operator operates on the 1 or 2 front-most boxes in the front. This is a way to display a stack, but a stack in isolation doesn't seem to scale well to larger programs.\n\nExample 2: The spaceship contains a number. Colliding with the BF-inspired primitives "
+                            },
+                            {
+                                "type": "text",
+                                "text": "+",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "-",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " [2] causes the number to be incremented and decremented, respectively. Now build addition out of it. Zooming into a number "
+                            },
+                            {
+                                "type": "text",
+                                "text": "n",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " shows it to be a loop of n iterations. When the spaceship collides with "
+                            },
+                            {
+                                "type": "text",
+                                "text": "n",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " it loops through n times, and the number inside it has n added to it. At a high zoom, you see the spaceship loop n times before exiting the \"solar system\". At a low zoom you see the spaceship exit instantaneously with n added to its value. Now you can imagine a reduce operation as a series of solar systems that the spaceship visits one by one.\n\nExample 3: The spaceship contains a binary heap to insert and delete elements from depending on objects it collides with. Zooming into any single collision reveals the tree structure to be the \"space\" that a smaller spaceship containing a single number bounces among.\n\nTwo properties that seem important from these examples:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "A hierarchical nature where space and spaceship are duals, and zooming in and out causes them to turn into each other."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Rendering the state of a spaceship needs to be extensible[3]. We need to leave Befunge's ASCII behind."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAt the largest scale, state machines feel like a really powerful way to represent the state within a spaceship. I often find them to be the outermost architecture of a large program. But to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "actually find",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " the state machine I have to flail around for a long time. If we could use some visual paradigm at the largest scales but zoom into text as needed, programs might be much more comprehensible.\n\n[1] "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://esolangs.org/wiki/Fungeoid"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n[2] "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://en.wikipedia.org/wiki/Brainfuck#Language_design"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n[3] Like in my old Pong demo: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://handmade.network/snippet/1561"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1681699086.000000"
+        },
+        "thread_ts": "1681698511.039269",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1681730692.950799",
+        "reply_users": [
+            "UGWUJUZHT"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "6b912d62-e572-4aa6-8a4b-f74ad8c79a7e",
+        "type": "message",
+        "text": "\u201c... A hierarchical nature ...\u201d\n\nFWIW, I strongly agree with this phrase.  A minor change in POV might make this whole problem simpler...\n\nWe need notations that *embrace* hierarchy and relative-ism.  Lisp lists, UNIX relative pathnames, StateChart nested machines, Kinopio \u201c/\u201d, HTML links, Dave Ackley all swirl around this flame...  Force-fitting 4D reality down into a single 2D notation causes self-imposed accidental complexity (epicycles).  We need to be thinking in terms of trees of stacks, trees of CPUs/machines/phones, trees of messages, etc.",
+        "user": "UGWUJUZHT",
+        "ts": "1681730692.950799",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "j5A",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\u201c... A hierarchical nature ...\u201d\n\nFWIW, I strongly agree with this phrase.  A minor change in POV might make this whole problem simpler...\n\nWe need notations that "
+                            },
+                            {
+                                "type": "text",
+                                "text": "embrace",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " hierarchy and relative-ism.  Lisp lists, UNIX relative pathnames, StateChart nested machines, Kinopio \u201c/\u201d, HTML links, Dave Ackley all swirl around this flame...  Force-fitting 4D reality down into a single 2D notation causes self-imposed accidental complexity (epicycles).  We need to be thinking in terms of trees of stacks, trees of CPUs/machines/phones, trees of messages, etc."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1681698511.039269",
+        "parent_user_id": "UCUSW7WVD"
+    }
+]
