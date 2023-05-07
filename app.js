@@ -1,15 +1,15 @@
 //@format
 /*globals Set, SimpleMarkdown*/
-import {getInfoForWeekAndDay, MONDAY} from './history/newsletter.js';
-const USER = 'marianoguerra',
-  REPO = 'future-of-coding-weekly',
+import { getInfoForWeekAndDay, MONDAY } from "./history/newsletter.js";
+const USER = "marianoguerra",
+  REPO = "future-of-coding-weekly",
   ISSUES_URL = `https://api.github.com/repos/${USER}/${REPO}/issues`;
 
 function toNode(obj) {
   if (obj && obj.tagName) {
     return obj;
   } else {
-    return document.createTextNode('' + obj);
+    return document.createTextNode("" + obj);
   }
 }
 

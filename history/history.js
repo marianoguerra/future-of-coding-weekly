@@ -1,21 +1,21 @@
 //@format
 /*globals SimpleMarkdown*/
-import {getNameToCode, textFromCode, skinIdsToCodes} from './emoji.js';
-import {AUTHORS} from './common.js';
+import { getNameToCode, skinIdsToCodes, textFromCode } from "./emoji.js";
+import { AUTHORS } from "./common.js";
 
-let historyPathBase = '/history';
+let historyPathBase = "/history";
 
 function setHistoryPathBase(v) {
   historyPathBase = v;
 }
 
 function zeroUnpad(v) {
-  return v.replace(/^0+/g, '');
+  return v.replace(/^0+/g, "");
 }
 
 function loadMsgsForDay(year, month0, day0, channel) {
-  const month = zeroUnpad('' + month0),
-    day = zeroUnpad('' + day0),
+  const month = zeroUnpad("" + month0),
+    day = zeroUnpad("" + day0),
     path = `${historyPathBase}/${year}/${month}/${day}/${channel}.json`;
 
   return fetch(path).then((resp) => resp.json());
@@ -43,14 +43,14 @@ function msgMatchesFilter(msg, filter) {
 }
 
 function downloadAs(exportObj, exportName, contentType) {
-  const dataBlob = new Blob([exportObj], {type: contentType});
+  const dataBlob = new Blob([exportObj], { type: contentType });
 
   if (navigator.msSaveBlob) {
     navigator.msSaveBlob(dataBlob, exportName);
   } else {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = window.URL.createObjectURL(dataBlob);
-    link.setAttribute('download', exportName);
+    link.setAttribute("download", exportName);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -62,16 +62,14 @@ function mdLink(label, url) {
 }
 
 function findFirstLink(msg) {
-  const {blocks, attachments} = msg,
+  const { blocks, attachments } = msg,
     firstAttachment = attachments ? attachments[0] : null;
   if (attachmentCanBeFirstLink(firstAttachment)) {
-    msg.attachments = attachments.slice(1);
-    // MUT: we remove the first attachment from the list and format it to text again
     addMsgAttachmentsText(msg);
 
     return [
       attachmentThumbnail(firstAttachment),
-      firstAttachment.$text.replace(/^> /, ''),
+      subjectLineForAttachment(firstAttachment),
     ];
   }
 
@@ -81,28 +79,28 @@ function findFirstLink(msg) {
 
   for (let i = 0, len = blocks.length; i < len; i += 1) {
     const block = blocks[i];
-    if (block.type === 'rich_text') {
+    if (block.type === "rich_text") {
       const elems = block.elements;
       for (let j = 0, len = elems.length; j < len; j += 1) {
         const elem = elems[j];
         if (
-          elem.type === 'rich_text_section' ||
-          elem.type === 'rich_text_quote'
+          elem.type === "rich_text_section" ||
+          elem.type === "rich_text_quote"
         ) {
           const subElems = elem.elements;
           for (let k = 0, len = subElems.length; k < len; k += 1) {
             const subElem = subElems[k];
-            if (subElem.type === 'link') {
-              const {url, text} = subElem,
+            if (subElem.type === "link") {
+              const { url, text } = subElem,
                 label = text || url;
 
               const match = url.match(
-                /^https:\/\/twitter.com\/(.*)\/status\/[0-9]+/
+                /^https:\/\/twitter.com\/(.*)\/status\/[0-9]+/,
               );
               if (match === null) {
-                return [urlThumbnail(url), '📝 ' + mdLink(label, url)];
+                return [urlThumbnail(url), "📝 " + mdLink(label, url)];
               } else {
-                return [null, '🐦 ' + mdLink('Tweet from @' + match[1], url)];
+                return [null, "🐦 " + mdLink("Tweet from @" + match[1], url)];
               }
             }
           }
@@ -118,79 +116,132 @@ function msgToMdNL(msg, linkPrefix) {
   const userLink = AUTHORS[msg.$userName],
     userText = userLink || `**${msg.$userName}**`,
     conversationLink = mdLink(
-      '🧵 conversation',
-      `${linkPrefix}#${msg.$dateStrISO}`
+      "🧵 conversation",
+      `${linkPrefix}#${msg.$dateStrISO}`,
     ),
     [thumbnail, resourceLink] = findFirstLink(msg),
-    thumbnailText = thumbnail ? thumbnail + '\n\n' : '',
-    resourceText = resourceLink ? `${resourceLink} via ` : '💬 ',
-    oldMark = msg.$isOlder ? '🕰️ ' : '',
-    base = `${resourceText}${userText}${oldMark}\n\n${conversationLink}\n\n${thumbnailText}${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
+    thumbnailText = thumbnail ? thumbnail + "\n\n" : "",
+    resourceText = resourceLink ? `${resourceLink} via ` : "💬 ",
+    oldMark = msg.$isOlder ? "🕰️ " : "",
+    base =
+      `${resourceText}${userText}${oldMark}\n\n${conversationLink}\n\n${thumbnailText}${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
 
   return base;
 }
 
 function msgToMd(msg) {
-  const base = `_[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
+  const base =
+    `_[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
   if (msg.responses.length === 0) {
     return base;
   } else {
     return (
       base +
-      '\n\n\n' +
+      "\n\n\n" +
       msg.responses
         .map(
           (msg) =>
-            `> _[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`
+            `> _[${msg.$dateStr}]_ **${msg.$userName}**:\n\n${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`,
         )
-        .join('\n\n\n')
+        .join("\n\n\n")
     );
   }
 }
 
 function dummyUser(user) {
-  return {user, name: user, real_name: user, profile: {real_name: user}};
+  return { user, name: user, real_name: user, profile: { real_name: user } };
 }
 
 function getRealName(username, users) {
   const user = users[username];
-  return user === undefined ? username : '**' + user.real_name + '**';
+  return user === undefined ? username : "**" + user.real_name + "**";
+}
+
+function subjectLineForAttachment(att) {
+  if (att.service_name === "twitter") {
+    // tweets with no text (like a video) have no text field O.o
+    return `🐦 [${att.author_name}](https://twitter.com/${att.author_subname})`;
+  } else if (att.service_name === "Twitter") {
+    // tweets with no text (like a video) have no text field O.o
+    const {
+        title,
+        fallback,
+        title_link,
+        from_url,
+        original_url,
+      } = att,
+      author = title || fallback,
+      url = title_link || from_url || original_url;
+    return `🐦 [${author}](${url})`;
+  } else if (att.service_name === "YouTube" || att.service_name === "Vimeo") {
+    return `🎥 [${att.title}](${att.title_link})`;
+  } else if (att.title && att.title_link) {
+    return `📝 [${att.title}](${att.title_link})`;
+  } else {
+    return "";
+  }
 }
 
 const TW_URL_REF_REGEX = /<(https?:\/\/.*?)>/g,
   TW_MENTION_REF_REGEX = /<(https?:\/\/.*?)\|(@.*?)>/g;
 function enrichAttachment(att) {
-  if (att.service_name === 'twitter') {
+  if (att.service_name === "twitter") {
     // tweets with no text (like a video) have no text field O.o
     const text = (
-      (att.text || '') +
-      (att.thumb_url ? `\n\n![Tweet Thumbnail](${att.thumb_url})` : '')
+      (att.text || "") +
+      (att.thumb_url ? `\n\n![Tweet Thumbnail](${att.thumb_url})` : "")
     )
       .replace(TW_MENTION_REF_REGEX, (_, url, handle) => `[${handle}](${url})`)
       .replace(TW_URL_REF_REGEX, (_, url) => url)
-      .replace(EMOJI_REF_REGEX, (_, emojiCode) =>
-        textFromCode(EMOJI_NAME_TO_CODE[emojiCode])
+      .replace(
+        EMOJI_REF_REGEX,
+        (_, emojiCode) => textFromCode(EMOJI_NAME_TO_CODE[emojiCode]),
       )
-      .replace(/\n/g, '\n> ');
-    att.$text = `\n> 🐦 [${att.author_name}](https://twitter.com/${att.author_subname}): ${text}`;
-  } else if (att.service_name === 'YouTube' || att.service_name === 'Vimeo') {
-    att.$text = `> 🎥 [${att.title}](${att.title_link})`;
+      .replace(/\n/g, "\n> ");
+    att.$text =
+      `\n> 🐦 [${att.author_name}](https://twitter.com/${att.author_subname}): ${text}`;
+  } else if (att.service_name === "Twitter") {
+    // tweets with no text (like a video) have no text field O.o
+    const {
+        title,
+        fallback,
+        title_link,
+        from_url,
+        original_url,
+        text,
+        image_url,
+      } = att,
+      author = title || fallback,
+      url = title_link || from_url || original_url,
+      md = (`\n> 🐦 [${author}](${url}): ${text || ""}` +
+        (image_url ? `\n\n> ![Tweet Thumbnail](${image_url})` : ""))
+        .replace(
+          EMOJI_REF_REGEX,
+          (_, emojiCode) => textFromCode(EMOJI_NAME_TO_CODE[emojiCode]),
+        )
+        .replace(/\n/g, "\n> ");
+    att.$text = md;
+  } else if (att.service_name === "YouTube" || att.service_name === "Vimeo") {
+    const { thumb_url, title } = att,
+      previewMd = thumb_url ? `\n>\n> ![${title}](${thumb_url})` : "";
+    att.$text = `> 🎥 [${att.title}](${att.title_link})${previewMd}`;
   } else if (att.title && att.title_link) {
-    att.$text = `> 📝 [${att.title}](${att.title_link})`;
+    const moreText = att.text ? `\n>\n>${att.text}` : "";
+    att.$text = `> 📝 [${att.title}](${att.title_link})${moreText}`;
   } else if (att.image_url) {
-    att.$text = `> 📷 [${att.fallback || att.image_url}](${att.image_url})`;
+    att.$text = `> ![${att.fallback || att.image_url}](${att.image_url})`;
   } else if (att.fallback) {
-    att.$text = '> ' + att.fallback.replace(/\n/g, '\n> ');
+    att.$text = "> " + att.fallback.replace(/\n/g, "\n> ");
   } else {
-    att.$text = '';
+    att.$text = "";
   }
 }
 
 function attachmentCanBeFirstLink(att) {
   return (
     att &&
-    (att.service_name === 'YouTube' ||
-      att.service_name === 'Vimeo' ||
+    (att.service_name === "YouTube" ||
+      att.service_name === "Vimeo" ||
       (att.title && att.title_link))
   );
 }
@@ -200,9 +251,9 @@ function attachmentThumbnail(att) {
     return null;
   }
 
-  if (att.service_name === 'YouTube') {
+  if (att.service_name === "YouTube") {
     return urlThumbnail(att.title_link);
-  } else if (att.service_name === 'Vimeo') {
+  } else if (att.service_name === "Vimeo") {
     return `![Vimeo Thumbnail](${att.thumb_url})`;
   }
 
@@ -220,7 +271,7 @@ function urlThumbnail(url) {
   }
 }
 
-const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'},
+const ENTITIES_TO_TEXT = { lt: "<", gt: ">", amp: "&" },
   EMOJI_NAME_TO_CODE = getNameToCode(),
   USER_REF_REGEX = /<@(.*?)>/g,
   ENTITIES_REGEX = /&(gt|lt|amp);/g,
@@ -228,57 +279,60 @@ const ENTITIES_TO_TEXT = {lt: '<', gt: '>', amp: '&'},
   URL_REF_REGEX = /<([^|>].*?)>/g,
   URL_LABEL_REF_REGEX = /<([^>]*?)\|([^>]*?)>/g,
   THING_REF_REGEX = /<!(.*?)>/g,
-  SKIN_REF_REGEX_TEXT = ':(' + Object.keys(skinIdsToCodes).join('|') + '):',
-  SKIN_REF_REGEX = new RegExp(SKIN_REF_REGEX_TEXT, 'g'),
-  EMOJI_REF_REGEX_TEXT =
-    ':(' + Object.keys(EMOJI_NAME_TO_CODE).join('|').replace('+', '\\+') + '):',
-  EMOJI_REF_REGEX = new RegExp(EMOJI_REF_REGEX_TEXT, 'g');
-function parseMsgText(msg, {users}) {
+  SKIN_REF_REGEX_TEXT = ":(" + Object.keys(skinIdsToCodes).join("|") + "):",
+  SKIN_REF_REGEX = new RegExp(SKIN_REF_REGEX_TEXT, "g"),
+  EMOJI_REF_REGEX_TEXT = ":(" +
+    Object.keys(EMOJI_NAME_TO_CODE).join("|").replace("+", "\\+") + "):",
+  EMOJI_REF_REGEX = new RegExp(EMOJI_REF_REGEX_TEXT, "g");
+function parseMsgText(msg, { users }) {
   return msg.text
     .replace(URL_LABEL_REF_REGEX, (_, url, label) => `[${label}](${url})`)
     .replace(USER_REF_REGEX, (_, username) => getRealName(username, users))
     .replace(
       GROUP_REF_REGEX,
-      (_, _gid, groupName) => '**`#' + groupName + '`**'
+      (_, _gid, groupName) => "**`#" + groupName + "`**",
     )
-    .replace(THING_REF_REGEX, (_, thing) => '**`@' + thing + '`**')
+    .replace(THING_REF_REGEX, (_, thing) => "**`@" + thing + "`**")
     .replace(URL_REF_REGEX, (_, url) => `[${url}](${url})`)
     .replace(
       ENTITIES_REGEX,
-      (match, entity) => ENTITIES_TO_TEXT[entity] || match
+      (match, entity) => ENTITIES_TO_TEXT[entity] || match,
     )
-    .replace(EMOJI_REF_REGEX, (_, emojiCode) =>
-      textFromCode(EMOJI_NAME_TO_CODE[emojiCode])
+    .replace(
+      EMOJI_REF_REGEX,
+      (_, emojiCode) => textFromCode(EMOJI_NAME_TO_CODE[emojiCode]),
     )
-    .replace(SKIN_REF_REGEX, (_, skinCode) =>
-      textFromCode(skinIdsToCodes[skinCode])
+    .replace(
+      SKIN_REF_REGEX,
+      (_, skinCode) => textFromCode(skinIdsToCodes[skinCode]),
     );
 }
 
 function dateFromTsDayOffset(ts, offset) {
   const date = new Date(ts);
   date.setUTCDate(date.getUTCDate() + offset);
-  return date.toISOString().split('T')[0];
+  return date.toISOString().split("T")[0];
 }
 
-const msgLinkRoot = location.pathname.endsWith('/history/')
-  ? './'
-  : './history/';
+const msgLinkRoot = location.pathname.endsWith("/history/")
+  ? "./"
+  : "./history/";
 function msgLink(tsFrom, tsTo, tsMsg, name) {
   const date = new Date(tsMsg),
     dateIso = date.toISOString(),
     dateDayBefore = dateFromTsDayOffset(tsFrom, -3),
     dateDayAfter = dateFromTsDayOffset(tsTo, 3),
-    url = `${msgLinkRoot}?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
+    url =
+      `${msgLinkRoot}?fromDate=${dateDayBefore}&toDate=${dateDayAfter}&channel=${name}&filter=#${dateIso}`;
 
-  return {url, dateIso};
+  return { url, dateIso };
 }
 
 function historyLinkFromSlackMsgInfo(channelId, tsRaw, channels) {
   const ts = +tsRaw / 1000,
     channel = channels[channelId],
     name = channel ? channel.name : channelId,
-    {url, dateIso} = msgLink(ts, ts, ts, name);
+    { url, dateIso } = msgLink(ts, ts, ts, name);
   return `[💬 #${name}@${dateIso}](${url})`;
 }
 
@@ -287,51 +341,51 @@ function historyLinkFromSlackReplyInfo(
   tsRaw,
   replyTs,
   _channelId1,
-  channels
+  channels,
 ) {
   const tsFrom = +tsRaw / 1000,
     tsTo = +replyTs * 1000,
     channel = channels[channelId],
     name = channel ? channel.name : channelId,
-    {url, dateIso} = msgLink(tsFrom, tsTo, tsTo, name);
+    { url, dateIso } = msgLink(tsFrom, tsTo, tsTo, name);
   return `[💬 #${name}@${dateIso}](${url})`;
 }
 
 function addMsgAttachmentsText(msg) {
   const atts = msg.attachments;
   if (atts) {
-    let accum = '';
+    let accum = "";
     for (let i = 0, len = atts.length; i < len; i += 1) {
       if (i !== 0) {
-        accum += '\n\n';
+        accum += "\n\n";
       }
       const att = atts[i];
       enrichAttachment(att);
       accum += att.$text;
     }
 
-    msg.$attachmentsText = accum + '\n';
+    msg.$attachmentsText = accum + "\n";
     msg.$attachmentsHtml = mdToHTML(accum);
   } else {
-    msg.$attachmentsText = '';
+    msg.$attachmentsText = "";
   }
 }
 
-const FILES_BASE_URL = 'http://history.futureofcoding.org/history/msg_files/';
-function msgFileToUrl({id, filetype}) {
-  const extension = filetype ? '.' + filetype : '',
+const FILES_BASE_URL = "http://history.futureofcoding.org/history/msg_files/";
+function msgFileToUrl({ id, filetype }) {
+  const extension = filetype ? "." + filetype : "",
     filename = id + extension,
     prefix = id.slice(0, 3);
 
-  return FILES_BASE_URL + prefix + '/' + filename;
+  return FILES_BASE_URL + prefix + "/" + filename;
 }
 
 //const types = {};
 function enrichMessage(msg, args, isOlder, channel) {
-  const {users} = args,
+  const { users } = args,
     msgTs = +msg.ts * 1000,
     date = new Date(msgTs),
-    {user} = msg;
+    { user } = msg;
 
   msg.$date = date;
   msg.$text = msgBlocksToMd(msg, args);
@@ -340,25 +394,25 @@ function enrichMessage(msg, args, isOlder, channel) {
 
   const files = msg.files;
   if (files) {
-    let accum = '';
+    let accum = "";
     for (let i = 0, len = files.length; i < len; i += 1) {
       if (i !== 0) {
-        accum += '\n\n';
+        accum += "\n\n";
       }
 
       const file = files[i],
-        mimetype = file.mimetype || '';
-      let icon = '📝';
-      if (mimetype.startsWith('video/')) {
-        icon = '🎥';
-      } else if (mimetype.startsWith('image/')) {
-        icon = '📷';
-      } else if (mimetype.startsWith('application/')) {
-        icon = '📄';
-      } else if (mimetype.startsWith('text/')) {
-        icon = '🗒️';
+        mimetype = file.mimetype || "";
+      let icon = "📝";
+      if (mimetype.startsWith("video/")) {
+        icon = "🎥";
+      } else if (mimetype.startsWith("image/")) {
+        icon = "📷";
+      } else if (mimetype.startsWith("application/")) {
+        icon = "📄";
+      } else if (mimetype.startsWith("text/")) {
+        icon = "🗒️";
       } else {
-        console.warn('unknown mimetype', file);
+        console.warn("unknown mimetype", file);
       }
 
       if (file.title) {
@@ -367,28 +421,28 @@ function enrichMessage(msg, args, isOlder, channel) {
       }
     }
 
-    msg.$filesText = accum + '\n';
+    msg.$filesText = accum + "\n";
     msg.$filesHtml = mdToHTML(accum);
   } else {
-    msg.$filesText = '';
+    msg.$filesText = "";
   }
 
   msg.$isOlder = isOlder;
   try {
-    const datePrefix = isOlder ? '🕰️ ' : '',
-      {url, dateIso} = msgLink(msgTs, msgTs, msgTs, channel);
+    const datePrefix = isOlder ? "🕰️ " : "",
+      { url, dateIso } = msgLink(msgTs, msgTs, msgTs, channel);
     msg.$dateStrISO = dateIso;
-    msg.$dateStr = datePrefix + dateIso.replace('T', ' ').slice(0, -5);
+    msg.$dateStr = datePrefix + dateIso.replace("T", " ").slice(0, -5);
     msg.$url = url;
   } catch (error) {
     console.log(date, msg, error);
-    msg.$dateStr = 'Invalid Date';
-    msg.$dateStrISO = 'Invalid Date';
-    msg.$url = '#';
+    msg.$dateStr = "Invalid Date";
+    msg.$dateStrISO = "Invalid Date";
+    msg.$url = "#";
   }
   msg.$user = users[user] || dummyUser(user);
-  msg.$userName =
-    msg.$user.real_name || msg.$user.profile.real_name || msg.$user.name;
+  msg.$userName = msg.$user.real_name || msg.$user.profile.real_name ||
+    msg.$user.name;
   msg.$filterText = (
     msg.$dateStrISO +
     msg.$userName +
@@ -426,7 +480,7 @@ function msgBlocksToMd(msg, args) {
   if (msg.blocks) {
     return msg.blocks
       .map((block, _i, _it) => blockToMd(block, args))
-      .join('\n\n');
+      .join("\n\n");
   } else {
     return parseMsgText(msg, args);
   }
@@ -440,26 +494,26 @@ function mapElements(o, fn, args, joinStr) {
 
 function blockToMd(block, args) {
   switch (block.type) {
-    case 'rich_text':
-      return mapElements(block, elementToMd, args, '\n\n');
+    case "rich_text":
+      return mapElements(block, elementToMd, args, "\n\n");
     default:
-      console.warn('Unknown type', block.type, block);
+      console.warn("Unknown type", block.type, block);
       return `Unknown type ${block.type}`;
   }
 }
 
 function elementToMd(element, args) {
   switch (element.type) {
-    case 'rich_text_list':
-      return '\n* ' + mapElements(element, nodeToMd, args, '\n* ');
-    case 'rich_text_preformatted':
-      return '\n```\n' + mapElements(element, nodeToMd, args, '') + '\n```\n\n';
-    case 'rich_text_quote':
-      return '\n> ' + mapElements(element, nodeToMd, args, '');
-    case 'rich_text_section':
-      return mapElements(element, nodeToMd, args, '');
+    case "rich_text_list":
+      return "\n* " + mapElements(element, nodeToMd, args, "\n* ");
+    case "rich_text_preformatted":
+      return "\n```\n" + mapElements(element, nodeToMd, args, "") + "\n```\n\n";
+    case "rich_text_quote":
+      return "\n> " + mapElements(element, nodeToMd, args, "");
+    case "rich_text_section":
+      return mapElements(element, nodeToMd, args, "");
     default:
-      console.warn('Unknown type', element.type, element);
+      console.warn("Unknown type", element.type, element);
       return `Unknown type ${element.type}`;
   }
 }
@@ -470,7 +524,7 @@ function mdChannel(id, channels) {
   return `**#${name}**`;
 }
 
-function mdUser(id, {users}) {
+function mdUser(id, { users }) {
   const user = users[id],
     name = user && user.profile ? user.profile.real_name : id;
 
@@ -478,11 +532,11 @@ function mdUser(id, {users}) {
 }
 
 function humanizeUrl(url) {
-  if (url.startsWith('http')) {
+  if (url.startsWith("http")) {
     return url
-      .replace(/(^https:\/\/|^http:\/\/)/, '')
-      .replace(/^www\./, '')
-      .replace(/\/$/, '');
+      .replace(/(^https:\/\/|^http:\/\/)/, "")
+      .replace(/^www\./, "")
+      .replace(/\/$/, "");
   } else {
     return url;
   }
@@ -492,11 +546,11 @@ const SLACK_MSG_LINK_REGEX =
     /https:\/\/futureofcoding\.slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)/g,
   SLACK_MSG_REPLY_REGEX =
     /https:\/\/futureofcoding\.slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)\?thread_ts=([0-9.]+)&cid=([A-Z0-9]+)/g,
-  INLINE_MARKUP = {code: '`', italic: '_', strike: '~', bold: '*'};
+  INLINE_MARKUP = { code: "`", italic: "_", strike: "~", bold: "*" };
 function nodeToMd(node, args) {
   switch (node.type) {
-    case 'text': {
-      const {style} = node;
+    case "text": {
+      const { style } = node;
       let s = node.text,
         hasStyle = false;
       for (let k in style) {
@@ -505,18 +559,18 @@ function nodeToMd(node, args) {
           s = formatStr + s.trim() + formatStr;
           hasStyle = true;
         } else {
-          console.warn('unknown format', k, 'in node');
+          console.warn("unknown format", k, "in node");
         }
       }
 
       if (hasStyle) {
-        s = ' ' + s + ' ';
+        s = " " + s + " ";
       }
 
-      return s.replace(/\n/g, '\n\n');
+      return s.replace(/\n/g, "\n\n");
     }
-    case 'link': {
-      const url = node.url || '',
+    case "link": {
+      const url = node.url || "",
         match = SLACK_MSG_LINK_REGEX.exec(url);
       if (match === null) {
         const match1 = SLACK_MSG_REPLY_REGEX.exec(url);
@@ -528,20 +582,20 @@ function nodeToMd(node, args) {
             match1[2],
             match1[3],
             match1[4],
-            args.channels
+            args.channels,
           );
         }
       } else {
         return historyLinkFromSlackMsgInfo(match[1], match[2], args.channels);
       }
     }
-    case 'emoji': {
+    case "emoji": {
       const code = EMOJI_NAME_TO_CODE[node.name];
       return code ? textFromCode(code) : `:${node.name}:`;
     }
-    case 'channel':
+    case "channel":
       return mdChannel(node.channel_id, args.channels);
-    case 'user':
+    case "user":
       return mdUser(node.user_id, args);
     default:
       return elementToMd(node, args);
@@ -555,33 +609,33 @@ function parseHistoryChannelData(
   msgByTs,
   msgOrder,
   olderMessagesToLoad,
-  channel
+  channel,
 ) {
   for (let i = 0, len = data.length; i < len; i += 1) {
     const msg = data[i];
 
-    let {type, ts, thread_ts} = msg;
+    let { type, ts, thread_ts } = msg;
 
-    if (type !== 'message') {
-      console.warn('unknown message type', type, msg);
+    if (type !== "message") {
+      console.warn("unknown message type", type, msg);
       continue;
     }
 
     if (thread_ts === undefined) {
       if (ts === undefined) {
-        console.log('msg without ts nor thread_ts', msg);
+        console.log("msg without ts nor thread_ts", msg);
         continue;
       } else {
         msg.thread_ts = ts;
         thread_ts = ts;
       }
     } else if (ts === undefined) {
-      console.log('msg without ts', msg);
+      console.log("msg without ts", msg);
       msg.ts = thread_ts;
       ts = thread_ts;
     }
 
-    enrichMessage(msg, {users, channels}, false, channel);
+    enrichMessage(msg, { users, channels }, false, channel);
     const isParent = ts === thread_ts;
     msg.$isParent = isParent;
 
@@ -600,14 +654,14 @@ function parseHistoryChannelData(
           {
             ts: thread_ts,
             thread_ts,
-            user: '',
-            text: '...',
+            user: "",
+            text: "...",
             $index: msgOrder.length,
             responses: [msg],
           },
-          {users, channels},
+          { users, channels },
           true,
-          channel
+          channel,
         );
         msgOrder.push(parentMsg);
         msgByTs[thread_ts] = parentMsg;
@@ -623,7 +677,7 @@ function usersToUsersById(users) {
 
   for (let i = 0, len = users.length; i < len; i += 1) {
     const user = users[i],
-      {id} = user;
+      { id } = user;
 
     result[id] = user;
   }
@@ -636,7 +690,7 @@ function channelsToChannelsById(channels) {
 
   for (let i = 0, len = channels.length; i < len; i += 1) {
     const channel = channels[i],
-      {id} = channel;
+      { id } = channel;
 
     result[id] = channel;
   }
@@ -676,8 +730,8 @@ function dateDayOffset(offset) {
 }
 
 function padZero(n) {
-  const s = '' + n;
-  return s.length === 1 ? '0' + s : s;
+  const s = "" + n;
+  return s.length === 1 ? "0" + s : s;
 }
 
 function dateParts(d) {
@@ -693,39 +747,39 @@ const defaultRules = Object.assign({}, SimpleMarkdown.defaultRules);
 delete defaultRules.reflink;
 
 function overrideDefaultHtml(ruleName, overrideFn) {
-  return Object.assign({}, defaultRules[ruleName], {html: overrideFn});
+  return Object.assign({}, defaultRules[ruleName], { html: overrideFn });
 }
 
 const customRules = {
-    paragraph: overrideDefaultHtml('paragraph', function (node, output, state) {
-      return '<p>' + output(node.content, state) + '</p>\n';
+    paragraph: overrideDefaultHtml("paragraph", function (node, output, state) {
+      return "<p>" + output(node.content, state) + "</p>\n";
     }),
     blockQuote: overrideDefaultHtml(
-      'blockQuote',
+      "blockQuote",
       function (node, output, state) {
-        return '<blockquote>' + output(node.content, state) + '</blockquote>\n';
-      }
+        return "<blockquote>" + output(node.content, state) + "</blockquote>\n";
+      },
     ),
   },
   rules = Object.assign({}, defaultRules, customRules),
   rawBuiltParser = SimpleMarkdown.parserFor(rules),
-  htmlOutput = SimpleMarkdown.htmlFor(SimpleMarkdown.ruleOutput(rules, 'html'));
+  htmlOutput = SimpleMarkdown.htmlFor(SimpleMarkdown.ruleOutput(rules, "html"));
 
 function mdToHTML(txt) {
-  return htmlOutput(rawBuiltParser(txt + '\n\n', {inline: false}));
+  return htmlOutput(rawBuiltParser(txt + "\n\n", { inline: false }));
 }
 
 const hasOwn = Object.prototype.hasOwnProperty;
 
 function decodeQuery(string, escapeQuerySpace) {
-  string += '';
+  string += "";
   if (escapeQuerySpace === undefined) {
     escapeQuerySpace = true;
   }
 
   try {
     return decodeURIComponent(
-      escapeQuerySpace ? string.replace(/\+/g, '%20') : string
+      escapeQuerySpace ? string.replace(/\+/g, "%20") : string,
     );
   } catch (e) {
     // we're not going to mess with weird encodings,
@@ -742,24 +796,24 @@ function parseQuery(string, escapeQuerySpace) {
   }
 
   // throw out the funky business - "?"[name"="value"&"]+
-  string = string.replace(/&+/g, '&').replace(/^\?*&*|&+$/g, '');
+  string = string.replace(/&+/g, "&").replace(/^\?*&*|&+$/g, "");
 
   if (!string) {
     return {};
   }
 
   const items = {},
-    splits = string.split('&'),
+    splits = string.split("&"),
     length = splits.length;
 
   for (let i = 0; i < length; i += 1) {
-    const v = splits[i].split('='),
+    const v = splits[i].split("="),
       name = decodeQuery(v.shift(), escapeQuerySpace),
       // no "=" is null according to http://dvcs.w3.org/hg/url/raw-file/tip/Overview.html#collect-url-parameters
-      value = v.length ? decodeQuery(v.join('='), escapeQuerySpace) : null;
+      value = v.length ? decodeQuery(v.join("="), escapeQuerySpace) : null;
 
     if (hasOwn.call(items, name)) {
-      if (typeof items[name] === 'string' || items[name] === null) {
+      if (typeof items[name] === "string" || items[name] === null) {
         items[name] = [items[name]];
       }
 
@@ -805,24 +859,24 @@ const EXPORT_HTML_PREFIX = `
 `;
 
 export {
-  yesterdayDate,
-  tomorrowDate,
+  addDays,
+  cloneDate,
   dateDayOffset,
   dateIsLessThanDate,
   dateParts,
-  parseHistoryChannelData,
-  addDays,
-  cloneDate,
-  enrichMessage,
-  msgMatchesFilter,
-  msgToMd,
   downloadAs,
-  msgToMdNL,
-  parseQuery,
-  loadUsers,
-  loadChannels,
-  loadMsgsForDay,
+  enrichMessage,
   EXPORT_HTML_PREFIX,
   EXPORT_HTML_SUFFIX,
+  loadChannels,
+  loadMsgsForDay,
+  loadUsers,
+  msgMatchesFilter,
+  msgToMd,
+  msgToMdNL,
+  parseHistoryChannelData,
+  parseQuery,
   setHistoryPathBase,
+  tomorrowDate,
+  yesterdayDate,
 };

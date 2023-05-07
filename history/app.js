@@ -1,50 +1,50 @@
 //@format
 /*globals Vue, Set, Promise*/
 import {
-  dateDayOffset,
-  loadUsers,
-  loadChannels,
-  dateIsLessThanDate,
-  dateParts,
-  parseHistoryChannelData,
   addDays,
   cloneDate,
-  enrichMessage,
-  msgMatchesFilter,
-  msgToMd,
+  dateDayOffset,
+  dateIsLessThanDate,
+  dateParts,
   downloadAs,
-  msgToMdNL,
-  parseQuery,
+  enrichMessage,
   EXPORT_HTML_PREFIX,
   EXPORT_HTML_SUFFIX,
+  loadChannels,
+  loadUsers,
+  msgMatchesFilter,
+  msgToMd,
+  msgToMdNL,
+  parseHistoryChannelData,
+  parseQuery,
   setHistoryPathBase,
-} from './history.js';
-import {getInfoForWeekAndDay, MONDAY} from './newsletter.js';
-import {AUTHORS} from './common.js';
+} from "./history.js";
+import { getInfoForWeekAndDay, MONDAY } from "./newsletter.js";
+import { AUTHORS } from "./common.js";
 
-setHistoryPathBase('.');
+setHistoryPathBase(".");
 function getBaseUrl() {
-  const {origin, pathname} = location;
+  const { origin, pathname } = location;
   return origin + pathname;
 }
 
 function mdTitle1(t) {
-  return '# ' + t + '\n\n';
+  return "# " + t + "\n\n";
 }
 
 function main() {
   const query = parseQuery(window.location.search),
     baseUrl = getBaseUrl(),
     app = new Vue({
-      el: '#app',
+      el: "#app",
       data: {
         baseUrl,
         queryLink: baseUrl,
         fromDate: dateDayOffset(-7),
         toDate: dateDayOffset(0),
-        channel: 'two-minute-week',
+        channel: "two-minute-week",
         loadingStatus: null,
-        msgFilter: '',
+        msgFilter: "",
         filteredMsgs: [],
         history: {
           msgs: [],
@@ -70,13 +70,15 @@ function main() {
           toDate,
           toDateFinal,
           olderMessagesToLoad,
-          onFinish
+          onFinish,
         ) {
           if (dateIsLessThanDate(fromDate, toDateFinal)) {
             const [year, month, day] = dateParts(fromDate),
-              path = `${year}/${month}/${day}/${channel}.json?t=${new Date().getTime()}`;
+              path = `${year}/${month}/${day}/${channel}.json?t=${
+                new Date().getTime()
+              }`;
 
-            this.loadingStatus = 'Loading ' + path;
+            this.loadingStatus = "Loading " + path;
 
             fetch(path).then((res) => {
               if (res.status === 200) {
@@ -88,7 +90,7 @@ function main() {
                     this.history.msgsByTs,
                     this.history.msgs,
                     olderMessagesToLoad,
-                    channel
+                    channel,
                   );
 
                   this.loadChannelDate(
@@ -97,7 +99,7 @@ function main() {
                     addDays(toDate, 1),
                     toDateFinal,
                     olderMessagesToLoad,
-                    onFinish
+                    onFinish,
                   );
                 });
               } else {
@@ -107,14 +109,14 @@ function main() {
                   addDays(toDate, 1),
                   toDateFinal,
                   olderMessagesToLoad,
-                  onFinish
+                  onFinish,
                 );
               }
             });
           } else {
             this.loadingStatus = null;
             this.filterMessages();
-            onFinish({olderMessagesToLoad, channel});
+            onFinish({ olderMessagesToLoad, channel });
           }
         },
         loadChannelDateRange: function (channel, fromDateBase, toDateFinal) {
@@ -132,7 +134,7 @@ function main() {
               (info) => {
                 this.onLoadChannelDateRangeFinished(info);
                 resolve(info);
-              }
+              },
             )
           );
         },
@@ -169,7 +171,7 @@ function main() {
               const element = document.getElementById(id);
 
               if (element) {
-                element.style.border = '2px solid rgb(0, 51, 34)';
+                element.style.border = "2px solid rgb(0, 51, 34)";
                 element.scrollIntoView();
               }
             }
@@ -177,7 +179,7 @@ function main() {
         },
         loadOlderMessages: function (paths, i, messagesToLoadByPath, channel) {
           const path = paths[i],
-            enrichArgs = {users: this.users, channels: this.channels},
+            enrichArgs = { users: this.users, channels: this.channels },
             msgsByTs = this.history.msgsByTs;
 
           if (path) {
@@ -199,7 +201,7 @@ function main() {
                     paths,
                     i + 1,
                     messagesToLoadByPath,
-                    channel
+                    channel,
                   );
                 });
               }
@@ -219,7 +221,7 @@ function main() {
           return this.loadChannelDateRange(this.channel, fromDate, toDate);
         },
         getDumpFileName: function (extension) {
-          return this.channel + '.' + extension;
+          return this.channel + "." + extension;
         },
         filterMessages: function () {
           const filterText = this.msgFilter.toLowerCase(),
@@ -236,7 +238,7 @@ function main() {
               );
 
             if (parentMatches || responses.length > 0) {
-              result.push(Object.assign({}, parentMsg, {responses}));
+              result.push(Object.assign({}, parentMsg, { responses }));
             }
           }
 
@@ -265,53 +267,57 @@ function main() {
         exportAsMd: function () {
           const txt = this.history.msgs
             .map((msg) => msgToMd(msg))
-            .join('\n\n---\n\n');
-          downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
+            .join("\n\n---\n\n");
+          downloadAs(txt, this.getDumpFileName("md"), "text/markdown");
         },
         getMdTitleForCurrentChannel: function () {
           switch (this.channel) {
-            case 'two-minute-week':
-              return mdTitle1('Two Minute Week');
-            case 'share-your-work':
-              return mdTitle1('Our Work');
-            case 'reading-together':
-              return mdTitle1('Reading Together');
-            case 'thinking-together':
-              return mdTitle1('Thinking Together');
-            case 'devlog-together':
-              return mdTitle1('Devlog Together');
-            case 'linking-together':
-              return mdTitle1('Content');
+            case "two-minute-week":
+              return mdTitle1("Two Minute Week");
+            case "share-your-work":
+              return mdTitle1("Our Work");
+            case "reading-together":
+              return mdTitle1("Reading Together");
+            case "thinking-together":
+              return mdTitle1("Thinking Together");
+            case "devlog-together":
+              return mdTitle1("Devlog Together");
+            case "linking-together":
+              return mdTitle1("Content");
+            case "of-ai":
+              return mdTitle1("🤖");
             default:
               return mdTitle1(this.channel);
           }
         },
         exportThisAsNewsletterWithWeek: function (week) {
-          const month = this.toDate.split('-')[1],
+          const month = this.toDate.split("-")[1],
             title = this.getMdTitleForCurrentChannel();
           this.exportAsNewsletter(
             `${month}/${week}/${this.channel}.html`,
-            title
+            title,
           );
           this.exportAsHTML();
         },
         exportAsNewsletter: function (linkSuffix, title) {
-          const linkPrefix = `https://marianoguerra.github.io/future-of-coding-weekly/history/weekly/${new Date().getFullYear()}/${linkSuffix}`,
-            txt =
-              title +
+          const linkPrefix =
+              `https://history.futureofcoding.org/history/weekly/${
+                new Date().getFullYear()
+              }/${linkSuffix}`,
+            txt = title +
               this.history.msgs
                 .filter((msg) => !msg.$isOlder)
                 .map((msg) => msgToMdNL(msg, linkPrefix))
-                .join('\n\n---\n\n');
+                .join("\n\n---\n\n");
 
-          downloadAs(txt, this.getDumpFileName('md'), 'text/markdown');
+          downloadAs(txt, this.getDumpFileName("md"), "text/markdown");
           this.printMessageUsersNotInAuthors();
         },
         printMessageUsersNotInAuthors() {
           console.log(
             Array.from(this.getMessageUsersNotInAuthors(this.history.msgs))
               .sort()
-              .join(', ')
+              .join(", "),
           );
         },
         getMessageUsersNotInAuthors(msgs) {
@@ -326,11 +332,11 @@ function main() {
           return result;
         },
         exportAsHTML: function () {
-          const msgsOutputNode = document.getElementById('msgs-output'),
+          const msgsOutputNode = document.getElementById("msgs-output"),
             msgsOutput = msgsOutputNode.innerHTML,
             html = EXPORT_HTML_PREFIX + msgsOutput + EXPORT_HTML_SUFFIX;
 
-          downloadAs(html, this.getDumpFileName('html'), 'text/html');
+          downloadAs(html, this.getDumpFileName("html"), "text/html");
         },
       },
     });
@@ -362,10 +368,10 @@ function main() {
     infoProm
       .then((_) => app.loadSelected())
       .then((info) => {
-        console.log('finished!', info);
+        console.log("finished!", info);
         if (query.forNewsletter !== undefined) {
           // {prevDay, nextDay, weekNumber, weekStr, monthStr, curYear}
-          const {weekStr} = getInfoForWeekAndDay(new Date(), MONDAY);
+          const { weekStr } = getInfoForWeekAndDay(new Date(), MONDAY);
           app.exportThisAsNewsletterWithWeek(weekStr);
         }
       });
