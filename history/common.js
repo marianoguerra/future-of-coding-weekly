@@ -12,7 +12,7 @@ const AUTHORS_DATA = {
   },
   "Kartik Agaram": {
     name: "Kartik Agaram",
-    url: "https://github.com/akkartik/mu",
+    url: "http://akkartik.name/about",
   },
   "Scott Anderson": {
     name: "Scott Anderson",
