@@ -1,0 +1,44 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2023-06-05T09:03:05.485Z" class="post"><span class="user">Yair Chuchem</span> <a href="./?fromDate=2023-06-02&amp;toDate=2023-06-08&amp;channel=devlog-together&amp;filter=#2023-06-05T09:03:05.485Z" class="date">2023-06-05 09:03:05</a> <div class="message"><p>Lamdu now elaborates on non-trivial type errors!</p>
+<p>In the screenshot several type errors are demonstrated:</p>
+<ul><li>A simple one: Text isn’t Num</li><li>“Occurs check”:  <code>func func</code>  means that the type of  <code>func</code>  is infinitely  <code>(((a -&gt; a) -&gt; a) -&gt; a) -&gt; …</code>  (note it can be done if wrapping in a nominal type to break the loop</li><li>Expand-record when inside record has the same fields. The message here isn’t yet very informative to which field is duplicated. Just says “constraints” for now</li><li>Scoped type variable escape (i.e “skolem”) error. This is equivalent to leaking Haskell’s  <code>ST</code>  monad’s  <code>s</code>  variable</li></ul></div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="http://history.futureofcoding.org/history/msg_files/F05/F05ARKA1C94.png">Screenshot 2023-06-05 at 11.54.42-fs8.png</a></p>
+</blockquote>
+</div> <div class="replies"></div></div><div id="2023-06-10T12:19:24.980Z" class="post"><span class="user">Maikel van de Lisdonk</span> <a href="./?fromDate=2023-06-07&amp;toDate=2023-06-13&amp;channel=devlog-together&amp;filter=#2023-06-10T12:19:24.980Z" class="date">2023-06-10 12:19:24</a> <div class="message"><p>Just a small clip to show a stress test I've worked on for my new visual programming system.. maybe not super impressive, but at least it is performing better then my old system. It uses purely DOM, svg and css (transforms).</p>
+<p>Creating all the nodes from javascript takes still quite long, they do all have different shapes though (using css clip-path).</p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F05/F05BZR59WA0.mp4">Image from iOS</a></p>
+</blockquote>
+</div> <div class="replies"><div id="2023-06-10T13:39:26.829Z" class="reply"><span class="user">Jarno Montonen</span> <a href="./?fromDate=2023-06-07&amp;toDate=2023-06-13&amp;channel=devlog-together&amp;filter=#2023-06-10T13:39:26.829Z" class="date">2023-06-10 13:39:26</a> <div class="message"><p>cool. have you thought about virtualizing the graph so that you can only draw the nodes that are visible to the user? Doesn't look like having that many nodes visible at once would ever be necessary?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-10T14:04:55.289Z" class="reply"><span class="user">Maikel van de Lisdonk</span> <a href="./?fromDate=2023-06-07&amp;toDate=2023-06-13&amp;channel=devlog-together&amp;filter=#2023-06-10T14:04:55.289Z" class="date">2023-06-10 14:04:55</a> <div class="message"><p>No not yet, I am currently depending on the browser for handling that when zooming and panning. In the stress test of the video that's no problem, at least on my hardware (apple m2 macbook pro and a recent windows laptop).. I'll also run this test on my much older iPad. My current rendering approach is quite naiev.. just adding all dom nodes and wires to dom and transform and scale a wrapper div when zooming/panning. Only the wrapper div has a "will-change:transform" applied. Since I have reference to all dom nodes, when moving a single node, the relevant dom node including connection nodes are changes directly</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-10T22:03:54.436Z" class="reply"><span class="user">Lu Wilson</span> <a href="./?fromDate=2023-06-07&amp;toDate=2023-06-13&amp;channel=devlog-together&amp;filter=#2023-06-10T22:03:54.436Z" class="date">2023-06-10 22:03:54</a> <div class="message"><p>Very nice!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-11T05:00:36.719Z" class="reply"><span class="user">Maikel van de Lisdonk</span> <a href="./?fromDate=2023-06-08&amp;toDate=2023-06-14&amp;channel=devlog-together&amp;filter=#2023-06-11T05:00:36.719Z" class="date">2023-06-11 05:00:36</a> <div class="message"><p>Thanks!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2023-06-10T21:40:43.257Z" class="post"><span class="user">Oleksandr Kryvonos</span> <a href="./?fromDate=2023-06-07&amp;toDate=2023-06-13&amp;channel=devlog-together&amp;filter=#2023-06-10T21:40:43.257Z" class="date">2023-06-10 21:40:43</a> <div class="message"><p>created basic transpiler from json-AST-C# to C#, I intend to write in this json format and to have code in other languages generated from it, this is in a spirit of Haxe</p>
+</div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="http://history.futureofcoding.org/history/msg_files/F05/F05CALPH1J5.png">Знімок екрана 2023-06-10 о 23.03.08.png</a></p>
+</blockquote>
+</div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>
