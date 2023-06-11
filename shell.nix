@@ -18,5 +18,7 @@ mkShell {
     npm install
     export PATH=$PWD/node_modules/.bin:$PATH
     export EDITOR=hx
+    source ./bin/activate
+    deno run remindme.js
   '';
 }

@@ -12,8 +12,7 @@ function generateScriptForThisWeek(now, dayNumber) {
     newsletterUrl,
   } = getInfoForWeekAndDay(now, dayNumber);
 
-  console.log("bash");
-  console.log("source ./bin/activate");
+  console.log("nix-shell");
   console.log("nu");
   console.log(`focWeekExport "${prevDateStr}" "${nextDateStr}"`);
   console.log(
@@ -21,10 +20,14 @@ function generateScriptForThisWeek(now, dayNumber) {
   );
   console.log(`mkdir history/weekly/${curYear}/${monthStr}/${weekStr}/`);
   console.log(
-    `nix-shell;\ncd newsletter-content;nikola new_post -f markdown -t "${issueTitle}" -e`,
+    `cd newsletter-content;nikola new_post -f markdown -t "${issueTitle}" -e`,
   );
   console.log("nikola clean; nikola build; nikola serve");
   console.log(newsletterUrl);
 }
-
-generateScriptForThisWeek(new Date(), MONDAY);
+function dateStrAddDays(days) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString().split("T")[0];
+}
+generateScriptForThisWeek(new Date(Deno.args[0] ?? dateStrAddDays(-1)), MONDAY);
