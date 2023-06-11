@@ -371,7 +371,9 @@ function main() {
         console.log("finished!", info);
         if (query.forNewsletter !== undefined) {
           // {prevDay, nextDay, weekNumber, weekStr, monthStr, curYear}
-          const { weekStr } = getInfoForWeekAndDay(new Date(), MONDAY);
+          const fromDate = new Date(query.fromDate);
+          fromDate.setDate(fromDate.getDate() + 1);
+          const { weekStr } = getInfoForWeekAndDay(fromDate, MONDAY);
           app.exportThisAsNewsletterWithWeek(weekStr);
         }
       });
