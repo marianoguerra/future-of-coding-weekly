@@ -1,0 +1,90 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2023-06-11T17:58:23.145Z" class="post"><span class="user">Wouter van Oortmerssen</span> <a href="./?fromDate=2023-06-08&amp;toDate=2023-06-14&amp;channel=share-your-work&amp;filter=#2023-06-11T17:58:23.145Z" class="date">2023-06-11 17:58:23</a> <div class="message"><p>Slides from a recent talk of mine (at a game engine/rendering conference, but is actually very much about programming language design/impl as it relates to game engines), video still forthcoming: <a href="https://twitter.com/mirror2mask/status/1667757561960103936">twitter.com/mirror2mask/status/1667757561960103936</a></p>
+</div> <div class="attachments">
+<blockquote><blockquote><p>🐦 <a href="https://twitter.com/mirror2mask/status/1667757561960103936">Natalya Tatarchuk 🇺🇦 on Twitter</a>: #REAC2023 - the slides from Wouter van Oortmerssen's "Scripting Language? Engine Language? Why Not Both?" posted - <a href="https://t.co/8PbCm2mOXh">https://t.co/8PbCm2mOXh</a> - Enjoy!</p>
+<p><img src="https://pbs.twimg.com/media/FyUQpYcacAEe7QI.jpg:large" alt="Tweet Thumbnail"></p>
+</blockquote>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2023-06-11T19:37:07.372Z" class="reply"><span class="user">Mariano Guerra</span> <a href="./?fromDate=2023-06-08&amp;toDate=2023-06-14&amp;channel=share-your-work&amp;filter=#2023-06-11T19:37:07.372Z" class="date">2023-06-11 19:37:07</a> <div class="message"><p>"Bla, a more academic language where stack frames and objects where the same interchangeable things!"</p>
+<p>I had that idea once 😄 do you have anything to recommend about stack frames? I find it's a thing that most programming languages "take for granted"</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-11T21:07:58.961Z" class="reply"><span class="user">Oleksandr Kryvonos</span> <a href="./?fromDate=2023-06-08&amp;toDate=2023-06-14&amp;channel=share-your-work&amp;filter=#2023-06-11T21:07:58.961Z" class="date">2023-06-11 21:07:58</a> <div class="message"><p>amazing - very much like your approach</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-11T22:26:48.042Z" class="reply"><span class="user">Wouter van Oortmerssen</span> <a href="./?fromDate=2023-06-08&amp;toDate=2023-06-14&amp;channel=share-your-work&amp;filter=#2023-06-11T22:26:48.042Z" class="date">2023-06-11 22:26:48</a> <div class="message"><p><a href="https://twitter.com/warianoguerra">Mariano Guerra</a> yeah it's not a first class citizen in almost all languages.. I guess the classical language to look into for "stack frames as objects" is continuations in scheme, but even there they a bit implicit about the link, in the Bla language you had an explicit  <code>self</code>  reference to the stack frame</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-12T06:07:11.283Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-06-09&amp;toDate=2023-06-15&amp;channel=share-your-work&amp;filter=#2023-06-12T06:07:11.283Z" class="date">2023-06-12 06:07:11</a> <div class="message"><p>In Pharo (descendent of Smalltalk 80 via Squeak), stack frames are plain objects. You can access (inspect, even modify) the current stack frame as  <code>thisContext</code>  anywhere you like.</p>
+<p>It is mostly used by debugging tools and exception handlers, but I suspect that more creative uses have been envisaged.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-12T06:29:56.776Z" class="reply"><span class="user">Mariano Guerra</span> <a href="./?fromDate=2023-06-09&amp;toDate=2023-06-15&amp;channel=share-your-work&amp;filter=#2023-06-12T06:29:56.776Z" class="date">2023-06-12 06:29:56</a> <div class="message"><p>In python it's not hard to access them and are very OO but they are really similar to any other stack frame in other languages, I think having them first class and adding functionality to them would be useful, for example adding metadata to make debugging and stack traces more useful</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-12T09:01:14.211Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-06-09&amp;toDate=2023-06-15&amp;channel=share-your-work&amp;filter=#2023-06-12T09:01:14.211Z" class="date">2023-06-12 09:01:14</a> <div class="message"><p>Python provides some access, but Python stack frames are hardly first-class objects. For comparison: in Pharo, you can serialize a stack frame object, then deserialize it elsewhere and do some debugging.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-13T06:41:48.367Z" class="reply"><span class="user">William Taysom</span> <a href="./?fromDate=2023-06-10&amp;toDate=2023-06-16&amp;channel=share-your-work&amp;filter=#2023-06-13T06:41:48.367Z" class="date">2023-06-13 06:41:48</a> <div class="message"><p>Thinking of Scheme, continuations have the same flavor as lambda in that they capture something and then put it in a black box.  I came to respect the Scheme Report for steering clear of features requiring implementations to be dynamic.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2023-06-12T17:34:11.099Z" class="post"><span class="user">Kevin Greer</span> <a href="./?fromDate=2023-06-09&amp;toDate=2023-06-15&amp;channel=share-your-work&amp;filter=#2023-06-12T17:34:11.099Z" class="date">2023-06-12 17:34:11</a> <div class="message"><p>Not my main work, but a fun little programming project that's relevant in a number of ways, despite apparently being more about the Past of Coding, than the Future.</p>
+<p>I wrote a small (&lt;500 lines of code) BASIC to JS compiler, that lets me run the programs from the class book <em>101 BASIC Computer Games</em> from 1978. It's interesting for two reasons I think: 1. for those who want to learn about languages and compilers, this provides a very simple example 2. philosophically, I think BASIC really exemplifies the Worse is Better approach outlined by  Richard Gabriel and covered in a FOC podcast. It is a terrible language in many ways, but it was small enough to be stored in a 4k ROM and be used to to useful things on an early microcomputer with only 4k of RAM. If we had waited for machines with enough memory to run Lisp, Smalltalk or Algol, the microcomputer revolution would have been delayed by a decade or more. Source: <a href="https://github.com/kgrgreer/foam3/tree/429f2fd2b4cef0e37996a4c4ad35cdf5f83a8b97/src/foam/demos/basic">github.com/kgrgreer/foam3/tree/429f2fd2b4cef0e37996a4c4ad35cdf5f83a8b97/src/foam/demos/basic</a></p>
+<p>Online version: <a href="https://codepen.io/kgr/details/yLQyLjR">codepen.io/kgr/details/yLQyLjR</a></p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://codepen.io/kgr/details/yLQyLjR">BASIC to JS Compiler</a></p>
+<p>A BASIC to JS compiler that lets you compile classic programs written in the BASIC programming language to JS and then run them in your browser. To us...</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2023-06-13T05:10:55.474Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-06-10&amp;toDate=2023-06-16&amp;channel=share-your-work&amp;filter=#2023-06-13T05:10:55.474Z" class="date">2023-06-13 05:10:55</a> <div class="message">
+<blockquote><p>If we had waited for machines with enough memory to run Lisp, Smalltalk or Algol, the microcomputer revolution would have been delayed by a decade or more.</p>
+</blockquote>
+<p>By my personal tastes, the best language for early microcomputers would have been Forth. It was around by then, but maybe not known widely enough. Or maybe someone decided it was too weird for ordinary people. There was one home computer model based on Forth (the <a href="https://en.wikipedia.org/wiki/Jupiter_Ace">Jupiter Ace</a>), which was not much of a commercial success, but it also appeared too late - BASIC was already everywhere.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-13T12:45:02.809Z" class="reply"><span class="user">Kevin Greer</span> <a href="./?fromDate=2023-06-10&amp;toDate=2023-06-16&amp;channel=share-your-work&amp;filter=#2023-06-13T12:45:02.809Z" class="date">2023-06-13 12:45:02</a> <div class="message"><p>Yes, that's true. I'm a big fan of FORTH, having used it a lot in the 80's and am even writing a lexically-scoped OO FORTH-like system: <a href="https://github.com/kgrgreer/TURTLES/tree/main">github.com/kgrgreer/TURTLES/tree/main</a> .  Also, some early microcomputers (<a href="https://en.wikipedia.org/wiki/MCM/70">en.wikipedia.org/wiki/MCM/70</a>) used APL, but neither APL nor FORTH were as accessible as BASIC. LOGO, which is a simplified dialect of LISP, and actually a pretty good language, might have been a better choice. But people looked down on it because of its use with Turtle graphics and being for kids, but it is actually a much better language than BASIC (or just about anything else at the time).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-13T13:20:57.633Z" class="reply"><span class="user">Kevin Greer</span> <a href="./?fromDate=2023-06-10&amp;toDate=2023-06-16&amp;channel=share-your-work&amp;filter=#2023-06-13T13:20:57.633Z" class="date">2023-06-13 13:20:57</a> <div class="message"><p>Also, I think that a big difference between FORTH and BASIC was that BASIC was suitable for use with a tape drive, whereas FORTH required a much more expensive floppy. This is because you would need to save much more frequently with FORTH because it wasn't memory safe and running your program could crash your machine and lose your changes. BASIC, on the other hand, would just give something like a 'SYNTAX ERROR: line 20', and nothing would be lost. With BASIC, you could program for hours and just save once at the end, which is something you couldn't do with FORTH. This effectively raised the price of a minimally viable machine.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-13T16:57:30.994Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-06-10&amp;toDate=2023-06-16&amp;channel=share-your-work&amp;filter=#2023-06-13T16:57:30.994Z" class="date">2023-06-13 16:57:30</a> <div class="message"><p>Memory safety is indeed a big advantage of BASIC!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-15T19:08:53.139Z" class="reply"><span class="user">Marcel Weiher</span> <a href="./?fromDate=2023-06-12&amp;toDate=2023-06-18&amp;channel=share-your-work&amp;filter=#2023-06-15T19:08:53.139Z" class="date">2023-06-15 19:08:53</a> <div class="message"><p>I think BASIC is underappreciated these days.</p>
+<p>Apart from memory safety (with the concept really not even surfacing), BASIC also has some advantages in being very straightforward and linear, rather than hierarchical. Which is not just easy to understand. but actually also a close analogue to how the CPU executes instructions, at least conceptually.</p>
+<p>That also enables a very direct transition from immediate mode execution to stored program:  just add a line number in front.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-06-16T07:36:48.174Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="./?fromDate=2023-06-13&amp;toDate=2023-06-19&amp;channel=share-your-work&amp;filter=#2023-06-16T07:36:48.174Z" class="date">2023-06-16 07:36:48</a> <div class="message"><p>That's an interesting observation for me because (1) it's clearly true, (2) looks like a good characteristic for newbies but (3) is also exactly why I didn't like BASIC. I wanted to get details out of my view, to focus on a bigger picture. My solution was printing the code, with subroutines on separate pages, starting with a comment that gave a name to the subroutine. Each  <code>gosub</code>  also had a comment with the name of the subroutine being called.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2023-06-14T13:23:50.352Z" class="post"><span class="user">Matt Webb</span> <a href="./?fromDate=2023-06-11&amp;toDate=2023-06-17&amp;channel=share-your-work&amp;filter=#2023-06-14T13:23:50.352Z" class="date">2023-06-14 13:23:50</a> <div class="message"><p>I’ve been sketching multiplayer UIs. Folks who came to the most recent London meet will recognise these from my demo. I’m trying not to converge on anything right now — how we interact with AI NPCs is still so open.</p>
+<p>I made a new one today, with spatial multiplayer chatrooms and an NPC inhabiting each. It’s on Twitter <a href="https://twitter.com/genmon/status/1668948562460266497">twitter.com/genmon/status/1668948562460266497</a></p>
+<p>An archive of all of my sketches, including a bonus gesture-controlled lamp <a href="https://www.actsnotfacts.com/made/multiplayer">actsnotfacts.com/made/multiplayer</a></p>
+</div> <div class="attachments">
+<blockquote><blockquote><p>🐦 <a href="https://twitter.com/genmon/status/1668948562460266497">Matt Webb 🌸🌼🌸 on Twitter</a>: what if you had one chatroom with an AI for wild ideas... and another next door for a dose of reality?</p>
+</blockquote>
+<p>and you travel between AI NPC chatrooms like a spatial map?</p>
+<p>yeah and it's all multiplayer so your friends can be there too?</p>
+<p>oh yes ALSO one of the rooms is haunted 👻</p>
+<blockquote><p><img src="https://pbs.twimg.com/tweet_video_thumb/FylK_7mXoAMzJOz.jpg:large" alt="Tweet Thumbnail"></p>
+</blockquote>
+<p>📝 <a href="https://www.actsnotfacts.com/made/multiplayer">Multiplayer sketches</a></p>
+<p>A series of software sketches exploring multiplayer UI.</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2023-06-14T19:05:55.418Z" class="reply"><span class="user">Lu Wilson</span> <a href="./?fromDate=2023-06-11&amp;toDate=2023-06-17&amp;channel=share-your-work&amp;filter=#2023-06-14T19:05:55.418Z" class="date">2023-06-14 19:05:55</a> <div class="message"><p>I really enjoyed your presentation Matt! I especially love the "commute" concept. I'd use that in a heartbeat :)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2023-06-15T22:20:34.503Z" class="post"><span class="user">Evan Conrad</span> <a href="./?fromDate=2023-06-12&amp;toDate=2023-06-18&amp;channel=share-your-work&amp;filter=#2023-06-15T22:20:34.503Z" class="date">2023-06-15 22:20:34</a> <div class="message"><p>with encouragement from <strong>@Joe Grossberg</strong>, down to share what I’m doing…</p>
+<p>I make <a href="http://lintrule.com">lintrule.com</a>, a little CLI for having a language model do your code review.</p>
+<p>You write rules in plain text, and then it checks them against your code, like a test framework. Here’s an example rule that runs on SQL migrations:</p>
+<h2>```</h2><p>include: ["migrations/*.sql"]</p>
+<hr><p>Make sure our postgres migrations follow these rules:</p>
+<ol start="1"><li><p>ensure new tables are at least 3NF (third normal form). If they're not, fail and give an example of what's wrong, assuming the reader does not know terms like "BNCF", "3NF", "BCNF", and so on.</p>
+</li><li><p>make sure that all tables have a created_at and updated_at</p>
+</li><li><p>make sure migrations don't have breaking changes. For example, removing a table, removing column, and so on.</p>
+<p>3.1 It's okay to have a breaking change if there's a comment on the migration that explains why it's safe to have that change.</p>
+</li><li><p>prefer 'uuid' over 'serial' or 'int' for primary keys. Ignore this check if it's primary key made up of two columns.
+```</p>
+</li></ol></div> <div class="attachments"></div> <div class="files"><blockquote><p>📷 <a href="http://history.futureofcoding.org/history/msg_files/F05/F05CLMDLLRL.png">Screen Shot 2023-06-15 at 3.20.06 PM.png</a></p>
+</blockquote>
+</div> <div class="replies"><div id="2023-06-16T19:20:27.089Z" class="reply"><span class="user">Jason Morris</span> <a href="./?fromDate=2023-06-13&amp;toDate=2023-06-19&amp;channel=share-your-work&amp;filter=#2023-06-16T19:20:27.089Z" class="date">2023-06-16 19:20:27</a> <div class="message"><p>That's pretty cool. Are you generating a symbolic representation of the rule in the background? (Generating symbolic representations of natural language rules is my day job.)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
