@@ -1,0 +1,543 @@
+[
+    {
+        "client_msg_id": "8432c5bc-16d1-4ad5-8498-b7661da3f6ac",
+        "type": "message",
+        "text": "Say, has anyone ever tried BASIC's non-consecutive numbers for spreadsheet coordinates?\nWe programmers always laugh at spreadsheet's use of coordinates (\"like machine code without assembly\") but few users avail themselves of features to name ranges / structured/hierarchical data etc.\nBut there are real annoyances with what-you-see-is-what-you count consecutive coordinates:  They _mostly_ shift correctly on insertions/deletions, BUT one needs to grok $A4 vs. B$7 notation, which I suspect many don't.  Getting range E3:F34 boundaries for formulas _exactly_ right is always a hassle.\nSo I wonder if features like named ranges are \"premature formalization\" then maybe \"structured numbers\" in the BASIC's style could serve as more accessible \"semi-formalization\"?\n\nBASIC users quickly learnt conventions like \"increment by 10, start functions on hundreds, big modules on thousands\".  And this allowed them to avoid re-numbering almost entirely!\n(This was good UX in teletype line-editor era :printer:, and of course now we have full-screen editors and can insert/delete \u2014 no need to \"increment from 10 to 20 so you can later insert 15\".\nBut a 2nd aspect that imho was really genius was the numbers were _stable_, helping your brain :bike::brain:.  Your transcript :scroll: had partial `LIST`ings, followed by chains of edit actions (poor man's git) + REPL experiments, and the fact that line 60 remains 60 throught helped you mentally interpret that history \u2014 making you a better debugging detective :female-detective:.  It's insane to remember what `GOSUB 437` means; easier if you _assign_ semi-systematic round `GOSUB 2100`.)\n\nSo, suppose spreadsheets let you use higher numbers/column names freely, by skipping display of unoccupied rows/columns.\n\u2022 If you have a long table that might grow, you won't put `=SUM(...)` computation directly beneath it; you put it at next 100 or 1000 \u2014 but it will still display close to its bottom.  And you can type the range as `10:99` from the start.\n\u2022 With some foresight allocating \"big enough\" ranges for tables, you might never run into situations where `$B7` vs. `B$7` matters.  (This means spreadsheet should become smarter yet in renumbering on insert/delete \u2014 do shift rows/columns, but stop at next unoccopied \"moat\".)\n\u2022 To introduce users to the idea, don't show consecutive numbers/letters.  Even in an empty spreadsheet, after some rows/columns, skip to some far-away numbers like 100 and 1000!\n\u2022 Perhaps it might also subsume the feature of \"freezing\" some rows/column from scrolling?  mockup below has one fake \"scrollbar\" to suggest a portion could be scrolled separately.\nattaching a mockup to this thread (drawn in a <https://docs.google.com/spreadsheets/d/1tQt2MgCaqkJGvyPvsqxTDfo3AurgWptWBg03TZr07zo/edit?usp=sharing|regular spreadsheet>:wink:)",
+        "user": "U02QC0PPER3",
+        "ts": "1688741734.320999",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+KXt",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Say, has anyone ever tried BASIC's non-consecutive numbers for spreadsheet coordinates?\nWe programmers always laugh at spreadsheet's use of coordinates (\"like machine code without assembly\") but few users avail themselves of features to name ranges / structured/hierarchical data etc.\nBut there are real annoyances with what-you-see-is-what-you count consecutive coordinates:  They "
+                            },
+                            {
+                                "type": "text",
+                                "text": "mostly",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " shift correctly on insertions/deletions, BUT one needs to grok $A4 vs. B$7 notation, which I suspect many don't.  Getting range E3:F34 boundaries for formulas "
+                            },
+                            {
+                                "type": "text",
+                                "text": "exactly",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " right is always a hassle.\nSo I wonder if features like named ranges are \"premature formalization\" then maybe \"structured numbers\" in the BASIC's style could serve as more accessible \"semi-formalization\"?\n\nBASIC users quickly learnt conventions like \"increment by 10, start functions on hundreds, big modules on thousands\".  And this allowed them to avoid re-numbering almost entirely!\n(This was good UX in teletype line-editor era "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "printer",
+                                "unicode": "1f5a8-fe0f"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and of course now we have full-screen editors and can insert/delete \u2014 no need to \"increment from 10 to 20 so you can later insert 15\".\nBut a 2nd aspect that imho was really genius was the numbers were "
+                            },
+                            {
+                                "type": "text",
+                                "text": "stable",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", helping your brain "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "bike",
+                                "unicode": "1f6b2"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "brain",
+                                "unicode": "1f9e0"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".  Your transcript "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "scroll",
+                                "unicode": "1f4dc"
+                            },
+                            {
+                                "type": "text",
+                                "text": " had partial "
+                            },
+                            {
+                                "type": "text",
+                                "text": "LIST",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "ings, followed by chains of edit actions (poor man's git) + REPL experiments, and the fact that line 60 remains 60 throught helped you mentally interpret that history \u2014 making you a better debugging detective "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "female-detective",
+                                "unicode": "1f575-fe0f-200d-2640-fe0f"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".  It's insane to remember what "
+                            },
+                            {
+                                "type": "text",
+                                "text": "GOSUB 437",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " means; easier if you "
+                            },
+                            {
+                                "type": "text",
+                                "text": "assign",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " semi-systematic round "
+                            },
+                            {
+                                "type": "text",
+                                "text": "GOSUB 2100",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".)\n\nSo, suppose spreadsheets let you use higher numbers/column names freely, by skipping display of unoccupied rows/columns.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "If you have a long table that might grow, you won't put "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "=SUM(...)",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " computation directly beneath it; you put it at next 100 or 1000 \u2014 but it will still display close to its bottom.  And you can type the range as "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "10:99",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " from the start."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "With some foresight allocating \"big enough\" ranges for tables, you might never run into situations where "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "$B7",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " vs. "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "B$7",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " matters.  (This means spreadsheet should become smarter yet in renumbering on insert/delete \u2014 do shift rows/columns, but stop at next unoccopied \"moat\".)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "To introduce users to the idea, don't show consecutive numbers/letters.  Even in an empty spreadsheet, after some rows/columns, skip to some far-away numbers like 100 and 1000!"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Perhaps it might also subsume the feature of \"freezing\" some rows/column from scrolling?  mockup below has one fake \"scrollbar\" to suggest a portion could be scrolled separately."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nattaching a mockup to this thread (drawn in a "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://docs.google.com/spreadsheets/d/1tQt2MgCaqkJGvyPvsqxTDfo3AurgWptWBg03TZr07zo/edit?usp=sharing",
+                                "text": "regular spreadsheet"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink",
+                                "unicode": "1f609"
+                            },
+                            {
+                                "type": "text",
+                                "text": ")"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U02QC0PPER3",
+            "ts": "1688742073.000000"
+        },
+        "thread_ts": "1688741734.320999",
+        "reply_count": 5,
+        "reply_users_count": 4,
+        "latest_reply": "1688850465.250039",
+        "reply_users": [
+            "U02QC0PPER3",
+            "U013WBS1B1C",
+            "U0112C10V4Y",
+            "UA14TGLTC"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "type": "message",
+        "text": "",
+        "files": [
+            {
+                "id": "F05FLBTTR0X",
+                "created": 1688742089,
+                "timestamp": 1688742089,
+                "name": "Screenshot from 2023-07-07 16-58-33.png",
+                "title": "Screenshot from 2023-07-07 16-58-33.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U02QC0PPER3",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 173373,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F05FLBTTR0X/screenshot_from_2023-07-07_16-58-33.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F05FLBTTR0X/download/screenshot_from_2023-07-07_16-58-33.png",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_360.png",
+                "thumb_360_w": 360,
+                "thumb_360_h": 129,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_480.png",
+                "thumb_480_w": 480,
+                "thumb_480_h": 171,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_720.png",
+                "thumb_720_w": 720,
+                "thumb_720_h": 257,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_800.png",
+                "thumb_800_w": 800,
+                "thumb_800_h": 286,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_960.png",
+                "thumb_960_w": 960,
+                "thumb_960_h": 343,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F05FLBTTR0X-14433df13b/screenshot_from_2023-07-07_16-58-33_1024.png",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 366,
+                "original_w": 2574,
+                "original_h": 919,
+                "thumb_tiny": "AwARADC8CTuznil/jxk9PWhD976mnc0AMGeOT6U4DIH+NLj3pefWgBNo/wAml2j3/Ojn1/Sjn1/SgBsfRv8AeNPpkfRv940+gAooooAKKKKAP//Z",
+                "permalink": "https://futureofcoding.slack.com/files/U02QC0PPER3/F05FLBTTR0X/screenshot_from_2023-07-07_16-58-33.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F05FLBTTR0X-339bf66a2c",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U02QC0PPER3",
+        "display_as_bot": false,
+        "ts": "1688742093.275469",
+        "client_msg_id": "5a2cceb7-deda-40a5-96f3-10ca669ecb51",
+        "thread_ts": "1688741734.320999",
+        "parent_user_id": "U02QC0PPER3"
+    },
+    {
+        "client_msg_id": "c9c02c02-2db2-4271-9c4b-a16a43b464b8",
+        "type": "message",
+        "text": "I love anchors, as my brain doesn't like it when things move around and aren't \"where I left them\". I want to add a `table` type to our language, like you can have a table *in* a spreadsheet (at least in Excel), which gives you this sub-thing that is a logical unit and structure, which can grow or change shape.\n\nOn the viz side, the trick is how to improve this. Today, at least in Excel, you have the worksheet model, and that's all you get for  UI (bear with me). e.g. you can't make a table and pop it up in it's own window. Worksheets are a flat stack, rather than something like MDI child windows. But what if you *could* do that, maybe something like Oberon or totally free-form. If you *want* to merge them all into a flat worksheet, their range IDs provide the layout positions, but they also have names and can be addressed relatively that way as well.",
+        "user": "U013WBS1B1C",
+        "ts": "1688749943.408259",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YYj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I love anchors, as my brain doesn't like it when things move around and aren't \"where I left them\". I want to add a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "table",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " type to our language, like you can have a table "
+                            },
+                            {
+                                "type": "text",
+                                "text": "in",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " a spreadsheet (at least in Excel), which gives you this sub-thing that is a logical unit and structure, which can grow or change shape.\n\nOn the viz side, the trick is how to improve this. Today, at least in Excel, you have the worksheet model, and that's all you get for  UI (bear with me). e.g. you can't make a table and pop it up in it's own window. Worksheets are a flat stack, rather than something like MDI child windows. But what if you "
+                            },
+                            {
+                                "type": "text",
+                                "text": "could",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " do that, maybe something like Oberon or totally free-form. If you "
+                            },
+                            {
+                                "type": "text",
+                                "text": "want",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to merge them all into a flat worksheet, their range IDs provide the layout positions, but they also have names and can be addressed relatively that way as well."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1688741734.320999",
+        "parent_user_id": "U02QC0PPER3"
+    },
+    {
+        "client_msg_id": "46272f9a-066e-43ca-8915-112a7d2e5a93",
+        "type": "message",
+        "text": "An interesting historical point is that the earlier language JOSS (from Rand Corporation, quite similar to BASIC except for syntax detaid) used floating point line numbers, which means that already written statements didn't need to be renumbered.",
+        "user": "U0112C10V4Y",
+        "ts": "1688751323.305789",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "vlJ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "An interesting historical point is that the earlier language JOSS (from Rand Corporation, quite similar to BASIC except for syntax detaid) used floating point line numbers, which means that already written statements didn't need to be renumbered."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1688741734.320999",
+        "parent_user_id": "U02QC0PPER3",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U013WBS1B1C"
+                ],
+                "count": 1
+            },
+            {
+                "name": "exploding_head",
+                "users": [
+                    "UCUSW7WVD",
+                    "U02QC0PPER3"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4a155617-a7fd-4e9f-a7ee-50ce6923ec74",
+        "type": "message",
+        "text": "Though limited in many ways, I do like how Numbers on macOS can use column/row headers as names in formulas.",
+        "user": "UA14TGLTC",
+        "ts": "1688772652.857479",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Ez5w8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Though limited in many ways, I do like how Numbers on macOS can use column/row headers as names in formulas."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1688741734.320999",
+        "parent_user_id": "U02QC0PPER3",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "3bfd8d26-f671-4a32-b0df-1da5f39489b3",
+        "type": "message",
+        "text": "Thinking more, thes might avoid relavite/absolute  `B$4` notation due to relocation, but it'll still be needed for replicated formulas when mixing cscalars/vectors/matrixes :-(\nE.g. if you have a column of prices * scalar tax rate stored in single cell, the reference to that cell must be absolute.",
+        "user": "U02QC0PPER3",
+        "ts": "1688850465.250039",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "aV8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thinking more, thes might avoid relavite/absolute  "
+                            },
+                            {
+                                "type": "text",
+                                "text": "B$4",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " notation due to relocation, but it'll still be needed for replicated formulas when mixing cscalars/vectors/matrixes :-(\nE.g. if you have a column of prices * scalar tax rate stored in single cell, the reference to that cell must be absolute."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1688741734.320999",
+        "parent_user_id": "U02QC0PPER3"
+    }
+]
