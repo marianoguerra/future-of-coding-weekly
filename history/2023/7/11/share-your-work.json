@@ -1,0 +1,520 @@
+[
+    {
+        "client_msg_id": "2441f514-e3b5-4fc1-8538-b2c31911d91b",
+        "type": "message",
+        "text": "I've started to work on a structural editor for my language coil <https://coil-editor.netlify.app/>\n\nIt's still early &amp; buggy, but the idea is to directly turn the AST into html with contenteditable for leaf attribute nodes.\n\nSo an expression like:\n`document.body`\nwhich is the coil AST:\n```{type: :property_lookup, lhs: {type: :id_lookup, name: \"document\"}, property: \"body\"}```\nTurns into:\n```&lt;div data-kind=\"property_lookup\"&gt;\n  &lt;div data-attr=\"lhs\"&gt;\n    &lt;div data-kind=\"id_lookup\"&gt;\n      &lt;div data-attr=\"name\" contenteditable&gt;document&lt;/div&gt;\n    &lt;/div&gt;\n  &lt;/div&gt;\n  &lt;div data-attr=\"property\" contenteditable&gt;body&lt;/div&gt;\n&lt;/div&gt;```\nAnd now we can easily query this expression with css selectors. So all the syntax highlighting AND formatting is done in css. It also means that static analysis can be done using querySelector.",
+        "user": "U03LJBR6THT",
+        "ts": "1689083336.878249",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "H862r",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've started to work on a structural editor for my language coil "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://coil-editor.netlify.app/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nIt's still early & buggy, but the idea is to directly turn the AST into html with contenteditable for leaf attribute nodes.\n\nSo an expression like:\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "document.body",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nwhich is the coil AST:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "{type: :property_lookup, lhs: {type: :id_lookup, name: \"document\"}, property: \"body\"}"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Turns into:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "<div data-kind=\"property_lookup\">\n  <div data-attr=\"lhs\">\n    <div data-kind=\"id_lookup\">\n      <div data-attr=\"name\" contenteditable>document</div>\n    </div>\n  </div>\n  <div data-attr=\"property\" contenteditable>body</div>\n</div>"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAnd now we can easily query this expression with css selectors. So all the syntax highlighting AND formatting is done in css. It also means that static analysis can be done using querySelector."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03LJBR6THT",
+            "ts": "1689083406.000000"
+        },
+        "thread_ts": "1689083336.878249",
+        "reply_count": 7,
+        "reply_users_count": 3,
+        "latest_reply": "1689173930.393469",
+        "reply_users": [
+            "U03LJBR6THT",
+            "U04E5QAD6DD",
+            "U03LMRE6MQE"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "U04E5QAD6DD"
+                ],
+                "count": 2
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT",
+                    "U013ZLJARC7"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "fc224633-718e-4983-8897-5bce5208f22d",
+        "type": "message",
+        "text": "Where I see this going is establishing a highly extendable editor system.\n\nI want it to be attainable for an average library author to ship with a linter, and editor plugins.\n\nTo start I need a dead simple editor system. So with embedding AST information in the html, it gives web developers a clear path how to inspect the AST &amp; come up with custom rules, or swap out parts of the ast with something more visually interesting (imagine putting in a colour picker in usages of a color function).\n\nI haven't realized its full potential yet, there might need to be more metadata in the DOM, but I'm starting small &amp; seeing how far I can get.",
+        "user": "U03LJBR6THT",
+        "ts": "1689084896.166049",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kXq",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Where I see this going is establishing a highly extendable editor system.\n\nI want it to be attainable for an average library author to ship with a linter, and editor plugins.\n\nTo start I need a dead simple editor system. So with embedding AST information in the html, it gives web developers a clear path how to inspect the AST & come up with custom rules, or swap out parts of the ast with something more visually interesting (imagine putting in a colour picker in usages of a color function).\n\nI haven't realized its full potential yet, there might need to be more metadata in the DOM, but I'm starting small & seeing how far I can get."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1689083336.878249",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "clap",
+                "users": [
+                    "U05G29UQHKK"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "c22977f3-7c7b-4ab1-8bb5-a76537bac7a7",
+        "type": "message",
+        "text": "I'd wondered about such things myself. You are lot further along than I am, though! The \"ground truth\" representation is still the AST, right? Do you have to do a lot of work to keep the DOM and AST in sync with each other? Are you using something like ProseMirror or\u2026hmm\u2026looks like your are writing your own! Cool!",
+        "user": "U04E5QAD6DD",
+        "ts": "1689111135.927889",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "suF",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'd wondered about such things myself. You are lot further along than I am, though! The \"ground truth\" representation is still the AST, right? Do you have to do a lot of work to keep the DOM and AST in sync with each other? Are you using something like ProseMirror or\u2026hmm\u2026looks like your are writing your own! Cool!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1689083336.878249",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "type": "message",
+        "text": "The code to do the mapping from html to ast, and vice versa is here <https://github.com/coil-language/coil-lang/blob/main/editor/src/ast.coil|https://github.com/coil-language/coil-lang/blob/main/editor/src/ast.coil>\n\nThe file is 67 lines of coil so its totally manageable, and I suspect it shouldn't have to grow much larger.\n\nIn terms of keeping them in sync, the data is stored in the dom, so when you edit a node, it will parse it as coil code &amp; turn it back into dom. So I guess ground truth is html. We only turn it back into coil AST when we evaluate it.\n\nKeeping the state in the dom lets us use query selectors for all sorts of things. Here's an example of checking for using undefined variables:\n\nAnd here's the linter in coil\n```\nfn lint-unused-variables {\n  let ids = document.querySelectorAll(\"\n      [data-kind=let] &gt;\n      [data-attr=assign_expr]\n      [data-text]\")\n    ::map(:textContent)\n    ::into(Set[])\n\n  document.querySelectorAll(\"[data-kind=id_lookup] [data-text]\")\n    ::reject(:textContent ids)\n    ::each($.setAttribute[\"data-warn\", \"Use of undefined variable\"])\n}```",
+        "files": [
+            {
+                "id": "F05H9DQ0800",
+                "created": 1689112270,
+                "timestamp": 1689112270,
+                "name": "Screen Recording 2023-07-11 at 5.50.58 PM.mov",
+                "title": "Screen Recording 2023-07-11 at 5.50.58 PM.mov",
+                "mimetype": "video/quicktime",
+                "filetype": "mov",
+                "pretty_type": "QuickTime Movie",
+                "user": "U03LJBR6THT",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 590584,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "transcription": {
+                    "status": "none"
+                },
+                "mp4": "https://files.slack.com/files-tmb/T5TCAFTA9-F05H9DQ0800-67eb159de0/screen_recording_2023-07-11_at_5.50.58_pm.mp4",
+                "url_private": "https://files.slack.com/files-tmb/T5TCAFTA9-F05H9DQ0800-67eb159de0/screen_recording_2023-07-11_at_5.50.58_pm.mp4",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F05H9DQ0800/download/screen_recording_2023-07-11_at_5.50.58_pm.mov",
+                "hls": "https://files.slack.com/files-tmb/T5TCAFTA9-F05H9DQ0800-67eb159de0/file.m3u8?_xcb=7544e",
+                "hls_embed": "data:application/vnd.apple.mpegurl;base64,I0VYVE0zVQojRVhULVgtVkVSU0lPTjozCiNFWFQtWC1JTkRFUEVOREVOVC1TRUdNRU5UUwojRVhULVgtU1RSRUFNLUlORjpCQU5EV0lEVEg9MzQ2ODI2LEFWRVJBR0UtQkFORFdJRFRIPTM0NjgyNixDT0RFQ1M9ImF2YzEuNjQwMDI4LG1wNGEuNDAuNSIsUkVTT0xVVElPTj0xOTIweDk2NixGUkFNRS1SQVRFPTI5Ljk3MApkYXRhOmFwcGxpY2F0aW9uL3ZuZC5hcHBsZS5tcGVndXJsO2Jhc2U2NCxJMFZZVkUwelZRb2pSVmhVTFZndFZrVlNVMGxQVGpvekNpTkZXRlF0V0MxVVFWSkhSVlJFVlZKQlZFbFBUam8zQ2lORldGUXRXQzFOUlVSSlFTMVRSVkZWUlU1RFJUb3hDaU5GV0ZRdFdDMVFURUZaVEVsVFZDMVVXVkJGT2xaUFJBb2pSVmhVU1U1R09qWXVNREEyTEFwb2RIUndjem92TDJacGJHVnpMbk5zWVdOckxtTnZiUzltYVd4bGN5MTBiV0l2VkRWVVEwRkdWRUU1TFVZd05VZzVSRkV3T0RBd0xUWTNaV0l4TlRsa1pUQXZabWxzWlY5SVh6STJORjh4T1RJd2VERXdPREJmTmpVd01FdENVRk5mTjFGV1FsSmZNREF3TURFdWRITUtJMFZZVkVsT1Jqb3pMalF6Tnl3S2FIUjBjSE02THk5bWFXeGxjeTV6YkdGamF5NWpiMjB2Wm1sc1pYTXRkRzFpTDFRMVZFTkJSbFJCT1MxR01EVklPVVJSTURnd01DMDJOMlZpTVRVNVpHVXdMMlpwYkdWZlNGOHlOalJmTVRreU1IZ3hNRGd3WHpZMU1EQkxRbEJUWHpkUlZrSlNYekF3TURBeUxuUnpDaU5GV0ZRdFdDMUZUa1JNU1ZOVUNnPT0KI0VYVC1YLVNUUkVBTS1JTkY6QkFORFdJRFRIPTI4NzQ3NyxBVkVSQUdFLUJBTkRXSURUSD0yODc0NzcsQ09ERUNTPSJhdmMxLjY0MDAxZixtcDRhLjQwLjUiLFJFU09MVVRJT049MTI4MHg2NDQsRlJBTUUtUkFURT0yOS45NzAKaHR0cHM6Ly9maWxlcy5zbGFjay5jb20vZmlsZXMtdG1iL1Q1VENBRlRBOS1GMDVIOURRMDgwMC02N2ViMTU5ZGUwL2ZpbGVfSF8yNjRfMTI4MHg3MjBfMzUwMEtCUFNfN1FWQlIubTN1OAo=",
+                "mp4_low": "https://files.slack.com/files-tmb/T5TCAFTA9-F05H9DQ0800-67eb159de0/screen_recording_2023-07-11_at_5.50.58_pm_trans.mp4",
+                "duration_ms": 9442,
+                "media_display_type": "video",
+                "thumb_video": "https://files.slack.com/files-tmb/T5TCAFTA9-F05H9DQ0800-67eb159de0/screen_recording_2023-07-11_at_5.50.58_pm_thumb_video.jpeg",
+                "thumb_video_w": 1332,
+                "thumb_video_h": 670,
+                "permalink": "https://futureofcoding.slack.com/files/U03LJBR6THT/F05H9DQ0800/screen_recording_2023-07-11_at_5.50.58_pm.mov",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F05H9DQ0800-d80378c091",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U03LJBR6THT",
+        "display_as_bot": false,
+        "ts": "1689112303.583349",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6xqRD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The code to do the mapping from html to ast, and vice versa is here "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/coil-language/coil-lang/blob/main/editor/src/ast.coil",
+                                "text": "https://github.com/coil-language/coil-lang/blob/main/editor/src/ast.coil"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nThe file is 67 lines of coil so its totally manageable, and I suspect it shouldn't have to grow much larger.\n\nIn terms of keeping them in sync, the data is stored in the dom, so when you edit a node, it will parse it as coil code & turn it back into dom. So I guess ground truth is html. We only turn it back into coil AST when we evaluate it.\n\nKeeping the state in the dom lets us use query selectors for all sorts of things. Here's an example of checking for using undefined variables:\n\nAnd here's the linter in coil\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nfn lint-unused-variables {\n  let ids = document.querySelectorAll(\"\n      [data-kind=let] >\n      [data-attr=assign_expr]\n      [data-text]\")\n    ::map(:textContent)\n    ::into(Set[])\n\n  document.querySelectorAll(\"[data-kind=id_lookup] [data-text]\")\n    ::reject(:textContent ids)\n    ::each($.setAttribute[\"data-warn\", \"Use of undefined variable\"])\n}"
+                            }
+                        ],
+                        "border": 0
+                    }
+                ]
+            }
+        ],
+        "edited": {
+            "user": "U03LJBR6THT",
+            "ts": "1689114444.000000"
+        },
+        "client_msg_id": "8aadb242-3597-44a3-bd79-52d172a900fb",
+        "thread_ts": "1689083336.878249",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "clap",
+                "users": [
+                    "U04E5QAD6DD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "47a8c827-f074-4198-a2ce-423165630d5a",
+        "type": "message",
+        "text": "I think very cool, but I must admit I can't work out how to try it out. Would you be able to do a video where you explain the keypresses you do to make edits",
+        "user": "U03LMRE6MQE",
+        "ts": "1689173272.597409",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8hp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think very cool, but I must admit I can't work out how to try it out. Would you be able to do a video where you explain the keypresses you do to make edits"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1689083336.878249",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "type": "message",
+        "text": "Admittedly it might be too early for <#CCL5VVBAN|share-your-work> but here's an attempt to show.\n\nOne thing is, its rough on mobile, you can eval it but editing is hard.\n\nThere's also a handful of crucial features missing notably\n\u2022 ability to tack on an operator after a node -&gt; going from `a.b` to `a.b.c`\n\u2022 delete the upcoming node - going from `a[0]` to `a::first()` is hard/impossible right now\nAlso there's some awkwardness of dealing with the editor as ast nodes, you can only edit within a leaf node, to move on to the next part you must tab into.\n\nHere's a video, hope it helps.",
+        "files": [
+            {
+                "id": "F05GM5D3D9B",
+                "created": 1689173527,
+                "timestamp": 1689173527,
+                "name": "Screen Recording 2023-07-12 at 10.49.12 AM.mov",
+                "title": "Screen Recording 2023-07-12 at 10.49.12 AM.mov",
+                "mimetype": "video/quicktime",
+                "filetype": "mov",
+                "pretty_type": "QuickTime Movie",
+                "user": "U03LJBR6THT",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 23431757,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "transcription": {
+                    "status": "none"
+                },
+                "mp4": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GM5D3D9B-60fb4bcf69/screen_recording_2023-07-12_at_10.49.12_am.mp4",
+                "url_private": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GM5D3D9B-60fb4bcf69/screen_recording_2023-07-12_at_10.49.12_am.mp4",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F05GM5D3D9B/download/screen_recording_2023-07-12_at_10.49.12_am.mov",
+                "hls": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GM5D3D9B-60fb4bcf69/file.m3u8?_xcb=efafe",
+                "hls_embed": "data:application/vnd.apple.mpegurl;base64,I0VYVE0zVQojRVhULVgtVkVSU0lPTjozCiNFWFQtWC1JTkRFUEVOREVOVC1TRUdNRU5UUwojRVhULVgtU1RSRUFNLUlORjpCQU5EV0lEVEg9ODAwODMxLEFWRVJBR0UtQkFORFdJRFRIPTU1ODY1NSxDT0RFQ1M9ImF2YzEuNjQwMDI4LG1wNGEuNDAuNSIsUkVTT0xVVElPTj0xOTIweDEwMzIsRlJBTUUtUkFURT0yOS45NzAKZGF0YTphcHBsaWNhdGlvbi92bmQuYXBwbGUubXBlZ3VybDtiYXNlNjQsSTBWWVZFMHpWUW9qUlZoVUxWZ3RWa1ZTVTBsUFRqb3pDaU5GV0ZRdFdDMVVRVkpIUlZSRVZWSkJWRWxQVGpvM0NpTkZXRlF0V0MxTlJVUkpRUzFUUlZGVlJVNURSVG94Q2lORldGUXRXQzFRVEVGWlRFbFRWQzFVV1ZCRk9sWlBSQW9qUlZoVVNVNUdPall1TURBMkxBcG9kSFJ3Y3pvdkwyWnBiR1Z6TG5Oc1lXTnJMbU52YlM5bWFXeGxjeTEwYldJdlZEVlVRMEZHVkVFNUxVWXdOVWROTlVRelJEbENMVFl3Wm1JMFltTm1Oamt2Wm1sc1pWOUlYekkyTkY4eE9USXdlREV3T0RCZk5qVXdNRXRDVUZOZk4xRldRbEpmTURBd01ERXVkSE1LSTBWWVZFbE9Sam8yTGpBd05pd0thSFIwY0hNNkx5OW1hV3hsY3k1emJHRmpheTVqYjIwdlptbHNaWE10ZEcxaUwxUTFWRU5CUmxSQk9TMUdNRFZIVFRWRU0wUTVRaTAyTUdaaU5HSmpaalk1TDJacGJHVmZTRjh5TmpSZk1Ua3lNSGd4TURnd1h6WTFNREJMUWxCVFh6ZFJWa0pTWHpBd01EQXlMblJ6Q2lORldGUkpUa1k2Tmk0d01EWXNDbWgwZEhCek9pOHZabWxzWlhNdWMyeGhZMnN1WTI5dEwyWnBiR1Z6TFhSdFlpOVVOVlJEUVVaVVFUa3RSakExUjAwMVJETkVPVUl0TmpCbVlqUmlZMlkyT1M5bWFXeGxYMGhmTWpZMFh6RTVNakI0TVRBNE1GODJOVEF3UzBKUVUxODNVVlpDVWw4d01EQXdNeTUwY3dvalJWaFVTVTVHT2pZdU1EQTJMQXBvZEhSd2N6b3ZMMlpwYkdWekxuTnNZV05yTG1OdmJTOW1hV3hsY3kxMGJXSXZWRFZVUTBGR1ZFRTVMVVl3TlVkTk5VUXpSRGxDTFRZd1ptSTBZbU5tTmprdlptbHNaVjlJWHpJMk5GOHhPVEl3ZURFd09EQmZOalV3TUV0Q1VGTmZOMUZXUWxKZk1EQXdNRFF1ZEhNS0kwVllWRWxPUmpvMkxqQXdOaXdLYUhSMGNITTZMeTltYVd4bGN5NXpiR0ZqYXk1amIyMHZabWxzWlhNdGRHMWlMMVExVkVOQlJsUkJPUzFHTURWSFRUVkVNMFE1UWkwMk1HWmlOR0pqWmpZNUwyWnBiR1ZmU0Y4eU5qUmZNVGt5TUhneE1EZ3dYelkxTURCTFFsQlRYemRSVmtKU1h6QXdNREExTG5SekNpTkZXRlJKVGtZNk5pNHdNRFlzQ21oMGRIQnpPaTh2Wm1sc1pYTXVjMnhoWTJzdVkyOXRMMlpwYkdWekxYUnRZaTlVTlZSRFFVWlVRVGt0UmpBMVIwMDFSRE5FT1VJdE5qQm1ZalJpWTJZMk9TOW1hV3hsWDBoZk1qWTBYekU1TWpCNE1UQTRNRjgyTlRBd1MwSlFVMTgzVVZaQ1VsOHdNREF3Tmk1MGN3b2pSVmhVU1U1R09qWXVNREEyTEFwb2RIUndjem92TDJacGJHVnpMbk5zWVdOckxtTnZiUzltYVd4bGN5MTBiV0l2VkRWVVEwRkdWRUU1TFVZd05VZE5OVVF6UkRsQ0xUWXdabUkwWW1ObU5qa3ZabWxzWlY5SVh6STJORjh4T1RJd2VERXdPREJmTmpVd01FdENVRk5mTjFGV1FsSmZNREF3TURjdWRITUtJMFZZVkVsT1JqbzJMakF3Tml3S2FIUjBjSE02THk5bWFXeGxjeTV6YkdGamF5NWpiMjB2Wm1sc1pYTXRkRzFpTDFRMVZFTkJSbFJCT1MxR01EVkhUVFZFTTBRNVFpMDJNR1ppTkdKalpqWTVMMlpwYkdWZlNGOHlOalJmTVRreU1IZ3hNRGd3WHpZMU1EQkxRbEJUWHpkUlZrSlNYekF3TURBNExuUnpDaU5GV0ZSSlRrWTZOaTR3TURZc0NtaDBkSEJ6T2k4dlptbHNaWE11YzJ4aFkyc3VZMjl0TDJacGJHVnpMWFJ0WWk5VU5WUkRRVVpVUVRrdFJqQTFSMDAxUkRORU9VSXROakJtWWpSaVkyWTJPUzltYVd4bFgwaGZNalkwWHpFNU1qQjRNVEE0TUY4Mk5UQXdTMEpRVTE4M1VWWkNVbDh3TURBd09TNTBjd29qUlZoVVNVNUdPall1TURBMkxBcG9kSFJ3Y3pvdkwyWnBiR1Z6TG5Oc1lXTnJMbU52YlM5bWFXeGxjeTEwYldJdlZEVlVRMEZHVkVFNUxVWXdOVWROTlVRelJEbENMVFl3Wm1JMFltTm1Oamt2Wm1sc1pWOUlYekkyTkY4eE9USXdlREV3T0RCZk5qVXdNRXRDVUZOZk4xRldRbEpmTURBd01UQXVkSE1LSTBWWVZFbE9Sam8yTGpBd05pd0thSFIwY0hNNkx5OW1hV3hsY3k1emJHRmpheTVqYjIwdlptbHNaWE10ZEcxaUwxUTFWRU5CUmxSQk9TMUdNRFZIVFRWRU0wUTVRaTAyTUdaaU5HSmpaalk1TDJacGJHVmZTRjh5TmpSZk1Ua3lNSGd4TURnd1h6WTFNREJMUWxCVFh6ZFJWa0pTWHpBd01ERXhMblJ6Q2lORldGUkpUa1k2TUM0eE5qY3NDbWgwZEhCek9pOHZabWxzWlhNdWMyeGhZMnN1WTI5dEwyWnBiR1Z6TFhSdFlpOVVOVlJEUVVaVVFUa3RSakExUjAwMVJETkVPVUl0TmpCbVlqUmlZMlkyT1M5bWFXeGxYMGhmTWpZMFh6RTVNakI0TVRBNE1GODJOVEF3UzBKUVUxODNVVlpDVWw4d01EQXhNaTUwY3dvalJWaFVMVmd0UlU1RVRFbFRWQW89CiNFWFQtWC1TVFJFQU0tSU5GOkJBTkRXSURUSD01MTc4NjAsQVZFUkFHRS1CQU5EV0lEVEg9MzkxNjUxLENPREVDUz0iYXZjMS42NDAwMWYsbXA0YS40MC41IixSRVNPTFVUSU9OPTEyODB4Njg4LEZSQU1FLVJBVEU9MjkuOTcwCmh0dHBzOi8vZmlsZXMuc2xhY2suY29tL2ZpbGVzLXRtYi9UNVRDQUZUQTktRjA1R001RDNEOUItNjBmYjRiY2Y2OS9maWxlX0hfMjY0XzEyODB4NzIwXzM1MDBLQlBTXzdRVkJSLm0zdTgK",
+                "mp4_low": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GM5D3D9B-60fb4bcf69/screen_recording_2023-07-12_at_10.49.12_am_trans.mp4",
+                "duration_ms": 66232,
+                "media_display_type": "video",
+                "thumb_video": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GM5D3D9B-60fb4bcf69/screen_recording_2023-07-12_at_10.49.12_am_thumb_video.jpeg",
+                "thumb_video_w": 3020,
+                "thumb_video_h": 1622,
+                "permalink": "https://futureofcoding.slack.com/files/U03LJBR6THT/F05GM5D3D9B/screen_recording_2023-07-12_at_10.49.12_am.mov",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F05GM5D3D9B-24b774f970",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U03LJBR6THT",
+        "display_as_bot": false,
+        "ts": "1689173720.524199",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "r4Jf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Admittedly it might be too early for "
+                            },
+                            {
+                                "type": "channel",
+                                "channel_id": "CCL5VVBAN"
+                            },
+                            {
+                                "type": "text",
+                                "text": " but here's an attempt to show.\n\nOne thing is, its rough on mobile, you can eval it but editing is hard.\n\nThere's also a handful of crucial features missing notably\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "ability to tack on an operator after a node -> going from "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "a.b",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " to "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "a.b.c",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "delete the upcoming node - going from "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "a[0]",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " to "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "a::first()",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " is hard/impossible right now"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nAlso there's some awkwardness of dealing with the editor as ast nodes, you can only edit within a leaf node, to move on to the next part you must tab into.\n\nHere's a video, hope it helps."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "client_msg_id": "dd1f2378-0ca3-46bc-b644-fbbe11e1381c",
+        "thread_ts": "1689083336.878249",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "78454109-b582-48a2-9ee0-4e84b5e476e6",
+        "type": "message",
+        "text": "I believe those problems are solvable, but right now I'm just showcasing the simplicity of the model, and the benefits of storing AST as html.",
+        "user": "U03LJBR6THT",
+        "ts": "1689173788.144059",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kDPq",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I believe those problems are solvable, but right now I'm just showcasing the simplicity of the model, and the benefits of storing AST as html."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1689083336.878249",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "0057dddd-0d82-467b-917e-d13fde376e76",
+        "type": "message",
+        "text": "When you insert a new line, its temporarily a plain text editor for that line until you focus away &amp; it parses it",
+        "user": "U03LJBR6THT",
+        "ts": "1689173930.393469",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FePi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "When you insert a new line, its temporarily a plain text editor for that line until you focus away & it parses it"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03LJBR6THT",
+            "ts": "1689173940.000000"
+        },
+        "thread_ts": "1689083336.878249",
+        "parent_user_id": "U03LJBR6THT"
+    }
+]

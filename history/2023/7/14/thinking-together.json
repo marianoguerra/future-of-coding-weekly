@@ -1,0 +1,235 @@
+[
+    {
+        "type": "message",
+        "text": "I've been thinking a lot about the patterns and architectures we're going to see start to emerge that lend themselves well to being written by generative AI and came across this technique being used by a library called Marvin (<https://github.com/PrefectHQ/marvin>) where they limit the tokens the LLM can respond with to just a single token corresponding to a value in an enum. They then have it respond with the value as the response to a natural language query. This is extra interesting because responding with a single token is relatively fast and cheap.\n\nThe example they give is using it in routing:\n\n&gt; ```    USER_PROFILE = \"/user-profile\"\n&gt;     SEARCH = \"/search\"\n&gt;     NOTIFICATIONS = \"/notifications\"\n&gt;     SETTINGS = \"/settings\"\n&gt;     HELP = \"/help\"\n&gt;     CHAT = \"/chat\"\n&gt;     DOCS = \"/docs\"\n&gt;     PROJECTS = \"/projects\"\n&gt;     WORKSPACES = \"/workspaces\"\n&gt; \n&gt; \n&gt; AppRoute(\"update my name\")\n&gt; # AppRoute.USER_PROFILE```\nBut I feel like there's a seed of an idea here that points to what a piece of an LLM-core architecture may look like. I experimented with the idea a bit in chatgpt earlier today (screenshots attached) and I'd love to know if anyone finds this interesting or has any thoughts/opinions.",
+        "files": [
+            {
+                "id": "F05HVF1T1LG",
+                "created": 1689368916,
+                "timestamp": 1689368916,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U05GSC0B4A0",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 83678,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F05HVF1T1LG/image.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F05HVF1T1LG/download/image.png",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F05HVF1T1LG-78ebb69484/image_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F05HVF1T1LG-78ebb69484/image_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F05HVF1T1LG-78ebb69484/image_360.png",
+                "thumb_360_w": 360,
+                "thumb_360_h": 251,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F05HVF1T1LG-78ebb69484/image_480.png",
+                "thumb_480_w": 480,
+                "thumb_480_h": 335,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F05HVF1T1LG-78ebb69484/image_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F05HVF1T1LG-78ebb69484/image_720.png",
+                "thumb_720_w": 720,
+                "thumb_720_h": 502,
+                "original_w": 786,
+                "original_h": 548,
+                "thumb_tiny": "AwAhADDQI29CeTnrSZPrT2PpSAH1oATcfWlz7/pTse5ooAbk+/5U4dOaKKAGt9KTdjtTm7Umff8AWgBQc9jS03OP/wBdOFABRRRQA1u1J2pW7UnagAp46CmU8dBQAUUUUAf/2Q==",
+                "permalink": "https://futureofcoding.slack.com/files/U05GSC0B4A0/F05HVF1T1LG/image.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F05HVF1T1LG-aef5595512",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            },
+            {
+                "id": "F05GZ49BPRC",
+                "created": 1689368929,
+                "timestamp": 1689368929,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U05GSC0B4A0",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 68982,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F05GZ49BPRC/image.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F05GZ49BPRC/download/image.png",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GZ49BPRC-b5934676d6/image_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GZ49BPRC-b5934676d6/image_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GZ49BPRC-b5934676d6/image_360.png",
+                "thumb_360_w": 315,
+                "thumb_360_h": 360,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GZ49BPRC-b5934676d6/image_480.png",
+                "thumb_480_w": 419,
+                "thumb_480_h": 480,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GZ49BPRC-b5934676d6/image_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GZ49BPRC-b5934676d6/image_720.png",
+                "thumb_720_w": 629,
+                "thumb_720_h": 720,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F05GZ49BPRC-b5934676d6/image_800.png",
+                "thumb_800_w": 699,
+                "thumb_800_h": 800,
+                "original_w": 700,
+                "original_h": 801,
+                "thumb_tiny": "AwAwACnRXp0IpfwNNwegJpce9ADsUYpKKADFLikooATr1Az9aMewoHA+7inYoAQCloxRigAopMUuKAGqOO4+tOxTVGR1P40uPc0ALijFJj3NGKADFLikxRigD//Z",
+                "permalink": "https://futureofcoding.slack.com/files/U05GSC0B4A0/F05GZ49BPRC/image.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F05GZ49BPRC-ab44925d32",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U05GSC0B4A0",
+        "ts": "1689369045.712599",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "=h8/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've been thinking a lot about the patterns and architectures we're going to see start to emerge that lend themselves well to being written by generative AI and came across this technique being used by a library called Marvin ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/PrefectHQ/marvin"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") where they limit the tokens the LLM can respond with to just a single token corresponding to a value in an enum. They then have it respond with the value as the response to a natural language query. This is extra interesting because responding with a single token is relatively fast and cheap.\n\nThe example they give is using it in routing:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "    USER_PROFILE = \"/user-profile\"\n    SEARCH = \"/search\"\n    NOTIFICATIONS = \"/notifications\"\n    SETTINGS = \"/settings\"\n    HELP = \"/help\"\n    CHAT = \"/chat\"\n    DOCS = \"/docs\"\n    PROJECTS = \"/projects\"\n    WORKSPACES = \"/workspaces\"\n\n\nAppRoute(\"update my name\")\n# AppRoute.USER_PROFILE"
+                            }
+                        ],
+                        "border": 1
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nBut I feel like there's a seed of an idea here that points to what a piece of an LLM-core architecture may look like. I experimented with the idea a bit in chatgpt earlier today (screenshots attached) and I'd love to know if anyone finds this interesting or has any thoughts/opinions."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "edited": {
+            "user": "U05GSC0B4A0",
+            "ts": "1689429287.000000"
+        },
+        "client_msg_id": "dfdd6c0b-378e-4b4c-901b-0a85498fa57c",
+        "thread_ts": "1689369045.712599",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1689428904.650439",
+        "reply_users": [
+            "U05FZS91DM2",
+            "U05GSC0B4A0"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "32c0afa1-8c37-4570-81e4-6f2fe2acfb7c",
+        "type": "message",
+        "text": "Just for clarification - is the idea that the LLM can be used as a sort of router?",
+        "user": "U05FZS91DM2",
+        "ts": "1689389586.939669",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "E+M2O",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Just for clarification - is the idea that the LLM can be used as a sort of router?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1689369045.712599",
+        "parent_user_id": "U05GSC0B4A0"
+    },
+    {
+        "client_msg_id": "060c8152-1624-4449-89fa-f81226483b00",
+        "type": "message",
+        "text": "Yeah, so they're using it as a natural language router which is super interesting in itself - that \"update my name\" could also be the output of another LLM (ex - as a result of a user action in a UI...user fills in a \"name\" field and clicks the \"save\" button, router POSTs that message to the API).\n\nYou can take that further on it's own - can you have an LLM route messages in a smalltalk/ruby/objective-c message-passing style language?\n\nBut where my head went is - given a specific context in a prompt, we can encode a bunch of information (in binary, hex?, emoji?) and enable new patterns that give us cost/speed benefits from LLMs while also not having to explicitly write as much code. I need to do a bigger experiment, but in my screenshots, I'm showing it actually being able to encode and decode the information, at least from a simple binary encoding.\n\nA while back I followed a tutorial for building a chess engine in C, and they used a similar technique but with U64s and a lot of bitwise operations, bit masks, etc and I'm thinking there's a way to take inspiration from those techniques and use it with an LLM...",
+        "user": "U05GSC0B4A0",
+        "ts": "1689428904.650439",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zW5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, so they're using it as a natural language router which is super interesting in itself - that \"update my name\" could also be the output of another LLM (ex - as a result of a user action in a UI...user fills in a \"name\" field and clicks the \"save\" button, router POSTs that message to the API).\n\nYou can take that further on it's own - can you have an LLM route messages in a smalltalk/ruby/objective-c message-passing style language?\n\nBut where my head went is - given a specific context in a prompt, we can encode a bunch of information (in binary, hex?, emoji?) and enable new patterns that give us cost/speed benefits from LLMs while also not having to explicitly write as much code. I need to do a bigger experiment, but in my screenshots, I'm showing it actually being able to encode and decode the information, at least from a simple binary encoding.\n\nA while back I followed a tutorial for building a chess engine in C, and they used a similar technique but with U64s and a lot of bitwise operations, bit masks, etc and I'm thinking there's a way to take inspiration from those techniques and use it with an LLM..."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U05GSC0B4A0",
+            "ts": "1689428928.000000"
+        },
+        "thread_ts": "1689369045.712599",
+        "parent_user_id": "U05GSC0B4A0"
+    }
+]
