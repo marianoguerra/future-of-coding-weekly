@@ -27,7 +27,10 @@ function generateScriptForThisWeek(now, dayNumber) {
 }
 function dateStrAddDays(days) {
   const d = new Date();
-  d.setDate(d.getDate() + days);
+  d.setUTCDate(d.getUTCDate() + days);
   return d.toISOString().split("T")[0];
 }
-generateScriptForThisWeek(new Date(Deno.args[0] ?? dateStrAddDays(-1)), MONDAY);
+generateScriptForThisWeek(
+  new Date(Date.parse(Deno.args[0] ?? dateStrAddDays(-1))),
+  MONDAY,
+);

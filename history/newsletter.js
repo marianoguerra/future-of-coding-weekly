@@ -7,8 +7,8 @@ function cloneDate(d) {
 function findNextWeekDay(d0, dayNumber) {
   const d = cloneDate(d0);
 
-  while (d.getDay() !== dayNumber) {
-    d.setDate(d.getDate() + 1);
+  while (d.getUTCDay() !== dayNumber) {
+    d.setUTCDate(d.getUTCDate() + 1);
   }
 
   return d;
@@ -16,27 +16,27 @@ function findNextWeekDay(d0, dayNumber) {
 
 function countWeekDayUntilIncluding(d0, dayNumber) {
   const d = cloneDate(d0);
-  d.setDate(1);
+  d.setUTCDate(1);
 
   let count = 0;
 
   do {
-    if (d.getDay() === dayNumber) {
+    if (d.getUTCDay() === dayNumber) {
       count += 1;
     }
 
-    d.setDate(d.getDate() + 1);
-  } while (d0.getDate() >= d.getDate());
+    d.setUTCDate(d.getUTCDate() + 1);
+  } while (d0.getTime() >= d.getTime());
 
   return count;
 }
 
 function formatDay(d) {
-  return d.toISOString().split('T')[0];
+  return d.toISOString().split("T")[0];
 }
 
 function zeroPad(v) {
-  return v < 10 ? '0' + v : '' + v;
+  return v < 10 ? "0" + v : "" + v;
 }
 
 function getInfoForWeekAndDay(now, dayNumber) {
@@ -44,12 +44,14 @@ function getInfoForWeekAndDay(now, dayNumber) {
     prevDay = cloneDate(nextDay),
     weekNumber = countWeekDayUntilIncluding(nextDay, dayNumber),
     weekStr = `W${weekNumber}`,
-    monthStr = zeroPad(now.getMonth() + 1),
-    curYear = now.getFullYear(),
-    issueTitle = `Future of Coding Weekly ${curYear}/${monthStr} Week ${weekNumber}`,
-    newsletterUrl = `https://newsletter.futureofcoding.org/posts/future-of-coding-weekly-${curYear}${monthStr}-week-${weekNumber}/`;
+    monthStr = zeroPad(now.getUTCMonth() + 1),
+    curYear = now.getUTCFullYear(),
+    issueTitle =
+      `Future of Coding Weekly ${curYear}/${monthStr} Week ${weekNumber}`,
+    newsletterUrl =
+      `https://newsletter.futureofcoding.org/posts/future-of-coding-weekly-${curYear}${monthStr}-week-${weekNumber}/`;
 
-  prevDay.setDate(prevDay.getDate() - 7);
+  prevDay.setUTCDate(prevDay.getUTCDate() - 7);
 
   const prevDateStr = formatDay(prevDay),
     nextDateStr = formatDay(nextDay);
@@ -68,4 +70,4 @@ function getInfoForWeekAndDay(now, dayNumber) {
   };
 }
 
-export {getInfoForWeekAndDay, MONDAY};
+export { getInfoForWeekAndDay, MONDAY };
