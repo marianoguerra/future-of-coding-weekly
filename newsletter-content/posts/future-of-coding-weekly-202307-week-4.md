@@ -1,6 +1,6 @@
 <!--
-.. title: Future of Coding Weekly 2023/07 Week 14282923
-.. slug: future-of-coding-weekly-202307-week-14282923
+.. title: Future of Coding Weekly 2023/07 Week 4
+.. slug: future-of-coding-weekly-202307-week-4
 .. date: 2023-07-30 16:36:19 UTC+02:00
 .. tags: 
 .. category: 
