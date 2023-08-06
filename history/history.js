@@ -509,7 +509,7 @@ function elementToMd(element, args) {
     case "rich_text_preformatted":
       return "\n```\n" + mapElements(element, nodeToMd, args, "") + "\n```\n\n";
     case "rich_text_quote":
-      return "\n> " + mapElements(element, nodeToMd, args, "");
+      return "\n> " + mapElements(element, nodeToMd, args, "\n> ");
     case "rich_text_section":
       return mapElements(element, nodeToMd, args, "");
     default:
