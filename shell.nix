@@ -1,17 +1,17 @@
-{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz") {} }:
-with pkgs;
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.05.tar.gz") {} }:
 
-mkShell {
-  LOCALE_ARCHIVE_2_27 = "${glibcLocales}/lib/locale/locale-archive";
+pkgs.mkShell {
+	LOCALE_ARCHIVE_2_27 = if (pkgs.glibcLocales != null) then "${pkgs.glibcLocales}/lib/locale/locale-archive" else "";
   buildInputs = [
-    glibcLocales
-    gnumake
-    python310
-    python310Packages.pip
-    python310Packages.Nikola
-    nodejs
-    git
-    sqlite
+    pkgs.glibcLocales
+    pkgs.gnumake
+    pkgs.python311
+    pkgs.python311Packages.pip
+    pkgs.python311Packages.nikola
+    pkgs.python311Packages.virtualenv
+    pkgs.nodejs
+    pkgs.git
+    pkgs.sqlite
   ];
   shellHook = ''
     export LC_ALL=en_US.UTF-8
