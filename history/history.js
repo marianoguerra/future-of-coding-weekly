@@ -402,21 +402,21 @@ function enrichMessage(msg, args, isOlder, channel) {
 
       const file = files[i],
         mimetype = file.mimetype || "";
-      let icon = "📝";
+      let prefix = "📝 ";
       if (mimetype.startsWith("video/")) {
-        icon = "🎥";
+        prefix = "🎥 ";
       } else if (mimetype.startsWith("image/")) {
-        icon = "📷";
+        prefix = "!";
       } else if (mimetype.startsWith("application/")) {
-        icon = "📄";
+        prefix = "📄 ";
       } else if (mimetype.startsWith("text/")) {
-        icon = "🗒️";
+        prefix = "🗒️ ";
       } else {
         console.warn("unknown mimetype", file);
       }
 
       if (file.title) {
-        file.$text = `> ${icon} [${file.title}](${msgFileToUrl(file)})`;
+        file.$text = `${prefix}[${file.title}](${msgFileToUrl(file)})`;
         accum += file.$text;
       }
     }
