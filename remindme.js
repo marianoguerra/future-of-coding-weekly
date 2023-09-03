@@ -13,12 +13,11 @@ function generateScriptForThisWeek(now, dayNumber) {
   } = getInfoForWeekAndDay(now, dayNumber);
 
   console.log("nix-shell");
-  console.log("nu");
+  console.log(`mkdir history/weekly/${curYear}/${monthStr}/${weekStr}/`);
   console.log(`focWeekExport "${prevDateStr}" "${nextDateStr}"`);
   console.log(
     `https://github.com/marianoguerra/future-of-coding-weekly/issues/new?&template=newsletter-week-issue.md&title=Future+of+Coding+Weekly+${curYear}%2F${monthStr}+Week+${weekNumber}`,
   );
-  console.log(`mkdir history/weekly/${curYear}/${monthStr}/${weekStr}/`);
   console.log(
     `cd newsletter-content;nikola new_post -f markdown -t "${issueTitle}" -e`,
   );
