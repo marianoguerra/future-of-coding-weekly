@@ -1,0 +1,2053 @@
+[
+    {
+        "client_msg_id": "b78d7be6-73fe-4268-a3ea-8aa81c05bbdc",
+        "type": "message",
+        "text": "For some time I've thought that type systems are essentially ad-hoc logic languages. So.. why not use a full on logic language (prolog or something) to statically analyze your codebase instead of keep patching onto a type system, it appears to me that logic languages are simpler &amp; more expressive than most type systems. I'm starting to work on this for my language, and creating a logic language in efforts to also understand logic programming better.\n\nAnother advantage I can think of is that if a the logic language is expressive enough to type even the most advanced languages as well as the weakest, it could be used as a shared interface between languages to understand at least parts of each others type systems, as well as be a tool for user extension for additional static analysis specific to their project.\n\nI'm basically thinking something like this.\n```# here's a sample program in my (object oriented) language\nfn add(a, b) = a + b\nadd(1, 2)```\ngenerated logic program in pseudo syntax (`#A` is a pattern to check value is type of `A`, `?a` is like prolog's `A`, `{...}`  is map literal.)\n```-- preloaded facts\nlookup(#Number, :+, {args: [#Number, #Number], ret: #Number}).\n\n-- program\nadd(?a, ?b, ?ret) :- lookup(?a, :+, {args: [?a, ?b], ret: ?ret}).\n?- add(1, 2, ?_).```\nThe specifics of my logic language is likely flawed, but I'm curious about the general idea of using a fully-fledged logic language to generate a program in &amp; run instead of generated a typed AST and running ad-hoc type systems.\n\nMy question is, what are people's thoughts on this? Any previous work in this area? Any obvious flaws?",
+        "user": "U03LJBR6THT",
+        "ts": "1693231453.379599",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3r4s",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "For some time I've thought that type systems are essentially ad-hoc logic languages. So.. why not use a full on logic language (prolog or something) to statically analyze your codebase instead of keep patching onto a type system, it appears to me that logic languages are simpler & more expressive than most type systems. I'm starting to work on this for my language, and creating a logic language in efforts to also understand logic programming better.\n\nAnother advantage I can think of is that if a the logic language is expressive enough to type even the most advanced languages as well as the weakest, it could be used as a shared interface between languages to understand at least parts of each others type systems, as well as be a tool for user extension for additional static analysis specific to their project.\n\nI'm basically thinking something like this.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "# here's a sample program in my (object oriented) language\nfn add(a, b) = a + b\nadd(1, 2)"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "generated logic program in pseudo syntax ("
+                            },
+                            {
+                                "type": "text",
+                                "text": "#A",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is a pattern to check value is type of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "A",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", "
+                            },
+                            {
+                                "type": "text",
+                                "text": "?a",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is like prolog's "
+                            },
+                            {
+                                "type": "text",
+                                "text": "A",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", "
+                            },
+                            {
+                                "type": "text",
+                                "text": "{...}",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "  is map literal.)\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "-- preloaded facts\nlookup(#Number, :+, {args: [#Number, #Number], ret: #Number}).\n\n-- program\nadd(?a, ?b, ?ret) :- lookup(?a, :+, {args: [?a, ?b], ret: ?ret}).\n?- add(1, 2, ?_)."
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe specifics of my logic language is likely flawed, but I'm curious about the general idea of using a fully-fledged logic language to generate a program in & run instead of generated a typed AST and running ad-hoc type systems.\n\nMy question is, what are people's thoughts on this? Any previous work in this area? Any obvious flaws?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03LJBR6THT",
+            "ts": "1693231493.000000"
+        },
+        "thread_ts": "1693231453.379599",
+        "reply_count": 19,
+        "reply_users_count": 6,
+        "latest_reply": "1693579885.040729",
+        "reply_users": [
+            "UGWUJUZHT",
+            "U03LJBR6THT",
+            "UKJGU23KP",
+            "UJBAJNFLK",
+            "UA14TGLTC",
+            "UCUSW7WVD"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "guitar",
+                "users": [
+                    "UGWUJUZHT"
+                ],
+                "count": 1
+            },
+            {
+                "name": "hushed",
+                "users": [
+                    "U05597GCDDK"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "ca6f05d1-f907-4bb6-a9d4-81fdd6884882",
+        "type": "message",
+        "text": "\u2026",
+        "user": "UGWUJUZHT",
+        "ts": "1693233321.418509",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Q9c",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\u2026"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UGWUJUZHT",
+            "ts": "1693234791.000000"
+        }
+    },
+    {
+        "client_msg_id": "b276b2bd-6300-4acf-9d16-c5651aed9655",
+        "type": "message",
+        "text": "I might be missing context here but the fact that type systems are logic languages should be uncontroversial given that that's what the Curry Howard Correspondence is about. Though I'm not very well read I think that using \"complete\" generic logic languages/solver (as a component) in solving type equations ought to be well trodden ground, my first thought went to <https://github.com/rust-lang/chalk|https://github.com/rust-lang/chalk> as one example. I'd be looking at what one might give up doing so as the reason why it doesn't happen more: speed? guaranteed termination? good error messages?",
+        "user": "U05PLUUKU94",
+        "ts": "1693234087.357479",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "992wf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I might be missing context here but the fact that type systems are logic languages should be uncontroversial given that that's what the Curry Howard Correspondence is about. Though I'm not very well read I think that using \"complete\" generic logic languages/solver (as a component) in solving type equations ought to be well trodden ground, my first thought went to "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/rust-lang/chalk",
+                                "text": "https://github.com/rust-lang/chalk"
+                            },
+                            {
+                                "type": "text",
+                                "text": " as one example. I'd be looking at what one might give up doing so as the reason why it doesn't happen more: speed? guaranteed termination? good error messages?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U05PLUUKU94",
+            "ts": "1693314440.000000"
+        },
+        "thread_ts": "1693234087.357479",
+        "reply_count": 2,
+        "reply_users_count": 1,
+        "latest_reply": "1693234370.728389",
+        "reply_users": [
+            "U03LJBR6THT"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "pray",
+                "users": [
+                    "U03LJBR6THT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "4845484c-51f9-4428-a939-0477f12da97d",
+        "type": "message",
+        "text": "I do think something like prolog might not be fit for it as the error messages seem poor, but it feels like a solvable problem - something like a stack trace instead of the \"no\" that prolog can give.",
+        "user": "U03LJBR6THT",
+        "ts": "1693234292.300919",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "J/7Ri",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I do think something like prolog might not be fit for it as the error messages seem poor, but it feels like a solvable problem - something like a stack trace instead of the \"no\" that prolog can give."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693234087.357479",
+        "parent_user_id": "U05PLUUKU94"
+    },
+    {
+        "client_msg_id": "341bef78-e9ad-4902-b7bb-ee5c64b1f37a",
+        "type": "message",
+        "text": "chalk looks pretty cool, thanks.",
+        "user": "U03LJBR6THT",
+        "ts": "1693234370.728389",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "g=y6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "chalk looks pretty cool, thanks."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693234087.357479",
+        "parent_user_id": "U05PLUUKU94",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U05PLUUKU94"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "64059C1C-00CB-488C-9564-6483E85B39C6",
+        "type": "message",
+        "text": "Quick reminder \u2014 <https://futureofcoding.org/member-handbook|please post replies as threaded replies>. Thanks!",
+        "user": "UC2A2ARPT",
+        "ts": "1693234378.983779",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+SqB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Quick reminder \u2014 "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://futureofcoding.org/member-handbook",
+                                "text": "please post replies as threaded replies"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". Thanks!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1693234427.000000"
+        },
+        "thread_ts": "1693234378.983779",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1693234776.022069",
+        "reply_users": [
+            "UGWUJUZHT"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UMQ6LR9NZ",
+                    "U03LJBR6THT",
+                    "U05PLUUKU94",
+                    "U016VUZGUUQ",
+                    "U03R0B9U1GD",
+                    "UJFN50C00"
+                ],
+                "count": 6
+            },
+            {
+                "name": "thread",
+                "users": [
+                    "U02QC0PPER3",
+                    "U05PRFSG069"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7b72941c-7fb2-4618-9169-f94c6b1c8751",
+        "type": "message",
+        "text": "Massive agreement. Wish: I wish that type-checking was built BESIDE languages instead of INSIDE-OF languages.  Observation: While sitting through a reading of PLFA (Agda) [with CompSci Cabal], I developed the distinct feeling that I was looking at 2 languages, one for programming a type system, and, one for programming an implementation (an after-thought in Agda, IMO) ; to me, \u201cDependent Types\u201d is just more-programming-language-constructs for a type language (DT adds parameters) ; Agda, et al, seems to be inching towards the re-discovery that type systems can be / should be programmed.  The benefit of Relational Languages (PROLOG, miniKanren, etc). is that they specify \u201cwhat is wanted\u201d (relations) instead of \u201chow to create steps for achieving what is wanted\u201d (3GLs like Python, Rust, Haskell, etc.)",
+        "user": "UGWUJUZHT",
+        "ts": "1693234670.939129",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hv5Jq",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Massive agreement. Wish: I wish that type-checking was built BESIDE languages instead of INSIDE-OF languages.  Observation: While sitting through a reading of PLFA (Agda) [with CompSci Cabal], I developed the distinct feeling that I was looking at 2 languages, one for programming a type system, and, one for programming an implementation (an after-thought in Agda, IMO) ; to me, \u201cDependent Types\u201d is just more-programming-language-constructs for a type language (DT adds parameters) ; Agda, et al, seems to be inching towards the re-discovery that type systems can be / should be programmed.  The benefit of Relational Languages (PROLOG, miniKanren, etc). is that they specify \u201cwhat is wanted\u201d (relations) instead of \u201chow to create steps for achieving what is wanted\u201d (3GLs like Python, Rust, Haskell, etc.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U03LJBR6THT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "967c33bd-133f-43de-ad25-1fa59c776330",
+        "type": "message",
+        "text": "My fault, yet again.  Where\u2019s Jef Raskin when you need him?",
+        "user": "UGWUJUZHT",
+        "ts": "1693234776.022069",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "AxP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "My fault, yet again.  Where\u2019s Jef Raskin when you need him?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693234378.983779",
+        "parent_user_id": "UC2A2ARPT"
+    },
+    {
+        "client_msg_id": "55a9908e-9ddd-40ae-bd54-7c475e6d311e",
+        "type": "message",
+        "text": "To me type systems are in the awkward position of trying to squeeze into an existing language (get out of the way), but also be powerful enough to express complex things like DSLs.\n\nType systems have to all sorts of optimizations to make unification manageable or querying the codebase.\n\nWhere it seems to me that these are solved problems - databases.\n\nI imagine such a logic system that learns from the many decades of high performance databases, could be very fast (think indexes, query caching, materialized views etc.).",
+        "user": "U03LJBR6THT",
+        "ts": "1693235859.178129",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MhJb",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "To me type systems are in the awkward position of trying to squeeze into an existing language (get out of the way), but also be powerful enough to express complex things like DSLs.\n\nType systems have to all sorts of optimizations to make unification manageable or querying the codebase.\n\nWhere it seems to me that these are solved problems - databases.\n\nI imagine such a logic system that learns from the many decades of high performance databases, could be very fast (think indexes, query caching, materialized views etc.)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03LJBR6THT",
+            "ts": "1693235995.000000"
+        },
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "E25CF027-1FE9-4C3C-8B63-FF1F0F655718",
+        "type": "message",
+        "text": "Rust embeds a datalog system in its type checker for borrow checking, if I\u2019m not mistaken. <https://github.com/rust-lang/datafrog|https://github.com/rust-lang/datafrog>",
+        "user": "UKJGU23KP",
+        "ts": "1693239230.709679",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BKb/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Rust embeds a datalog system in its type checker for borrow checking, if I\u2019m not mistaken. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/rust-lang/datafrog",
+                                "text": "https://github.com/rust-lang/datafrog"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "fire",
+                "users": [
+                    "U03LJBR6THT",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "22f3bdfd-ba59-48e6-8894-40ad6c6643b7",
+        "type": "message",
+        "text": "A one minute interaction with a digital product at 60FP on an HD RGB screen flows through a creative/generative space of 125,241,246,351,360,000 pixel variations.\n\nWe need spaceships to explore this space, but we got rectangles with drag handles instead.",
+        "user": "U03GBV8B58V",
+        "ts": "1693241119.883579",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "83Z",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "A one minute interaction with a digital product at 60FP on an HD RGB screen flows through a creative/generative space of 125,241,246,351,360,000 pixel variations.\n\nWe need spaceships to explore this space, but we got rectangles with drag handles instead."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241119.883579",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1693244498.771159",
+        "reply_users": [
+            "U03GBV8B58V"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "white_square_button",
+                "users": [
+                    "U02B6FQKZK8"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0161c5e8-3a37-4a3e-b714-0eb4e21257b2",
+        "type": "message",
+        "text": "A question for ya\u2019ll doing thinking on future of coding things:\n\nWhen/if you think about the accessibility (read here as \u201ca11y\u201d) of the future of coding do you consider accessibility as an attribute of the folks using your thing (e.g. a need) or an attribute of your design (e.g. a feature)?",
+        "user": "UMQ6LR9NZ",
+        "ts": "1693241844.727769",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "99NW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "A question for ya\u2019ll doing thinking on future of coding things:\n\nWhen/if you think about the accessibility (read here as \u201ca11y\u201d) of the future of coding do you consider accessibility as an attribute of the folks using your thing (e.g. a need) or an attribute of your design (e.g. a feature)?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UMQ6LR9NZ",
+            "ts": "1693241926.000000"
+        },
+        "thread_ts": "1693241844.727769",
+        "reply_count": 14,
+        "reply_users_count": 5,
+        "latest_reply": "1693510913.235389",
+        "reply_users": [
+            "UMQ6LR9NZ",
+            "U02B6FQKZK8",
+            "UCUSW7WVD",
+            "U013ZLJARC7",
+            "U03DNFDFYDA"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "7853d0d7-e304-4819-8d4e-faeb34d99c5f",
+        "type": "message",
+        "text": "follow up question: does that distinction matter?",
+        "user": "UMQ6LR9NZ",
+        "ts": "1693242095.191999",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5mtl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "follow up question: does that distinction matter?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "5E09FB49-2A4C-4B7A-B9FE-A4A25F5E2613",
+        "type": "message",
+        "text": "I think there's actually a trichotomy on that term that is worth exploring:\n\n1) There's the industry standard, like \"a11y\", which I would say is basically always great to have correctly implemented on any production app; generally if the tool can be consistently navigated/manipulated keyboard-only and readable by assistive technology, it is a good sign the UI architecture is sound;\n\n2) There's the interpretation you mentioned that would be designing with a particular user need in mind, like for instance, one can literally blindfold  himself and optimize the tool for that particular usage context; that would quite surely make the tool \"more accessible\"; also, clearly great powers lie within optimizing for all human senses;\n\n3) There's a third, quite literal, interpretation of \"accessibility\", as simply \"having access at all to something\". I personally have used that in the context of \"live/visual programming can make technology more accessible\", even simply because of ease of use, and mobile, etc. for instance.",
+        "user": "U02B6FQKZK8",
+        "ts": "1693243981.149299",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NNlz+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think there's actually a trichotomy on that term that is worth exploring:\n\n1) There's the industry standard, like \"a11y\", which I would say is basically always great to have correctly implemented on any production app; generally if the tool can be consistently navigated/manipulated keyboard-only and readable by assistive technology"
+                            },
+                            {
+                                "type": "text",
+                                "text": ","
+                            },
+                            {
+                                "type": "text",
+                                "text": " it is a good sign the UI architecture is sound;\n\n2) There's the interpretation you mentioned that would be designing with a particular user need in mind"
+                            },
+                            {
+                                "type": "text",
+                                "text": ","
+                            },
+                            {
+                                "type": "text",
+                                "text": " like for instance"
+                            },
+                            {
+                                "type": "text",
+                                "text": ","
+                            },
+                            {
+                                "type": "text",
+                                "text": " one can literally blindfold  himself and optimize the tool for that particular usage context; that would quite surely make the tool \"more accessible\"; also, clearly great powers lie within optimizing for all human senses;\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "3) There's a third, quite literal, interpretation of \"accessibility\", as simply \"having access at all to something\". I personally have used that in the context of \"live/visual programming can make technology more accessible\", even simply because of ease of use, and mobile, etc. for instance."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "786a291c-4df0-4ed7-b1c5-904aefcd8e8e",
+        "type": "message",
+        "text": "Spaceships to explore pixels in products:\n\nScrubbing controls to cycle through:\n- Different localizations side-by-side\n- Data distributions that break layouts\n- Theme variations that cause issues\n- Screen sizes\n\nThese spaces are largely unexplored today only through manual means.",
+        "user": "U03GBV8B58V",
+        "ts": "1693244498.771159",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "KYUYl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Spaceships to explore pixels in products:\n\nScrubbing controls to cycle through:\n- Different localizations side-by-side\n- Data distributions that break layouts\n- Theme variations that cause issues\n- Screen sizes\n\nThese spaces are largely unexplored today only through manual means."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241119.883579",
+        "parent_user_id": "U03GBV8B58V"
+    },
+    {
+        "client_msg_id": "3aa24a62-2d30-4c71-bdd0-18138ddeb205",
+        "type": "message",
+        "text": "I like that break down a lot!\n\nSort of 3 facets of one thing, but all different. I\u2019m imagining a <https://en.wikipedia.org/wiki/Radar_chart|radar chart> mapping them, now!",
+        "user": "UMQ6LR9NZ",
+        "ts": "1693248061.438079",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZPd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I like that break down a lot!\n\nSort of 3 facets of one thing, but all different. I\u2019m imagining a "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://en.wikipedia.org/wiki/Radar_chart",
+                                "text": "radar chart"
+                            },
+                            {
+                                "type": "text",
+                                "text": " mapping them, now!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "8e5e96c7-e78e-4af7-93d9-3906f08e2884",
+        "type": "message",
+        "text": "The only example of a language with a \"sidecar\" type checker is Shen (<https://shenlanguage.org/>). It's a Lisp that includes a logic engine (roughly Prolog with lispy syntax), which is used to implement the type checker that can be turned on and off as preferred. And the type checker is just another Shen program, so nothing (except the effort) prevents you from substituting your own.",
+        "user": "UJBAJNFLK",
+        "ts": "1693248699.166509",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LVWp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The only example of a language with a \"sidecar\" type checker is Shen ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://shenlanguage.org/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "). It's a Lisp that includes a logic engine (roughly Prolog with lispy syntax), which is used to implement the type checker that can be turned on and off as preferred. And the type checker is just another Shen program, so nothing (except the effort) prevents you from substituting your own."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://shenlanguage.org/",
+                "id": 1,
+                "original_url": "https://shenlanguage.org/",
+                "fallback": "The Shen Group",
+                "text": "Shen Programming Language",
+                "title": "The Shen Group",
+                "title_link": "https://shenlanguage.org/",
+                "service_name": "shenlanguage.org"
+            }
+        ],
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "pray",
+                "users": [
+                    "U03LJBR6THT",
+                    "UA14TGLTC"
+                ],
+                "count": 2
+            },
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            },
+            {
+                "name": "100",
+                "users": [
+                    "U059ULNS2MQ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "b267f16c-45d4-4ccd-98d2-2c2a5fba3298",
+        "type": "message",
+        "text": "I'd also love to see static checkers outside of languages, allowing multiple checkers and in particular domain-specific ones. Ideally, I'd build my own checker as my understanding of my problem domain evolves.\n\nI somewhat suspect that the traditional tight integration of type systems and languages comes from the benefit that type checking brings to optimization.",
+        "user": "UJBAJNFLK",
+        "ts": "1693248848.074799",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "clSP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'd also love to see static checkers outside of languages, allowing multiple checkers and in particular domain-specific ones. Ideally, I'd build my own checker as my understanding of my problem domain evolves.\n\nI somewhat suspect that the traditional tight integration of type systems and languages comes from the benefit that type checking brings to optimization."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U03LJBR6THT",
+                    "UGWUJUZHT",
+                    "UA14TGLTC"
+                ],
+                "count": 3
+            },
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e1a8c34e-7e93-4574-a1f6-1034c0839627",
+        "type": "message",
+        "text": "Yea adding project specific rules was the original inspiration that got me thinking beyond conventional type systems.",
+        "user": "U03LJBR6THT",
+        "ts": "1693249907.454979",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "K9l",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yea adding project specific rules was the original inspiration that got me thinking beyond conventional type systems."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UGWUJUZHT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0377fa90-5d62-4999-a18b-a149d7c081ea",
+        "type": "message",
+        "text": "linters can work, but its duplicating all the work of the original type system, and usually don't even do proper type checking... and they usually have their own build step etc.\n\nWhat if my additional rules could be understood by a common LSP-like system?",
+        "user": "U03LJBR6THT",
+        "ts": "1693250132.454309",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SNUx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "linters can work, but its duplicating all the work of the original type system, and usually don't even do proper type checking... and they usually have their own build step etc.\n\nWhat if my additional rules could be understood by a common LSP-like system?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "40a2a5fd-98bb-44e7-9042-3219668e9880",
+        "type": "message",
+        "text": "&gt; I somewhat suspect that the traditional tight integration of type systems and languages comes from the benefit that type checking brings to optimization.\nThere's no reason why the database generated from the logic language can't stick around to be queried for optimizations, right?\n\nOne thing that I imagine will require some work is interpreting errors (no answers found) for the results of running these programs. I'm imagining when this logic program runs it'll have to keep track of which queries / predicates succeeded &amp; which didn't - and something to make something like a stacktrace, maybe even track that in a logic db that can also be queried to emit domain specific (nice) error messages.\n\nI think the big idea is having a database that contains really detailed statically analyzed facts which can be used to check correctness, do optimizations, or even help with automated refactoring tools. So it might not even need to be 1 logic language, but a shared database system which all the logic languages can speak &amp; store facts &amp; query from.",
+        "user": "U03LJBR6THT",
+        "ts": "1693252545.445969",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/Vz",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I somewhat suspect that the traditional tight integration of type systems and languages comes from the benefit that type checking brings to optimization."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There's no reason why the database generated from the logic language can't stick around to be queried for optimizations, right?\n\nOne thing that I imagine will require some work is interpreting errors (no answers found) for the results of running these programs. I'm imagining when this logic program runs it'll have to keep track of which queries / predicates succeeded & which didn't - and something to make something like a stacktrace, maybe even track that in a logic db that can also be queried to emit domain specific (nice) error messages.\n\nI think the big idea is having a database that contains really detailed statically analyzed facts which can be used to check correctness, do optimizations, or even help with automated refactoring tools. So it might not even need to be 1 logic language, but a shared database system which all the logic languages can speak & store facts & query from."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UJBAJNFLK"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "b31ed627-383b-4e24-998e-90881077ff87",
+        "type": "message",
+        "text": "This seems like one of those many places where a noun obscures where an adjective would clarify. Tools are for folks, folks have abilities. How accessible a tool is for someone depends on fit. Not very satisfying, but at least phrasing it this way is in principle answerable in a concrete case. But \"this tool has accessibility\"? Or \"this tool is for accessibility people\"? Neither seems like a meaningful statement.",
+        "user": "UCUSW7WVD",
+        "ts": "1693274641.763249",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rnn/Z",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This seems like one of those many places where a noun obscures where an adjective would clarify. Tools are for folks, folks have abilities. How accessible a tool is for someone depends on fit. Not very satisfying, but at least phrasing it this way is in principle answerable in a concrete case. But \"this tool has accessibility\"? Or \"this tool is for accessibility people\"? Neither seems like a meaningful statement."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1693353813.000000"
+        },
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U0245E9RB2B",
+                    "U013ZLJARC7"
+                ],
+                "count": 2
+            },
+            {
+                "name": "100",
+                "users": [
+                    "UJBAJNFLK"
+                ],
+                "count": 1
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "UMQ6LR9NZ"
+                ],
+                "count": 1
+            },
+            {
+                "name": "pixel-chickadee",
+                "users": [
+                    "UMQ6LR9NZ"
+                ],
+                "count": 1
+            },
+            {
+                "name": "ribbit",
+                "users": [
+                    "UMQ6LR9NZ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "354889c7-d881-48d1-9690-cffbfc2b2826",
+        "type": "message",
+        "text": "&gt;  There's no reason why the database generated from the logic language can't stick around to be queried for optimizations, right?\nTechnically, no. Socially, it means that the generation of important information is no longer under control of the compiler writer, and even language designer. They would have to cooperate with the users of their language and tool, and negotiate protocols for information exchange. It's more convenient to be a dictator.",
+        "user": "UJBAJNFLK",
+        "ts": "1693286528.265149",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YT6Y7",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": " There's no reason why the database generated from the logic language can't stick around to be queried for optimizations, right?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Technically, no. Socially, it means that the generation of important information is no longer under control of the compiler writer, and even language designer. They would have to cooperate with the users of their language and tool, and negotiate protocols for information exchange. It's more convenient to be a dictator."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U03LJBR6THT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "6abc064c-de6a-4238-9690-5c08dbbfd021",
+        "type": "message",
+        "text": "It's curious that value types are so favored among all the useful summary/analysis operations we can do on programming languages.  I mean similar techniques can track references, side-effects, entity life-cycles, resource usage, even evaluation of the language itself.",
+        "user": "UA14TGLTC",
+        "ts": "1693292544.844609",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yDaRR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It's curious that value types are so favored among all the useful summary/analysis operations we can do on programming languages.  I mean similar techniques can track references, side-effects, entity life-cycles, resource usage, even evaluation of the language itself."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "b8ceaba7-d4d5-4bf4-b8bc-2fd1a8ee01f1",
+        "type": "message",
+        "text": "One reason types are built inside languages is undecidability. We tend to want the type checker to always terminate, and to err on the side of soundness rather than completeness. This is why the type language is weaker, whereas the \"main\" language can be Turing-complete.",
+        "user": "UCUSW7WVD",
+        "ts": "1693368096.745299",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jSE=d",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One reason types are built inside languages is undecidability. We tend to want the type checker to always terminate, and to err on the side of soundness rather than completeness. This is why the type language is weaker, whereas the \"main\" language can be Turing-complete."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "8c74d46c-400e-40af-978b-332e712beec0",
+        "type": "message",
+        "text": "Kinda off to the side: I\u2019d say that when making production stuff I take the kind of accessibility you\u2019re talking about quite seriously, but when doing more research-y stuff I leave it aside during the initial phases because it\u2019s so much harder to try new ideas while carrying the full weight of past standards.",
+        "user": "U013ZLJARC7",
+        "ts": "1693382569.318889",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wRT5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Kinda off to the side: I\u2019d say that when making production stuff I take the kind of accessibility you\u2019re talking about quite seriously, but when doing more research-y stuff I leave it aside during the initial phases because it\u2019s so much harder to try new ideas while carrying the full weight of past standards."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U02B6FQKZK8"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2ea9d61c-7ff2-4dcb-84b7-b7313ecb88b6",
+        "type": "message",
+        "text": "I'd reverse the causality of that argument. It's because the type checker is part of the compiler that type checking has to be decidable and prioritize soundness over completeness (and lots of other nice properties we don't get, such as fitness for the application domain).",
+        "user": "UJBAJNFLK",
+        "ts": "1693386172.210129",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "i1vz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'd reverse the causality of that argument. It's because the type checker is part of the compiler that type checking has to be decidable and prioritize soundness over completeness (and lots of other nice properties we don't get, such as fitness for the application domain)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "dfc54a34-e64a-4c78-ae4e-428471984db5",
+        "type": "message",
+        "text": "&gt; but when doing more research-y stuff I leave it aside during the initial phases because it\u2019s so much harder to try new ideas while carrying the full weight of past standards.\nDo you think this is always true? (showing my cards my whole _thing_ and job revolves around accessibility and sort of trying to advocate for it to be a core part of the design/considerations for stuff...not just cream cheese applied at the end, or blueberries shoved into an already baked muffin.)\n\nAs example of how it could contribute to the design of a thing:\n\n\u2022 say you need some metric to track the _impact_ of enhancing accessibility?\n\u2022 an easy(ish) way to track this impact is to track _completions_ wherein you define some set of tasks that can be completed within a system and then track what % of folks start the thing vs finish it\n\u2022 leveraging accessibility-first design when approaching that situation empowers you to start thinking about \"escape hatches,\" and ways to optimize for completion. Whereas if you just try to make it _accessible_ at the end you'd remediate any keyboard traps you accidentally made, maybe with this approach you would ask \"if someone were to get trapped at this step what would they do? what way out and through can we provide even if trapped?\" ",
+        "user": "UMQ6LR9NZ",
+        "ts": "1693393329.954329",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "gAS",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "but when doing more research-y stuff I leave it aside during the initial phases because it\u2019s so much harder to try new ideas while carrying the full weight of past standards."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nDo you think this is always true? (showing my cards my whole "
+                            },
+                            {
+                                "type": "text",
+                                "text": "thing",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and job revolves around accessibility and sort of trying to advocate for it to be a core part of the design/considerations for stuff...not just cream cheese applied at the end, or blueberries shoved into an already baked muffin.)\n\nAs example of how it could contribute to the design of a thing:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "say you need some metric to track the "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "impact",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " of enhancing accessibility?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "an easy(ish) way to track this impact is to track "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "completions",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " wherein you define some set of tasks that can be completed within a system and then track what % of folks start the thing vs finish it"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "leveraging accessibility-first design when approaching that situation empowers you to start thinking about \"escape hatches,\" and ways to optimize for completion. Whereas if you just try to make it "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "accessible",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " at the end you'd remediate any keyboard traps you accidentally made, maybe with this approach you would ask \"if someone were to get trapped at this step what would they do? what way out and through can we provide even if trapped?\" "
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UMQ6LR9NZ",
+            "ts": "1693393475.000000"
+        },
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "ccabc2ed-d121-462c-9507-a574dd349afd",
+        "type": "message",
+        "text": "How I mean this is that if I want to experiment with, say, AR goggles, I\u2019m not going to start from the position of \u201chow will blind people use this display device?\u201d Or if I want to build a two-handed input device, I\u2019m not going to start from \u201chow would a one-handed person use this?\u201d",
+        "user": "U013ZLJARC7",
+        "ts": "1693393996.359419",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "CDao",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "How I mean this is that if I want to experiment with, say, AR goggles, I\u2019m not going to start from the position of \u201chow will blind people use this display device?\u201d Or if I want to build a two-handed input device, I\u2019m not going to start from \u201chow would a one-handed person use this?\u201d"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "af6d6849-6b27-48cf-ad5d-d78d6ca7dfd9",
+        "type": "message",
+        "text": "That said, there are many situations in more established input/output modalities (touchscreens, for example) where taking design cues from accessibility research improves the interface for *everyone*, which I think is broadly under-appreciated.",
+        "user": "U013ZLJARC7",
+        "ts": "1693394145.239599",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3jce+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That said, there are many situations in more established input/output modalities (touchscreens, for example) where taking design cues from accessibility research improves the interface for "
+                            },
+                            {
+                                "type": "text",
+                                "text": "everyone",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", which I think is broadly under-appreciated."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ",
+        "reactions": [
+            {
+                "name": "raised_hands",
+                "users": [
+                    "UMQ6LR9NZ"
+                ],
+                "count": 1
+            },
+            {
+                "name": "point_up_2",
+                "users": [
+                    "U02B6FQKZK8"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "BA580651-788B-46A6-96AA-972A5AF3EC26",
+        "type": "message",
+        "text": "Word. That makes sense. Again, sort of showing my bias, I think across tech \u201caccessibility\u201d is often framed as a matter of input methodology when it could be framed as a core design principle, akin to color theory. I\u2019ve found folks are more readily able to accept this idea when you don\u2019t frame it as acceasiibility, but instead approach it like _service design_. ",
+        "user": "UMQ6LR9NZ",
+        "ts": "1693394387.137899",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3sMP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Word"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " That makes sense"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " Again, sort of showing my bias, I think across tech \u201caccessibility\u201d is often framed as a matter of input methodology when it could be framed as a core design principle, akin to color theory"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I\u2019ve"
+                            },
+                            {
+                                "type": "text",
+                                "text": " found folks are more readily able to accept this idea when you "
+                            },
+                            {
+                                "type": "text",
+                                "text": "don\u2019t"
+                            },
+                            {
+                                "type": "text",
+                                "text": " frame it as acceasiibility, but instead approach it like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "service design",
+                                "style": {
+                                    "bold": false,
+                                    "italic": true,
+                                    "strike": false
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "78017B70-35C5-4F9B-B907-767D41BAD18D",
+        "type": "message",
+        "text": "I am excited about seeing what apple does with AR/VR because I think desktop computing mostly ignore the human body (for both good and ill), phones and mobile devices started to force consideration of the body, and I *think* ar/vr could do some interesting stuff to ground computation into the body. ",
+        "user": "UMQ6LR9NZ",
+        "ts": "1693394682.032379",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WkaK2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I am excited about seeing what apple does with AR/VR because I think desktop computing mostly ignore the human body (for both good and ill), phones and mobile devices started to force consideration of the body, and I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "think",
+                                "style": {
+                                    "bold": true,
+                                    "italic": false,
+                                    "strike": false
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ar/vr could do some interesting stuff to ground computation into the body"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "9BD38CA7-A541-4B10-AF59-4D4EE2665E15",
+        "type": "message",
+        "text": "That said\u2026all the talking and demos and reading I\u2019ve done has me thinking that\u2019s still a ways off",
+        "user": "UMQ6LR9NZ",
+        "ts": "1693394711.208019",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Ddd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That said"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\u2026"
+                            },
+                            {
+                                "type": "text",
+                                "text": "all the talking and demos and reading "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I\u2019ve"
+                            },
+                            {
+                                "type": "text",
+                                "text": " done has me thinking "
+                            },
+                            {
+                                "type": "text",
+                                "text": "that\u2019s"
+                            },
+                            {
+                                "type": "text",
+                                "text": " still a ways off"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "ccc734b8-ffa2-4485-b6a7-e454119aa8a4",
+        "type": "message",
+        "text": "I don't know if I understand all the arguments against turing complete type systems. Could someone spell it out for me?\n\nIs it hard that it'd be hard to debug infinite recursion in type systems? Do you worry people will misuse it to write fancy compile-time programs that will delay builds?",
+        "user": "U03LJBR6THT",
+        "ts": "1693404191.962399",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "i=U",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't know if I understand all the arguments against turing complete type systems. Could someone spell it out for me?\n\nIs it hard that it'd be hard to debug infinite recursion in type systems? Do you worry people will misuse it to write fancy compile-time programs that will delay builds?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "740F0586-10BE-462D-A35C-9886D679FACC",
+        "type": "message",
+        "text": "My second point seems to be possible in turing-incomplete languages too. ",
+        "user": "U03LJBR6THT",
+        "ts": "1693404713.585669",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "K0o7q",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "My second point seems to be possible in turing-incomplete languages too. "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "c3a4ddc7-89e5-43f3-9fca-a5dde72cb3b3",
+        "type": "message",
+        "text": "Something that I think would be unique to bringing in something like prolog is you could use its time travelling debugger to debug especially tricky types. I'd argue against tricky types/constraints in general, but when you're stuck with a library that goes wild with types you could at least dig in vs just getting a dump of useless text.",
+        "user": "U03LJBR6THT",
+        "ts": "1693405020.997229",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "b=PsA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Something that I think would be unique to bringing in something like prolog is you could use its time travelling debugger to debug especially tricky types. I'd argue against tricky types/constraints in general, but when you're stuck with a library that goes wild with types you could at least dig in vs just getting a dump of useless text."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03LJBR6THT",
+            "ts": "1693405062.000000"
+        },
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "f36d02b8-2a35-461d-880a-45d66d7053dc",
+        "type": "message",
+        "text": "metadata-rich systems are well positioned for the kinds of introspection that make a11y easier\u2026. e.g. this widget isn\u2019t just a text box with a label, but a _projection into UX space_ of a field object in a data dictionary somewhere. But metadata-richness usually leads to very poor legibility--every use case is an _encoding_ in some lower-level language",
+        "user": "U03DNFDFYDA",
+        "ts": "1693416754.607769",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "IiYa",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "metadata-rich systems are well positioned for the kinds of introspection that make a11y easier\u2026. e.g. this widget isn\u2019t just a text box with a label, but a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "projection into UX space",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " of a field object in a data dictionary somewhere. But metadata-richness usually leads to very poor legibility--every use case is an "
+                            },
+                            {
+                                "type": "text",
+                                "text": "encoding",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " in some lower-level language"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03DNFDFYDA",
+            "ts": "1693416797.000000"
+        },
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "ccc46cd9-8918-49b0-8609-51ae9f8e2b1e",
+        "type": "message",
+        "text": "<@U03LJBR6THT> The main issue with a Turing-complete type system is that the compiler might get stuck in an endless loop.",
+        "user": "UJBAJNFLK",
+        "ts": "1693421682.938769",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "1hLb4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U03LJBR6THT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " The main issue with a Turing-complete type system is that the compiler might get stuck in an endless loop."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U03LJBR6THT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "2C5AC035-262C-4F4F-BCFB-6C1E6EF24846",
+        "type": "message",
+        "text": "I think we need a name for this more general design principle <@UMQ6LR9NZ> is trying to entail. I particularly like the tie to input (methods and contexts), because it makes it very tangible, and the emergent benefits can be often surprising (mostly thinking about programming interfaces here):\n\n1) If my interface can be completely controllable/readable by voice, then any person (not only people with impaired vision for any reason) could use it in many arbitrary situations; I can program while cooking;\n\n2) Similarly, if my system can be controlled completely by hand gestures, then I don't have to speak, or even touch the keyboard/mouse/touchpad; I can then build something very casually, like a game, using muscle memory alone; \n\n3) Interesting research can be made on the ergonomics of interfaces considering arbitrary handicaps \"Single Handed Programming\", \"Single Finger Coding\", \"Software Bending\" (Programming using body gestures, which doesn't even exist yet), and their many design challenges' particularities;\n\n4) The fact that one can program on the phone at all is a very sophisticated accessibility feat already, but (at least) that front gets talked about around as \"Mobile First\" design; still a very rare feat in current software ecosystem, especially for coding;\n\n5) Repeat that for many devices (what about programming only with a joystick?) or body/mental state conditions (I have very little/high energy right now...) or environmental (would this tool be more helpful to code underwater?)... etc... etc...\n\nThese are a few examples of this unnamed phenomenon. I will try to compress it: \"if you design with limitations in mind, the overall solution might improve\". \n\nWhat is the name?",
+        "user": "U02B6FQKZK8",
+        "ts": "1693507682.325009",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "g4w0Y",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think we need a name for this more general design principle "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UMQ6LR9NZ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " is trying to entail. I particularly like the tie to input (methods and contexts), because it makes it very tangible, and the emergent benefits can be often surprising (mostly thinking about programming interfaces here):\n\n1) If my interface can be completely controllable/readable by voice, then any person (not only people with impaired vision for any reason) could use it in many arbitrary situations; I can program while cooking;\n\n2) Similarly, if my system can be controlled completely by hand gestures, then I don't have to speak, or even touch the keyboard/mouse/touchpad; I can then build something very casually, like a game, using muscle memory alone; \n\n3) Interesting research can be made on the ergonomics of interfaces considering arbitrary handicaps \"Single Handed Programming\", \"Single Finger Coding\", \"Software Bending\" (Programming using body gestures, which doesn't even exist yet), and their many design challenges' particularities;\n\n4) The fact that one can program on the phone at all is a very sophisticated accessibility feat already, but (at least) that front gets talked about around as \"Mobile First\" design; still a very rare feat in current software ecosystem, especially for coding;\n\n5) Repeat that for many devices (what about programming only with a joystick?) or body/mental state conditions (I have very little/high energy right now...) or environmental (would this tool be more helpful to code underwater?)... etc... etc...\n\nThese are a few examples of this unnamed phenomenon. I will try to compress it: \"if you design with limitations in mind, the overall solution might improve\". \n\nWhat is the name?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UMQ6LR9NZ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "0f8e7777-60dc-4b54-a4e9-a7600d8d8a81",
+        "type": "message",
+        "text": "I\u2019ve run into this kind of thing and seen it called stuff like\n\n\u2022 accessibility beyond compliance\n\u2022 inclusive design (adjacent to _participatory design_)\n\u2022 designing for resiliency \n\u2022 \u2026\nBut I don\u2019t think they _really_ capture what you are doing a great job of describing, <@U02B6FQKZK8>.\n\nI wonder about something like reclaiming Interaction Design, but with a broader scope of what _interaction_ encompasses?",
+        "user": "UMQ6LR9NZ",
+        "ts": "1693510913.235389",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qP2ro",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I\u2019ve run into this kind of thing and seen it called stuff like\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "accessibility beyond compliance"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "inclusive design (adjacent to "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "participatory design",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ")"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "designing for resiliency "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "\u2026"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nBut I don\u2019t think they "
+                            },
+                            {
+                                "type": "text",
+                                "text": "really",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " capture what you are doing a great job of describing, "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U02B6FQKZK8"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nI wonder about something like reclaiming Interaction Design, but with a broader scope of what "
+                            },
+                            {
+                                "type": "text",
+                                "text": "interaction",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " encompasses?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693241844.727769",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "286355b9-d306-49b5-b406-24796d720d2d",
+        "type": "message",
+        "text": "Turing-complete runtimes suffer from a similar problem.  :flushed:",
+        "user": "UA14TGLTC",
+        "ts": "1693542230.321329",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9jPAp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Turing-complete runtimes suffer from a similar problem.  "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "flushed",
+                                "unicode": "1f633"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U03LJBR6THT",
+                    "UJBAJNFLK"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f3b32025-5b47-41fd-8dbd-589a7f5a8ac9",
+        "type": "message",
+        "text": "Turing completeness is indeed always a mixed blessing. But the problems matter more than the benefits at \"meta\" levels of scaffolding around a program. If you could get into an infinite loop before you even start _running your program_, the UX is much worse.",
+        "user": "UCUSW7WVD",
+        "ts": "1693579300.272649",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RBm8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Turing completeness is indeed always a mixed blessing. But the problems matter more than the benefits at \"meta\" levels of scaffolding around a program. If you could get into an infinite loop before you even start _running your program_, the UX is much worse."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT"
+    },
+    {
+        "client_msg_id": "e08e3d8c-4a4e-4d29-84b8-bc69d06d1de1",
+        "type": "message",
+        "text": "Hmm, going back to the original question it might work with some additional tooling. We typically have just a run command, but if the compiler supported running just the parser, or just up to the typechecker, maybe the UX becomes a non-issue. Yes, the programmer now needs to become aware of the internals of the compiler to some extent. But it might be a good trade-off.",
+        "user": "UCUSW7WVD",
+        "ts": "1693579885.040729",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rOVAw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hmm, going back to the original question it might work with some additional tooling. We typically have just a run command, but if the compiler supported running just the parser, or just up to the typechecker, maybe the UX becomes a non-issue. Yes, the programmer now needs to become aware of the internals of the compiler to some extent. But it might be a good trade-off."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1693231453.379599",
+        "parent_user_id": "U03LJBR6THT",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U03LJBR6THT",
+                    "UJBAJNFLK"
+                ],
+                "count": 2
+            }
+        ]
+    }
+]
