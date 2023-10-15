@@ -231,8 +231,14 @@ function main() {
             i < len;
             i += 1
           ) {
-            const parentMsg = msgs[i],
-              parentMatches = msgMatchesFilter(parentMsg, filterText),
+            const parentMsg = msgs[i];
+
+            if (!parentMsg) {
+              console.warn("bad parentMsg", parentMsg, msgs, i);
+              continue;
+            }
+
+            const parentMatches = msgMatchesFilter(parentMsg, filterText),
               responses = parentMsg.responses.filter((msg, _i, _it) =>
                 msgMatchesFilter(msg, filterText)
               );
@@ -270,7 +276,7 @@ function main() {
             .join("\n\n---\n\n");
           downloadAs(txt, this.getDumpFileName("md"), "text/markdown");
         },
-        getMdTitleForCurrentChannel: function () {
+        getMdTitleForChannel: function (channel) {
           switch (this.channel) {
             case "two-minute-week":
               return mdTitle1("Two Minute Week");
@@ -286,18 +292,34 @@ function main() {
               return mdTitle1("Content");
             case "of-ai":
               return mdTitle1("🤖");
+            case "of-graphics":
+              return mdTitle1("Graphics");
+            case "of-music":
+              return mdTitle1("Music");
+            case "of-end-user-programming":
+              return mdTitle1("End User Programming");
+            case "of-functional-programming":
+              return mdTitle1("Functional Programming");
+            case "of-logic-programming":
+              return mdTitle1("Logic Programming");
+            case "present-company":
+              return mdTitle1("Present Company");
             default:
               return mdTitle1(this.channel);
           }
         },
+        getMdTitleForCurrentChannel: function () {
+          return this.getMdTitleForChannel(this.channel);
+        },
         exportThisAsNewsletterWithWeek: function (week) {
           const month = this.toDate.split("-")[1],
-            title = this.getMdTitleForCurrentChannel();
-          this.exportAsNewsletter(
-            `${month}/${week}/${this.channel}.html`,
-            title,
-          );
+            title = this.getMdTitleForCurrentChannel(),
+            txt = this.exportAsNewsletter(
+              `${month}/${week}/${this.channel}.html`,
+              title,
+            );
           this.exportAsHTML();
+          return txt;
         },
         exportAsNewsletter: function (linkSuffix, title) {
           const linkPrefix =
@@ -312,6 +334,7 @@ function main() {
 
           downloadAs(txt, this.getDumpFileName("md"), "text/markdown");
           this.printMessageUsersNotInAuthors();
+          return txt;
         },
         printMessageUsersNotInAuthors() {
           console.log(
@@ -365,21 +388,59 @@ function main() {
 
   app.updateQueryLink();
   if (someParam) {
-    infoProm
-      .then((_) => app.loadSelected())
-      .then((info) => {
-        console.log("finished!", info);
-        if (query.forNewsletter !== undefined) {
-          // {prevDay, nextDay, weekNumber, weekStr, monthStr, curYear}
-          const fromDate = new Date(query.fromDate);
-          fromDate.setDate(fromDate.getDate() + 1);
-          const { weekStr } = getInfoForWeekAndDay(fromDate, MONDAY);
-          app.exportThisAsNewsletterWithWeek(weekStr);
-        }
-      });
+    if (query.newsletterDump !== undefined) {
+      const fromDate = new Date(query.fromDate),
+        toDate = new Date(query.toDate);
+      loadNewsletterChannels(app, fromDate, toDate);
+    } else {
+      infoProm
+        .then((_) => app.loadSelected())
+        .then((info) => {
+          console.log("finished!", info);
+          if (query.forNewsletter !== undefined) {
+            // {prevDay, nextDay, weekNumber, weekStr, monthStr, curYear}
+            const fromDate = new Date(query.fromDate);
+            fromDate.setDate(fromDate.getDate() + 1);
+            const { weekStr } = getInfoForWeekAndDay(fromDate, MONDAY);
+            app.exportThisAsNewsletterWithWeek(weekStr);
+          }
+        });
+    }
   }
 
   window.focApp = app;
+}
+
+async function loadNewsletterChannels(app, fromDate, toDate) {
+  const channels = [
+    "two-minute-week",
+    "share-your-work",
+    "devlog-together",
+    "reading-together",
+    "thinking-together",
+    "linking-together",
+    "of-graphics",
+    "of-music",
+    "of-end-user-programming",
+    "of-functional-programming",
+    "of-logic-programming",
+    "of-ai",
+    "present-company",
+  ];
+
+  const weekDate = new Date(fromDate);
+  weekDate.setDate(weekDate.getDate() + 1);
+  const { weekStr } = getInfoForWeekAndDay(weekDate, MONDAY);
+  let txt = "";
+
+  for (const channel of channels) {
+    app.channel = channel;
+    await app.loadSelected();
+    txt += app.exportThisAsNewsletterWithWeek(weekStr);
+    txt += "\n\n";
+  }
+
+  downloadAs(txt, `newsletter-${weekStr}.md`, "text/markdown");
 }
 
 main();
