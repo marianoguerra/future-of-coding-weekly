@@ -1,0 +1,2004 @@
+[
+    {
+        "client_msg_id": "d21b7fd2-c524-4391-9382-e62bc28520ff",
+        "type": "message",
+        "text": "*Replacing authentication with visual identity*\n\nBackground: I'm starting to think about building a new forum. Given <https://akkartik.name/freewheeling/|my past>, it won't surprise anyone that I mean to do this outside the morass of non-convivial software that is the modern web browser. My broad plan is:\n\n\u2022 L\u00d6VE v12 will support https, and <https://github.com/love2d/love/actions|release candidates> are already quite stable. Good enough to start building on.\n\u2022 I'll build my forum out of a server-side API in Lua and a client in L\u00d6VE v12. (Should be easy to support Windows, Linux, BSD and Android. Mac and iOS will require some annual contortions to build L\u00d6VE for oneself.)\n\u2022 The server side will of course be open source just like the client. In addition, all post/comment data will be published to a git repo on something like a daily basis.\nThe one major open question concerns authentication. How can we have stable identity? The above architecture is intended to allow anyone to host the forum (without trying to build galaxy-brain merkle trees, federated protocols or CRDTs), and I would prefer to not take a position of power as the source of everyone's hashed passwords (an intrinsically centralizing architecture).\n\nA few months ago someone showed me this ancient essay called <https://web.archive.org/web/20091126092028/http://www.kuro5hin.org/story/2009/3/12/33338/3000|\"attacked from within\">, and I find myself thinking about it often. The whole thing is worth reading, but for this thread the crucial list of bullets halfway down is:\n\u2022 Registration keeps out good posters.\n\u2022 Registration lets in bad posters.\n\u2022 Registration attracts trolls.\n\u2022 Anonymity counters vanity.\nA provocative worldview that seems at least worth exploring. Keeping this in mind, I have a hazy idea that looks like this:\n\u2022 When you run the client you get to choose your handle, but it's not unique (cf. <https://en.wikipedia.org/wiki/Zooko%27s_triangle|Zooko's Triangle>)\n\u2022 When you run the client for the first time, it creates an RSA keypair for you.\n\u2022 When composing messages, the client signs the message with your private key (<https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Signing_messages|description on Wikipedia>)\n\u2022 When rendering messages, the client validates the signature against your public key and shows something like an <https://en.wikipedia.org/wiki/Identicon|identicon> of the public key.\nImplications of this setup:\n\u2022 No registration\n\u2022 Your \"password\" (private key) never leaves your device(s).\n\u2022 When reading a thread you see a handle like `spiralganglion`. However, the handle is not authoritative. Next to it is an identicon that is authoritative.\n\u2022 It's easy in a thread to see if there are ever two people with the same handle but different identicons.\n\u2022 Since the client platform is starting from scratch, accessibility and internationalization will be a challenge for a long time :confused:\nNo guarantees this is all doable. It's quite possible the cryptographic operations will be untenably slow when implemented in Lua, and a native library for them would complicate the simple install story that is L\u00d6VE's greatest strength.\n\nBut I'm curious to get people's thoughts on this idea in principle.",
+        "user": "UCUSW7WVD",
+        "ts": "1698121773.522159",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hKHWi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Replacing authentication with visual identity",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nBackground: I'm starting to think about building a new forum. Given "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://akkartik.name/freewheeling/",
+                                "text": "my past"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", it won't surprise anyone that I mean to do this outside the morass of non-convivial software that is the modern web browser. My broad plan is:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "L\u00d6VE v12 will support https, and "
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://github.com/love2d/love/actions",
+                                        "text": "release candidates"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " are already quite stable. Good enough to start building on."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I'll build my forum out of a server-side API in Lua and a client in L\u00d6VE v12. (Should be easy to support Windows, Linux, BSD and Android. Mac and iOS will require some annual contortions to build L\u00d6VE for oneself.)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The server side will of course be open source just like the client. In addition, all post/comment data will be published to a git repo on something like a daily basis."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe one major open question concerns authentication. How can we have stable identity? The above architecture is intended to allow anyone to host the forum (without trying to build galaxy-brain merkle trees, federated protocols or CRDTs), and I would prefer to not take a position of power as the source of everyone's hashed passwords (an intrinsically centralizing architecture).\n\nA few months ago someone showed me this ancient essay called "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://web.archive.org/web/20091126092028/http://www.kuro5hin.org/story/2009/3/12/33338/3000",
+                                "text": "\"attacked from within\""
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and I find myself thinking about it often. The whole thing is worth reading, but for this thread the crucial list of bullets halfway down is:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Registration keeps out good posters."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Registration lets in bad posters."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Registration attracts trolls."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Anonymity counters vanity."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nA provocative worldview that seems at least worth exploring. Keeping this in mind, I have a hazy idea that looks like this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "When you run the client you get to choose your handle, but it's not unique (cf. "
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://en.wikipedia.org/wiki/Zooko%27s_triangle",
+                                        "text": "Zooko's Triangle"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ")"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "When you run the client for the first time, it creates an RSA keypair for you."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "When composing messages, the client signs the message with your private key ("
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Signing_messages",
+                                        "text": "description on Wikipedia"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ")"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "When rendering messages, the client validates the signature against your public key and shows something like an "
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://en.wikipedia.org/wiki/Identicon",
+                                        "text": "identicon"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " of the public key."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nImplications of this setup:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "No registration"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Your \"password\" (private key) never leaves your device(s)."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "When reading a thread you see a handle like "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "spiralganglion",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ". However, the handle is not authoritative. Next to it is an identicon that is authoritative."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "It's easy in a thread to see if there are ever two people with the same handle but different identicons."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Since the client platform is starting from scratch, accessibility and internationalization will be a challenge for a long time "
+                                    },
+                                    {
+                                        "type": "emoji",
+                                        "name": "confused",
+                                        "unicode": "1f615"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nNo guarantees this is all doable. It's quite possible the cryptographic operations will be untenably slow when implemented in Lua, and a native library for them would complicate the simple install story that is L\u00d6VE's greatest strength.\n\nBut I'm curious to get people's thoughts on this idea in principle."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1698122472.000000"
+        },
+        "thread_ts": "1698121773.522159",
+        "reply_count": 37,
+        "reply_users_count": 6,
+        "latest_reply": "1698346711.057869",
+        "reply_users": [
+            "UFEQUBNNT",
+            "UCUSW7WVD",
+            "U013ZLJARC7",
+            "UMQ6LR9NZ",
+            "UJBAJNFLK",
+            "U05UBCXHWM6"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "878E8DE1-F3B9-4F68-A5A7-89BC811DB464",
+        "type": "message",
+        "text": "&lt;Cue flashbacks to the \u201cwhat should we use instead of Slack?\u201d discussions&gt;",
+        "user": "UFEQUBNNT",
+        "ts": "1698122697.788409",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "tzEfW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "<Cue flashbacks to the \u201cwhat should we use instead of Slack?\u201d discussions>"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "laughing",
+                "users": [
+                    "U013ZLJARC7",
+                    "U05UBCXHWM6"
+                ],
+                "count": 2
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "UC2A2ARPT",
+                    "U05UBCXHWM6"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "client_msg_id": "77cb8992-8191-44e3-9b24-4b39177f25b6",
+        "type": "message",
+        "text": "Exactly!",
+        "user": "UCUSW7WVD",
+        "ts": "1698122716.743899",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yXcBg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Exactly!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "1F635327-CB2A-4EDA-AC5F-DF5D8AD479AE",
+        "type": "message",
+        "text": "I am curious what you think about harassment? Not quite trolling, not quite vanity.",
+        "user": "UFEQUBNNT",
+        "ts": "1698122843.585619",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mmNQS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I am curious what you think about harassment? Not quite trolling, not quite vanity."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "dfb76fed-59bd-46c4-a8f1-4639a7edab32",
+        "type": "message",
+        "text": "Moderation in general is the single biggest thing that has always put me off from creating any public forum of any sort across any modality. I have a lot of appreciation for people who do it, like Ivan here -- and have successfully mooched off of their labors all these years.\n\nAnd yet, it's starting to feel like my projects need a central place of their own where someone can come see past questions and discussions that are currently only centralized in my notes. (And if it gets people here off Slack, I wouldn't be above spinning up a forum that forks this place.)\n\nSo I have zero grounds to pretend at any sort of knowledge or expertise on moderation. Mostly I figure, it looks like I have to get to this some time, the sooner I start, the more of a hope I have of learning to not suck at it. So your question about these gradations completely goes over my head. But ask me after I've been running something for a year.\n\nOh, one random note: Maybe pseudonymity makes harassment more difficult? It's easier in my system to create a new handle than it is on say ActivityPub. Does that seem to move the needle?",
+        "user": "UCUSW7WVD",
+        "ts": "1698123307.250089",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lZNz9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Moderation in general is the single biggest thing that has always put me off from creating any public forum of any sort across any modality. I have a lot of appreciation for people who do it, like Ivan here -- and have successfully mooched off of their labors all these years.\n\nAnd yet, it's starting to feel like my projects need a central place of their own where someone can come see past questions and discussions that are currently only centralized in my notes. (And if it gets people here off Slack, I wouldn't be above spinning up a forum that forks this place.)\n\nSo I have zero grounds to pretend at any sort of knowledge or expertise on moderation. Mostly I figure, it looks like I have to get to this some time, the sooner I start, the more of a hope I have of learning to not suck at it. So your question about these gradations completely goes over my head. But ask me after I've been running something for a year.\n\nOh, one random note: Maybe pseudonymity makes harassment more difficult? It's easier in my system to create a new handle than it is on say ActivityPub. Does that seem to move the needle?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1698123554.000000"
+        },
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "b8a2c6c9-6b98-43a6-a5a3-a6e9241a5eb7",
+        "type": "message",
+        "text": "My naive plan for moderation is: make commits in git. By nature, this moderation log will be totally public, just the git log.\n\nBut by the same token, for any sort of scale I can hope for, it should be super easy to detect and delete harassment?",
+        "user": "UCUSW7WVD",
+        "ts": "1698123450.609659",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9prcy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "My naive plan for moderation is: make commits in git. By nature, this moderation log will be totally public, just the git log.\n\nBut by the same token, for any sort of scale I can hope for, it should be super easy to detect and delete harassment?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1698123474.000000"
+        },
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "238F5B1E-8F68-4D48-883A-CB101E1A98E9",
+        "type": "message",
+        "text": "Probably. I\u2019ve never run a community. If you\u2019re going to comb git logs before harassment hits anyone\u2019s inboxes, I don\u2019t see anything wrong with starting there.\n\nA common kind of harassment that drives people away from online communities is, in its simplest form, randos dropping slurs then poofing. So long as I\u2019m me and want others to know I\u2019m me, the people who do that sort of thing can find me too. I don\u2019t see that accounted for in the four-point framework you mentioned, and that\u2019s what makes me curious.",
+        "user": "UFEQUBNNT",
+        "ts": "1698125007.921669",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+DWJC",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Probably"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " I\u2019ve never run a community"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "If you\u2019re going to comb git logs before harassment hits anyone\u2019s inboxes, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I don\u2019t see anything wrong with starting there"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nA common kind of harassment that drives people away from online communities is, in its simplest form, randos dropping slurs then poofing"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " So long as I\u2019m me and want others to know I\u2019m me, the people who do that sort of thing can find me too. I don\u2019t see that accounted for in the four-point framework you mentioned, and that\u2019s what makes me curious."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "9c0f61fc-11c0-4d42-94f3-9e1d0cad2cfe",
+        "type": "message",
+        "text": "That's a good point. I don't think attacked from within is trying to be perfect, or to guarantee absence of various sorts of dysfunctions. It seems to be trying rather to sculpt energy barriers for good vs bad actions. So yes, you're going to need moderation independent of the auth mechanism.",
+        "user": "UCUSW7WVD",
+        "ts": "1698126331.061839",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "EaW/K",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That's a good point. I don't think attacked from within is trying to be perfect, or to guarantee absence of various sorts of dysfunctions. It seems to be trying rather to sculpt energy barriers for good vs bad actions. So yes, you're going to need moderation independent of the auth mechanism."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1698126387.000000"
+        },
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "5b32a91e-dd50-4251-82f9-d3ce3adfd44b",
+        "type": "message",
+        "text": "Have you considered? <https://en.m.wikipedia.org/wiki/Usenet_newsgroup>",
+        "user": "U013ZLJARC7",
+        "ts": "1698131315.026339",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "65Ufg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Have you considered? "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://en.m.wikipedia.org/wiki/Usenet_newsgroup"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Usenet-total-storage.jpg",
+                "image_width": 1264,
+                "image_height": 907,
+                "image_bytes": 324733,
+                "from_url": "https://en.m.wikipedia.org/wiki/Usenet_newsgroup",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/wikipedia.png",
+                "id": 1,
+                "original_url": "https://en.m.wikipedia.org/wiki/Usenet_newsgroup",
+                "fallback": "wikipedia: Usenet newsgroup",
+                "text": "A Usenet newsgroup is a repository usually within the Usenet system, for messages posted from users in different locations using the Internet. They are discussion groups and are not devoted to publishing news. Newsgroups are technically distinct from, but functionally similar to, discussion forums on the World Wide Web. Newsreader software is used to read the content of newsgroups.\nBefore the adoption of the World Wide Web, Usenet newsgroups were among the most popular Internet services.\nCommunication is facilitated by the Network News Transfer Protocol (NNTP) which allows connection to Usenet servers and data transfer over the internet.  Similar to another early (yet still used) protocol SMTP which is used for email messages, NNTP allows both server-server and client-server communication.  This means that newsgroups can be replicated from server to server which gives the Usenet network the ability to maintain a level of robust data persistence as a result of built-in data redundancy.  However, most users will access using only the client-server commands of NNTP and in almost all cases will use a GUI for browsing as opposed to command line based client-server communication specified in the NNTP protocol.",
+                "title": "Usenet newsgroup",
+                "title_link": "https://en.m.wikipedia.org/wiki/Usenet_newsgroup",
+                "author_name": "Wikipedia",
+                "author_link": "https://en.wikipedia.org/"
+            }
+        ],
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "joy",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "brain",
+                "users": [
+                    "UFEQUBNNT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e72ff9c6-f3ef-4b17-baee-1374fc0b9865",
+        "type": "message",
+        "text": "No! :memo:",
+        "user": "UCUSW7WVD",
+        "ts": "1698132063.546539",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Ku3mG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "No! "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "memo",
+                                "unicode": "1f4dd"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "71EEC682-3255-4582-9E7D-3B079841BE37",
+        "type": "message",
+        "text": "My very boring question would be why not an email list?",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698142153.959709",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pfrtR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "My very boring question would be why not an email list?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "15d4be95-021c-497a-b31e-72e1bd86a2c3",
+        "type": "message",
+        "text": "I was wondering as well what you want to do differently from existing approaches. The obvious part is lightweight software, and that's something I like very much. But then? What are the specific features you want to have? Which ones you definitely do not want to have?",
+        "user": "UJBAJNFLK",
+        "ts": "1698149832.759449",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "CQMOD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I was wondering as well what you want to do differently from existing approaches. The obvious part is lightweight software, and that's something I like very much. But then? What are the specific features you want to have? Which ones you definitely do not want to have?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "eb3394a3-bca9-43d6-9b4a-ec0905a96e95",
+        "type": "message",
+        "text": "I'd also add what features are you willing to walk away from?",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698149861.118749",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "o7/Ax",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'd also add what features are you willing to walk away from?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "2d81b6d5-5e04-4fd4-a2e6-15cd21a75cad",
+        "type": "message",
+        "text": "Why not an email list: lot of work to self-host, kinda like a proprietary service if you don't self-host, and it excludes large swathes of people who just don't like it.\n\nFor a long time my twin reasons for not creating any community were:\n\u2022 Any medium I choose excludes a majority of people who don't care for it.\n\u2022 Moderation headaches.\nThe big insight here is realizing that these reasons are in opposition. Excluding people reduces my moderation headaches :smile: So I just need a way to avoid excluding the people I want to hear from. Requiring people to install L\u00d6VE seems like a good filter. The goal is a place to ask questions after you've run one of my freewheeling apps, and making the communication tool itself a freewheeling app seems like an elegant solution.\n\nWhat features I am willing to walk away from: how much time do you have? :smile: <https://archive.org/details/akkartik-freewheeling-2023-07-06> demonstrates a tiny browser replacement UI that might give you a sense for how bare-bones this might start out as. Really the only thing missing in <https://git.sr.ht/~akkartik/pothi.love> is a server for requesting posts/comments from and some way to tell that two comments are by the same person. And maybe I don't even care about guarantees on that?!\n\nI might still end up holding my nose and creating a new community on Discord, just because that seems most popular in the L\u00d6VE community.",
+        "user": "UCUSW7WVD",
+        "ts": "1698153927.887259",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OAyr/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Why not an email list: lot of work to self-host, kinda like a proprietary service if you don't self-host, and it excludes large swathes of people who just don't like it.\n\nFor a long time my twin reasons for not creating any community were:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Any medium I choose excludes a majority of people who don't care for it."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Moderation headaches."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe big insight here is realizing that these reasons are in opposition. Excluding people reduces my moderation headaches "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile",
+                                "unicode": "1f604"
+                            },
+                            {
+                                "type": "text",
+                                "text": " So I just need a way to avoid excluding the people I want to hear from. Requiring people to install L\u00d6VE seems like a good filter. The goal is a place to ask questions after you've run one of my freewheeling apps, and making the communication tool itself a freewheeling app seems like an elegant solution.\n\nWhat features I am willing to walk away from: how much time do you have? "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile",
+                                "unicode": "1f604"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://archive.org/details/akkartik-freewheeling-2023-07-06"
+                            },
+                            {
+                                "type": "text",
+                                "text": " demonstrates a tiny browser replacement UI that might give you a sense for how bare-bones this might start out as. Really the only thing missing in "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://git.sr.ht/~akkartik/pothi.love"
+                            },
+                            {
+                                "type": "text",
+                                "text": " is a server for requesting posts/comments from and some way to tell that two comments are by the same person. And maybe I don't even care about guarantees on that?!\n\nI might still end up holding my nose and creating a new community on Discord, just because that seems most popular in the L\u00d6VE community."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UMQ6LR9NZ",
+                    "UJBAJNFLK"
+                ],
+                "count": 2
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "049e97d2-a402-4598-9147-905ad8aa2498",
+        "type": "message",
+        "text": "Cozy Web by design - interesting! Plus dogfooding.\nIn that context, your question about authentication becomes: which sign-up effort will my intended audience accept?\n\nExample: assuming your audience is proficient with a Unix shell, you could use shell accounts with ssh access and use the ssh keys for authentication. That also scares a lot of people away, but if you don't care about such people, that's fine.",
+        "user": "UJBAJNFLK",
+        "ts": "1698160670.499829",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "3mHAN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Cozy Web by design - interesting! Plus dogfooding.\nIn that context, your question about authentication becomes: which sign-up effort will my intended audience accept?\n\nExample: assuming your audience is proficient with a Unix shell, you could use shell accounts with ssh access and use the ssh keys for authentication. That also scares a lot of people away, but if you don't care about such people, that's fine."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "b4428d7f-1dde-4b83-ba59-38f5930b92b1",
+        "type": "message",
+        "text": "Yeah, I don't want to make any assumptions about my audience beyond a willingness to install the tool.\n\nThough now I'm reading what I wrote and imagining someone modifying the client to automate sending spam to the forum. Good thing the code is so hackable! :lolsob:\n\nSeriously, though, I would love to get lots of Windows people.",
+        "user": "UCUSW7WVD",
+        "ts": "1698161927.745039",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Fvfcv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, I don't want to make any assumptions about my audience beyond a willingness to install the tool.\n\nThough now I'm reading what I wrote and imagining someone modifying the client to automate sending spam to the forum. Good thing the code is so hackable! "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "lolsob"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nSeriously, though, I would love to get lots of Windows people."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "95fdd7a1-9ead-49a2-b904-e4875edf6bf4",
+        "type": "message",
+        "text": "> Yeah, I don\u2019t want to make any assumptions about my audience beyond a willingness to install the tool.\nThe biggest assumption to me here is around accessibility \u2014 while an OS or browser brings a TON of headaches and complexity, it also brings with it a TON of accessibility tooling that love2d has none of. I can\u2019t change the text appearance of a love2d application without modifying the application, and while I know how to do that, it isn\u2019t necessarily as easy as using my operating system\u2019s zoom capabilities.",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698162119.651239",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zKFEr",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, I don\u2019t want to make any assumptions about my audience beyond a willingness to install the tool."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe biggest assumption to me here is around accessibility \u2014 while an OS or browser brings a TON of headaches and complexity, it also brings with it a TON of accessibility tooling that love2d has none of. I can\u2019t change the text appearance of a love2d application without modifying the application, and while I know how to do that, it isn\u2019t necessarily as easy as using my operating system\u2019s zoom capabilities."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UMQ6LR9NZ",
+            "ts": "1698162219.000000"
+        },
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "100",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "grimacing",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "82759991-4f95-4932-b420-7095aeaa050d",
+        "type": "message",
+        "text": "You're absolutely right, and this very much wears on my mind.\n\nIs there any good history of accessibility efforts in web browsers? How _did_ this highly capitalist-owned product end up achieving so much for accessibility.\n\nOne correction: all my L\u00d6VE apps support `ctrl+=` and `ctrl+-` for increasing or decreasing the font size. So at least I have that covered..",
+        "user": "UCUSW7WVD",
+        "ts": "1698163855.659719",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "e0DcV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You're absolutely right, and this very much wears on my mind.\n\nIs there any good history of accessibility efforts in web browsers? How "
+                            },
+                            {
+                                "type": "text",
+                                "text": "did",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " this highly capitalist-owned product end up achieving so much for accessibility.\n\nOne correction: all my L\u00d6VE apps support "
+                            },
+                            {
+                                "type": "text",
+                                "text": "ctrl+=",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "ctrl+-",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " for increasing or decreasing the font size. So at least I have that covered.."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "c3c50103-42c1-49f9-b309-cf130862f712",
+        "type": "message",
+        "text": "and, also, that wasn't meant as a judgement, I love what you do with love2d, btw",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698164014.424019",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6+t6v",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "and, also, that wasn't meant as a judgement, I love what you do with love2d, btw"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "5f8ff1f8-b4a5-4e08-95ea-68a6d20d6bcc",
+        "type": "message",
+        "text": "I didn't know that about your love apps! That is rad",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698164036.013219",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Wf7BV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I didn't know that about your love apps! That is rad"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "245a30dc-2f34-483e-855e-e2542c4c6418",
+        "type": "message",
+        "text": "as for how accessibility was achieved in browsers, my honest guess is that it was an accident of history more than it was intentional.\n\nLike, if you think through the architecture, it is sort of backwards how we apply accessibility as sort of a veneer on top of a finished product, even WCAG is this -- it is accessibility guidance when a standard already exists. Why not bake it into the standard? Why not have a standard for how to implement accessible rendering of an element like they do for browsers, instead most accessibility tech (even the stuff baked into browsers a lot of the time) mostly function as a black box. It is hard to tell what they do and why",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698164143.130429",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "5r2JM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "as for how accessibility was achieved in browsers, my honest guess is that it was an accident of history more than it was intentional.\n\nLike, if you think through the architecture, it is sort of backwards how we apply accessibility as sort of a veneer on top of a finished product, even WCAG is this -- it is accessibility guidance when a standard already exists. Why not bake it into the standard? Why not have a standard for how to implement accessible rendering of an element like they do for browsers, instead most accessibility tech (even the stuff baked into browsers a lot of the time) mostly function as a black box. It is hard to tell what they do and why"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "523d0e2f-8e06-48b4-9a63-00871788c9b6",
+        "type": "message",
+        "text": "Yeah, my goal is to judge myself so that nobody else has to. Or before anybody else does. :slightly_smiling_face:\n\nI would _love_ to have a set of criteria (say in the form of behavioral tests) that my app has to hit to be accessible.\n\nFor example, screen readers. My app has text. I can provide the text in any API you like. But I don't know anything about how say a text to speech generator would hook up to a web browser. But this feels like it should be easy? I'm just missing some key knowledge.",
+        "user": "UCUSW7WVD",
+        "ts": "1698164565.539949",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "DYdnc",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, my goal is to judge myself so that nobody else has to. Or before anybody else does. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI would "
+                            },
+                            {
+                                "type": "text",
+                                "text": "love",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to have a set of criteria (say in the form of behavioral tests) that my app has to hit to be accessible.\n\nFor example, screen readers. My app has text. I can provide the text in any API you like. But I don't know anything about how say a text to speech generator would hook up to a web browser. But this feels like it should be easy? I'm just missing some key knowledge."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "6d4efa7d-942b-4c6f-9dc0-b39042562ebb",
+        "type": "message",
+        "text": "I, too, would have to have that level of detailed knowledge about how such tools work :laughing:",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698164628.454179",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "AAvNU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I, too, would have to have that level of detailed knowledge about how such tools work "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "laughing",
+                                "unicode": "1f606"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "883a5665-8c57-4a29-aaa8-6bb32c33b99e",
+        "type": "message",
+        "text": "I have tried to get it, and you can _sort_ of get there, but, like, the way JAWS works versus NVDA versus VoiceOver are all different. There isn't a clear and easy path -- so, we're left with sort of heuristics and well known patterns for widely targeted system (e.g. web and \"native\")",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698164692.882969",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "C2usy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I have tried to get it, and you can "
+                            },
+                            {
+                                "type": "text",
+                                "text": "sort",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " of get there, but, like, the way JAWS works versus NVDA versus VoiceOver are all different. There isn't a clear and easy path -- so, we're left with sort of heuristics and well known patterns for widely targeted system (e.g. web and \"native\")"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "9be93ece-e5bb-4573-a272-f5feaab0a083",
+        "type": "message",
+        "text": "the work some game studios are doing I think really highlights how this is mostly unexplored ground since they're all sort of having to invent it as they go along",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698164721.338879",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jPIXR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the work some game studios are doing I think really highlights how this is mostly unexplored ground since they're all sort of having to invent it as they go along"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "5f9571b1-46c3-4f73-b1db-d9843e1b3e20",
+        "type": "message",
+        "text": "whereas if you wanted to render HTML to pixel-based screen today that is relatively achievable",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698164743.073329",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Giw1O",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "whereas if you wanted to render HTML to pixel-based screen today that is relatively achievable"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "c1073fb1-079e-4419-ab38-061c49610c53",
+        "type": "message",
+        "text": "I would love to be bombarded with links!",
+        "user": "UCUSW7WVD",
+        "ts": "1698164762.545609",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "HtCZd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I would love to be bombarded with links!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "faf2b8f4-9826-42b4-b130-aaaad4341477",
+        "type": "message",
+        "text": "I can't bombard ya with links at the moment, but I'll consider that a mission!",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698164780.185349",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QH4dR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I can't bombard ya with links at the moment, but I'll consider that a mission!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "saluting_face",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "73B17582-AE2C-43BF-898D-114FDCD67F58",
+        "type": "message",
+        "text": "I think the path is well-lit if you target a single platform. I\u2019ve followed accessibility tutorials on Android and Apple. I just have no idea how to make them all happy simultaneously without embedding a browser. :face_with_peeking_eye: \n\nProbably the way to go is convince a government agency to build apps in L\u00d6VE. Then someone has to make it happen.",
+        "user": "UFEQUBNNT",
+        "ts": "1698169906.663439",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "t/psN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think the path is well-lit if you target a single platform. I\u2019ve followed accessibility tutorials on Android and Apple. I just have no idea how to make them all happy simultaneously without embedding a browser. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "face_with_peeking_eye",
+                                "unicode": "1fae3"
+                            },
+                            {
+                                "type": "text",
+                                "text": " \n\nProbably the way to go is convince a government agency to build apps in L\u00d6VE. Then someone has to make it happen."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UFEQUBNNT",
+            "ts": "1698169935.000000"
+        },
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "F8228B3D-5033-4933-8409-0A07E60D39A4",
+        "type": "message",
+        "text": "Oops, I forgot you wanted this thread to be about identity.",
+        "user": "UFEQUBNNT",
+        "ts": "1698170149.921349",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QP2Jg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oops, I forgot you wanted this thread to be about identity."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "511ec94a-5b63-4000-b96f-b9cdb63e9bff",
+        "type": "message",
+        "text": "<@UMQ6LR9NZ> Accessibility in browsers was no accident! We fought for that stuff for *years*, starting in the mid-90s. Here\u2019s a web designer <https://alistapart.com/article/dao/|writing> about it in 2000:\n&gt; Designing adaptable pages is designing accessible pages. And perhaps the great promise of the web, far from fulfilled as yet, is accessibility, regardless of difficulties, to information. It\u2019s an important belief of the <http://www.w3.org/|World Wide Web Consortium>, and is becoming an imperative of web design, as web pages will be required by law to provide universal access, just as building codes around the world require access to buildings.",
+        "user": "U013ZLJARC7",
+        "ts": "1698171706.833499",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iQkd6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UMQ6LR9NZ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Accessibility in browsers was no accident! We fought for that stuff for "
+                            },
+                            {
+                                "type": "text",
+                                "text": "years",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", starting in the mid-90s. Here\u2019s a web designer "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://alistapart.com/article/dao/",
+                                "text": "writing"
+                            },
+                            {
+                                "type": "text",
+                                "text": " about it in 2000:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Designing adaptable pages is designing accessible pages. And perhaps the great promise of the web, far from fulfilled as yet, is accessibility, regardless of difficulties, to information. It\u2019s an important belief of the "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://www.w3.org/",
+                                "text": "World Wide Web Consortium"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and is becoming an imperative of web design, as web pages will be required by law to provide universal access, just as building codes around the world require access to buildings."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "f85d07c4-2563-418d-9d42-b4a4c63e1974",
+        "type": "message",
+        "text": "Sorry, I didn\u2019t mean to imply that the fight to bring it was an accident, but the way it was implemented, like so much of the web, seems sort of \u2026 layered on? Does that make sense? Again, this isn\u2019t to belittle what we\u2019ve got (I think the web is by and far the most accessible platform around). I should have used a less loaded word, for sure!",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698171779.323609",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "exZkH",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sorry, I didn\u2019t mean to imply that the fight to bring it was an accident, but the way it was implemented, like so much of the web, seems sort of \u2026 layered on? Does that make sense? Again, this isn\u2019t to belittle what we\u2019ve got (I think the web is by and far the most accessible platform around). I should have used a less loaded word, for sure!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "black_heart",
+                "users": [
+                    "U013ZLJARC7"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "7cba1cc1-5ad1-4bb2-b0e3-940a9b4b1fd1",
+        "type": "message",
+        "text": "Maybe more of a general coding question but how do you y\u2019all feel about database/stores that add fields to your documents that insert?\nE.g. you insert `{ name: 'Titanic', director: 'James Cameron' }` into `movies` and when you fetch it you get back `{_id: 1234, _col: 'movies', name: 'Titanic', director: 'James Cameron' }`\nDoes that bug you? Don\u2019t care?\n\nAre there any ways to get around this so there aren\u2019t won\u2019t ever have collections between user defined fields and internal metadata?",
+        "user": "U02C3SH9L2J",
+        "ts": "1698174688.510349",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Qs75b",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Maybe more of a general coding question but how do you y\u2019all feel about database/stores that add fields to your documents that insert?\nE.g. you insert "
+                            },
+                            {
+                                "type": "text",
+                                "text": "{ name: 'Titanic', director: 'James Cameron' }",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " into "
+                            },
+                            {
+                                "type": "text",
+                                "text": "movies",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and when you fetch it you get back "
+                            },
+                            {
+                                "type": "text",
+                                "text": "{_id: 1234, _col: 'movies', name: 'Titanic', director: 'James Cameron' }",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nDoes that bug you? Don\u2019t care?\n\nAre there any ways to get around this so there aren\u2019t won\u2019t ever have collections between user defined fields and internal metadata?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698174688.510349",
+        "reply_count": 4,
+        "reply_users_count": 3,
+        "latest_reply": "1698219181.215979",
+        "reply_users": [
+            "U03CEGR3HSL",
+            "U02C3SH9L2J",
+            "UKVEBP5RD"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "bug",
+                "users": [
+                    "UFEQUBNNT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "e2c7d38a-aa39-4bf3-998d-b64d321e010f",
+        "type": "message",
+        "text": "I feel that data and metadata should be strictly separated so that I don't ever accidentally corrupt metadata by using a field that I'm not supposed to. This is the same kind of in-band signaling that made the old phone system vulnerable to blue boxes and that created SQL injection vulnerabilities all over the internet.",
+        "user": "U03CEGR3HSL",
+        "ts": "1698175064.457729",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "55QFi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I feel that data and metadata should be strictly separated so that I don't ever accidentally corrupt metadata by using a field that I'm not supposed to. This is the same kind of in-band signaling that made the old phone system vulnerable to blue boxes and that created SQL injection vulnerabilities all over the internet."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698174688.510349",
+        "parent_user_id": "U02C3SH9L2J",
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "U04QB9V2RNG"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "29452ebd-becb-40fb-a670-8bcc7271f249",
+        "type": "message",
+        "text": "Not sure I follow that last part",
+        "user": "U02C3SH9L2J",
+        "ts": "1698176306.615899",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WzCHe",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Not sure I follow that last part"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698174688.510349",
+        "parent_user_id": "U02C3SH9L2J"
+    },
+    {
+        "client_msg_id": "8c6935b6-fa66-47ec-95ea-2871dfeeb67c",
+        "type": "message",
+        "text": "When you mix data with metadata, you make it possible for certain values of the data to accidentally or deliberately corrupt the metadata.\n\nWith in band telephone signaling, telephone system devices communicated with each other using special tones that were sent over the same audio channel as the voice communications. This made it possible for people to manipulate the devices by playing tones into their telephone. The data is the voice communication, and the metadata is the phone system signaling information. By sending them in the same channel, it became possible for people to corrupt the metadata through carefully chosen values of data.\n\nPeople who construct SQL queries by including user supplied data, rather than using placeholders, create the risk that carefully chosen values of data, namely the thing being searched for or stored, can corrupt the \"metadata,\" (okay, I'm stretching a little here, but the principle is the same.) that being the structure of the SQL query itself.",
+        "user": "U03CEGR3HSL",
+        "ts": "1698176672.732679",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YeQL5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "When you mix data with metadata, you make it possible for certain values of the data to accidentally or deliberately corrupt the metadata.\n\nWith in band telephone signaling, telephone system devices communicated with each other using special tones that were sent over the same audio channel as the voice communications. This made it possible for people to manipulate the devices by playing tones into their telephone. The data is the voice communication, and the metadata is the phone system signaling information. By sending them in the same channel, it became possible for people to corrupt the metadata through carefully chosen values of data.\n\nPeople who construct SQL queries by including user supplied data, rather than using placeholders, create the risk that carefully chosen values of data, namely the thing being searched for or stored, can corrupt the \"metadata,\" (okay, I'm stretching a little here, but the principle is the same.) that being the structure of the SQL query itself."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698174688.510349",
+        "parent_user_id": "U02C3SH9L2J"
+    },
+    {
+        "client_msg_id": "f8ddf510-d19a-4162-9695-44dc93cfaafa",
+        "type": "message",
+        "text": "All the web stuff is definitely a bit ad hoc! I just wanted to point out that that particular thing wasn\u2019t an emerging property, and that we can\u2019t just assume that accessibility will happen :slightly_smiling_face:",
+        "user": "U013ZLJARC7",
+        "ts": "1698214263.711269",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dss3N",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "All the web stuff is definitely a bit ad hoc! I just wanted to point out that that particular thing wasn\u2019t an emerging property, and that we can\u2019t just assume that accessibility will happen "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "8ae19629-d8e6-4a16-b6be-f34db9f88fee",
+        "type": "message",
+        "text": "Not sure about the database case but\n*I feel that too much implicit & hard to guess \"magic\" behaviour is generally a bad thing.*\n\n\u2013 Shell script is really bad at that in syntax interpretation (parse time).\n\u2013 Python does a lot of implicit magic at runtime.\nEven seen a video mocking this for a laugh (with a cringe & tear).\n\nPersonally I rather prefer more verbous expliciteness. Doing trice the work upfront instead of doing 30x the debugging work later.\nWell, exaggerating a bit. Maybe.\n*I think progressive disclosure is what we need to get out of that misery conserving rut.* But that needs structural-projectional editing.\n\n\u2013For C&C++ go no further than:\n<http://henning-thielemann.de/CHater.html>",
+        "user": "UKVEBP5RD",
+        "ts": "1698219181.215979",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wReb8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Not sure about the database case but\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "I feel that too much implicit & hard to guess \"magic\" behaviour is generally a bad thing.",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\n\u2013 Shell script is really bad at that in syntax interpretation (parse time).\n\u2013 Python does a lot of implicit magic at runtime.\nEven seen a video mocking this for a laugh (with a cringe & tear).\n\nPersonally I rather prefer more verbous expliciteness. Doing trice the work upfront instead of doing 30x the debugging work later.\nWell, exaggerating a bit. Maybe.\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "I think progressive disclosure is what we need to get out of that misery conserving rut.",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " But that needs structural-projectional editing.\n\n\u2013For C&C++ go no further than:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://henning-thielemann.de/CHater.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UKVEBP5RD",
+            "ts": "1698219217.000000"
+        },
+        "thread_ts": "1698174688.510349",
+        "parent_user_id": "U02C3SH9L2J"
+    },
+    {
+        "client_msg_id": "03A252E5-D2F8-4346-8B43-C4AD2B6E8BD4",
+        "type": "message",
+        "text": "Yes! 100%",
+        "user": "UMQ6LR9NZ",
+        "ts": "1698232957.289349",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "AUKzV",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes! 100%"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "ec1b15d3-bfeb-4801-a38e-dd204a61d3fc",
+        "type": "message",
+        "text": "I must admit that I'm very wary of \"anonymous by default\" systems, given the horrible cess-pool that is chan boards.",
+        "user": "U05UBCXHWM6",
+        "ts": "1698329861.583519",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Oro5b",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I must admit that I'm very wary of \"anonymous by default\" systems, given the horrible cess-pool that is chan boards."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "aaabae6f-c6d8-48a7-9244-af7350c73706",
+        "type": "message",
+        "text": "Have you considered a petname system for user ids? It could be really interesting to see in practive",
+        "user": "U05UBCXHWM6",
+        "ts": "1698329880.391229",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JEsUn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Have you considered a petname system for user ids? It could be really interesting to see in practive"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "d6f2f958-06e3-42c2-9d59-a021a3760e99",
+        "type": "message",
+        "text": "Thanks for reminding me to reread <http://www.skyhunter.com/marcs/petnames/IntroPetNames.html|http://www.skyhunter.com/marcs/petnames/IntroPetNames.html>! I got a lot more out of it this time.",
+        "user": "UCUSW7WVD",
+        "ts": "1698333094.358109",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Utctm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for reminding me to reread "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://www.skyhunter.com/marcs/petnames/IntroPetNames.html",
+                                "text": "http://www.skyhunter.com/marcs/petnames/IntroPetNames.html"
+                            },
+                            {
+                                "type": "text",
+                                "text": "! I got a lot more out of it this time."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "57e43cb4-8957-4bb7-a9b6-f29408acaccf",
+        "type": "message",
+        "text": "4chan is indeed a concern. I don't quite (yet) buy fully into the worldview of \"attacked from within\". This is all an experiment I want to be very careful about scaling up.",
+        "user": "UCUSW7WVD",
+        "ts": "1698346711.057869",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XQDsn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "4chan is indeed a concern. I don't quite (yet) buy fully into the worldview of \"attacked from within\". This is all an experiment I want to be very careful about scaling up."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1698121773.522159",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U05UBCXHWM6"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
