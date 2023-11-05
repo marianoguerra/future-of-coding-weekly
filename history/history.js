@@ -161,7 +161,7 @@ function subjectLineForAttachment(att) {
   if (att.service_name === "twitter") {
     // tweets with no text (like a video) have no text field O.o
     return `🐦 [${att.author_name}](https://twitter.com/${att.author_subname})`;
-  } else if (att.service_name === "Twitter") {
+  } else if (att.service_name === "Twitter" || att.service_name === "X (formerly Twitter)") {
     // tweets with no text (like a video) have no text field O.o
     const {
         title,
@@ -200,7 +200,7 @@ function enrichAttachment(att) {
       .replace(/\n/g, "\n> ");
     att.$text =
       `\n> 🐦 [${att.author_name}](https://twitter.com/${att.author_subname}): ${text}`;
-  } else if (att.service_name === "Twitter") {
+  } else if (att.service_name === "Twitter" || att.service_name === "X (formerly Twitter)") {
     // tweets with no text (like a video) have no text field O.o
     const {
         title,
