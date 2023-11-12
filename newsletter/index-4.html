@@ -50,7 +50,113 @@
 <p style="font-size:1.5rem;margin-bottom:2rem;text-align:center">✉️ Not subscribed yet? <a href="https://tinyletter.com/marianoguerra/" target="_blank">Subscribe to the Newsletter</a></p>
     
 
-    <article><h1 class="title"><a href="posts/future-of-coding-weekly-202308-week-4/">Future of Coding Weekly 2023/08 Week 4</a></h1>
+    <article><h1 class="title"><a href="posts/future-of-coding-weekly-202309-week-1/">Future of Coding Weekly 2023/09 Week 1</a></h1>
+      <h2 class="subtitle is-6">2023-09-03 23:30</h2>
+      <div class="content">
+    <p>🐬 AI NPCs as dolphins 🎥 Introducing Mathematica (1989) 💡 Apps as Functions</p>
+<h2>Devlog Together</h2>
+<p>📝 <a href="https://zettelkasten.de/introduction/#the-fixed-address-of-each-note">Introduction to the Zettelkasten Method</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/devlog-together.html#2023-08-29T20:53:08.046Z">🧵 conversation</a></p>
+<p>I just came up with a name for the versioning scheme I've been using recently:</p>
+<p>Zettelkasten versioning</p>
+<p>1, 2, 3, ... 14, 14a, 14b, ... 14z, 14aa, ... 14ak1, 14ak2, ...</p>
+<p>My versions are to communicate identity. That's it. Not ordering, not value, not recency, not stability, not compatibility, not quantity of change, not support duration, just identity. Am I using the same version as you?</p>
+<p>(The easiest way to come up with versions also ends up communicating heredity. But that's an unimportant side effect.)</p>
+<blockquote>
+<p>Learn how the Zettelkasten works as a system, what a Zettel is made of, and how to grow an organic web of knowledge.</p>
+</blockquote>
+<h2>Our Work</h2>
+<p>🐬🐦 <a href="https://twitter.com/genmon/status/1697261981814985139">Matt Webb on X</a> via <strong>Matt Webb</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/share-your-work.html#2023-08-31T15:16:27.233Z">🧵 conversation</a></p>
+<p>I’ve been digging into how we might interact with AI, beyond chatbots, and whether we could have NPCs as colleagues...</p>
+<p>In particular I’ve been writing actual code (ulp) around actual multiplayer apps (ulp) to see what the interactions and issues might be</p>
+<p>It is slightly ridiculous to imagine AI NPCs as dolphins... but why not, right? We’ve got a lot of language around “companion species” as a metaphor for AI, so let’s jump and see if that works.</p>
+<p>So here’s a Twitter/X thread of my first sketches: multiplayer cursors that look like other users, but are actually NPCs</p>
+<p>Big lessons: escaping the chatbot format might let us answer the AI affordance issue (ie how do we know what the AI can do). Here the NPC can proactively tell you. But also apps will need significant re-engineering to present a machine API and NPC runtime</p>
+<p>Gonna dig in this direction for a couple weeks, so up for chatting with anyone about the intersection of AI/multiplayer/collaboration/etc</p>
+<blockquote>
+<p>📝 <a href="https://twitter.com/genmon/status/1697261981814985139">Matt Webb :cherry_blossom::blossom::cherry_blossom: on X</a></p>
+<p>How do we collaborate with AIs? What if they were just like our human colleagues, cursors and all? Well not exactly human</p>
+</blockquote>
+<p>I’ve been sketching NPCs-as-dolphins — you build a little pool, summon them, and that’s where they hang out</p>
+<p>(NPCs = non-player characters)</p>
+<p>AND THEN...</p>
+<h2>Thinking Together</h2>
+<p>💬 <strong>Marcelle Rusu (they/them)</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/thinking-together.html#2023-08-28T14:04:13.379Z">🧵 conversation</a></p>
+<p>For some time I've thought that type systems are essentially ad-hoc logic languages. So.. why not use a full on logic language (prolog or something) to statically analyze your codebase instead of keep patching onto a type system, it appears to me that logic languages are simpler &amp; more expressive than most type systems. I'm starting to work on this for my language, and creating a logic language in efforts to also understand logic programming better.</p>
+<p>Another advantage I can think of is that if a the logic language is expressive enough to type even the most advanced languages as well as the weakest, it could be used as a shared interface between languages to understand at least parts of each others type systems, as well as be a tool for user extension for additional static analysis specific to their project.</p>
+<p>I'm basically thinking something like this.</p>
+<div class="code"><pre class="code literal-block"><span class="c1"># here's a sample program in my (object oriented) language</span>
+
+<span class="n">fn</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+
+<span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+<p>generated logic program in pseudo syntax ( <code>#A</code>  is a pattern to check value is type of  <code>A</code> ,  <code>?a</code>  is like prolog's  <code>A</code> ,  <code>{...}</code>   is map literal.)</p>
+<div class="code"><pre class="code literal-block"><span class="s s-Atom">--</span> <span class="s s-Atom">preloaded</span> <span class="s s-Atom">facts</span>
+
+<span class="nf">lookup</span><span class="p">(</span><span class="s s-Atom">#</span><span class="nv">Number</span><span class="p">,</span> <span class="o">:</span><span class="s s-Atom">+</span><span class="p">,</span> <span class="p">{</span><span class="s s-Atom">args</span><span class="p">:</span> <span class="p">[</span><span class="s s-Atom">#</span><span class="nv">Number</span><span class="p">,</span> <span class="s s-Atom">#</span><span class="nv">Number</span><span class="p">],</span> <span class="s s-Atom">ret</span><span class="p">:</span> <span class="s s-Atom">#</span><span class="nv">Number</span><span class="p">}).</span>
+
+
+
+<span class="s s-Atom">--</span> <span class="s s-Atom">program</span>
+
+<span class="nf">add</span><span class="p">(</span><span class="nb">?</span><span class="s s-Atom">a</span><span class="p">,</span> <span class="nb">?</span><span class="s s-Atom">b</span><span class="p">,</span> <span class="nb">?</span><span class="s s-Atom">ret</span><span class="p">)</span> <span class="o">:-</span> <span class="nf">lookup</span><span class="p">(</span><span class="nb">?</span><span class="s s-Atom">a</span><span class="p">,</span> <span class="o">:</span><span class="s s-Atom">+</span><span class="p">,</span> <span class="p">{</span><span class="s s-Atom">args</span><span class="p">:</span> <span class="p">[</span><span class="nb">?</span><span class="s s-Atom">a</span><span class="p">,</span> <span class="nb">?</span><span class="s s-Atom">b</span><span class="p">],</span> <span class="s s-Atom">ret</span><span class="p">:</span> <span class="nb">?</span><span class="s s-Atom">ret</span><span class="p">}).</span>
+
+<span class="nb">?</span><span class="o">-</span> <span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">?</span><span class="k">_</span><span class="p">).</span>
+</pre></div>
+
+<p>The specifics of my logic language is likely flawed, but I'm curious about the general idea of using a fully-fledged logic language to generate a program in &amp; run instead of generated a typed AST and running ad-hoc type systems.</p>
+<p>My question is, what are people's thoughts on this? Any previous work in this area? Any obvious flaws?</p>
+<p>📝 <a href="https://github.com/rust-lang/chalk">github.com/rust-lang/chalk</a> via <strong>Martin Sandin</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/thinking-together.html#2023-08-28T14:48:07.357Z">🧵 conversation</a></p>
+<p>I might be missing context here but the fact that type systems are logic languages should be uncontroversial given that that's what the Curry Howard Correspondence is about. Though I'm not very well read I think that using "complete" generic logic languages/solver (as a component) in solving type equations ought to be well trodden ground, my first thought went to <a href="https://github.com/rust-lang/chalk">github.com/rust-lang/chalk</a> as one example. I'd be looking at what one might give up doing so as the reason why it doesn't happen more: speed? guaranteed termination? good error messages?</p>
+<p>💬 <a href="https://twitter.com/jimmeyer">Jim Meyer</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/thinking-together.html#2023-08-28T16:45:19.883Z">🧵 conversation</a></p>
+<p>A one minute interaction with a digital product at 60FP on an HD RGB screen flows through a creative/generative space of 125,241,246,351,360,000 pixel variations.</p>
+<p>We need spaceships to explore this space, but we got rectangles with drag handles instead.</p>
+<p>💬 <strong>Eli Mellen</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/thinking-together.html#2023-08-28T16:57:24.727Z">🧵 conversation</a></p>
+<p>A question for ya’ll doing thinking on future of coding things:</p>
+<p>When/if you think about the accessibility (read here as “a11y”) of the future of coding do you consider accessibility as an attribute of the folks using your thing (e.g. a need) or an attribute of your design (e.g. a feature)?</p>
+<p>🐦 <a href="https://twitter.com/cis_female/status/1697763571751674297?s=20">sophia  on X</a> via <a href="https://dekorte.com/">Steve Dekorte</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/thinking-together.html#2023-09-03T00:11:32.398Z">🧵 conversation</a></p>
+<p>Thoughts? </p>
+<blockquote>
+<p>🐦 <a href="https://twitter.com/cis_female/status/1697763571751674297?s=20">sophia :chart: (8723/30000 days alive) on X</a></p>
+<p>I feel like it’s not obvious to consumers how monumental and expensive regular software is. iOS cost about as much as the Manhattan project (~$20b). Google search cost about as much as the ISS (~$100b).</p>
+</blockquote>
+<h2>Content</h2>
+<p>🎥 <a href="https://youtu.be/MeuCAT5HDh0?si=mZHZtW1YmDmH4aRT">Introducing Mathematica, Stephen Wolfram</a> via <strong>Chris</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/linking-together.html#2023-08-29T21:31:48.535Z">🧵 conversation</a></p>
+<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/MeuCAT5HDh0/hqdefault.jpg"></p>
+<p>Fascinating video that popped up on my radar today of Stephen Wolfram demoing Mathematica in 1989 </p>
+<p>I was quite blown away by how powerful and ahead of its time it was, even back then, with features like interactive programming in a very high level, multi-paradigm language for symbolic computation with rich, introspectable outputs and various thoughtful design decisions around interoperability, extensibility and API (as validated by how none of the API functions demo'd have changed AFAIK in 30+ years!)</p>
+<p>💡 <a href="https://github.com/Ruddle/Fomos">github.com/Ruddle/Fomos: Experimental OS, built with rust</a> via <a href="https://twitter.com/curious_reader">Andreas S</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/linking-together.html#2023-08-30T16:17:56.776Z">🧵 conversation</a></p>
+<p>„So what if an app was a function ? „</p>
+<h2>🤖</h2>
+<p>🧑‍🏫 <a href="https://openai.com/blog/teaching-with-ai">Teaching with AI</a> via <a href="https://twitter.com/TodePond">Lu Wilson</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/of-ai.html#2023-08-31T21:34:28.340Z">🧵 conversation</a></p>
+<p>Hard to pin down what's most dystopian about this</p>
+<blockquote>
+<p>We’re releasing a guide for teachers using ChatGPT in their classroom—including suggested prompts, an explanation of how ChatGPT works and its limitations, the efficacy of AI detectors, and bias.</p>
+</blockquote>
+<p>💬 <a href="https://twitter.com/vrandezo">Denny Vrandečić</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/of-ai.html#2023-08-31T21:45:30.164Z">🧵 conversation</a></p>
+<p>Doug Lenat, inventor of Cyc, has passed away</p>
+<h2>present-company</h2>
+<p>📝 <a href="https://assafmagen.com/">Assaf Magen, PhD - Entrepreneur and Consultant Profile</a> via <strong>Assaf</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/present-company.html#2023-08-29T22:27:27.823Z">🧵 conversation</a></p>
+<p>For those interested in gaining experience in bioinformatics/ML:</p>
+<p>I've recently founded Mendel AI, a first of its kind AI-assisted data analysis and visualization tool designed to empower biotech &amp; pharma R&amp;D scientists to interact with genomics data using natural language. We're working on a prototype and would benefit from additional help. Reach out If getting exposure to this rapidly developing field sounds exciting to you.</p>
+<p>👔 <a href="http://trychroma.com">Chroma</a> via <a href="https://twitter.com/nickarner">Nick Arner</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2023/09/W1/present-company.html#2023-08-31T15:22:15.553Z">🧵 conversation</a></p>
+<p>A company I put an angel check into, <a href="http://trychroma.com">Chroma</a>, is hiring a <a href="https://trychroma.notion.site/careers-chroma-9d017c3007c7478ebd85bad854101497#d618e6e26a324cc7831e2c5c9e48e8f5">product engineer</a>. Very keen to talk with folks from communities like this / tools for thought. If you’re interested; send a note to <a href="mailto:careers@trychroma.com">careers@trychroma.com</a></p>
+      </div>
+    </article><article><h1 class="title"><a href="posts/future-of-coding-weekly-202308-week-4/">Future of Coding Weekly 2023/08 Week 4</a></h1>
       <h2 class="subtitle is-6">2023-08-28 15:42</h2>
       <div class="content">
     <p>🎙 FoC #66 Bonnie Nardi • A Small Matter of Programming 🫰 LÖVE your apps 🤔 No one actually wants simplicity</p>
