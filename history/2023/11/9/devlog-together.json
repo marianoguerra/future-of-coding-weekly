@@ -1,0 +1,185 @@
+[
+    {
+        "client_msg_id": "fee132ea-48ea-41d9-acd4-3aff88cddace",
+        "type": "message",
+        "text": "Now that I've started inserting coroutines into my apps (<https://futureofcoding.slack.com/archives/C0120A3L30R/p1698818828191999>) to make them more debuggable, I'm starting to find and plug gaps in error recovery:\n\u2022 I have to be careful to check the results of coroutine operations, because the underlying coroutine might have thrown an error.\n\u2022 Errors in Lua include a call stack, but errors within coroutines don't return the stack by default.\n\u2022 If I create a higher-order helper to abstract away the coroutine munging just to smear a computation across frames, does that impact the quality of debug information in the call stack? (Answer: no it doesn't in Lua, but it wasn't obvious.)\n\u2022 Call stacks returned by L\u00d6VE aren't _quite_ as clean as plain Lua.",
+        "user": "UCUSW7WVD",
+        "ts": "1699507456.115349",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xn5U3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Now that I've started inserting coroutines into my apps ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://futureofcoding.slack.com/archives/C0120A3L30R/p1698818828191999"
+                            },
+                            {
+                                "type": "text",
+                                "text": ") to make them more debuggable, I'm starting to find and plug gaps in error recovery:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I have to be careful to check the results of coroutine operations, because the underlying coroutine might have thrown an error."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Errors in Lua include a call stack, but errors within coroutines don't return the stack by default."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "If I create a higher-order helper to abstract away the coroutine munging just to smear a computation across frames, does that impact the quality of debug information in the call stack? (Answer: no it doesn't in Lua, but it wasn't obvious.)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Call stacks returned by L\u00d6VE aren't "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "quite",
+                                        "style": {
+                                            "italic": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " as clean as plain Lua."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1699507456.115349",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1699577246.529979",
+        "reply_users": [
+            "UML4ZEKDK",
+            "UCUSW7WVD"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "8d0e7905-e5cf-4acb-8aea-d32d951122f0",
+        "type": "message",
+        "text": "How would you rate the Lua / L\u00d6VE debug experience overall? Do you generally get meaningful stack traces? Are there debuggers that work as expected? (Feel free to tell me to go away and figure it out myself! :innocent:)",
+        "user": "UML4ZEKDK",
+        "ts": "1699555669.146779",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "d7vqG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "How would you rate the Lua / L\u00d6VE debug experience overall? Do you generally get meaningful stack traces? Are there debuggers that work as expected? (Feel free to tell me to go away and figure it out myself! "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "innocent",
+                                "unicode": "1f607"
+                            },
+                            {
+                                "type": "text",
+                                "text": ")"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1699507456.115349",
+        "parent_user_id": "UCUSW7WVD"
+    },
+    {
+        "client_msg_id": "992f9a49-a176-4f11-85fd-d1ae1353c3a1",
+        "type": "message",
+        "text": "I think it's pretty decent. Baseline Lua gives nice stacks to show you precisely where an error happened. But as a dynamic language it also gives you tools to try to 'improve' on it, and when I run into problems it's invariably because I was trying to be clever and my improvements like driver.love regress the experience. L\u00d6VE is a bit like that as well albeit much more mature than my stuff; it has one issue I've noticed that baseline Lua doesn't have.\n\nI tend to be a debug by print person so haven't played with debuggers like <https://github.com/deltadaedalus/vudu|https://github.com/deltadaedalus/vudu> much. So it might fall to others to review the debugger side of the eco system. But things have seemed decent enough to me.",
+        "user": "UCUSW7WVD",
+        "ts": "1699577246.529979",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yfTI4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think it's pretty decent. Baseline Lua gives nice stacks to show you precisely where an error happened. But as a dynamic language it also gives you tools to try to 'improve' on it, and when I run into problems it's invariably because I was trying to be clever and my improvements like driver.love regress the experience. L\u00d6VE is a bit like that as well albeit much more mature than my stuff; it has one issue I've noticed that baseline Lua doesn't have.\n\nI tend to be a debug by print person so haven't played with debuggers like "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/deltadaedalus/vudu",
+                                "text": "https://github.com/deltadaedalus/vudu"
+                            },
+                            {
+                                "type": "text",
+                                "text": " much. So it might fall to others to review the debugger side of the eco system. But things have seemed decent enough to me."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1699577316.000000"
+        },
+        "thread_ts": "1699507456.115349",
+        "parent_user_id": "UCUSW7WVD",
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UML4ZEKDK"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

@@ -1,0 +1,36 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2023-11-09T05:24:16.115Z" class="post"><span class="user">Kartik Agaram</span> <a href="./?fromDate=2023-11-06&amp;toDate=2023-11-12&amp;channel=devlog-together&amp;filter=#2023-11-09T05:24:16.115Z" class="date">2023-11-09 05:24:16</a> <div class="message"><p>Now that I've started inserting coroutines into my apps (<a href="./?fromDate=2023-10-29&amp;toDate=2023-11-04&amp;channel=two-minute-week&amp;filter=#2023-11-01T06:07:08.191Z">💬 #two-minute-week@2023-11-01T06:07:08.191Z</a>) to make them more debuggable, I'm starting to find and plug gaps in error recovery:</p>
+<ul><li>I have to be careful to check the results of coroutine operations, because the underlying coroutine might have thrown an error.</li><li>Errors in Lua include a call stack, but errors within coroutines don't return the stack by default.</li><li>If I create a higher-order helper to abstract away the coroutine munging just to smear a computation across frames, does that impact the quality of debug information in the call stack? (Answer: no it doesn't in Lua, but it wasn't obvious.)</li><li>Call stacks returned by LÖVE aren't  <em>quite</em>  as clean as plain Lua.</li></ul></div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2023-11-09T18:47:49.146Z" class="reply"><span class="user">J. Ryan Stinnett</span> <a href="./?fromDate=2023-11-06&amp;toDate=2023-11-12&amp;channel=devlog-together&amp;filter=#2023-11-09T18:47:49.146Z" class="date">2023-11-09 18:47:49</a> <div class="message"><p>How would you rate the Lua / LÖVE debug experience overall? Do you generally get meaningful stack traces? Are there debuggers that work as expected? (Feel free to tell me to go away and figure it out myself! 😇)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2023-11-10T00:47:26.529Z" class="reply"><span class="user">Kartik Agaram</span> <a href="./?fromDate=2023-11-07&amp;toDate=2023-11-13&amp;channel=devlog-together&amp;filter=#2023-11-10T00:47:26.529Z" class="date">2023-11-10 00:47:26</a> <div class="message"><p>I think it's pretty decent. Baseline Lua gives nice stacks to show you precisely where an error happened. But as a dynamic language it also gives you tools to try to 'improve' on it, and when I run into problems it's invariably because I was trying to be clever and my improvements like driver.love regress the experience. LÖVE is a bit like that as well albeit much more mature than my stuff; it has one issue I've noticed that baseline Lua doesn't have.</p>
+<p>I tend to be a debug by print person so haven't played with debuggers like <a href="https://github.com/deltadaedalus/vudu">github.com/deltadaedalus/vudu</a> much. So it might fall to others to review the debugger side of the eco system. But things have seemed decent enough to me.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2023-11-11T19:13:54.975Z" class="post"><span class="user">Kartik Agaram</span> <a href="./?fromDate=2023-11-08&amp;toDate=2023-11-14&amp;channel=devlog-together&amp;filter=#2023-11-11T19:13:54.975Z" class="date">2023-11-11 19:13:54</a> <div class="message"><p>I've cleaned up the code for my debug infrastructure of <a href="./?fromDate=2023-10-29&amp;toDate=2023-11-04&amp;channel=two-minute-week&amp;filter=#2023-11-01T06:07:08.191Z">💬 #two-minute-week@2023-11-01T06:07:08.191Z</a> and improved the error flow; now you get decent call stacks even if there's a coroutine in the middle somewhere.</p>
+<p>The debug infrastructure lives on the surface. I frequently tinker with it while debugging.</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F06/F0654TJTCPQ.png" alt="driver-map.png"></p>
+</div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>
