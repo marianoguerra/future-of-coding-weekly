@@ -1,0 +1,479 @@
+[
+    {
+        "client_msg_id": "a0e8ab62-9a37-44bc-bb30-e5be9dc211d3",
+        "type": "message",
+        "text": "This may interest you. It talks about combining programming by example (ML) and traditional means.\n<https://www.youtube.com/watch?v=16X0RB_YrvE&t=1330s&ab_channel=caltech>",
+        "user": "U03U0SCU5LH",
+        "ts": "1699939505.650209",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hap50",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This may interest you. It talks about combining programming by example (ML) and traditional means.\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.youtube.com/watch?v=16X0RB_YrvE&t=1330s&ab_channel=caltech"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "edited": {
+            "user": "U03U0SCU5LH",
+            "ts": "1699939527.000000"
+        },
+        "attachments": [
+            {
+                "from_url": "https://www.youtube.com/watch?v=16X0RB_YrvE&amp;t=1330s&amp;ab_channel=caltech",
+                "thumb_url": "https://i.ytimg.com/vi/16X0RB_YrvE/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/16X0RB_YrvE?feature=oembed&start=1330&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen title=\"Neurosymbolic Programming - Yisong Yue\"></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "id": 1,
+                "original_url": "https://www.youtube.com/watch?v=16X0RB_YrvE&amp;t=1330s&amp;ab_channel=caltech",
+                "fallback": "YouTube Video: Neurosymbolic Programming - Yisong Yue",
+                "title": "Neurosymbolic Programming - Yisong Yue",
+                "title_link": "https://www.youtube.com/watch?v=16X0RB_YrvE&amp;t=1330s&amp;ab_channel=caltech",
+                "author_name": "caltech",
+                "author_link": "https://www.youtube.com/@caltech",
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/"
+            }
+        ]
+    },
+    {
+        "client_msg_id": "811d29a1-3222-4bf0-aa84-f226f7ffbec7",
+        "type": "message",
+        "text": "<https://blog.vero.site/post/noulith|Fun blogpost about implementing a language>",
+        "user": "UMQ6LR9NZ",
+        "ts": "1699991274.481269",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "A229j",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://blog.vero.site/post/noulith",
+                                "text": "Fun blogpost about implementing a language"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://blog.vero.site/post/noulith",
+                "service_icon": "https://blog.vero.site/favicon.ico",
+                "id": 1,
+                "original_url": "https://blog.vero.site/post/noulith",
+                "fallback": "Designing a Programming Language to Speedrun Advent of Code",
+                "text": "\u201cshouldn\u2019t this have been published a few months ago?\u201d yeah, probably. I even considered submitting it to the AoC contest. time is a real beast.\nThe title is clickbait. I did not design and implement a programming language for the sole or even primary purpose of leaderboarding on Advent of Code. It just turned out that the programming language I was working on fit the task remarkably well.\nI can\u2019t name just a single reason I started work on my language, Noulith, back in July 2022, but I think the biggest one was even more absurdly niche: I solve and write a lot of puzzlehunts, and I wanted a better programming language to use to search word lists for words satisfying unusual constraints, such as, \u201cFind all ten-letter words that contain each of the letters A, B, and C exactly once and that have the ninth letter K.\u201d1 I have a folder of ten-line scripts of this kind, mostly Python, and I thought there was surely a better way to do this. Not necessarily faster \u2014 there is obviously no way I could save time on net by optimizing this process. But, for example, I wanted to be able to easily share these programs such that others could run them. I had a positive experience in this with my slightly older golflang Paradoc, which I had compiled into a WASM blob and put online and, just once, experienced the convenience of sharing a short text processing program through a link. (Puzzle: what does this program do?) I also wanted to write and run these programs while booted into a different operating system, using a different computer, or just on my phone.\nAs I worked on it, I kept accumulating reasons to keep going. There were other contexts where I wanted to quickly code a combinatorial brute force that was annoying to write in other languages; a glib phrasing is that I wanted access to Haskell\u2019s list monad in a sloppier language. I also wanted an excuse to read Crafting Interpreters more thoroughly. But sometimes I think the best characterization for what developing the language \u201cfelt like\u201d was that I had been possessed by a supernatural creature \u2014 say, the dragon from the Dragon Book. I spent every spare minute thinking about language features and next implementation steps, because I had to.\nThe first \u201creal program\u201d I wrote in Noulith was to brute force constructions for The Cube, for last year\u2019s Galactic Puzzle Hunt in early August, and it worked unexpectedly well. I wrote a for loop with a 53-clause iteratee and the interpreter executed it smoothly. Eventually I realized that the language could expand into other niches in my life where I wanted a scripting language. For example, I did a few Cryptopals challenges in them. It would take a month or two before it dawned on me that the same compulsion that drove me to create this language would drive me to do Advent of Code in it. That\u2019s just how it has to be.\nThis post details my thought process behind the design of this language. Some preliminary notes:",
+                "title": "Designing a Programming Language to Speedrun Advent of Code",
+                "title_link": "https://blog.vero.site/post/noulith",
+                "service_name": "blog.vero.site"
+            }
+        ],
+        "thread_ts": "1699991274.481269",
+        "reply_count": 7,
+        "reply_users_count": 4,
+        "latest_reply": "1700061051.928699",
+        "reply_users": [
+            "UMQ6LR9NZ",
+            "U015TBQ2091",
+            "U05PESXCC2E",
+            "UFEQUBNNT"
+        ],
+        "is_locked": false,
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "054d33e7-8085-4776-a67c-0020c17a0486",
+        "type": "message",
+        "text": "and while not the point of the article, Noulith, the language in question, sort of reminds me of John Ernest\u2019s <https://beyondloom.com/decker/lil.html|lil>, which may be one of the most lovely little languages without heaps of parenthesis that I\u2019ve ever used.",
+        "user": "UMQ6LR9NZ",
+        "ts": "1699992595.214099",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FPczR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "and while not the point of the article, Noulith, the language in question, sort of reminds me of John Ernest\u2019s "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://beyondloom.com/decker/lil.html",
+                                "text": "lil"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", which may be one of the most lovely little languages without heaps of parenthesis that I\u2019ve ever used."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1699991274.481269",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "D564F58C-281E-4573-A4BF-7FD9513768C9",
+        "type": "message",
+        "text": "i LOVE noulith hahahaha. i\u2019ve programmed in it a lot and really love the expressivity of this language. the kitchen sink of ways to call functions ",
+        "user": "U015TBQ2091",
+        "ts": "1699993901.963909",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "R4m77",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i LOVE noulith hahahaha"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "i\u2019ve"
+                            },
+                            {
+                                "type": "text",
+                                "text": " programmed in it a lot and really love the expressivity of this language"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " the kitchen sink of ways to call functions "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1699991274.481269",
+        "parent_user_id": "UMQ6LR9NZ",
+        "reactions": [
+            {
+                "name": "heart_hands",
+                "users": [
+                    "UMQ6LR9NZ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "847895c4-59cd-4666-82b3-1b7c1c5838cb",
+        "type": "message",
+        "text": "Nice. I like the topics, the in depth reasoning and choices, and the \"fun facts\". I also had the idea to write a \"implementing a language\" article, but am trying to be very \"incremental\" and target a not-so-developer audience.\n\nIt's tough not being able to just say random techie stuff when writing about techie stuff :slightly_smiling_face:",
+        "user": "U05PESXCC2E",
+        "ts": "1700000385.581429",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FgES1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Nice. I like the topics, the in depth reasoning and choices, and the \"fun facts\". I also had the idea to write a \"implementing a language\" article, but am trying to be very \"incremental\" and target a not-so-developer audience.\n\nIt's tough not being able to just say random techie stuff when writing about techie stuff "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1699991274.481269",
+        "parent_user_id": "UMQ6LR9NZ",
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UFEQUBNNT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "89392E4E-FA3F-4338-A220-CD0925DD2B61",
+        "type": "message",
+        "text": "<@U05PESXCC2E> That\u2019s why I\u2019m here. When I posted programming stuff on Facebook, I\u2019d just get family members saying, \u201cI don\u2019t know what you\u2019re talking about, but you seem to be having fun!\u201d",
+        "user": "UFEQUBNNT",
+        "ts": "1700001994.047079",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "VFdwz",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U05PESXCC2E"
+                            },
+                            {
+                                "type": "text",
+                                "text": " That\u2019s why I\u2019m here. When I posted programming stuff on Facebook, I\u2019d just get family members saying, \u201cI don\u2019t know what you\u2019re talking about, but you seem to be having fun!\u201d"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1699991274.481269",
+        "parent_user_id": "UMQ6LR9NZ",
+        "reactions": [
+            {
+                "name": "laughing",
+                "users": [
+                    "U05PESXCC2E"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "client_msg_id": "11631349-6E76-4636-B216-DD26A8CEF007",
+        "type": "message",
+        "text": "<@UMQ6LR9NZ> do you know if it\u2019s possible to use the lil language? i\u2019m interested in playing around with it",
+        "user": "U015TBQ2091",
+        "ts": "1700026676.555799",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6dLY0",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UMQ6LR9NZ"
+                            },
+                            {
+                                "type": "text",
+                                "text": " do you know if "
+                            },
+                            {
+                                "type": "text",
+                                "text": "it\u2019s"
+                            },
+                            {
+                                "type": "text",
+                                "text": " possible to use the lil language? "
+                            },
+                            {
+                                "type": "text",
+                                "text": "i\u2019m"
+                            },
+                            {
+                                "type": "text",
+                                "text": " interested in playing around with it"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1699991274.481269",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "9EA91E81-ADB3-4CB4-99F2-BB57D52EB59A",
+        "type": "message",
+        "text": "It is! I use it all the time. It\u2019s embedded into <https://internet-janitor.itch.io/decker|decker> where you can use it as a scripting language, and you can grab a standalone interpreter to run locally from <https://github.com/JohnEarnest/Decker|GitHub>. It is in the repo as a cosmopolitan libc, I find that works well. Hit me up with any questions <@U015TBQ2091> ",
+        "user": "UMQ6LR9NZ",
+        "ts": "1700051918.951749",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "V2aB4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It is! I use it all the time. It\u2019s embedded into "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://internet-janitor.itch.io/decker",
+                                "text": "decker"
+                            },
+                            {
+                                "type": "text",
+                                "text": " where you can use it as a scripting language, and you can grab a standalone interpreter to run locally from "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/JohnEarnest/Decker",
+                                "text": "GitHub"
+                            },
+                            {
+                                "type": "text",
+                                "text": ". It is in the repo as a cosmopolitan libc, I find that works well. Hit me up with any questions "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U015TBQ2091"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "image_url": "https://img.itch.zone/aW1nLzk2MjYwNTcuZ2lm/original/zaz%2FU%2B.gif",
+                "image_width": 512,
+                "image_height": 342,
+                "image_bytes": 180725,
+                "from_url": "https://internet-janitor.itch.io/decker",
+                "service_icon": "https://internet-janitor.itch.io/favicon.ico",
+                "id": 1,
+                "original_url": "https://internet-janitor.itch.io/decker",
+                "fallback": "itch.io: Decker by Internet Janitor",
+                "text": "A multimedia sketchbook",
+                "title": "Decker by Internet Janitor",
+                "title_link": "https://internet-janitor.itch.io/decker",
+                "service_name": "itch.io"
+            }
+        ],
+        "thread_ts": "1699991274.481269",
+        "parent_user_id": "UMQ6LR9NZ"
+    },
+    {
+        "client_msg_id": "9dbc61e4-2bb1-4a2d-8e08-4f29f30d01e2",
+        "type": "message",
+        "text": "This is one of my favorite programs I\u2019ve written with lil. It isn\u2019t useful, but I think it shows off the language features really well.\n\n```sys.seed:<http://sys.ms|sys.ms>\ncons: \"|\" split \"b|c|d|f|g|h|j|k|l|m|n|p|r|s|t|v|w|z|ch|sh|zh|th\"\n vow: \"|\" split \"a|e|i|o|u|y|ee|ai|ae|au\"\n\non syl do random[vow],random[cons] end\non word do syl @ range random[1,2,3,4] end\non words x do \" \" fuse word @ range x end\nspeak:words[7]\nshow[speak]```\nThat generates mostly pronounceable gibberish, like `ushapaiw aih eez enasil auk aeshowychees ehilehuk` and `ainaec eeneewaig ainimimum auvaichaef ojushychaen upenizash ac`\n\nSame program in JavaScript,\n\n```const cons = [\"b\", \"c\", \"d\", \"f\", \"g\", \"h\", \"j\", \"k\", \"l\", \"m\", \"n\", \"p\", \"r\", \"s\", \"t\", \"v\", \"w\", \"z\", \"ch\", \"sh\", \"zh\", \"th\"];\nconst vow = [\"a\", \"e\", \"i\", \"o\", \"u\", \"y\", \"ee\", \"ai\", \"ae\", \"au\"];\n\nconst rpick = t =&gt; t[Math.floor(Math.random() * t.length)];\n\nconst syl = () =&gt; rpick(cons) + rpick(vow);\n\nconst word = () =&gt; {\n  const syllables = Array(Math.floor(Math.random() * 3) + 1).fill(null).map(() =&gt; syl()).join('');\n  return Math.random() &gt; 0.2 ? syllables + rpick(cons) : syllables;\n};\n\nconst speak = numberOfWords =&gt; Array(numberOfWords).fill(null).map(() =&gt; word()).join(' ');\n\nconsole.log(speak(7));```",
+        "user": "UMQ6LR9NZ",
+        "ts": "1700061051.928699",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OjM1K",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is one of my favorite programs I\u2019ve written with lil. It isn\u2019t useful, but I think it shows off the language features really well.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "sys.seed:sys.ms\ncons: \"|\" split \"b|c|d|f|g|h|j|k|l|m|n|p|r|s|t|v|w|z|ch|sh|zh|th\"\n vow: \"|\" split \"a|e|i|o|u|y|ee|ai|ae|au\"\n\non syl do random[vow],random[cons] end\non word do syl @ range random[1,2,3,4] end\non words x do \" \" fuse word @ range x end\nspeak:words[7]\nshow[speak]"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThat generates mostly pronounceable gibberish, like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "ushapaiw aih eez enasil auk aeshowychees ehilehuk",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "ainaec eeneewaig ainimimum auvaichaef ojushychaen upenizash ac",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nSame program in JavaScript,\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "const cons = [\"b\", \"c\", \"d\", \"f\", \"g\", \"h\", \"j\", \"k\", \"l\", \"m\", \"n\", \"p\", \"r\", \"s\", \"t\", \"v\", \"w\", \"z\", \"ch\", \"sh\", \"zh\", \"th\"];\nconst vow = [\"a\", \"e\", \"i\", \"o\", \"u\", \"y\", \"ee\", \"ai\", \"ae\", \"au\"];\n\nconst rpick = t => t[Math.floor(Math.random() * t.length)];\n\nconst syl = () => rpick(cons) + rpick(vow);\n\nconst word = () => {\n  const syllables = Array(Math.floor(Math.random() * 3) + 1).fill(null).map(() => syl()).join('');\n  return Math.random() > 0.2 ? syllables + rpick(cons) : syllables;\n};\n\nconst speak = numberOfWords => Array(numberOfWords).fill(null).map(() => word()).join(' ');\n\nconsole.log(speak(7));"
+                            }
+                        ],
+                        "border": 0
+                    }
+                ]
+            }
+        ],
+        "team": "T5TCAFTA9",
+        "thread_ts": "1699991274.481269",
+        "parent_user_id": "UMQ6LR9NZ"
+    }
+]
