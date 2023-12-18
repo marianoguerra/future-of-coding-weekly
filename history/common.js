@@ -180,7 +180,7 @@ const AUTHORS_DATA = {
   "Steve Dekorte": { name: "Steve Dekorte", url: "https://dekorte.com/" },
   "Duncan Cragg": {
     name: "Duncan Cragg",
-    url: "https://twitter.com/duncancragg",
+    url: "https://twitter.com/Duncan__Cragg",
   },
   "Jimmy Miller": {
     name: "Jimmy Miller",
