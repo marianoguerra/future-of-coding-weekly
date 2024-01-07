@@ -1,5 +1,6 @@
 //@format
-/*globals Set, SimpleMarkdown*/
+/*globals Set*/
+import { SimpleMarkdown } from "./history/lib/simple-markdown.js";
 import { getInfoForWeekAndDay, MONDAY } from "./history/newsletter.js";
 const USER = "marianoguerra",
   REPO = "future-of-coding-weekly",
