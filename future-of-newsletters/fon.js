@@ -1,4 +1,6 @@
 import path from "path";
+import { mkdir } from "node:fs/promises";
+import { mdToHTML } from "../history/md.js";
 
 class MailGunConfig {
   constructor(url, from, apiKey) {
@@ -55,14 +57,31 @@ class MailInfo {
   }
 
   static async fromFolderPath(dirPath) {
-    const textPath = path.join(dirPath, "mail.txt"),
-      htmlPath = path.join(dirPath, "mail.html"),
-      infoPath = path.join(dirPath, "mail.toml"),
+    const { textPath, htmlPath, infoPath } = MailInfo.getMailDirPaths(dirPath),
       text = await readFileAsString(textPath),
       html = await readFileAsString(htmlPath),
       info = await readTomlFile(infoPath);
 
     return new MailInfo(text, html, info.subject);
+  }
+
+  static getMailDirPaths(dirPath) {
+    const textPath = path.join(dirPath, "mail.txt"),
+      htmlPath = path.join(dirPath, "mail.html"),
+      infoPath = path.join(dirPath, "mail.toml");
+
+    return { textPath, htmlPath, infoPath };
+  }
+
+  async toFolderPath(dirPath) {
+    const { textPath, htmlPath, infoPath } = MailInfo.getMailDirPaths(dirPath);
+    await mkdir(dirPath, { recursive: true });
+    await writeStringToFile(textPath, this.text);
+    await writeStringToFile(htmlPath, this.html);
+    await writeStringToFile(
+      infoPath,
+      `subject = ${JSON.stringify(this.subject)}`,
+    );
   }
 }
 
@@ -73,6 +92,10 @@ async function readFileAsString(path) {
 
 async function readTomlFile(path) {
   return Bun.TOML.parse(await readFileAsString(path));
+}
+
+async function writeStringToFile(path, text) {
+  await Bun.write(path, text);
 }
 
 async function mailsFromCsv(csvPath) {
@@ -97,13 +120,26 @@ async function sendMail(to, config, mailInfo) {
   return { res, body };
 }
 
-async function main([configPath, mailFolderPath, subsCsvPath]) {
-  const config = await MailGunConfig.fromTomlFile(configPath),
-    mailInfo = await MailInfo.fromFolderPath(mailFolderPath);
+async function main([command, ...args]) {
+  if (command === "send") {
+    const [configPath, mailFolderPath, subsCsvPath] = args,
+      config = await MailGunConfig.fromTomlFile(configPath),
+      mailInfo = await MailInfo.fromFolderPath(mailFolderPath);
 
-  for (const to of await mailsFromCsv(subsCsvPath)) {
-    const { res, body } = await sendMail(to, config, mailInfo);
-    console.log(res, body);
+    for (const to of await mailsFromCsv(subsCsvPath)) {
+      const { res, body } = await sendMail(to, config, mailInfo);
+      console.log(res, body);
+    }
+  } else if (command === "mk-mail-dir") {
+    const [subject, mdFilePath, dirPath] = args,
+      text = await readFileAsString(mdFilePath),
+      // remove top level html comment with nikola metadata
+      html = mdToHTML(text.replace(/<!--[\s\S]*?-->/, "")),
+      mailInfo = new MailInfo(text, html, subject);
+
+    await mailInfo.toFolderPath(dirPath);
+  } else {
+    console.log("wat?");
   }
 }
 

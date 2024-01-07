@@ -140,8 +140,20 @@ function onCommentsFinished(_contributors, authors) {
   document.getElementById("output-html").textContent = outputNode.innerHTML
     .replace(/<p>/g, "\n\n<p>")
     .trim();
-  document.getElementById("output-md").textContent = mdOutput;
+  document.getElementById("output-md").textContent = mdOutput + MD_FOOTER;
 }
+
+const MD_FOOTER = `
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://tinyletter.com/marianoguerra/) / [Archive](https://newsletter.futureofcoding.org/) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+`;
 
 function addCommentSeparator(_outputNode) {
   //outputNode.appendChild(ce('p', {style: 'text-align:center'}, '🚥'));
