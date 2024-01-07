@@ -10,13 +10,13 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="rss.xml">
 <link rel="canonical" href="http://newsletter.futureofcoding.org/">
-<link rel="next" href="index-4.html" type="text/html">
+<link rel="next" href="index-5.html" type="text/html">
 <!--[if lt IE 9]><script src="assets/js/html5shiv-printshiv.min.js"></script><![endif]--><link href="assets/css/rst.css" rel="stylesheet" type="text/css">
 <link href="assets/css/code.css" rel="stylesheet" type="text/css">
 <link href="assets/css/theme.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="prefetch" href="posts/future-of-coding-weekly-202401-week-1/" type="text/html">
+<link rel="prefetch" href="posts/future-of-coding-weekly-202401-week-2/" type="text/html">
 </head>
 <body>
 
@@ -50,7 +50,141 @@
 <p style="font-size:1.5rem;margin-bottom:2rem;text-align:center">✉️ Not subscribed yet? <a href="https://tinyletter.com/marianoguerra/" target="_blank">Subscribe to the Newsletter</a></p>
     
 
-    <article><h1 class="title"><a href="posts/future-of-coding-weekly-202401-week-1/">Future of Coding Weekly 2024/01 Week 1</a></h1>
+    <article><h1 class="title"><a href="posts/future-of-coding-weekly-202401-week-2/">Future of Coding Weekly 2024/01 Week 2</a></h1>
+      <h2 class="subtitle is-6">2024-01-08 00:09</h2>
+      <div class="content">
+    <p>💡 Communicating programming ideas 📑 On simplicity 🎥 What even is code?</p>
+<h2>Our Work</h2>
+<p>💬 <strong>Robin Allison</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/share-your-work.html#2024-01-04T06:22:58.649Z">🧵 conversation</a></p>
+<p>I really like TodePond's video "Screens in Screens in Screens". I've been wanting to do the same kinda thing with mathematical formulas instead of shapes, a kind of "formulas in formulas in formulas", but I'm an awful programmer so I'll describe some math you can do to that effect. Apologies in advance for the shoddy explanation though.</p>
+<p>Here's a thing you can do with "screens". You can name screens. Start with some screens A B C. Then if C is inside A, and A and B are the same color, then there is a copy of C inside B. What do you call this copy? "The copy of B from A to C"? It will be convenient if we give it a symbolic name. Call it (A-&gt;B)C. Or if you are really hardcore you can call it just t(A,B,C) where t is a ternary operator describing the result of copying C from A to B. You may think to only consider (A-&gt;B)C when C is inside A, but the math becomes tractable if you consider all screens at once. Then we can stipulate some axioms:</p>
+<ol>
+<li>
+<p>(A-&gt;A)B = B</p>
+</li>
+<li>
+<p>(A-&gt;B)A=B</p>
+</li>
+<li>
+<p>(B-&gt;C)(A-&gt;B)=(A-&gt;C)</p>
+</li>
+<li>
+<p>(A-&gt;(X-&gt;Y)A)=(X-&gt;Y)</p>
+</li>
+</ol>
+<p>The first axiom means if you are copying a screen from one screen to itself, you aren't changing anything. The second axiom is "obvious" except for considering (A-&gt;B)A in the first place. The third axiom means if you copy a screen from A to B and then from B to C that is the same as if you were to copy it from A to C directly. It is also shorthand for (B-&gt;C)((A-&gt;B)D) = (A-&gt;C)D for all screens D. The fourth axiom takes a bit more explaining. Basically we want this equation to be true whenever A is in X, and both sides are being used to copy something from A. But our theory at this point doesn't have a predicate for "A is contained in X" so we say it holds in all cases.</p>
+<p>With these axioms you can show the operators (A-&gt;B) form an algebraic structure called a group: You can multiply them by performing one copy after the other (C-&gt;D)(A-&gt;B). This operation is associative (I mean, it must be), and has an identity element and inverses. The identity being (A-&gt;A) and the inverse of (A-&gt;B) being (B-&gt;A).</p>
+<p>Another perspective is to view screens as points in an affine space (i.e. vector space without a specified origin). Then (A-&gt;B)C can be thought of as (B-A)+C, and each of the axioms above can be interpreted as vector equations. This isn't a good model though because it ends up saying some screens are the same when they should be different. You can still take the above axioms and show that screens form a generalization of affine spaces called torsors.</p>
+<p>I'll share more if anybody is interested. It really needs a much longer write up, but I thought somebody might know if its already been done before.</p>
+<p>📝 <a href="https://marianoguerra.org/msite/human-server-protocol/">Don't strip the meaning away from your runtime</a> via <a href="https://twitter.com/warianoguerra">Mariano Guerra</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/share-your-work.html#2024-01-04T17:27:43.636Z">🧵 conversation</a></p>
+<p><a href="https://marianoguerra.org/msite/human-server-protocol/">Don't strip the meaning away from your runtime</a>: Exploring extending programming languages to include descriptions in the domain of the problem and solution</p>
+<p>Spoiler alert: interactive example inside 🙂</p>
+<p>First draft, feedback welcome!</p>
+<p>📑 <a href="https://stefanlesser.substack.com/p/on-simplicity">On simplicity</a> via <a href="https://twitter.com/stefanlesser">Stefan Lesser</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/share-your-work.html#2024-01-06T19:02:44.240Z">🧵 conversation</a></p>
+<p>A few weeks ago I started a new series of blog posts (or “newsletters”, in Substack parlance) about  <em>simplicity</em> :</p>
+<p>1 • <a href="https://stefanlesser.substack.com/p/on-simplicity">On simplicity</a> introduces the series with how my thinking about simplicity has changed over the years.</p>
+<p>2 • <a href="https://stefanlesser.substack.com/p/on-simplicity-2-meaning-ful-design">Meaning-ful design</a> connects simplicity to meaning making and coherence.</p>
+<p>3 • <a href="https://stefanlesser.substack.com/p/on-simplicity-3-familiarity">Familiarity</a> explores how complex things can be surprisingly simple and why we can’t ignore context.</p>
+<p>4 • <a href="https://stefanlesser.substack.com/p/on-simplicity-4-reciprocal-realization">Reciprocal realization</a> frames design as a complex dynamic process of mutual adaptation between designer and designed object.</p>
+<p>…  <em>I expect about four or five more posts coming after that, but I haven’t written them yet, so I have no idea.</em> 🙂</p>
+<p>A lot of this draws on 4E cognitive science, design theory, and philosophy. As such it may perhaps be less technical than you would expect it to be, although I try much harder in this series to relate it more directly to programming and software development than in <a href="https://stefanlesser.substack.com/p/previously-a-recap">my last</a>.</p>
+<p>And that’s why I post it here, today. I’m hoping to learn if this resonates at all with a technical audience, or if this is still too abstract. I know we’re all craving for the easily applicable  <em>Top 10 Things to Make Things Simple</em>  (and number 6 will surprise you), but I have reason to believe that it’s just not that… well… simple. But I think I’m slowly making progress towards synthesizing something valuable, even if I can’t express it as beautifully as I would like to. Yet.</p>
+<p>Let me know what you think, and please ask any questions you may have (in thread or via DM). Appreciate your feedback!</p>
+<p>💬 <a href="https://twitter.com/jimmeyer">Jim Meyer</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/share-your-work.html#2024-01-07T18:18:35.602Z">🧵 conversation</a></p>
+<p>Spinners are boring, so might as well get creative with AI UX for loading states, even with fast LLMs like Mixtral.</p>
+<p>The thinking is to not only show multiplayer presence on our canvas, but also what the AI is doing and working on, including visualizing the code its writing in real-time.</p>
+<p><img alt="henosia-ai-code-minimap.gif" src="http://history.futureofcoding.org/history/msg_files/F06/F06CL8JNRCN.gif"></p>
+<h2>Devlog Together</h2>
+<p>💬 <a href="http://akkartik.name/about">Kartik Agaram</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/devlog-together.html#2024-01-01T16:45:01.357Z">🧵 conversation</a></p>
+<p>I think I have a usable app development experience now on my tablet. I basically took my recent Lua Carousel and made a few changes. In Carousel (first clip) you start in the programming environment, each screen runs a separate script, scripts run in the background of the editor, and each screen manages its own canvas. The new setup (second clip) starts in the app, which takes over the entire device until I 'exit' into the programming environment. In the programming environment, screens are now just editors with a shared 'run' button and canvas. Hopefully I can now finish polishing this  ~turd~  app entirely on the tablet.</p>
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F06/F06CR52NK4G.webm">dash-baseline</a></p>
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F06/F06CR52S072.webm">dash</a></p>
+<p>💬 <a href="https://twitter.com/o_kryvonos">Oleksandr Kryvonos</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/devlog-together.html#2024-01-02T21:38:05.027Z">🧵 conversation</a></p>
+<p>I built a bare-minimum in-browser text editor,</p>
+<p>it saves files immediately on every key press,</p>
+<p>I also created a history of revisions but realised I do not need them, git works good enough for now.</p>
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F06/F06CKLQBX1P.mov">Demo</a></p>
+<p>⚽ <a href="https://akkartik.itch.io/carousel/devlog/660061/some-squishy-balls">Some squishy balls</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/devlog-together.html#2024-01-03T21:22:56.470Z">🧵 conversation</a></p>
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F06/F06BXNDPCA3.webm">boids</a></p>
+<p>💬 <a href="https://twitter.com/RoundTableLaw">Jason Morris</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/devlog-together.html#2024-01-05T18:47:02.634Z">🧵 conversation</a></p>
+<p>So I've only been a real developer again for a month, but holy cow. I would have thought keeping your data persistence layer in sync with your code would be easier than this, by now. Irritating.</p>
+<h2>Thinking Together</h2>
+<p>💡  Communicating programming ideas by <a href="http://ivanish.ca/">Ivan Reese</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/thinking-together.html#2024-01-01T21:17:17.966Z">🧵 conversation</a></p>
+<p>Someone reached out to ask me for more thoughts about communicating programming ideas through media other than the academic paper. I wrote a reply, and then decided it would be worth sharing here to see if other folks have their own inspirations they'd like to share, or ideas for how our industry can go  <em>paper-free</em>  ;)</p>
+<hr>
+<p>I feel like I owe reading an apology. I certainly try to play up my "crank" side on the podcast, but it does run the risk of mixing-up  <em>this is being silly</em> with  <em>this is thoughtful critique</em> .</p>
+<p>I have tremendous reverence for the communicative potential of the written word. I just think there are some kinds of ideas that lend themselves better to other forms of expression, or some ideas that can't be written down.</p>
+<p>For instance, it's very strange to me whenever I read a paper about HCI, especially if they're discussing GUI ideas. Sure, often these papers will be accompanied by a video. But, like, the work being described is about  <em>interacting with interfaces</em> . I think the work should be presented as an interface you can interact with!</p>
+<p>I'm especially fond of <a href="http://worrydream.com">Bret</a>'s essays, naturally. <a href="https://ciechanow.ski">Bartosz</a> also does great work with visualization, though I feel like he leans a little too heavily on text and that the visualizations are too linear. <a href="https://www.redblobgames.com">Amit</a> also does excellent work, but he has the advantage that most of the things he demos are inherently about interactive graphics so they lend themselves naturally to this sort of presentation (not to diminish the incredible effort Amit puts in to these articles).</p>
+<p>The thing I want to see more of is… people finding ideas that can  <em>only</em>  be expressed through interaction. I think successfully achieving this requires that someone work natively in interaction, a lot, for a long time. As a result, most of these ideas seem to emerge in the periphery of video games.</p>
+<p>One of my favourite examples is <a href="https://w.itch.io/dys4ia">Dys4ia</a>, a collection of microgames about the trans experience. It uses written language and (meaningfully crude) visual art to set up the  <em>plot</em> , but interaction to tell the  <em>story</em> .</p>
+<p>Something I'm very interested in seeing (and have made a few attempts at myself, but nothing worth sharing) is an attempt to create a fully-usable programming environment  <em>presented as a game</em>  specifically for the purpose of communicating ideas about programming. There've been plenty of the inverse, where a programming system is the setting within which a game takes place (see all the works of <a href="http://zachtronics.com">Zachtronics</a>, for instance), but I haven't seen anyone do a game as the setting within which actual programming takes place. Closest to that might be something like Minecraft or Dreams (etc), but I don't think those were designed to communicate ideas about programming the way, say, The Witness was designed to communicate a philosophy of science.</p>
+<p>Another close comparison might be Advent of Code, where you playfully approach programming differently than in your normal work. The programming you do for AoC should feel meaningfully different. Similarly, imagine building your own Rosetta Code from scratch. That should give you a really particular feeling. I think it's related to, say, the feeling of writing a rasterizer for the dozenth time. I think these feelings are ideas, and that there's a whole language of them, and that the language is expressed through the creation of systems. I think if we studied this language, it would guide us toward building different kinds of tools.</p>
+<p>And hell, you might eventually be able to write a paper about that. (Countdown to someone arguing that this is what Christopher Alexander has made a career of, in a sense.) But I don't think we will arrive at those system-feeling ideas in any way other than by building and playing with systems, and with a particular intention at that.</p>
+<p>📖 <a href="https://www.tiktok.com/@etymologynerd?lang=en">tiktok.com/@etymologynerd</a> via <a href="https://twitter.com/stevekrouse">Steve Krouse</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/thinking-together.html#2024-01-04T13:26:04.684Z">🧵 conversation</a></p>
+<p>Hey friends!</p>
+<p>I don't know if you're familiar with this harvard linguist on tiktok but he's the best: <a href="https://www.tiktok.com/@etymologynerd?lang=en">tiktok.com/@etymologynerd</a></p>
+<p>I think it would be AWESOME if someone from "our community" would make those style of tiktoks, but about computer and programming history. I think it would become quite popular and be super enriching and educational</p>
+<p>I have some amount of capacity to help and sponsor this, but I mostly wanted to put it out there as a general request for someone in our community to take up the gauntlet in this new medium</p>
+<p>💬 <strong>Ivan Lugo</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/thinking-together.html#2024-01-06T16:05:41.625Z">🧵 conversation</a></p>
+<p>Heya internetpeoples ❤ I’ve spent a long time refining this and brought in “The LLMs” to help craft the tone here, and I think I’ve finally gotten it to a point where I feel like it hits my message and question, and doesn’t assume too much negativity or… doomcalling, heh. Thanks for the time and shared space, as always.</p>
+<hr>
+<p>I’ve despaired when stuck on problems I just couldn’t crack. I’ve also felt the joy of those “aha!” moments when things finally click. We’ve all been there as coders. While documentation and searches can help fill gaps, little replaces another human sitting alongside, guiding with patience earned from experience. In those moments when someone more seasoned gave guidance, I felt hope renewed. How might we foster more of these vital human connections?</p>
+<p>Key Discussion Points:</p>
+<ul>
+<li>
+<p><em>Knowledge flows when passion meets patience</em> . I’m grateful for the patient coders who “reached down” to guide me. Let’s discuss barriers hampering these relationships. Generalizations about certain groups being “unwilling” to help are counterproductive. However, empathetic mentorship remains scarce. How might we change incentives?</p>
+</li>
+<li>
+<p>Truly supporting newcomers requires understanding their frustrations are valid. I want to open a thoughtful discussion on constructive ways we can keep improving in this regard.</p>
+</li>
+<li>
+<p>There are always exceptions by those dedicated to lifting others up. But much room remains for improving access, channels and incentives for more direct peer sharing across experience levels. It’s on each of us to reflect on where we can have an impact.</p>
+</li>
+</ul>
+<p>I welcome reactions, shared experiences, and dialogue toward that aim. How might we strengthen coder communities through human connections? Where do you see the biggest opportunities? Together, I believe we can guide positive change.</p>
+<h2>Content</h2>
+<p>📼 <a href="https://cassette-lang.com/">Cassette is a small, Lisp-like programming language</a> via <strong>Eli Mellen</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/linking-together.html#2024-01-03T18:58:29.354Z">🧵 conversation</a></p>
+<p>I ran across <a href="https://cassette-lang.com/">Cassette</a>, a programming language today. I liked some of the stuff on the webpage and think it is interestingly aligned with the Future of Coding community.</p>
+<blockquote>
+<p>I made Cassette as a simple language for “playful programming”. Playful programming is writing something for the sake of writing it. It’s making a software 3D renderer or a GIF reader, even though better implementations of those already exist. It’s making generative art programs and drawing them with a pen plotter. Cassette itself is playful programming—there are certainly other scripting languages that may be better for personal projects like these, but this one is mine.</p>
+</blockquote>
+<p>Continuing,</p>
+<blockquote>
+<p><em>In particular, I wanted Cassette to feel “essential”, where each aspect of the language reflects some fundamental aspect of computing</em> 
+ (from a functional language perspective, at least). For example, I consider garbage collection, lexical scopes, and immutable types essential. The result is a little boring, but I hope it’s a good platform to play with other programming concepts.</p>
+</blockquote>
+<p><em>Emphasis</em>  mine.</p>
+<p>📝 <a href="https://web.sas.upenn.edu/dream-lab/creative-coding-2024/">This looks fun: Creative Coding 2024</a> via <strong>Eli Mellen</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/linking-together.html#2024-01-04T21:32:53.170Z">🧵 conversation</a></p>
+<p><a href="https://web.sas.upenn.edu/dream-lab/creative-coding-2024/">This looks fun</a></p>
+<p>🎥 <a href="https://www.youtube.com/watch?v=UH0A2iujtY8">"What even is code? Building a non-code coding interface" - Katie Bell (LCA 2021 Online)</a> via <strong>Nilesh Trivedi</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/linking-together.html#2024-01-07T00:23:04.303Z">🧵 conversation</a></p>
+<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/UH0A2iujtY8/hqdefault.jpg"></p>
+<p>by <strong>@Katie Bell</strong> is 👍</p>
+<h2>🤖</h2>
+<p>💬 <a href="https://twitter.com/RoundTableLaw">Jason Morris</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/01/W2/of-ai.html#2024-01-07T08:21:21.798Z">🧵 conversation</a></p>
+<p>Is anyone aware of any papers on LLM assisted code generation inside a visual programming environment? I've only seen one. I'm going to be doing some experiments later this month, and I don't really know the state of the art.</p>
+<hr>
+<p>👨🏽‍💻 By 🐘 <a href="https://hachyderm.io/@marianoguerra">@marianoguerra@hachyderm.io</a> 🐦 <a href="https://twitter.com/warianoguerra">@warianoguerra</a></p>
+<p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/">Future of Coding Community</a></p>
+<p>✉️ Not subscribed yet? <a href="https://tinyletter.com/marianoguerra/">Subscribe to the Newsletter</a> / <a href="https://newsletter.futureofcoding.org/">Archive</a> / <a href="https://history.futureofcoding.org/newsletter/rss.xml">RSS</a></p>
+<p>🎙️ Prefer podcasts? check the <a href="https://futureofcoding.org/episodes/">Future of Coding Podcast</a></p>
+      </div>
+    </article><article><h1 class="title"><a href="posts/future-of-coding-weekly-202401-week-1/">Future of Coding Weekly 2024/01 Week 1</a></h1>
       <h2 class="subtitle is-6">2024-01-01 22:44</h2>
       <div class="content">
     <p>🎙️ FoC: Mary Shaw • Myths &amp; Mythconceptions 🥕 Elliot Evans 2023 projects 📑 Malleable Systems Collective 2023 Digest</p>
@@ -1045,149 +1179,9 @@ I can’t name just a single reason I started work on my language, Noulith, back
 <p>Also if you know some impressive solobuilders, feel free to name drop them 🙂</p>
 <p>I would appreciate any link or name dropped in the thread 😉</p>
       </div>
-    </article><article><h1 class="title"><a href="posts/future-of-coding-weekly-202310-week-5/">Future of Coding Weekly 2023/10 Week 5</a></h1>
-      <h2 class="subtitle is-6">2023-10-30 00:51</h2>
-      <div class="content">
-    <p>🖼️ Drawing Images Explains Programs 🐰 Data Exploration, Visualization &amp; Learning 💡 Is generic code just hopeless in practice?</p>
-<h2>Two Minute Week</h2>
-<h2>Our Work</h2>
-<p>💬 <a href="https://pel-daniel.github.io/cv/">Daniel Garcia</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/share-your-work.html#2023-10-29T06:03:43.331Z">🧵 conversation</a></p>
-<p>I’ve been working on a tool to get a high level view of an entire typescript codebase to help me understand/navigate it.</p>
-<p>It shows all the functions and interfaces. Every  <code>interface</code>  is represented by a color, and the signature of a function is shown with these colors.</p>
-<p>I need some help with a better algorithm to transform the name of the  <code>type</code>  into to a color. e.g. the type  <code>string</code>  -&gt; blue,  <code>int</code>  -&gt; green, etc.</p>
-<p>The problem is that I’m not sure what I want the output to be, how should the color space be distributed? how should colors be clustered?</p>
-<p>I think I can copy what code editors use for  <code>semantic highlighting</code> , but I haven’t been able to find an implementation of it.</p>
-<p>Does anyone have ideas on what I should search for?</p>
-<p>Happy to explain more, if it’s not clear.</p>
-<p>PS. Here is how a codebase currently looks. White rectangles are files, interfaces are shown on the top, and functions on the bottom</p>
-<p><img alt="Screenshot 2023-10-28 at 10.08.57 PM.png" src="http://history.futureofcoding.org/history/msg_files/F06/F063BQWJFDJ.png"></p>
-<h2>Devlog Together</h2>
-<p>📝 <a href="https://history.futureofcoding.org/history/?fromDate=2023-10-22&amp;toDate=2023-10-28&amp;channel=thinking-together&amp;filter=#2023-10-25T09:06:24.573Z">ALDs compatibility with code projection focused of concatenative code</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/devlog-together.html#2023-10-26T19:10:50.567Z">🧵 conversation</a></p>
-<p>Some nice original research by <a href="https://twitter.com/mechadense">Lukas Süss</a>: <a href="posts/future-of-coding-weekly-202310-week-5/?fromDate=2023-10-21&amp;toDate=2023-10-27&amp;channel=thinking-together&amp;filter=#2023-10-24T22:28:03.239Z">💬 #thinking-together@2023-10-24T22:28:03.239Z</a></p>
-<blockquote>
-<p>[October 24th, 2023 3:28 PM] lukas.suess: &lt;@U01ULCCJB7X&gt;
-I spontaneously decided to project your example to an ALD mockup to get a bit of a feeling for inhowfar ALDs are compatible with your code projection focused of concatenative code.
-Seems pretty good.</p>
-<p>★ One nice thing with ALDs is that library functions are threated exactly the same as argument values. They come in as semi-implicit arguments via the grey collection abstraction-line.
-★ One annoying (but I think good) restriction of ALD is that functions (and definitions in let sections) can only ever have just one single value-line as their final output (except one cheats a bit as I've done here with memocurry :smiling_imp:).</p>
-</blockquote>
-<p>💬 <a href="http://akkartik.name/about">Kartik Agaram</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/devlog-together.html#2023-10-28T20:19:31.035Z">🧵 conversation</a></p>
-<p>Ok, I think I've tapped into a rich new vein of pointless demos.</p>
-<p>🔗 <a href="https://unit.land/">unit.land</a> via <strong>Samuel Timbó</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/devlog-together.html#2023-10-28T23:01:17.733Z">🧵 conversation</a></p>
-<p>The time has come for “the bot” to leave main <a href="https://unit.land">unit.land</a> 🥲 </p>
-<blockquote>
-<p>📝 <a href="https://unit.land/">unit.land</a></p>
-<p>Local First Open Source Distribuition of the Unit Programming Environment.</p>
-<p>📝 <a href="https://twitter.com/io_sammt/status/1718332004419170414?s=46&amp;t=kvyalr_gJlbdW-jQJstTcg">Samuel Timbó on X</a></p>
-<p>Doesn't <a href="https://unit.land">unit.land</a> feel lonely without the bot?</p>
-</blockquote>
-<h2>Thinking Together</h2>
-<p>📝 <a href="https://akkartik.name/freewheeling/">Using computers more freely and safely</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-24T04:29:33.522Z">🧵 conversation</a></p>
-<p><em>Replacing authentication with visual identity</em> </p>
-<p>Background: I'm starting to think about building a new forum. Given <a href="https://akkartik.name/freewheeling/">my past</a>, it won't surprise anyone that I mean to do this outside the morass of non-convivial software that is the modern web browser. My broad plan is:</p>
-<ul>
-<li>LÖVE v12 will support https, and <a href="https://github.com/love2d/love/actions">release candidates</a> are already quite stable. Good enough to start building on.</li>
-<li>I'll build my forum out of a server-side API in Lua and a client in LÖVE v12. (Should be easy to support Windows, Linux, BSD and Android. Mac and iOS will require some annual contortions to build LÖVE for oneself.)</li>
-<li>The server side will of course be open source just like the client. In addition, all post/comment data will be published to a git repo on something like a daily basis.</li>
-</ul>
-<p>The one major open question concerns authentication. How can we have stable identity? The above architecture is intended to allow anyone to host the forum (without trying to build galaxy-brain merkle trees, federated protocols or CRDTs), and I would prefer to not take a position of power as the source of everyone's hashed passwords (an intrinsically centralizing architecture).</p>
-<p>A few months ago someone showed me this ancient essay called <a href="https://web.archive.org/web/20091126092028/http://www.kuro5hin.org/story/2009/3/12/33338/3000">"attacked from within"</a>, and I find myself thinking about it often. The whole thing is worth reading, but for this thread the crucial list of bullets halfway down is:</p>
-<ul>
-<li>Registration keeps out good posters.</li>
-<li>Registration lets in bad posters.</li>
-<li>Registration attracts trolls.</li>
-<li>Anonymity counters vanity.</li>
-</ul>
-<p>A provocative worldview that seems at least worth exploring. Keeping this in mind, I have a hazy idea that looks like this:</p>
-<ul>
-<li>When you run the client you get to choose your handle, but it's not unique (cf. <a href="https://en.wikipedia.org/wiki/Zooko%27s_triangle">Zooko's Triangle</a>)</li>
-<li>When you run the client for the first time, it creates an RSA keypair for you.</li>
-<li>When composing messages, the client signs the message with your private key (<a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Signing_messages">description on Wikipedia</a>)</li>
-<li>When rendering messages, the client validates the signature against your public key and shows something like an <a href="https://en.wikipedia.org/wiki/Identicon">identicon</a> of the public key.</li>
-</ul>
-<p>Implications of this setup:</p>
-<ul>
-<li>No registration</li>
-<li>Your "password" (private key) never leaves your device(s).</li>
-<li>When reading a thread you see a handle like  <code>spiralganglion</code> . However, the handle is not authoritative. Next to it is an identicon that is authoritative.</li>
-<li>It's easy in a thread to see if there are ever two people with the same handle but different identicons.</li>
-<li>Since the client platform is starting from scratch, accessibility and internationalization will be a challenge for a long time 😕</li>
-</ul>
-<p>No guarantees this is all doable. It's quite possible the cryptographic operations will be untenably slow when implemented in Lua, and a native library for them would complicate the simple install story that is LÖVE's greatest strength.</p>
-<p>But I'm curious to get people's thoughts on this idea in principle.</p>
-<p>💬 <a href="https://twitter.com/aspen_cloud">Matthew Linkous</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-24T19:11:28.510Z">🧵 conversation</a></p>
-<p>Maybe more of a general coding question but how do you y’all feel about database/stores that add fields to your documents that insert?</p>
-<p>E.g. you insert  <code>{ name: 'Titanic', director: 'James Cameron' }</code>  into  <code>movies</code>  and when you fetch it you get back  <code>{_id: 1234, _col: 'movies', name: 'Titanic', director: 'James Cameron' }</code> </p>
-<p>Does that bug you? Don’t care?</p>
-<p>Are there any ways to get around this so there aren’t won’t ever have collections between user defined fields and internal metadata?</p>
-<p>💬 <strong>FreeMasen</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-25T00:48:09.284Z">🧵 conversation</a></p>
-<p>One of the things I am curious about is how a11y relates to the future of coding. So far it doesn't seem to come up in the discussions on the podcast but I think there is something to be said about the advancement in a11y in computing over the last 25 years and a large part of this is due to a movement away from some of the more creative interface designs (ala Magic Ink). Is there a future of code that is more accessible to people with different abilities?</p>
-<p>🧮 <a href="https://tromp.github.io/cl/diagrams.html">Lambda Diagrams</a> via <a href="https://twitter.com/mechadense">Lukas Süss</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-25T09:06:24.573Z">🧵 conversation</a></p>
-<p>Here's the big omega combinator as annotated lambda diagram.</p>
-<p>Plus showing how the (here non-terminating) evaluation could be fluently animated. 🤤</p>
-<p>( John Tromps unannoteed version here: <a href="https://tromp.github.io/cl/diagrams.html">tromp.github.io/cl/diagrams.html</a> )</p>
-<p><img alt="Screenshot_20231025_105239.png" src="http://history.futureofcoding.org/history/msg_files/F06/F062H8XPRK8.png"></p>
-<p>💡💬 <strong>Marcelle Rusu (they/them)</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-25T15:02:42.762Z">🧵 conversation</a></p>
-<p>In the past year or 2, I got interested in OO and I find even its basic form within a mainstream language very powerful.</p>
-<p>Yet, when I try to advocate for using polymorphism in almost any context, I get "this is too unfamiliar"/"that's not how we do things in framework X" instead advocating for switch statements or similar.</p>
-<p>And it really gets me thinking, if we don't even understand OO after 30 years of mainstream adoption (in some form or another) and are still doing "structured programming" with lambdas &amp; objects, is generic code just hopeless in practice? Is there an education problem? Is it just indicative of how poor standards are that few people have the privilege to do any amount of design for their systems before developing?</p>
-<p>If so, how does "future of coding" even matter if any form of real adoption feels impossible.</p>
-<p>💡💬 <a href="https://jimmyhmiller.github.io/">Jimmy Miller</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-26T19:47:15.445Z">🧵 conversation</a></p>
-<p>Forking <strong>@Marcelle Rusu (they/them)</strong>’s thread onto this bit</p>
-<blockquote>
-<p>If so, how does "future of coding" even matter if any form of real adoption feels impossible.</p>
-</blockquote>
-<p>(Making a new thread about this because the other one has become about OO instead of this bit)</p>
-<p>I feel this deeply. It can often feel as if things don't get adopted. That programming doesn't change for the better. I have so many thoughts on this, it is hard to summarize.</p>
-<p>First, I do think we can get others to adopt the things we value. It is almost never an education issue, imo and instead a value question. (I am intentionally leaving aside the OO frame here). Think about the impact that Rich Hickey has had on how many people code, not just clojure people, but in the industry broadly. How did he do it? Through Simple Made Easy, a talk largely about values, not techniques. The same is true of Bret Victor's influence on the future of coding community. He communicated values that others adopted.</p>
-<p>I've found this to be true in practice as well. Trying to convince people to change their coding style requires diligence, communicating values, and showing how code improves because of these values. Conflict often happens when people implicitly hold very different values. I'm going to bet that is the case in the original example given.</p>
-<p>But I also want to step back and ask, what kind of adoption, by who, by how many people? I'm willing to bet a lot of people in this slack listen to some genre of music that isn't completely mainstream. Have those genres failed because of the lack of becoming mainstream? Would they be better if they became mainstream?</p>
-<p>💬 <strong>Arcade Wise</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-26T20:52:18.869Z">🧵 conversation</a></p>
-<p>Have y’all heard about the PLATO computer system? </p>
-<p>💬 <strong>Gregor</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-28T14:57:08.473Z">🧵 conversation</a></p>
-<p>I’m looking to learn more about a space, that I’m not sure exists. Does this word comob trigger associations to existing projects: spreadsheet, schema, hierarchy?</p>
-<p>🐰🎥 <a href="https://www.youtube.com/watch?v=wE-vOSY-ULc">"No Code" Intro to Data Rabbit for Visualization &amp; Dashboarding (for non-Clojure peeps)</a> via <strong>Qqwy / Marten</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-28T16:29:34.734Z">🧵 conversation</a></p>
-<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/wE-vOSY-ULc/hqdefault.jpg"></p>
-<p>What do people here think about the REBL (read-eval-browse-loop) and the ‘Data Rabbit’ project which evolved from it?</p>
-<p>Both are tools originating in Clojure, but where the REBL is about mixing writing/running Clojure with having a graphical interface to drill down into the output data (e.g. a natural ‘visual programming’ evolution of a REPL),</p>
-<p>I’d describe Data Rabbit as the opposite: A data inspection/‘dashboard creation’ tool where you can do most tasks visually, only dropping down to Clojure if you want to do really custom things (or create new types of ‘blocks’/interactions).</p>
-<p>💬 <strong>Qqwy / Marten</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/thinking-together.html#2023-10-28T16:39:19.200Z">🧵 conversation</a></p>
-<p>And in not totally unrelated fashion, there’s PureData (FOSS) / Cycling76' Max (paid), which are reasonably successful graph-based programming languages for digital music synthesizers.</p>
-<p>I expect that in that particular case graph-based programming is so successful because it is a direct translation of how (analog) modular synthesizers used to be patched together, flattening the learning curve for musicians.</p>
-<h2>Content</h2>
-<p>🐍 <a href="https://pythontutor.com/">pythontutor.com</a> via <strong>Marcelle Rusu (they/them)</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/linking-together.html#2023-10-23T21:15:02.428Z">🧵 conversation</a></p>
-<p><a href="https://pythontutor.com/">pythontutor.com</a></p>
-<p>Anyone play around with this? I was given this back in first-year comsci, and I think honestly there's few tools which top it.</p>
-<p>🖼️🎥 <a href="https://vimeo.com/11064303">Kaleido Demo</a> via <a href="https://twitter.com/qualmist">Joshua Horowitz</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/linking-together.html#2023-10-27T08:54:29.769Z">🧵 conversation</a></p>
-<p><img alt="Vimeo Thumbnail" src="https://i.vimeocdn.com/video/59768675-9325a1808dd0b7c76de039fd1b3be003cdda7be1fd1b68b17043a3a9cd3d805d-d_295x166"></p>
-<p>Kaleido lets a Processing programmer draw a picture to map out different parts of their program</p>
-<p>This idea is so simple and “unsophisticated” and it looks utterly transformative. (I’ve never seen anything like it!)</p>
-<h2>🤖</h2>
-<p>☠️ <a href="https://venturebeat.com/ai/meet-nightshade-the-new-tool-allowing-artists-to-poison-ai-models-with-corrupted-training-data/">Meet Nightshade, the new tool allowing artists to ‘poison’ AI models with corrupted training data</a> via <a href="http://www.chrismaughan.com/">Chris Maughan</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/of-ai.html#2023-10-26T09:43:19.381Z">🧵 conversation</a></p>
-<p>📝 <a href="https://guitarvydas.github.io/2023/10/27/PEO-Generative-AI.html">Peo generative ail</a> via <a href="https://guitarvydas.github.io/2021/09/23/Manifesto.html">Paul Tarvydas</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2023/10/W5/of-ai.html#2023-10-27T15:32:44.491Z">🧵 conversation</a></p>
-<p>A.I. is simply pattern matching - a summary of a talk I attended … </p>
-      </div>
     </article><nav class="postindexpager"><ul class="pager">
 <li class="next">
-                <a href="index-4.html" rel="next">Older posts</a>
+                <a href="index-5.html" rel="next">Older posts</a>
             </li>
         </ul></nav>
 </div>
