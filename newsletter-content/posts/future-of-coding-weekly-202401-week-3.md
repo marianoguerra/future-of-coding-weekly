@@ -57,6 +57,7 @@ Proof of concept for having an LLM generate logical code in a visual coding envi
 [🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/01/W3/devlog-together.html#2024-01-14T09:40:46.364Z)
 
 ![Youtube Thumbnail](https://img.youtube.com/vi/glFRPjWWlzA/hqdefault.jpg)
+
 [In this video](https://youtu.be/glFRPjWWlzA)  I show a timeline slider with which you can scroll through the executed path of a visual flow program. Some node-types like variables and the node-tree-visualizer have there state being recorded for each execution.. so when moving through the timeline, these nodes are updated and especially with the node-tree-visualizer this gives a good overview of how a program/algorithm works (in this case quicksort). Instead of having to visualize this in your head , you see the effect of the program for each execution step and you can also inspect the variables like the left and right arrays and the pivot variable.
 
 
