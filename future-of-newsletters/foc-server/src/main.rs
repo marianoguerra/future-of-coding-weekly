@@ -1,3 +1,4 @@
+use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_ses::types::{Body, Content, Destination, Message};
 use aws_sdk_ses::{Client, Error};
 use axum::{
@@ -25,6 +26,88 @@ pub const DEFAULT_DB_NAME: &str = "foc.db";
 pub const APP_NAME: &str = "foc";
 pub const COMMAND: &str = "foc";
 
+async fn make_aws_client() -> Client {
+    let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
+    let config = aws_config::from_env().region(region_provider).load().await;
+    let client = aws_sdk_ses::Client::new(&config);
+    client
+}
+
+#[derive(Debug)]
+enum NewsletterSendErr {
+    SesError(aws_sdk_ses::Error),
+    ReadFileError(std::io::Error),
+    CsvReadError(csv::Error),
+}
+
+impl From<aws_sdk_ses::Error> for NewsletterSendErr {
+    fn from(error: aws_sdk_ses::Error) -> Self {
+        NewsletterSendErr::SesError(error)
+    }
+}
+
+impl From<std::io::Error> for NewsletterSendErr {
+    fn from(error: std::io::Error) -> Self {
+        NewsletterSendErr::ReadFileError(error)
+    }
+}
+
+impl From<csv::Error> for NewsletterSendErr {
+    fn from(error: csv::Error) -> Self {
+        NewsletterSendErr::CsvReadError(error)
+    }
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct NewsletterSubscriptionRecord {
+    #[serde(rename = "E-mail")]
+    address: String,
+    #[serde(rename = "Subscribe Date (GMT)")]
+    pub subscribe_date: String,
+    #[serde(rename = "Notes")]
+    pub notes: String,
+}
+
+async fn send_newsletter(
+    title: &str,
+    mail_path: &str,
+    subscriber_list: &str,
+) -> Result<(), NewsletterSendErr> {
+    println!("send newsletter: {title} {mail_path} {subscriber_list}");
+    let base_path = std::path::Path::new(mail_path);
+    let mail_text_path = base_path.join("mail.txt");
+    let mail_html_path = base_path.join("mail.html");
+
+    let mail_text_content = std::fs::read_to_string(mail_text_path)?;
+    let mail_html_content = std::fs::read_to_string(mail_html_path)?;
+
+    let mut sub_reader = csv::Reader::from_path(subscriber_list)?;
+
+    let client = make_aws_client().await;
+    let mut count = 0;
+    for result in sub_reader.deserialize() {
+        let record: NewsletterSubscriptionRecord = result?;
+        println!("{:?}", record);
+        send_message(
+            &client,
+            vec![record.address.to_string()],
+            "Mariano Guerra <mariano@marianoguerra.org>",
+            title,
+            &mail_text_content,
+            &mail_html_content,
+        )
+        .await?;
+
+        count += 1;
+
+        if (count % 100) == 0 {
+            println!("Sent to {count}");
+        }
+    }
+
+    Ok(())
+}
+
 #[tokio::main(flavor = "multi_thread")]
 async fn main() {
     let cmd = clap::Command::new(COMMAND)
@@ -36,7 +119,31 @@ async fn main() {
                 .action(clap::ArgAction::Count)
                 .help("Sets the level of verbosity"),
         )
-        //.subcommand_required(true)
+        .subcommand_required(true)
+        .subcommand(
+            clap::Command::new("send-newsletter")
+                .arg(
+                    clap::Arg::new("title")
+                        .long("title")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set)
+                        .required(true),
+                )
+                .arg(
+                    clap::Arg::new("mail-path")
+                        .long("mail-path")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set)
+                        .required(true),
+                )
+                .arg(
+                    clap::Arg::new("subscriber-list")
+                        .long("subscriber-list")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set)
+                        .required(true),
+                ),
+        )
         .subcommand(
             clap::Command::new("server")
                 .arg(
@@ -82,7 +189,21 @@ async fn main() {
             let port = matches.get_one::<u16>("port").unwrap_or(&DEFAULT_PORT);
             start(address, *port).await;
         }
-        None => start(DEFAULT_ADDRESS, DEFAULT_PORT).await,
+        Some(("send-newsletter", matches)) => {
+            let o_title = matches.get_one::<String>("title");
+            let o_mail_path = matches.get_one::<String>("mail-path");
+            let o_subscriber_list = matches.get_one::<String>("subscriber-list");
+
+            if let (Some(title), Some(mail_path), Some(subscriber_list)) =
+                (o_title, o_mail_path, o_subscriber_list)
+            {
+                if let Err(err) = send_newsletter(title, mail_path, subscriber_list).await {
+                    eprintln!("Error sending newsletter: {err:?}");
+                }
+            } else {
+                eprintln!("missing arguments for send-newsletter");
+            }
+        }
         _ => {}
     };
 }
@@ -221,14 +342,25 @@ async fn send_message(
     contacts: Vec<String>,
     from: &str,
     subject: &str,
-    message: &str,
+    message_text: &str,
+    message_html: &str,
 ) -> Result<(), Error> {
     let mut dest: Destination = Destination::builder().build();
     dest.to_addresses = Some(contacts);
     let subject_content = Content::builder().data(subject).charset("UTF-8").build()?;
-    let body_content = Content::builder().data(message).charset("UTF-8").build()?;
+    let body_text_content = Content::builder()
+        .data(message_text)
+        .charset("UTF-8")
+        .build()?;
+    let body_html_content = Content::builder()
+        .data(message_html)
+        .charset("UTF-8")
+        .build()?;
 
-    let body = Body::builder().text(body_content).build();
+    let body = Body::builder()
+        .html(body_html_content)
+        .text(body_text_content)
+        .build();
 
     let msg = Message::builder()
         .subject(subject_content)
