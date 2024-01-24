@@ -1,112 +1,11 @@
-use aws_config::meta::region::RegionProviderChain;
-use aws_sdk_ses::types::{Body, Content, Destination, Message};
-use aws_sdk_ses::{Client, Error};
-use axum::{
-    extract::{self, Path},
-    http::header::{HeaderMap, HeaderValue},
-    http::StatusCode,
-    routing::{get, post},
-    Json, Router,
-};
 use clap::Arg;
-use rust_embed::RustEmbed;
-use serde::{Deserialize, Serialize};
-use std::{borrow::Cow, net::SocketAddr};
+use libfoc::{db, mail::send_newsletter, server::start};
 
-#[derive(RustEmbed)]
-#[folder = "./ui/"]
-struct Asset;
-
-pub type CowStr = Cow<'static, [u8]>;
-
-pub const DEFAULT_PORT: u16 = 3852;
-pub const DEFAULT_PORT_STR: &str = "3852";
-pub const DEFAULT_ADDRESS: &str = "127.0.0.1";
-pub const DEFAULT_DB_NAME: &str = "foc.db";
-pub const APP_NAME: &str = "foc";
-pub const COMMAND: &str = "foc";
-
-async fn make_aws_client() -> Client {
-    let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
-    let config = aws_config::from_env().region(region_provider).load().await;
-    let client = aws_sdk_ses::Client::new(&config);
-    client
-}
-
-#[derive(Debug)]
-enum NewsletterSendErr {
-    SesError(aws_sdk_ses::Error),
-    ReadFileError(std::io::Error),
-    CsvReadError(csv::Error),
-}
-
-impl From<aws_sdk_ses::Error> for NewsletterSendErr {
-    fn from(error: aws_sdk_ses::Error) -> Self {
-        NewsletterSendErr::SesError(error)
-    }
-}
-
-impl From<std::io::Error> for NewsletterSendErr {
-    fn from(error: std::io::Error) -> Self {
-        NewsletterSendErr::ReadFileError(error)
-    }
-}
-
-impl From<csv::Error> for NewsletterSendErr {
-    fn from(error: csv::Error) -> Self {
-        NewsletterSendErr::CsvReadError(error)
-    }
-}
-
-#[derive(Debug, serde::Deserialize)]
-pub struct NewsletterSubscriptionRecord {
-    #[serde(rename = "E-mail")]
-    address: String,
-    #[serde(rename = "Subscribe Date (GMT)")]
-    pub subscribe_date: String,
-    #[serde(rename = "Notes")]
-    pub notes: String,
-}
-
-async fn send_newsletter(
-    title: &str,
-    mail_path: &str,
-    subscriber_list: &str,
-) -> Result<(), NewsletterSendErr> {
-    println!("send newsletter: {title} {mail_path} {subscriber_list}");
-    let base_path = std::path::Path::new(mail_path);
-    let mail_text_path = base_path.join("mail.txt");
-    let mail_html_path = base_path.join("mail.html");
-
-    let mail_text_content = std::fs::read_to_string(mail_text_path)?;
-    let mail_html_content = std::fs::read_to_string(mail_html_path)?;
-
-    let mut sub_reader = csv::Reader::from_path(subscriber_list)?;
-
-    let client = make_aws_client().await;
-    let mut count = 0;
-    for result in sub_reader.deserialize() {
-        let record: NewsletterSubscriptionRecord = result?;
-        println!("{:?}", record);
-        send_message(
-            &client,
-            vec![record.address.to_string()],
-            "Mariano Guerra <mariano@marianoguerra.org>",
-            title,
-            &mail_text_content,
-            &mail_html_content,
-        )
-        .await?;
-
-        count += 1;
-
-        if (count % 100) == 0 {
-            println!("Sent to {count}");
-        }
-    }
-
-    Ok(())
-}
+const DEFAULT_PORT: u16 = 3852;
+const DEFAULT_PORT_STR: &str = "3852";
+const DEFAULT_ADDRESS: &str = "127.0.0.1";
+const DEFAULT_DB_NAME: &str = "foc.db";
+const COMMAND: &str = "foc";
 
 #[tokio::main(flavor = "multi_thread")]
 async fn main() {
@@ -120,6 +19,7 @@ async fn main() {
                 .help("Sets the level of verbosity"),
         )
         .subcommand_required(true)
+        .subcommand(clap::Command::new("export-subscribers"))
         .subcommand(
             clap::Command::new("send-newsletter")
                 .arg(
@@ -187,7 +87,14 @@ async fn main() {
                 .get_one::<String>("address")
                 .unwrap_or(&default_address);
             let port = matches.get_one::<u16>("port").unwrap_or(&DEFAULT_PORT);
-            start(address, *port).await;
+            match db::open_and_setup(DEFAULT_DB_NAME).await {
+                Ok(conn) => {
+                    start(address, *port, conn).await;
+                }
+                Err(err) => {
+                    eprintln!("Error opening database: {err:?}");
+                }
+            }
         }
         Some(("send-newsletter", matches)) => {
             let o_title = matches.get_one::<String>("title");
@@ -204,6 +111,31 @@ async fn main() {
                 eprintln!("missing arguments for send-newsletter");
             }
         }
+        Some(("export-subscribers", _matches)) => match db::open_and_setup(DEFAULT_DB_NAME).await {
+            Ok(conn) => match db::get_active_subscriptions(&conn).await {
+                Ok(subscribers) => {
+                    let mut wtr = csv::Writer::from_writer(std::io::stdout());
+                    wtr.write_record(&["E-mail", "Subscribe Date (GMT)", "Token"])
+                        .expect("opening csv writer");
+                    for subscriber in subscribers {
+                        wtr.write_record(&[
+                            subscriber.email,
+                            subscriber.created_at,
+                            subscriber.token,
+                        ])
+                        .expect("writing csv record");
+                    }
+
+                    wtr.flush().expect("flushing writer");
+                }
+                Err(err) => {
+                    eprintln!("Error listting subscriber: {err:?}");
+                }
+            },
+            Err(err) => {
+                eprintln!("Error opening database: {err:?}");
+            }
+        },
         _ => {}
     };
 }
@@ -228,154 +160,5 @@ pub fn setup_logs(log_level: log::LevelFilter) -> Result<(), anyhow::Error> {
         .chain(fern::log_file("output.log")?)
         // Apply globally
         .apply()?;
-    Ok(())
-}
-
-async fn start(address: &str, port: u16) {
-    match format!("{address}:{port}").parse() {
-        Ok(addr) => {
-            log::info!("Serving @ {}:{}", address, port);
-            let _ = serve(addr).await;
-        }
-        Err(err) => {
-            log::error!("bad address: {:?}", err);
-        }
-    }
-}
-
-async fn serve(addr: SocketAddr) -> Result<(), hyper::Error> {
-    let app = Router::new()
-        // routes are matched from bottom to top
-        .route("/", get(get_index))
-        .route("/action", post(handle_action))
-        .route("/*path", get(get_asset));
-
-    match axum_server::bind(addr).serve(app.into_make_service()).await {
-        Ok(_) => Ok(()),
-        Err(err) => {
-            log::error!("Error Starting Server: {}", err.to_string());
-            std::process::exit(1);
-        }
-    }
-}
-
-async fn get_asset(
-    Path(path): Path<String>,
-) -> Result<(StatusCode, HeaderMap, CowStr), StatusCode> {
-    serve_file(path).await
-}
-
-async fn serve_file(path: String) -> Result<(StatusCode, HeaderMap, CowStr), StatusCode> {
-    match Asset::get(&path) {
-        Some(file) => {
-            let guess = mime_guess::from_path(path);
-            let mime = guess
-                .first_raw()
-                .map(HeaderValue::from_static)
-                .unwrap_or_else(|| {
-                    HeaderValue::from_str(mime::APPLICATION_OCTET_STREAM.as_ref()).unwrap()
-                });
-
-            let mut headers = HeaderMap::new();
-            headers.append("content-type", mime);
-
-            Ok((StatusCode::OK, headers, file.data))
-        }
-        None => Err(StatusCode::NOT_FOUND),
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(tag = "type")]
-enum Action {
-    Subscribe { mail: String },
-    Unsubscribe { mail: String, token: String },
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(tag = "type")]
-enum ActionResult {
-    OK,
-    Error { reason: String },
-}
-
-impl ActionResult {
-    fn error(reason: &str) -> Self {
-        Self::Error {
-            reason: reason.to_string(),
-        }
-    }
-}
-
-async fn get_index() -> Result<(StatusCode, HeaderMap, CowStr), StatusCode> {
-    serve_file("index.html".into()).await
-}
-
-async fn handle_action(
-    extract::Json(payload): extract::Json<Action>,
-) -> Result<(StatusCode, HeaderMap, Json<ActionResult>), StatusCode> {
-    log::info!("{payload:?}");
-    let mut headers = HeaderMap::new();
-    headers.insert("content-type", "application/json".parse().unwrap());
-    match payload {
-        Action::Subscribe { mail } => {
-            if mail == "FAIL" {
-                Ok((
-                    StatusCode::BAD_REQUEST,
-                    headers,
-                    Json(ActionResult::error("asked to fail")),
-                ))
-            } else {
-                Ok((StatusCode::OK, headers, Json(ActionResult::OK)))
-            }
-        }
-        Action::Unsubscribe { .. } => Ok((
-            StatusCode::BAD_REQUEST,
-            headers,
-            Json(ActionResult::error("not implemented")),
-        )),
-    }
-}
-
-async fn send_message(
-    client: &Client,
-    contacts: Vec<String>,
-    from: &str,
-    subject: &str,
-    message_text: &str,
-    message_html: &str,
-) -> Result<(), Error> {
-    let mut dest: Destination = Destination::builder().build();
-    dest.to_addresses = Some(contacts);
-    let subject_content = Content::builder().data(subject).charset("UTF-8").build()?;
-    let body_text_content = Content::builder()
-        .data(message_text)
-        .charset("UTF-8")
-        .build()?;
-    let body_html_content = Content::builder()
-        .data(message_html)
-        .charset("UTF-8")
-        .build()?;
-
-    let body = Body::builder()
-        .html(body_html_content)
-        .text(body_text_content)
-        .build();
-
-    let msg = Message::builder()
-        .subject(subject_content)
-        .body(body)
-        .build();
-
-    client
-        .send_email()
-        .source(from)
-        .destination(dest)
-        .message(msg)
-        .send()
-        .await?;
-
-    println!("Email sent");
-
     Ok(())
 }
