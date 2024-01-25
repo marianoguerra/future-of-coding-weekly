@@ -88,6 +88,7 @@ async fn serve_file(path: String) -> Result<(StatusCode, HeaderMap, CowStr), Sta
 #[serde(tag = "type")]
 enum Action {
     Subscribe { mail: String },
+    Confirm { mail: String, token: String },
     Unsubscribe { mail: String, token: String },
 }
 
@@ -136,6 +137,19 @@ async fn handle_action(
                             Json(ActionResult::error("db error")),
                         ))
                     }
+                }
+            }
+        }
+        Action::Confirm { mail, token } => {
+            match db::confirm_subscription(&state.db_connection, &mail, &token).await {
+                Ok(()) => Ok((StatusCode::OK, headers, Json(ActionResult::OK))),
+                Err(err) => {
+                    log::error!("Error confirming subscription: {err:?}");
+                    Ok((
+                        StatusCode::BAD_REQUEST,
+                        headers,
+                        Json(ActionResult::error("db error")),
+                    ))
                 }
             }
         }

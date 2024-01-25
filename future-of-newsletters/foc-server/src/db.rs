@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS newsletter_subscriptions (
     email TEXT NOT NULL UNIQUE,
     token TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
+    confirmed_at TIMESTAMP,
     deleted_at TIMESTAMP
 )
 "###,
@@ -45,13 +46,27 @@ pub async fn add_subscription(conn: &Connection, email: &str, token: &str) -> Re
     .await
 }
 
+pub async fn confirm_subscription(conn: &Connection, email: &str, token: &str) -> Result<()> {
+    let email = email.to_string();
+    let token = token.to_string();
+    conn.call(move |conn| {
+        let current_time = Utc::now().to_rfc3339();
+        conn.execute(
+            "UPDATE newsletter_subscriptions SET confirmed_at = ?1 WHERE email = ?2 AND token = ?3",
+            params![current_time, email, token],
+        )?;
+        Ok(())
+    })
+    .await
+}
+
 pub async fn remove_subscription(conn: &Connection, email: &str, token: &str) -> Result<()> {
     let email = email.to_string();
     let token = token.to_string();
     conn.call(move |conn| {
         let current_time = Utc::now().to_rfc3339();
         conn.execute(
-            "UPDATE newsletter_subscriptions SET deleted_at = ?1 WHERE email = ?2 ANd token = ?3",
+            "UPDATE newsletter_subscriptions SET deleted_at = ?1 WHERE email = ?2 AND token = ?3",
             params![current_time, email, token],
         )?;
         Ok(())
@@ -63,17 +78,19 @@ pub async fn remove_subscription(conn: &Connection, email: &str, token: &str) ->
 pub struct Subscriber {
     pub email: String,
     pub created_at: String,
+    pub confirmed_at: Option<String>,
     pub token: String,
 }
 
 pub async fn get_active_subscriptions(conn: &Connection) -> Result<Vec<Subscriber>> {
     conn.call(move |conn| {
         let mut stmt =
-            conn.prepare("SELECT email, created_at, token FROM newsletter_subscriptions WHERE deleted_at IS NULL")?;
+            conn.prepare("SELECT email, created_at, confirmed_at, token FROM newsletter_subscriptions WHERE deleted_at IS NULL AND confirmed_at IS NOT NULL")?;
         let rows = stmt.query_map(params![], |row| Ok(Subscriber {
              email: row.get(0)?,
              created_at: row.get(1)?,
-             token: row.get(2)?,
+             confirmed_at: row.get(3)?,
+             token: row.get(3)?,
         }))?;
 
         let mut subscriptions = Vec::new();
@@ -100,6 +117,7 @@ mod tests {
         let conn = setup_in_memory_db().await?;
         let token = new_token();
         add_subscription(&conn, "test@example.com", &token).await?;
+        confirm_subscription(&conn, "test@example.com", &token).await?;
 
         let active_subscriptions = get_active_subscriptions(&conn).await?;
 
@@ -114,6 +132,7 @@ mod tests {
         let conn = setup_in_memory_db().await?;
         let token = new_token();
         add_subscription(&conn, "test@example.com", &token).await?;
+        confirm_subscription(&conn, "test@example.com", &token).await?;
 
         remove_subscription(&conn, "test@example.com", "bad token").await?;
         assert_eq!(get_active_subscriptions(&conn).await?.len(), 1);
@@ -127,10 +146,17 @@ mod tests {
     #[tokio::test]
     async fn test_get_active_subscriptions() -> Result<()> {
         let conn = setup_in_memory_db().await?;
-        add_subscription(&conn, "active@example.com", &new_token()).await?;
         let token = new_token();
-        add_subscription(&conn, "inactive@example.com", &token).await?;
-        remove_subscription(&conn, "inactive@example.com", &token).await?;
+        add_subscription(&conn, "active@example.com", &token).await?;
+        confirm_subscription(&conn, "active@example.com", &token).await?;
+
+        let token1 = new_token();
+        add_subscription(&conn, "inactive@example.com", &token1).await?;
+        confirm_subscription(&conn, "inactive@example.com", &token1).await?;
+        remove_subscription(&conn, "inactive@example.com", &token1).await?;
+
+        let token2 = new_token();
+        add_subscription(&conn, "notconfirmed@example.com", &token2).await?;
 
         let active_subscriptions = get_active_subscriptions(&conn).await?;
 
