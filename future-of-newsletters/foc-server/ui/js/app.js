@@ -170,7 +170,7 @@ function makeDomFns(prefix) {
 }
 
 async function sendAction(reqBody) {
-  const res = await fetch("/action", {
+  const res = await fetch("./action", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(reqBody),

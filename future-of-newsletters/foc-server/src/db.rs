@@ -89,7 +89,7 @@ pub async fn get_active_subscriptions(conn: &Connection) -> Result<Vec<Subscribe
         let rows = stmt.query_map(params![], |row| Ok(Subscriber {
              email: row.get(0)?,
              created_at: row.get(1)?,
-             confirmed_at: row.get(3)?,
+             confirmed_at: row.get(2)?,
              token: row.get(3)?,
         }))?;
 

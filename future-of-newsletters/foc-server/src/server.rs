@@ -12,7 +12,7 @@ use std::{borrow::Cow, net::SocketAddr};
 use tokio_rusqlite::Connection;
 
 const BASE_NEWSLETTER_ACTION_URL: &str = "https://newsletter.futureofcoding.org/join/";
-const NEWSLETTER_FROM_MAIL_ADDRESS: &str = "mariano@marianoguerra.org";
+const NEWSLETTER_FROM_MAIL_ADDRESS: &str = "Mariano Guerra <mariano@marianoguerra.org>";
 const NEWSLETTER_CONFIRM_ADDRESS_MAIL_SUBJECT: &str = "Please confirm your subscription";
 
 pub type CowStr = Cow<'static, [u8]>;
