@@ -46,30 +46,30 @@ pub async fn add_subscription(conn: &Connection, email: &str, token: &str) -> Re
     .await
 }
 
-pub async fn confirm_subscription(conn: &Connection, email: &str, token: &str) -> Result<()> {
+pub async fn confirm_subscription(conn: &Connection, email: &str, token: &str) -> Result<usize> {
     let email = email.to_string();
     let token = token.to_string();
     conn.call(move |conn| {
         let current_time = Utc::now().to_rfc3339();
-        conn.execute(
+        let rows = conn.execute(
             "UPDATE newsletter_subscriptions SET confirmed_at = ?1 WHERE email = ?2 AND token = ?3",
             params![current_time, email, token],
         )?;
-        Ok(())
+        Ok(rows)
     })
     .await
 }
 
-pub async fn remove_subscription(conn: &Connection, email: &str, token: &str) -> Result<()> {
+pub async fn remove_subscription(conn: &Connection, email: &str, token: &str) -> Result<usize> {
     let email = email.to_string();
     let token = token.to_string();
     conn.call(move |conn| {
         let current_time = Utc::now().to_rfc3339();
-        conn.execute(
+        let rows = conn.execute(
             "UPDATE newsletter_subscriptions SET deleted_at = ?1 WHERE email = ?2 AND token = ?3",
             params![current_time, email, token],
         )?;
-        Ok(())
+        Ok(rows)
     })
     .await
 }

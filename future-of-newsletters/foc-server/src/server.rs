@@ -1,4 +1,4 @@
-use crate::db;
+use crate::{db, mail};
 use axum::{
     extract::{self, Path, State},
     http::header::{HeaderMap, HeaderValue},
@@ -10,6 +10,10 @@ use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 use std::{borrow::Cow, net::SocketAddr};
 use tokio_rusqlite::Connection;
+
+const BASE_NEWSLETTER_ACTION_URL: &str = "https://newsletter.futureofcoding.org/join/";
+const NEWSLETTER_FROM_MAIL_ADDRESS: &str = "mariano@marianoguerra.org";
+const NEWSLETTER_CONFIRM_ADDRESS_MAIL_SUBJECT: &str = "Please confirm your subscription";
 
 pub type CowStr = Cow<'static, [u8]>;
 
@@ -127,44 +131,97 @@ async fn handle_action(
                     Json(ActionResult::error("asked to fail")),
                 ))
             } else {
-                match db::add_subscription(&state.db_connection, &mail, &db::new_token()).await {
-                    Ok(()) => Ok((StatusCode::OK, headers, Json(ActionResult::OK))),
-                    Err(err) => {
-                        log::error!("Error adding subscription: {err:?}");
-                        Ok((
-                            StatusCode::BAD_REQUEST,
-                            headers,
-                            Json(ActionResult::error("db error")),
-                        ))
-                    }
-                }
+                Ok(handle_subscribe(&state, mail, headers).await)
             }
         }
         Action::Confirm { mail, token } => {
             match db::confirm_subscription(&state.db_connection, &mail, &token).await {
-                Ok(()) => Ok((StatusCode::OK, headers, Json(ActionResult::OK))),
+                Ok(0) => Ok((
+                    StatusCode::BAD_REQUEST,
+                    headers,
+                    Json(ActionResult::error("No match")),
+                )),
+                Ok(_) => Ok((StatusCode::OK, headers, Json(ActionResult::OK))),
                 Err(err) => {
                     log::error!("Error confirming subscription: {err:?}");
                     Ok((
                         StatusCode::BAD_REQUEST,
                         headers,
-                        Json(ActionResult::error("db error")),
+                        Json(ActionResult::error("database error")),
                     ))
                 }
             }
         }
         Action::Unsubscribe { mail, token } => {
             match db::remove_subscription(&state.db_connection, &mail, &token).await {
-                Ok(()) => Ok((StatusCode::OK, headers, Json(ActionResult::OK))),
+                Ok(0) => Ok((
+                    StatusCode::BAD_REQUEST,
+                    headers,
+                    Json(ActionResult::error("No match")),
+                )),
+                Ok(_) => Ok((StatusCode::OK, headers, Json(ActionResult::OK))),
                 Err(err) => {
                     log::error!("Error adding subscription: {err:?}");
                     Ok((
                         StatusCode::BAD_REQUEST,
                         headers,
-                        Json(ActionResult::error("db error")),
+                        Json(ActionResult::error("Database error")),
                     ))
                 }
             }
+        }
+    }
+}
+
+async fn handle_subscribe(
+    state: &ServerState,
+    mail: String,
+    headers: HeaderMap,
+) -> (StatusCode, HeaderMap, Json<ActionResult>) {
+    let token = db::new_token();
+    match db::add_subscription(&state.db_connection, &mail, &token).await {
+        Ok(()) => {
+            let aws_client = mail::make_aws_client().await;
+
+            match mail::send_confirm_address_message(
+                &aws_client,
+                BASE_NEWSLETTER_ACTION_URL,
+                &mail,
+                &token,
+                NEWSLETTER_FROM_MAIL_ADDRESS,
+                NEWSLETTER_CONFIRM_ADDRESS_MAIL_SUBJECT,
+            )
+            .await
+            {
+                Ok(()) => (StatusCode::OK, headers, Json(ActionResult::OK)),
+                Err(err) => {
+                    log::error!("sending confirmation mail: {err:?}");
+                    (
+                        StatusCode::INTERNAL_SERVER_ERROR,
+                        headers,
+                        Json(ActionResult::error("Sending confirmation mail")),
+                    )
+                }
+            }
+        }
+        Err(tokio_rusqlite::Error::Rusqlite(rusqlite::Error::SqliteFailure(
+            libsqlite3_sys::Error {
+                code: libsqlite3_sys::ErrorCode::ConstraintViolation,
+                ..
+            },
+            _,
+        ))) => (
+            StatusCode::BAD_REQUEST,
+            headers,
+            Json(ActionResult::error("Subscription exists")),
+        ),
+        Err(err) => {
+            log::error!("Error adding subscription: {err:?}");
+            (
+                StatusCode::BAD_REQUEST,
+                headers,
+                Json(ActionResult::error("Database error")),
+            )
         }
     }
 }

@@ -1,8 +1,9 @@
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_ses::types::{Body, Content, Destination, Message};
 use aws_sdk_ses::{Client, Error};
+use thiserror::Error;
 
-async fn make_aws_client() -> Client {
+pub async fn make_aws_client() -> Client {
     let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
     let config = aws_config::from_env().region(region_provider).load().await;
 
@@ -92,9 +93,6 @@ async fn send_message(
     message_text: &str,
     message_html: &str,
 ) -> Result<(), Error> {
-    let mut dest: Destination = Destination::builder().build();
-    dest.to_addresses = Some(contacts);
-    let subject_content = Content::builder().data(subject).charset("UTF-8").build()?;
     let body_text_content = Content::builder()
         .data(message_text)
         .charset("UTF-8")
@@ -108,6 +106,125 @@ async fn send_message(
         .html(body_html_content)
         .text(body_text_content)
         .build();
+
+    send_message_with_body(client, contacts, from, subject, body).await
+}
+
+const CONFIRM_MAIL_TEMPLATE: &str = r###"
+Please confirm your subscription by clicking the link below:
+
+{{confirm_link}}
+
+If you don't want to subscribe, please ignore this email. 
+
+---
+
+Use this link to unsubscribe {{unsubscribe_link}}
+"###;
+
+pub fn format_action_link(
+    base_url: &str,
+    action: &str,
+    mail: &str,
+    token: &str,
+) -> Result<String, url::ParseError> {
+    let mut link = url::Url::parse(base_url)?;
+
+    link.query_pairs_mut()
+        .append_pair("action", action)
+        .append_pair("mail", mail)
+        .append_pair("token", token);
+
+    Ok(link.to_string())
+}
+
+pub fn format_confirm_link(
+    base_url: &str,
+    mail: &str,
+    token: &str,
+) -> Result<String, url::ParseError> {
+    format_action_link(base_url, "confirm", mail, token)
+}
+
+pub fn format_unsubscribe_link(
+    base_url: &str,
+    mail: &str,
+    token: &str,
+) -> Result<String, url::ParseError> {
+    format_action_link(base_url, "unsubscribe", mail, token)
+}
+
+#[derive(Error, Debug)]
+pub enum FormatMessageError {
+    #[error("template rendering error")]
+    TemplateError(#[from] minijinja::Error),
+    #[error("url format error")]
+    UrlFormatError(#[from] url::ParseError),
+}
+
+pub fn format_confirm_address_message(
+    base_url: &str,
+    mail: &str,
+    token: &str,
+) -> Result<String, FormatMessageError> {
+    let confirm_link = format_confirm_link(base_url, mail, token)?;
+    let unsubscribe_link = format_unsubscribe_link(base_url, mail, token)?;
+    let mut env = minijinja::Environment::new();
+    env.add_template("confirm.txt", CONFIRM_MAIL_TEMPLATE)?;
+    let template = env.get_template("confirm.txt")?;
+
+    Ok(template.render(
+        minijinja::context! { confirm_link => confirm_link, unsubscribe_link => unsubscribe_link },
+    )?)
+}
+
+#[derive(Error, Debug)]
+pub enum SendMessageError {
+    #[error("format message error")]
+    FormatError(#[from] FormatMessageError),
+    #[error("mail send error")]
+    UrlFormatError(#[from] Error),
+}
+
+pub async fn send_confirm_address_message(
+    client: &Client,
+    base_url: &str,
+    mail: &str,
+    token: &str,
+    from: &str,
+    subject: &str,
+) -> Result<(), SendMessageError> {
+    let message_text = format_confirm_address_message(base_url, mail, token)?;
+    Ok(send_plain_message(client, vec![mail.to_string()], from, subject, &message_text).await?)
+}
+
+pub async fn send_plain_message(
+    client: &Client,
+    contacts: Vec<String>,
+    from: &str,
+    subject: &str,
+    message_text: &str,
+) -> Result<(), Error> {
+    let body_text_content = Content::builder()
+        .data(message_text)
+        .charset("UTF-8")
+        .build()?;
+
+    let body = Body::builder().text(body_text_content).build();
+
+    send_message_with_body(client, contacts, from, subject, body).await
+}
+
+pub async fn send_message_with_body(
+    client: &Client,
+    contacts: Vec<String>,
+    from: &str,
+    subject: &str,
+    body: Body,
+) -> Result<(), Error> {
+    let mut dest: Destination = Destination::builder().build();
+    dest.to_addresses = Some(contacts);
+    let subject_content = Content::builder().data(subject).charset("UTF-8").build()?;
 
     let msg = Message::builder()
         .subject(subject_content)
@@ -125,4 +242,39 @@ async fn send_message(
     println!("Email sent");
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_add_subscription() {
+        let text =
+            format_confirm_address_message("http://foo.com", "a@b.com", "secret123").unwrap();
+        assert_eq!(
+            text.contains("http://foo.com/?action=confirm&mail=a%40b.com&token=secret123"),
+            true
+        );
+        assert_eq!(
+            text.contains("http://foo.com/?action=unsubscribe&mail=a%40b.com&token=secret123"),
+            true
+        );
+    }
+
+    #[test]
+    fn test_format_confirm_link() {
+        assert_eq!(
+            format_confirm_link("http://foo.com", "a@b.com", "secret123").unwrap(),
+            "http://foo.com/?action=confirm&mail=a%40b.com&token=secret123"
+        );
+    }
+
+    #[test]
+    fn test_format_unsubscribe_link() {
+        assert_eq!(
+            format_unsubscribe_link("http://foo.com", "a@b.com", "secret123").unwrap(),
+            "http://foo.com/?action=unsubscribe&mail=a%40b.com&token=secret123"
+        );
+    }
 }
