@@ -35,13 +35,6 @@ async fn main() {
                         .value_parser(clap::builder::NonEmptyStringValueParser::new())
                         .action(clap::ArgAction::Set)
                         .required(true),
-                )
-                .arg(
-                    clap::Arg::new("subscriber-list")
-                        .long("subscriber-list")
-                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
-                        .action(clap::ArgAction::Set)
-                        .required(true),
                 ),
         )
         .subcommand(
@@ -97,18 +90,20 @@ async fn main() {
             }
         }
         Some(("send-newsletter", matches)) => {
-            let o_title = matches.get_one::<String>("title");
-            let o_mail_path = matches.get_one::<String>("mail-path");
-            let o_subscriber_list = matches.get_one::<String>("subscriber-list");
+            let title = matches.get_one::<String>("title").expect("title");
+            let mail_path = matches.get_one::<String>("mail-path").expect("mail-path");
+            let conn = db::open_and_setup(DEFAULT_DB_NAME)
+                .await
+                .expect("db connection");
+            let subscribers = db::get_active_subscriptions(&conn)
+                .await
+                .expect("subscribers")
+                .iter()
+                .map(|r| r.email.clone())
+                .collect();
 
-            if let (Some(title), Some(mail_path), Some(subscriber_list)) =
-                (o_title, o_mail_path, o_subscriber_list)
-            {
-                if let Err(err) = send_newsletter(title, mail_path, subscriber_list).await {
-                    eprintln!("Error sending newsletter: {err:?}");
-                }
-            } else {
-                eprintln!("missing arguments for send-newsletter");
+            if let Err(err) = send_newsletter(title, mail_path, subscribers).await {
+                eprintln!("Error sending newsletter: {err:?}");
             }
         }
         Some(("export-subscribers", _matches)) => match db::open_and_setup(DEFAULT_DB_NAME).await {
@@ -161,6 +156,7 @@ pub fn setup_logs(log_level: log::LevelFilter) -> Result<(), anyhow::Error> {
         .level(log_level)
         .level_for("sea_schema", log::LevelFilter::Off)
         .level_for("sqlx", log::LevelFilter::Off)
+        .level_for("aws_config::meta::region", log::LevelFilter::Off)
         // Output to stdout, files, and other Dispatch configurations
         .chain(std::io::stdout())
         .chain(fern::log_file("output.log")?)

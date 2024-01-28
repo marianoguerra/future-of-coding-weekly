@@ -35,22 +35,12 @@ impl From<csv::Error> for NewsletterSendErr {
     }
 }
 
-#[derive(Debug, serde::Deserialize)]
-pub struct NewsletterSubscriptionRecord {
-    #[serde(rename = "E-mail")]
-    address: String,
-    #[serde(rename = "Subscribe Date (GMT)")]
-    pub subscribe_date: String,
-    #[serde(rename = "Notes")]
-    pub notes: String,
-}
-
 pub async fn send_newsletter(
     title: &str,
     mail_path: &str,
-    subscriber_list: &str,
+    subscribers: Vec<String>,
 ) -> Result<(), NewsletterSendErr> {
-    println!("send newsletter: {title} {mail_path} {subscriber_list}");
+    println!("send newsletter: {title} {mail_path}");
     let base_path = std::path::Path::new(mail_path);
     let mail_text_path = base_path.join("mail.txt");
     let mail_html_path = base_path.join("mail.html");
@@ -58,16 +48,12 @@ pub async fn send_newsletter(
     let mail_text_content = std::fs::read_to_string(mail_text_path)?;
     let mail_html_content = std::fs::read_to_string(mail_html_path)?;
 
-    let mut sub_reader = csv::Reader::from_path(subscriber_list)?;
-
     let client = make_aws_client().await;
     let mut count = 0;
-    for result in sub_reader.deserialize() {
-        let record: NewsletterSubscriptionRecord = result?;
-        println!("{:?}", record);
+    for address in subscribers {
         send_message(
             &client,
-            vec![record.address.to_string()],
+            vec![address],
             "Mariano Guerra <mariano@marianoguerra.org>",
             title,
             &mail_text_content,
