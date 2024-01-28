@@ -110,7 +110,7 @@ async fn main() {
             Ok(conn) => match db::get_active_subscriptions(&conn).await {
                 Ok(subscribers) => {
                     let mut wtr = csv::Writer::from_writer(std::io::stdout());
-                    wtr.write_record(&[
+                    wtr.write_record([
                         "E-mail",
                         "Subscribe Date (GMT)",
                         "confirm Date (GMT)",
