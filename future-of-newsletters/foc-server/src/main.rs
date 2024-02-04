@@ -1,5 +1,5 @@
 use clap::Arg;
-use libfoc::{db, mail::send_newsletter, server::start};
+use libfoc::{db, mail, server::start};
 
 const DEFAULT_PORT: u16 = 3852;
 const DEFAULT_PORT_STR: &str = "3852";
@@ -23,8 +23,8 @@ async fn main() {
         .subcommand(
             clap::Command::new("send-newsletter")
                 .arg(
-                    clap::Arg::new("title")
-                        .long("title")
+                    clap::Arg::new("db-path")
+                        .long("db-path")
                         .value_parser(clap::builder::NonEmptyStringValueParser::new())
                         .action(clap::ArgAction::Set)
                         .required(true),
@@ -90,21 +90,7 @@ async fn main() {
             }
         }
         Some(("send-newsletter", matches)) => {
-            let title = matches.get_one::<String>("title").expect("title");
-            let mail_path = matches.get_one::<String>("mail-path").expect("mail-path");
-            let conn = db::open_and_setup(DEFAULT_DB_NAME)
-                .await
-                .expect("db connection");
-            let subscribers = db::get_active_subscriptions(&conn)
-                .await
-                .expect("subscribers")
-                .iter()
-                .map(|r| r.email.clone())
-                .collect();
-
-            if let Err(err) = send_newsletter(title, mail_path, subscribers).await {
-                eprintln!("Error sending newsletter: {err:?}");
-            }
+            cli_send_newsletter(matches).await;
         }
         Some(("export-subscribers", _matches)) => match db::open_and_setup(DEFAULT_DB_NAME).await {
             Ok(conn) => match db::get_active_subscriptions(&conn).await {
@@ -139,6 +125,26 @@ async fn main() {
         },
         _ => {}
     };
+}
+
+async fn cli_send_newsletter(matches: &clap::ArgMatches) {
+    let mail_path = matches
+        .get_one::<String>("mail-path")
+        .expect("no mail-path");
+    let db_path = matches.get_one::<String>("db-path").expect("no db-path");
+    let config_path = std::path::Path::new(mail_path).join("config.toml");
+    let config = mail::Config::from_file(config_path.to_str().expect("invalid config path"))
+        .expect("can't load newsletter's config.toml");
+    let conn = db::open_and_setup(db_path)
+        .await
+        .expect("can't open db connection");
+    let subscribers = db::get_active_subscriptions(&conn)
+        .await
+        .expect("can't load active subscribers");
+
+    if let Err(err) = mail::send_newsletter(&config, mail_path, subscribers).await {
+        eprintln!("Error sending newsletter: {err:?}");
+    }
 }
 
 pub fn setup_logs(log_level: log::LevelFilter) -> Result<(), anyhow::Error> {

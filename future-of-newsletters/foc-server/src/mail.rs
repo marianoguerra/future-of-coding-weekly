@@ -1,7 +1,86 @@
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_ses::types::{Body, Content, Destination, Message};
 use aws_sdk_ses::{Client, Error};
+use serde::Deserialize;
 use thiserror::Error;
+
+use crate::db::Subscriber;
+
+#[derive(Deserialize)]
+pub struct Config {
+    title: String,
+    from: String,
+    base_url: String,
+    html: Option<HtmlConfig>,
+    text: Option<TextConfig>,
+}
+
+#[derive(Deserialize)]
+pub struct HtmlConfig {
+    prefix: Option<String>,
+    suffix: Option<String>,
+}
+
+#[derive(Deserialize)]
+pub struct TextConfig {
+    prefix: Option<String>,
+    suffix: Option<String>,
+}
+
+#[derive(Error, Debug)]
+pub enum ConfigLoadError {
+    #[error("config parsing error")]
+    ParseError(#[from] toml::de::Error),
+    #[error("file rendering error")]
+    ReadError(#[from] std::io::Error),
+}
+
+impl Config {
+    pub fn from_string(content: &str) -> Result<Config, toml::de::Error> {
+        let config: Config = toml::from_str(content)?;
+        Ok(config)
+    }
+
+    pub fn from_file(path: &str) -> Result<Config, ConfigLoadError> {
+        let content = std::fs::read_to_string(path)?;
+        let config = Self::from_string(&content)?;
+        Ok(config)
+    }
+
+    pub fn get_html_wrappers(&self) -> (String, String) {
+        if let Some(html) = &self.html {
+            html.get_wrappers()
+        } else {
+            ("".into(), "".into())
+        }
+    }
+
+    pub fn get_text_wrappers(&self) -> (String, String) {
+        if let Some(text) = &self.text {
+            text.get_wrappers()
+        } else {
+            ("".into(), "".into())
+        }
+    }
+}
+
+impl HtmlConfig {
+    pub fn get_wrappers(&self) -> (String, String) {
+        (
+            self.prefix.as_ref().map_or("".to_string(), |v| v.clone()),
+            self.suffix.as_ref().map_or("".to_string(), |v| v.clone()),
+        )
+    }
+}
+
+impl TextConfig {
+    pub fn get_wrappers(&self) -> (String, String) {
+        (
+            self.prefix.as_ref().map_or("".to_string(), |v| v.clone()),
+            self.suffix.as_ref().map_or("".to_string(), |v| v.clone()),
+        )
+    }
+}
 
 pub async fn make_aws_client() -> Client {
     let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
@@ -10,37 +89,22 @@ pub async fn make_aws_client() -> Client {
     aws_sdk_ses::Client::new(&config)
 }
 
-#[derive(Debug)]
+#[derive(Error, Debug)]
 pub enum NewsletterSendErr {
-    SesError(aws_sdk_ses::Error),
-    ReadFileError(std::io::Error),
-    CsvReadError(csv::Error),
-}
-
-impl From<aws_sdk_ses::Error> for NewsletterSendErr {
-    fn from(error: aws_sdk_ses::Error) -> Self {
-        NewsletterSendErr::SesError(error)
-    }
-}
-
-impl From<std::io::Error> for NewsletterSendErr {
-    fn from(error: std::io::Error) -> Self {
-        NewsletterSendErr::ReadFileError(error)
-    }
-}
-
-impl From<csv::Error> for NewsletterSendErr {
-    fn from(error: csv::Error) -> Self {
-        NewsletterSendErr::CsvReadError(error)
-    }
+    #[error("message send error")]
+    MessageSendError(#[from] MessageSendError),
+    #[error("file rendering error")]
+    ReadFileError(#[from] std::io::Error),
+    #[error("csv parsing error")]
+    CsvReadError(#[from] csv::Error),
 }
 
 pub async fn send_newsletter(
-    title: &str,
+    config: &Config,
     mail_path: &str,
-    subscribers: Vec<String>,
+    subscribers: Vec<Subscriber>,
 ) -> Result<(), NewsletterSendErr> {
-    println!("send newsletter: {title} {mail_path}");
+    println!("send newsletter: {} {mail_path}", config.title);
     let base_path = std::path::Path::new(mail_path);
     let mail_text_path = base_path.join("mail.txt");
     let mail_html_path = base_path.join("mail.html");
@@ -49,19 +113,76 @@ pub async fn send_newsletter(
     let mail_html_content = std::fs::read_to_string(mail_html_path)?;
 
     let client = make_aws_client().await;
-    let mut count = 0;
-    for address in subscribers {
-        send_message(
-            &client,
-            vec![address],
-            "Mariano Guerra <mariano@marianoguerra.org>",
-            title,
-            &mail_text_content,
-            &mail_html_content,
-        )
-        .await?;
 
+    send_message(
+        &client,
+        config,
+        subscribers,
+        &mail_text_content,
+        &mail_html_content,
+    )
+    .await?;
+
+    Ok(())
+}
+
+#[derive(Error, Debug)]
+pub enum MessageSendError {
+    #[error("template rendering error")]
+    TemplateError(#[from] minijinja::Error),
+    #[error("url format error")]
+    UrlFormatError(#[from] url::ParseError),
+    #[error("AWS SES error")]
+    SesError(#[from] aws_sdk_ses::Error),
+    #[error("AWS SES Build error")]
+    SesBuildError(#[from] aws_sdk_ses::error::BuildError),
+}
+
+fn render_message(
+    prefix: &str,
+    body: &str,
+    suffix: &str,
+    ctx: minijinja::value::Value,
+) -> Result<aws_sdk_ses::types::Content, MessageSendError> {
+    let message_text = render_template(&format!("{prefix}{body}{suffix}"), ctx)?;
+
+    Ok(Content::builder()
+        .data(message_text)
+        .charset("UTF-8")
+        .build()?)
+}
+
+async fn send_message(
+    client: &Client,
+    config: &Config,
+    subscribers: Vec<Subscriber>,
+    message_body_text: &str,
+    message_body_html: &str,
+) -> Result<(), MessageSendError> {
+    let mut count = 0;
+
+    for subscriber in subscribers {
         count += 1;
+
+        let unsubscribe_link =
+            format_unsubscribe_link(&config.base_url, &subscriber.email, &subscriber.token)?;
+        let ctx = minijinja::context! { unsubscribe_link => unsubscribe_link };
+
+        let (prefix_html, suffix_html) = config.get_html_wrappers();
+        let message_html =
+            render_message(&prefix_html, message_body_html, &suffix_html, ctx.clone())?;
+
+        let (prefix_text, suffix_text) = config.get_text_wrappers();
+        let message_text =
+            render_message(&prefix_text, message_body_text, &suffix_text, ctx.clone())?;
+
+        let body = Body::builder()
+            .html(message_html)
+            .text(message_text)
+            .build();
+
+        let contacts = vec![subscriber.email.clone()];
+        send_message_with_body(client, contacts, &config.from, &config.title, body).await?;
 
         if (count % 100) == 0 {
             println!("Sent to {count}");
@@ -69,31 +190,6 @@ pub async fn send_newsletter(
     }
 
     Ok(())
-}
-
-async fn send_message(
-    client: &Client,
-    contacts: Vec<String>,
-    from: &str,
-    subject: &str,
-    message_text: &str,
-    message_html: &str,
-) -> Result<(), Error> {
-    let body_text_content = Content::builder()
-        .data(message_text)
-        .charset("UTF-8")
-        .build()?;
-    let body_html_content = Content::builder()
-        .data(message_html)
-        .charset("UTF-8")
-        .build()?;
-
-    let body = Body::builder()
-        .html(body_html_content)
-        .text(body_text_content)
-        .build();
-
-    send_message_with_body(client, contacts, from, subject, body).await
 }
 
 const CONFIRM_MAIL_TEMPLATE: &str = r###"
@@ -155,13 +251,21 @@ pub fn format_confirm_address_message(
 ) -> Result<String, FormatMessageError> {
     let confirm_link = format_confirm_link(base_url, mail, token)?;
     let unsubscribe_link = format_unsubscribe_link(base_url, mail, token)?;
-    let mut env = minijinja::Environment::new();
-    env.add_template("confirm.txt", CONFIRM_MAIL_TEMPLATE)?;
-    let template = env.get_template("confirm.txt")?;
-
-    Ok(template.render(
+    Ok(render_template(
+        CONFIRM_MAIL_TEMPLATE,
         minijinja::context! { confirm_link => confirm_link, unsubscribe_link => unsubscribe_link },
     )?)
+}
+
+pub fn render_template(
+    template: &str,
+    ctx: minijinja::value::Value,
+) -> Result<String, minijinja::Error> {
+    let mut env = minijinja::Environment::new();
+    env.add_template("template.txt", template)?;
+    let template = env.get_template("template.txt")?;
+
+    template.render(ctx)
 }
 
 #[derive(Error, Debug)]
@@ -262,5 +366,51 @@ mod tests {
             format_unsubscribe_link("http://foo.com", "a@b.com", "secret123").unwrap(),
             "http://foo.com/?action=unsubscribe&mail=a%40b.com&token=secret123"
         );
+    }
+
+    #[test]
+    fn test_parse_simple_config() {
+        let config = Config::from_string(
+            r#"
+            title = "Hello World"
+            from = "Foo Bar <foo@bar.org>"
+            base_url = "base url"
+        "#,
+        )
+        .unwrap();
+
+        assert_eq!(config.base_url, "base url");
+        assert_eq!(config.title, "Hello World");
+        assert_eq!(config.from, "Foo Bar <foo@bar.org>");
+    }
+
+    #[test]
+    fn test_parse_config_sections() {
+        let config = Config::from_string(
+            r#"
+            title = "Hello World"
+            from = "Foo Bar <foo@bar.org>"
+            base_url = "base url"
+
+            [html]
+            prefix = 'html "prefix"'
+            suffix = "html suffix"
+
+            [text]
+            prefix = "text prefix"
+            suffix = "text suffix"
+        "#,
+        )
+        .unwrap();
+
+        assert_eq!(config.base_url, "base url");
+        assert_eq!(config.title, "Hello World");
+        assert_eq!(config.from, "Foo Bar <foo@bar.org>");
+        let html = config.html.unwrap();
+        assert_eq!(html.prefix.unwrap(), "html \"prefix\"");
+        assert_eq!(html.suffix.unwrap(), "html suffix");
+        let text = config.text.unwrap();
+        assert_eq!(text.prefix.unwrap(), "text prefix");
+        assert_eq!(text.suffix.unwrap(), "text suffix");
     }
 }
