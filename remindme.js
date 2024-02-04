@@ -40,6 +40,7 @@ function generateScriptForThisWeek(now, dayNumber) {
   );
   console.log("nikola clean; nikola build; nikola serve");
   console.log("git add newsletter*");
+  console.log(`git add future-of-newsletters/mail-sent/${dateDir}/`);
   console.log("git commit -m 'Newsletter and Links'");
   console.log("git push origin");
   console.log("focRemotePull");
