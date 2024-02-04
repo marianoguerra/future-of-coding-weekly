@@ -138,11 +138,9 @@ function onCommentsFinished(_contributors, authors) {
 
   outputNode.appendChild(ce("p", {}, ""));
 
-  document.getElementById("output-html").textContent =
-    ('<div style="max-width:80ch;margin:auto;font-size:14pt;line-height:1.4em;text-wrap:pretty">' +
-      outputNode.innerHTML + "</div>")
-      .replace(/<p>/g, "\n\n<p>")
-      .trim();
+  document.getElementById("output-html").textContent = outputNode.innerHTML
+    .replace(/<p>/g, "\n\n<p>")
+    .trim();
   document.getElementById("output-md").textContent = mdOutput + MD_FOOTER;
 }
 
