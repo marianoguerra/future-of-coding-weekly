@@ -16,3 +16,7 @@ ubuntu-2004-release:
 
 docker-build-ubuntu-2004:
 	docker build --no-cache --build-arg UID=$(id -u) --build-arg GID=$(id -g) --build-arg UNAME=$(whoami) -t ubuntu-foc:20-04 resources/containers/ubuntu/
+
+upload-foc:
+	scp foc foc@newsletter.futureofcoding.org:/home/foc/foc-new
+	ssh foc@newsletter.futureofcoding.org "cp foc foc-cur"
