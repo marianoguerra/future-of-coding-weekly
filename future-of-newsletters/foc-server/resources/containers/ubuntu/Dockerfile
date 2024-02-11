@@ -23,5 +23,7 @@ WORKDIR /home/$UNAME
 # Install Rust using rustup, select the stable toolchain, and do not install docs
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable --no-modify-path --profile minimal
 
+RUN cargo install just
+
 # Add the cargo bin directory to PATH
 ENV PATH="/home/$UNAME/.cargo/bin:${PATH}"
