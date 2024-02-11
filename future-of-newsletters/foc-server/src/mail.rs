@@ -7,6 +7,15 @@ use thiserror::Error;
 use crate::db::Subscriber;
 
 #[derive(Deserialize)]
+pub struct RawConfig {
+    title: Option<String>,
+    from: Option<String>,
+    base_url: Option<String>,
+    html: Option<HtmlConfig>,
+    text: Option<TextConfig>,
+}
+
+#[derive(Debug)]
 pub struct Config {
     title: String,
     from: String,
@@ -15,13 +24,13 @@ pub struct Config {
     text: Option<TextConfig>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct HtmlConfig {
     prefix: Option<String>,
     suffix: Option<String>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct TextConfig {
     prefix: Option<String>,
     suffix: Option<String>,
@@ -35,18 +44,66 @@ pub enum ConfigLoadError {
     ReadError(#[from] std::io::Error),
 }
 
-impl Config {
-    pub fn from_string(content: &str) -> Result<Config, toml::de::Error> {
-        let config: Config = toml::from_str(content)?;
+impl RawConfig {
+    pub fn from_string(content: &str) -> Result<RawConfig, toml::de::Error> {
+        let config: RawConfig = toml::from_str(content)?;
         Ok(config)
     }
 
-    pub fn from_file(path: &str) -> Result<Config, ConfigLoadError> {
+    pub fn from_file(path: &str) -> Result<RawConfig, ConfigLoadError> {
         let content = std::fs::read_to_string(path)?;
         let config = Self::from_string(&content)?;
         Ok(config)
     }
 
+    pub fn merge(&self, other: &Self) -> Self {
+        Self {
+            title: merge_options(self.title.as_ref(), other.title.as_ref()),
+            from: merge_options(self.from.as_ref(), other.from.as_ref()),
+            base_url: merge_options(self.base_url.as_ref(), other.base_url.as_ref()),
+            html: if let Some(v) = self.html.as_ref() {
+                if let Some(other_v) = other.html.as_ref() {
+                    Some(v.merge(&other_v))
+                } else {
+                    self.html.clone()
+                }
+            } else {
+                other.html.clone()
+            },
+            text: if let Some(v) = self.text.as_ref() {
+                if let Some(other_v) = other.text.as_ref() {
+                    Some(v.merge(&other_v))
+                } else {
+                    self.text.clone()
+                }
+            } else {
+                other.text.clone()
+            },
+        }
+    }
+
+    pub fn to_config(self) -> Result<Config, ToConfigError> {
+        let title = self
+            .title
+            .ok_or(ToConfigError::MissingField("title".into()))?;
+        let from = self
+            .from
+            .ok_or(ToConfigError::MissingField("from".into()))?;
+        let base_url = self
+            .base_url
+            .ok_or(ToConfigError::MissingField("base_url".into()))?;
+
+        Ok(Config {
+            title,
+            from,
+            base_url,
+            html: self.html,
+            text: self.text,
+        })
+    }
+}
+
+impl Config {
     pub fn get_html_wrappers(&self) -> (String, String) {
         if let Some(html) = &self.html {
             html.get_wrappers()
@@ -64,12 +121,24 @@ impl Config {
     }
 }
 
+#[derive(Debug)]
+pub enum ToConfigError {
+    MissingField(String),
+}
+
 impl HtmlConfig {
     pub fn get_wrappers(&self) -> (String, String) {
         (
             self.prefix.as_ref().map_or("".to_string(), |v| v.clone()),
             self.suffix.as_ref().map_or("".to_string(), |v| v.clone()),
         )
+    }
+
+    pub fn merge(&self, other: &Self) -> Self {
+        Self {
+            prefix: merge_options(self.prefix.as_ref(), other.prefix.as_ref()),
+            suffix: merge_options(self.suffix.as_ref(), other.suffix.as_ref()),
+        }
     }
 }
 
@@ -79,6 +148,21 @@ impl TextConfig {
             self.prefix.as_ref().map_or("".to_string(), |v| v.clone()),
             self.suffix.as_ref().map_or("".to_string(), |v| v.clone()),
         )
+    }
+
+    pub fn merge(&self, other: &Self) -> Self {
+        Self {
+            prefix: merge_options(self.prefix.as_ref(), other.prefix.as_ref()),
+            suffix: merge_options(self.suffix.as_ref(), other.suffix.as_ref()),
+        }
+    }
+}
+
+fn merge_options<T: Clone>(left: Option<&T>, right: Option<&T>) -> Option<T> {
+    match (left, right) {
+        (Some(v), None) => Some(v.clone()),
+        (_, Some(v)) => Some(v.clone()),
+        (None, None) => None,
     }
 }
 
@@ -370,13 +454,15 @@ mod tests {
 
     #[test]
     fn test_parse_simple_config() {
-        let config = Config::from_string(
+        let config = RawConfig::from_string(
             r#"
             title = "Hello World"
             from = "Foo Bar <foo@bar.org>"
             base_url = "base url"
         "#,
         )
+        .unwrap()
+        .to_config()
         .unwrap();
 
         assert_eq!(config.base_url, "base url");
@@ -386,7 +472,44 @@ mod tests {
 
     #[test]
     fn test_parse_config_sections() {
-        let config = Config::from_string(
+        let config = RawConfig::from_string(
+            r#"
+            title = "Hello World"
+            from = "Foo Bar <foo@bar.org>"
+            base_url = "base url"
+
+            [html]
+            prefix = 'html "prefix"'
+            suffix = "html suffix"
+
+            [text]
+            prefix = "text prefix"
+            suffix = "text suffix"
+        "#,
+        )
+        .unwrap()
+        .to_config()
+        .unwrap();
+
+        assert_eq!(config.base_url, "base url");
+        assert_eq!(config.title, "Hello World");
+        assert_eq!(config.from, "Foo Bar <foo@bar.org>");
+        let html = config.html.unwrap();
+        assert_eq!(html.prefix.unwrap(), "html \"prefix\"");
+        assert_eq!(html.suffix.unwrap(), "html suffix");
+        let text = config.text.unwrap();
+        assert_eq!(text.prefix.unwrap(), "text prefix");
+        assert_eq!(text.suffix.unwrap(), "text suffix");
+    }
+
+    #[test]
+    fn test_merge_base_all_empty() {
+        let base_raw_config = RawConfig::from_string(
+            r#"
+        "#,
+        )
+        .unwrap();
+        let other_raw_config = RawConfig::from_string(
             r#"
             title = "Hello World"
             from = "Foo Bar <foo@bar.org>"
@@ -402,6 +525,181 @@ mod tests {
         "#,
         )
         .unwrap();
+        let config = base_raw_config
+            .merge(&other_raw_config)
+            .to_config()
+            .unwrap();
+
+        assert_eq!(config.base_url, "base url");
+        assert_eq!(config.title, "Hello World");
+        assert_eq!(config.from, "Foo Bar <foo@bar.org>");
+        let html = config.html.unwrap();
+        assert_eq!(html.prefix.unwrap(), "html \"prefix\"");
+        assert_eq!(html.suffix.unwrap(), "html suffix");
+        let text = config.text.unwrap();
+        assert_eq!(text.prefix.unwrap(), "text prefix");
+        assert_eq!(text.suffix.unwrap(), "text suffix");
+    }
+
+    #[test]
+    fn test_merge_other_all_empty() {
+        let base_raw_config = RawConfig::from_string(
+            r#"
+            title = "Hello World"
+            from = "Foo Bar <foo@bar.org>"
+            base_url = "base url"
+
+            [html]
+            prefix = 'html "prefix"'
+            suffix = "html suffix"
+
+            [text]
+            prefix = "text prefix"
+            suffix = "text suffix"
+        "#,
+        )
+        .unwrap();
+        let other_raw_config = RawConfig::from_string(
+            r#"
+        "#,
+        )
+        .unwrap();
+        let config = base_raw_config
+            .merge(&other_raw_config)
+            .to_config()
+            .unwrap();
+
+        assert_eq!(config.base_url, "base url");
+        assert_eq!(config.title, "Hello World");
+        assert_eq!(config.from, "Foo Bar <foo@bar.org>");
+        let html = config.html.unwrap();
+        assert_eq!(html.prefix.unwrap(), "html \"prefix\"");
+        assert_eq!(html.suffix.unwrap(), "html suffix");
+        let text = config.text.unwrap();
+        assert_eq!(text.prefix.unwrap(), "text prefix");
+        assert_eq!(text.suffix.unwrap(), "text suffix");
+    }
+
+    #[test]
+    fn test_merge_override_all() {
+        let base_raw_config = RawConfig::from_string(
+            r#"
+            title = "override me"
+            from = "override me"
+            base_url = "override me"
+
+            [html]
+            prefix = "override me"
+            suffix = "override me"
+
+            [text]
+            prefix = "override me"
+            suffix = "override me"
+        "#,
+        )
+        .unwrap();
+        let other_raw_config = RawConfig::from_string(
+            r#"
+            title = "Hello World"
+            from = "Foo Bar <foo@bar.org>"
+            base_url = "base url"
+
+            [html]
+            prefix = 'html "prefix"'
+            suffix = "html suffix"
+
+            [text]
+            prefix = "text prefix"
+            suffix = "text suffix"
+        "#,
+        )
+        .unwrap();
+        let config = base_raw_config
+            .merge(&other_raw_config)
+            .to_config()
+            .unwrap();
+
+        assert_eq!(config.title, "Hello World");
+        assert_eq!(config.from, "Foo Bar <foo@bar.org>");
+        assert_eq!(config.base_url, "base url");
+        let html = config.html.unwrap();
+        assert_eq!(html.prefix.unwrap(), "html \"prefix\"");
+        assert_eq!(html.suffix.unwrap(), "html suffix");
+        let text = config.text.unwrap();
+        assert_eq!(text.prefix.unwrap(), "text prefix");
+        assert_eq!(text.suffix.unwrap(), "text suffix");
+    }
+
+    #[test]
+    fn test_merge_half_and_half() {
+        let base_raw_config = RawConfig::from_string(
+            r#"
+            from = "Foo Bar <foo@bar.org>"
+            base_url = "base url"
+
+            [html]
+            prefix = 'html "prefix"'
+
+            [text]
+            suffix = "text suffix"
+        "#,
+        )
+        .unwrap();
+        let other_raw_config = RawConfig::from_string(
+            r#"
+            title = "Hello World"
+
+            [html]
+            suffix = "html suffix"
+
+            [text]
+            prefix = "text prefix"
+        "#,
+        )
+        .unwrap();
+        let config = base_raw_config
+            .merge(&other_raw_config)
+            .to_config()
+            .unwrap();
+
+        assert_eq!(config.base_url, "base url");
+        assert_eq!(config.title, "Hello World");
+        assert_eq!(config.from, "Foo Bar <foo@bar.org>");
+        let html = config.html.unwrap();
+        assert_eq!(html.prefix.unwrap(), "html \"prefix\"");
+        assert_eq!(html.suffix.unwrap(), "html suffix");
+        let text = config.text.unwrap();
+        assert_eq!(text.prefix.unwrap(), "text prefix");
+        assert_eq!(text.suffix.unwrap(), "text suffix");
+    }
+
+    #[test]
+    fn test_merge_half_and_half_2() {
+        let base_raw_config = RawConfig::from_string(
+            r#"
+            from = "Foo Bar <foo@bar.org>"
+            base_url = "base url"
+
+            [html]
+            prefix = 'html "prefix"'
+            suffix = "html suffix"
+        "#,
+        )
+        .unwrap();
+        let other_raw_config = RawConfig::from_string(
+            r#"
+            title = "Hello World"
+
+            [text]
+            prefix = "text prefix"
+            suffix = "text suffix"
+        "#,
+        )
+        .unwrap();
+        let config = base_raw_config
+            .merge(&other_raw_config)
+            .to_config()
+            .unwrap();
 
         assert_eq!(config.base_url, "base url");
         assert_eq!(config.title, "Hello World");

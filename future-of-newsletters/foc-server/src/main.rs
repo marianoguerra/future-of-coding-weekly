@@ -30,6 +30,12 @@ async fn main() {
                         .required(true),
                 )
                 .arg(
+                    clap::Arg::new("config-path")
+                        .long("config-path")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set),
+                )
+                .arg(
                     clap::Arg::new("mail-path")
                         .long("mail-path")
                         .value_parser(clap::builder::NonEmptyStringValueParser::new())
@@ -132,9 +138,19 @@ async fn cli_send_newsletter(matches: &clap::ArgMatches) {
         .get_one::<String>("mail-path")
         .expect("no mail-path");
     let db_path = matches.get_one::<String>("db-path").expect("no db-path");
+
+    let base_config_path = matches
+        .get_one::<String>("config-path")
+        .expect("no config-path");
+    let base_config = mail::RawConfig::from_file(base_config_path).expect("can't load base config");
     let config_path = std::path::Path::new(mail_path).join("config.toml");
-    let config = mail::Config::from_file(config_path.to_str().expect("invalid config path"))
-        .expect("can't load newsletter's config.toml");
+    let mail_config =
+        mail::RawConfig::from_file(config_path.to_str().expect("invalid config path"))
+            .expect("can't load newsletter's config.toml");
+    let config = base_config
+        .merge(&mail_config)
+        .to_config()
+        .expect("invalid config merge");
     let conn = db::open_and_setup(db_path)
         .await
         .expect("can't open db connection");
