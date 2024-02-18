@@ -32,7 +32,7 @@ function mdTitle1(t) {
   return "# " + t + "\n\n";
 }
 
-function main() {
+async function main() {
   const query = parseQuery(window.location.search),
     baseUrl = getBaseUrl(),
     app = new Vue({
@@ -61,6 +61,7 @@ function main() {
         loadChannels: function () {
           return loadChannels().then((channels) => {
             this.channels = channels;
+            console.log("got channels", channels, this.channels);
           });
         },
 
@@ -83,10 +84,12 @@ function main() {
             fetch(path).then((res) => {
               if (res.status === 200) {
                 res.json().then((data) => {
+                  const channels = this.channels;
+                  console.log("channels", channels);
                   parseHistoryChannelData(
                     data,
                     this.users,
-                    this.channels,
+                    channels,
                     this.history.msgsByTs,
                     this.history.msgs,
                     olderMessagesToLoad,
@@ -391,6 +394,7 @@ function main() {
     if (query.newsletterDump !== undefined) {
       const fromDate = new Date(query.fromDate),
         toDate = new Date(query.toDate);
+      await infoProm;
       loadNewsletterChannels(app, fromDate, toDate);
     } else {
       infoProm
