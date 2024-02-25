@@ -38,7 +38,14 @@ pub async fn add_subscription(conn: &Connection, email: &str, token: &str) -> Re
     conn.call(move |conn| {
         let current_time = Utc::now().to_rfc3339();
         conn.execute(
-            "INSERT INTO newsletter_subscriptions (email, token, created_at) VALUES (?1, ?2, ?3)",
+            r#"INSERT INTO newsletter_subscriptions (email, token, created_at)
+VALUES (?1, ?2, ?3)
+ON CONFLICT (email) DO UPDATE SET
+    token = excluded.token,
+    created_at = excluded.created_at,
+    deleted_at = NULL
+WHERE deleted_at IS NOT NULL;
+"#,
             params![email, token, current_time],
         )?;
         Ok(())
@@ -140,6 +147,25 @@ mod tests {
         remove_subscription(&conn, "test@example.com", &token).await?;
         assert_eq!(get_active_subscriptions(&conn).await?.len(), 0);
 
+        Ok(())
+    }
+
+    #[tokio::test]
+    async fn test_unsubscribe_subscribe_subscription() -> Result<()> {
+        let conn = setup_in_memory_db().await?;
+        let token = new_token();
+        add_subscription(&conn, "test@example.com", &token).await?;
+        confirm_subscription(&conn, "test@example.com", &token).await?;
+        assert_eq!(get_active_subscriptions(&conn).await?.len(), 1);
+        remove_subscription(&conn, "test@example.com", &token).await?;
+        assert_eq!(get_active_subscriptions(&conn).await?.len(), 0);
+
+        let token1 = new_token();
+        add_subscription(&conn, "test@example.com", &token1).await?;
+        let subs = get_active_subscriptions(&conn).await?;
+        assert_eq!(subs.len(), 1);
+        let sub = subs.get(0).unwrap();
+        assert_eq!(sub.token, token1);
         Ok(())
     }
 
