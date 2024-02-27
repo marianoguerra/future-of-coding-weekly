@@ -1,16 +1,16 @@
 //@format
 /*globals Set*/
-import { SimpleMarkdown } from "./history/lib/simple-markdown.js";
-import { getInfoForWeekAndDay, MONDAY } from "./history/newsletter.js";
-const USER = "marianoguerra",
-  REPO = "future-of-coding-weekly",
+import {SimpleMarkdown} from './history/lib/simple-markdown.js';
+import {getInfoForWeekAndDay, MONDAY} from './history/newsletter.js';
+const USER = 'marianoguerra',
+  REPO = 'future-of-coding-weekly',
   ISSUES_URL = `https://api.github.com/repos/${USER}/${REPO}/issues`;
 
 function toNode(obj) {
   if (obj && obj.tagName) {
     return obj;
   } else {
-    return document.createTextNode("" + obj);
+    return document.createTextNode('' + obj);
   }
 }
 
@@ -27,18 +27,18 @@ function ce(tag, attrs, ...body) {
   return node;
 }
 
-let mdOutput = "";
+let mdOutput = '';
 function handleComment(comment, node, authors) {
-  const container = ce("div", { style: "margin-top:1em" }),
+  const container = ce('div', {style: 'margin-top:1em'}),
     markdown = comment.body,
     matchResult = (
       new RegExp(
-        "\\[([^\\[]*?)\\]\\((https?://(www\\.)?twitter.com/([^/]+))\\)",
-        "gm",
+        '\\[([^\\[]*?)\\]\\((https?://(www\\.)?twitter.com/([^/]+))\\)',
+        'gm'
       ).exec(markdown) || []
     ).slice(1);
 
-  mdOutput += comment.body + "\n\n";
+  mdOutput += comment.body + '\n\n';
   container.innerHTML = mdToHTML(markdown);
 
   matchResult.forEach((v, i, _arr) => {
@@ -49,99 +49,99 @@ function handleComment(comment, node, authors) {
   });
 
   node.appendChild(container);
-  node.appendChild(ce("br", {}));
+  node.appendChild(ce('br', {}));
   // The beforebegin and afterend positions work only if the node is in a tree
   // and has an element parent.
-  container.insertAdjacentText("beforebegin", "\n\n");
-  container.insertAdjacentText("afterend", "\n\n");
+  container.insertAdjacentText('beforebegin', '\n\n');
+  container.insertAdjacentText('afterend', '\n\n');
 }
 
 function link(url, label) {
-  return ce("a", { href: url, target: "_blank" }, label || url);
+  return ce('a', {href: url, target: '_blank'}, label || url);
 }
 
-const TWITTER_HANDLES_TO_FILTER = new Set(["warianoguerra"]);
+const TWITTER_HANDLES_TO_FILTER = new Set(['warianoguerra']);
 function onCommentsFinished(_contributors, authors) {
   console.log(authors);
-  const outputNode = document.getElementById("output"),
+  const outputNode = document.getElementById('output'),
     authorsSorted = Array.from(authors).sort((userA, userB) =>
       userA.localeCompare(userB)
     );
 
   outputNode.appendChild(
-    ce("hr", { style: "border:0;border-top:1px solid #cccccc" }),
+    ce('hr', {style: 'border:0;border-top:1px solid #cccccc'})
   );
 
   window.setTimeout(() => {
     const twitterHandles = authorsSorted
         .filter((name) => !TWITTER_HANDLES_TO_FILTER.has(name))
-        .map((name) => "@" + name)
-        .join(" "),
-      textArea = document.getElementById("output-help"),
-      textAreaMd = document.getElementById("output-md"),
-      { newsletterUrl } = getInfoForWeekAndDay(new Date(), MONDAY);
+        .map((name) => '@' + name)
+        .join(' '),
+      textArea = document.getElementById('output-help'),
+      textAreaMd = document.getElementById('output-md'),
+      {newsletterUrl} = getInfoForWeekAndDay(new Date(), MONDAY);
     console.log(twitterHandles);
 
     textArea.innerHTML = textArea.innerHTML
-      .replace("%NEWSLETTER_URL%", newsletterUrl)
-      .replace("%TWITTER_HANDLES%", twitterHandles)
-      .replace(/%TOPICS%/g, textAreaMd.innerHTML.trim().split("\n")[0]);
+      .replace('%NEWSLETTER_URL%', newsletterUrl)
+      .replace('%TWITTER_HANDLES%', twitterHandles)
+      .replace(/%TOPICS%/g, textAreaMd.innerHTML.trim().split('\n')[0]);
   }, 500);
 
   outputNode.appendChild(
     ce(
-      "p",
+      'p',
       {},
-      "👨🏽‍💻 By ",
+      '👨🏽‍💻 By ',
       link(
-        "https://hachyderm.io/@marianoguerra",
-        "🐘 @marianoguerra@hachyderm.io",
+        'https://hachyderm.io/@marianoguerra',
+        '🐘 @marianoguerra@hachyderm.io'
       ),
-      " ",
-      link("https://twitter.com/warianoguerra", "🐦 @warianoguerra"),
-    ),
+      ' ',
+      link('https://twitter.com/warianoguerra', '🐦 @warianoguerra')
+    )
   );
 
   outputNode.appendChild(
     ce(
-      "p",
+      'p',
       {},
-      "💬 Not a member yet? Check the ",
-      link("https://futureofcoding.org/", "Future of Coding Community"),
-    ),
+      '💬 Not a member yet? Check the ',
+      link('https://futureofcoding.org/', 'Future of Coding Community')
+    )
   );
 
   outputNode.appendChild(
     ce(
-      "p",
+      'p',
       {},
-      "✉️ Not subscribed yet? ",
+      '✉️ Not subscribed yet? ',
       link(
-        "https://tinyletter.com/marianoguerra/",
-        "Subscribe to the Newsletter",
+        'https://newsletter.futureofcoding.org/join/',
+        'Subscribe to the Newsletter'
       ),
-      " / ",
-      link("https://tinyletter.com/marianoguerra/archive", "Archive"),
-      " / ",
-      link("https://history.futureofcoding.org/newsletter/rss.xml", "RSS"),
-    ),
+      ' / ',
+      link('https://newsletter.futureofcoding.org/archive.html', 'Archive'),
+      ' / ',
+      link('https://history.futureofcoding.org/newsletter/rss.xml', 'RSS')
+    )
   );
 
   outputNode.appendChild(
     ce(
-      "p",
+      'p',
       {},
-      "🎙 Prefer podcasts? check the ",
-      link("https://futureofcoding.org/episodes/", "Future of Coding Podcast"),
-    ),
+      '🎙 Prefer podcasts? check the ',
+      link('https://futureofcoding.org/episodes/', 'Future of Coding Podcast')
+    )
   );
 
-  outputNode.appendChild(ce("p", {}, ""));
+  outputNode.appendChild(ce('p', {}, ''));
 
-  document.getElementById("output-html").textContent = outputNode.innerHTML
-    .replace(/<p>/g, "\n\n<p>")
+  document.getElementById('output-html').textContent = outputNode.innerHTML
+    .replace(/<p>/g, '\n\n<p>')
     .trim();
-  document.getElementById("output-md").textContent = mdOutput + MD_FOOTER;
+  document.getElementById('output-md').textContent = mdOutput + MD_FOOTER;
 }
 
 const MD_FOOTER = `
@@ -151,7 +151,7 @@ const MD_FOOTER = `
 
 💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
 
-✉️ Not subscribed yet? [Subscribe to the Newsletter](https://tinyletter.com/marianoguerra/) / [Archive](https://newsletter.futureofcoding.org/) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
 
 🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
 `;
@@ -161,7 +161,7 @@ function addCommentSeparator(_outputNode) {
 }
 
 function onComments(comments, baseUrl, count, contributors, authors) {
-  const outputNode = document.getElementById("output"),
+  const outputNode = document.getElementById('output'),
     lastIndex = comments.length - 1;
 
   comments.forEach((comment, i, _it) => {
@@ -180,9 +180,8 @@ function onComments(comments, baseUrl, count, contributors, authors) {
 }
 
 function loadCommentsPage(baseUrl, count, contributors, authors, callback) {
-  fetchJson(
-    baseUrl + count,
-    (comments) => callback(comments, baseUrl, count + 1, contributors, authors),
+  fetchJson(baseUrl + count, (comments) =>
+    callback(comments, baseUrl, count + 1, contributors, authors)
   );
 }
 
@@ -190,35 +189,35 @@ function handleIssue(issue) {
   const contributors = {},
     authors = new Set();
   loadCommentsPage(
-    issue.comments_url + "?page=",
+    issue.comments_url + '?page=',
     1,
     contributors,
     authors,
-    onComments,
+    onComments
   );
 }
 
 function showMsg(className, txt) {
-  const node = document.getElementById("msg");
+  const node = document.getElementById('msg');
   node.className = className;
-  node.style.display = "block";
+  node.style.display = 'block';
   node.innerText = txt;
 }
 
 function noIssuesOpen() {
-  showMsg("alert alert-danger", "No Issues Open");
+  showMsg('alert alert-danger', 'No Issues Open');
 }
 
 function moreThanOneIssueOpen() {
   showMsg(
-    "alert alert-warning",
-    "More than one issue open, picking latest one",
+    'alert alert-warning',
+    'More than one issue open, picking latest one'
   );
 }
 
 function handleIssues(data) {
   const openIssues = data
-    .filter((issue) => issue.state === "open")
+    .filter((issue) => issue.state === 'open')
     .sort((issueA, issueB) => issueA.number - issueB.number);
 
   if (openIssues.length === 0) {
@@ -239,37 +238,37 @@ function fetchJson(url, onData) {
 }
 
 function main() {
-  console.log("fetching issues");
+  console.log('fetching issues');
   fetchJson(ISSUES_URL, handleIssues);
 }
 
 const defaultRules = SimpleMarkdown.defaultRules;
 
 function overrideDefaultHtml(ruleName, overrideFn) {
-  return Object.assign({}, defaultRules[ruleName], { html: overrideFn });
+  return Object.assign({}, defaultRules[ruleName], {html: overrideFn});
 }
 
 const customRules = {
-    paragraph: overrideDefaultHtml("paragraph", function (node, output, state) {
-      return "<p>" + output(node.content, state) + "</p>\n";
+    paragraph: overrideDefaultHtml('paragraph', function (node, output, state) {
+      return '<p>' + output(node.content, state) + '</p>\n';
     }),
     blockQuote: overrideDefaultHtml(
-      "blockQuote",
+      'blockQuote',
       function (node, output, state) {
         return (
           '<blockquote style="margin-left:1em;color:#555555;font-style:italic">' +
           output(node.content, state) +
-          "</blockquote>\n"
+          '</blockquote>\n'
         );
-      },
+      }
     ),
   },
   rules = Object.assign({}, defaultRules, customRules),
   rawBuiltParser = SimpleMarkdown.parserFor(rules),
-  htmlOutput = SimpleMarkdown.htmlFor(SimpleMarkdown.ruleOutput(rules, "html"));
+  htmlOutput = SimpleMarkdown.htmlFor(SimpleMarkdown.ruleOutput(rules, 'html'));
 
 function mdToHTML(txt) {
-  return htmlOutput(rawBuiltParser(txt + "\n\n", { inline: false }));
+  return htmlOutput(rawBuiltParser(txt + '\n\n', {inline: false}));
 }
 
 main();

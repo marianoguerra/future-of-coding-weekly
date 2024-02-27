@@ -24,6 +24,7 @@ function generateScriptForThisWeek(now, dayNumber) {
   console.log(
     `https://github.com/marianoguerra/future-of-coding-weekly/issues/new?&template=newsletter-week-issue.md&title=Future+of+Coding+Weekly+${curYear}%2F${monthStr}+Week+${weekNumber}`
   );
+  console.log(`git add history; git commit -m "weekly dump"; git push origin`);
   console.log(`focAfterWeeklyPush`);
   console.log(`hx future-of-newsletters/mail-sent/${dateDir}/mail.html`);
   console.log(`hx future-of-newsletters/mail-sent/${dateDir}/mail.txt`);
