@@ -408,12 +408,12 @@ pub async fn send_message_with_body(
     client
         .send_email()
         .source(from)
-        .destination(dest)
+        .destination(dest.clone())
         .message(msg)
         .send()
         .await?;
 
-    println!("Email sent");
+    println!("Email sent to {}", dest.to_addresses().join(", "));
 
     Ok(())
 }
