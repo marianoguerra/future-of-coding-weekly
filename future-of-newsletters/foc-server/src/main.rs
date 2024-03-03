@@ -19,7 +19,32 @@ async fn main() {
                 .help("Sets the level of verbosity"),
         )
         .subcommand_required(true)
-        .subcommand(clap::Command::new("export-subscribers"))
+        .subcommand(
+            clap::Command::new("export-subscribers").arg(
+                clap::Arg::new("db-path")
+                    .long("db-path")
+                    .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                    .action(clap::ArgAction::Set)
+                    .required(true),
+            ),
+        )
+        .subcommand(
+            clap::Command::new("import-subscribers")
+                .arg(
+                    clap::Arg::new("db-path")
+                        .long("db-path")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set)
+                        .required(true),
+                )
+                .arg(
+                    clap::Arg::new("subscribers-path")
+                        .long("subscribers-path")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set)
+                        .required(true),
+                ),
+        )
         .subcommand(
             clap::Command::new("send-newsletter")
                 .arg(
@@ -95,40 +120,15 @@ async fn main() {
                 }
             }
         }
+        Some(("import-subscribers", matches)) => {
+            cli_import_subscribers(matches).await;
+        }
         Some(("send-newsletter", matches)) => {
             cli_send_newsletter(matches).await;
         }
-        Some(("export-subscribers", _matches)) => match db::open_and_setup(DEFAULT_DB_NAME).await {
-            Ok(conn) => match db::get_active_subscriptions(&conn).await {
-                Ok(subscribers) => {
-                    let mut wtr = csv::Writer::from_writer(std::io::stdout());
-                    wtr.write_record([
-                        "E-mail",
-                        "Subscribe Date (GMT)",
-                        "confirm Date (GMT)",
-                        "Token",
-                    ])
-                    .expect("opening csv writer");
-                    for subscriber in subscribers {
-                        wtr.write_record(&[
-                            subscriber.email,
-                            subscriber.created_at,
-                            subscriber.confirmed_at.unwrap_or_else(|| "".to_string()),
-                            subscriber.token,
-                        ])
-                        .expect("writing csv record");
-                    }
-
-                    wtr.flush().expect("flushing writer");
-                }
-                Err(err) => {
-                    eprintln!("Error listting subscriber: {err:?}");
-                }
-            },
-            Err(err) => {
-                eprintln!("Error opening database: {err:?}");
-            }
-        },
+        Some(("export-subscribers", matches)) => {
+            cli_export_subscribers(matches).await;
+        }
         _ => {}
     };
 }
@@ -160,6 +160,106 @@ async fn cli_send_newsletter(matches: &clap::ArgMatches) {
 
     if let Err(err) = mail::send_newsletter(&config, mail_path, subscribers).await {
         eprintln!("Error sending newsletter: {err:?}");
+    }
+}
+
+async fn cli_export_subscribers(matches: &clap::ArgMatches) {
+    let db_path = matches.get_one::<String>("db-path").expect("no db-path");
+
+    let conn = db::open_and_setup(db_path)
+        .await
+        .expect("can't open db connection");
+
+    let subscribers = db::get_active_subscriptions(&conn)
+        .await
+        .expect("error getting subscribers");
+    let mut wtr = csv::Writer::from_writer(std::io::stdout());
+    wtr.write_record([
+        "E-mail",
+        "Subscribe Date (GMT)",
+        "confirm Date (GMT)",
+        "Token",
+    ])
+    .expect("opening csv writer");
+    for subscriber in subscribers {
+        wtr.write_record(&[
+            subscriber.email,
+            subscriber.created_at,
+            subscriber.confirmed_at.unwrap_or_else(|| "".to_string()),
+            subscriber.token,
+        ])
+        .expect("writing csv record");
+    }
+
+    wtr.flush().expect("flushing writer");
+}
+
+async fn cli_import_subscribers(matches: &clap::ArgMatches) {
+    let subscribers_path = matches
+        .get_one::<String>("subscribers-path")
+        .expect("no subscribers-path");
+
+    let db_path = matches.get_one::<String>("db-path").expect("no db-path");
+
+    let conn = db::open_and_setup(db_path)
+        .await
+        .expect("can't open db connection");
+
+    let reader = csv::ReaderBuilder::new()
+        .has_headers(true)
+        .from_path(subscribers_path)
+        .expect("can't create csv reader");
+
+    for maybe_record in reader.into_records() {
+        match maybe_record {
+            Ok(record) => {
+                if let (Some(mail), Some(created_raw)) = (record.get(0), record.get(1)) {
+                    import_subscriber(&conn, mail, created_raw).await;
+                } else {
+                    eprintln!("Bad record: {record:?}");
+                }
+            }
+            Err(err) => {
+                eprintln!("Error reading record {err:?}");
+            }
+        }
+    }
+}
+
+async fn import_subscriber(conn: &tokio_rusqlite::Connection, mail: &str, created_raw: &str) {
+    let created_result = chrono::NaiveDateTime::parse_from_str(created_raw, "%Y-%m-%d %H:%M:%S");
+    match created_result {
+        Ok(created_at_ndt) => {
+            let created_at = created_at_ndt.and_utc().to_rfc3339();
+            let confirmed_at = chrono::Utc::now().to_rfc3339();
+            let token = db::new_token();
+
+            println!("{mail} {created_at} {confirmed_at} {token}");
+
+            match db::add_subscription_with_date(&conn, mail, &token, created_at).await {
+                Ok(()) => {
+                    match db::confirm_subscription_with_date(&conn, mail, &token, confirmed_at)
+                        .await
+                    {
+                        Ok(1) => {
+                            println!("Added and confirmed");
+                        }
+                        Ok(count) => {
+                            eprintln!("Expected to confirm one row, got: {count}");
+                        }
+                        Err(err) => {
+                            eprintln!("Error confirming: {err:?}");
+                        }
+                    }
+                }
+                Err(err) => {
+                    eprintln!("Error adding: {err:?}");
+                }
+            }
+        }
+        Err(err) => {
+            eprintln!("Bad created at date format: {mail}: {created_raw} ({err:?})");
+        }
     }
 }
 

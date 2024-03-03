@@ -33,10 +33,19 @@ pub fn new_token() -> String {
 }
 
 pub async fn add_subscription(conn: &Connection, email: &str, token: &str) -> Result<()> {
+    let created_at = Utc::now().to_rfc3339();
+    add_subscription_with_date(conn, email, token, created_at).await
+}
+
+pub async fn add_subscription_with_date(
+    conn: &Connection,
+    email: &str,
+    token: &str,
+    created_at: String,
+) -> Result<()> {
     let email = email.to_string();
     let token = token.to_string();
     conn.call(move |conn| {
-        let current_time = Utc::now().to_rfc3339();
         conn.execute(
             r#"INSERT INTO newsletter_subscriptions (email, token, created_at)
 VALUES (?1, ?2, ?3)
@@ -46,7 +55,7 @@ ON CONFLICT (email) DO UPDATE SET
     deleted_at = NULL
 WHERE deleted_at IS NOT NULL;
 "#,
-            params![email, token, current_time],
+            params![email, token, created_at],
         )?;
         Ok(())
     })
@@ -54,13 +63,22 @@ WHERE deleted_at IS NOT NULL;
 }
 
 pub async fn confirm_subscription(conn: &Connection, email: &str, token: &str) -> Result<usize> {
+    let confirmed_at = Utc::now().to_rfc3339();
+    confirm_subscription_with_date(conn, email, token, confirmed_at).await
+}
+
+pub async fn confirm_subscription_with_date(
+    conn: &Connection,
+    email: &str,
+    token: &str,
+    confirmed_at: String,
+) -> Result<usize> {
     let email = email.to_string();
     let token = token.to_string();
     conn.call(move |conn| {
-        let current_time = Utc::now().to_rfc3339();
         let rows = conn.execute(
             "UPDATE newsletter_subscriptions SET confirmed_at = ?1 WHERE email = ?2 AND token = ?3",
-            params![current_time, email, token],
+            params![confirmed_at, email, token],
         )?;
         Ok(rows)
     })
