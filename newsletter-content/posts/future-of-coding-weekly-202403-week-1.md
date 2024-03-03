@@ -1,0 +1,392 @@
+<!--
+.. title: Future of Coding Weekly 2024/03 Week 1
+.. slug: future-of-coding-weekly-202403-week-1
+.. date: 2024-03-04 00:24:27 UTC+01:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🎙️ The New Physics (with Stefan Lesser)  🛸 Moldable development for Common Lisp 🎥 Project Updates
+
+# Our Work
+
+🎙️ [The New Physics (with Stefan Lesser)](https://www.patreon.com/posts/new-physics-with-99281699) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/share-your-work.html#2024-02-27T03:16:13.134Z)
+
+I had a lovely call with [Stefan Lesser](https://twitter.com/stefanlesser) a few weeks ago, and he was kind enough to let me record it and release it as the [patreon bonus podcast episode](https://www.patreon.com/posts/new-physics-with-99281699) this month. We'd been DMing about [💬 #thinking-together@2024-01-01T21:17:17.966Z](./?fromDate=2023-12-29&toDate=2024-01-04&channel=thinking-together&filter=#2024-01-01T21:17:17.966Z), keen to exchange our thoughts on a (new?) subtle kind of idea: those that can only be expressed (or received) by designing (or playing with) an interactive system. For instance, there's a subjective experience of interacting with a system, and I posit that this feeling engenders a kind of meaningful thought. So we set out to talk about this, and of course about some related things too (such as "the new physics" that exist inside the computer). Lots of fun. Thanks [Stefan Lesser](https://twitter.com/stefanlesser) for the chat, and for letting me share it as  _boco_ . And thanks to all of you who support our effort to make the best, weirdest, most interesting podcast we can. Look forward to the next main episode… with a real  _subjective experience_  of soon-ness!
+
+📝 [The Parallel Reality Computer](https://duncancragg.substack.com/p/the-parallel-reality-computer?r=1sq2dz&utm_campaign=post&utm_medium=web) via [Duncan Cragg](https://twitter.com/Duncan__Cragg)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/share-your-work.html#2024-02-29T10:37:24.699Z)
+
+ *The Parallel Reality Computer* 
+
+(very short article!)
+
+📝 [Zest: dialects and metaprogramming](https://www.scattered-thoughts.net/writing/zest-dialects-and-metaprogramming/) via [Jamie Brandon](https://scattered-thoughts.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/share-your-work.html#2024-03-01T00:15:54.754Z)
+
+Some thoughts on skirting the line between static and dynamic typing
+
+💻 [Programming as Theory Building](https://futureofcoding.org/episodes/061.html) via **Eoghan Mulcahy**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/share-your-work.html#2024-03-01T13:42:11.927Z)
+
+Inspired by the [Programming as Theory Building](https://futureofcoding.org/episodes/061.html) episode we are building a tool to help development teams capture & store the theory of their program text.
+
+We achieve this through auto-generation of logical paths through the codebase which developers explain to each-other through voice and video.
+
+
+
+We would love to hear the thoughts of this community specifically as many of you will see what we are trying to achieve here.
+
+Checkout out our [launch](https://www.ycombinator.com/launches/KWX-ten-dev-understand-code-remarkably-fast) for more info.
+
+![launchdemo-higher-qual.gif](http://history.futureofcoding.org/history/msg_files/F06/F06MUUE4TA5.gif)
+
+
+💬 [Jim Meyer](https://twitter.com/jimmeyer)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/share-your-work.html#2024-03-02T13:22:59.394Z)
+
+Had the terrible realization that our code-native multiplayer canvas is the perfect opportunity to troll coworkers 😂
+
+
+
+(Instantly send code changes to your coworker's canvas via multiplayer)
+
+🎥 [Turing complete trolling](http://history.futureofcoding.org/history/msg_files/F06/F06MHRM9JVB.mp4)
+
+
+
+# Devlog Together
+
+💬 [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-02-26T04:05:44.786Z)
+
+I'm getting more and more into a new… idea? Let's see if I can explain it.
+
+
+
+
+
+
+* There are programs, like photoshop, that are tools for artists. You can use them to make art. They're a digital equivalent of traditional art tools. The fact that they're digital has, just to give one example, enabled artists to easily do some things that used to be really hard. This has, in turn, changed the sort of art that gets made.
+
+
+
+
+
+
+* There are programs, like flash, that are tools for _______ to make tools for artists. (I'm leaving a blank there because… I could have said "programmers", but I actually want you to not think of them as programmers for a sec. Just go with me.) For example, in the late 00s, I worked as a ______ making tools for artists, and I used flash to do this, because it gave me a programming environment that was designed in tandem with a drawing environment. Really nice fit here. But flash wasn't really designed for people to make tools for artists. It was designed to be a tool for artists, but it was also programmable, which made it a good tool for making tools for artists.
+
+
+
+
+
+
+* There are —————, that are tools for making tools for ______ to make tools for artists. (I'm adding another blank. I could have said "programming languages", but I actually want you to not think of these  _—————s_  as programming languages for a sec. Just go with me.) For example, going to school, or reading books, or a good night's sleep, or taking a shower, or having a stimulating conversation with a friend. These are all —————, but they're outside the computer.
+
+
+
+Just as the computer allowed artists to have a new kind of tool that changed the sort of art that got made, I'm interested in how the computer might give us new kinds of ——————, which would in turn make new kinds of _________.
+
+
+
+It's possible that FoC as a community is a —————. But I also think there's ————— software that's  _not_  a programming language.
+
+
+💬 [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-02-26T11:25:57.889Z)
+
+Progress on the binary operations explorable: step through binary AND, shift left and shift right.
+
+![binvm-and.gif](http://history.futureofcoding.org/history/msg_files/F06/F06LHPQ8F0D.gif)
+
+![binvm-shift.gif](http://history.futureofcoding.org/history/msg_files/F06/F06L64TU7K9.gif)
+
+
+
+💬 [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-02-26T13:49:40.237Z)
+
+🚂 All onboard the shift operation train (showing intermediate results during stepping)
+
+![binvm-shift-train.gif](http://history.futureofcoding.org/history/msg_files/F06/F06MA6PM848.gif)
+
+
+
+🛸 [A moldable Common Lisp object inspector based on CLOG](https://codeberg.org/khinsen/clog-inspector) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-02-26T13:53:38.202Z)
+
+Moldable development is coming to Common Lisp
+
+💻 [SplootCode tiny program](https://app.splootcode.io/shared/mattia/for-loops-example/EPdLhGOx7p1SbPDIDisgbfpV) via [Mattia Fregola](https://twitter.com/MattiaFregola)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-02-27T00:15:43.623Z)
+
+Hi everyone,
+
+I have a big question about a programming-related problem I only partly understand, hoping not to get an answer, but rather pointers to where I should be looking. Here it goes.
+
+
+
+For the past two years I have been working on SplootCode wanting to make code more accessible to non-engineers. The initial product (as is today) is basically a structured editor with drag and drop a-la-Scratch capabilities, and some other things to help non-engineers see and understand what the code is doing. You can see an example tiny program [here](https://app.splootcode.io/shared/mattia/for-loops-example/EPdLhGOx7p1SbPDIDisgbfpV).
+
+
+
+During the interviews I conducted with several people, I bumped into a non-native English speaker who revealed their frustrations with having to learn English in order to code.
+
+
+
+After speaking to another dozen non-native speakers - some of whom teach programming in non-English speaking countries using their native language - I figured that this is a really big problem for a lot people, and I want to solve it.
+
+
+
+Since I have been deep into SplootCode for over two years, I am sure that I am suffering from sunk cost fallacy like crazy, thus the reason I am asking the question here is to get some outside perspective.
+
+
+So, to solve the problem for people, I am wanting to address the nested problem that – AFAIK – the vast majority of programming languages, with the exclusion of any purely symbolic ones, are effectively a subset of the English language.
+
+
+
+My first train of thoughts was: “perfect use case for building on top of SplootCode! The structured editing part means half the work is done already since I can label keywords however I want”.
+
+Followed by: “but wait! how can this be actually solved so that anyone can use their own tool of choice, which is what people will need?”
+
+---
+
+Thus my question is:
+
+I believe that the proper solution is to add a  _layer_ * to code – call the  `tongue`  layer – that defines the  _label_ ** for each  `tongue` .
+
+ *What do I need to understand thoroughly, in order to build such a solution? Who should I speak to?* 
+
+
+
+* _layer_  intended as a standalone structure that doesn’t interact with anything but the semantic label of any literal, variable, operator, or function (or any other atomic structure that may exist within a programming language)
+
+
+
+** _label_  intended as the human-readable part of an atomic structure of a program. For example, the  `if`  in the structure  `if () {}`  in javascript, would be  `se`  in Italian, and  `もし`  in Japanese.
+
+💬 [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-02-27T13:53:21.975Z)
+
+Where are the nibbles?
+
+![binvm-bytes-shorts-ints.gif](http://history.futureofcoding.org/history/msg_files/F06/F06MHDSQ7NU.gif)
+
+
+📝 [Science Fiction Short: Hijack](https://spectrum.ieee.org/hard-science-fiction-computer) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-02-28T04:36:56.886Z)
+
+Some doggerel while reading [spectrum.ieee.org/hard-science-fiction-computer](https://spectrum.ieee.org/hard-science-fiction-computer):
+
+
+
+If an Agile org and Private Cloud
+
+put in a million sprints,
+
+Do you suppose their OKRs
+
+might start to overload Mars?
+
+
+
+(With apologies to Lewis Carroll: [ The Walrus and the Carpenter](https://www.poetryfoundation.org/poems/43914/the-walrus-and-the-carpenter-56d222cbc80a9))
+
+📝 [Entry 005: Functions: take 1](http://alltom.com/pages/ppl-lab-notebook/005.html) via [Tom Lieber](https://twitter.com/alltom)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-03-01T22:11:24.550Z)
+
+Pictured: the equivalent of this WebPPL model
+
+
+
+
+
+
+```
+var clamp = function(num) {
+
+  return num > 2 ? 2 : num
+
+}
+
+clamp(sum(repeat(3, function() {
+
+  return flip()
+
+})))
+```
+
+
+
+
+
+ *What's new this time? User-defined functions!*  There's one anonymous, single-use function at the top (the one that's passed to  `repeat()` ), and a function named  `clamp`  below that's written to be reused.  *Functions = Boxes.*  Lu took lines, but I think boxes are still available.
+
+
+
+ *The writeup is here:* [alltom.com/pages/ppl-lab-notebook/005.html](http://alltom.com/pages/ppl-lab-notebook/005.html) If you want to know the whys and the hows, it's for you. I  _love_  how the lab notebook / experiment writeup format gives me places to hang all the random things I'd like to write about. Design vicariously with me. 🙂
+
+
+
+(Even if you don't have the time to read the writeup, I want you to know that I  _do not like_  how the clamp function's source code looks. I'm not done. But I decided a few entries back that I was going to dump all the LEGO bricks onto the floor where I could see them before I started picking the ones I wanted in my spaceship.)
+
+![2024-02-21 clamped sum.gif](http://history.futureofcoding.org/history/msg_files/F06/F06MY094R6D.gif)
+
+
+
+🎥 [mandelbrot fractal in my visual programming environment](https://youtu.be/y71c1IBBBsk) via [Maikel van de Lisdonk](https://www.devhelpr.com/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-03-02T19:47:07.747Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/y71c1IBBBsk/hqdefault.jpg)
+
+The last couple of weeks I've been mainly focussing on the editing/creating of composition nodes in the visual programming system that I am building, which is more work than I expected. At least it's now possible to add input and output ports dynamically for existing compositions.
+
+
+
+Since I also wanted to have some fun (and procastinate) I decided to implement a zoomable mandelbrot fractal in the gl-flow app, which can be seen in this little video [youtu.be/y71c1IBBBsk](https://youtu.be/y71c1IBBBsk). This also required some extra node-types and adjustments to the pull-based gl-flow engine. Like having support for a  for-loop-node which can be breaked out of depending on a condition. I implemented both the for-node as the condition as containers due to the way the pull-based engine works.
+
+
+
+To give some background on the implementation of the pull-based flow engine which is used in the gl-flow app: the nodes get executed backwards starting at an end node and their output is glsl-code which can be run by a fragment shader on the gpu. So, the nodes themselves are not executed by the shader but the generated output is.
+
+The spatial placement of the "end-nodes" is used to determine which node gets executed first and then the input nodes are executed backwards. A container is also an end-node. So, the contained nodes are executed in a code block.
+
+
+
+I think the fractal renderer works quite nicely but you can't zoom very deep because of precision issues. I might try to solve these in the future, but my goal is not to make the perfect visual shadertoy😊.
+
+📝 [Entry 006: Layout by dragging](http://alltom.com/pages/ppl-lab-notebook/006.html) via [Tom Lieber](https://twitter.com/alltom)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/devlog-together.html#2024-03-03T19:15:51.557Z)
+
+Catharsis: I finally don't have to lay code out (solely) by typing <x, y, z> coordinates. 😌
+
+
+
+The write up is here, though it's more like a programming livestream this time because I didn't iterate on the language much: [alltom.com/pages/ppl-lab-notebook/006.html](http://alltom.com/pages/ppl-lab-notebook/006.html)
+
+🎥 [drag nodes and charts](http://history.futureofcoding.org/history/msg_files/F06/F06MG5YDXKQ.mov)
+
+# Thinking Together
+
+💬 [Hamish Todd](https://twitter.com/hamish_todd)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/thinking-together.html#2024-02-28T11:39:28.482Z)
+
+Hey folks. I've been working on a VR ui for animation, inspired by Stop Drawing Dead Fish and a system called Projective Geometric Algebra. In this gif you can see me making something called a PGA Rotor, which is TLDR is an object that generalizes vectors and quaternions.
+
+![chrome-capture-2024-1-28.gif](http://history.futureofcoding.org/history/msg_files/F06/F06M15AMZ0B.gif)
+
+You animate by making a bunch of these things, and then "snapping" them together, so they are joined end-to-end for example, and that becomes constantly-updated behaviour.  *Problem*  that I'd appreciate input on an idea for is how to visualize the "code"
+
+Problem: my setup is already cluttered. Eg, animated characters are already surrounded by a halo of crazy clockwork; it's all I can do to hide it. But sometimes you want to see a lot of it. And I don't want to add boxes-and-arrows, and I don't want to add spreadsheets much either. I'm thinking that instead of showing the relations, I just let you fiddle with the things and see what happens
+
+But maybe someone here has already tried this?
+
+📝 [Academia from the outside](https://www.todepond.com/wikiblogarden/academia/from/the-outside/) via [Lu Wilson](https://twitter.com/TodePond)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/thinking-together.html#2024-03-03T08:04:25.001Z)
+
+I wrote down my perceptions of academia as someone on the outside.
+
+# Content
+
+🐦 [worrydream.com/Tweets](https://worrydream.com/Tweets/) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/linking-together.html#2024-03-02T03:33:09.031Z)
+
+Bret Victor has redesigned his website. Poking around it, I noticed this wing of tweets: [worrydream.com/Tweets](https://worrydream.com/Tweets/)
+
+
+
+Example content:
+
+
+
+2011-09-30:
+
+
+
+
+> Spent the last two days trying to write a paragraph. WHY CAN'T I WRITE PARAGRAPH.
+
+
+
+❤
+
+
+📝 [How to adopt Christopher Alexander’s ideas in the software industry](https://stefan-lesser.com/2020/10/27/how-to-adopt-christopher-alexanders-ideas-in-the-software-industry/) via [Andreas S](https://twitter.com/curious_reader)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/linking-together.html#2024-03-02T16:23:52.247Z)
+
+Digging around for Christopher Alexander I found [Stefan Lesser](https://twitter.com/stefanlesser) 🙂 
+
+📝 [List of 2024 Leap Day Bugs](https://codeofmatt.com/list-of-2024-leap-day-bugs/) via **Beni Cherniavsky-Paskin**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/linking-together.html#2024-03-03T09:13:14.576Z)
+
+Some hilarious examples if "software legalism" 🤦... (literally legalism in the case of marriage certificates) [codeofmatt.com/list-of-2024-leap-day-bugs](https://codeofmatt.com/list-of-2024-leap-day-bugs/)
+
+>Well, it's 2024 and leap day has come once again. As I've done in prior leap years, I've captured as many bug reports and outages as I can, along with links to the source where possible. For those have been following along, you'll notice these have been organized a bit
+
+
+# 🤖
+
+📝 [AI is bad/good actually](https://www.todepond.com/wikiblogarden/better-computing/worse-computing/artificial-intelligence/bad/good/) via [Lu Wilson](https://twitter.com/TodePond)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/of-ai.html#2024-03-01T07:49:58.723Z)
+
+I'd like to introduce a new way of talking about good/bad bad/good AI
+
+![1709279393169.png](http://history.futureofcoding.org/history/msg_files/F06/F06MH1XPDGU.png)
+
+
+# Present Company
+
+💬 **Beni Cherniavsky-Paskin**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/03/W1/present-company.html#2024-02-27T23:21:04.211Z)
+
+My 11yo son is learning the piano, and I rigged him a midi->raspberry pi->RGB LED strip so keys he plays light up then fade (it's a 144/m strip so nearly 2 leds per key).  
+
+Now i'd like him to program he visualizer himself.  Tweak the colors, maybe do some analysis like recognize chords, try record/replay, maybe even ignore the music and make some game using the piano as input device?
+
+
+
+He knows Scratch/Snap!, and wants to learn python (which my current script happens to already use), but the audio/visual nature here just screams "missed FoC/live coding opportunity" 😆 
+
+What would you recommend?
+
+
+
+[constraint: myself I know zero about music 🙉]
+
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
