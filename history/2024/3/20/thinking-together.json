@@ -1,0 +1,706 @@
+[
+    {
+        "user": "U05TJD2V4P2",
+        "type": "message",
+        "ts": "1710955571.143429",
+        "edited": {
+            "user": "U05TJD2V4P2",
+            "ts": "1710955613.000000"
+        },
+        "client_msg_id": "ac842475-3a1a-4730-b62d-1761c92802c1",
+        "text": "I want to build the backend of an as-bidirectional-as-possible spreadsheet/dataflow, does anyone have any favorite techniques?\n\nI\u2019d like to prefer a dataflow style solution over a constraint solver. I\u2019ve been reading up on why this problem feels hard and its similarity to the \u201cview update problem\u201d in databases, I\u2019m curious if there\u2019s a widely accepted solution that I\u2019m missing.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "reply_count": 10,
+        "reply_users_count": 6,
+        "latest_reply": "1711394130.661509",
+        "reply_users": [
+            "UC2A2ARPT",
+            "U05TJD2V4P2",
+            "U06BUK2M2RH",
+            "UN57U8V53",
+            "U06131CATV3",
+            "UA14TGLTC"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wdYk2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I want to build the backend of an as-bidirectional-as-possible spreadsheet/dataflow, does anyone have any favorite techniques?\n\nI\u2019d like to prefer a dataflow style solution over a constraint solver. I\u2019ve been reading up on why this problem feels hard and its similarity to the \u201cview update problem\u201d in databases, I\u2019m curious if there\u2019s a widely accepted solution that I\u2019m missing."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UC2A2ARPT",
+        "type": "message",
+        "ts": "1710975759.645089",
+        "client_msg_id": "89a5406b-bd6c-4491-8693-970d0830a5a0",
+        "text": "[moved from top level, original message by <@U06JEKAJLTV>]\n\nI get that you're not looking for a constraints-based solution, but maybe you'll find this interesting anyway: <https://github.com/harc/constraint-based-spreadsheet>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "DLgH3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "[moved from top level, original message by "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U06JEKAJLTV"
+                            },
+                            {
+                                "type": "text",
+                                "text": "]\n\nI get that you're not looking for a constraints-based solution, but maybe you'll find this interesting anyway: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/harc/constraint-based-spreadsheet"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U05TJD2V4P2",
+        "type": "message",
+        "ts": "1710978469.844719",
+        "client_msg_id": "64a88866-5e79-4d2c-86c9-f85a8e5f943f",
+        "text": "Thanks <@U06JEKAJLTV>, would you mind sharing any thoughts on how the project went with the constraint approach? I\u2019m thinking right now about leaning on lenses and some semantics discussed in this slideshow \u201cWeird World of Bi-Directional Programming\u201d from Benjamin Pierce. Was there a particular reason you chose a constraint solver?\n\n<https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MgF/Z",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U06JEKAJLTV"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", would you mind sharing any thoughts on how the project went with the constraint approach? I\u2019m thinking right now about leaning on lenses and some semantics discussed in this slideshow \u201cWeird World of Bi-Directional Programming\u201d from Benjamin Pierce. Was there a particular reason you chose a constraint solver?\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.cis.upenn.edu/~bcpierce/papers/lenses-etapsslides.pdf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "eyes",
+                "users": [
+                    "U06131CATV3"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U06BUK2M2RH",
+        "type": "message",
+        "ts": "1711048996.282089",
+        "edited": {
+            "user": "U06BUK2M2RH",
+            "ts": "1711132188.000000"
+        },
+        "client_msg_id": "7dabf15d-4381-403c-bcf8-403650006bb4",
+        "text": "I've been enamored with the Propagator Model as a solution to this problem. The idea is cells don't just store values, but more broadly they store information about what the value could be (such as a set of potential values), and propagators are like functions that react to changes in any number of connected cells, do computation, and then updated dependent cells continuously by* 'merging' in information (like finding the intersection of a set to get closer to a solution). It's a bit abstract, but these networks can be used as general purpose constraint solvers/computers by reacting to changes to cells and propagating updates to converge on a solution/steady state (they can be structured so they always converge). Bonus is nodes are 'actors' in the sense they are autonomous, async, and thus can be  distributed/run in paralle. Sussman and Radul have a paper in it- this is the best intro ive seen (<https://www.youtube.com/watch?v=HB5TrK7A4pI>), and there are some implementations of it in <https://github.com/ekmett/propagators|Haskel> for example  by this guy",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "attachments": [
+            {
+                "from_url": "https://www.youtube.com/watch?v=HB5TrK7A4pI",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "thumb_url": "https://i.ytimg.com/vi/HB5TrK7A4pI/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/HB5TrK7A4pI?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen title=\"&quot;We Really Don&#39;t Know How to Compute!&quot; - Gerald Sussman (2011)\"></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "id": 1,
+                "original_url": "https://www.youtube.com/watch?v=HB5TrK7A4pI",
+                "fallback": "YouTube Video: \"We Really Don't Know How to Compute!\" - Gerald Sussman (2011)",
+                "title": "\"We Really Don't Know How to Compute!\" - Gerald Sussman (2011)",
+                "title_link": "https://www.youtube.com/watch?v=HB5TrK7A4pI",
+                "author_name": "Strange Loop Conference",
+                "author_link": "https://www.youtube.com/@StrangeLoopConf",
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "DpXWy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've been enamored with the Propagator Model as a solution to this problem. The idea is cells don't just store values, but more broadly they store information about what the value could be (such as a set of potential values), and propagators are like functions that react to changes in any number of connected cells, do computation, and then updated dependent cells continuously by* 'merging' in information (like finding the intersection of a set to get closer to a solution). It's a bit abstract, but these networks can be used as general purpose constraint solvers/computers by reacting to changes to cells and propagating updates to converge on a solution/steady state (they can be structured so they always converge). Bonus is nodes are 'actors' in the sense they are autonomous, async, and thus can be  distributed/run in paralle. Sussman and Radul have a paper in it- this is the best intro ive seen ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.youtube.com/watch?v=HB5TrK7A4pI"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), and there are some implementations of it in "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/ekmett/propagators",
+                                "text": "Haskel"
+                            },
+                            {
+                                "type": "text",
+                                "text": " for example  by this guy"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            },
+            {
+                "name": "point_up",
+                "users": [
+                    "UA14TGLTC",
+                    "U06131CATV3"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "text": "Here's an visual: You can see how by wiring up an equation in both directions you can solve any variable given the other one*.",
+        "files": [
+            {
+                "id": "F06R4EERJJV",
+                "created": 1711049158,
+                "timestamp": 1711049158,
+                "name": "Screenshot 2024-03-21 at 3.25.55\u202fPM.png",
+                "title": "Screenshot 2024-03-21 at 3.25.55\u202fPM.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U06BUK2M2RH",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 26886,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F06R4EERJJV/screenshot_2024-03-21_at_3.25.55___pm.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F06R4EERJJV/download/screenshot_2024-03-21_at_3.25.55___pm.png",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F06R4EERJJV-44fb5af49e/screenshot_2024-03-21_at_3.25.55___pm_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F06R4EERJJV-44fb5af49e/screenshot_2024-03-21_at_3.25.55___pm_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F06R4EERJJV-44fb5af49e/screenshot_2024-03-21_at_3.25.55___pm_360.png",
+                "thumb_360_w": 360,
+                "thumb_360_h": 229,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F06R4EERJJV-44fb5af49e/screenshot_2024-03-21_at_3.25.55___pm_160.png",
+                "original_w": 449,
+                "original_h": 286,
+                "thumb_tiny": "AwAeADDToPT0oo60AN54+YUc88jNOwPSk2jOcCgBR0oo6CigBGGaac7fcdqfQQDQAw9Opz6Uc45p2BS4FADO3Jx7U5enPWjApaAP/9k=",
+                "permalink": "https://futureofcoding.slack.com/files/U06BUK2M2RH/F06R4EERJJV/screenshot_2024-03-21_at_3.25.55___pm.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F06R4EERJJV-f6f9fe32cd",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U06BUK2M2RH",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6dTSN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Here's an visual: You can see how by wiring up an equation in both directions you can solve any variable given the other one*."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1711049193.915029",
+        "edited": {
+            "user": "U06BUK2M2RH",
+            "ts": "1711049260.000000"
+        },
+        "client_msg_id": "80824728-2ffa-4947-892e-4112f7e93838",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2"
+    },
+    {
+        "user": "U06BUK2M2RH",
+        "type": "message",
+        "ts": "1711049323.804559",
+        "client_msg_id": "d280d44c-baf7-47a3-8c63-8f3662fcf32a",
+        "text": "Lastly to add- this is not widely accepted- probably far from it. Just particularly interesting. Hope thats useful",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dqdcQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Lastly to add- this is not widely accepted- probably far from it. Just particularly interesting. Hope thats useful"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "text": "Related, there's a great book on constraint theory by Friedman and Phan that digs into this kind of thing",
+        "files": [
+            {
+                "id": "F06QBTPK6NB",
+                "created": 1711056421,
+                "timestamp": 1711056421,
+                "name": "IMG_20240321_172553.jpg",
+                "title": "IMG_20240321_172553.jpg",
+                "mimetype": "image/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UN57U8V53",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 661026,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F06QBTPK6NB/img_20240321_172553.jpg",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F06QBTPK6NB/download/img_20240321_172553.jpg",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_64.jpg",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_80.jpg",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_360.jpg",
+                "thumb_360_w": 360,
+                "thumb_360_h": 271,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_480.jpg",
+                "thumb_480_w": 480,
+                "thumb_480_h": 361,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_160.jpg",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_720.jpg",
+                "thumb_720_w": 720,
+                "thumb_720_h": 542,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_800.jpg",
+                "thumb_800_w": 800,
+                "thumb_800_h": 602,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_960.jpg",
+                "thumb_960_w": 960,
+                "thumb_960_h": 723,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F06QBTPK6NB-5502f99b8d/img_20240321_172553_1024.jpg",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 771,
+                "original_w": 4080,
+                "original_h": 3072,
+                "thumb_tiny": "AwAkADBDUZYj73FPPWkPTFAAjYwQe9XMlhVMDp9atbuMUAIwpMfKRSE0A5FAEOaaA2eTkUp60mfpQA4DkfWpzxUCfeFWmANAERoXpSkD1puecUCIVYmn1EvWpe1AwX7wqyw9zVZfvD61abpQDIW+tN709qZ3piP/2Q==",
+                "permalink": "https://futureofcoding.slack.com/files/UN57U8V53/F06QBTPK6NB/img_20240321_172553.jpg",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F06QBTPK6NB-ea1b49b3f2",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "UN57U8V53",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fbAzX",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Related, there's a great book on constraint theory by Friedman and Phan that digs into this kind of thing"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1711056481.014849",
+        "client_msg_id": "6306a402-564d-4ba8-a510-34489c27c832",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "reactions": [
+            {
+                "name": "eyes",
+                "users": [
+                    "U06131CATV3",
+                    "U06BUK2M2RH"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "user": "U06BUK2M2RH",
+        "type": "message",
+        "ts": "1711056746.149069",
+        "client_msg_id": "2BED84FC-3BC9-4705-BD37-DF6FE498D560",
+        "text": "<@UN57U8V53> really cool- just got a copy, curious to peruse",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TeGON",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UN57U8V53"
+                            },
+                            {
+                                "type": "text",
+                                "text": " really cool- just got a copy, curious to peruse"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U06131CATV3",
+        "type": "message",
+        "ts": "1711082273.878299",
+        "client_msg_id": "13d6812c-ab17-422b-b32d-a5e6547cfc69",
+        "text": "<@U06BUK2M2RH> if you're into scheme and p2p networking at all there's this interesting experimental propagator implementation built using Spritely Goblins: <https://gitlab.com/spritely/brainy>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "attachments": [
+            {
+                "from_url": "https://gitlab.com/spritely/brainy",
+                "service_icon": "https://gitlab.com/assets/apple-touch-icon-b049d4bc0dd9626f31db825d61880737befc7835982586d015bded10b4435460.png",
+                "thumb_url": "https://gitlab.com/assets/twitter_card-570ddb06edf56a2312253c5872489847a0f385112ddbcd71ccfa1570febab5d2.jpg",
+                "thumb_width": 1024,
+                "thumb_height": 1024,
+                "id": 1,
+                "original_url": "https://gitlab.com/spritely/brainy",
+                "fallback": "GitLab: spritely / Brainy \u00b7 GitLab",
+                "text": "A super research'y back-burner implementation of the propagator model. Ultra-pre-alpha! Still in the highly experimental stage! Not part of Spritely's...",
+                "title": "spritely / Brainy \u00b7 GitLab",
+                "title_link": "https://gitlab.com/spritely/brainy",
+                "service_name": "GitLab"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "r/MV7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U06BUK2M2RH"
+                            },
+                            {
+                                "type": "text",
+                                "text": " if you're into scheme and p2p networking at all there's this interesting experimental propagator implementation built using Spritely Goblins: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://gitlab.com/spritely/brainy"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "exploding_head",
+                "users": [
+                    "U06BUK2M2RH"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UA14TGLTC",
+        "type": "message",
+        "ts": "1711082598.888909",
+        "client_msg_id": "3a1c0664-8c32-42af-b6b9-634cb5cd1674",
+        "text": "Hello, and welcome to one of my favorite topics.  I'm so glad to hear the Propagator Model mentioned.  One thing I've learned in spending... oh my... a decade plus on the topic is that you must integrate invalid states and a view model from the start.  Then soon enough, you'll really want versioning.\n\nConsider the simplest thing in a spreadsheet:\n\u2022 Set `A1 = 24.0`.\n\u2022 Set `A2 = A1 * 9 / 5 + 32`.\n\u2022 Come back to edit A1.  Type \"x\".  What should happen to A2?  For a usual spreadsheet, the answer is nothing.  When active, a cell's state shouldn't propagate, so make that part of the model in the first place.\n\u2022 Hit enter.  We expect A2 to go funny in some way, ideally a way that points back to A1 as the source of the type error.  An advantage of something like the propagator model is that you can wire your network as the basic level and then independently experiment with the semantics of error propagation.\nWhat about versioning?  Versioning is useful for collaboration, yes.  And undo is essential for any non-trivial model that you can mess up.  But a real potential is realized in having the system make a bunch of version of things and then combine them.  For instance, make a bunch of copies of A1 and A2.  Vary A1 and chart how it affects A2.  So instead of having separate looping constructs, just allow for clones/copies of the parts of the model.\n\nAnd if you make time first-class, instead of distinguishing between a clone and a copy, you can choose to either modify the original before or after copies were made to get a similar effect.  An advantage is that you now have a well-defined semantics for conflicts when an embellishment of a clone is incompatible with a change to the original.  You can pinpoint: this operation no longer works.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "fC+T7",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hello, and welcome to one of my favorite topics.  I'm so glad to hear the Propagator Model mentioned.  One thing I've learned in spending... oh my... a decade plus on the topic is that you must integrate invalid states and a view model from the start.  Then soon enough, you'll really want versioning.\n\nConsider the simplest thing in a spreadsheet:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Set "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "A1 = 24.0",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Set "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "A2 = A1 * 9 / 5 + 32",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Come back to edit A1.  Type \"x\".  What should happen to A2?  For a usual spreadsheet, the answer is nothing.  When active, a cell's state shouldn't propagate, so make that part of the model in the first place."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Hit enter.  We expect A2 to go funny in some way, ideally a way that points back to A1 as the source of the type error.  An advantage of something like the propagator model is that you can wire your network as the basic level and then independently experiment with the semantics of error propagation."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nWhat about versioning?  Versioning is useful for collaboration, yes.  And undo is essential for any non-trivial model that you can mess up.  But a real potential is realized in having the system make a bunch of version of things and then combine them.  For instance, make a bunch of copies of A1 and A2.  Vary A1 and chart how it affects A2.  So instead of having separate looping constructs, just allow for clones/copies of the parts of the model.\n\nAnd if you make time first-class, instead of distinguishing between a clone and a copy, you can choose to either modify the original before or after copies were made to get a similar effect.  An advantage is that you now have a well-defined semantics for conflicts when an embellishment of a clone is incompatible with a change to the original.  You can pinpoint: this operation no longer works."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U06131CATV3",
+                    "U06BUK2M2RH"
+                ],
+                "count": 2
+            },
+            {
+                "name": "100",
+                "users": [
+                    "UC2A2ARPT",
+                    "U06BUK2M2RH"
+                ],
+                "count": 2
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "U06BUK2M2RH",
+                    "UFPRPSA4S"
+                ],
+                "count": 2
+            },
+            {
+                "name": "exploding_head",
+                "users": [
+                    "U06BUK2M2RH",
+                    "U05TJD2V4P2"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "user": "U05TJD2V4P2",
+        "type": "message",
+        "ts": "1711394130.661509",
+        "client_msg_id": "09d4ac40-3062-483d-8c27-c616ec6258a4",
+        "text": "Propagator model seems really interesting, thanks <@U06BUK2M2RH> <@UN57U8V53> <@U06131CATV3> <@UA14TGLTC>! I\u2019ll update when further questions come up.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1710955571.143429",
+        "parent_user_id": "U05TJD2V4P2",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SDsW3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Propagator model seems really interesting, thanks "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U06BUK2M2RH"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UN57U8V53"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U06131CATV3"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UA14TGLTC"
+                            },
+                            {
+                                "type": "text",
+                                "text": "! I\u2019ll update when further questions come up."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U06131CATV3",
+                    "U06BUK2M2RH"
+                ],
+                "count": 2
+            }
+        ]
+    }
+]
