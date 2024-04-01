@@ -107,6 +107,27 @@ pub struct Subscriber {
     pub token: String,
 }
 
+pub async fn get_subscription_by_email(conn: &Connection, email: &str) -> Result<Vec<Subscriber>> {
+    let email = email.to_string();
+    conn.call(move |conn| {
+        let mut stmt =
+            conn.prepare("SELECT email, created_at, confirmed_at, token FROM newsletter_subscriptions WHERE email = ?1")?;
+        let rows = stmt.query_map(params![email], |row| Ok(Subscriber {
+             email: row.get(0)?,
+             created_at: row.get(1)?,
+             confirmed_at: row.get(2)?,
+             token: row.get(3)?,
+        }))?;
+
+        let mut subscriptions = Vec::new();
+        for row in rows {
+            subscriptions.push(row?);
+        }
+        Ok(subscriptions)
+    })
+    .await
+}
+
 pub async fn get_active_subscriptions(conn: &Connection) -> Result<Vec<Subscriber>> {
     conn.call(move |conn| {
         let mut stmt =
@@ -206,6 +227,34 @@ mod tests {
 
         assert_eq!(active_subscriptions.len(), 1);
         assert_eq!(active_subscriptions[0].email, "active@example.com");
+        Ok(())
+    }
+
+    #[tokio::test]
+    async fn test_get_subscription_by_email() -> Result<()> {
+        let conn = setup_in_memory_db().await?;
+        let token = new_token();
+        let email = "test@example.com";
+
+        assert_eq!(get_subscription_by_email(&conn, email).await?.len(), 0);
+        add_subscription(&conn, email, &token).await?;
+        assert_eq!(get_subscription_by_email(&conn, email).await?.len(), 1);
+        confirm_subscription(&conn, email, &token).await?;
+        assert_eq!(get_subscription_by_email(&conn, email).await?.len(), 1);
+
+        remove_subscription(&conn, email, "bad token").await?;
+        assert_eq!(get_active_subscriptions(&conn).await?.len(), 1);
+        assert_eq!(get_subscription_by_email(&conn, email).await?.len(), 1);
+
+        remove_subscription(&conn, email, &token).await?;
+        assert_eq!(get_active_subscriptions(&conn).await?.len(), 0);
+        assert_eq!(get_subscription_by_email(&conn, email).await?.len(), 1);
+
+        let subs = get_subscription_by_email(&conn, email).await?;
+        let sub = subs.get(0).unwrap();
+        assert_eq!(sub.email, email);
+        assert_eq!(sub.token, token);
+
         Ok(())
     }
 }

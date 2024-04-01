@@ -69,6 +69,38 @@ async fn main() {
                 ),
         )
         .subcommand(
+            clap::Command::new("subscribe")
+                .arg(
+                    clap::Arg::new("db-path")
+                        .long("db-path")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set)
+                        .required(true),
+                )
+                .arg(
+                    clap::Arg::new("mail")
+                        .long("mail")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set),
+                ),
+        )
+        .subcommand(
+            clap::Command::new("unsubscribe")
+                .arg(
+                    clap::Arg::new("db-path")
+                        .long("db-path")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set)
+                        .required(true),
+                )
+                .arg(
+                    clap::Arg::new("mail")
+                        .long("mail")
+                        .value_parser(clap::builder::NonEmptyStringValueParser::new())
+                        .action(clap::ArgAction::Set),
+                ),
+        )
+        .subcommand(
             clap::Command::new("server")
                 .arg(
                     clap::Arg::new("address")
@@ -128,6 +160,12 @@ async fn main() {
         }
         Some(("export-subscribers", matches)) => {
             cli_export_subscribers(matches).await;
+        }
+        Some(("subscribe", matches)) => {
+            cli_subscribe(matches).await;
+        }
+        Some(("unsubscribe", matches)) => {
+            cli_unsubscribe(matches).await;
         }
         _ => {}
     };
@@ -259,6 +297,63 @@ async fn import_subscriber(conn: &tokio_rusqlite::Connection, mail: &str, create
         }
         Err(err) => {
             eprintln!("Bad created at date format: {mail}: {created_raw} ({err:?})");
+        }
+    }
+}
+
+async fn cli_unsubscribe(matches: &clap::ArgMatches) {
+    let db_path = matches.get_one::<String>("db-path").expect("no db-path");
+    let email = matches.get_one::<String>("mail").expect("no mail");
+
+    let conn = db::open_and_setup(db_path)
+        .await
+        .expect("can't open db connection");
+
+    let subs = db::get_subscription_by_email(&conn, &email)
+        .await
+        .expect("no subscriptions");
+
+    match subs.get(0) {
+        Some(sub) => match db::remove_subscription(&conn, email, &sub.token).await {
+            Ok(r) if r == 0 => {
+                println!("No match for unsubscribe");
+            }
+            Ok(_r) => {
+                println!("Unsubscribed {email}");
+            }
+            Err(err) => {
+                eprintln!("error unsubscribing {err:?}");
+            }
+        },
+        None => {
+            eprintln!("subscription not found for {email}");
+        }
+    }
+}
+
+async fn cli_subscribe(matches: &clap::ArgMatches) {
+    let db_path = matches.get_one::<String>("db-path").expect("no db-path");
+    let email = matches.get_one::<String>("mail").expect("no mail");
+    let token = db::new_token();
+
+    let conn = db::open_and_setup(db_path)
+        .await
+        .expect("can't open db connection");
+
+    match db::add_subscription(&conn, &email, &token).await {
+        Ok(()) => match db::confirm_subscription(&conn, &email, &token).await {
+            Ok(r) if r == 0 => {
+                eprintln!("error confirming subscription (not found)");
+            }
+            Ok(_r) => {
+                println!("subscribed {email}");
+            }
+            Err(err) => {
+                eprintln!("error confirming subscription {err:?}");
+            }
+        },
+        Err(err) => {
+            eprintln!("error subscribing {err:?}");
         }
     }
 }
