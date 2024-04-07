@@ -1,0 +1,799 @@
+[
+    {
+        "user": "UFQ1ZEJ0G",
+        "type": "message",
+        "ts": "1711977300.083979",
+        "client_msg_id": "082bac75-136d-4194-a597-f1d24a0714ab",
+        "text": "I'm currently building <https://resheet.dev>, a notion-spreadsheet-hybrid. Started because I often ran into limitations with Notion and with spreadsheets. In Notion I wanted to be able to just do some calculations (or even have some embedded spreadsheet). Spreadsheets are nice, but I always ran into limitations. I always thought these could easily be overcome by having a more feature-complete programming language. Because I previously failed very hard by being too ambitious, I tried to keep this project simple. ReSheet runs JavaScript with React because of the vast ecosystem and wide adoption.\n\nIt was important to me that it's core is simple and extensible: Everything revolves around the concept of a \"Block\", which can be thought of like a cell in a spreadsheet. Blocks can be nested and you're able to write and then use your custom Block completely in ReSheet itself. As ReSheet itself is just one big Block you can embed ReSheet in itself.\n\nMaybe sometime in the future I'll get to work on a Block for visual and interactive programming, but currently I'm trying to get it reliably working and useful in the current state.\n\nI'd love to hear your feedback and to answer any questions! (Documentation is still lacking. Currently working on adding some example documents (in ReSheet) to better show what's possible)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1711977300.083979",
+        "reply_count": 7,
+        "reply_users_count": 2,
+        "latest_reply": "1712087364.322489",
+        "reply_users": [
+            "U04SAJZ155H",
+            "UFQ1ZEJ0G"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4qVe4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm currently building "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://resheet.dev"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", a notion-spreadsheet-hybrid. Started because I often ran into limitations with Notion and with spreadsheets. In Notion I wanted to be able to just do some calculations (or even have some embedded spreadsheet). Spreadsheets are nice, but I always ran into limitations. I always thought these could easily be overcome by having a more feature-complete programming language. Because I previously failed very hard by being too ambitious, I tried to keep this project simple. ReSheet runs JavaScript with React because of the vast ecosystem and wide adoption.\n\nIt was important to me that it's core is simple and extensible: Everything revolves around the concept of a \"Block\", which can be thought of like a cell in a spreadsheet. Blocks can be nested and you're able to write and then use your custom Block completely in ReSheet itself. As ReSheet itself is just one big Block you can embed ReSheet in itself.\n\nMaybe sometime in the future I'll get to work on a Block for visual and interactive programming, but currently I'm trying to get it reliably working and useful in the current state.\n\nI'd love to hear your feedback and to answer any questions! (Documentation is still lacking. Currently working on adding some example documents (in ReSheet) to better show what's possible)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "U013ZLJARC7",
+                    "U85HCL7JP",
+                    "U050FT8AJ9Y",
+                    "UMV4B97GT",
+                    "US370TRJA",
+                    "UML4ZEKDK"
+                ],
+                "count": 6
+            },
+            {
+                "name": "heart",
+                "users": [
+                    "U05EREC3DCK"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1712060521.809589",
+        "client_msg_id": "d32efe94-9df5-4b88-928c-fb0169bab210",
+        "text": "I'm wondering why there is a keyboard calibration wizard. Everything else on the web works without calibration.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1711977300.083979",
+        "parent_user_id": "UFQ1ZEJ0G",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8rbx9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm wondering why there is a keyboard calibration wizard. Everything else on the web works without calibration."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFQ1ZEJ0G",
+        "type": "message",
+        "ts": "1712061141.867479",
+        "client_msg_id": "6a2e550a-d4fb-4baf-b112-bbf71dbc3293",
+        "text": "Problem is: `Ctrl+?` for example is a different combination in different keyboard layouts. I wanted to keep the \"?\" constant, not the physical keys which have to be pressed. The latter would be possible without the wizard. And I didn't want to maintain different shortcut settings for different layouts. So this was the easiest solution I could come up with. :man-shrugging: It would be almost possible without, but a tiny detail in the keyboard event handling makes this necessary: On a US layout `Shift+/` is \"?\" and is reported as `event.key === '?'` , but as soon as I add another modifier, like `Meta+Shift+/` I get `event.key === '/'`\n\nI suspect others either just use the physical location to determine the shortcut or they maintain different shortcut mappings for different keyboard layouts.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1711977300.083979",
+        "parent_user_id": "UFQ1ZEJ0G",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QZ27l",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Problem is: "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Ctrl+?",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " for example is a different combination in different keyboard layouts. I wanted to keep the \"?\" constant, not the physical keys which have to be pressed. The latter would be possible without the wizard. And I didn't want to maintain different shortcut settings for different layouts. So this was the easiest solution I could come up with. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "man-shrugging",
+                                "unicode": "1f937-200d-2642-fe0f"
+                            },
+                            {
+                                "type": "text",
+                                "text": " It would be almost possible without, but a tiny detail in the keyboard event handling makes this necessary: On a US layout "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift+/",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is \"?\" and is reported as "
+                            },
+                            {
+                                "type": "text",
+                                "text": "event.key === '?'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " , but as soon as I add another modifier, like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Meta+Shift+/",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " I get "
+                            },
+                            {
+                                "type": "text",
+                                "text": "event.key === '/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI suspect others either just use the physical location to determine the shortcut or they maintain different shortcut mappings for different keyboard layouts."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1712065382.609279",
+        "client_msg_id": "64b52d71-927e-4594-835b-15a571b151fc",
+        "text": "I see. As a user, the latter is what I want anyway. The fact that character mapped to `Shift-'/'` does not equal the character mapped to `Meta-Shift-'/'` is not a mistake and needs not be corrected. As soon as you add another modifier, you're in a different and unrelated group in the keyboard layout, and you can't assume that the `Meta-Shift` group equals the `Shift` group.\n\nThere's really no such thing as `Control-'?'`. When I see such a key binding, it confuses me, and I think it was made by some American who has a question mark key on their keyboard, and I assume it's not accessible to me. The key binding is really `Control-Shift-'/'`, regardless of whether `Shift-'/'` happens to type a question mark.\n\nKeyboard layouts vary in what modifiers need to be pressed. Imagine you have the key binding `Shift-'1'`, and then someone comes with a Czech keyboard, which requires holding `Shift` to type digits, and then the key binding becomes the nonsensical `Shift-Shift-'+'`.\n\nHere's an excerpt from a handbook I'm writing in text editor design:\n\n&gt; Key bindings should be the actual keys on the keyboard, not the characters the keys type after applying a keyboard layout that may change due to locale and user preference. _Control-z_ should be the same place on the keyboard regardless of whether the keyboard layout causes the _z_ key to type the character _z_ (English), _y_ (German), _w_ (French), _\u042f_ (Russian) or _;_ (Dvorak).",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1711977300.083979",
+        "parent_user_id": "UFQ1ZEJ0G",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "k+EyA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I see. As a user, the latter is what I want anyway. The fact that character mapped to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " does not equal the character mapped to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Meta-Shift-'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is not a mistake and needs not be corrected. As soon as you add another modifier, you're in a different and unrelated group in the keyboard layout, and you can't assume that the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Meta-Shift",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " group equals the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " group.\n\nThere's really no such thing as "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Control-'?'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". When I see such a key binding, it confuses me, and I think it was made by some American who has a question mark key on their keyboard, and I assume it's not accessible to me. The key binding is really "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Control-Shift-'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", regardless of whether "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " happens to type a question mark.\n\nKeyboard layouts vary in what modifiers need to be pressed. Imagine you have the key binding "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-'1'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and then someone comes with a Czech keyboard, which requires holding "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to type digits, and then the key binding becomes the nonsensical "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-Shift-'+'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nHere's an excerpt from a handbook I'm writing in text editor design:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Key bindings should be the actual keys on the keyboard, not the characters the keys type after applying a keyboard layout that may change due to locale and user preference. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Control-z",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " should be the same place on the keyboard regardless of whether the keyboard layout causes the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "z",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " key to type the character "
+                            },
+                            {
+                                "type": "text",
+                                "text": "z",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (English), "
+                            },
+                            {
+                                "type": "text",
+                                "text": "y",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (German), "
+                            },
+                            {
+                                "type": "text",
+                                "text": "w",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (French), "
+                            },
+                            {
+                                "type": "text",
+                                "text": "\u042f",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (Russian) or "
+                            },
+                            {
+                                "type": "text",
+                                "text": ";",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " (Dvorak)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFQ1ZEJ0G",
+        "type": "message",
+        "ts": "1712067338.793459",
+        "edited": {
+            "user": "UFQ1ZEJ0G",
+            "ts": "1712067554.000000"
+        },
+        "client_msg_id": "8984a420-7a2a-4533-9966-28da87671907",
+        "text": "Regarding your example on Ctrl-z: It is mostly practice that it still is Ctrl-z on a german keyboard, even though it is a different location. Without judging if this was a good design in the first place, I think it's not unreasonable to follow this practice.\n\nYour example with the Czech keyboard layout is one of the cases I avoid with this design: Neither do I have `Shift-'/'` nor do I have `Shift-'1'` as a keybinding.\n\nAnother note: I'm not sure if/where you're speaking of `'/'` as the key in any keyboard layout that generates a `'/'`, or if you mean the key location, that generates a `'/'` on a US layout. If you were only speaking of the former, then your remark about `Control-Shift-'/'` has the same problem as you described in your Czech example: On a german keyboard `'/'` is typed by pressing `Shift-'7'`, so there is no `Shift-'/'` as this would be `Shift-Shift-'/'` .\n\nThe part about not being clear enough how `Control-'?'`  can be typed is indeed something I have to clarify in the app.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1711977300.083979",
+        "parent_user_id": "UFQ1ZEJ0G",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/r1M6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Regarding your example on Ctrl-z: It is mostly practice that it still is Ctrl-z on a german keyboard, even though it is a different location. Without judging if this was a good design in the first place, I think it's not unreasonable to follow this practice.\n\nYour example with the Czech keyboard layout is one of the cases I avoid with this design: Neither do I have "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " nor do I have "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-'1'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " as a keybinding.\n\nAnother note: I'm not sure if/where you're speaking of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " as the key in any keyboard layout that generates a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", or if you mean the key location, that generates a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " on a US layout. If you were only speaking of the former, then your remark about "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Control-Shift-'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " has the same problem as you described in your Czech example: On a german keyboard "
+                            },
+                            {
+                                "type": "text",
+                                "text": "'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is typed by pressing "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-'7'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", so there is no "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " as this would be "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Shift-Shift-'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " .\n\nThe part about not being clear enough how "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Control-'?'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "  can be typed is indeed something I have to clarify in the app."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFQ1ZEJ0G",
+        "type": "message",
+        "ts": "1712068175.967869",
+        "client_msg_id": "804dc753-2480-4171-a96f-0d622df3f958",
+        "text": "I'm also not super-invested in the way I solved this. I may change it in the future. It was just the option that seemed most sensible to me under the circumstances I had. (Which included how much time I want to invest, does it work cross-keyboard-layout, how do I display the shortcut, do I have memorable shortcuts, etc)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1711977300.083979",
+        "parent_user_id": "UFQ1ZEJ0G",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "I4AM/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm also not super-invested in the way I solved this. I may change it in the future. It was just the option that seemed most sensible to me under the circumstances I had. (Which included how much time I want to invest, does it work cross-keyboard-layout, how do I display the shortcut, do I have memorable shortcuts, etc)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1712071101.591709",
+        "edited": {
+            "user": "U04SAJZ155H",
+            "ts": "1712071171.000000"
+        },
+        "client_msg_id": "7b292fa6-85ef-4ab5-a99b-f8aad3c7172a",
+        "text": "> It is mostly practice that it still is Ctrl-z on a german keyboard, even though it is a different location.\nWhich is a practice that annoys me every time. Even more so the Vim style directional keys `j`, `k`, `l`, `;`, a variation of which is present in your app.\n> Your example with the Czech keyboard layout is one of the cases I avoid with this design\nEven if you never bind the digit keys, you'll still have problems with Russian layouts among others that don't have the letters `a` to `z`. I used to have a keyboard layout where a question mark is typed with the `Alt Gr` modifier, which the calibration wizard does not support at all.\n> I'm not sure if/where you're speaking of `'/'` as the key in any keyboard layout that generates a `'/'`, or if you mean the key location, that generates a `'/'` on a US layout.\nI wasn't generalizing this particular example beyond the US layout, so the distinction doesn't matter. When generalizing, my suggestion is to bind keys to actual locations every time.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1711977300.083979",
+        "parent_user_id": "UFQ1ZEJ0G",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "THv0I",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It is mostly practice that it still is Ctrl-z on a german keyboard, even though it is a different location."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Which is a practice that annoys me every time. Even more so the Vim style directional keys "
+                            },
+                            {
+                                "type": "text",
+                                "text": "j",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", "
+                            },
+                            {
+                                "type": "text",
+                                "text": "k",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", "
+                            },
+                            {
+                                "type": "text",
+                                "text": "l",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", "
+                            },
+                            {
+                                "type": "text",
+                                "text": ";",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", a variation of which is present in your app.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Your example with the Czech keyboard layout is one of the cases I avoid with this design"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Even if you never bind the digit keys, you'll still have problems with Russian layouts among others that don't have the letters "
+                            },
+                            {
+                                "type": "text",
+                                "text": "a",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "z",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". I used to have a keyboard layout where a question mark is typed with the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Alt Gr",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " modifier, which the calibration wizard does not support at all.\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm not sure if/where you're speaking of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " as the key in any keyboard layout that generates a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", or if you mean the key location, that generates a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "'/'",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " on a US layout."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I wasn't generalizing this particular example beyond the US layout, so the distinction doesn't matter. When generalizing, my suggestion is to bind keys to actual locations every time."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFQ1ZEJ0G",
+        "type": "message",
+        "ts": "1712087364.322489",
+        "client_msg_id": "efc250f7-3ad4-47fb-9fc7-de41680477ac",
+        "text": "I see, you're right, my approach still has limitations. When I have time, I need to work on that.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1711977300.083979",
+        "parent_user_id": "UFQ1ZEJ0G",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Zb84V",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I see, you're right, my approach still has limitations. When I have time, I need to work on that."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
