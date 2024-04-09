@@ -40,7 +40,10 @@ function generateScriptForThisWeek(now, dayNumber) {
   console.log(newsletterUrl);
   console.log("# Don't run inside a nix-shell");
   console.log(
-    `cd future-of-newsletters/foc-server/;cargo run -- send-newsletter --config-path ./resources/base-config.toml --mail-path ../mail-sent/${dateDir}/ --db-path ~/.foc/foc.db`
+    `cd future-of-newsletters/foc-server/;cargo run -- send-newsletter --config-path ./resources/base-config.toml --mail-path ../mail-sent/${dateDir}/ --db-path ~/.foc/justmariano.db`
+  );
+  console.log(
+    `cargo run -- send-newsletter --config-path ./resources/base-config.toml --mail-path ../mail-sent/${dateDir}/ --db-path ~/.foc/foc.db`
   );
 }
 function dateStrAddDays(days) {
