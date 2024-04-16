@@ -1,0 +1,1058 @@
+[
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713098099.807429",
+        "client_msg_id": "0367e943-d68a-4557-8517-a9b8577c252f",
+        "text": "I wrote a blog post about constant data in PL. Which is kind of curious in text based PL and a place where more visual approaches can really shine. <https://medium.com/@bitteldany/where-does-constant-data-go-b650338b2ee9>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "reply_count": 24,
+        "reply_users_count": 5,
+        "latest_reply": "1713251806.020289",
+        "reply_users": [
+            "U0296ACR13M",
+            "U5STGTB3J",
+            "U03U0SCU5LH",
+            "UCUSW7WVD",
+            "U04SAJZ155H"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "attachments": [
+            {
+                "image_url": "https://miro.medium.com/v2/resize:fit:1200/1*YlR0V8AMcTAhe9vj-KKMyw.jpeg",
+                "image_width": 1200,
+                "image_height": 600,
+                "image_bytes": 114545,
+                "from_url": "https://medium.com/@bitteldany/where-does-constant-data-go-b650338b2ee9",
+                "service_icon": "https://miro.medium.com/v2/resize:fill:152:152/1*sHhtYhaCe2Uc3IU0IgKwIQ.png",
+                "ts": 1712557184,
+                "id": 1,
+                "original_url": "https://medium.com/@bitteldany/where-does-constant-data-go-b650338b2ee9",
+                "fallback": "Medium: Where does constant data go?",
+                "text": "All of the programming languages I know make an interesting distinction, between two groups of constants, depending on type.",
+                "title": "Where does constant data go?",
+                "title_link": "https://medium.com/@bitteldany/where-does-constant-data-go-b650338b2ee9",
+                "service_name": "Medium",
+                "fields": [
+                    {
+                        "value": "4 min read",
+                        "title": "Reading time",
+                        "short": true
+                    }
+                ]
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "BdRZq",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I wrote a blog post about constant data in PL. Which is kind of curious in text based PL and a place where more visual approaches can really shine. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://medium.com/@bitteldany/where-does-constant-data-go-b650338b2ee9"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1713099605.126929",
+        "edited": {
+            "user": "U0296ACR13M",
+            "ts": "1713099654.000000"
+        },
+        "client_msg_id": "6a676863-cbf4-4558-8f5a-fb2b7fe07dee",
+        "text": "> We would need to execute the parsing during compilation, but as far as I know no programming language allows allocation during compile time execution.\nYou could just include the parsed data as a const byte array, which basically all compiled languages allow. The tradeoff is of course in increasing the size of the binary, having less control over when to pay the cost for loading the data into memory (and when to unload it), and increased stress on instruction cache. Anyway, this has been quite common as an optimization in game development.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JzMeE",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "We would need to execute the parsing during compilation, but as far as I know no programming language allows allocation during compile time execution."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You could just include the parsed data as a const byte array, which basically all compiled languages allow. The tradeoff is of course in increasing the size of the binary, having less control over when to pay the cost for loading the data into memory (and when to unload it), and increased stress on instruction cache. Anyway, this has been quite common as an optimization in game development."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U5STGTB3J",
+        "type": "message",
+        "ts": "1713101145.309739",
+        "client_msg_id": "b390eaec-8d34-40c5-a2ac-49ecad6efe9c",
+        "text": "You say you are using a \u201cC-like language\u201d for the examples, so I\u2019m not sure what the `string` type of that language translates to. But in C the trouble with const is that you either point to a constant value, and the pointer can still change, or you declare a constant pointer to a variable, and you can\u2019t change the pointer, but you can change the value. Both of these need to be held in a read/write segment and I assume that is probably why your example copies the string contents o the heap?\n\nIn C you can use double const to explicitly have a constant pointer to a constant value, but I have no idea how that plays out when you compile it and no means to try it right now. I wouldn\u2019t be too surprised if that also does something unexpected, given that C compilers have a lot of wiggle room in terms of \u201cimplementation details\u201d and \u201cundefined behavior\u201d.\n\nSwift has <https://developer.apple.com/documentation/swift/staticstring|an explicit >`StaticString`<https://developer.apple.com/documentation/swift/staticstring| type> that is used for literals and enables all kinds of compiler optimizations and compile-time shenanigans, like <https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/|macros that are type-checked proper Swift code run at compile-time>.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GBP/9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You say you are using a \u201cC-like language\u201d for the examples, so I\u2019m not sure what the "
+                            },
+                            {
+                                "type": "text",
+                                "text": "string",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " type of that language translates to. But in C the trouble with const is that you either point to a constant value, and the pointer can still change, or you declare a constant pointer to a variable, and you can\u2019t change the pointer, but you can change the value. Both of these need to be held in a read/write segment and I assume that is probably why your example copies the string contents o the heap?\n\nIn C you can use double const to explicitly have a constant pointer to a constant value, but I have no idea how that plays out when you compile it and no means to try it right now. I wouldn\u2019t be too surprised if that also does something unexpected, given that C compilers have a lot of wiggle room in terms of \u201cimplementation details\u201d and \u201cundefined behavior\u201d.\n\nSwift has "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://developer.apple.com/documentation/swift/staticstring",
+                                "text": "an explicit "
+                            },
+                            {
+                                "type": "text",
+                                "text": "StaticString",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://developer.apple.com/documentation/swift/staticstring",
+                                "text": " type"
+                            },
+                            {
+                                "type": "text",
+                                "text": " that is used for literals and enables all kinds of compiler optimizations and compile-time shenanigans, like "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/macros/",
+                                "text": "macros that are type-checked proper Swift code run at compile-time"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U5STGTB3J",
+        "type": "message",
+        "ts": "1713101886.306839",
+        "client_msg_id": "F855652E-7081-42AE-B81B-168907A434BC",
+        "text": "There\u2019s also an `ExpressibleBy\u2026Literal` protocol, which I guess would enable you to implement your own types with their own custom binary representations that can be specified as literals in the code and read and converted at compile time while treated as constants. How useful that really is though, I\u2019m not sure.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "unwaY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There\u2019s also an "
+                            },
+                            {
+                                "type": "text",
+                                "text": "ExpressibleBy\u2026Literal",
+                                "style": {
+                                    "bold": false,
+                                    "italic": false,
+                                    "strike": false,
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " protocol, which I guess would enable you to implement your own types with their own custom binary representations that can be specified as literals in the code and read and converted at compile time while treated as constants. How useful that really is though, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I\u2019m"
+                            },
+                            {
+                                "type": "text",
+                                "text": " not sure"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713104961.228849",
+        "client_msg_id": "a4f35700-6df0-431e-b6d1-5a7a0feea8e3",
+        "text": "<@U0296ACR13M> , that's what I'm doing in that example, or do you mean to include the binary byte stream as a const byte array? Then you'd need to escape all special characters and copy paste from a binary file? Or how would you go about it? That sounds like a dependency with extra steps.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FHzuA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U0296ACR13M"
+                            },
+                            {
+                                "type": "text",
+                                "text": " , that's what I'm doing in that example, or do you mean to include the binary byte stream as a const byte array? Then you'd need to escape all special characters and copy paste from a binary file? Or how would you go about it? That sounds like a dependency with extra steps."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713105023.742089",
+        "client_msg_id": "aba44529-1753-462a-8f66-5d4b9baa9e80",
+        "text": "<@U5STGTB3J> Should have said C syntax, sorry. With string I'm eyeing c++ std::string. It does a copy when constructed from const char*. I assume swift would do the same. As far as I can tell StaticString is swifts way of doing const char*. ExpressibleBy.. is syntactic sugar for constructors. What I want is StaticFont, StaticImage, StaticGraph ... :slightly_smiling_face:",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "uZNrY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U5STGTB3J"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Should have said C syntax, sorry. With string I'm eyeing c++ std::string. It does a copy when constructed from const char*. I assume swift would do the same. As far as I can tell StaticString is swifts way of doing const char*. ExpressibleBy.. is syntactic sugar for constructors. What I want is StaticFont, StaticImage, StaticGraph ... "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1713105395.418919",
+        "client_msg_id": "947cb657-c047-4924-81c1-5aa86fbf1dbe",
+        "text": "Yes, I meant the binary representation of the results of the parsing. It could be a prebuild step to do the parsing and write the prebaking code into a codefile. You wouldn't need to escape anything. It could just appear as initialization of a byte array in the source code.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "iGTxp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, I meant the binary representation of the results of the parsing. It could be a prebuild step to do the parsing and write the prebaking code into a codefile. You wouldn't need to escape anything. It could just appear as initialization of a byte array in the source code."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1713105941.941249",
+        "edited": {
+            "user": "U0296ACR13M",
+            "ts": "1713106180.000000"
+        },
+        "client_msg_id": "36253511-17aa-4738-9fd2-d906be4c3fd0",
+        "text": "The actual implementation would depend on a language, but essentially you'd then point a pointer of correct type to the beginning of the bytes. But you could also just have the prebaking step generate the actual source code that initializes the objects/structs that represent the parse results. So say you're reading in a json \"root: { prop1: 23, prop2: \"test\" }. Your baking step would generate code \"static readonly ROOT = new Root {Prop1 = 23, Prop2 = \"test\" }. I suppose it would depend on the language how much of this ends up being just loading the binary (on program startup) and how much is left to runtime.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OBovk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The actual implementation would depend on a language, but essentially you'd then point a pointer of correct type to the beginning of the bytes. But you could also just have the prebaking step generate the actual source code that initializes the objects/structs that represent the parse results. So say you're reading in a json \"root: { prop1: 23, prop2: \"test\" }. Your baking step would generate code \"static readonly ROOT = new Root {Prop1 = 23, Prop2 = \"test\" }. I suppose it would depend on the language how much of this ends up being just loading the binary (on program startup) and how much is left to runtime."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1713110853.041169",
+        "client_msg_id": "cff01803-477c-4eca-87d2-0a12e640b1d3",
+        "text": "I like the insight that declarative programming is entirely working with constants.\n\nThere _are_ ways to convert constants to a representation that the computer can just copy from disk into RAM. It's not clear to me why we don't do that. It's non-trivial (e.g. making sure references to the same object don't serialize to two copies of it) but definitely not rocket science. Looking forward to seeing where you go with this.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "i7fAK",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I like the insight that declarative programming is entirely working with constants.\n\nThere "
+                            },
+                            {
+                                "type": "text",
+                                "text": "are",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ways to convert constants to a representation that the computer can just copy from disk into RAM. It's not clear to me why we don't do that. It's non-trivial (e.g. making sure references to the same object don't serialize to two copies of it) but definitely not rocket science. Looking forward to seeing where you go with this."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713117555.806449",
+        "client_msg_id": "fbfc2270-dc4e-4ea9-ad6e-796301fcf9d0",
+        "text": "&gt; We would need to execute the parsing during compilation, but as far as I know no programming language allows allocation during compile time execution.\nDid you look at Zig?\n&gt; \u2022 Call any function at compile-time.\n<https://ziglang.org>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "96gdK",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "We would need to execute the parsing during compilation, but as far as I know no programming language allows allocation during compile time execution."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Did you look at Zig?\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Call any function at compile-time."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 1
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://ziglang.org"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713118055.801289",
+        "client_msg_id": "5f14e1ef-5e46-457a-97c5-89ce442251c7",
+        "text": "Anyway, what code a compiler accepts in a compile-time context shouldn't be limiting you. There are many ways other ways to execute arbitrary code on compile-time. Traditionally you run a tool like Make (or a more modern option), which lets you run any program to process an input file and generate an output file that is used by the next tool. The tool can either generate a blob that you can include in your program to get untyped data, or a source file you can include to get typed data.\n\nRust has its own tool Cargo that runs the file '<http://build.rs|build.rs>' for this purpose, but it also allows procedural macros, that are libraries loaded by the compiler that can run arbitrary code.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cS8RB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Anyway, what code a compiler accepts in a compile-time context shouldn't be limiting you. There are many ways other ways to execute arbitrary code on compile-time. Traditionally you run a tool like Make (or a more modern option), which lets you run any program to process an input file and generate an output file that is used by the next tool. The tool can either generate a blob that you can include in your program to get untyped data, or a source file you can include to get typed data.\n\nRust has its own tool Cargo that runs the file '"
+                            },
+                            {
+                                "type": "text",
+                                "text": "build.rs",
+                                "style": {
+                                    "unlink": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "' for this purpose, but it also allows procedural macros, that are libraries loaded by the compiler that can run arbitrary code."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713118292.097099",
+        "client_msg_id": "823a43df-23a7-4f2a-8b06-44401f4a0d95",
+        "text": "&gt; In conclusion, declarative programming is nothing other than defining constants in a text form.\nSame goes for non-declarative languages. Think of Lisp.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qyVFm",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In conclusion, declarative programming is nothing other than defining constants in a text form."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Same goes for non-declarative languages. Think of Lisp."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UJBAJNFLK"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713161057.982209",
+        "client_msg_id": "153a2958-6fa3-4f15-bc83-5939577fa6d1",
+        "text": "<@U04SAJZ155H> Thanks for bringing up zig, it has indeed nice comptime features. Looking into it now, it seems to allow allocation into the data segment and even reading a file. This is a good general solution. (I will add this to the blog post). Data structures like a graph that contains pointers to itself will need some extra work though.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "KzujY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U04SAJZ155H"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Thanks for bringing up zig, it has indeed nice comptime features. Looking into it now, it seems to allow allocation into the data segment and even reading a file. This is a good general solution. (I will add this to the blog post). Data structures like a graph that contains pointers to itself will need some extra work though."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713161151.655639",
+        "client_msg_id": "fa95f041-2e95-411d-8641-76ff143b8481",
+        "text": "<@U04SAJZ155H> You kind of proof my point. Why is it so simple to define a constant integer, yet if I want for example a constant list of integers I have to go through all those extra steps you outlined.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "k21f2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U04SAJZ155H"
+                            },
+                            {
+                                "type": "text",
+                                "text": " You kind of proof my point. Why is it so simple to define a constant integer, yet if I want for example a constant list of integers I have to go through all those extra steps you outlined."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713161617.532779",
+        "client_msg_id": "9b6936b1-13c6-49f3-b5ba-ce9809870226",
+        "text": "That's a good point. It personally bothers me a lot that Rust has five different features that do the same thing, with five different limitations. (*1.* generics, *2.* const evaluation, *3.* declarative macros, *4.* procedural macros, *5.* build scripts) I prefer to have one good way to do it, like in Zig.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xivK4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "That's a good point. It personally bothers me a lot that Rust has five different features that do the same thing, with five different limitations. ("
+                            },
+                            {
+                                "type": "text",
+                                "text": "1.",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " generics, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "2.",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " const evaluation, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "3.",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " declarative macros, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "4.",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " procedural macros, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "5.",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " build scripts) I prefer to have one good way to do it, like in Zig."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713162134.408879",
+        "client_msg_id": "46c5ac50-effb-4298-88e9-ece76a90b637",
+        "text": "&gt; Data structures like a graph that contains pointers to itself will need some extra work though.\nLooking at Rust, const data can contain references to const data as long as they are not circular. I don't really care though. I never put references in my const data, but instead put indexes that are relative to the base pointer of the const data. A reference is 8 bytes, so I don't want to have that in const data. An index is 1, 2 or 4 bytes depending on the size of the data. Sometimes I've even packed a 12-bit index and a 4-bit length in two bytes.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zQtyH",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Data structures like a graph that contains pointers to itself will need some extra work though."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Looking at Rust, const data can contain references to const data as long as they are not circular. I don't really care though. I never put references in my const data, but instead put indexes that are relative to the base pointer of the const data. A reference is 8 bytes, so I don't want to have that in const data. An index is 1, 2 or 4 bytes depending on the size of the data. Sometimes I've even packed a 12-bit index and a 4-bit length in two bytes."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713162710.011709",
+        "client_msg_id": "6a09353e-35f2-4dc2-bffb-6c02640d5ddb",
+        "text": "<@U04SAJZ155H> Oh really? So (in rust) the pointers inside the data segment get relocated when the executable is loaded? How does the loader know whats data and whats pointers? The linker would need to add that to the relocation data?\nI agree data structures with indices are the way to go. It is also easier to serialize, clone and you can (ideally) allocate everything in single block. You cannot however easily extend, join, reuse part of it.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "67j0w",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U04SAJZ155H"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Oh really? So (in rust) the pointers inside the data segment get relocated when the executable is loaded? How does the loader know whats data and whats pointers? The linker would need to add that to the relocation data?\nI agree data structures with indices are the way to go. It is also easier to serialize, clone and you can (ideally) allocate everything in single block. You cannot however easily extend, join, reuse part of it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713163556.337849",
+        "client_msg_id": "04d64e36-33ec-47c6-9ae0-31f854914c46",
+        "text": "I suppose they get relocated. I made an example, but don't know how to make Compiler Explorer show the relocation table. Relocations would be another reason to prefer indexes, as the relocation table adds a number of extra bytes for each pointer, and also slows down loading of the executable, and also takes up memory for the relocated copy of the const data, as opposed mapping the memory directly to the executable file.\n<https://rust.godbolt.org/z/8YvfPr5G9>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "attachments": [
+            {
+                "from_url": "https://rust.godbolt.org/z/8YvfPr5G9",
+                "service_icon": "https://rust.godbolt.org/favicon.ico?v=1",
+                "thumb_url": "https://github.com/compiler-explorer/infra/blob/main/logo/favicon.png?raw=true",
+                "thumb_width": 125,
+                "thumb_height": 128,
+                "id": 1,
+                "original_url": "https://rust.godbolt.org/z/8YvfPr5G9",
+                "fallback": "Compiler Explorer - Rust (rustc 1.76.0)",
+                "text": "#[derive(Clone, Copy)]\npub struct LinkedList&lt;'a, T&gt; {\n next: Option&lt;&amp;'a Self&gt;,\n value: T,\n}\n\nconst A: LinkedList&lt;u32&gt; = LinkedList {\n next: None,\n value: 42,\n};\n\nconst B1: LinkedList&lt;u32&gt; = LinkedList {\n next: Some(&amp;A),\n value: 13,\n};\n\nconst B2: LinkedList&lt;u32&gt; = LinkedList {\n next: Some(&amp;A),\n value: 0,\n};\n\n#[no_mangle]\nfn peek() -&gt; LinkedList&lt;'static, u32&gt; {\n B2\n}",
+                "title": "Compiler Explorer - Rust (rustc 1.76.0)",
+                "title_link": "https://rust.godbolt.org/z/8YvfPr5G9",
+                "service_name": "rust.godbolt.org"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "aeN9u",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I suppose they get relocated. I made an example, but don't know how to make Compiler Explorer show the relocation table. Relocations would be another reason to prefer indexes, as the relocation table adds a number of extra bytes for each pointer, and also slows down loading of the executable, and also takes up memory for the relocated copy of the const data, as opposed mapping the memory directly to the executable file.\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://rust.godbolt.org/z/8YvfPr5G9"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713165817.436579",
+        "client_msg_id": "62159804-12ee-4bb1-b807-45408da191bb",
+        "text": "Ok I'm confused. Does this create a linked list inside the data segment or.. 3 list segments and links them on startup. The assembly would suggest the first, but could also be the latter, sadly it doesn't show what's actually in the data.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RBEMQ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ok I'm confused. Does this create a linked list inside the data segment or.. 3 list segments and links them on startup. The assembly would suggest the first, but could also be the latter, sadly it doesn't show what's actually in the data."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713165943.313859",
+        "client_msg_id": "8de19f6b-53d0-4011-a61d-a11b454f1b32",
+        "text": "The three nodes are in the data segment. The disassembly shows that the function copies a node right out of the data segment without any further processing, showing that the pointer is already correct.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+1Y5a",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The three nodes are in the data segment. The disassembly shows that the function copies a node right out of the data segment without any further processing, showing that the pointer is already correct."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713166556.415569",
+        "client_msg_id": "9c3ad201-98b6-4723-85a4-b568785646af",
+        "text": "On second thought, the disassembly of the function doesn't show that clearly enough, due to optimization. Let's instead return a reference to the node, so the constant data cannot be inlined. Now you can also see the relocation being there in the form of a label in the data in the assembly.\n<https://rust.godbolt.org/z/nYxh47def>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "attachments": [
+            {
+                "from_url": "https://rust.godbolt.org/z/nYxh47def",
+                "thumb_url": "https://github.com/compiler-explorer/infra/blob/main/logo/favicon.png?raw=true",
+                "thumb_width": 125,
+                "thumb_height": 128,
+                "service_icon": "https://rust.godbolt.org/favicon.ico?v=1",
+                "id": 1,
+                "original_url": "https://rust.godbolt.org/z/nYxh47def",
+                "fallback": "Compiler Explorer - Rust (rustc 1.76.0)",
+                "text": "#[derive(Clone, Copy)]\npub struct LinkedList&lt;'a, T&gt; {\n next: Option&lt;&amp;'a Self&gt;,\n value: T,\n}\n\nconst A: LinkedList&lt;u32&gt; = LinkedList {\n next: None,\n value: 42,\n};\n\nconst B1: LinkedList&lt;u32&gt; = LinkedList {\n next: Some(&amp;A),\n value: 13,\n};\n\nconst B2: LinkedList&lt;u32&gt; = LinkedList {\n next: Some(&amp;A),\n value: 0,\n};\n\n#[no_mangle]\nfn peek() -&gt; &amp;'static LinkedList&lt;'static, u32&gt; {\n &amp;B1\n}",
+                "title": "Compiler Explorer - Rust (rustc 1.76.0)",
+                "title_link": "https://rust.godbolt.org/z/nYxh47def",
+                "service_name": "rust.godbolt.org"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QUdAS",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "On second thought, the disassembly of the function doesn't show that clearly enough, due to optimization. Let's instead return a reference to the node, so the constant data cannot be inlined. Now you can also see the relocation being there in the form of a label in the data in the assembly.\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://rust.godbolt.org/z/nYxh47def"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713166840.605729",
+        "client_msg_id": "9ba21db9-4527-4d3b-b53a-67c9977dbc3a",
+        "text": "I see it know, even better if you return B2 and link to B1 inside B2.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "eJX8c",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I see it know, even better if you return B2 and link to B1 inside B2."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713166941.321659",
+        "client_msg_id": "780bfaf6-b6b0-4b29-841d-6ba1a609a85d",
+        "text": "You can also do away with the function entirely and make the data show up in Compiler Explorer by declaring any entry points as `pub static` instead of `const`.\n<https://rust.godbolt.org/z/o9qc8d5Y4>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "attachments": [
+            {
+                "from_url": "https://rust.godbolt.org/z/o9qc8d5Y4",
+                "thumb_url": "https://github.com/compiler-explorer/infra/blob/main/logo/favicon.png?raw=true",
+                "thumb_width": 125,
+                "thumb_height": 128,
+                "service_icon": "https://rust.godbolt.org/favicon.ico?v=1",
+                "id": 1,
+                "original_url": "https://rust.godbolt.org/z/o9qc8d5Y4",
+                "fallback": "Compiler Explorer - Rust (rustc 1.76.0)",
+                "text": "#[derive(Clone, Copy)]\npub struct LinkedList&lt;'a, T&gt; {\n next: Option&lt;&amp;'a Self&gt;,\n value: T,\n}\n\npub static A: LinkedList&lt;u32&gt; = LinkedList {\n next: None,\n value: 42,\n};\n\npub static B1: LinkedList&lt;u32&gt; = LinkedList {\n next: Some(&amp;A),\n value: 13,\n};\n\npub static B2: LinkedList&lt;u32&gt; = LinkedList {\n next: Some(&amp;A),\n value: 0,\n};\n\npub static C: &amp;LinkedList&lt;u32&gt; = &amp;B2;",
+                "title": "Compiler Explorer - Rust (rustc 1.76.0)",
+                "title_link": "https://rust.godbolt.org/z/o9qc8d5Y4",
+                "service_name": "rust.godbolt.org"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bfIxW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "You can also do away with the function entirely and make the data show up in Compiler Explorer by declaring any entry points as "
+                            },
+                            {
+                                "type": "text",
+                                "text": "pub static",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " instead of "
+                            },
+                            {
+                                "type": "text",
+                                "text": "const",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://rust.godbolt.org/z/o9qc8d5Y4"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1713241402.418759",
+        "client_msg_id": "744ff7a2-70ff-4c29-856f-3f437f499c2e",
+        "text": "Thanks for all the feedback, I updated the blog post.. hopefully also making it more clear, what I actually want to see.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hVJNr",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thanks for all the feedback, I updated the blog post.. hopefully also making it more clear, what I actually want to see."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04SAJZ155H",
+        "type": "message",
+        "ts": "1713251806.020289",
+        "client_msg_id": "9c9932f0-fd2f-42ad-872b-32b0195c5580",
+        "text": "Those are some interesting thoughts you have added. It seems like you want to see something like the Smalltalk system, where everything is an object, and you can use one tool to edit and object, such as a drawing or a document, and then reuse the same object in your programming. The Smalltalk system solved this by not having a compile-time, but instead doing all programming in a live system. When you want to deploy it on another machine, you save an image of the heap, and that's const data that you can run on another machine without doing any processing on startup. This is what Alan Kay calls _real OOP_. You can find videos of Alan Kay and Dan Ingalls demonstrating it.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713098099.807429",
+        "parent_user_id": "U03U0SCU5LH",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZXu7C",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Those are some interesting thoughts you have added. It seems like you want to see something like the Smalltalk system, where everything is an object, and you can use one tool to edit and object, such as a drawing or a document, and then reuse the same object in your programming. The Smalltalk system solved this by not having a compile-time, but instead doing all programming in a live system. When you want to deploy it on another machine, you save an image of the heap, and that's const data that you can run on another machine without doing any processing on startup. This is what Alan Kay calls "
+                            },
+                            {
+                                "type": "text",
+                                "text": "real OOP",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ". You can find videos of Alan Kay and Dan Ingalls demonstrating it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
