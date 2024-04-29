@@ -1,0 +1,468 @@
+[
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1713941430.437429",
+        "edited": {
+            "user": "UFS53UWE5",
+            "ts": "1713946854.000000"
+        },
+        "client_msg_id": "698b12d5-c2f7-4709-9e78-67fa99e1188c",
+        "text": "Ok, I've been thinking a lot about composable systems recently, and why I don't find visual programming languages like blueprints very flexible. Wrote up a blog post about it. Basically, I think the value graph is a more fundamental primitive for computation than execution graphs. <https://johnaustin.io/articles/2024/composability-designing-a-visual-programming-language|https://johnaustin.io/articles/2024/composability-designing-a-visual-programming-language>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "reply_count": 13,
+        "reply_users_count": 5,
+        "latest_reply": "1714110480.830759",
+        "reply_users": [
+            "U04JY2BF24E",
+            "UFS53UWE5",
+            "U049T6YAAGG",
+            "U06SS0DHZD1",
+            "U03U0SCU5LH"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZbVMp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ok, I've been thinking a lot about composable systems recently, and why I don't find visual programming languages like blueprints very flexible. Wrote up a blog post about it. Basically, I think the value graph is a more fundamental primitive for computation than execution graphs. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://johnaustin.io/articles/2024/composability-designing-a-visual-programming-language",
+                                "text": "https://johnaustin.io/articles/2024/composability-designing-a-visual-programming-language"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U04JY2BF24E",
+        "type": "message",
+        "ts": "1713972981.018249",
+        "client_msg_id": "68387912-d858-44ed-a608-3c281fce87db",
+        "text": "Just an observation: \"value graph\" seems analogous to \"data flow\" in a data flow/control flow sense.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yT8ia",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Just an observation: \"value graph\" seems analogous to \"data flow\" in a data flow/control flow sense."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1713974007.517509",
+        "client_msg_id": "46b7f4ac-57fa-49a3-b81a-00ad010b976d",
+        "text": "It's similar, but not quite the same. Value graphs are distinct in that a node only ever executes once. It's more akin to a build-graph. Where-as dataflow expects values to be flowing through and nodes have several values over the course of execution.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "beGg8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It's similar, but not quite the same. Value graphs are distinct in that a node only ever executes once. It's more akin to a build-graph. Where-as dataflow expects values to be flowing through and nodes have several values over the course of execution."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1713974129.539259",
+        "edited": {
+            "user": "UFS53UWE5",
+            "ts": "1713974134.000000"
+        },
+        "client_msg_id": "a108a0d1-71a8-4615-a5a9-d919a129335b",
+        "text": "I've actually been trying to find information about this type of computation, that's not in the context of build system like Bazel, Nix, etc.\n\nFor example, if you squint, Git is also a value-graph -- it's a big directed graph where every node holds a single value, which is defined entirely by the node's inputs in a pure way. :thinking_face:",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Hk+2m",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've actually been trying to find information about this type of computation, that's not in the context of build system like Bazel, Nix, etc.\n\nFor example, if you squint, Git is also a value-graph -- it's a big directed graph where every node holds a single value, which is defined entirely by the node's inputs in a pure way. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "thinking_face",
+                                "unicode": "1f914"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U049T6YAAGG",
+        "type": "message",
+        "ts": "1713977489.725449",
+        "client_msg_id": "9C8EFE9E-123D-4202-979E-8520BF76F452",
+        "text": "Framed another way, a value graph is like _provenance_ seen in reverse. Usually when we talk about data provenance its from the perspective of understanding the inputs that produced a particular result. A value graph seems more like starting from the inputs and building up to the result.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "btZez",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Framed another way, a value graph is like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "provenance ",
+                                "style": {
+                                    "bold": false,
+                                    "italic": true,
+                                    "strike": false
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "seen in reverse. Usually when we talk about data provenance its from the perspective of understanding the inputs that produced a particular result. A value graph seems more like starting from the inputs and building up to the result."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1713979658.003039",
+        "client_msg_id": "6bfb12a2-334f-4d4d-8de9-2c201bd4d214",
+        "text": "Yeah! I like that perspective. Merkel trees, for instance, are also value graphs.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TIJRN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah! I like that perspective. Merkel trees, for instance, are also value graphs."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1713979678.335139",
+        "edited": {
+            "user": "UFS53UWE5",
+            "ts": "1713979683.000000"
+        },
+        "client_msg_id": "62d318cd-a640-4997-970e-2e4ccb0892de",
+        "text": "Any piece of the value graph is recoverable if you have the required inputs.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Hzi7r",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Any piece of the value graph is recoverable if you have the required inputs."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U049T6YAAGG",
+        "type": "message",
+        "ts": "1713980486.421769",
+        "client_msg_id": "AE6FC94E-44C4-4121-8FD0-40BDAA63D11A",
+        "text": "Hmm, this makes me think about visual programming for computational notebooks. Notebook code tends to be focused on the production of specific outputs, not reusable code. Actually the first thing that comes to mind is Ultimate Plumber: <https://github.com/akavel/up|https://github.com/akavel/up>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "FCrU4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hmm, this makes me think about visual programming for computational notebooks. Notebook code tends to be focused on the production of specific outputs, not reusable code. Actually the first thing that comes to mind is Ultimate Plumber: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/akavel/up",
+                                "text": "https://github.com/akavel/up"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "cool",
+                "users": [
+                    "UFEQUBNNT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1713980961.743169",
+        "client_msg_id": "e39341c6-3d68-4525-b7b4-5d8e5c124459",
+        "text": "Cool reference, I haven't seen that!",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "OAh37",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Cool reference, I haven't seen that!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1713981000.957779",
+        "client_msg_id": "9464ba9c-963c-4a5c-b7b0-498ccace927c",
+        "text": "Yeah, many notebooks are just fancy build graphs for data. Very much a value graph. :slightly_smiling_face:",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LB6F/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, many notebooks are just fancy build graphs for data. Very much a value graph. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U06SS0DHZD1",
+        "type": "message",
+        "ts": "1714026208.326369",
+        "client_msg_id": "58aa0fae-a4d7-43d3-9978-ef65d222dc50",
+        "text": "IIUC UE Blueprints, which are used as an example of execution graph, are not composable because they force the designer to sequence the nodes. (This is a really cool observation!) Is it possible that Unreal Engine Blueprints are just missing the operations to split &amp; merge signals? I don't know UE well enough but it doesn't seem like a fundamental issue with execution graphs. Am I missing something?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "jwuCP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "IIUC UE Blueprints, which are used as an example of execution graph, are not composable because they force the designer to sequence the nodes. (This is a really cool observation!) Is it possible that Unreal Engine Blueprints are just missing the operations to split & merge signals? I don't know UE well enough but it doesn't seem like a fundamental issue with execution graphs. Am I missing something?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1714026761.823429",
+        "client_msg_id": "28045bee-b9eb-489e-9e1e-dc4157463ce3",
+        "text": "There are operations to split and merge execution wires, such as branch (a split), but the key is there is no split operation for an execution wire that retains the program semantics. A branch semantically changes the program (because it only takes one or the other).",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "D/dWh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There are operations to split and merge execution wires, such as branch (a split), but the key is there is no split operation for an execution wire that retains the program semantics. A branch semantically changes the program (because it only takes one or the other)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFS53UWE5",
+        "type": "message",
+        "ts": "1714026777.853449",
+        "client_msg_id": "3d60a4a2-ea1a-4b2d-be78-d1546689fabe",
+        "text": "The only semantically sensible \"split\" operation for an execution wire is to run the nodes in parallel, but that comes with other issues.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "2t3Az",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The only semantically sensible \"split\" operation for an execution wire is to run the nodes in parallel, but that comes with other issues."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U03U0SCU5LH",
+        "type": "message",
+        "ts": "1714110480.830759",
+        "edited": {
+            "user": "U03U0SCU5LH",
+            "ts": "1714110503.000000"
+        },
+        "client_msg_id": "4337a891-95c6-4cf5-a58b-d8c2179bba83",
+        "text": "Miqula also has value graphs. When I started coding it, I didn't even know blueprints had \"execution\" wires, how could one do such a hideous thing! To split the execution, I use subnets, for example in a condition, one for true and one that is executed for false. That doesn't solve all problems though, if one would do for example\n\n```foo != nullptr ->\nfoo->IsValid() ->\n-> both connected to an && node```\nyou don't need to do subnets, it just does the most sensible thing.\n\nAs for side effects, a \"regular graph\" has none, except assertions (exceptions). To do effects on the world, I use a behavior tree (which is nicely composable). The leaf nodes have regular graphs, which then  may contain nodes with side effects (for example to send messages / spawn objects).\n\nBe aware that dataflow programming (with pure functions) is a different model. Most people are used to do the \"little robot in your head\" that does stuff, one after the other (which is procedural programming). In dataflow, you are wiring dependencies / data together to create new data. You look at the data instead of the instruction.\nI'm curious as how you want to design around these problems and how it fit's into an ECS.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1713941430.437429",
+        "parent_user_id": "UFS53UWE5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kJgtL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Miqula also has value graphs. When I started coding it, I didn't even know blueprints had \"execution\" wires, how could one do such a hideous thing! To split the execution, I use subnets, for example in a condition, one for true and one that is executed for false. That doesn't solve all problems though, if one would do for example\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "foo != nullptr ->\nfoo->IsValid() ->\n-> both connected to an && node"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nyou don't need to do subnets, it just does the most sensible thing.\n\nAs for side effects, a \"regular graph\" has none, except assertions (exceptions). To do effects on the world, I use a behavior tree (which is nicely composable). The leaf nodes have regular graphs, which then  may contain nodes with side effects (for example to send messages / spawn objects).\n\nBe aware that dataflow programming (with pure functions) is a different model. Most people are used to do the \"little robot in your head\" that does stuff, one after the other (which is procedural programming). In dataflow, you are wiring dependencies / data together to create new data. You look at the data instead of the instruction.\nI'm curious as how you want to design around these problems and how it fit's into an ECS."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
