@@ -106,7 +106,9 @@ FIELD_DEFAULTS = {
         "channel_id": '',
 }
 
+
 FIELD_NAMES = list(FIELD_DEFAULTS.keys())
+INDEX_OF_TS = FIELD_NAMES.index('ts')
 INSERT_MSG_QUERY = f"INSERT INTO message ({', '.join(FIELD_NAMES)}) VALUES ({', '.join(['?' for _ in FIELD_DEFAULTS])})"
 INSERT_REPLY_QUERY = "INSERT INTO reply (user, ts, msg_ts) VALUES (?, ?, ?)"
 INSERT_REACTION_QUERY = "INSERT INTO reaction (user, name, msg_ts) VALUES (?, ?, ?)"
@@ -118,7 +120,7 @@ def setup_db(db_path):
     con = sqlite3.connect(db_path)
     cur = con.cursor()
 
-    cur.execute('''CREATE TABLE IF NOT EXISTS message (client_msg_id text, type text, text text, user text, ts text, team text, user_team text, source_team text, thread_ts text, is_locked integer, subscribed integer, channel_id text)''')
+    cur.execute('''CREATE TABLE IF NOT EXISTS message (client_msg_id text, type text, text text, user text, ts int, team text, user_team text, source_team text, thread_ts text, is_locked integer, subscribed integer, channel_id text)''')
 
     cur.execute('''CREATE TABLE IF NOT EXISTS reply (user text, ts text, msg_ts text)''')
     cur.execute('''CREATE TABLE IF NOT EXISTS reaction (user text, name text, msg_ts text)''')
@@ -136,6 +138,7 @@ def insert_msg(cur, msg, channel):
     values = [msg.get(key, def_val) for (key, def_val) in FIELD_DEFAULTS.items()]
 
     values[-1] = channel.id
+    values[INDEX_OF_TS] = int(float(values[INDEX_OF_TS]))
 
     cur.execute(INSERT_MSG_QUERY, values)
 
