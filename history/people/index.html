@@ -1,54 +1,68 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>People of the Future of Coding</title>
-    <link rel="stylesheet" href="//history.futureofcoding.org/style.css">
-    <style>td{text-align:left;overflow:hidden;padding:.5em;}tr:hover{background-color: #ddeedd}</style>
-  </head>
-  <body>
-    <div id="app" v-cloak>
-      <div id="ui">
 
-        <a id="logo" href="https://futureofcoding.org">
-          <img src="./logo.svg" alt="People of the Future of Coding">
-        </a>
+<head>
+  <meta charset="utf-8">
+  <title>People of the Future of Coding</title>
+  <link rel="stylesheet" href="//history.futureofcoding.org/style.css">
+  <style>
+    td {
+      text-align: left;
+      overflow: hidden;
+      padding: .5em;
+    }
 
-        <div id="small-logo">
-          People of the <a href="https://futureofcoding.org">Future of Coding</a>
-        </div>
+    tr:hover {
+      background-color: #ddeedd
+    }
+  </style>
+</head>
 
-        <div id="center">
-          <div id="query">
-            <div>
-              <div class="field">
-                <label style="margin-right:1em" v-if="loading">Loading</label>
-                <label style="margin-right:1em" v-if="!loading">Search</label>
-                <input id="search" type="search" v-model="filter" v-on:input="doSearch()" placeholder="Type to search" autofocus>
-              </div>
+<body>
+  <div id="app" v-cloak>
+    <div id="ui">
+
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="./logo.svg" alt="People of the Future of Coding">
+      </a>
+
+      <div id="small-logo">
+        People of the <a href="https://futureofcoding.org">Future of Coding</a>
+      </div>
+
+      <div id="center">
+        <div id="query">
+          <div>
+            <div class="field">
+              <label style="margin-right:1em" v-if="loading">Loading</label>
+              <label style="margin-right:1em" v-if="!loading">Search</label>
+              <input id="search" type="search" v-model="filter" v-on:input="doSearch()" placeholder="Type to search"
+                autofocus>
             </div>
           </div>
         </div>
       </div>
-
-        <table class="links-table" style="max-width:72ch;margin-top:1em">
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Link</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="user in users" :key="user.url">
-              <td>{{user.name}}</td>
-              <td><a :href="user.url" target="_blank">{{user.url}}</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script type="module" src="app.js"></script>
-  </body>
+    <table class="links-table" style="max-width:72ch;margin-top:1em">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Link</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user.url">
+          <td>{{user.name}}</td>
+          <td><a :href="user.url" target="_blank">{{user.url}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+
 </html>

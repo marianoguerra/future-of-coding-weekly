@@ -1,117 +1,121 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Future of Coding History</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="./favicon.ico">
 
-  </head>
-  <body>
-    <div id="app" v-cloak>
+<head>
+  <meta charset="utf-8">
+  <title>Future of Coding History</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
 
-      <div id="ui">
+</head>
 
-        <a id="logo" href="https://futureofcoding.org">
-          <img src="logo.svg" alt="Future of Coding History">
-        </a>
+<body>
+  <div id="app" v-cloak>
 
-        <div id="small-logo">
-          <a href="https://futureofcoding.org">Future of Coding</a> History
-        </div>
+    <div id="ui">
 
-        <div id="center">
-          <div id="query">
-            <div>
-              <div class="field">
-                <label>From</label>
-                <input type="date" v-model="fromDate" v-on:input="onFromDateChange">
-              </div>
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="logo.svg" alt="Future of Coding History">
+      </a>
 
-              <div class="field">
-                <label>To</label>
-                <input type="date" v-model="toDate" v-on:input="onToDateChange">
-              </div>
-
-              <div class="field">
-                <label>Channel</label>
-                <select v-model="channel" v-on:input="onChannelChange">
-                  <option value="two-minute-week">#two-minute-week</option>
-                  <option value="share-your-work">#share-your-work</option>
-                  <option value="reading-together">#reading-together</option>
-                  <option value="thinking-together">#thinking-together</option>
-                  <option value="linking-together">#linking-together</option>
-                  <option value="devlog-together">#devlog-together</option>
-                  <option value="of-graphics">#of-graphics</option>
-                  <option value="of-music">#of-music</option>
-                  <option value="of-end-user-programming">#of-end-user-programming</option>
-                  <option value="of-functional-programming">#of-functional-programming</option>
-                  <option value="of-logic-programming">#of-logic-programming</option>
-                  <option value="of-ai">#of-ai</option>
-                  <option value="present-company">#present-company</option>
-                  <option value="feedback">🗄️ #feedback</option>
-                  <option value="general">🗄️ #general</option>
-                </select>
-              </div>
-            </div>
-
-            <button id="load" v-on:click="loadSelected()">Load</button>
-          </div>
-
-          <div id="filter">
-            <div>
-              <div class="field">
-                <label>Filter</label>
-                <input type="text" v-model="msgFilter" v-on:input="onFilterChanged">
-              </div>
-              <div id="msgCount" v-bind:class="{hide: loadingStatus !== null}">
-                <span v-if="msgFilter">{{filteredMsgs.length}} of </span>{{history.msgs.length}} Posts
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="actions">
-          <div id="loadingStatus" v-if="loadingStatus !== null">
-            {{loadingStatus}}
-          </div>
-
-          <div v-if="loadingStatus == null && filteredMsgs.length > 0">
-            <h3>Export</h3>
-            <button style="margin-right:2px" v-on:click="exportAsMd()">Markdown</button>
-            <button v-on:click="exportAsHTML()">HTML</button>
-          </div>
-
-          <a id="linkToSearch" v-if="loadingStatus == null && history.msgs.length > 0" :href="queryLink" target="_blank">Link to This Search</a>
-        </div>
-
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
       </div>
 
-      <div id="msgs-output">
-        <div class="post" v-for="msg in filteredMsgs" :key="msg.ts" :id="msg.$dateStrISO">
-          <span class="user">{{msg.$userName}}</span>
-          <a class="date" :href="msg.$url">{{msg.$dateStr}}</a>
-          <div class="message" v-html="msg.$html"></div>
-          <div class="attachments" v-html="msg.$attachmentsHtml"></div>
-          <div class="files" v-html="msg.$filesHtml"></div>
+      <div id="center">
+        <div id="query">
+          <div>
+            <div class="field">
+              <label>From</label>
+              <input type="date" v-model="fromDate" v-on:input="onFromDateChange">
+            </div>
 
-          <div class="replies">
-            <div class="reply" v-for="resp in msg.responses" :key="resp.ts" :id="resp.$dateStrISO">
-              <span class="user">{{resp.$userName}}</span>
-              <a class="date" :href="resp.$url">{{resp.$dateStr}}</a>
-              <div class="message" v-html="resp.$html"></div>
-              <div class="attachments" v-html="resp.$attachmentsHtml"></div>
-              <div class="files" v-html="resp.$filesHtml"></div>
+            <div class="field">
+              <label>To</label>
+              <input type="date" v-model="toDate" v-on:input="onToDateChange">
+            </div>
+
+            <div class="field">
+              <label>Channel</label>
+              <select v-model="channel" v-on:input="onChannelChange">
+                <option value="two-minute-week">#two-minute-week</option>
+                <option value="share-your-work">#share-your-work</option>
+                <option value="reading-together">#reading-together</option>
+                <option value="thinking-together">#thinking-together</option>
+                <option value="linking-together">#linking-together</option>
+                <option value="devlog-together">#devlog-together</option>
+                <option value="of-graphics">#of-graphics</option>
+                <option value="of-music">#of-music</option>
+                <option value="of-end-user-programming">#of-end-user-programming</option>
+                <option value="of-functional-programming">#of-functional-programming</option>
+                <option value="of-logic-programming">#of-logic-programming</option>
+                <option value="of-ai">#of-ai</option>
+                <option value="present-company">#present-company</option>
+                <option value="feedback">🗄️ #feedback</option>
+                <option value="general">🗄️ #general</option>
+              </select>
             </div>
           </div>
 
+          <button id="load" v-on:click="loadSelected()">Load</button>
+        </div>
+
+        <div id="filter">
+          <div>
+            <div class="field">
+              <label>Filter</label>
+              <input type="text" v-model="msgFilter" v-on:input="onFilterChanged">
+            </div>
+            <div id="msgCount" v-bind:class="{hide: loadingStatus !== null}">
+              <span v-if="msgFilter">{{filteredMsgs.length}} of </span>{{history.msgs.length}} Posts
+            </div>
+          </div>
         </div>
       </div>
+
+      <div id="actions">
+        <div id="loadingStatus" v-if="loadingStatus !== null">
+          {{loadingStatus}}
+        </div>
+
+        <div v-if="loadingStatus == null && filteredMsgs.length > 0">
+          <h3>Export</h3>
+          <button style="margin-right:2px" v-on:click="exportAsMd()">Markdown</button>
+          <button v-on:click="exportAsHTML()">HTML</button>
+        </div>
+
+        <a id="linkToSearch" v-if="loadingStatus == null && history.msgs.length > 0" :href="queryLink"
+          target="_blank">Link to This Search</a>
+      </div>
+
     </div>
 
-    <div id="loading">Loading</div>
+    <div id="msgs-output">
+      <div class="post" v-for="msg in filteredMsgs" :key="msg.ts" :id="msg.$dateStrISO">
+        <span class="user">{{msg.$userName}}</span>
+        <a class="date" :href="msg.$url">{{msg.$dateStr}}</a>
+        <div class="message" v-html="msg.$html"></div>
+        <div class="attachments" v-html="msg.$attachmentsHtml"></div>
+        <div class="files" v-html="msg.$filesHtml"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script type="module" src="app.js"></script>
-  </body>
+        <div class="replies">
+          <div class="reply" v-for="resp in msg.responses" :key="resp.ts" :id="resp.$dateStrISO">
+            <span class="user">{{resp.$userName}}</span>
+            <a class="date" :href="resp.$url">{{resp.$dateStr}}</a>
+            <div class="message" v-html="resp.$html"></div>
+            <div class="attachments" v-html="resp.$attachmentsHtml"></div>
+            <div class="files" v-html="resp.$filesHtml"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="loading">Loading</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+
 </html>

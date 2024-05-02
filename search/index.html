@@ -1,32 +1,34 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Future of Coding History Search</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <div id="app" v-cloak>
 
-      <div id="ui">
+<head>
+  <meta charset="utf-8">
+  <title>Future of Coding History Search</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-        <a id="logo" href="https://futureofcoding.org">
-          <img src="logo.svg" alt="Future of Coding History Search">
-        </a>
+<body>
+  <div id="app" v-cloak>
 
-        <div id="small-logo">
-          <a href="https://futureofcoding.org">Future of Coding</a> History Search
-        </div>
+    <div id="ui">
 
-        <div id="center">
-          <div id="query">
-            <div>
-              <div class="field">
-                <label>Search</label>
-                <input type="search" v-model="search" v-on:keyup.enter="doSearch()">
-              </div>
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="logo.svg" alt="Future of Coding History Search">
+      </a>
 
-              <!--<div class="field">
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History Search
+      </div>
+
+      <div id="center">
+        <div id="query">
+          <div>
+            <div class="field">
+              <label>Search</label>
+              <input type="search" v-model="search" v-on:keyup.enter="doSearch()">
+            </div>
+
+            <!--<div class="field">
                 <label>Channel</label>
                 <select v-model="channel">
                   <option value="feedback">🗄️ #feedback</option>
@@ -38,47 +40,48 @@
                   <option value="two-minute-week">#two-minute-week</option>
                 </select>
               </div>-->
-            </div>
-
-            <button id="load" v-on:click="doSearch()" :disabled="loading">
-              <span v-if="loading">Wait</span>
-              <span v-if="!loading">Search</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="msgs-output">
-        <div class="post" v-for="msg in msgs" :key="msg.ts" :id="msg.$dateStrISO">
-          <span class="user">{{msg.$userName}}</span>
-          <a class="date" :href="msg.$url" target="_blank">{{msg.$dateStr}}</a>
-          <span class="channel">#{{msg.$channelName}}</span>
-          <span v-if="!msg.$isParent" title="click on the date to search for context" style="font-size:0.8em;color:#cc3333;float:right">thread reply</span>
-          <div class="message" v-html="msg.$html"></div>
-          <div class="attachments" v-html="msg.$attachmentsHtml"></div>
-          <div class="files" v-html="msg.$filesHtml"></div>
-
-          <div class="replies">
-            <div class="reply" v-for="resp in msg.responses" :key="resp.ts" :id="resp.$dateStrISO">
-              <span class="user">{{resp.$userName}}</span>
-              <a class="date" :href="'#' + resp.$dateStrISO">{{resp.$dateStr}}</a>
-              <div class="message" v-html="resp.$html"></div>
-              <div class="attachments" v-html="resp.$attachmentsHtml"></div>
-              <div class="files" v-html="resp.$filesHtml"></div>
-            </div>
           </div>
 
+          <button id="load" v-on:click="doSearch()" :disabled="loading">
+            <span v-if="loading">Wait</span>
+            <span v-if="!loading">Search</span>
+          </button>
         </div>
       </div>
-      <button id="more" v-if="hasResults" @click="loadMore()" :disabled="loading">
-        <span v-if="loading">Wait</span>
-        <span v-if="!loading">More</span>
-      </button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="/history/lib/simple-markdown.js"></script>
-    <script type="module" src="app.js"></script>
-  </body>
-</html>
+    <div id="msgs-output">
+      <div class="post" v-for="msg in msgs" :key="msg.ts" :id="msg.$dateStrISO">
+        <span class="user">{{msg.$userName}}</span>
+        <a class="date" :href="msg.$url" target="_blank">{{msg.$dateStr}}</a>
+        <span class="channel">#{{msg.$channelName}}</span>
+        <span v-if="!msg.$isParent" title="click on the date to search for context"
+          style="font-size:0.8em;color:#cc3333;float:right">thread reply</span>
+        <div class="message" v-html="msg.$html"></div>
+        <div class="attachments" v-html="msg.$attachmentsHtml"></div>
+        <div class="files" v-html="msg.$filesHtml"></div>
 
+        <div class="replies">
+          <div class="reply" v-for="resp in msg.responses" :key="resp.ts" :id="resp.$dateStrISO">
+            <span class="user">{{resp.$userName}}</span>
+            <a class="date" :href="'#' + resp.$dateStrISO">{{resp.$dateStr}}</a>
+            <div class="message" v-html="resp.$html"></div>
+            <div class="attachments" v-html="resp.$attachmentsHtml"></div>
+            <div class="files" v-html="resp.$filesHtml"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <button id="more" v-if="hasResults" @click="loadMore()" :disabled="loading">
+      <span v-if="loading">Wait</span>
+      <span v-if="!loading">More</span>
+    </button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js"></script>
+  <script src="/history/lib/simple-markdown.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>
