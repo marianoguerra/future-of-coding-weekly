@@ -1,0 +1,48 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-05-20T16:05:49.765Z" class="post"><span class="user">Stefan Lesser</span> <a href="./?fromDate=2024-05-17&amp;toDate=2024-05-23&amp;channel=thinking-together&amp;filter=#2024-05-20T16:05:49.765Z" class="date">2024-05-20 16:05:49</a> <div class="message"><p>This is one of those questions where I don’t really know yet how to ask it, so let me fumble and handwave a little bit and see where this goes:</p>
+<p>In computing history we went from printers to screens, and on those screens from a brief stint with vector graphics to bitmap displays, and on those bitmap displays from text mode to frame buffer, and in those frame buffers from sprites and blitting to rasterization and compositing. In the early days, when there wasn’t enough RAM for a full-screen bitmap frame buffer, character glyphs and sprites were brought in from ROM. Now we have so much memory that we have double-/triple-buffering and realtime compositing of separately stored textures that often exceed the number of screen pixels available by an order of magnitude or more.</p>
+<p>I’m particularly interested in the early transition to raster graphics. At some point (and I assume that was probably with PostScript?) it became feasible to compute graphics on the fly instead of having them prepared as bitmaps in ROM or on disk. If I remember this correctly, PostScript was invented because due to the different font sizes it was more economical to ship instructions to generate glyphs on the fly on the printer than to ship all possible glyphs as bitmaps in all the different font sizes.</p>
+<p>In a way we went from a “final” representation of a map of bits restricted to a certain grid size to an “intermediate” representation of instructions that have to be executed to generate the final map of bits in the desired size. Alternatively, we could see that as swapping space (memory) for time (compute).</p>
+<p>Are you aware of any papers or other material that compares both sides of this transition?</p>
+<p>For instance in terms of performance in space and time, ie. how much compute is needed for how much memory saved. Or in the broader sense of how we settled on certain graphics primitives, because they were cheap enough to implement in terms of compute, and how we settled on certain data formats, because they were small enough in terms of memory usage, so that this trade-off made sense.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2024-05-20T16:21:30.412Z" class="reply"><span class="user">Stefan Lesser</span> <a href="./?fromDate=2024-05-17&amp;toDate=2024-05-23&amp;channel=thinking-together&amp;filter=#2024-05-20T16:21:30.412Z" class="date">2024-05-20 16:21:30</a> <div class="message"><p>I guess a different way of describing what I’m looking for is this: Today, graphics primitives are a “solved problem” and part of any stack that you could possibly use (except maybe for low-level systems programming).</p>
+<p>Back in those days I’m referring to, we were just figuring all that out. I’m looking for any kind of material that exposes the thinking processes that lead to the graphics stacks we use today, but also surface some of the abandoned (or never really investigated) ideas of what could’ve been.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-05-20T16:28:58.338Z" class="reply"><span class="user">Personal Dynamic Media</span> <a href="./?fromDate=2024-05-17&amp;toDate=2024-05-23&amp;channel=thinking-together&amp;filter=#2024-05-20T16:28:58.338Z" class="date">2024-05-20 16:28:58</a> <div class="message"><p>You may find Principles of Interactive Computer Graphics by Newman and Sproull interesting. It may not go into all of the comparisons and trade-offs that you are discussing, but it certainly has discussions relevant to questions about how and why we do things certain ways.</p>
+<p><a href="https://archive.org/details/principlesofinter00newm/mode/1up">archive.org/details/principlesofinter00newm/mode/1up</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-05-20T17:14:15.035Z" class="reply"><span class="user">Kartik Agaram</span> <a href="./?fromDate=2024-05-17&amp;toDate=2024-05-23&amp;channel=thinking-together&amp;filter=#2024-05-20T17:14:15.035Z" class="date">2024-05-20 17:14:15</a> <div class="message"><p><a href="https://cohost.org/mcc/post/1406157-i-want-to-talk-about-webgpu">cohost.org/mcc/post/1406157-i-want-to-talk-about-webgpu</a> from last year sticks out in my mind as having really great historical context.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-05-20T18:49:03.329Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="./?fromDate=2024-05-17&amp;toDate=2024-05-23&amp;channel=thinking-together&amp;filter=#2024-05-20T18:49:03.329Z" class="date">2024-05-20 18:49:03</a> <div class="message"><p>I can't directly answer your question, but, if I were trying to answer this question, I would look at:</p>
+<ul><li>early issues of Siggraph</li><li>early issues of ACM ToG (Transactions on Graphics)</li><li>early literature from Apple re. Apple postscript printers (a key ingredient to Apple's success &amp; $$$)</li><li>early literature from Adobe re. postscript</li><li>early literature from Sun Microsystems. re. NeWS (capable of rendering circular windows)</li><li>I remember the name Alain Fournier being associated with the transition from clunky graphics to realistic graphics (did he say anything of interest to the above question?)</li></ul><p>FWIW:</p>
+<ul><li>"vector" beams came from the way that cathode ray tubes (oscilloscopes and TV) and raster scanning worked</li><li>I blame the use of fixed-sized grids of non-overlapping small bitmaps ("characters") on Gutenberg and the use of clay tablets and papyrus mixed in with the concepts of arrays of bits (i.e. digital memory)</li><li>rows and columns of input switches were used in IBM Selectric typewriters and keyboards which naturally led to the idea of rows and columns of core memory bits, dot-matrix printing and output pixels. 7-segment displays led to grids of pixels-on-a-chip, etc. The key being optimization of pin count by using row/column addressing instead of direct pixel addressing, the same optimization used in PLCs.</li><li>the epitome of row/column addressing was the invention of the CPU chip attached to Random Access Memory, IMO</li><li>I think that we're only beginning to use scalable vector graphics in the form of SVG and variants of XML</li></ul><p>(... asking a more-knowledgable friend about this question ...)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2024-05-24T12:23:03.680Z" class="post"><span class="user">Oleksandr Kryvonos</span> <a href="./?fromDate=2024-05-21&amp;toDate=2024-05-27&amp;channel=thinking-together&amp;filter=#2024-05-24T12:23:03.680Z" class="date">2024-05-24 12:23:03</a> <div class="message"><p>Does anyone know if there is somewhere a new implementation of something similar to GRAIL system from Rand corporation ? <a href="https://www.youtube.com/watch?v=2Cq8S3jzJiQ">youtube.com/watch?v=2Cq8S3jzJiQ</a></p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://www.youtube.com/watch?v=2Cq8S3jzJiQ">Grail Demo from CHM tape</a></p>
+<p><img src="https://i.ytimg.com/vi/2Cq8S3jzJiQ/hqdefault.jpg" alt="Grail Demo from CHM tape"></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2024-05-26T19:07:35.897Z" class="reply"><span class="user">hamish todd</span> <a href="./?fromDate=2024-05-23&amp;toDate=2024-05-29&amp;channel=thinking-together&amp;filter=#2024-05-26T19:07:35.897Z" class="date">2024-05-26 19:07:35</a> <div class="message"><p>Unreal Blueprints is similar</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
