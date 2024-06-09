@@ -310,9 +310,7 @@ function dateFromTsDayOffset(ts, offset) {
   return date.toISOString().split('T')[0];
 }
 
-const msgLinkRoot = location.pathname.endsWith('/history/')
-  ? './'
-  : './history/';
+const msgLinkRoot = 'https://history.futureofcoding.org/';
 function msgLink(tsFrom, tsTo, tsMsg, name) {
   const date = new Date(tsMsg),
     dateIso = date.toISOString(),
