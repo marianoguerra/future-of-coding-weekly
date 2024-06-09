@@ -326,7 +326,7 @@ function historyLinkFromSlackMsgInfo(channelId, tsRaw, channels) {
     channel = channels[channelId],
     name = channel ? channel.name : channelId,
     {url, dateIso} = msgLink(ts, ts, ts, name);
-  return `[💬 #${name}@${dateIso}](${url})`;
+  return `[💬 #${name}@${dateIso.slice(0, 10)}](${url})`;
 }
 
 function historyLinkFromSlackReplyInfo(
@@ -341,7 +341,7 @@ function historyLinkFromSlackReplyInfo(
     channel = channels[channelId],
     name = channel ? channel.name : channelId,
     {url, dateIso} = msgLink(tsFrom, tsTo, tsTo, name);
-  return `[💬 #${name}@${dateIso}](${url})`;
+  return `[💬 #${name}@${dateIso.slice(0, 10)}](${url})`;
 }
 
 function addMsgAttachmentsText(msg) {
