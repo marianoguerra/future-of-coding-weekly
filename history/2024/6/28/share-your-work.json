@@ -1,0 +1,205 @@
+[
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1719606573.026489",
+        "edited": {
+            "user": "UGWUJUZHT",
+            "ts": "1719608986.000000"
+        },
+        "client_msg_id": "0c8de7f5-4766-43ba-929e-e11c46ce49ff",
+        "text": "In my demo, I made the statement \"... t2t doesn't need the full power of OhmJS ...\", but, I didn't clarify.\n\nFor t2t - text to text transpilation - primarily, you need to pattern-match incoming text, then emit text based on the input.\n\nOhmJS parses incoming text, then gives you the full power of JavaScript to do anything you want with the parse tree.\n\nFor t2t, you don't need to resort to class hierarchies, functions, closures, etc., etc. You primarily need to pattern match, then, create and modify text. In addition to OhmJS' ability to pattern-match, Javascript's \"template strings\" are about all you need - the ability to create text and to interpolate text from the tree walk of the parsed input.\n\nThis _seems_ to be unnecessarily restrictive, but, turns out to be quite powerful and mind-freeing. Fewer options -> less clutter -> increased ability to think about interesting issues. After all, \"simplicity\" == \"lack of nuance\", and, my goal is to simplify DX.\n\n[Infrequently, one needs to do a tiny bit more (like gensym() a new symbol and leave it on a scoped stack for use during the tree-walk), so I provide a way to break out and call a Javascript function, but, this kind of power is not needed in most cases. I guess that, in the future, I will restrict this some more, but, I'm still experimenting].",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1719606573.026489",
+        "reply_count": 5,
+        "reply_users_count": 2,
+        "latest_reply": "1719666713.459399",
+        "reply_users": [
+            "UGWUJUZHT",
+            "UJBAJNFLK"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nhkAn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In my demo, I made the statement \"... t2t doesn't need the full power of OhmJS ...\", but, I didn't clarify.\n\nFor t2t - text to text transpilation - primarily, you need to pattern-match incoming text, then emit text based on the input.\n\nOhmJS parses incoming text, then gives you the full power of JavaScript to do anything you want with the parse tree.\n\nFor t2t, you don't need to resort to class hierarchies, functions, closures, etc., etc. You primarily need to pattern match, then, create and modify text. In addition to OhmJS' ability to pattern-match, Javascript's \"template strings\" are about all you need - the ability to create text and to interpolate text from the tree walk of the parsed input.\n\nThis "
+                            },
+                            {
+                                "type": "text",
+                                "text": "seems",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " to be unnecessarily restrictive, but, turns out to be quite powerful and mind-freeing. Fewer options -> less clutter -> increased ability to think about interesting issues. After all, \"simplicity\" == \"lack of nuance\", and, my goal is to simplify DX.\n\n[Infrequently, one needs to do a tiny bit more (like gensym() a new symbol and leave it on a scoped stack for use during the tree-walk), so I provide a way to break out and call a Javascript function, but, this kind of power is not needed in most cases. I guess that, in the future, I will restrict this some more, but, I'm still experimenting]."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1719607280.641969",
+        "client_msg_id": "0438315b-847f-4d78-b4c9-2b75a2404740",
+        "text": "Given this simplification, I easily invented a nano-DSL to handle the string building bit. I call it RWR (for ReWRite). RWR is, itself, just t2t - it transpiles the RWR spec into Javascript that is compatible with OhmJS.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1719606573.026489",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LqqTo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Given this simplification, I easily invented a nano-DSL to handle the string building bit. I call it RWR (for ReWRite). RWR is, itself, just t2t - it transpiles the RWR spec into Javascript that is compatible with OhmJS."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UJBAJNFLK",
+        "type": "message",
+        "ts": "1719647021.745029",
+        "client_msg_id": "ec3f2410-b8e2-44a7-9be4-b717e979fdf4",
+        "text": "What are your use cases for t2t? Code transformation, data transformation, or both?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1719606573.026489",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pwx5O",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What are your use cases for t2t? Code transformation, data transformation, or both?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1719654413.433109",
+        "client_msg_id": "7e2ba87a-a3a2-407b-a3b4-c5b732b96402",
+        "text": "I\u2019ve used t2t for both, but, emphasize code transformation because I feel that the idea of code transformation is under-utilized. It drastically changes the realm of compiler writing. One can create new languages, but does not need to write whole compilers (simply lean on existing compilers). When one can create new languages in minutes/hours instead of months, it changes one\u2019s approach to problem solving, e.g. one can create multiple nano-DSLs on a per-project basis (\u201cawk\u201d and REGEX on steroids) instead of building general purpose languages. It makes it reasonable to create S/W Architecture languages that describe Design Intent instead of Implementation and Production Engineering. To me, Python, Common Lisp, Javascript, Odin, (Haskell, Rust, \u2026), etc., are just assemblers for HHLLs (higher-than-high-level languages). This is like Lisp macros and Functional Programming done by pipelining instead of cramming all of the concepts into a single hair-ball of complexity.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1719606573.026489",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8yoMm",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I\u2019ve used t2t for both, but, emphasize code transformation because I feel that the idea of code transformation is under-utilized. It drastically changes the realm of compiler writing. One can create new languages, but does not need to write whole compilers (simply lean on existing compilers). When one can create new languages in minutes/hours instead of months, it changes one\u2019s approach to problem solving, e.g. one can create multiple nano-DSLs on a per-project basis (\u201cawk\u201d and REGEX on steroids) instead of building general purpose languages. It makes it reasonable to create S/W Architecture languages that describe Design Intent instead of Implementation and Production Engineering. To me, Python, Common Lisp, Javascript, Odin, (Haskell, Rust, \u2026), etc., are just assemblers for HHLLs (higher-than-high-level languages). This is like Lisp macros and Functional Programming done by pipelining instead of cramming all of the concepts into a single hair-ball of complexity."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UJBAJNFLK",
+        "type": "message",
+        "ts": "1719666061.529359",
+        "client_msg_id": "7cd65887-91bf-4678-ae13-fd8d6cde2af6",
+        "text": "What I find most attractive about t2t for code is that I can look at the intermediate code. The idea of taking many small steps towards the goal rather than a big obscure one sounds tempting (though I haven't ever done multi-step t2t).",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1719606573.026489",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qDThn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What I find most attractive about t2t for code is that I can look at the intermediate code. The idea of taking many small steps towards the goal rather than a big obscure one sounds tempting (though I haven't ever done multi-step t2t)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UC2A2ARPT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1719666713.459399",
+        "client_msg_id": "080cd784-4764-4d17-a7da-304fe3bdfb5e",
+        "text": "There are side-benefits, too. Like, if you own the transpiler, you can easily insert tracing/debugging/instrumentation tidbits. Like, \"macros\" for textual languages instead of only for list-based languages (like Lisp, Scheme). A down-side is that, to really do t2t in small steps, you need to emphasize machine-readability (easy to do), but, machine-readable code not= human-readable code (machine-readable code is more verbose and repetitive, but, understandable to humans, albeit boring and TL;DR). FYI at one point, I got up to 15 steps in building a Ceptre-to-Prolog transpiler before I veered off in some other direction. I would be happy to kibitz if anyone wants to try out the stuff I've got - I imagine that it ain't packaged in pristine shrink-wrapped form yet...",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1719606573.026489",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bIVoi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "There are side-benefits, too. Like, if you own the transpiler, you can easily insert tracing/debugging/instrumentation tidbits. Like, \"macros\" for textual languages instead of only for list-based languages (like Lisp, Scheme). A down-side is that, to really do t2t in small steps, you need to emphasize machine-readability (easy to do), but, machine-readable code not= human-readable code (machine-readable code is more verbose and repetitive, but, understandable to humans, albeit boring and TL;DR). FYI at one point, I got up to 15 steps in building a Ceptre-to-Prolog transpiler before I veered off in some other direction. I would be happy to kibitz if anyone wants to try out the stuff I've got - I imagine that it ain't packaged in pristine shrink-wrapped form yet..."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UJBAJNFLK"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
