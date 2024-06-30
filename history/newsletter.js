@@ -32,11 +32,11 @@ function countWeekDayUntilIncluding(d0, dayNumber) {
 }
 
 function formatDay(d) {
-  return d.toISOString().split("T")[0];
+  return d.toISOString().split('T')[0];
 }
 
 function zeroPad(v) {
-  return v < 10 ? "0" + v : "" + v;
+  return v < 10 ? '0' + v : '' + v;
 }
 
 function getInfoForWeekAndDay(now, dayNumber) {
@@ -44,12 +44,10 @@ function getInfoForWeekAndDay(now, dayNumber) {
     prevDay = cloneDate(nextDay),
     weekNumber = countWeekDayUntilIncluding(nextDay, dayNumber),
     weekStr = `W${weekNumber}`,
-    monthStr = zeroPad(now.getUTCMonth() + 1),
-    curYear = now.getUTCFullYear(),
-    issueTitle =
-      `Future of Coding Weekly ${curYear}/${monthStr} Week ${weekNumber}`,
-    newsletterUrl =
-      `https://newsletter.futureofcoding.org/posts/future-of-coding-weekly-${curYear}${monthStr}-week-${weekNumber}/`;
+    monthStr = zeroPad(nextDay.getUTCMonth() + 1),
+    curYear = nextDay.getUTCFullYear(),
+    issueTitle = `Future of Coding Weekly ${curYear}/${monthStr} Week ${weekNumber}`,
+    newsletterUrl = `https://newsletter.futureofcoding.org/posts/future-of-coding-weekly-${curYear}${monthStr}-week-${weekNumber}/`;
 
   prevDay.setUTCDate(prevDay.getUTCDate() - 7);
 
@@ -70,4 +68,4 @@ function getInfoForWeekAndDay(now, dayNumber) {
   };
 }
 
-export { getInfoForWeekAndDay, MONDAY };
+export {getInfoForWeekAndDay, MONDAY};

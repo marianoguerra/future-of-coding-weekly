@@ -21,6 +21,7 @@ function generateScriptForThisWeek(now, dayNumber) {
   );
   console.log(`bat future-of-newsletters/mail-sent/${dateDir}/config.toml`);
   console.log(`focWeekExport "${prevDateStr}" "${nextDateStr}"`);
+  console.log(`deno run remindme.js`);
   console.log(
     `https://github.com/marianoguerra/future-of-coding-weekly/issues/new?&template=newsletter-week-issue.md&title=Future+of+Coding+Weekly+${curYear}%2F${monthStr}+Week+${weekNumber}`
   );
