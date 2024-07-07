@@ -1,0 +1,390 @@
+[
+    {
+        "user": "UBN9AFS0N",
+        "type": "message",
+        "ts": "1719827238.988589",
+        "edited": {
+            "user": "UBN9AFS0N",
+            "ts": "1719827274.000000"
+        },
+        "client_msg_id": "1e32acaa-7de0-48b7-abb8-7ecd82c847d1",
+        "text": ":writing_hand::skin-tone-4: <https://marianoguerra.org/posts/the-proof-is-in-the-meta-tracing-jit-interpreter/|The proof is in the meta-tracing JIT interpreter>\n\nThe one where I implement a native JIT interpreter for my minimal oop language using pypy's meta-tracing compiler toolchain",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://marianoguerra.org/posts/the-proof-is-in-the-meta-tracing-jit-interpreter/",
+                "ts": 1719765099,
+                "id": 1,
+                "original_url": "https://marianoguerra.org/posts/the-proof-is-in-the-meta-tracing-jit-interpreter/",
+                "fallback": "Mariano Guerra's Log: The proof is in the meta-tracing JIT interpreter",
+                "text": "In the previous posts: Make Your Self and Macros and optimizations: it's just a phase I described the design and implementation of a minimal object oriented language with the implementation done in Ja",
+                "title": "The proof is in the meta-tracing JIT interpreter",
+                "title_link": "https://marianoguerra.org/posts/the-proof-is-in-the-meta-tracing-jit-interpreter/",
+                "service_name": "Mariano Guerra's Log"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hauXG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "emoji",
+                                "name": "writing_hand",
+                                "unicode": "270d-1f3fd",
+                                "skin_tone": 4
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://marianoguerra.org/posts/the-proof-is-in-the-meta-tracing-jit-interpreter/",
+                                "text": "The proof is in the meta-tracing JIT interpreter"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nThe one where I implement a native JIT interpreter for my minimal oop language using pypy's meta-tracing compiler toolchain"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UA14TGLTC"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UE6EFEPTQ",
+        "type": "message",
+        "ts": "1719843583.211389",
+        "client_msg_id": "415f5253-b0e6-448d-9874-d344959ea145",
+        "text": "Hi <@U0112C10V4Y> I understand you've been collaborating with Folk Computer? And a quick search reveals that you may not have told us all about it here! If both are true - over to you! (Else I'll delete this post before I get embarrassed :flushed: )",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qB4k8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U0112C10V4Y"
+                            },
+                            {
+                                "type": "text",
+                                "text": " I understand you've been collaborating with Folk Computer? And a quick search reveals that you may not have told us all about it here! If both are true - over to you! (Else I'll delete this post before I get embarrassed "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "flushed",
+                                "unicode": "1f633"
+                            },
+                            {
+                                "type": "text",
+                                "text": " )"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U02QC0PPER3",
+        "type": "message",
+        "ts": "1719856171.606639",
+        "edited": {
+            "user": "U02QC0PPER3",
+            "ts": "1719861022.000000"
+        },
+        "client_msg_id": "78c109c3-3bad-4ee3-84bb-04daa69be693",
+        "text": "Been a while since I touched it but I've been <https://github.com/cben/animation-stack-language|building> a toy postfix stack-based language to inflict upon my kids.  My theory is:\n\u2022 postfix may have benefits for early teaching (linear evaluation order, lack of \"syntax\", trivial notional machine)\n\u2022 the obvious drawbacks can be somewhat mitigated if instead of destructively changing the stack, you can navigate all previous stack states.  (I'm not the first to try the latter; in particular Kartik did it in Mu, including descending into function calls. I don't even have user-defined functions yet.)\n\u2022 I wanted to explore \"replacing\" some uses of control structures with composition of a bigger data type, like a whole picture or animation.  \nI'm resigned to the thing not being turing-complete.\n\nInitial implementation's data type was 1D \"animation\" of color change (I wanted them to program an RGB lamp): <https://asciinema.org/a/zObMq9ZLJQNA99X3EhdEDllhA>\n=> My kids liked typing and mixing colors, but the idea of a single value representing change over time went entirely over their heads :disappointed:\nAnyway terminal REPL was a dead end, because you can't go back and edit past code.  => I got a prototype web editor \u2014 you can move cursor, edit freely, and see stack state before each word: <https://animation-stack-language.netlify.app/>\nTODO: rendering still uses styled block characters :technologist:, I need to learn canvas...\n\nTODO: Next big step will be to replace the data type from 1D \"time\" to 2D \"picture\", taking inspiration from <http://forthsalon.appspot.com|forthsalon.appspot.com> and <https://code.world/|code.world >.\nI'm thinking to make do with some 2D rather than RGB colorspace, so that every pixel can also be interpreted as a vector.  That way any picture doubles as a limited representation of function-as-data (not turing-complete! but very visual :thinking_face:).",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "mIGfk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Been a while since I touched it but I've been "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/cben/animation-stack-language",
+                                "text": "building"
+                            },
+                            {
+                                "type": "text",
+                                "text": " a toy postfix stack-based language to inflict upon my kids.  My theory is:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "postfix may have benefits for early teaching (linear evaluation order, lack of \"syntax\", trivial notional machine)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "the obvious drawbacks can be somewhat mitigated if instead of destructively changing the stack, you can navigate all previous stack states.  (I'm not the first to try the latter; in particular Kartik did it in Mu, including descending into function calls. I don't even have user-defined functions yet.)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I wanted to explore \"replacing\" some uses of control structures with composition of a bigger data type, like a whole picture or animation.  "
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI'm resigned to the thing not being turing-complete.\n\nInitial implementation's data type was 1D \"animation\" of color change (I wanted them to program an RGB lamp): "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://asciinema.org/a/zObMq9ZLJQNA99X3EhdEDllhA"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n=> My kids liked typing and mixing colors, but the idea of a single value representing change over time went entirely over their heads "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "disappointed",
+                                "unicode": "1f61e"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nAnyway terminal REPL was a dead end, because you can't go back and edit past code.  => I got a prototype web editor \u2014 you can move cursor, edit freely, and see stack state before each word: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://animation-stack-language.netlify.app/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nTODO: rendering still uses styled block characters "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "technologist",
+                                "unicode": "1f9d1-200d-1f4bb"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", I need to learn canvas...\n\nTODO: Next big step will be to replace the data type from 1D \"time\" to 2D \"picture\", taking inspiration from "
+                            },
+                            {
+                                "type": "link",
+                                "url": "http://forthsalon.appspot.com",
+                                "text": "forthsalon.appspot.com"
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://code.world/",
+                                "text": "code.world "
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\nI'm thinking to make do with some 2D rather than RGB colorspace, so that every pixel can also be interpreted as a vector.  That way any picture doubles as a limited representation of function-as-data (not turing-complete! but very visual "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "thinking_face",
+                                "unicode": "1f914"
+                            },
+                            {
+                                "type": "text",
+                                "text": ")."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "UFEQUBNNT",
+                    "U06SAHYT80L",
+                    "UA14TGLTC"
+                ],
+                "count": 4
+            }
+        ]
+    },
+    {
+        "user": "U03LMRE6MQE",
+        "type": "message",
+        "ts": "1719860900.286079",
+        "client_msg_id": "2b6b9ab3-4b1b-4f10-a231-0ee7d5a22af7",
+        "text": "Hash reference to every function and limiting effects at the top level to allow code to execute even after a failure. This is a bit longer as I try to explain in more detail what these features are in EYG <https://vimeo.com/973314611?share=copy>",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "from_url": "https://vimeo.com/973314611?share=copy",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/vimeo.png",
+                "thumb_url": "https://i.vimeocdn.com/video/1887438430-1ad5b565b17f24df0112fa86e8d2590d6dd98c2a109df670fcf8d6bc2c9bceb4-d_295x166",
+                "thumb_width": 295,
+                "thumb_height": 166,
+                "video_html": "<iframe src=\"https://player.vimeo.com/video/973314611?autoplay=1&amp;app_id=122963\" width=\"400\" height=\"225\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write\" title=\"7/1/2024, hash references to functions, effects and transpilation in EYG\"></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "id": 1,
+                "original_url": "https://vimeo.com/973314611?share=copy",
+                "fallback": "Vimeo Video: 7/1/2024, hash references to functions, effects and transpilation in EYG",
+                "title": "7/1/2024, hash references to functions, effects and transpilation in EYG",
+                "title_link": "https://vimeo.com/973314611?share=copy",
+                "author_name": "crowdhailer",
+                "author_link": "https://vimeo.com/crowdhailer",
+                "service_name": "Vimeo",
+                "service_url": "https://vimeo.com/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PmXN8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hash reference to every function and limiting effects at the top level to allow code to execute even after a failure. This is a bit longer as I try to explain in more detail what these features are in EYG "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://vimeo.com/973314611?share=copy"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U06MCTWJKSR",
+        "type": "message",
+        "ts": "1719868360.256359",
+        "edited": {
+            "user": "U06MCTWJKSR",
+            "ts": "1719869342.000000"
+        },
+        "client_msg_id": "85f893d8-d239-4f0f-b183-e27eb223db22",
+        "text": "I made a blog post about visualizing risk. <https://calcwithdec.dev/posts/viz-risk/>\nIt's a scrollable explanation that develops up a visualization - a bit going on in it, a problem I have with a lot of things, so was really glad to spend time learning a few things about making this kind of scrollable interaction to more carefully introduce things.\n\nBehind the scenes, the numbers are from a calculang model doing monte carlo simulations on a pension calculator calculang model. This composability (or what I call flexibility) is something I decided not to make _this_ post about, but it's an important part of why calculang exists.\nI plan to do a few similar separate exercises, and then spin back to this on it's own. (e.g. next: benchmarking actual results to their older estimates)\n\nSo, this blog post isn't really technical, but I hope it's interesting or at least easy to follow, and it fits into a longer piece about calculang. Happy if you have any feedback about the post or questions about this longer piece!",
+        "team": "T5TCAFTA9",
+        "attachments": [
+            {
+                "image_url": "https://calcwithdec.dev/posts/viz-risk/viz-risk.png",
+                "image_width": 1044,
+                "image_height": 676,
+                "image_bytes": 118885,
+                "from_url": "https://calcwithdec.dev/posts/viz-risk/",
+                "id": 1,
+                "original_url": "https://calcwithdec.dev/posts/viz-risk/",
+                "fallback": "Visualizing Risk \u2013 Calc with Dec :abacus: :nerd_face:",
+                "text": "Visualizing Risk: feat. a pension savings calculation, Monte Carlo simulation, and \u2018scrollytelling\u2019",
+                "title": "Visualizing Risk \u2013 Calc with Dec :abacus: :nerd_face:",
+                "title_link": "https://calcwithdec.dev/posts/viz-risk/",
+                "service_name": "calcwithdec.dev"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wL7PW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I made a blog post about visualizing risk. "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://calcwithdec.dev/posts/viz-risk/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nIt's a scrollable explanation that develops up a visualization - a bit going on in it, a problem I have with a lot of things, so was really glad to spend time learning a few things about making this kind of scrollable interaction to more carefully introduce things.\n\nBehind the scenes, the numbers are from a calculang model doing monte carlo simulations on a pension calculator calculang model. This composability (or what I call flexibility) is something I decided not to make "
+                            },
+                            {
+                                "type": "text",
+                                "text": "this",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " post about, but it's an important part of why calculang exists.\nI plan to do a few similar separate exercises, and then spin back to this on it's own. (e.g. next: benchmarking actual results to their older estimates)\n\nSo, this blog post isn't really technical, but I hope it's interesting or at least easy to follow, and it fits into a longer piece about calculang. Happy if you have any feedback about the post or questions about this longer piece!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U02QC0PPER3",
+                    "U0123H7JRDM",
+                    "UA14TGLTC"
+                ],
+                "count": 3
+            }
+        ]
+    }
+]

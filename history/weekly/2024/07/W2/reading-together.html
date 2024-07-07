@@ -1,0 +1,42 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-07-05T18:10:29.699Z" class="post"><span class="user">Polly</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-02&amp;toDate=2024-07-08&amp;channel=reading-together&amp;filter=#2024-07-05T18:10:29.699Z" class="date">2024-07-05 18:10:29</a> <div class="message"><p>I've been kinda obsessed with this paper, "Weird Machines, Exploitability, and Provable Unexploitability" since October last year.</p>
+<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8226852">ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8226852</a></p>
+<p><a href="https://www.youtube.com/watch?v=1ynkWcfiwOk">youtube.com/watch?v=1ynkWcfiwOk</a></p>
+<p>(I think starting with the talk is a good idea)</p>
+<p>After hearing about robust first computing I've been pondering the connection for a bit. I'm not really sure what to make of it, but there has to be some connection. In <a href="https://www.youtube.com/watch?v=Dmlm6mtnSZs">this talk</a> by Dave Ackley he specifically mentions that "flipping one bit" (paraphrasing) can be enough to destroy a lot of software, which is the exact attack model that Dullien uses. It would be nice if software could maintain security invariants despite memory corruption (which Dullien proves for a small piece of software that he writes) so in that sense the two concepts allign. But I find that "continuing despite an error" or "return a best-effort answer" is the source of many security vulnerabilities, (mid example: database lookup fails, code is written in a way that forgot to handle that case, code continues anyway and returns admin data that shouldn't be shown). I wonder if any of y'all have read this or have thoughts about it. :))</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2024-07-05T23:26:15.552Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-02&amp;toDate=2024-07-08&amp;channel=reading-together&amp;filter=#2024-07-05T23:26:15.552Z" class="date">2024-07-05 23:26:15</a> <div class="message"><p>I'm still thinking about this one, but want to share something I wrote a few years that starts out from a similar framing: <a href="https://akkartik.name/post/modularity">akkartik.name/post/modularity</a></p>
+<p>OP is much cleaner. What I refer to fuzzily as "territories of programs", OP makes precise as the distinction between the intended finite state machine and its  <em>emulation</em>  on a (fixed-memory, so you end up padding a bunch of don't-care bits in the address space) real computer.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-06T08:33:58.939Z" class="reply"><span class="user">Polly</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-03&amp;toDate=2024-07-09&amp;channel=reading-together&amp;filter=#2024-07-06T08:33:58.939Z" class="date">2024-07-06 08:33:58</a> <div class="message"><p>Ah, I see the connection! And I see how tests are a good aid for this. My take on tests is that everyone who cares about their software being correct should do them, because I don't believe anyone can make and maintain correct software, so tests will be useful to show how and where you fail. But also they don't give correctness under typical use and definitely not security (read: correctness) under adversarial conditions. And and they don't give robustness, but also i'm not quite sure what robustness is really but i think my software should have it</p>
+<blockquote><p> OP is much cleaner</p>
+</blockquote>
+<p>More formal at least, your writing is very clear.</p>
+<p>I feel like there's a tension between formal correctness and robustness. The whole "correctness and efficiency only" goal of current software methods means we don't think about what happens after faults or memory vulnerabilities. I think I'd like to have correctness despite faults, which is different from what Robust-first computing seems to do? I'm not sure</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-07T14:02:14.437Z" class="reply"><span class="user">Noel</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-04&amp;toDate=2024-07-10&amp;channel=reading-together&amp;filter=#2024-07-07T14:02:14.437Z" class="date">2024-07-07 14:02:14</a> <div class="message"><p>All I know about robust computing comes from the Future of Coding episode on it, so this response is probably steeped in ignorance. One thing not mentioned in the episode is probabilistic algorithms. The usual setup is to assume a deterministic computer, and then introduce imperfect information (often via a hash function) giving a small probability of error but achieving a large reduction in time or space requirements. Perhaps the most used algorithm is <a href="[en.wikipedia.org/wiki/HyperLogLog](https://en.wikipedia.org/wiki/HyperLogLog)">HyperLogLog</a>, but I think <a href="[en.wikipedia.org/wiki/MinHash](https://en.wikipedia.org/wiki/MinHash)">MinHash</a> is particularly easy to understand. This isn't the same as assuming any part of the algorithm can fail, but it might provide a pathway to that model.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
