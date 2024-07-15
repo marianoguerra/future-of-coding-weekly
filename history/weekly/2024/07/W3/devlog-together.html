@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-07-11T01:07:01.938Z" class="post"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-08&amp;toDate=2024-07-14&amp;channel=devlog-together&amp;filter=#2024-07-11T01:07:01.938Z" class="date">2024-07-11 01:07:01</a> <div class="message"><p>I've been slowly reading "The Nature of Order" by Christopher Alexander and slowly thinking about how to make my editor for text and line drawings more timeless. (And mostly sleeping a lot, if I'm honest.) Today the combination of the two led me to draw this shape for the line-wrapping algorithm.</p>
+<p>Until now I've been developing the editor the "usual" way, which for me consists of needing some computation, figuring out the most convenient place to perform the computation, then squirreling away the result somewhere it's available when needed. In an effort to get myself out of the rut of the inevitable problems of indirection and cache invalidation that result, I've been trying to replace all my  <em>ad hoc</em>  data structures with on-demand computation based on the base state of the program. And what I've been ending up with is umpteen variations of this pictured algorithm, just with different code stuck on to the protrusions.</p>
+<p>There may be an abstraction that comes out of all this, but I don't see it yet. And as CA says, a flower isn't made up of identical petals. Each one evolves uniquely as a part of the whole.</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F07/F07BXME9XQA.jpg" alt="20240710_175623.jpg"></p>
+</div> <div class="replies"><div id="2024-07-11T01:15:43.429Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-08&amp;toDate=2024-07-14&amp;channel=devlog-together&amp;filter=#2024-07-11T01:15:43.429Z" class="date">2024-07-11 01:15:43</a> <div class="message"><p>Here's the Lua code skeleton corresponding to that drawing. The ellipses are the protrusions:</p>
+<pre><code>for line_index, line in array.each(State.lines, State.screen_top.line) do
+
+    if line.mode == 'text' then
+
+        local initpos = 1
+
+        if line_index == State.screen_top.line then
+
+            -- top screen line
+
+            initpos = State.screen_top.pos
+
+        end
+
+        for pos, char in utf8chars(line.data, initpos) do
+
+            if char:match('%s') then
+
+                if line_wrap_at_word_boundary(State) then
+
+                    ...
+
+                else
+
+                    ...
+
+                end
+
+            else
+
+                if x+w &gt; State.right then
+
+                    ...
+
+                else
+
+                    ...
+
+                end
+
+            end
+
+        end
+
+    else  -- drawing
+
+        ...
+
+    end
+
+end</code></pre></div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-11T02:00:56.621Z" class="reply"><span class="user">Tom Lieber</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-08&amp;toDate=2024-07-14&amp;channel=devlog-together&amp;filter=#2024-07-11T02:00:56.621Z" class="date">2024-07-11 02:00:56</a> <div class="message"><p>That shape doesn’t mean anything to me yet, but I love that it means something to you and that if we were to talk about it, it would probably become a useful artifact for us both to refer to as we forget the details…</p>
+<p>I think there’s potential for semantics to be layered onto a diagram like that, in a way that can be maintained as the design evolves. It reminds me of <a href="http://tinlizzie.org/dbjr/high_contrast.html">tinlizzie.org/dbjr/high_contrast.html</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2024-07-12T02:17:22.619Z" class="post"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-09&amp;toDate=2024-07-15&amp;channel=devlog-together&amp;filter=#2024-07-12T02:17:22.619Z" class="date">2024-07-12 02:17:22</a> <div class="message"><p>Quick and dirty prototype of the above algo/shape/code using Vim syntax highlighting.</p>
+<p>The code in the screenshot is a function to convert a mouse click (mx, my) into the location (line_index, pos) of the character at that point on the screen.</p>
+<p>The problem is much of this function is boilerplate shared with several other places, such as the code to draw text on screen, compute the height of a wrapped line, etc. The boilerplate makes it difficult to see the business logic unique to this particular function, and so creates pressure to prematurely create an abstraction to "DRY things out". Highlighting the shape of the boilerplate in pink helps the eye to focus to the unique business logic in the protrusions, and so counters the pressure to hide the boilerplate before I've figured out the best way to do so.</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F07/F07C1D0TQGM.png" alt="linewrap-vim.png"></p>
+</div> <div class="replies"><div id="2024-07-12T02:20:48.698Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-09&amp;toDate=2024-07-15&amp;channel=devlog-together&amp;filter=#2024-07-12T02:20:48.698Z" class="date">2024-07-12 02:20:48</a> <div class="message"><p>As an aside, this is an example of what I think of as "programmer-configured highlighting". We've gotten used to our editors deciding what to highlight for us, and we just pick the colors. <a href="https://gist.github.com/akkartik/8642131">One little tool</a> I use everyday is the ability to highlight specific identifiers which flips this around: I pick a word, and the editor picks a color at random to highlight it with. And the highlight persists across sessions. The color of the  <code>State</code>  variable in the screenshot was selected in this manner.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-12T03:15:28.978Z" class="reply"><span class="user">Eli Mellen</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-09&amp;toDate=2024-07-15&amp;channel=devlog-together&amp;filter=#2024-07-12T03:15:28.978Z" class="date">2024-07-12 03:15:28</a> <div class="message"><p>I love this! </p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2024-07-14T14:04:41.476Z" class="post"><span class="user">Maikel van de Lisdonk</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-11&amp;toDate=2024-07-17&amp;channel=devlog-together&amp;filter=#2024-07-14T14:04:41.476Z" class="date">2024-07-14 14:04:41</a> <div class="message"><p>Some updates on my visual programming project codeflowcanvas this week: In this video <a href="https://youtu.be/U8SB2hXBKs0">youtu.be/U8SB2hXBKs0</a> I show some work I did for the open-canvas working group (ocwg for short): if you go to <a href="http://demo.codeflowcanvas.io/ocwg">demo.codeflowcanvas.io/ocwg</a> you can see a window floating in the bottom right, this shows the current flow in the current ocwg draft spec.</p>
+<p>I've build the export mechanism using a strategy pattern so that I can also easily support other formats if needed (a basic export to tldraw is already one of them). I hope this helps in developing the new open canvas spec that the ocwg is working on via bi-weekly meetings and a github repo (see various links on <a href="https://www.canvasprotocol.org">canvasprotocol.org</a>).</p>
+<p>Lately I am focussing more on embedding and/or integrating codeflowcanvas with other tools and technologies so that it is not running in a silo of its own, and this feature helps with that I think.</p>
+<p>This week I also send in a submission to <a href="http://liveprog.org">liveprog.org</a>.</p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://youtu.be/U8SB2hXBKs0">exporting from codeflowcanvas to open-canvas draft spec</a></p>
+<p><img src="https://i.ytimg.com/vi/U8SB2hXBKs0/hqdefault.jpg" alt="exporting from codeflowcanvas to open-canvas draft spec"></p>
+<p>📝 <a href="https://www.canvasprotocol.org/">Open Canvas Working Group | OCWG</a></p>
+<p>Working group for establishing interoperability between different infinite canvas tools.</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>

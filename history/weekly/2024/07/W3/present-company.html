@@ -1,0 +1,40 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-07-10T22:49:29.002Z" class="post"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-07&amp;toDate=2024-07-13&amp;channel=present-company&amp;filter=#2024-07-10T22:49:29.002Z" class="date">2024-07-10 22:49:29</a> <div class="message"><p>Today Slack has started throwing a spinner on me if I return to a tab after some interval (like 5 minutes?). It's kinda hard to even describe this eldritch horror, so bear with me:</p>
+<ul><li>I have a tab. It has Slack loaded on it all working. 🎈</li><li>I switch tabs, go off and interact with some other site.</li><li>After some time I return to my Slack tab.</li><li>I'm faced with a white page with a tiny spinner in its geometric center. 💥</li><li>A few (1-5) seconds later Slack returns. There's no sign of a page reload or anything.</li><li>I had to double-check, but I've definitely not restarted my browser or even closed the lid on my laptop in the interim.</li></ul><p>What.. is this? Is this some new idea in web development? I can't imagine what benefit it could possibly provide anyone. Is it a bug affecting just my computer? I can't conceive what sort of error of omission might lead to it.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2024-07-10T22:51:50.246Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-07&amp;toDate=2024-07-13&amp;channel=present-company&amp;filter=#2024-07-10T22:51:50.246Z" class="date">2024-07-10 22:51:50</a> <div class="message"><p>I wonder if it's some way to deal with getting throttled in the bg? Like, the JS notices that it's been in the background for a while, meaning it doesn't get to check for fresh data, so instead of showing stale data they just block the ui and hit the server when you come back.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-10T22:54:34.185Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-07&amp;toDate=2024-07-13&amp;channel=present-company&amp;filter=#2024-07-10T22:54:34.185Z" class="date">2024-07-10 22:54:34</a> <div class="message"><p>Ah that helps at least make sense of it. So the idea is that Slack is so mission-critical it can't afford to risk showing outdated information.. 😂</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-10T22:55:10.885Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-07&amp;toDate=2024-07-13&amp;channel=present-company&amp;filter=#2024-07-10T22:55:10.885Z" class="date">2024-07-10 22:55:10</a> <div class="message"><p>Are you seeing it as well, at least?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-10T22:56:54.019Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-07&amp;toDate=2024-07-13&amp;channel=present-company&amp;filter=#2024-07-10T22:56:54.019Z" class="date">2024-07-10 22:56:54</a> <div class="message"><p>(Because I'm assuming JS can easily reify information in the DOM before it gets backgrounded.. but I really don't know much about all this..)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-11T14:19:40.495Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-08&amp;toDate=2024-07-14&amp;channel=present-company&amp;filter=#2024-07-11T14:19:40.495Z" class="date">2024-07-11 14:19:40</a> <div class="message"><p>I don't see this, perhaps because I use the app rather than the website.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-11T14:21:01.016Z" class="reply"><span class="user">J. Ryan Stinnett</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-08&amp;toDate=2024-07-14&amp;channel=present-company&amp;filter=#2024-07-11T14:21:01.016Z" class="date">2024-07-11 14:21:01</a> <div class="message"><p>I use Slack in the browser, but I don't think I've seen this particular problem yet... (I'm using Firefox on macOS.)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-12T17:21:03.056Z" class="reply"><span class="user">Hayden</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-09&amp;toDate=2024-07-15&amp;channel=present-company&amp;filter=#2024-07-12T17:21:03.056Z" class="date">2024-07-12 17:21:03</a> <div class="message"><p>There's a lot of factors that could be at play here: browser, device, device settings/context, HTTP caching/state, client side code, is a service worker involved etc.</p>
+<p>This behavior could be just one of those things e.g. bad client side code. Or a combination e.g. a device with "data saver" settings working with the browser to aggressively background inactive tabs not playing nicely with a service worker.</p>
+<p>As a data point I'm using Slack in the browser on MacOS and haven't seen this.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
