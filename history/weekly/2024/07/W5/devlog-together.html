@@ -1,0 +1,42 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-07-22T18:57:53.632Z" class="post"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-19&amp;toDate=2024-07-25&amp;channel=devlog-together&amp;filter=#2024-07-22T18:57:53.632Z" class="date">2024-07-22 18:57:53</a> <div class="message"><p>For the past month I've been doing something very unnatural for myself: "throwing the first one away." Going back and rewriting an aspect of a working program just to improve one property of the  <em>code</em>  rather than the behavior: eliminating all derived data structures and re-deriving everything all the time in a performant way.</p>
+<p>The result is a simpler API that seems applicable to pixel-based editors that use proportional fonts. Basically the problem is: as you do line-wrapping on a screen, how do you deal with interactive operations like clicking at a pixel coordinate or pressing the down arrow (which might result in a scroll). These primitives seem to make the implementation fairly self-evident: <a href="https://git.sr.ht/~akkartik/lines2.love/tree/main/item/move.lua#L11-28">git.sr.ht/~akkartik/lines2.love/tree/main/item/move.lua#L11-28</a></p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"></div></div><div id="2024-07-26T20:18:30.960Z" class="post"><span class="user">Dennis Hansen</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-23&amp;toDate=2024-07-29&amp;channel=devlog-together&amp;filter=#2024-07-26T20:18:30.960Z" class="date">2024-07-26 20:18:30</a> <div class="message"><p>Hello- little update on <a href="http://www.holograph.so">www.holograph.so</a> - formerly known as the <a href="https://history.futureofcoding.org/?fromDate=2024-05-19&amp;toDate=2024-05-25&amp;channel=share-your-work&amp;filter=#2024-05-22T21:33:18.853Z">💬 #share-your-work@2024-05-22</a>- I am working on performance had had the nerdiest proud moment ever and figured of all people, ya'll would appreciate it.</p>
+<p>I built a propagation speed profiler in holograph to test how fast propagation was occurring for a little recursively incrementing loop (in the grey box). Im using a buffer to collect and average the values over time and another buffer to collect and display averages as a chart. You can see the propagation speed and compare it with the total Propagations Per Second (PPS in the top left). Before this work i was at a hard cap of 60 pps and now total pps often gets over 300. Still a long road ahead but it feels like a big win right now 🎉</p>
+<p>In any case, this example demonstrates major stuff added since my first post here:</p>
+<ul><li>Get and set shape properties</li><li>Trigger click events</li><li>Dashed arrows that don't fire propagators</li><li>Async functions/fetch/await syntax</li><li>Lots of cool examples to explore- including some made my folk here :)</li></ul><p>Hope ya'll enjoyed the update! If ya'll find anything wonky or have ideas let me know !</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F07/F07ECFZPEJG.gif" alt="ezgif-3-b2fdc5e7db.gif"></p>
+</div> <div class="replies"><div id="2024-07-26T21:51:58.393Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-23&amp;toDate=2024-07-29&amp;channel=devlog-together&amp;filter=#2024-07-26T21:51:58.393Z" class="date">2024-07-26 21:51:58</a> <div class="message"><p>Do you know what the current bottleneck is?</p>
+<p>Like, if you run this without rendering, does it get 100x faster?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-26T22:03:09.546Z" class="reply"><span class="user">Dennis Hansen</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-23&amp;toDate=2024-07-29&amp;channel=devlog-together&amp;filter=#2024-07-26T22:03:09.546Z" class="date">2024-07-26 22:03:09</a> <div class="message"><p>I wish. Rendering is batched and throttled to requestAnimationFrame and rendering together takes maybe 10% cpu (purple)? The main propagate function is maybe 50% (cyan). Maybe 20% idle (all propagation is async/settimeout rn so min 4ms delay there). Going to have to really optimize the propagate function to really push the limit which shouldn’t be too bad since it’s currently garbage. And reduce unnecessary propagation. And parallelizing/webworkers. And eventually I’ll probs want the main propagation logic in c/wasm. Just gonna be a slog haha</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F07/F07EABK1XUK.png" alt="Screenshot 2024-07-26 at 3.55.37 PM"></p>
+</div></div><div id="2024-07-27T06:21:16.933Z" class="reply"><span class="user">Christopher Shank</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-24&amp;toDate=2024-07-30&amp;channel=devlog-together&amp;filter=#2024-07-27T06:21:16.933Z" class="date">2024-07-27 06:21:16</a> <div class="message"><p>Are you still diffing tldraw nodes of each update?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-07-27T14:50:24.516Z" class="reply"><span class="user">Dennis Hansen</span> <a href="https://history.futureofcoding.org/?fromDate=2024-07-24&amp;toDate=2024-07-30&amp;channel=devlog-together&amp;filter=#2024-07-27T14:50:24.516Z" class="date">2024-07-27 14:50:24</a> <div class="message"><p>Each update is constructing a partial shape object, and if it causes a downstream update, it recurses. Upon user actions, TL is handling diffing and firing a callback with changes which initiates update loop. Does that answer your question?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
