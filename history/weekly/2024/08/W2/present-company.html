@@ -1,0 +1,41 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-08-10T07:25:05.524Z" class="post"><span class="user">Dany</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-07&amp;toDate=2024-08-13&amp;channel=present-company&amp;filter=#2024-08-10T07:25:05.524Z" class="date">2024-08-10 07:25:05</a> <div class="message"><p>So I have this c/c++ codebase, around 116,000 lines of code. A full release compilation takes 6:25 minutes. Not too bad to work on.</p>
+<p>If I break this down, a single line of c/c++ code takes 0.0033s (3.3 miliseconds). For comparison, a game that runs at 60 fps, draws a new frame in under 16 miliseconds. So while a game simulates and renders a frame, a c/c++ compiler compiles 5 lines of code. That is usually not even a single function.</p>
+<p>My cpu avarages at around 10 instructions per clock cycle. At 3.6Ghz it can do 3.6 * 10 * 1,000,000,000 instructions on each core, per second. That's 36,000,000 per milisecond, on 8 cores.. but let's add some cache misses, any instructions can either go full speed 1x or go to main memory around 200x slower.</p>
+<p>We are looking at around 5 million instructions per milisecond.</p>
+<p>If we print out (9pt font) all instructions executed to compile a single line of c/c++ code, we'd end up with over 6 kilometer long paper.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2024-08-10T16:29:12.502Z" class="reply"><span class="user">Leonard Pauli</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-07&amp;toDate=2024-08-13&amp;channel=present-company&amp;filter=#2024-08-10T16:29:12.502Z" class="date">2024-08-10 16:29:12</a> <div class="message"><p>I'm curious about gpu based compiling; eg. 100k lines at avg 80char/line = 8MB ≈ one 4k frame at single channel u8. Tokenizing this and astifying this may require a few passes, but still think this theoretically could be done multiple orders of magnitude faster... 400s to sub 400ms?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-10T19:20:57.788Z" class="reply"><span class="user">Jamie Brandon</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-07&amp;toDate=2024-08-13&amp;channel=present-company&amp;filter=#2024-08-10T19:20:57.788Z" class="date">2024-08-10 19:20:57</a> <div class="message"><p>Gcc and clang are really not tuned for compile latency. Compare to eg <a href="https://home.in.tum.de/~engelke/pubs/2403-cgo.pdf">home.in.tum.de/~engelke/pubs/2403-cgo.pdf</a> or <a href="https://arxiv.org/pdf/2305.13241">arxiv.org/pdf/2305.13241</a>.</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F07/F07G771GZK8.png" alt="screenshot_2024-08-10_12-16-02.png"></p>
+<p><img src="http://history.futureofcoding.org/history/msg_files/F07/F07GAV0TE0M.png" alt="screenshot_2024-08-10_12-18-12.png"></p>
+</div></div><div id="2024-08-10T19:23:35.090Z" class="reply"><span class="user">Jamie Brandon</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-07&amp;toDate=2024-08-13&amp;channel=present-company&amp;filter=#2024-08-10T19:23:35.090Z" class="date">2024-08-10 19:23:35</a> <div class="message"><p>Computer graphics are also well suited to data-parallel hardware, which has several orders of magnitude better throughput than serial hardware.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-10T19:29:33.843Z" class="reply"><span class="user">Jamie Brandon</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-07&amp;toDate=2024-08-13&amp;channel=present-company&amp;filter=#2024-08-10T19:29:33.843Z" class="date">2024-08-10 19:29:33</a> <div class="message"><p>There's been some work on compiling on gpus (eg <a href="https://onedrive.live.com/?authkey=%21AN3eH7D93Q8%2Dxzs&amp;cid=0CFFDB1C3A2F95F6&amp;id=CFFDB1C3A2F95F6%21702303&amp;parId=CFFDB1C3A2F95F6%21184476&amp;o=OneUp">onedrive.live.com/?authkey=%21AN3eH7D93Q8%2Dxzs&amp;cid=0CFFDB1C3A2F95F6&amp;id=CFFDB1C3A2F95F6%21702303&amp;parId=CFFDB1C3A2F95F6%21184476&amp;o=OneUp</a>) but it's very basic.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-10T19:30:18.979Z" class="reply"><span class="user">Jamie Brandon</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-07&amp;toDate=2024-08-13&amp;channel=present-company&amp;filter=#2024-08-10T19:30:18.979Z" class="date">2024-08-10 19:30:18</a> <div class="message"><p>A lot of basic tasks (eg representing changes to code during optimization) don't have good solutions yet.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
