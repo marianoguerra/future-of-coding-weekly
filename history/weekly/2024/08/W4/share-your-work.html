@@ -1,0 +1,96 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-08-19T01:15:04.795Z" class="post"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-16&amp;toDate=2024-08-22&amp;channel=share-your-work&amp;filter=#2024-08-19T01:15:04.795Z" class="date">2024-08-19 01:15:04</a> <div class="message"><p>Call Return Spaghetti</p>
+<p>2024-08-18</p>
+<p>PAUL TARVYDAS</p>
+<p>AUG 19</p>
+<p>In the essay referenced below, I examine why a diagram of a Call/Return system makes less sense than a diagram of a concurrent system.</p>
+<p>Call/Return operates in a LIFO - last-in first-out, stack-like - manner.</p>
+<p>Adopting an alternate perspective - FIFO, first-in first-out, queue-like manner - allows us to represent diagrams more easily.</p>
+<p>CPU chips implement CALL and RETURN instructions as single opcodes, but, they do not implement queue behaviour as single opcodes.</p>
+<p>Most popular languages are generally function-based, e.g. C, Haskell, Python, Javascript, Smalltalk, etc. Such function-based languages tend to adopt a LIFO (callstack) perspective and tend to use CALL and RETURN opcodes to fake out the function-based paradigm.</p>
+<p>Such languages allow programmers to implement FIFO queues, but, such languages encourage the use of LIFO stacks. This seemingly small difference subtly affects designs with function-based - stack-based - thinking. This difference ultimately encourages single-threaded design while making multi-threaded design more difficult to imagine and to implement, as witnessed by the fact that most languages relegate multi-threading to hefty code libraries, while treating functions as basic building blocks.</p>
+<p>This subtle encouragement towards function-based thinking has led to the general impression that Visual Programming Languages (VPLs), node-and-wire Diagrammatic Programming Languages (DPLs), Actors, etc., are ineffective programming tools.</p>
+<p>I argue that VPLs, DPLs, Actors, etc. are effective programming tools, but that their use is are ultimately discouraged by the over-use of the function-based paradigm.</p>
+<p>Further</p>
+<p><a href="https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html">guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html</a></p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2024-08-19T01:44:41.734Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-16&amp;toDate=2024-08-22&amp;channel=share-your-work&amp;filter=#2024-08-19T01:44:41.734Z" class="date">2024-08-19 01:44:41</a> <div class="message"><p>One thing I've tried to articulate to you in the past, might be worth trying again:</p>
+<p>LIFO has one advantage over FIFO as you implement it so far in your projects:</p>
+<ul><li>call/return involves passing arbitrary numbers of values between a  <em>single</em>  producer and a  <em>single</em>  consumer (caller/callee).</li><li>FIFOs involve passing arbitrary numbers of values between  <em>multiple</em>  producers and a single consumer (or vice versa)</li></ul><p>I think the single/single constraint is easier to reason about. FIFOs might be easier to program with if you somehow preserve that constraint. It would certainly eliminate at a stroke a bunch of corner cases of timing and synchronization that bother me every time I think about your stuff.</p>
+<p>One way to achieve this would be to say the nodes in the VPL can only have a single input port, but that port can take on arbitrarily structured types (records, arrays, etc.). Then you'd simulate multiple ports using tuple types, but the tuples would have to be explicitly created in a single node at a time.</p>
+<p>Another way would be to restrict fan-in or fan-out somehow. Either input ports or output ports can only connect to a single wire. (I work at <a href="https://recroom.com">recroom.com</a>, and our VPL includes both the input and output constraints in different situations. Might be worth a look: <a href="https://blog.recroom.com/posts/2021/5/03/the-circuits-handbook.">blog.recroom.com/posts/2021/5/03/the-circuits-handbook.</a>)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-19T16:59:02.244Z" class="reply"><span class="user">Mark Dewing</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-16&amp;toDate=2024-08-22&amp;channel=share-your-work&amp;filter=#2024-08-19T16:59:02.244Z" class="date">2024-08-19 16:59:02</a> <div class="message"><p>What is your opinion of Go?</p>
+<p>Multi-threading is much more fundamental to the language (and lighter weight).  Part of that is how it manages the stack memory for each thread.</p>
+<p>(Disclaimer: I don't know Go very well).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-19T17:35:35.108Z" class="reply"><span class="user">Jasmine Otto</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-16&amp;toDate=2024-08-22&amp;channel=share-your-work&amp;filter=#2024-08-19T17:35:35.108Z" class="date">2024-08-19 17:35:35</a> <div class="message"><p>(xpost from substack) What I am hearing is that dataflow notebooks, like ObservableHQ in my case, are a bit of an unholy matrimony between the two styles. FWIW I've been using their 'Runtime' dispatcher as a set of training wheels, given my heavy functional-programming bias. But my experience has been that important quality-of-life tools (map-reduce pipelines) that rely on the call stack are inherently hard to debug under the event-driven paradigm. And this seems to be the kernel of that idea.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-20T03:42:10.342Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-17&amp;toDate=2024-08-23&amp;channel=share-your-work&amp;filter=#2024-08-20T03:42:10.342Z" class="date">2024-08-20 03:42:10</a> <div class="message"><p>Yeah works for me just now. </p>
+<p>(I didn't actually click on it this time because I've read it before 😅)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-20T18:35:52.423Z" class="reply"><span class="user">Jasmine Otto</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-17&amp;toDate=2024-08-23&amp;channel=share-your-work&amp;filter=#2024-08-20T18:35:52.423Z" class="date">2024-08-20 18:35:52</a> <div class="message"><p>I also got the 404, it's because a  <code>.</code>  is postpended to the URL. My best guess is that Slack on Windows -&gt; Firefox behaves differently than Kartik's setup. This one works for me:</p>
+<p><a href="https://blog.recroom.com/posts/2021/5/03/the-circuits-handbook">blog.recroom.com/posts/2021/5/03/the-circuits-handbook</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-20T20:23:23.702Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-17&amp;toDate=2024-08-23&amp;channel=share-your-work&amp;filter=#2024-08-20T20:23:23.702Z" class="date">2024-08-20 20:23:23</a> <div class="message"><p>Ha, I totally misinterpreted which blog link we're talking about. Paul's blog link works fine for me, my recroom link does not. Unfortunately I can't edit that comment anymore.</p>
+<p>At least Slack is consistent across platforms.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-21T15:58:17.662Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-18&amp;toDate=2024-08-24&amp;channel=share-your-work&amp;filter=#2024-08-21T15:58:17.662Z" class="date">2024-08-21 15:58:17</a> <div class="message">
+<blockquote><p>What is your opinion of Go?</p>
+</blockquote>
+<p>I have strong opinions about how to structure component-based programs while retaining both, FIFOs and LIFOs. 0D is but one manifestation of these opinions. Golang comes closer than most other languages but is more like an assembler for component-based programming rather than a structured way to compose component-based programs. ...</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-21T16:02:09.162Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-18&amp;toDate=2024-08-24&amp;channel=share-your-work&amp;filter=#2024-08-21T16:02:09.162Z" class="date">2024-08-21 16:02:09</a> <div class="message"><p><strong>@Jasmine Otto</strong> do you have a suggestion on how I might get a 50,000 foot overview of ObservableHQ and the 'Runtime' dispatcher?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-21T21:57:25.592Z" class="reply"><span class="user">Jasmine Otto</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-18&amp;toDate=2024-08-24&amp;channel=share-your-work&amp;filter=#2024-08-21T21:57:25.592Z" class="date">2024-08-21 21:57:25</a> <div class="message"><p><a href="https://guitarvydas.github.io/2021/09/23/Manifesto.html">Paul Tarvydas</a> Yes! They've been shuffling their docs around, especially for the Framework release, so I really hope these don't get lost.</p>
+<p>syntax - <a href="https://observablehq.com/documentation/cells/observable-javascript">observablehq.com/documentation/cells/observable-javascript</a></p>
+<p>dispatcher - <a href="https://observablehq.com/@observablehq/how-observable-runs">observablehq.com/@observablehq/how-observable-runs</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2024-08-23T20:27:01.212Z" class="post"><span class="user">Kyle Beechly</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-20&amp;toDate=2024-08-26&amp;channel=share-your-work&amp;filter=#2024-08-23T20:27:01.212Z" class="date">2024-08-23 20:27:01</a> <div class="message"><p>I just published <a href="https://github.com/kaBeech/tensort?tab=readme-ov-file#tensort-">Tensort</a>, a family of sorting algorithms (slash research paper?) inspired by Ivan's remark near the end of <a href="https://futureofcoding.org/episodes/070">Beyond Efficiency by Dave Ackley</a> about Robustsort not existing yet. I'd love to hear what y'all think! 💙</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2024-08-24T04:10:54.600Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-21&amp;toDate=2024-08-27&amp;channel=share-your-work&amp;filter=#2024-08-24T04:10:54.600Z" class="date">2024-08-24 04:10:54</a> <div class="message"><p>This is fantastic. The guiding presence of Sir Michael Caine, the way you introduce terminology, the first step of tensort ( 🤯 ).... what a cool project, and enjoyable write up to go with it.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-24T04:24:48.009Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-21&amp;toDate=2024-08-27&amp;channel=share-your-work&amp;filter=#2024-08-24T04:24:48.009Z" class="date">2024-08-24 04:24:48</a> <div class="message"><p>The tensor part would take me some serious time with paper and pencil to figure out. But the rest is quite straightforward and fun to think about.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-24T04:32:40.824Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-21&amp;toDate=2024-08-27&amp;channel=share-your-work&amp;filter=#2024-08-24T04:32:40.824Z" class="date">2024-08-24 04:32:40</a> <div class="message"><p>Oh my god! I was just thinking about Austin Powers' dad today (the stiff neck joke, as I took an Advil), probably for the first time since that movie came out. I can't even!</p>
+<p>Oh and then I read the explanation of Magicsort. This has to be a troll. It's too much!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-24T13:09:01.249Z" class="reply"><span class="user">Eli Mellen</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-21&amp;toDate=2024-08-27&amp;channel=share-your-work&amp;filter=#2024-08-24T13:09:01.249Z" class="date">2024-08-24 13:09:01</a> <div class="message"><p>Me, after reading this ❤  </p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F07/F07K1B3RFH6.jpg" alt="IMG_0152"></p>
+</div></div><div id="2024-08-25T01:42:29.259Z" class="reply"><span class="user">Kyle Beechly</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-22&amp;toDate=2024-08-28&amp;channel=share-your-work&amp;filter=#2024-08-25T01:42:29.259Z" class="date">2024-08-25 01:42:29</a> <div class="message"><p>Yes!!!!! Thank you!!!! My heart is full:smiling_face_with_3_hearts:</p>
+<p>Haha I very nearly used a Scrooge Caine for the Magicsort image!</p>
+<blockquote><p>The tensor part would take me some serious time with paper and pencil to figure out</p>
+</blockquote>
+<p>Yeah it can get hard to reason about (😝) pretty quickly once you get into the higher dimensions. I did a lot of playing with cards and Jenga blocks while working on it😸</p>
+<p>I'd really like to make a visualization of it but that will prolly have to wait until after I land a new job</p>
+<blockquote><p>I was just thinking about Austin Powers' dad today</p>
+</blockquote>
+<p>Hahaha certain parts of that movie never leave my psyche ("Nothing could be my father from the truth!", "No I dadn't!")</p>
+<blockquote><p>This has to be a troll</p>
+</blockquote>
+<p>The way I presented Magicsort was 100% a troll directed at you specifically <a href="http://ivanish.ca/">Ivan Reese</a>, I'm not even joking lol. And slightly a jab at the Computerphile guy who couldn't think of any practical applications of Bogosort. I was hoping you'd get a kick out of it 😹</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-25T01:45:13.800Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-22&amp;toDate=2024-08-28&amp;channel=share-your-work&amp;filter=#2024-08-25T01:45:13.800Z" class="date">2024-08-25 01:45:13</a> <div class="message"><p>Hats off Kyle. You've made something very cool and technical and fascinating, but also woven charm and joy into its presentation. Beautiful.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-08-25T02:05:05.271Z" class="reply"><span class="user">Kyle Beechly</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-22&amp;toDate=2024-08-28&amp;channel=share-your-work&amp;filter=#2024-08-25T02:05:05.271Z" class="date">2024-08-25 02:05:05</a> <div class="message"><p>I'm just so happy y'all are enjoying and appreciating it:smiling_face_with_3_hearts: I've had a lot of fun working on it. Thanks everybody, this is such a cool community, I appreciate y'all:heart_hands:</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2024-08-24T09:54:44.880Z" class="post"><span class="user">Mariano Guerra</span> <a href="https://history.futureofcoding.org/?fromDate=2024-08-21&amp;toDate=2024-08-27&amp;channel=share-your-work&amp;filter=#2024-08-24T09:54:44.880Z" class="date">2024-08-24 09:54:44</a> <div class="message"><p>📼 Bootstrapping OOP Part 3: Who Parses the Parser?</p>
+<p>How do we feed the prelude if there's no parser (yet)?</p>
+<p>💡 If code is data then a data serialization format is a binary representation of a program</p>
+<p>✍ <a href="https://marianoguerra.org/posts/bootstrapping-oop-part-3-who-parses-the-parser/">marianoguerra.org/posts/bootstrapping-oop-part-3-who-parses-the-parser</a></p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://marianoguerra.org/posts/bootstrapping-oop-part-3-who-parses-the-parser/">Bootstrapping OOP Part 3: Who Parses the Parser?</a></p>
+<p>In Bootstrap post-collapse OOP technology with Wasm GC (Part 2)
+we implemented the minimum viable runtime in raw WebAssembly to run our prelude and bootstrap a basic OOP language.
+But the prelude was</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>

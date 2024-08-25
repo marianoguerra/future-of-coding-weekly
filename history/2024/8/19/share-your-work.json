@@ -1,0 +1,506 @@
+[
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1724030104.795619",
+        "client_msg_id": "2dd2006b-c948-4090-838a-2be5bc98954d",
+        "text": "Call Return Spaghetti\n2024-08-18\nPAUL TARVYDAS\nAUG 19\n\nIn the essay referenced below, I examine why a diagram of a Call/Return system makes less sense than a diagram of a concurrent system.\n\nCall/Return operates in a LIFO - last-in first-out, stack-like - manner.\n\nAdopting an alternate perspective - FIFO, first-in first-out, queue-like manner - allows us to represent diagrams more easily.\n\nCPU chips implement CALL and RETURN instructions as single opcodes, but, they do not implement queue behaviour as single opcodes.\n\nMost popular languages are generally function-based, e.g. C, Haskell, Python, Javascript, Smalltalk, etc. Such function-based languages tend to adopt a LIFO (callstack) perspective and tend to use CALL and RETURN opcodes to fake out the function-based paradigm.\n\nSuch languages allow programmers to implement FIFO queues, but, such languages encourage the use of LIFO stacks. This seemingly small difference subtly affects designs with function-based - stack-based - thinking. This difference ultimately encourages single-threaded design while making multi-threaded design more difficult to imagine and to implement, as witnessed by the fact that most languages relegate multi-threading to hefty code libraries, while treating functions as basic building blocks.\n\nThis subtle encouragement towards function-based thinking has led to the general impression that Visual Programming Languages (VPLs), node-and-wire Diagrammatic Programming Languages (DPLs), Actors, etc., are ineffective programming tools.\n\nI argue that VPLs, DPLs, Actors, etc. are effective programming tools, but that their use is are ultimately discouraged by the over-use of the function-based paradigm.\n\nFurther\n\n<https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "reply_count": 9,
+        "reply_users_count": 4,
+        "latest_reply": "1724277445.592279",
+        "reply_users": [
+            "UCUSW7WVD",
+            "UNS7QDKFV",
+            "U05UK5T7LPP",
+            "UGWUJUZHT"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Fp+7J",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Call Return Spaghetti\n2024-08-18\nPAUL TARVYDAS\nAUG 19\n\nIn the essay referenced below, I examine why a diagram of a Call/Return system makes less sense than a diagram of a concurrent system.\n\nCall/Return operates in a LIFO - last-in first-out, stack-like - manner.\n\nAdopting an alternate perspective - FIFO, first-in first-out, queue-like manner - allows us to represent diagrams more easily.\n\nCPU chips implement CALL and RETURN instructions as single opcodes, but, they do not implement queue behaviour as single opcodes.\n\nMost popular languages are generally function-based, e.g. C, Haskell, Python, Javascript, Smalltalk, etc. Such function-based languages tend to adopt a LIFO (callstack) perspective and tend to use CALL and RETURN opcodes to fake out the function-based paradigm.\n\nSuch languages allow programmers to implement FIFO queues, but, such languages encourage the use of LIFO stacks. This seemingly small difference subtly affects designs with function-based - stack-based - thinking. This difference ultimately encourages single-threaded design while making multi-threaded design more difficult to imagine and to implement, as witnessed by the fact that most languages relegate multi-threading to hefty code libraries, while treating functions as basic building blocks.\n\nThis subtle encouragement towards function-based thinking has led to the general impression that Visual Programming Languages (VPLs), node-and-wire Diagrammatic Programming Languages (DPLs), Actors, etc., are ineffective programming tools.\n\nI argue that VPLs, DPLs, Actors, etc. are effective programming tools, but that their use is are ultimately discouraged by the over-use of the function-based paradigm.\n\nFurther\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://guitarvydas.github.io/2020/12/09/CALL-RETURN-Spaghetti.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U06SS0DHZD1"
+                ],
+                "count": 1
+            },
+            {
+                "name": "blue_heart",
+                "users": [
+                    "U07JALQGJRG"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1724031881.734239",
+        "client_msg_id": "4158a3e0-896d-443a-9679-a59d63538642",
+        "text": "One thing I've tried to articulate to you in the past, might be worth trying again:\n\nLIFO has one advantage over FIFO as you implement it so far in your projects:\n\u2022 call/return involves passing arbitrary numbers of values between a *single* producer and a *single* consumer (caller/callee).\n\u2022 FIFOs involve passing arbitrary numbers of values between *multiple* producers and a single consumer (or vice versa)\nI think the single/single constraint is easier to reason about. FIFOs might be easier to program with if you somehow preserve that constraint. It would certainly eliminate at a stroke a bunch of corner cases of timing and synchronization that bother me every time I think about your stuff.\n\nOne way to achieve this would be to say the nodes in the VPL can only have a single input port, but that port can take on arbitrarily structured types (records, arrays, etc.). Then you'd simulate multiple ports using tuple types, but the tuples would have to be explicitly created in a single node at a time.\n\nAnother way would be to restrict fan-in or fan-out somehow. Either input ports or output ports can only connect to a single wire. (I work at <https://recroom.com>, and our VPL includes both the input and output constraints in different situations. Might be worth a look: <https://blog.recroom.com/posts/2021/5/03/the-circuits-handbook.>)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "G539i",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "One thing I've tried to articulate to you in the past, might be worth trying again:\n\nLIFO has one advantage over FIFO as you implement it so far in your projects:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "call/return involves passing arbitrary numbers of values between a "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "single",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " producer and a "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "single",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " consumer (caller/callee)."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "FIFOs involve passing arbitrary numbers of values between "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "multiple",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " producers and a single consumer (or vice versa)"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI think the single/single constraint is easier to reason about. FIFOs might be easier to program with if you somehow preserve that constraint. It would certainly eliminate at a stroke a bunch of corner cases of timing and synchronization that bother me every time I think about your stuff.\n\nOne way to achieve this would be to say the nodes in the VPL can only have a single input port, but that port can take on arbitrarily structured types (records, arrays, etc.). Then you'd simulate multiple ports using tuple types, but the tuples would have to be explicitly created in a single node at a time.\n\nAnother way would be to restrict fan-in or fan-out somehow. Either input ports or output ports can only connect to a single wire. (I work at "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://recroom.com"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", and our VPL includes both the input and output constraints in different situations. Might be worth a look: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://blog.recroom.com/posts/2021/5/03/the-circuits-handbook."
+                            },
+                            {
+                                "type": "text",
+                                "text": ")"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "eyes",
+                "users": [
+                    "U05UK5T7LPP"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UNS7QDKFV",
+        "type": "message",
+        "ts": "1724086742.244679",
+        "client_msg_id": "0cabb713-9609-4a0f-bb76-c4bd65c0cebf",
+        "text": "What is your opinion of Go?\nMulti-threading is much more fundamental to the language (and lighter weight).  Part of that is how it manages the stack memory for each thread.\n(Disclaimer: I don't know Go very well).",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "AgxME",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What is your opinion of Go?\nMulti-threading is much more fundamental to the language (and lighter weight).  Part of that is how it manages the stack memory for each thread.\n(Disclaimer: I don't know Go very well)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UGWUJUZHT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U05UK5T7LPP",
+        "type": "message",
+        "ts": "1724088935.108219",
+        "client_msg_id": "d04727f3-77e8-4928-a3c1-72f0d926417f",
+        "text": "(xpost from substack) What I am hearing is that dataflow notebooks, like ObservableHQ in my case, are a bit of an unholy matrimony between the two styles. FWIW I've been using their 'Runtime' dispatcher as a set of training wheels, given my heavy functional-programming bias. But my experience has been that important quality-of-life tools (map-reduce pipelines) that rely on the call stack are inherently hard to debug under the event-driven paradigm. And this seems to be the kernel of that idea.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "82zRd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(xpost from substack) What I am hearing is that dataflow notebooks, like ObservableHQ in my case, are a bit of an unholy matrimony between the two styles. FWIW I've been using their 'Runtime' dispatcher as a set of training wheels, given my heavy functional-programming bias. But my experience has been that important quality-of-life tools (map-reduce pipelines) that rely on the call stack are inherently hard to debug under the event-driven paradigm. And this seems to be the kernel of that idea."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            },
+            {
+                "name": "thinking_face",
+                "users": [
+                    "UGWUJUZHT"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1724125330.342289",
+        "client_msg_id": "94db0195-3cc1-435c-a1d5-1f19fd6d69c2",
+        "text": "Yeah works for me just now. \n\n(I didn't actually click on it this time because I've read it before :sweat_smile:)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yqx9W",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah works for me just now. \n\n(I didn't actually click on it this time because I've read it before "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile",
+                                "unicode": "1f605"
+                            },
+                            {
+                                "type": "text",
+                                "text": ")"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U05UK5T7LPP",
+        "type": "message",
+        "ts": "1724178952.423689",
+        "edited": {
+            "user": "U05UK5T7LPP",
+            "ts": "1724179065.000000"
+        },
+        "client_msg_id": "711e86a6-5273-4764-8577-6e04175bb277",
+        "text": "I also got the 404, it's because a `.` is postpended to the URL. My best guess is that Slack on Windows -> Firefox behaves differently than Kartik's setup. This one works for me:\n<https://blog.recroom.com/posts/2021/5/03/the-circuits-handbook>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "R+7g9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I also got the 404, it's because a "
+                            },
+                            {
+                                "type": "text",
+                                "text": ".",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is postpended to the URL. My best guess is that Slack on Windows -> Firefox behaves differently than Kartik's setup. This one works for me:\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://blog.recroom.com/posts/2021/5/03/the-circuits-handbook"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heavy_check_mark",
+                "users": [
+                    "UGWUJUZHT"
+                ],
+                "count": 1
+            },
+            {
+                "name": "bulb",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1724185403.702379",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1724185494.000000"
+        },
+        "client_msg_id": "464f7993-8a1a-43ad-a0ac-31619882460e",
+        "text": "Ha, I totally misinterpreted which blog link we're talking about. Paul's blog link works fine for me, my recroom link does not. Unfortunately I can't edit that comment anymore.\n\nAt least Slack is consistent across platforms.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "qO672",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ha, I totally misinterpreted which blog link we're talking about. Paul's blog link works fine for me, my recroom link does not. Unfortunately I can't edit that comment anymore.\n\nAt least Slack is consistent across platforms."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "pray",
+                "users": [
+                    "U05UK5T7LPP"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1724255897.662259",
+        "client_msg_id": "6e47c460-4daf-4508-9573-ca00491a51a2",
+        "text": "&gt; What is your opinion of Go?\nI have strong opinions about how to structure component-based programs while retaining both, FIFOs and LIFOs. 0D is but one manifestation of these opinions. Golang comes closer than most other languages but is more like an assembler for component-based programming rather than a structured way to compose component-based programs. ...",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nwsr8",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What is your opinion of Go?"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI have strong opinions about how to structure component-based programs while retaining both, FIFOs and LIFOs. 0D is but one manifestation of these opinions. Golang comes closer than most other languages but is more like an assembler for component-based programming rather than a structured way to compose component-based programs. ..."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1724256129.162559",
+        "client_msg_id": "b8f55dee-c709-49b4-8eaf-860f3fd3f37f",
+        "text": "<@U05UK5T7LPP> do you have a suggestion on how I might get a 50,000 foot overview of ObservableHQ and the 'Runtime' dispatcher?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xCHYp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U05UK5T7LPP"
+                            },
+                            {
+                                "type": "text",
+                                "text": " do you have a suggestion on how I might get a 50,000 foot overview of ObservableHQ and the 'Runtime' dispatcher?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U05UK5T7LPP",
+        "type": "message",
+        "ts": "1724277445.592279",
+        "client_msg_id": "62f0e0f9-5c31-4b2c-abc3-2657429029b4",
+        "text": "<@UGWUJUZHT> Yes! They've been shuffling their docs around, especially for the Framework release, so I really hope these don't get lost.\nsyntax - <https://observablehq.com/documentation/cells/observable-javascript>\ndispatcher - <https://observablehq.com/@observablehq/how-observable-runs>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1724030104.795619",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LeSfn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UGWUJUZHT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Yes! They've been shuffling their docs around, especially for the Framework release, so I really hope these don't get lost.\nsyntax - "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://observablehq.com/documentation/cells/observable-javascript"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\ndispatcher - "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://observablehq.com/@observablehq/how-observable-runs"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
