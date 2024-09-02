@@ -1,0 +1,419 @@
+[
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1725160636.476039",
+        "client_msg_id": "6a1ede04-2f5a-48f0-9c43-e28a0d424ff7",
+        "text": "Does anyone have thoughts about equality vs ordering in maps/sets?\n\nI have some pondering here - <https://www.scattered-thoughts.net/log/0048/#zest-ordering> but the decision tree at the end is the main thing:\n\n\u2022 Order isn't observable at all.\n\u2022 Iteration order is either non-deterministic or expensive.\n\u2022 Determism can be manually recovered by storing both a map and a list of keys, but at the cost of storing two copies of each key.\n\u2022 Order is observable.\n\u2022 Order doesn't affect equality.\n    \u25e6 Equality is not extensional ie `a == b` does not imply that `f(a) == f(b)`.\n    \u25e6 If `[a: 0, b: 1] == [b: 1, a: 0]` then we must have `struct[a: i64, b: i64] == struct[b: i64, a: i64]`, but we still have to remember that the field order is different, which implies that type equality can't rely on interning and pointer comparison.\n\u2022 Order affects equality.\n    \u25e6 Sets become surprising / less useful.\n    \u25e6 If I want to add query planning, I can't promise that `f(db) == optimize-query(f)(db)`.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725160636.476039",
+        "reply_count": 6,
+        "reply_users_count": 5,
+        "latest_reply": "1725243105.721099",
+        "reply_users": [
+            "U71PMQ1V0",
+            "UCUSW7WVD",
+            "UQ706GB9U",
+            "U6KQ2S410",
+            "U8A5MS6R1"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pHLLf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Does anyone have thoughts about equality vs ordering in maps/sets?\n\nI have some pondering here - "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.scattered-thoughts.net/log/0048/#zest-ordering"
+                            },
+                            {
+                                "type": "text",
+                                "text": " but the decision tree at the end is the main thing:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Order isn't observable at all."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Iteration order is either non-deterministic or expensive."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Determism can be manually recovered by storing both a map and a list of keys, but at the cost of storing two copies of each key."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Order is observable."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Order doesn't affect equality."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Equality is not extensional ie "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "a == b",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " does not imply that "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "f(a) == f(b)",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "If "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "[a: 0, b: 1] == [b: 1, a: 0]",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " then we must have "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "struct[a: i64, b: i64] == struct[b: i64, a: i64]",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ", but we still have to remember that the field order is different, which implies that type equality can't rely on interning and pointer comparison."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 1,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Order affects equality."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Sets become surprising / less useful."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "If I want to add query planning, I can't promise that "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "f(db) == optimize-query(f)(db)",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 1,
+                        "border": 0
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1725160650.213549",
+        "client_msg_id": "e1c46ef4-0905-48a5-8abf-729f568b0297",
+        "text": "Good job collapsing the tree slack :smile:",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725160636.476039",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lfkye",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Good job collapsing the tree slack "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile",
+                                "unicode": "1f604"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1725160671.159679",
+        "client_msg_id": "5b1fca3d-ef2f-4b98-a256-fbfbcddc4a0d",
+        "text": "```* Order isn't observable at all.\n  * Iteration order is either non-deterministic or expensive.\n  * Determism can be manually recovered by storing both a map and a list of keys, but at the cost of storing two copies of each key.\n* Order is observable.\n  * Order doesn't affect equality.\n    * Equality is not extensional ie `a == b` does not imply that `f(a) == f(b)`.\n    * If `[a: 0, b: 1] == [b: 1, a: 0]` then we must have `struct[a: i64, b: i64] == struct[b: i64, a: i64]`, but we still have to remember that the field order is different, which implies that type equality can't rely on interning and pointer comparison.\n  * Order affects equality.\n    * Sets become surprising / less useful.\n    * If I want to add query planning, I can't promise that `f(db) == optimize-query(f)(db)`.```\n",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725160636.476039",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Pr1VS",
+                "elements": [
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "* Order isn't observable at all.\n  * Iteration order is either non-deterministic or expensive.\n  * Determism can be manually recovered by storing both a map and a list of keys, but at the cost of storing two copies of each key.\n* Order is observable.\n  * Order doesn't affect equality.\n    * Equality is not extensional ie `a == b` does not imply that `f(a) == f(b)`.\n    * If `[a: 0, b: 1] == [b: 1, a: 0]` then we must have `struct[a: i64, b: i64] == struct[b: i64, a: i64]`, but we still have to remember that the field order is different, which implies that type equality can't rely on interning and pointer comparison.\n  * Order affects equality.\n    * Sets become surprising / less useful.\n    * If I want to add query planning, I can't promise that `f(db) == optimize-query(f)(db)`."
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1725183143.956889",
+        "client_msg_id": "c4837b23-5d1c-4181-90f4-277c0c6150ad",
+        "text": "I don't particularly like order being observable by your description. \n\nHave you considered two iterators, akin to Lua's `pairs` and `ipairs`?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725160636.476039",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "h9JyI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't particularly like order being observable by your description. \n\nHave you considered two iterators, akin to Lua's `pairs` and `ipairs`?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UQ706GB9U",
+        "type": "message",
+        "ts": "1725211871.599639",
+        "client_msg_id": "f0fd58a5-ac91-45b9-9589-dced5a03c30d",
+        "text": "What about non-ordered but supporting composite keys where one of the components is the order?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725160636.476039",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Xv5Eq",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "What about non-ordered but supporting composite keys where one of the components is the order?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U6KQ2S410",
+        "type": "message",
+        "ts": "1725223394.407399",
+        "edited": {
+            "user": "U6KQ2S410",
+            "ts": "1725223480.000000"
+        },
+        "client_msg_id": "fb3d1114-aff5-45f8-bcba-3e03705fc563",
+        "text": "It\u2019s so refreshing to read a discussion of design tradeoffs rather than being presented with a post hoc rationalization. Your discussions heavily weigh performance, so it would make sense to avoid ordering and allow non-determinism. I favor order for user-friendliness. Translating into your terminology, I provide sets as maps to a unit value that are auto-sorted by key value.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725160636.476039",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "wPpIM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It\u2019s so refreshing to read a discussion of design tradeoffs rather than being presented with a post hoc rationalization. Your discussions heavily weigh performance, so it would make sense to avoid ordering and allow non-determinism. I favor order for user-friendliness. Translating into your terminology, I provide sets as maps to a unit value that are auto-sorted by key value."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U8A5MS6R1",
+        "type": "message",
+        "ts": "1725243105.721099",
+        "client_msg_id": "8f1a96fd-76b6-4ca9-82fd-e25dd854483e",
+        "text": "Do you see ordered objects as being mostly useful for users? Or mostly incidental and only occasionally useful? In general I prefer key/value bundles to be unordered. I can still add order by encoding another list on the side as you mention. It also seems easier to evolve the language from unordered to ordered iteration if needed, than to go in the other direction.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725160636.476039",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "CjBsw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Do you see ordered objects as being mostly useful for users? Or mostly incidental and only occasionally useful? In general I prefer key/value bundles to be unordered. I can still add order by encoding another list on the side as you mention. It also seems easier to evolve the language from unordered to ordered iteration if needed, than to go in the other direction."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
