@@ -16,7 +16,7 @@
 <link href="assets/css/theme.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="prefetch" href="posts/future-of-coding-weekly-202409-week-1/" type="text/html">
+<link rel="prefetch" href="posts/future-of-coding-weekly-202409-week-2/" type="text/html">
 </head>
 <body>
 
@@ -50,7 +50,138 @@
 <p style="font-size:1.5rem;margin-bottom:2rem;text-align:center">✉️ Not subscribed yet? <a href="https://newsletter.futureofcoding.org/join/" target="_blank">Subscribe to the Newsletter</a></p>
     
 
-    <article><h1 class="title"><a href="posts/future-of-coding-weekly-202409-week-1/">Future of Coding Weekly 2024/09 Week 1</a></h1>
+    <article><h1 class="title"><a href="posts/future-of-coding-weekly-202409-week-2/">Future of Coding Weekly 2024/09 Week 2</a></h1>
+      <h2 class="subtitle is-6">2024-09-09 09:59</h2>
+      <div class="content">
+    <p>📢 PAINT &amp; Causal Islands Berlin 💻 Decode: an augmented coding canvas 🎥 Roboco-op: mimetic engineering</p>
+<h2>Two Minute Week</h2>
+<p>💬 <strong>Marek Rogalski</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/two-minute-week.html#2024-09-02T22:54:58.390Z">🧵 conversation</a></p>
+<p>Working on performance improvements now. Getting some <a href="http://history.futureofcoding.org/history/msg_files/F07/F07K5QJ25NK.mp4">nice visual effects thanks to uninitialized memory.</a></p>
+<h2>Our Work</h2>
+<p>🧑‍🔬 Account of the research project we’re doing at JetBrains by <strong>Pavel Mikhailovskii</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/share-your-work.html#2024-09-04T07:55:52.259Z">🧵 conversation</a></p>
+<p>Hi everyone!</p>
+<p>I’d like to give an account of the research project we’re doing at JetBrains.</p>
+<p>It is called Ludwig after Ludwig Wittgenstein and has an ambitious goal of re-engineering the foundations of the software development stack.</p>
+<p>At the moment, we are still at a very early design and prototyping stage, but we believe that this project will let us create the next generation of development tools.</p>
+<p>Here are the most important ideas we’re trying to materialize:</p>
+<p><em>Liberation of code from the shackles of textual representation</em> </p>
+<p>Human-readable textual notations were a great innovation back in the 1950s. However, we have made great progress in the ways we store complex data structures since then, and the typical codebase sizes have also grown by a few orders of magnitude.</p>
+<p>Code is essentially a graph with one tree-like perspective more important than others. An adequate way of storing such complex and evolving data as code would be to put it in a versioned graph / linked document database, supporting Git-like branching and merging. That would get rid of the need for continuous parsing, indexing, symbol resolution and typechecking that constitute the code editing workflow in modern IDEs.  We would resolve symbols once, at the moment of typing and store their unique identifiers (not just names!) in an indexed by construction and preserving referential integrity database.</p>
+<p>That would also make such intentions as Rename, Move, Find Usages or Go To Definition trivial to implement. Of course, structural representation of code will come hand-in-hand  with structural (semantic) diff and merge.</p>
+<p>This graph-like representation should allow for a fine-grained tracking of changes and dependencies and dramatically reduce feedback times in such scenarios as incremental compilation.</p>
+<p><em>A minimalist approach towards programming language design</em> </p>
+<p>To prevent our language from becoming “fat and weak” as John Backus has put it in his famous <a href="https://dl.acm.org/doi/pdf/10.1145/359576.359579">lecture</a>, we want to pass our language through a series of aggressive optimization rounds or distillation passes.</p>
+<p>This should result in something comparable with Smalltalk’s “syntax on a postcard”. Actually, we believe that we could make it even more symmetric by eliminating the distinctions between methods, named and anonymous functions, operators and statements. (As you know, Smalltalk has different syntaxes and different behavior of return statements for methods and blocks and “surprising” execution order rules for different kinds of messages).</p>
+<p>The goal is to come up with a language that would be easy to learn and read and straightforward to reason about for all kinds of agents-be it humans, static analysis tools or AI.</p>
+<p>In terms of notation, it will look like an indentation-based syntax for a tiny subset of Lisp, but without its macros or the zoo of “special forms”. Being freed from the limitations of plain text, we’re going to use semantic coloring to make the notation even more expressive and compact.</p>
+<p>Obviously, our programming language, as any other, should be able to express computation logic and code structure; what is less common is that we also want it to be able to express data, configurations and knowledge, thus eliminating the need for additional DSLs. A YAML-like data notation emerges from our tiny language as naturally as JSON emerged from JavaScript. The only difference is that JSON was discovered by chance, and our language is consciously designed to be able to declaratively describe complex data structures.</p>
+<p><em>Unification of Object-Oriented and Functional programming</em> </p>
+<p>As a part of our minimalist program, we are aiming to heal the great schism that divided programming into the object-oriented and the functional worlds.</p>
+<p>We believe that the class-free approach in the form <a href="https://youtu.be/DxnYQRuLX7Q">proposed</a> by Douglas Crockford will let us make OOP an integral part of functional programming, thus converging the two into what could be called unified programming. This form of OOP will keep the best parts—encapsulation and polymorphism and get rid of the "considered harmful" implementation inheritance.  There will be no need for classes, constructors, prototypes, visibility modifiers, this and new - just immutable structures and anonymous functions.</p>
+<p><em>An IDE designed for focus and context awareness</em> </p>
+<p>We want to build an immersive Smalltalk-like environment with structural navigation, a smaller editing scope and richer and more dynamic context compared to the traditional file- and text-based IDEs. This seems well-aligned with both the minimalist design of the language and the non-textual storage format. The latter should allow us to store some additional information alongside the code. That will include all kinds of metadata, normally invisible to the users, but also some unusual forms of embedded content. Think of a documentation comment containing a video explaining the algorithm or a discussion between multiple developers linked to a certain place in the code.</p>
+<p><em>Smart typing</em> </p>
+<p>We also have some ideas on how we could implement some smart typing techniques, combining the convenience of automatic type inference with the solidness and discipline of explicit type annotations.</p>
+<p>The key idea is that the flexibility of the non-textual representation will eliminate the need for the user to choose between the two worlds. Manual annotations can be hidden to reduce visual distraction, automatically inferred types can be displayed and persisted in the code database, etc.</p>
+<p><em>Designed to be AI-fitting</em> </p>
+<p>Finally, we want the whole thing to be future-proof and provide better support for AI-aided development compared to the traditional languages. The simplicity of the language as well as its fine granularity and its property of always having all the symbols resolved should allow for high-quality “understanding” and retrieval-augmented generation of code compared to such languages as Python or Java.</p>
+<hr>
+<p>As I said, at the moment we’re still at a very early stage. Many of our challenges are not technical, but about finding the way of how we could shape this set of ideas into a product vision. We are, of course, open to collaboration with like-minded people.</p>
+<p>I will be happy to answer your questions and hear your feedback.</p>
+<blockquote>
+<p>🎥 <a href="https://youtu.be/DxnYQRuLX7Q">code::dive 2017 – Douglas Crockford – The better parts</a></p>
+<p><img alt="code::dive 2017 – Douglas Crockford – The better parts" src="https://i.ytimg.com/vi/DxnYQRuLX7Q/hqdefault.jpg"></p>
+</blockquote>
+<p>💬 <strong>Jarno Montonen</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/share-your-work.html#2024-09-06T12:13:10.441Z">🧵 conversation</a></p>
+<p>Added tabular data and document template import to my notebook demo so now it can be used to fill/generate documents from csv/spreadsheet rows. Would any of you find something like this useful? I know there are a bunch of document generators, but the ones I've seen seem kinda crappy. Happy to hear about experiences using any of the existing solutions and why they suck though 😆.</p>
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F07/F07L925PQN7.mp4">Document Generation</a></p>
+<p>📝 <a href="https://duncancragg.substack.com/about">About - The Parallel Reality Computer</a> via <a href="https://twitter.com/Duncan__Cragg">Duncan Cragg</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/share-your-work.html#2024-09-08T14:11:20.701Z">🧵 conversation</a></p>
+<p>Hiya folks, now that many of you have been digging in to Dynamicland's website for a bit and are in the right frame of mind, I was hoping that you may have had your neurons tickled in just the right ways to be open to reading about a project with some similarities: mine! 🤗</p>
+<p>So I updated my About page, and I was hoping that it's now short and accessible enough to be just the info needed for you to "get" what my project is all about:</p>
+<p>📝 <a href="https://duncancragg.substack.com/about">About - The Parallel Reality Computer</a></p>
+<p>💬 <a href="http://akkartik.name/about">Kartik Agaram</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/devlog-together.html#2024-09-05T02:17:23.000Z">🧵 conversation</a></p>
+<p>Still lots missing, but <a href="http://history.futureofcoding.org/history/msg_files/F07/F07KTFXV45C.webm">check this out.</a></p>
+<p>Lol, look at how it renders hyperlinks. This isn't going to be useful without some sort of delimiter or fence around math.</p>
+<p><img alt="fractions-bug.png" src="http://history.futureofcoding.org/history/msg_files/F07/F07LD4W9PQV.png"></p>
+<h2>Thinking Together</h2>
+<p>🪼 <a href="https://m.youtube.com/watch?si=VpS2zmWQgoVUkvid&amp;v=3OmkehAJoyo&amp;feature=youtu.be">Physics of JellyCar: Soft Body Physics Explained</a> via <a href="https://mobile.twitter.com/chrisshank23">Christopher Shank</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/thinking-together.html#2024-09-03T03:05:46.830Z">🧵 conversation</a></p>
+<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/3OmkehAJoyo/hqdefault.jpg"></p>
+<p>What are ways we can make computation more squishy with soft-body physics? Most visual notations are overwhelmingly rigid and structured!</p>
+<h2>Content</h2>
+<p>💻 <a href="https://getdecode.dev">Decode</a> via <a href="http://ivanish.ca/">Ivan Reese</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-03T15:59:33.701Z">🧵 conversation</a></p>
+<p><a href="https://getdecode.dev">Decode</a> — a new tldraw-based augmented coding canvas tool from <strong>@Francois Laberge</strong></p>
+<p>📝 <a href="https://www.researchgate.net/publication/342855224_Situated_Computations_Bridging_Craft_and_Computation_in_the_Trinidad_and_Tobago_Carnival">Situated Computations: Bridging Craft and Computation in the Trinidad and Tobago Carnival</a> via <strong>Jasmine Otto</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-03T21:20:30.511Z">🧵 conversation</a></p>
+<p>a paper from an architectural journal that combines an ethnography with a sculptural grammar ('situated computations').</p>
+<p>🧦 <a href="https://dynamicland.org/">dynamicland.org</a> via <strong>Alex McLean</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-04T14:35:53.288Z">🧵 conversation</a></p>
+<p>I hear <a href="https://dynamicland.org/">dynamicland.org</a> will update sometime today..</p>
+<p>💡 <a href="https://dynamicland.org/donate/">Donate to dynamicland</a> via <a href="http://ivanish.ca/">Ivan Reese</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-04T21:55:15.501Z">🧵 conversation</a></p>
+<p>Somewhat buried in the new DL webpage — you can now directly <a href="https://dynamicland.org/donate/">donate</a> to support their work. This is absolutely the sort of thing I'd back on Patreon, so I'm glad to see they offer those sorts of $n/month options.</p>
+<p>📝 <a href="https://www.washingtonpost.com/opinions/interactive/2024/michael-lewis-chris-marks-the-canary-who-is-government/">The Canary</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-05T05:09:24.078Z">🧵 conversation</a></p>
+<p>No coding here, but this is fantastic.</p>
+<p><a href="https://www.washingtonpost.com/opinions/interactive/2024/michael-lewis-chris-marks-the-canary-who-is-government/">The Canary</a></p>
+<blockquote>
+<p>And yet even now his father hovered in the background both as a rhyme and a presence. The careers of both men had been redirected by a simple question posed in a college class. Both spent their lives measuring the stress in stone. Both used scientific methods to answer questions that had seemed to everyone else beyond the reach of science. Both sought to understand what prevented roofs from collapsing. The father’s work had received a lot of public attention and the son’s had not. But that was just an accident of what people cared about. A lot of people cared about Gothic cathedrals; fewer were concerned with whatever was happening to workers deep underground.</p>
+</blockquote>
+<p>📢 <a href="https://2024.splashcon.org/series/paint">PAINT: Programming Abstractions and Interactive Notations, Tools, and Environments</a> via <strong>Beni Cherniavsky-Paskin</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-05T20:50:16.344Z">🧵 conversation</a></p>
+<p>Looking at SPLASH '24 program, I knew <a href="https://liveprog.org">LIVE</a> workshop is always very relevant (this year majority of lectures involve folks here); but also found <a href="https://2024.splashcon.org/series/paint">PAINT</a> which sounds great too 👀</p>
+<blockquote>
+<p>In the workshop on Programming Abstractions and Interactive Notations, Tools, and Environments (PAINT), we want to discuss programming environments that support users in working with and creating notations and abstractions that matter to them. We are interested in the relationship between people centric notations and general-purpose programming languages and environments. How do we reflect the various experiences, needs, and priorities of the many people involved in programming — whether they call it that or not?</p>
+</blockquote>
+<p>Areas of interest to PAINT include but are not limited to:</p>
+<ul>
+<li>Design and implementation of program representations and their means of interaction for end-users of all ages</li>
+<li>Design and implementation of visual programming environments</li>
+<li>Block-based environments and their application</li>
+<li>Projectional editors and their application</li>
+<li>Languages and their environments with mixed notations</li>
+<li>Meta tools or tool creation frameworks</li>
+<li>Methods to support working with abstractions, such as example-based programming</li>
+<li>Input and output devices for interacting with programming environments</li>
+<li>Theories of the above</li>
+</ul>
+<p>PAINT format is flipped, kinda critical review, and not recorded IIUC.  But the past papers look interesting.</p>
+<p>📝 <a href="https://graydon2.dreamwidth.org/313862.html">A note on the PERQ computer</a> via <a href="http://ivanish.ca/">Ivan Reese</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-07T14:29:44.991Z">🧵 conversation</a></p>
+<p>A fun little rollercoaster of computing history shared in <a href="https://graydon2.dreamwidth.org/313862.html">this short blog post</a> by Graydon Hoare, looking at the lesser known Xerox Alto descendant, the PERQ.</p>
+<p>📢 <a href="https://berlin.causalislands.com/">Causal Islands Berlin</a> via <a href="https://twitter.com/OrionReedOne">Orion Reed</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-07T15:38:24.618Z">🧵 conversation</a></p>
+<p>The <a href="https://berlin.causalislands.com/">Causal Islands Berlin</a> conference (organised by me, Boris Mann, and Jack Rusher) is happening next month (Oct 4 &amp; 5). Would love to see some of you there. It'll be quite small (100-ish capacity) but loaded with great talks and conversations. We'll also be doing a more full-size conference in May next year. The vibes are "future of computing" and "spiritual successor to Strange Loop" with a more socio-political bent.</p>
+<p>Also, there is a <a href="https://causalislands.getgrist.com/forms/4n86BCQeVyR3EsBMEDqjTK/7">CfP</a> up if you want to submit a presentation!</p>
+<p>🧑‍💻 <a href="https://ianarawjo.com/docs/To_Write_Code_Arawjo_CHI2020.pdf">To Write Code: The Cultural Fabrication of Programming Notation and Practice</a> via <strong>Joel Chan</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/linking-together.html#2024-09-07T18:44:24.210Z">🧵 conversation</a></p>
+<p>greetings! am thoroughly enjoying <a href="https://futureofcoding.org/episodes/073">the latest podcast episode on agentsheets</a>, and the discussion of “is programming a Language(TM)” and the history of how it came to be that programming was considered language in the sense of “has a formal grammar” reminded me of this paper by Ian Arawjo on the history of programming notation and its cultural referents (e.g., typewriters, and how it moved away from more “visual” forms and converged around “programming as typing on a typewriter”: <a href="https://ianarawjo.com/docs/To_Write_Code_Arawjo_CHI2020.pdf">To Write Code: The Cultural Fabrication of Programming Notation and Practice</a></p>
+<p>i found the resulting frame of programming as translation work of “mapping one culture to another” provocative too!</p>
+<p><img alt="CleanShot 2024-09-07 at 14.41.31@2x.png" src="http://history.futureofcoding.org/history/msg_files/F07/F07KZFYA5U7.png"></p>
+<p><img alt="CleanShot 2024-09-07 at 14.43.59@2x.png" src="http://history.futureofcoding.org/history/msg_files/F07/F07LE2V8D1Q.png"></p>
+<h2>🤖</h2>
+<p>💬 <strong>Nilesh Trivedi</strong></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/of-ai.html#2024-09-03T04:01:21.046Z">🧵 conversation</a></p>
+<p>TIL:</p>
+<p><img alt="image.png" src="http://history.futureofcoding.org/history/msg_files/F07/F07KZPXHKT3.png"></p>
+<p><img alt="image.png" src="http://history.futureofcoding.org/history/msg_files/F07/F07KM4A5GSE.png"></p>
+<p>🎥 <a href="https://www.youtube.com/watch?v=8cNRZUZSSS8">Roboco-op explainer</a> via <a href="https://webcode.run">Tom Larkworthy</a></p>
+<p><a href="https://history.futureofcoding.org/history/weekly/2024/09/W2/of-ai.html#2024-09-06T14:26:18.361Z">🧵 conversation</a></p>
+<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/8cNRZUZSSS8/hqdefault.jpg"></p>
+<p>I thought I had shared roboco-op here but it seems I had not. The idea is to mix code/runtime/chat context into a single materialised human editable representation to enable "mimetic engineering". Copy and pasting "skills" between notebooks and therefore engineering the AIs context to suit the task at hand, all while having a machine checked code based conversation (I demoed this at Berlin's GenAI meetup) withou context switches.</p>
+<hr>
+<p>👨🏽‍💻 By 🐘 <a href="https://hachyderm.io/@marianoguerra">@marianoguerra@hachyderm.io</a> 🐦 <a href="https://twitter.com/warianoguerra">@warianoguerra</a></p>
+<p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/">Future of Coding Community</a></p>
+<p>✉️ Not subscribed yet? <a href="https://newsletter.futureofcoding.org/join/">Subscribe to the Newsletter</a> / <a href="https://newsletter.futureofcoding.org/archive.html">Archive</a> / <a href="https://history.futureofcoding.org/newsletter/rss.xml">RSS</a></p>
+<p>🎙️ Prefer podcasts? check the <a href="https://futureofcoding.org/episodes/">Future of Coding Podcast</a></p>
+      </div>
+    </article><article><h1 class="title"><a href="posts/future-of-coding-weekly-202409-week-1/">Future of Coding Weekly 2024/09 Week 1</a></h1>
       <h2 class="subtitle is-6">2024-09-02 10:19</h2>
       <div class="content">
     <p>🎙️ FoC 73 • Moving Beyond Syntax 📢 Onward! and LIVE Papers Announced 🧦 Hypercard in the World </p>
@@ -1158,113 +1289,6 @@ It’s a good book I cannot summarise in the 50 characters I have left in this p
 <p>📑 <a href="https://bits.ashleyblewer.com/halt-and-catch-fire-syllabus/">Ashley Blewer's Halt and Catch Fire Syllabus</a> via <strong>Walker Griggs</strong></p>
 <p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W2/linking-together.html#2024-07-07T19:39:39.203Z">🧵 conversation</a></p>
 <p>A CFL (call for links). Does anyone have any other examples of non-academic syllabi like <a href="https://bits.ashleyblewer.com/halt-and-catch-fire-syllabus/">Ashley Blewer's Halt and Catch Fire Syllabus</a>? Specifically a curated, self guided exploration of a topic that references foundational academic works but is itself not created as a formal course. That vast majority of syllabi online are (under)grad syllabi reposted by the department or professor </p>
-<hr>
-<p>👨🏽‍💻 By 🐘 <a href="https://hachyderm.io/@marianoguerra">@marianoguerra@hachyderm.io</a> 🐦 <a href="https://twitter.com/warianoguerra">@warianoguerra</a></p>
-<p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/">Future of Coding Community</a></p>
-<p>✉️ Not subscribed yet? <a href="https://newsletter.futureofcoding.org/join/">Subscribe to the Newsletter</a> / <a href="https://newsletter.futureofcoding.org/archive.html">Archive</a> / <a href="https://history.futureofcoding.org/newsletter/rss.xml">RSS</a></p>
-<p>🎙️ Prefer podcasts? check the <a href="https://futureofcoding.org/episodes/">Future of Coding Podcast</a></p>
-      </div>
-    </article><article><h1 class="title"><a href="posts/future-of-coding-weekly-202407-week-1/">Future of Coding Weekly 2024/07 Week 1</a></h1>
-      <h2 class="subtitle is-6">2024-06-30 22:19</h2>
-      <div class="content">
-    <p>🔌 Is an AI copilot for LabVIEW possible? 💾 Local, first, forever 🎥 Future of Coding virtual meetup #2</p>
-<h2>Two Minute Week</h2>
-<p>🎥 <a href="https://www.instagram.com/p/C8xbV09ufpr/">Working on live notation systems with spatial computing for our lil robots…</a> via <strong>Alex McLean</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/two-minute-week.html#2024-06-30T10:14:20.340Z">🧵 conversation</a></p>
-<p>A bit more progress with hand-drawn code. Towards the end you can see there's a bit of abstraction going on </p>
-<h2>Our Work</h2>
-<p>📝 <a href="https://marianoguerra.org/posts/macros-and-optimizations-its-just-a-phase/">Macros and optimizations: it's just a phase</a> via <a href="https://twitter.com/warianoguerra">Mariano Guerra</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/share-your-work.html#2024-06-24T09:34:59.313Z">🧵 conversation</a></p>
-<p><a href="https://marianoguerra.org/posts/macros-and-optimizations-its-just-a-phase/">Macros and optimizations: it's just a phase</a>: The one where I implement macros and optimizations as a sequence of evaluations with different semantics</p>
-<p>💁 is this 🦋 homoiconic?</p>
-<p>💬 <a href="https://twitter.com/hamish_todd">Hamish Todd</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/share-your-work.html#2024-06-24T20:34:49.824Z">🧵 conversation</a></p>
-<p>I posted a longer version of this above, but I don't think I introduced it very well! It's a stab at Stop Drawing Dead Fish in VR with spreadsheets and something called Geometric Algebra (GA) also known as Clifford Algebra.</p>
-<p>Those who have scrutinized Stop Drawing Dead Fish(SDDF) closely might have noticed two references to GA. Bret also used to have a "Geometric Algebra" sticker on his laptop! But while GA is a very Bret thing, he actually did not  <em>use</em>  it to make SDDF, so my thing is trying to make good on that.</p>
-<p>GA is a mathematical system where you get a bunch of geometric objects and transformations, and they all get related to one another by math that is quite a lot simpler than usual. For example, in the conventional/non-GA approach, if you wanted a line in 3D space you'd take two "vectors" v1 and v2 and say the line is the set of vectors v1+t*v2 for all scalars t. This can be kinda useful, but gets complicated if you ask for a simple thing like a rotation around that line. In the GA way of doing things, instead of being "a set of vectors", a line is its own sort of object - lines can be added together; multiplied by planes and rotations; etc. Lots of useful operations turn out to be examples of this, I've attached a pdf of examples.</p>
-<p>"doing math/programming by working directly with (tangible/visualizable) geometric objects instead of with linear equations" should strike you as a centrally Bret thing. But why didn't he use it? I'll say in a comment under this message.</p>
-<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F07/F07A7GECRA4.mp4">Video</a></p>
-<p>🎥 <a href="https://youtu.be/zXmC3BVIVuQ">Exploring Technique and Notations for Augmenting DX</a> via <a href="https://guitarvydas.github.io/2021/09/23/Manifesto.html">Paul Tarvydas</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/share-your-work.html#2024-06-26T21:46:45.632Z">🧵 conversation</a></p>
-<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/zXmC3BVIVuQ/hqdefault.jpg"></p>
-<p>FTR: Here is the demo video I presented earlier today. I've added links, in the form of a Kinopio page, to the other technologies that I didn't demo.</p>
-<p>Exploring Techniques and Notations for Augmenting DX</p>
-<p>💬 <a href="https://guitarvydas.github.io/2021/09/23/Manifesto.html">Paul Tarvydas</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/share-your-work.html#2024-06-28T20:29:33.026Z">🧵 conversation</a></p>
-<p>In my demo, I made the statement "... t2t doesn't need the full power of OhmJS ...", but, I didn't clarify.</p>
-<p>For t2t - text to text transpilation - primarily, you need to pattern-match incoming text, then emit text based on the input.</p>
-<p>OhmJS parses incoming text, then gives you the full power of JavaScript to do anything you want with the parse tree.</p>
-<p>For t2t, you don't need to resort to class hierarchies, functions, closures, etc., etc. You primarily need to pattern match, then, create and modify text. In addition to OhmJS' ability to pattern-match, Javascript's "template strings" are about all you need - the ability to create text and to interpolate text from the tree walk of the parsed input.</p>
-<p>This  <em>seems</em>  to be unnecessarily restrictive, but, turns out to be quite powerful and mind-freeing. Fewer options -&gt; less clutter -&gt; increased ability to think about interesting issues. After all, "simplicity" == "lack of nuance", and, my goal is to simplify DX.</p>
-<p>[Infrequently, one needs to do a tiny bit more (like gensym() a new symbol and leave it on a scoped stack for use during the tree-walk), so I provide a way to break out and call a Javascript function, but, this kind of power is not needed in most cases. I guess that, in the future, I will restrict this some more, but, I'm still experimenting].</p>
-<p>🔌 <a href="https://www.linkedin.com/posts/jimkring_labview-sparkles-is-an-ai-copilot-for-activity-7212597622111449088-VQKe">Is an AI copilot for LabVIEW possible?</a> via <strong>Jim Kring</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/share-your-work.html#2024-06-29T00:10:07.724Z">🧵 conversation</a></p>
-<p>I’m close to publicly releasing an AI powered coding assistant for LabVIEW, a visual programming language. <a href="https://www.linkedin.com/posts/jimkring_labview-sparkles-is-an-ai-copilot-for-activity-7212597622111449088-VQKe">Here is a teaser</a></p>
-<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F07/F07A8DL0JN9.mp4">Video</a></p>
-<p>🐸🎥 <a href="https://youtube.com/live/hlsDbXSZ2ko">Reaction Reaction</a> via <a href="https://twitter.com/TodePond">Lu Wilson</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/share-your-work.html#2024-06-29T22:13:49.379Z">🧵 conversation</a></p>
-<p>I did a four hour livestream performance art piece where I explore the nature of recursion and infinity and time. And it starts with me doing some crappy live coding</p>
-<p><img alt="Reaction Reaction" src="https://i.ytimg.com/vi/hlsDbXSZ2ko/maxresdefault.jpg"></p>
-<h2>Devlog Together</h2>
-<p>🎥 <a href="https://youtu.be/LayMwCIQAnM">Embedding codeflowcanvas and exporting to different formats</a> via <a href="https://www.devhelpr.com/">Maikel van de Lisdonk</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/devlog-together.html#2024-06-30T10:55:48.622Z">🧵 conversation</a></p>
-<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/LayMwCIQAnM/hqdefault.jpg"></p>
-<p><a href="https://youtu.be/LayMwCIQAnM">In this video</a> you can see the progress I made on opening up codeflowcanvas so that it is embeddable in other frameworks/libraries like Astro/Angular and React. I've restructured some of the packages that the project uses and published these to NPM. You can see the embedding of codeflowcanvas on its own website using a custom StorageProvider for loading json files from a javascript bundle: <a href="https://www.codeflowcanvas.io/devlog/embedded-codeflowcanvas/">codeflowcanvas.io/devlog/embedded-codeflowcanvas</a> .</p>
-<p>This goal of this restructuring is to get codeflowcanvas out of its own silo on various way (for example in the future I want to be able to design flows in a vscode editor and use these together with other framework/libraries without embedding the editor and just run the flows).</p>
-<p>A feature that is also made possible by the above is being able to export to external formats like tldraw and the OpenCanvas work-in-progress spec (see <a href="https://www.canvasprotocol.org/">canvasprotocol.org</a>). Different strategies can be implemented to provide different formats.</p>
-<h2>Thinking Together</h2>
-<p>💬 <a href="http://ivanish.ca/">Ivan Reese</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/thinking-together.html#2024-06-24T00:44:20.647Z">🧵 conversation</a></p>
-<p>I'm becoming interested in the idea of "programming tools as art", and as a consequence I'm interested in programming tools criticism.</p>
-<p>I'd like to read/watch/hear critical reviews of programming tools that approach them not as bundles of features and capabilities, but as authored works that reflect a creative intent and as cultural touchstones and as environments or artifacts within which one can have deeply personal experiences.</p>
-<p>A. Do you share my interest?</p>
-<p>B. Do you know any such critics?</p>
-<p>💬 <strong>Alex McLean</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/thinking-together.html#2024-06-29T08:24:53.795Z">🧵 conversation</a></p>
-<p>Who'd be interested in an event with talks and some performances around making notations and programming languages for pattern-making (textile, musical, choreographic etc)? Half focussed online, half focussed in-person, all streamed. Mix of open call and invited talks. All free/open access. Probably in January. Maybe called "Programming Of The Art Computer".</p>
-<p>💬 <strong>GuzhIRegem</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/thinking-together.html#2024-06-30T19:19:11.815Z">🧵 conversation</a></p>
-<p>Hey, someone knows about any research into RAG-Based training of models?</p>
-<h2>Content</h2>
-<p>🎥 <a href="https://www.youtube.com/watch?v=ubaX1Smg6pY">Is it really "Complex"? Or did we just make it "Complicated"?</a> via <a href="https://guitarvydas.github.io/2021/09/23/Manifesto.html">Paul Tarvydas</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/linking-together.html#2024-06-24T20:12:20.288Z">🧵 conversation</a></p>
-<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/ubaX1Smg6pY/hqdefault.jpg"></p>
-<p>Alan Kay talk ‘Is it really "Complex"? Or did we just make it "Complicated”?’. The talk was given some 9 years ago, but, this is the first time that I’ve seen it</p>
-<p>My highlights:</p>
-<p>51:21 suppressing the present to see different ways to address the future</p>
-<p>51:35 “semaphore” is a “bad idea”, pseudo-time is superior, but never got used over last 30 years</p>
-<p>54:10 Nile Graphics Language by Dan Amelang is a dataflow language and is very small. Expresses how to define shapes using pixels in only 45 lines of code.</p>
-<p>54:51 - Bret Victor at VPRI</p>
-<p>57:59 all compositing rules, including alpha-blending, is expressed in 95 LOC</p>
-<p>59:16 whole graphics system, equivalent to what is needed on a PC, is expressed in 435 LOC</p>
-<p>1:01:00 - Code has to be transformed into CPU-speak</p>
-<p>1:01:38 - we need a “language transforming language” [[pt] At present, I use the term “t2t” (text to text)]</p>
-<p>1:01:58 - OMeta2 [[pt] OhmJS is an ancestor of OMeta2]</p>
-<p>1:02:58 Using OMeta to make Nile, parser 130 LOC, LLL 730 LOC</p>
-<p>1:06:00 TCP/IP expressed in 160 LOC</p>
-<p>1:20:24 POLs == Problem Oriented Languages [[pt] I use the term SCN - Solution Centric Notation]</p>
-<p>1:37:37 hardware is just software that is crystallized early [[pt] I say it another way: software is just soft hardware]</p>
-<p>💾 <a href="https://tonsky.me/blog/crdt-filesync/">Local, first, forever</a> via <strong>Nilesh Trivedi</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/linking-together.html#2024-06-25T10:11:50.811Z">🧵 conversation</a></p>
-<p>On Interoperability of sync services for software designed to be Local-First</p>
-<p>📝 <a href="https://create.vi/programming-in-abstract-g-7e970f123f3c?source=friends_link&amp;sk=a53e37d328f1fbc2a8020c94c1f4c0b0">Programming in “Abstract G”</a> via <strong>Jim Kring</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/linking-together.html#2024-06-26T06:28:11.970Z">🧵 conversation</a></p>
-<p>Here’s an article I wrote on a visual dataflow language modality where the execution of the graphical dataflow dynamically constructs the dataflow graph that is itself executing. (It’s similar to how Elixer functions can output AST for the function instead of the result and one can alternate between AST via quote/unquote)</p>
-<h2>Music</h2>
-<p>🎥 <a href="https://youtu.be/iYJcVXjRi-I">Detailed walk-through and explainer</a> via <strong>avon</strong></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/of-music.html#2024-06-24T17:57:51.540Z">🧵 conversation</a></p>
-<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/iYJcVXjRi-I/hqdefault.jpg"></p>
-<p>ran into this strange and wonderful physical modeling synthesizer called Anukari which has a lot of lovely 3D VPL concepts in its interface design</p>
-<p>The dev also did an ADC talk and there’s a lot of interesting computing going on under the hood, like using the GPU to do all of the physical modeling math: <a href="https://youtu.be/lb8b1SYy73Q">Fast Audio Thread Synchronization for GPU Data - Evan Mezeske - ADC23</a></p>
-<h2>Logic Programming</h2>
-<p>💬 <a href="https://twitter.com/RoundTableLaw">Jason Morris</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/of-logic-programming.html#2024-06-27T22:49:59.308Z">🧵 conversation</a></p>
-<p>What would the syntax be for searching any statement that includes the atom  <code>socrates</code> ?</p>
-<h2>Present Company</h2>
-<p>🎥 <a href="https://www.youtube.com/watch?v=4lG2vFffAO4">Virtual Meetup 2 • June 26, 2024</a> via <a href="http://ivanish.ca/">Ivan Reese</a></p>
-<p><a href="https://history.futureofcoding.org/history/weekly/2024/07/W1/present-company.html#2024-06-30T16:42:23.997Z">🧵 conversation</a></p>
-<p><img alt="Youtube Thumbnail" src="https://img.youtube.com/vi/4lG2vFffAO4/hqdefault.jpg"></p>
-<p>Recording of last week's <a href="https://www.youtube.com/watch?v=4lG2vFffAO4">Future of Coding virtual meetup #2</a></p>
 <hr>
 <p>👨🏽‍💻 By 🐘 <a href="https://hachyderm.io/@marianoguerra">@marianoguerra@hachyderm.io</a> 🐦 <a href="https://twitter.com/warianoguerra">@warianoguerra</a></p>
 <p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/">Future of Coding Community</a></p>
