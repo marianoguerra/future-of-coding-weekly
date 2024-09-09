@@ -1,0 +1,1227 @@
+[
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725436552.259159",
+        "client_msg_id": "14084c01-dc30-4520-ab09-53d43739c0eb",
+        "text": "Hi everyone!\n\nI\u2019d like to give an account of the research project we\u2019re doing at JetBrains.\nIt is called Ludwig after Ludwig Wittgenstein and has an ambitious goal of re-engineering the foundations of the software development stack.\nAt the moment, we are still at a very early design and prototyping stage, but we believe that this project will let us create the next generation of development tools.\n\nHere are the most important ideas we\u2019re trying to materialize:\n\n*Liberation of code from the shackles of textual representation*\nHuman-readable textual notations were a great innovation back in the 1950s. However, we have made great progress in the ways we store complex data structures since then, and the typical codebase sizes have also grown by a few orders of magnitude.\n\nCode is essentially a graph with one tree-like perspective more important than others. An adequate way of storing such complex and evolving data as code would be to put it in a versioned graph / linked document database, supporting Git-like branching and merging. That would get rid of the need for continuous parsing, indexing, symbol resolution and typechecking that constitute the code editing workflow in modern IDEs.  We would resolve symbols once, at the moment of typing and store their unique identifiers (not just names!) in an indexed by construction and preserving referential integrity database.\n\nThat would also make such intentions as Rename, Move, Find Usages or Go To Definition trivial to implement. Of course, structural representation of code will come hand-in-hand  with structural (semantic) diff and merge.\n\nThis graph-like representation should allow for a fine-grained tracking of changes and dependencies and dramatically reduce feedback times in such scenarios as incremental compilation.\n\n*A minimalist approach towards programming language design*\nTo prevent our language from becoming \u201cfat and weak\u201d as John Backus has put it in his famous <https://dl.acm.org/doi/pdf/10.1145/359576.359579|lecture>, we want to pass our language through a series of aggressive optimization rounds or distillation passes.\n\nThis should result in something comparable with Smalltalk\u2019s \u201csyntax on a postcard\u201d. Actually, we believe that we could make it even more symmetric by eliminating the distinctions between methods, named and anonymous functions, operators and statements. (As you know, Smalltalk has different syntaxes and different behavior of return statements for methods and blocks and \u201csurprising\u201d execution order rules for different kinds of messages).\n\nThe goal is to come up with a language that would be easy to learn and read and straightforward to reason about for all kinds of agents-be it humans, static analysis tools or AI.\n\nIn terms of notation, it will look like an indentation-based syntax for a tiny subset of Lisp, but without its macros or the zoo of \u201cspecial forms\u201d. Being freed from the limitations of plain text, we\u2019re going to use semantic coloring to make the notation even more expressive and compact.\n\nObviously, our programming language, as any other, should be able to express computation logic and code structure; what is less common is that we also want it to be able to express data, configurations and knowledge, thus eliminating the need for additional DSLs. A YAML-like data notation emerges from our tiny language as naturally as JSON emerged from JavaScript. The only difference is that JSON was discovered by chance, and our language is consciously designed to be able to declaratively describe complex data structures.\n\n*Unification of Object-Oriented and Functional programming*\nAs a part of our minimalist program, we are aiming to heal the great schism that divided programming into the object-oriented and the functional worlds.\n We believe that the class-free approach in the form <https://youtu.be/DxnYQRuLX7Q|proposed> by Douglas Crockford will let us make OOP an integral part of functional programming, thus converging the two into what could be called unified programming. This form of OOP will keep the best parts\u2014encapsulation and polymorphism and get rid of the \"considered harmful\" implementation inheritance.  There will be no need for classes, constructors, prototypes, visibility modifiers, this and new - just immutable structures and anonymous functions.\n\n*An IDE designed for focus and context awareness*\nWe want to build an immersive Smalltalk-like environment with structural navigation, a smaller editing scope and richer and more dynamic context compared to the traditional file- and text-based IDEs. This seems well-aligned with both the minimalist design of the language and the non-textual storage format. The latter should allow us to store some additional information alongside the code. That will include all kinds of metadata, normally invisible to the users, but also some unusual forms of embedded content. Think of a documentation comment containing a video explaining the algorithm or a discussion between multiple developers linked to a certain place in the code.\n\n*Smart typing*\nWe also have some ideas on how we could implement some smart typing techniques, combining the convenience of automatic type inference with the solidness and discipline of explicit type annotations.\nThe key idea is that the flexibility of the non-textual representation will eliminate the need for the user to choose between the two worlds. Manual annotations can be hidden to reduce visual distraction, automatically inferred types can be displayed and persisted in the code database, etc.\n\n*Designed to be AI-fitting*\nFinally, we want the whole thing to be future-proof and provide better support for AI-aided development compared to the traditional languages. The simplicity of the language as well as its fine granularity and its property of always having all the symbols resolved should allow for high-quality \u201cunderstanding\u201d and retrieval-augmented generation of code compared to such languages as Python or Java.\n\n***\n\nAs I said, at the moment we\u2019re still at a very early stage. Many of our challenges are not technical, but about finding the way of how we could shape this set of ideas into a product vision. We are, of course, open to collaboration with like-minded people.\n\nI will be happy to answer your questions and hear your feedback.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "reply_count": 29,
+        "reply_users_count": 3,
+        "latest_reply": "1725477975.848029",
+        "reply_users": [
+            "U07KR4BMKNW",
+            "U0296ACR13M",
+            "UGWUJUZHT"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "attachments": [
+            {
+                "from_url": "https://youtu.be/DxnYQRuLX7Q",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "thumb_url": "https://i.ytimg.com/vi/DxnYQRuLX7Q/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/DxnYQRuLX7Q?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen title=\"code::dive 2017 \u2013 Douglas Crockford \u2013 The better parts\"></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "id": 1,
+                "original_url": "https://youtu.be/DxnYQRuLX7Q",
+                "fallback": "YouTube Video: code::dive 2017 \u2013 Douglas Crockford \u2013 The better parts",
+                "title": "code::dive 2017 \u2013 Douglas Crockford \u2013 The better parts",
+                "title_link": "https://youtu.be/DxnYQRuLX7Q",
+                "author_name": "code::dive conference",
+                "author_link": "https://www.youtube.com/@codediveconference",
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Es8xU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hi everyone!\n\nI\u2019d like to give an account of the research project we\u2019re doing at JetBrains.\nIt is called Ludwig after Ludwig Wittgenstein and has an ambitious goal of re-engineering the foundations of the software development stack.\nAt the moment, we are still at a very early design and prototyping stage, but we believe that this project will let us create the next generation of development tools.\n\nHere are the most important ideas we\u2019re trying to materialize:\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Liberation of code from the shackles of textual representation",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nHuman-readable textual notations were a great innovation back in the 1950s. However, we have made great progress in the ways we store complex data structures since then, and the typical codebase sizes have also grown by a few orders of magnitude.\n\nCode is essentially a graph with one tree-like perspective more important than others. An adequate way of storing such complex and evolving data as code would be to put it in a versioned graph / linked document database, supporting Git-like branching and merging. That would get rid of the need for continuous parsing, indexing, symbol resolution and typechecking that constitute the code editing workflow in modern IDEs.  We would resolve symbols once, at the moment of typing and store their unique identifiers (not just names!) in an indexed by construction and preserving referential integrity database.\n\nThat would also make such intentions as Rename, Move, Find Usages or Go To Definition trivial to implement. Of course, structural representation of code will come hand-in-hand  with structural (semantic) diff and merge.\n\nThis graph-like representation should allow for a fine-grained tracking of changes and dependencies and dramatically reduce feedback times in such scenarios as incremental compilation.\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "A minimalist approach towards programming language design",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nTo prevent our language from becoming \u201cfat and weak\u201d as John Backus has put it in his famous "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://dl.acm.org/doi/pdf/10.1145/359576.359579",
+                                "text": "lecture"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", we want to pass our language through a series of aggressive optimization rounds or distillation passes.\n\nThis should result in something comparable with Smalltalk\u2019s \u201csyntax on a postcard\u201d. Actually, we believe that we could make it even more symmetric by eliminating the distinctions between methods, named and anonymous functions, operators and statements. (As you know, Smalltalk has different syntaxes and different behavior of return statements for methods and blocks and \u201csurprising\u201d execution order rules for different kinds of messages).\n\nThe goal is to come up with a language that would be easy to learn and read and straightforward to reason about for all kinds of agents-be it humans, static analysis tools or AI.\n\nIn terms of notation, it will look like an indentation-based syntax for a tiny subset of Lisp, but without its macros or the zoo of \u201cspecial forms\u201d. Being freed from the limitations of plain text, we\u2019re going to use semantic coloring to make the notation even more expressive and compact.\n\nObviously, our programming language, as any other, should be able to express computation logic and code structure; what is less common is that we also want it to be able to express data, configurations and knowledge, thus eliminating the need for additional DSLs. A YAML-like data notation emerges from our tiny language as naturally as JSON emerged from JavaScript. The only difference is that JSON was discovered by chance, and our language is consciously designed to be able to declaratively describe complex data structures.\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Unification of Object-Oriented and Functional programming",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nAs a part of our minimalist program, we are aiming to heal the great schism that divided programming into the object-oriented and the functional worlds.\n We believe that the class-free approach in the form "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://youtu.be/DxnYQRuLX7Q",
+                                "text": "proposed"
+                            },
+                            {
+                                "type": "text",
+                                "text": " by Douglas Crockford will let us make OOP an integral part of functional programming, thus converging the two into what could be called unified programming. This form of OOP will keep the best parts\u2014encapsulation and polymorphism and get rid of the \"considered harmful\" implementation inheritance.  There will be no need for classes, constructors, prototypes, visibility modifiers, this and new - just immutable structures and anonymous functions.\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "An IDE designed for focus and context awareness",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nWe want to build an immersive Smalltalk-like environment with structural navigation, a smaller editing scope and richer and more dynamic context compared to the traditional file- and text-based IDEs. This seems well-aligned with both the minimalist design of the language and the non-textual storage format. The latter should allow us to store some additional information alongside the code. That will include all kinds of metadata, normally invisible to the users, but also some unusual forms of embedded content. Think of a documentation comment containing a video explaining the algorithm or a discussion between multiple developers linked to a certain place in the code.\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Smart typing",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nWe also have some ideas on how we could implement some smart typing techniques, combining the convenience of automatic type inference with the solidness and discipline of explicit type annotations.\nThe key idea is that the flexibility of the non-textual representation will eliminate the need for the user to choose between the two worlds. Manual annotations can be hidden to reduce visual distraction, automatically inferred types can be displayed and persisted in the code database, etc.\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Designed to be AI-fitting",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nFinally, we want the whole thing to be future-proof and provide better support for AI-aided development compared to the traditional languages. The simplicity of the language as well as its fine granularity and its property of always having all the symbols resolved should allow for high-quality \u201cunderstanding\u201d and retrieval-augmented generation of code compared to such languages as Python or Java.\n\n***\n\nAs I said, at the moment we\u2019re still at a very early stage. Many of our challenges are not technical, but about finding the way of how we could shape this set of ideas into a product vision. We are, of course, open to collaboration with like-minded people.\n\nI will be happy to answer your questions and hear your feedback."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "U0296ACR13M",
+                    "U85HCL7JP",
+                    "U8A5MS6R1",
+                    "UMV4B97GT",
+                    "U07L1CEPF34",
+                    "UJBAJNFLK"
+                ],
+                "count": 6
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "U013ZLJARC7",
+                    "U02QC0PPER3"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "text": "A little example, illustrating the syntax:",
+        "files": [
+            {
+                "id": "F07KUEYUN75",
+                "created": 1725436586,
+                "timestamp": 1725436586,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U07KR4BMKNW",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 10067,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F07KUEYUN75/image.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F07KUEYUN75/download/image.png",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KUEYUN75-d6860229d2/image_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KUEYUN75-d6860229d2/image_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KUEYUN75-d6860229d2/image_360.png",
+                "thumb_360_w": 360,
+                "thumb_360_h": 161,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KUEYUN75-d6860229d2/image_160.png",
+                "original_w": 474,
+                "original_h": 212,
+                "thumb_tiny": "AwAVADCkcd6Tj3oNHXqaADj3ooyT3pKACiiigBTRmg0lAC5NGTSUUAKTmjJNJRQB/9k=",
+                "permalink": "https://futureofcoding.slack.com/files/U07KR4BMKNW/F07KUEYUN75/image.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F07KUEYUN75-bc9d0a0b43",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U07KR4BMKNW",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "gStJj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "A little example, illustrating the syntax:"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1725436594.062289",
+        "client_msg_id": "6c132479-1c44-4070-ae1a-bc4cabb27854",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW"
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725462785.538279",
+        "client_msg_id": "9a23c44c-2498-4818-ad56-936fa0b2fc53",
+        "text": "Very interesting. Thanks for sharing and great to see JetBrains represented here!\n\nYour \"liberation from textual representation\" and the \"context aware IDE\" -paragraphs describe my thoughts exactly while building my textual projectional language workbench (some demo videos at: <https://levlo.com>). Although, I suppose one wouldn't build a projectional language at all if those paragraphs wouldn't resonate.. Is there a reason you don't seem to be referring to your language as a projectional language? To not compete with MPS :sweat_smile: ?\n\nI certainly agree that having all the symbols resolved, and generally the AST/semantic tree in a valid state at all times, helps in guiding AI to produce semantically valid code and I'm heavily utilizing this for Levlo's AI Copilot. However, I feel that new programming languages might be at an disadvantage in the new AI era as there aren't large amount of samples for the LLMs to train on (and it would take a while for the common LLMs to train on new public samples). Coincidentally this doesn't seem to be an issue if the language is very natural language like.. I suppose having a similar syntax to existing languages could also help. Although, if the semantics are different it could also hurt. I'm not sure I understand what you mean when you say that the \"fine granularity\" of the language should make it more AI-fitting. Can you elaborate on that?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "j+iL5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Very interesting. Thanks for sharing and great to see JetBrains represented here!\n\nYour \"liberation from textual representation\" and the \"context aware IDE\" -paragraphs describe my thoughts exactly while building my textual projectional language workbench (some demo videos at: "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://levlo.com"
+                            },
+                            {
+                                "type": "text",
+                                "text": "). Although, I suppose one wouldn't build a projectional language at all if those paragraphs wouldn't resonate.. Is there a reason you don't seem to be referring to your language as a projectional language? To not compete with MPS "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile",
+                                "unicode": "1f605"
+                            },
+                            {
+                                "type": "text",
+                                "text": " ?\n\nI certainly agree that having all the symbols resolved, and generally the AST/semantic tree in a valid state at all times, helps in guiding AI to produce semantically valid code and I'm heavily utilizing this for Levlo's AI Copilot. However, I feel that new programming languages might be at an disadvantage in the new AI era as there aren't large amount of samples for the LLMs to train on (and it would take a while for the common LLMs to train on new public samples). Coincidentally this doesn't seem to be an issue if the language is very natural language like.. I suppose having a similar syntax to existing languages could also help. Although, if the semantics are different it could also hurt. I'm not sure I understand what you mean when you say that the \"fine granularity\" of the language should make it more AI-fitting. Can you elaborate on that?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725468318.691339",
+        "client_msg_id": "c5b0cf23-54e1-4942-af23-5165b6ce130a",
+        "text": "Your project indeed has a lot of similarities with our work. Many of the ideas I described had been proposed as early as in the 1960-70s. I know that Erik Meijer is also working on something very similar to what you are doing\u2014programming in plain English that gets translated into something Prolog-like, able to call external functions.\n\nI avoid the term \"projectional editing\" for two reasons. First, in my opinion, projectional editors have got a bad reputation for being pain to use. Problems typically start with arithmetic operators and handling of parenthesis. I am not saying that those problems are unsolvable, but the fact is that way too many attempts to implement projectional editing resulted in a terrible experience. We hope to avoid the usual pitfalls by having really minimalist and uniform syntax without precedence rules and by not trying to imitate text.\nThe other reason is that I think that a more specific term like \"autocompletion-driven editing\" would better reflect the idea of having most of the symbols resolved at the time they are typed.  The term \"projectional editor\" is oversaturated, and it's hard to impress anyone by saying that you're building yet another one.\n\nWith regard to your question about LLMs, we hope that we will be able to transpile a reasonably big corpus of programs written in some mainstream language into our tiny little Lisp, preserving most of the structure, and then use that transpiled code to train the LLM. Another possibility is that the advancement of AI will soon allow us to simply teach LLMs to program in our simple language without feeding them with a large number of examples.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "SiV1K",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Your project indeed has a lot of similarities with our work. Many of the ideas I described had been proposed as early as in the 1960-70s. I know that Erik Meijer is also working on something very similar to what you are doing\u2014programming in plain English that gets translated into something Prolog-like, able to call external functions.\n\nI avoid the term \"projectional editing\" for two reasons. First, in my opinion, projectional editors have got a bad reputation for being pain to use. Problems typically start with arithmetic operators and handling of parenthesis. I am not saying that those problems are unsolvable, but the fact is that way too many attempts to implement projectional editing resulted in a terrible experience. We hope to avoid the usual pitfalls by having really minimalist and uniform syntax without precedence rules and by not trying to imitate text.\nThe other reason is that I think that a more specific term like \"autocompletion-driven editing\" would better reflect the idea of having most of the symbols resolved at the time they are typed.  The term \"projectional editor\" is oversaturated, and it's hard to impress anyone by saying that you're building yet another one.\n\nWith regard to your question about LLMs, we hope that we will be able to transpile a reasonably big corpus of programs written in some mainstream language into our tiny little Lisp, preserving most of the structure, and then use that transpiled code to train the LLM. Another possibility is that the advancement of AI will soon allow us to simply teach LLMs to program in our simple language without feeding them with a large number of examples."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1725471898.089349",
+        "client_msg_id": "720cd9ea-a9c9-4826-8ac8-4fa576b3fbd6",
+        "text": "FWIW: brainstorming...\n(1) Get LLMs to generate code in some large-corpus language, like JS, Python. Use text-to-text transpilation to convert the generated code, syntactically, into tiny little lisp (going from JS to Lisp-y, or Python to Lisp-y is straight-forward using PEGs)\n(1a) Get LLMs to generate code in full-blown lisp, then ask nicely to get it to remove the hoary bits (special forms, macros)\n(1b) No need to re-train LLMs with tiny little lisp if conversion can be done.\n(2) Steve Philips used an LLM to generate OhmJS code to create a new language over top of an existing language (in his case, he built his new language using Golang as \"assembly code\"), he might have advice on how to ask an LLM to build syntax converters",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "6zQuh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "FWIW: brainstorming...\n(1) Get LLMs to generate code in some large-corpus language, like JS, Python. Use text-to-text transpilation to convert the generated code, syntactically, into tiny little lisp (going from JS to Lisp-y, or Python to Lisp-y is straight-forward using PEGs)\n(1a) Get LLMs to generate code in full-blown lisp, then ask nicely to get it to remove the hoary bits (special forms, macros)\n(1b) No need to re-train LLMs with tiny little lisp if conversion can be done.\n(2) Steve Philips used an LLM to generate OhmJS code to create a new language over top of an existing language (in his case, he built his new language using Golang as \"assembly code\"), he might have advice on how to ask an LLM to build syntax converters"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725473107.558729",
+        "client_msg_id": "27db66a3-52a8-435f-b710-dc4a5d245338",
+        "text": "<@UGWUJUZHT> Thanks for your suggestions. There's indeed a number of techniques that can be used to LLM-generated transform code in some traditional language into our \"Lisp\". However, that would only increase the complexity of the development stack, and our goal is to radically simplify it. That's why we want the LLM to be able to generate code and \"think\" in terms of our language. That would be a faster, cheaper and more robust solution. Ideally, the LLM should be able to generate neat code without any knowledge about the bloated languages of the past :wink: This doesn't mean we couldn't use any dirty tricks and hacks for the initial training.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9udzg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "UGWUJUZHT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Thanks for your suggestions. There's indeed a number of techniques that can be used to LLM-generated transform code in some traditional language into our \"Lisp\". However, that would only increase the complexity of the development stack, and our goal is to radically simplify it. That's why we want the LLM to be able to generate code and \"think\" in terms of our language. That would be a faster, cheaper and more robust solution. Ideally, the LLM should be able to generate neat code without any knowledge about the bloated languages of the past "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "wink",
+                                "unicode": "1f609"
+                            },
+                            {
+                                "type": "text",
+                                "text": " This doesn't mean we couldn't use any dirty tricks and hacks for the initial training."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725473422.737709",
+        "client_msg_id": "0af4ae24-232f-4dfc-9032-edb5b05079b6",
+        "text": "Interesting, didn't know about Erik Meijer's natural language programming stuff. Are there any material about it? I only found some possible references in his twitter.\n\nAnd yeah, I'm sure it's possible to build an AI Copilot for a new language. And if your language is always authored using your IDE, there shouldn't be a need for users to go get help from Chat GPT for example.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "l8l61",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Interesting, didn't know about Erik Meijer's natural language programming stuff. Are there any material about it? I only found some possible references in his twitter.\n\nAnd yeah, I'm sure it's possible to build an AI Copilot for a new language. And if your language is always authored using your IDE, there shouldn't be a need for users to go get help from Chat GPT for example."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725473572.753279",
+        "client_msg_id": "bf08d3f3-63b8-406c-afd0-5b183741bfd0",
+        "text": "<@U0296ACR13M> He gave a talk about it at KotlinConf and we had a long talk afterwards. The video of the talk should be published on YouTube. Unfortunately, the talk was interrupted by a false fire alarm.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "zNqlW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "user",
+                                "user_id": "U0296ACR13M"
+                            },
+                            {
+                                "type": "text",
+                                "text": " He gave a talk about it at KotlinConf and we had a long talk afterwards. The video of the talk should be published on YouTube. Unfortunately, the talk was interrupted by a false fire alarm."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U0296ACR13M"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725473698.886679",
+        "client_msg_id": "c1c822bd-2888-4442-ae2a-e690251758b7",
+        "text": "It's hard to predict what AI will be capable of in let's say two years\u2014a very optimistic estimate of how long it's going to take us to build our solution.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yMnKA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It's hard to predict what AI will be capable of in let's say two years\u2014a very optimistic estimate of how long it's going to take us to build our solution."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725474062.600839",
+        "client_msg_id": "6f5cdd9e-71d5-4366-8725-6dbcd7e0c28e",
+        "text": "Sorry, I forgot to clarify what I meant by \"fine granularity. I wanted to say that in our system the minimal unit of editing will be something like a function and that function will not be buried in a large file, so we will be able to provide a fully resolved and relatively small context for that single function only, That should make it easier for the AI to understand the meaning of a function and, at the same time, for the IDE to validate AI's output.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MNVfv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Sorry, I forgot to clarify what I meant by \"fine granularity. I wanted to say that in our system the minimal unit of editing will be something like a function and that function will not be buried in a large file, so we will be able to provide a fully resolved and relatively small context for that single function only, That should make it easier for the AI to understand the meaning of a function and, at the same time, for the IDE to validate AI's output."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725474151.904639",
+        "client_msg_id": "39d2484f-1cdb-4394-9036-9206078e4be4",
+        "text": "Oh and I sympathize with your thoughts about the term projectional language. The problem is that basically the same things are already called Projectional/Structured/Structural Language/Editor/Editing. I'm not sure one more term would help with the matter. :sweat_smile:\n\nI feel that both my self and the Hazel folks have basically solved the parenthesis and more generally \"just boxes inside boxes\" issue in projectional editing. Although, admittedly neither in a battle tested context.\n\nI seriously considered to not implement support for operator precedence in Levlo, but concluded that if the target users are non-programmers, math just has to work the way it's taught in schools.. If the target audience was programmers, I'd probably go the same route you've decided to.. Precedence rules bring so much pain for no gain. Although, I wonder if you'll have some trouble trying to explain the missing operator precedence to LLMs..",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sRDNZ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh and I sympathize with your thoughts about the term projectional language. The problem is that basically the same things are already called Projectional/Structured/Structural Language/Editor/Editing. I'm not sure one more term would help with the matter. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "sweat_smile",
+                                "unicode": "1f605"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI feel that both my self and the Hazel folks have basically solved the parenthesis and more generally \"just boxes inside boxes\" issue in projectional editing. Although, admittedly neither in a battle tested context.\n\nI seriously considered to not implement support for operator precedence in Levlo, but concluded that if the target users are non-programmers, math just has to work the way it's taught in schools.. If the target audience was programmers, I'd probably go the same route you've decided to.. Precedence rules bring so much pain for no gain. Although, I wonder if you'll have some trouble trying to explain the missing operator precedence to LLMs.."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725474315.345199",
+        "client_msg_id": "2d26266a-2ba5-455c-ba5d-6548ec342987",
+        "text": "<https://www.youtube.com/watch?v=ySKS719R6fc>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "attachments": [
+            {
+                "from_url": "https://www.youtube.com/watch?v=ySKS719R6fc",
+                "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/youtube.png",
+                "thumb_url": "https://i.ytimg.com/vi/ySKS719R6fc/hqdefault.jpg",
+                "thumb_width": 480,
+                "thumb_height": 360,
+                "video_html": "<iframe width=\"400\" height=\"225\" src=\"https://www.youtube.com/embed/ySKS719R6fc?feature=oembed&autoplay=1&iv_load_policy=3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen title=\"Virtual Machinations: Leveraging the Linguistic Bytecode of Large Language Models | Erik Meijer\"></iframe>",
+                "video_html_width": 400,
+                "video_html_height": 225,
+                "id": 1,
+                "original_url": "https://www.youtube.com/watch?v=ySKS719R6fc",
+                "fallback": "YouTube Video: Virtual Machinations: Leveraging the Linguistic Bytecode of Large Language Models | Erik Meijer",
+                "title": "Virtual Machinations: Leveraging the Linguistic Bytecode of Large Language Models | Erik Meijer",
+                "title_link": "https://www.youtube.com/watch?v=ySKS719R6fc",
+                "author_name": "Kotlin by JetBrains",
+                "author_link": "https://www.youtube.com/@Kotlin",
+                "service_name": "YouTube",
+                "service_url": "https://www.youtube.com/"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "IiDz/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://www.youtube.com/watch?v=ySKS719R6fc"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725474384.902909",
+        "client_msg_id": "22243f67-beac-4bd6-8025-84fcfa68489a",
+        "text": "Awesome, thanks! Will certainly check it out.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "hhnAw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Awesome, thanks! Will certainly check it out."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725474761.865079",
+        "edited": {
+            "user": "U07KR4BMKNW",
+            "ts": "1725474795.000000"
+        },
+        "client_msg_id": "5736eded-4dbe-44c4-9491-e0dd6c41df4d",
+        "text": "I actually don't want the LLM to understand our indentation- and color-sensitive notation (that's a more correct term than syntax). That notation can be mechanically converted to/from S-expressions). A bigger challenge is that we want to use unique ids, invariant to renames (re-labeling) and moves, and yet, expect the LLM to generate human-readable labels and be able to get some insights from them.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dJ/9v",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I actually don't want the LLM to understand our indentation- and color-sensitive notation (that's a more correct term than syntax). That notation can be mechanically converted to/from S-expressions). A bigger challenge is that we want to use unique ids, invariant to renames (re-labeling) and moves, and yet, expect the LLM to generate human-readable labels and be able to get some insights from them."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725474815.946639",
+        "client_msg_id": "07fbea8e-cb0f-4e83-b148-887c9a1564f3",
+        "text": "&gt; IDE to validate AI's output\nThis is what I'm doing. Although I call the component that the LLM feeds into an \"language engine\". I have a very simple parser that reads through the LLM response and feeds it in appropriate pieces to the engine. The engine maintains the AST and is able to provide all the possible valid sequences at any given location. If LLM output doesn't match any of the valid options, I reprompt and ask it to reformulate the answer so that it continues with one of the valid sequences. Additionally I'm using the language engine to generate semantically valid samples for the LLM.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Iueec",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "IDE to validate AI's output"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is what I'm doing. Although I call the component that the LLM feeds into an \"language engine\". I have a very simple parser that reads through the LLM response and feeds it in appropriate pieces to the engine. The engine maintains the AST and is able to provide all the possible valid sequences at any given location. If LLM output doesn't match any of the valid options, I reprompt and ask it to reformulate the answer so that it continues with one of the valid sequences. Additionally I'm using the language engine to generate semantically valid samples for the LLM."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725475045.181869",
+        "client_msg_id": "041a1a25-2435-4ada-be31-137d862aa644",
+        "text": "Yes, it's basically RAG. And by IDE I meant \"the thing performing analysis of the generated code\", not sure if we should distinguish between the IDE and the compiler here.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "cowcY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, it's basically RAG. And by IDE I meant \"the thing performing analysis of the generated code\", not sure if we should distinguish between the IDE and the compiler here."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725475136.457739",
+        "client_msg_id": "a6a2b73f-3d1c-4cce-8676-be5f226df235",
+        "text": "Moonbit seems to take a very similar approach <https://www.moonbitlang.com/blog/moonbit-ai>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "attachments": [
+            {
+                "image_url": "https://www.moonbitlang.com/assets/images/cover-fd7e29022331bfad893694193e5f184b.jpg",
+                "image_width": 3840,
+                "image_height": 1920,
+                "image_bytes": 123869,
+                "from_url": "https://www.moonbitlang.com/blog/moonbit-ai",
+                "service_icon": "https://www.moonbitlang.com/img/favicon.ico",
+                "ts": 1708214400,
+                "id": 1,
+                "original_url": "https://www.moonbitlang.com/blog/moonbit-ai",
+                "fallback": "MoonBit: Exploring the design of an AI-Native Language Toolchain | MoonBit",
+                "text": "Exploring the design of an AI-Native Language Toolchain",
+                "title": "MoonBit: Exploring the design of an AI-Native Language Toolchain | MoonBit",
+                "title_link": "https://www.moonbitlang.com/blog/moonbit-ai",
+                "service_name": "moonbitlang.com"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TbZk+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Moonbit seems to take a very similar approach "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.moonbitlang.com/blog/moonbit-ai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725475382.026239",
+        "edited": {
+            "user": "U0296ACR13M",
+            "ts": "1725475450.000000"
+        },
+        "client_msg_id": "af6acf44-6a68-4f09-a99a-862fd979518b",
+        "text": "Yeah, I suppose it could also be called language server.. But not an important distinction.\n\nSo what kind of usages are you thinking for the color-sensitivity? And as for labels, I think it's beneficial for the LLMs to work with the human readable labels. Although I've faced some challenges getting LLM generate sensible human readable ones. But how else would it work if the LLM needs to define new variables for example? Or do I misunderstand what you meant by \"use unique ids\". Why couldn't you use human readable labels in the s-expressions when interacting with the LLM? In Levlo the LLM generated labels just go into the language engine and it resolves those into new identities or references to existing identities.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/37Qx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yeah, I suppose it could also be called language server.. But not an important distinction.\n\nSo what kind of usages are you thinking for the color-sensitivity? And as for labels, I think it's beneficial for the LLMs to work with the human readable labels. Although I've faced some challenges getting LLM generate sensible human readable ones. But how else would it work if the LLM needs to define new variables for example? Or do I misunderstand what you meant by \"use unique ids\". Why couldn't you use human readable labels in the s-expressions when interacting with the LLM? In Levlo the LLM generated labels just go into the language engine and it resolves those into new identities or references to existing identities."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725475616.855209",
+        "client_msg_id": "9f730b4c-8554-446b-a149-3dbab0472ef0",
+        "text": "Well, it can, for example, have the form `(let bf191635-10f4-4032-a90f-3a02e867b345 \"the-answer\" 42 ...)`",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ieGV4",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Well, it can, for example, have the form "
+                            },
+                            {
+                                "type": "text",
+                                "text": "(let bf191635-10f4-4032-a90f-3a02e867b345 \"the-answer\" 42 ...)",
+                                "style": {
+                                    "code": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725476163.953939",
+        "client_msg_id": "fb2d69c4-cc6f-41b3-81b2-e1d37dbab336",
+        "text": "Didn't know about MoonBit. Thanks for bringing up!",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "gBC4W",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Didn't know about MoonBit. Thanks for bringing up!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725476195.553509",
+        "client_msg_id": "52d8c74f-07cf-4f74-bf1d-f440c48a9500",
+        "text": "And I like the idea of indentation- and color-based notation as both techniques allow you to express the structure and the semantics without cluttering the visual field. It works like magic - \"show something without showing anything\". Like what is called negative space in photography. And we know that at least indentation works very well in Python and YAML",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "eSZCd",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "And I like the idea of indentation- and color-based notation as both techniques allow you to express the structure and the semantics without cluttering the visual field. It works like magic - \"show something without showing anything\". Like what is called negative space in photography. And we know that at least indentation works very well in Python and YAML"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725476495.966359",
+        "edited": {
+            "user": "U0296ACR13M",
+            "ts": "1725476756.000000"
+        },
+        "client_msg_id": "8530e41f-1d59-4d19-998b-53f884217cec",
+        "text": "Yes, I definitely agree about indentation, but I'm not sure I see how handy color-sensitive semantics would be. Or am I getting it wrong. Do you mean that changing the color of say the label in variable definition would change it's type?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "RQaGM",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes, I definitely agree about indentation, but I'm not sure I see how handy color-sensitive semantics would be. Or am I getting it wrong. Do you mean that changing the color of say the label in variable definition would change it's type?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725476668.912109",
+        "client_msg_id": "c3a442f9-9b53-46b8-bf9b-d69ef0172903",
+        "text": "I suppose readability vice it should work, I'm wondering more what the authoring experience would be. Although, I guess user could still type the type, but then the editor would remove it and set the label color instead. I do a bit similar thing with colors in one of my demos. The user can type the hex value (or use a picker) and then the editor just shows a colored circle.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yQST5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I suppose readability vice it should work, I'm wondering more what the authoring experience would be. Although, I guess user could still type the type, but then the editor would remove it and set the label color instead. I do a bit similar thing with colors in one of my demos. The user can type the hex value (or use a picker) and then the editor just shows a colored circle."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725476713.031959",
+        "client_msg_id": "41572352-9206-4a02-b72b-cc59e1865df3",
+        "text": "And if you focus the circle, it turns into the hex value again.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "76jW3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "And if you focus the circle, it turns into the hex value again."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725476895.384169",
+        "client_msg_id": "d688f151-fc5d-499b-a9ba-cc6d5bfdc4d5",
+        "text": "The color will depend on the usage type. Look at the factorial example that I posted. The color red means it's a definition of a new symbol, so I can omit `let`, blue means it's a parameter declaration, white  - just passing value as a constant, teal - function application. Same symbol, like `factorial` can be passed as a value to a high-order function or applied.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "asNGy",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The color will depend on the usage type. Look at the factorial example that I posted. The color red means it's a definition of a new symbol, so I can omit "
+                            },
+                            {
+                                "type": "text",
+                                "text": "let",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", blue means it's a parameter declaration, white  - just passing value as a constant, teal - function application. Same symbol, like "
+                            },
+                            {
+                                "type": "text",
+                                "text": "factorial",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " can be passed as a value to a high-order function or applied."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725477115.670639",
+        "edited": {
+            "user": "U0296ACR13M",
+            "ts": "1725477149.000000"
+        },
+        "client_msg_id": "e3489eb8-9729-4286-88d0-d2372264bc24",
+        "text": "I see, but does the user choose in which color they're going to be typing next or is the color just applied by the IDE after the semantics have been resolved?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Teh2D",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I see, but does the user choose in which color they're going to be typing next or is the color just applied by the IDE after the semantics have been resolved?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725477585.000609",
+        "client_msg_id": "84709f58-a2af-4128-93d3-57f942b6e865",
+        "text": "the idea is that you insert a symbol by typing a special symbol that defines the type of use - for example, `d` for definition of a new symbol, `v` - for passing as value, `a` - for application of as function, etc. You would need to learn less than 10 shortcuts. And that doesn't mean typing more than in a traditional text editor \u2014 there you typically press SPACE before starting typing a new identifier. This is just a sketch of the  idea\u2014we're actually going to do some empirical and theoretical research to come up with a useful UX",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ssv5k",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the idea is that you insert a symbol by typing a special symbol that defines the type of use - for example, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "d",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " for definition of a new symbol, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "v",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " - for passing as value, "
+                            },
+                            {
+                                "type": "text",
+                                "text": "a",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " - for application of as function, etc. You would need to learn less than 10 shortcuts. And that doesn't mean typing more than in a traditional text editor \u2014 there you typically press SPACE before starting typing a new identifier. This is just a sketch of the  idea\u2014we're actually going to do some empirical and theoretical research to come up with a useful UX"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "text": "This is a screenshot of my presentation where I explain the idea of semantic coloring. Not to be taken as the final design:",
+        "files": [
+            {
+                "id": "F07KYEZRR7V",
+                "created": 1725477857,
+                "timestamp": 1725477857,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U07KR4BMKNW",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 8241435,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F07KYEZRR7V/image.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F07KYEZRR7V/download/image.png",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_360.png",
+                "thumb_360_w": 265,
+                "thumb_360_h": 360,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_480.png",
+                "thumb_480_w": 353,
+                "thumb_480_h": 480,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_720.png",
+                "thumb_720_w": 529,
+                "thumb_720_h": 720,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_800.png",
+                "thumb_800_w": 800,
+                "thumb_800_h": 1089,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_960.png",
+                "thumb_960_w": 706,
+                "thumb_960_h": 960,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F07KYEZRR7V-1d760f5769/image_1024.png",
+                "thumb_1024_w": 753,
+                "thumb_1024_h": 1024,
+                "original_w": 2057,
+                "original_h": 2799,
+                "thumb_tiny": "AwAwACOv9ol/vt+dH2iX++3/AH1UfB7ijA9qYh/2iXs7f99U03E3/PV/zppFNNAx3nzf89X/ADo8+b/nq/50yikBIFHt+dO2j2/Om8elGR6YpiFIHrTSBSmmmgBKSlpKBkmP85pdv1/OmUUCHED/ACaaaKQ0DEopKKQH/9k=",
+                "permalink": "https://futureofcoding.slack.com/files/U07KR4BMKNW/F07KYEZRR7V/image.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F07KYEZRR7V-bf3e4276e0",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U07KR4BMKNW",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "dQXIP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This is a screenshot of my presentation where I explain the idea of semantic coloring. Not to be taken as the final design:"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1725477879.917289",
+        "client_msg_id": "dd0957c2-c7bc-4299-af5c-9a915cc8946f",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW"
+    },
+    {
+        "user": "U0296ACR13M",
+        "type": "message",
+        "ts": "1725477908.053319",
+        "client_msg_id": "644b1a69-4447-43b7-bdef-b42931e9ae18",
+        "text": "I see. That could work. It's been great chatting with you! However, getting late here so have to start heading to the bed.. :)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "0p+RW",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I see. That could work. It's been great chatting with you! However, getting late here so have to start heading to the bed.. :)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U07KR4BMKNW",
+        "type": "message",
+        "ts": "1725477975.848029",
+        "client_msg_id": "4c29e0a9-3665-4e9f-8856-e417f781ba36",
+        "text": "Thank you for your interest. Good night!",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1725436552.259159",
+        "parent_user_id": "U07KR4BMKNW",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "LvSFf",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Thank you for your interest. Good night!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
