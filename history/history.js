@@ -123,7 +123,7 @@ function msgToMdNL(msg, linkPrefix) {
     thumbnailText = thumbnail ? thumbnail + '\n\n' : '',
     resourceText = resourceLink ? `${resourceLink} via ` : '💬 ',
     oldMark = msg.$isOlder ? '🕰️ ' : '',
-    base = `${resourceText}${userText}${oldMark}\n\n${conversationLink}\n\n${thumbnailText}${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
+    base = `## ${resourceText}${userText}${oldMark}\n\n${conversationLink}\n\n${thumbnailText}${msg.$text}\n${msg.$attachmentsText}\n${msg.$filesText}`;
 
   return base;
 }
