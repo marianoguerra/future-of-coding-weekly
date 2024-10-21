@@ -1,0 +1,502 @@
+[
+    {
+        "user": "UK3LH8CF5",
+        "type": "message",
+        "ts": "1728922292.671349",
+        "client_msg_id": "24201b37-2580-4546-a807-efb4390a0614",
+        "text": "I've not posted her in a bit partially because it feels like the work I'm doing is a bit \"present-company\". I put my editor on pause because I hate all languages I could write it in. I want a good dynamic language where I can develop the editor in itself without ever restarting it. I want something multi-threaded. I want something with a lightweight runtime. But ultimately, I really just want to boil the ocean and this feels like a fun way.\n\nSo I've been making my own language. It is a dynamically typed functional language that compiles straight to machine code (no vm at all). Today, I finally got my persistent vectors properly working (After finally figuring out that my bug was in the gc (still not fixed) not my implementation.) I decided as an experiment to implement clojures HAMT based persistent vectors into the language itself (not at the compiler/runtime level). In fact, even my mutable arrays are implemented in the language with a primitive allocation function and some fetching \"fields\" primitives.\n\nSadly my implementation is about 6x slower than clojures on my artificial benchmark. But honestly that's pretty darn good! I have done 0 optimizations, Clojure's data structures are all implemented in java. That means I'm about 6x slower than java on this benchmark. Not bad. Trying to figure out next if I want to do some performance work, or continue building out features.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "reply_count": 11,
+        "reply_users_count": 4,
+        "latest_reply": "1729191461.533459",
+        "reply_users": [
+            "UBN9AFS0N",
+            "UK3LH8CF5",
+            "UGWUJUZHT",
+            "UCUSW7WVD"
+        ],
+        "is_locked": false,
+        "subscribed": true,
+        "last_read": "1729191461.533459",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "29UkZ",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've not posted her in a bit partially because it feels like the work I'm doing is a bit \"present-company\". I put my editor on pause because I hate all languages I could write it in. I want a good dynamic language where I can develop the editor in itself without ever restarting it. I want something multi-threaded. I want something with a lightweight runtime. But ultimately, I really just want to boil the ocean and this feels like a fun way.\n\nSo I've been making my own language. It is a dynamically typed functional language that compiles straight to machine code (no vm at all). Today, I finally got my persistent vectors properly working (After finally figuring out that my bug was in the gc (still not fixed) not my implementation.) I decided as an experiment to implement clojures HAMT based persistent vectors into the language itself (not at the compiler/runtime level). In fact, even my mutable arrays are implemented in the language with a primitive allocation function and some fetching \"fields\" primitives.\n\nSadly my implementation is about 6x slower than clojures on my artificial benchmark. But honestly that's pretty darn good! I have done 0 optimizations, Clojure's data structures are all implemented in java. That means I'm about 6x slower than java on this benchmark. Not bad. Trying to figure out next if I want to do some performance work, or continue building out features."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UCUSW7WVD",
+                    "URKQXRCAC",
+                    "U04E5QAD6DD",
+                    "UBN9AFS0N",
+                    "U85HCL7JP",
+                    "U04S5LF5C7R",
+                    "U03R0B9U1GD",
+                    "U02E4DAQGSZ",
+                    "UMQ6LR9NZ",
+                    "U0123H7JRDM",
+                    "UA14TGLTC",
+                    "U06LQ54LB1R",
+                    "UML4ZEKDK"
+                ],
+                "count": 13
+            }
+        ]
+    },
+    {
+        "user": "UBN9AFS0N",
+        "type": "message",
+        "ts": "1728926175.094319",
+        "client_msg_id": "99c4590c-4abc-4cca-b1b2-7c3bf5fde65e",
+        "text": "please share some high level design notes :slightly_smiling_face:",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "JF0Px",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "please share some high level design notes "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UBN9AFS0N",
+        "type": "message",
+        "ts": "1728926181.846809",
+        "client_msg_id": "2ebe5b32-c730-429c-98bc-dec3e3d640f4",
+        "text": "(if you want :smile:)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "WzSad",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(if you want "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "smile",
+                                "unicode": "1f604"
+                            },
+                            {
+                                "type": "text",
+                                "text": ")"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UK3LH8CF5",
+        "type": "message",
+        "ts": "1728932604.498159",
+        "client_msg_id": "3d05fa88-931a-4d21-a05f-60be0886e137",
+        "text": "The whole thing is premised on the idea that there are no* popular, modern dynamically typed languages. Javascript, python, and ruby are all decades old and are showing their age. Clojure and Elixir are the only contenders.  Clojure will never be popular because it is a lisp. Elixir's super power and its limitation is the beam.\n\nPython, ruby, and javascript all lack a good story on multi-threading. Ruby and python are slower than they ought to be. All of them are OO inspired. I think functional langauges + Rust have shown a different way of programming.  All of them have weird quirks and problems around packages/modules/scoping, things we've since learned to do better. Finally, they have bad tooling for inspecting performance, memory, usage etc.\n\n\nAll of this is the situation I'm designing into. I want to build something that\n\n1) Can be popular (so no lisp)\n2) Can be fast (so focusing on performance from the beginning, no slow interpreter)\n3) Has good module/namespace support\n4) Is multi-threaded\n5) Is lightweight (does not depend on a big existing platform)\n6) Has great performance and memory tooling support\n\nAs for the actual code design. I've started from the ground up with a aarch64 machine code generator. I have an IR that is an infinite register machine. An AST on top of that. I've implemented 3 different GC systems (Mark and Sweep, Compacting, and a simple generational collector).\n\nThat's quite a bit, so happy to answer any questions",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "4cVfe",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The whole thing is premised on the idea that there are no* popular, modern dynamically typed languages. Javascript, python, and ruby are all decades old and are showing their age. Clojure and Elixir are the only contenders.  Clojure will never be popular because it is a lisp. Elixir's super power and its limitation is the beam.\n\nPython, ruby, and javascript all lack a good story on multi-threading. Ruby and python are slower than they ought to be. All of them are OO inspired. I think functional langauges + Rust have shown a different way of programming.  All of them have weird quirks and problems around packages/modules/scoping, things we've since learned to do better. Finally, they have bad tooling for inspecting performance, memory, usage etc.\n\n\nAll of this is the situation I'm designing into. I want to build something that\n\n1) Can be popular (so no lisp)\n2) Can be fast (so focusing on performance from the beginning, no slow interpreter)\n3) Has good module/namespace support\n4) Is multi-threaded\n5) Is lightweight (does not depend on a big existing platform)\n6) Has great performance and memory tooling support\n\nAs for the actual code design. I've started from the ground up with a aarch64 machine code generator. I have an IR that is an infinite register machine. An AST on top of that. I've implemented 3 different GC systems (Mark and Sweep, Compacting, and a simple generational collector).\n\nThat's quite a bit, so happy to answer any questions"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UBN9AFS0N",
+        "type": "message",
+        "ts": "1728934112.295549",
+        "client_msg_id": "b11d1d3a-423d-45c0-b841-e217a710bf13",
+        "text": "is it immutable all the way, immutable first or mutable first with immutable support?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7B+lH",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "is it immutable all the way, immutable first or mutable first with immutable support?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UBN9AFS0N",
+        "type": "message",
+        "ts": "1728934159.570619",
+        "client_msg_id": "36028664-6f2b-44e5-a238-f6f6496f1ef4",
+        "text": "the multithread support is going to be raw \"pthreads\"? or some core abstraction like actors, channels etc?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "xTc98",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "the multithread support is going to be raw \"pthreads\"? or some core abstraction like actors, channels etc?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UBN9AFS0N",
+        "type": "message",
+        "ts": "1728934197.683429",
+        "client_msg_id": "ac247947-aec7-4ed4-a6ee-b0e00ceb3df6",
+        "text": "any esoteric inspirations?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/XODN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "any esoteric inspirations?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UK3LH8CF5",
+        "type": "message",
+        "ts": "1728934211.924999",
+        "client_msg_id": "729ACF4D-5071-4533-8134-BA059EEE88E2",
+        "text": "The goal is that people will write immutable code. But I\u2019m going to be fairly pragmatic in that regard. It will be very similar to Clojure. There will be ways to write mutable stuff. But everything is pushing you to write immutable stuff. ",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MxX/S",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The goal is that people will write immutable code"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " But I\u2019m going to be fairly pragmatic in that regard"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " It will be very similar to Clojure"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " There will be ways to write mutable stuff"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " But everything is pushing you to write immutable stuff"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UK3LH8CF5",
+        "type": "message",
+        "ts": "1728934288.956369",
+        "client_msg_id": "0487D228-587B-426A-A626-5D54F78EE0BC",
+        "text": "Multithreading as in system threads. The language should be flexible enough that anything more than that should be able to be written in user land. Still flirting with the idea of delimited continuations in the base language. Which would give you all the power you need for anything like that. ",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PcKms",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Multithreading as in system threads"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " The language should be flexible enough that anything more than that should be able to be written in user land"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " Still flirting with the idea of delimited continuations in the base language"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " Which would give you all the power you need for anything like that"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UK3LH8CF5",
+        "type": "message",
+        "ts": "1728934433.025249",
+        "client_msg_id": "8B3BC06C-0D22-4C8B-95A2-BA5A73829F81",
+        "text": "The most esoteric inspiration I can think of is pyret. Just like pyret I plan on having nice support for algebraic data types (but not trying to do their gradual type stuff) and first class ways of doing tests. \n\nReally this is clojure + rust + batteries included. Those are the main inspirations. ",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "t83VL",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The most esoteric inspiration I can think of is pyret"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " Just like pyret I plan on having nice support for algebraic data types (but not trying to do their gradual type stuff) and first class ways of doing tests"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " \n\nReally this is clojure + rust + batteries included"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " Those are the main inspirations"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UBN9AFS0N"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1728935091.981019",
+        "client_msg_id": "f95349e0-c835-497b-8429-a8ff63372cd5",
+        "text": "FYI - in places where you can guarantee stack-based immutability, you might consider using Jart's ABC garbage collector. She does it in 40 bytes. YMMV.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/Nx/A",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "FYI - in places where you can guarantee stack-based immutability, you might consider using Jart's ABC garbage collector. She does it in 40 bytes. YMMV."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UK3LH8CF5"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1729191461.533459",
+        "client_msg_id": "4f774e67-dd57-4406-9d06-647676d669c5",
+        "text": "I just want to say, I think:\n\na) This feels like future not present.\nb) <#C03RR0W5DGC|> is agnostic to future vs present. It's a space for anything you want to share.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1728922292.671349",
+        "parent_user_id": "UK3LH8CF5",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "CZGy+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I just want to say, I think:\n\na) This feels like future not present.\nb) "
+                            },
+                            {
+                                "type": "channel",
+                                "channel_id": "C03RR0W5DGC"
+                            },
+                            {
+                                "type": "text",
+                                "text": " is agnostic to future vs present. It's a space for anything you want to share."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
