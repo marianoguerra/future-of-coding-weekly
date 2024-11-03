@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-11-02T10:45:44.124Z" class="post"><span class="user">Patrick Dubroy</span> <a href="https://history.futureofcoding.org/?fromDate=2024-10-30&amp;toDate=2024-11-05&amp;channel=of-graphics&amp;filter=#2024-11-02T10:45:44.124Z" class="date">2024-11-02 10:45:44</a> <div class="message"><p>Hello! I'm curious if anyone here has a good idea about interleaving works between a compute shader and a fragment shader.</p>
+<p>Some relevant details:</p>
+<ul><li>My app is built with Rust and wgpu, and I'm running on an M1 Macbook Pro.</li><li>I have a single encoder with a compute pipeline and a render pipeline.</li><li>The compute shader writes to a storage buffer defined like this:</li></ul><pre><code>@group(0) @binding(2) var&lt;storage, read_write&gt; output: array&lt;vec4&lt;f32&gt;&gt;;</code></pre><ul><li>The fragment shader reads from the same buffer. Basically, each fragment is just one element of the  <code>vec4&lt;f32&gt;</code> . The fragment shader is very simple, and doesn't touch anything else in the storage buffer.</li></ul><p>I've added timestamp queries to the pipeline, and what I'm seeing is this:</p>
+<pre><code>Duration #1: 47.800208ms
+
+Duration #2: 47.809876ms
+
+Frame time: 51.2545ms</code></pre><p> <code>Duration #1</code>  is computed from the compute shader timestamps (the duration between the beginning and end of the compute pass) and  <code>Duration #2</code>  is the time for the render pass, computed the same way.</p>
+<p> <code>Frame time</code>  is measured on the CPU.</p>
+<p>I expected the duration of the compute shader and fragment shader to add up to the frame time (approximately). But it doesn't and I'm confused about why! Could it be due to interleaving of the compute pass and render pass? If so, I'm curious how the synchronization works. How does the GPU figure out the dependencies between the write (a compute shader invocation) and the reader (fragment shader invocation)?</p>
+<p>I don't have any explicit synchronization, but I'm also not seeing any tearing or anything that would indicate that there is a data race between the shaders.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2024-11-02T13:33:33.232Z" class="reply"><span class="user">Duncan Cragg</span> <a href="https://history.futureofcoding.org/?fromDate=2024-10-30&amp;toDate=2024-11-05&amp;channel=of-graphics&amp;filter=#2024-11-02T13:33:33.232Z" class="date">2024-11-02 13:33:33</a> <div class="message"><p>those durations are suspiciously close for being times of completely different processes! plus, is it possible that the compute for frame N was run in frame N-1?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-11-02T13:56:47.005Z" class="reply"><span class="user">Patrick Dubroy</span> <a href="https://history.futureofcoding.org/?fromDate=2024-10-30&amp;toDate=2024-11-05&amp;channel=of-graphics&amp;filter=#2024-11-02T13:56:47.005Z" class="date">2024-11-02 13:56:47</a> <div class="message"><p>I agree. My colleague’s theory was that they are interleaved, and that they are both running at the same time but that they are somehow synchronized by the runtime. I’m skeptical that we’d get that for free. </p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-11-02T13:58:31.600Z" class="reply"><span class="user">Patrick Dubroy</span> <a href="https://history.futureofcoding.org/?fromDate=2024-10-30&amp;toDate=2024-11-05&amp;channel=of-graphics&amp;filter=#2024-11-02T13:58:31.600Z" class="date">2024-11-02 13:58:31</a> <div class="message"><p>I also wondered whether they are somehow running in parallel but the computer shader is one frame ahead, but I don’t see how that’s possible in the code. Both pipelines are added to the same encoder and so definitely submitted together. </p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-11-02T14:01:39.453Z" class="reply"><span class="user">Patrick Dubroy</span> <a href="https://history.futureofcoding.org/?fromDate=2024-10-30&amp;toDate=2024-11-05&amp;channel=of-graphics&amp;filter=#2024-11-02T14:01:39.453Z" class="date">2024-11-02 14:01:39</a> <div class="message"><p>I asked on another forum, and the conclusion was that the timestamps may not be reliable. There are a bunch of wgpu issues related to timestamps on Metal and TBDR architectures </p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-11-03T15:07:39.110Z" class="reply"><span class="user">Jack Rusher</span> <a href="https://history.futureofcoding.org/?fromDate=2024-10-31&amp;toDate=2024-11-06&amp;channel=of-graphics&amp;filter=#2024-11-03T15:07:39.110Z" class="date">2024-11-03 15:07:39</a> <div class="message"><p>I also vote “unreliable timestamps”</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>

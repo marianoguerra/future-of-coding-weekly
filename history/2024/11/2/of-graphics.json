@@ -1,0 +1,396 @@
+[
+    {
+        "user": "U01DWJSAF2B",
+        "type": "message",
+        "ts": "1730544344.124919",
+        "client_msg_id": "ed13a083-5750-4e85-a7ec-b581889205af",
+        "text": "Hello! I'm curious if anyone here has a good idea about interleaving works between a compute shader and a fragment shader.\n\nSome relevant details:\n\u2022 My app is built with Rust and wgpu, and I'm running on an M1 Macbook Pro.\n\u2022 I have a single encoder with a compute pipeline and a render pipeline.\n\u2022 The compute shader writes to a storage buffer defined like this:\n```@group(0) @binding(2) var&lt;storage, read_write&gt; output: array&lt;vec4&lt;f32&gt;&gt;;```\n\u2022 The fragment shader reads from the same buffer. Basically, each fragment is just one element of the `vec4&lt;f32&gt;`. The fragment shader is very simple, and doesn't touch anything else in the storage buffer.\nI've added timestamp queries to the pipeline, and what I'm seeing is this:\n```Duration #1: 47.800208ms\nDuration #2: 47.809876ms\nFrame time: 51.2545ms```\n`Duration #1` is computed from the compute shader timestamps (the duration between the beginning and end of the compute pass) and `Duration #2` is the time for the render pass, computed the same way.\n\n`Frame time` is measured on the CPU.\n\nI expected the duration of the compute shader and fragment shader to add up to the frame time (approximately). But it doesn't and I'm confused about why! Could it be due to interleaving of the compute pass and render pass? If so, I'm curious how the synchronization works. How does the GPU figure out the dependencies between the write (a compute shader invocation) and the reader (fragment shader invocation)?\n\nI don't have any explicit synchronization, but I'm also not seeing any tearing or anything that would indicate that there is a data race between the shaders.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1730544344.124919",
+        "reply_count": 5,
+        "reply_users_count": 3,
+        "latest_reply": "1730646459.110919",
+        "reply_users": [
+            "UE6EFEPTQ",
+            "U01DWJSAF2B",
+            "U013ZLJARC7"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "9bRb/",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hello! I'm curious if anyone here has a good idea about interleaving works between a compute shader and a fragment shader.\n\nSome relevant details:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "My app is built with Rust and wgpu, and I'm running on an M1 Macbook Pro."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I have a single encoder with a compute pipeline and a render pipeline."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The compute shader writes to a storage buffer defined like this:"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "@group(0) @binding(2) var<storage, read_write> output: array<vec4<f32>>;"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The fragment shader reads from the same buffer. Basically, each fragment is just one element of the "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "vec4<f32>",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ". The fragment shader is very simple, and doesn't touch anything else in the storage buffer."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI've added timestamp queries to the pipeline, and what I'm seeing is this:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Duration #1: 47.800208ms\nDuration #2: 47.809876ms\nFrame time: 51.2545ms"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Duration #1",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is computed from the compute shader timestamps (the duration between the beginning and end of the compute pass) and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "Duration #2",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is the time for the render pass, computed the same way.\n\n"
+                            },
+                            {
+                                "type": "text",
+                                "text": "Frame time",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is measured on the CPU.\n\nI expected the duration of the compute shader and fragment shader to add up to the frame time (approximately). But it doesn't and I'm confused about why! Could it be due to interleaving of the compute pass and render pass? If so, I'm curious how the synchronization works. How does the GPU figure out the dependencies between the write (a compute shader invocation) and the reader (fragment shader invocation)?\n\nI don't have any explicit synchronization, but I'm also not seeing any tearing or anything that would indicate that there is a data race between the shaders."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UE6EFEPTQ",
+        "type": "message",
+        "ts": "1730554413.232549",
+        "client_msg_id": "fecedd6d-bf2c-498d-b9f4-3d4b66ed6632",
+        "text": "those durations are suspiciously close for being times of completely different processes! plus, is it possible that the compute for frame N was run in frame N-1?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1730544344.124919",
+        "parent_user_id": "U01DWJSAF2B",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "sbdUj",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "those durations are suspiciously close for being times of completely different processes! plus, is it possible that the compute for frame N was run in frame N-1?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U01DWJSAF2B",
+        "type": "message",
+        "ts": "1730555807.005099",
+        "client_msg_id": "9F9A0474-11BA-442E-BFA1-F2A5F41CEA2C",
+        "text": "I agree. My colleague\u2019s theory was that they are interleaved, and that they are both running at the same time but that they are somehow synchronized by the runtime. I\u2019m skeptical that we\u2019d get that for free. ",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1730544344.124919",
+        "parent_user_id": "U01DWJSAF2B",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+JjPY",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I agree"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " My "
+                            },
+                            {
+                                "type": "text",
+                                "text": "colleague\u2019s"
+                            },
+                            {
+                                "type": "text",
+                                "text": " theory was that they are interleaved, and that they are both running at the same time but that they are somehow synchronized by the runtime"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " I\u2019m skeptical that "
+                            },
+                            {
+                                "type": "text",
+                                "text": "we\u2019d"
+                            },
+                            {
+                                "type": "text",
+                                "text": " get that for free"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U01DWJSAF2B",
+        "type": "message",
+        "ts": "1730555911.600089",
+        "client_msg_id": "B5A844B8-A35B-4BE9-A50B-6C138FF956CF",
+        "text": "I also wondered whether they are somehow running in parallel but the computer shader is one frame ahead, but I don\u2019t see how that\u2019s possible in the code. Both pipelines are added to the same encoder and so definitely submitted together. ",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1730544344.124919",
+        "parent_user_id": "U01DWJSAF2B",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "GMrm6",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I also wondered whether they are somehow running in parallel but the computer shader is one frame ahead, but I "
+                            },
+                            {
+                                "type": "text",
+                                "text": "don\u2019t"
+                            },
+                            {
+                                "type": "text",
+                                "text": " see how "
+                            },
+                            {
+                                "type": "text",
+                                "text": "that\u2019s"
+                            },
+                            {
+                                "type": "text",
+                                "text": " possible in the code"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " Both pipelines are added to the same encoder and so definitely submitted together"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U01DWJSAF2B",
+        "type": "message",
+        "ts": "1730556099.453219",
+        "client_msg_id": "BD26F5B4-4EE3-4CD4-9F15-93FE848AA034",
+        "text": "I asked on another forum, and the conclusion was that the timestamps may not be reliable. There are a bunch of wgpu issues related to timestamps on Metal and TBDR architectures ",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1730544344.124919",
+        "parent_user_id": "U01DWJSAF2B",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PXGVO",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I asked on another forum, and the conclusion was that the timestamps may not be reliable"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            },
+                            {
+                                "type": "text",
+                                "text": " There are a bunch of wgpu issues related to timestamps on Metal and TBDR architectures "
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U013ZLJARC7",
+        "type": "message",
+        "ts": "1730646459.110919",
+        "client_msg_id": "E5AA0044-810D-43CD-9149-956FC9FF335C",
+        "text": "I also vote \u201cunreliable timestamps\u201d",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1730544344.124919",
+        "parent_user_id": "U01DWJSAF2B",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "TBJZB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I also vote \u201cunreliable timestamps\u201d"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U01DWJSAF2B"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]
