@@ -93,6 +93,7 @@ function onCommentsFinished(_contributors, authors) {
       'p',
       {},
       '👨🏽‍💻 By ',
+      link('https://bsky.app/profile/marianoguerra.org', '🦋 @marianoguerra.org'),
       link(
         'https://hachyderm.io/@marianoguerra',
         '🐘 @marianoguerra@hachyderm.io'
