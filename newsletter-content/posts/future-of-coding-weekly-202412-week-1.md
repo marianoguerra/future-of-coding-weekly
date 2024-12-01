@@ -1,0 +1,386 @@
+<!--
+.. title: Future of Coding Weekly 2024/12 Week 1
+.. slug: future-of-coding-weekly-202412-week-1
+.. date: 2024-12-01 23:30:08 UTC+01:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🎥 Bottom up engineering for robust-first computing 🎈 Smalltalk & LLMs 🎥 FoC Virtual Meetup Video
+
+# Two Minute Week
+
+## 🎥 [Node output preview when dragging values on edges](https://youtu.be/MlAjl4GCT_M) via [Maikel van de Lisdonk](https://www.devhelpr.com/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/two-minute-week.html#2024-12-01T13:51:44.632Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/MlAjl4GCT_M/hqdefault.jpg)
+
+In [this video](https://youtu.be/MlAjl4GCT_M) I show a small new feature : when dragging values on to edges (or connections as I like to call them), for node-types that support it ... a small preview shows the node output as a hint above the node. Currently only the expression and sum node-type support this. I am looking for a way to have every node-type support this.
+
+
+
+Another small tweak is that the expression node-type triggers its output directly when the expression is changed. Previously the whole flow was retrigged and this new behavior feels much better.
+
+# Our Work
+
+## 🎥 [Mariano Guerra &  Tudor Girba - LLMs & Smalltalk - UK Smalltalk User Group](https://vimeo.com/ukstug/) via **Francisco Garau**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/share-your-work.html#2024-11-25T00:09:07.870Z)
+
+The videos from last month presentation are now available:
+
+[:kind | ‘Regards from ’, kind ] value: ‘The UK Smalltalk User Group’.
+
+> 🎥 [Mariano Guerra on LLMs](https://vimeo.com/ukstug/marianollm)
+>
+> ![MarianoGuerra - LLM - 30-Oct-2024](https://i.vimeocdn.com/video/1949305360-29b80766a9dd789f9f848f708e4b45798339a3fb0fd6525cd957f92df541b4f3-d?f=webp)
+
+> 🎥 [Tudor Girba on LLMs](https://vimeo.com/ukstug/tudorllm)
+>
+> ![Tudor Girba - LLM - 30-Oct-2024](https://i.vimeocdn.com/video/1949175086-25ee38594ba09b85bb1ed6efffc73e0d378400f07b9e839b195660978fa04418-d?f=webp)
+
+
+## 🕸️ [smallweb](https://www.smallweb.run/) via **Achille Lacoin**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/share-your-work.html#2024-11-26T13:48:02.139Z)
+
+Hey, I'm working on [smallweb](https://www.smallweb.run/), a self-hostable personal cloud.
+
+
+
+It's inspired by by serveless platforms like val.town and old standards like cgi-bin. I still struggle to describe it. It feels like coding in dropbox, but in a good way.
+
+
+
+For example, if I want to host my new blog in smallweb, I can do it by just creating a new folder at  `~/smallweb/blog/main.ts`  :
+
+
+
+
+
+
+```
+import { Smallblog } from "jsr:@tayzendev/smallblog@1.1.5";
+
+
+
+export default new Smallblog({
+
+  siteTitle: "Pomdtr's Blog",
+
+  defaultAuthors: ["pomdtr"],
+
+});
+
+
+```
+
+
+
+
+
+Then, no need to run any terminal command or to wait for a deploy step, my blog is instantly available on the [blog.pomdtr.me](http://blog.pomdtr.me) subdomain: [blog.pomdtr.me](https://blog.pomdtr.me) (this one is hosted on my raspberrypi).
+
+
+
+Apps also have write access to their own dir. For example, if you go to [vscode-demo.smallweb.run](https://vscode-demo.smallweb.run), you'll be able to write in my own smallweb dir. Or feel free to draw me something at [excalidraw.smallweb.run](https://excalidraw.smallweb.run) !
+
+
+
+All of the websites hosted under the  `smallweb.run`  domain are open-source, and can be found at: [gh.smallweb.run](https://gh.smallweb.run)
+
+
+## 📝 [fishtower.conradgodfrey.com](https://fishtower.conradgodfrey.com/) via **Conrad Godfrey**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/share-your-work.html#2024-11-27T18:41:06.836Z)
+
+Hi,
+
+
+
+Sharing fish tower 
+
+
+
+Was built as half experiment with how quickly I could get a websocket real time thingy up and running,  and to see if I could market a London Filet O Fish First Timer meetup using a webtoy.
+
+
+
+I think people don't use webtoys to market real world events as much as I would've thought - I think this gets cheaper with AI and perhaps we'll see this a lot more?
+
+
+
+[fishtower.conradgodfrey.com](https://fishtower.conradgodfrey.com/)
+
+
+## 👓 [LookAtThat: Render source code in 3D, for macOS and iOS](https://github.com/tikimcfee/LookAtThat/) via **Ivan Lugo**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/share-your-work.html#2024-12-01T21:45:37.188Z)
+
+Hello Future of Coding folks!
+
+
+
+It's been a while since I've crawled out from my cave, but I've come to share something fun, at least I think so. I've finally managed to get the downloadable TestFlight betas up for free for my visualizer tool for macOS and iOS, and you can get the links here on the main GitHub page:
+
+
+
+[github.com/tikimcfee/LookAtThat](https://github.com/tikimcfee/LookAtThat/)
+
+
+
+Many thanks go out to everyone here that helped answer odd questions at odd hours to help me build this first releasable beta. Cheers, and let me know what breaks!
+
+![Project Screenshot](https://github.com/tikimcfee/LookAtThat/blob/main/repo_info/metal-v3-desktop-ide.png?raw=true)
+
+
+
+# Devlog Together
+
+## 💬 [Christopher Shank](https://mobile.twitter.com/chrisshank23)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/devlog-together.html#2024-11-25T01:28:16.375Z)
+
+"make illegal states unconnectable"
+
+🎥 [Screen Recording](http://history.futureofcoding.org/history/msg_files/F08/F08299U9XU2.mov)
+
+## 📝 [github.com/uprun/git-auto-commit](https://github.com/uprun/git-auto-commit) via [Oleksandr Kryvonos](https://twitter.com/o_kryvonos)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/devlog-together.html#2024-11-25T14:03:18.418Z)
+
+I am back with small project ( ~work in progress~  already finalized),
+
+Have you ever thought that git diff does not really show the history of changes you made and just shows the final state,
+
+this can be solved with more granual commits,
+
+so my project - [github.com/uprun/git-auto-commit](https://github.com/uprun/git-auto-commit) - creates commits when file changes,
+
+in such way  ~changes will be sent real-time and~  the transformation history is saved as well.
+
+
+
+
+## 🛸 [Eclector](https://s-expressionists.github.io/Eclector/) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/devlog-together.html#2024-11-27T11:10:10.768Z)
+
+Over the last weeks I have been working on my moldable inspector for Common Lisp again, with the goal of turning it into a support platform for explainable data science. One big task that I have finally achieved is code browsing. You can navigate through the code by clicking on symbols in displayed code. And you can transclude code into HTML, as shown on the first pane.
+
+
+
+This wasn't trivial to do because Common Lisp cannot be statically parsed. When loading code, Lisp reads one top-level form (everything between a top-level pair of parentheses), executes it, and then goes on to the next one. The semantics of each form thus depend on the previous ones. Static parsing, as I do here, can never be perfect. The goal is getting the parser to deal with 99% of code correctly and not crash on the remaining 1%.
+
+
+
+Fortunately, others had done most of the hard work, and I could use [Eclector](https://s-expressionists.github.io/Eclector/), a portable and extensible Common Lisp reader, as the basis for my code browser.
+
+
+
+The code for my demo [available on Codeberg](https://codeberg.org/khinsen/ratp-points-of-sale/).
+
+🎥 [Demo](http://history.futureofcoding.org/history/msg_files/F08/F082PKND6FM.mkv)
+
+
+
+## 💻 [exporter](https://observablehq.com/@tomlarkworthy/exporter) via [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/devlog-together.html#2024-11-27T18:38:46.325Z)
+
+So orthogonal artifact 1 of (maybe) 3 for reimplementing (a subset of) Observable in userspace is done ([exporter](https://observablehq.com/@tomlarkworthy/exporter)).  The next thing, as discussed in the demo, is to preserve the editing experience by adding a userspace code editor, so that the exported, unbundled (offline-first) notebook carries its own editor around with it.
+
+
+
+Progress is pretty good. It ends up a little different to Observable as it is pinned to a specific cell, but it can also do extra things like edit the variables in dependancies which is what you want when the export format has bundled all the dependancies. You might need to change them too!
+
+
+
+The third required project, I thought of while preparing for the demo, is the notebook renderer itself. That should also be in userspace and hackable. Even with the editor component, you can't reorder cells, as there is a whole presentation layer that lives above the runtime that chooses how to render the results. That rendering process itself needs to be hackable, so you can leave the vertical notebook format entirely. Currently the single file format follows the path of the existing observable runtime of instantiating the DOM before starting the runtime and piping observations to the DOM, but for maximum control we should let userspace be informed of the runtime changes and choose how to render. Just a shower thought at the moment but I definitely think the "renderer" should be another orthogonal component.
+
+
+
+I am trying to document my learnings about the Observable system in some reference documentation [here](https://observablehq.com/@tomlarkworthy/observable-notes) if you want to learn more. That documentation actually hacks the runtime so the concepts are explained adjacent to the actually executing concepts. I love literate programming.
+
+
+
+aside: I am enjoying the single file hermetic webpage format, its like portable statically linked binary that ends up being way faster than normal webpages.
+
+![image.png](http://history.futureofcoding.org/history/msg_files/F08/F082P5ABVMK.png)
+
+
+
+## 💬 [Jason Morris](https://twitter.com/RoundTableLaw)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/devlog-together.html#2024-11-29T07:09:33.095Z)
+
+I'm doing one weird stuff with knowledge graphs in my "real job", and it is sufficiently weird that I am finding that my intuitions about what's going on in the graph are  _dramatically_  incorrect, and I don't have  _any_  comprehension of how wrong I am until after I select a random collection of nodes, and visualize them somehow. The degree to which this is a pain in the ass compared to using other data structures is wild. You just cannot usefully inspect a graph in text. Are there some tricks of the trade I'm missing, here?
+
+## 💬 [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/devlog-together.html#2024-12-01T00:06:34.493Z)
+
+I've been watching my wife teach the kids second-grade math for a few weeks now with the glimmer of an idea in my head that just came out.
+
+
+
+The tree notation for addition and subtraction shows the symmetry between them, and also the symmetry between operands.
+
+
+
+I know it's valuable, because it got instantly adopted in lessons, where most of my ideas get gently humored and booted out of the room.
+
+
+
+I'd never have the sense something like this was valuable before hanging out here ❤
+
+![addition.png](http://history.futureofcoding.org/history/msg_files/F08/F08341DLWGJ.png)
+
+
+
+# Thinking Together
+
+## 📝 [github.com/bellard/quickjs](https://github.com/bellard/quickjs/tree/master) via **John Flockton**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/thinking-together.html#2024-11-30T14:09:49.778Z)
+
+Hey folks! Bit of a random question, but can any one think of any language interpreters which parse text straight to bytecode, omitting the AST step completely? Quick.js is one of the most well-known ([github.com/bellard/quickjs/tree/master](https://github.com/bellard/quickjs/tree/master)) but I wondered if any one knew of any other interesting examples for other languages?
+
+
+
+# Content
+
+## 🎥 [ABI-DOS Announcement Trailer](https://www.youtube.com/watch?v=iZ5EN0mYOfs) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-11-25T16:35:12.902Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/iZ5EN0mYOfs/hqdefault.jpg)
+
+Here's a lil circuit simulation game that looks pretty neat — [ABI-DOS](https://www.youtube.com/watch?v=iZ5EN0mYOfs)
+
+
+
+EDIT: Ended up collecting [a handful of these](https://github.com/ivanreese/visual-programming-codex/issues/86).
+
+## 📝 [Viewing document history is now easy as scrubbing through a video.](https://bsky.app/profile/nbaschez.bsky.social/post/3lbsp4lrpuc2j) via [Mattia Fregola](https://twitter.com/MattiaFregola)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-11-26T00:10:47.806Z)
+
+Pretty great thing I wish I had through life:
+
+
+
+[Viewing document history is now easy as scrubbing through a video.](https://bsky.app/profile/nbaschez.bsky.social/post/3lbsp4lrpuc2j)
+
+
+
+Usable on [lex.page](https://lex.page/)
+
+## 📃 [Feels Like Paper](https://www.lukasmoro.com/paper) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-11-28T00:26:30.406Z)
+
+Some lovely explorations of physical paper + augmented reality in this project [Feels Like Paper](https://www.lukasmoro.com/paper) from Lukas Moro
+
+## 🎥 [Bottom up engineering for robust-first computing](https://www.youtube.com/watch?v=y1y2BIAOwAY) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-11-28T09:22:20.538Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/y1y2BIAOwAY/hqdefault.jpg)
+
+[What machines want](https://www.youtube.com/watch?v=y1y2BIAOwAY), by **@Dave Ackley**. The subtitle  *"* [Bottom up engineering for robust-first computing](https://www.youtube.com/watch?v=y1y2BIAOwAY) *"* is more informative. It's about building computing systems that remain robust under scale.
+
+## 🎥 [Handmade Cities](https://www.youtube.com/@HandmadeCities) via **misha**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-11-29T10:16:18.658Z)
+
+> We are the largest indie conferences for low-level programmers. This is your portal to meet with folks into graphics, game engines, kernels, compilers, and more!
+
+## 🎥 [UIST'09: Bonfire: a nomadic system for hybrid laptop-tabletop interaction](https://www.youtube.com/watch?v=O3MZYRAZJNk) via [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-11-30T16:00:57.375Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/O3MZYRAZJNk/hqdefault.jpg)
+
+
+## 📝 [Oliver Kreylos' Research and Development Homepage - Augmented Reality Sandbox](https://web.cs.ucdavis.edu/~okreylos/ResDev/SARndbox/) via [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-11-30T16:02:09.604Z)
+
+[Augmented Reality Sandbox](https://web.cs.ucdavis.edu/~okreylos/ResDev/SARndbox/)
+
+
+
+
+
+
+> The goal of this project was to develop a real-time integrated augmented reality system to physically create topography models which are then scanned into a computer in real time, and used as background for a variety of graphics effects and simulations. The final product is supposed to be self-contained to the point where it can be used as a hands-on exhibit in science museums with little supervision.
+
+## 🎥 [WUW / sixthsense - a wearable gestural interface](https://www.youtube.com/watch?v=ZfV4R4x2SK0) via [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-11-30T16:07:49.000Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/ZfV4R4x2SK0/hqdefault.jpg)
+
+> 'WUW' bridges this gap by augmenting the physical world around us with digital information and proposing natural hand gestures as the mechanism to interact with that information. 'WUW' brings the intangible information out into the tangible world. By using a camera and a tiny projector mounted on a hat or coupled in a pendant like device, 'WUW' sees what you see and visually augments any surfaces or objects you are interacting with. 'WUW' projects information to any surface, walls, and the objects around us, and to interact with the information through natural hand gestures, arm movements, or with the object itself.
+
+## 📝 [Bret Victor on climate change](https://worrydream.com/ClimateChange/#tools) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/linking-together.html#2024-12-01T02:38:31.151Z)
+
+Rereading [Bret Victor on climate change](https://worrydream.com/ClimateChange/#tools), it finally sunk in that he really really cares about software tools for scientific computing.
+
+
+
+
+
+
+> I’m happy to endorse Julia because, well, it’s just about the only example of well-grounded academic research in technical computing. 
+>  _It’s the craziest thing._ 
+>  I’ve been following the programming language community for a decade, I’ve spoken at [SPLASH](http://splashcon.org) and [POPL](http://popl.mpi-sws.org) and [Strange Loop](http://www.thestrangeloop.com), and it’s only slightly an unfair generalization to say that almost every programming language researcher is working on
+> (a) languages and methods for software developers,
+> (b) languages for novices or end-users,
+> (c) implementation of compilers or runtimes, or
+> (d) theoretical considerations, often of type systems.
+> The very concept of a “programming language” originated with [languages for scientists](https://en.wikipedia.org/wiki/Fortran)
+>  — now such languages aren’t even part of the discussion! Yet they remain the tools by which humanity understands the world and builds a better one.
+> If we can provide our climate scientists and energy engineers with a civilized computing environment, I believe it will make a very significant difference. But not one that is easily visible or measured!
+
+# Music
+
+## 📝 [Orbita – a new device from Playtronica](https://orbita.playtronica.com/) via [Tak Tran](https://twitter.com/zlog)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/of-music.html#2024-11-28T09:15:00.943Z)
+
+[Coloured dots for making a sequencer](https://orbita.playtronica.com/) - the same company are making a [MIDI controller using plants](https://shop.playtronica.com/products/biotron) too
+
+>Turn color and gesture into music with Orbita - a new
+device in Playtronica’s range of quirky sound gadgets
+
+## 🎥 [Virtual Meetup 7 • November 27, 2024](https://www.youtube.com/watch?v=ZG6GRDo-pfQ) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W1/present-company.html#2024-11-27T19:09:35.091Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/ZG6GRDo-pfQ/hqdefault.jpg)
+
+Here's the recording of the [Future of Coding Virtual Meetup 7](https://www.youtube.com/watch?v=ZG6GRDo-pfQ). This time, I added some notes and timestamps to the description, just in case that's helpful.
+
+
+
+For next month, we'll have to figure out something a little different so we don't collide uncomfortably with the holiday season. TBD!
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
