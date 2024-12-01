@@ -134,6 +134,9 @@ def setup_db(db_path):
 
     return (con, cur)
 
+def to_reply_row(reply, msg_ts):
+    return [reply.get('user', '?'), reply.get('ts', '?'), msg_ts]
+
 def insert_msg(cur, msg, channel):
     values = [msg.get(key, def_val) for (key, def_val) in FIELD_DEFAULTS.items()]
 
@@ -143,8 +146,8 @@ def insert_msg(cur, msg, channel):
     cur.execute(INSERT_MSG_QUERY, values)
 
     msg_ts = msg.get('ts', '?')
-    for reply in msg.get('replies', []):
-        cur.execute(INSERT_REPLY_QUERY, [reply.get('user', '?'), reply.get('ts', '?'), msg_ts])
+    replies = [to_reply_row(reply, msg_ts) for reply in reply in msg.get('replies', [])]
+    cur.executemany(INSERT_REPLY_QUERY, replies)
 
     for reaction in msg.get('reactions', []):
         name = reaction.get('name', '?')
