@@ -1,0 +1,41 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2024-12-09T09:10:55.939Z" class="post"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2024-12-06&amp;toDate=2024-12-12&amp;channel=devlog-together&amp;filter=#2024-12-09T09:10:55.939Z" class="date">2024-12-09 09:10:55</a> <div class="message"><p>I've implemented a rough-in of a VHLL (Very High Level Language) and used it to write a non-trivial program (a mutual multi-tasking kernel that does message passing, about 1,400 LOC). It generates Python, Common Lisp and Javascript (node.js) code, essentially using existing languages as assemblers. This uses a variety of techniques, including a DPL (diagrammatic programming language), t2t (text-to-text transpilation) and a jury-rigged REPL programming language workbench. Several mundane gotchas were wrestled down. Now, I'm wondering what direction to take this next. My thought is that this needs to run in a browser (Javascript, WASM?), but that exceeds my limited knowledge and will require going down new learning curves. Maybe I'm thinking too much inside-the-box? Comments (and help) appreciated. FWIW more detail: <a href="https://programmingsimplicity.substack.com/p/rt-now-what?r=1egdky">programmingsimplicity.substack.com/p/rt-now-what?r=1egdky</a> which further references <a href="https://programmingsimplicity.substack.com/p/rt-transpiler?r=1egdky">programmingsimplicity.substack.com/p/rt-transpiler?r=1egdky</a></p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2024-12-09T19:56:33.777Z" class="reply"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2024-12-06&amp;toDate=2024-12-12&amp;channel=devlog-together&amp;filter=#2024-12-09T19:56:33.777Z" class="date">2024-12-09 19:56:33</a> <div class="message"><p>I used to use <a href="https://haxe.org/">haxe.org</a> and quite liked it and thought it might be useful for places where you need to maintain business logic in multiple places, e.g. web app + mobile app. There is still quite a frustrating part where you have to normalize external connections e.g. UI as no cross language thing can really do that. Haxe was a compelling type system and existed before Typescript. I think thats what motivated me, so I would like to understand more on what the language RT actually looks like.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2024-12-10T15:07:39.333Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2024-12-07&amp;toDate=2024-12-13&amp;channel=devlog-together&amp;filter=#2024-12-10T15:07:39.333Z" class="date">2024-12-10 15:07:39</a> <div class="message"><p>I understand your question to be: "how to do cross-language stuff?". My answer to portability is in this <a href="https://programmingsimplicity.substack.com/p/text-based-portability?r=1egdky">article</a>.</p>
+<p>[meta: is this answering your question?]</p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://programmingsimplicity.substack.com/p/text-based-portability?r=1egdky">Text-Based Portability</a></p>
+<p>Towards Higher Level Syntax for Programming Languages 2024-12-10</p>
+</blockquote>
+</div> <div class="files"></div></div><div id="2024-12-11T11:48:00.136Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2024-12-08&amp;toDate=2024-12-14&amp;channel=devlog-together&amp;filter=#2024-12-11T11:48:00.136Z" class="date">2024-12-11 11:48:00</a> <div class="message"><p>... I forgot to mention LLMS ... Steve Phillips created a new language that he calls Voltair (formerly called Phi). He created a compiler for it in about 8 hours by getting Claude 3.5 Sonnet to write code that maps Voltair to legal Go code (approx. 2000 LOC). Voltair programs now build and run, while the Go compiler does the heavy lifting of doing the actual compilation work. As I understand it, Phillips started out by getting Claude to write OhmJS code to do the mapping.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2024-12-09T20:05:45.921Z" class="post"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2024-12-06&amp;toDate=2024-12-12&amp;channel=devlog-together&amp;filter=#2024-12-09T20:05:45.921Z" class="date">2024-12-09 20:05:45</a> <div class="message"><p>Miniscule progress on an alternative notebook renderer that hacks the observable runtime to capture all the values. Behold, "foo" is rendered in two places! One of those places is a giant cells containing every other cell in the notebook.... that is what visualizer will be. A cell that renders the whole. So then the outer HTML frame will not actually provide any DOM nodes for the runtime to render into externally, the engine will start and visualizer will dynamically create DOM nodes to render the rest from the inside. An inversion, much more hackable that way.</p>
+</div> <div class="attachments"></div> <div class="files"><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F0850BEDVAL.mov">synced_cells.mov</a></p>
+</div> <div class="replies"></div></div><div id="2024-12-13T10:26:30.295Z" class="post"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2024-12-10&amp;toDate=2024-12-16&amp;channel=devlog-together&amp;filter=#2024-12-13T10:26:30.295Z" class="date">2024-12-13 10:26:30</a> <div class="message"><p>Incremental progress documenting writing of a DSL and generating code from it. A quick overview video...</p>
+<p><a href="http://programmingsimplicity.substack.com/p/2024-12-12-building-a-dsl-example?r=1egdk">programmingsimplicity.substack.com/p/2024-12-12-building-a-dsl-example?r=1egdk</a></p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>
