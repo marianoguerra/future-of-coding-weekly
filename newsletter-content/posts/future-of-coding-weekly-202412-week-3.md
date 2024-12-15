@@ -1,0 +1,135 @@
+<!--
+.. title: Future of Coding Weekly 2024/12 Week 3
+.. slug: future-of-coding-weekly-202412-week-3
+.. date: 2024-12-16 00:24:05 UTC+01:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+📺 Variable design 📢 FoC Virtual Meetup 2025.1 📝 Problems people are motivated by
+
+# Our Work
+
+## 🧮 [Pictures of Pensions – Calc with Dec](https://calcwithdec.dev/posts/pictures-pensions/) via **Declan**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/share-your-work.html#2024-12-09T23:14:00.913Z)
+
+I made a 'narrative visualization' blog post that's about pension savings. Like other places I use calculang it combines reactive programming/visualization (OJS and Vega) and calculang models (a pension calculator, which is using a separate income tax model for a tax relief calc- an example of model composition)
+
+
+
+FP nature of calculang and no state and FRP nature of the rest makes it kinda easy to put together - Some viz signals and some calculang parameters condition on  `progress`  which increments as the user scrolls (the reactive systems do the rest).
+
+
+
+I'd like to bring a few tools together to streamline DX for this kind of output for calculang models - it could be even more declarative. (+see [Fidyll](https://github.com/idyll-lang/fidyll))
+
+Happy to hear any feedback or suggestions.
+
+## 🎥 [Live Coding an Interactive Tool with Val Town & AI](https://www.youtube.com/watch?v=PPLquvGgsiU) via [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/share-your-work.html#2024-12-11T14:50:39.953Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/PPLquvGgsiU/hqdefault.jpg)
+
+Live Coding Interactive Tools with Val Town & LLMs
+
+
+
+Quickly prototype interactive data components without the need for local installation or setup
+
+
+
+First FoC tool collab? 🙂
+
+## 🖩 [Mortgage Calculator](http://voicecarrier.com/lab/calc/calc.html) via **edward**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/share-your-work.html#2024-12-15T21:13:40.953Z)
+
+I wrote a Mortgage calculator web app, suitable for use with Mobile devices, using my Super Duper Pythonic language. It makes it easy to build rubbery user interfaces that adapt to the device size by specifying things using proportions when possible. Keeps things legible without fussing over measurements.  App is at [voicecarrier.com/lab/calc/calc.html](http://voicecarrier.com/lab/calc/calc.html), source code is at [screenshot of calculator](https://github.com/magicmouse/beads-examples/blob/master/Example%20-%20Mortgage/image.png)
+
+
+
+I couldn't stand how complex the web is to build for, especially when you want to make things legible.
+
+
+
+The key strategy for simplification is to make the layout and rendering part of the language, and having all subdivision of the screen be executable statements that can be put into loops and conditional clauses, making the entire page layout programmatic as opposed to static, which is the great flaw of HTML.
+
+# Devlog Together
+
+## 📝 [RT - Now What? Towards Higher Level Syntax for Programming Languages](https://programmingsimplicity.substack.com/p/rt-now-what?r=1egdky) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/devlog-together.html#2024-12-09T09:10:55.939Z)
+
+I've implemented a rough-in of a VHLL (Very High Level Language) and used it to write a non-trivial program (a mutual multi-tasking kernel that does message passing, about 1,400 LOC). It generates Python, Common Lisp and Javascript (node.js) code, essentially using existing languages as assemblers. This uses a variety of techniques, including a DPL (diagrammatic programming language), t2t (text-to-text transpilation) and a jury-rigged REPL programming language workbench. Several mundane gotchas were wrestled down. Now, I'm wondering what direction to take this next. My thought is that this needs to run in a browser (Javascript, WASM?), but that exceeds my limited knowledge and will require going down new learning curves. Maybe I'm thinking too much inside-the-box? Comments (and help) appreciated. FWIW more detail: [RT - Now What?](https://programmingsimplicity.substack.com/p/rt-now-what?r=1egdky) which further references [RT Transpiler](https://programmingsimplicity.substack.com/p/rt-transpiler?r=1egdky)
+
+## 💬 [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/devlog-together.html#2024-12-09T20:05:45.921Z)
+
+Miniscule progress on an alternative notebook renderer that hacks the observable runtime to capture all the values. Behold, "foo" is rendered in two places! One of those places is a giant cells containing every other cell in the notebook.... that is what visualizer will be. A cell that renders the whole. So then the outer HTML frame will not actually provide any DOM nodes for the runtime to render into externally, the engine will start and visualizer will dynamically create DOM nodes to render the rest from the inside. An inversion, much more hackable that way.
+
+🎥 [synced cells](http://history.futureofcoding.org/history/msg_files/F08/F0850BEDVAL.mov)
+
+
+## 📝 [Building A DSL - Example DSL That Generates Python Code](http://programmingsimplicity.substack.com/p/2024-12-12-building-a-dsl-example?r=1egdk) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/devlog-together.html#2024-12-13T10:26:30.295Z)
+
+Incremental progress documenting writing of a DSL and generating code from it. A quick overview video...
+
+# Thinking Together
+
+## 📝 [Problems people are motivated by](https://wiki.futureofcoding.org/problems/) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/thinking-together.html#2024-12-09T04:13:40.576Z)
+
+I still think about [this](https://wiki.futureofcoding.org/problems/) every once in a while.
+
+![problems.png](http://history.futureofcoding.org/history/msg_files/F08/F08470NSM35.png)
+
+![problems2.png](http://history.futureofcoding.org/history/msg_files/F08/F08447VUFPX.png)
+
+
+
+## 🎥 [Marcin Ignac, Variable.io - Variable design /KIKK24](https://www.youtube.com/watch?v=sBcrsF6ahm8) via [Jack Rusher](https://twitter.com/jackrusher)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/linking-together.html#2024-12-09T15:15:51.490Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/sBcrsF6ahm8/hqdefault.jpg)
+
+If you liked the above project, you might also enjoy [Marcin Ignac](https://twitter.com/marcinignac)’s talk from KIKK 2024, which features more of his studio’s work and some additional insights into their in-house visual programming environment.
+
+# 🤖
+
+## 💬 [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/of-ai.html#2024-12-13T17:43:49.468Z)
+
+we just got Devin, pretty slick slack based workflow. Still teaching it we use python 3.10 but it seems like its quite useful for dependabot alerts. I am seeing if it can do a decent refactor or not.
+
+
+
+# Present Company
+
+## 📢 [Virtual Meetup 2025.1](https://lu.ma/vxjq0rbj) via [Maikel van de Lisdonk](https://www.devhelpr.com/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2024/12/W3/present-company.html#2024-12-13T08:42:11.467Z)
+
+Hi, on wednesday 22th jan 2025 (16:00 UTC) we will have our first online meetup of 2025 and we will continue in the same format with short live demo's and presentations from our community .. the meetup is also on [Virtual Meetup 2025.1](https://lu.ma/vxjq0rbj) .. if anyone wants to give a demo about their project or give a short talk then please let us know here in the thread of this message 😀
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
