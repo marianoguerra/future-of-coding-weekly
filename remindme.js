@@ -28,9 +28,9 @@ function generateScriptForThisWeek(now, dayNumber) {
   console.log(`vim future-of-newsletters/mail-sent/${dateDir}/mail.html`);
   console.log(`vim future-of-newsletters/mail-sent/${dateDir}/mail.txt`);
   console.log(
-    `cd newsletter-content;nikola new_post -f markdown -t "${issueTitle}" -e`
+    `cd newsletter-content;uv tool run nikola new_post -f markdown -t "${issueTitle}" -e`
   );
-  console.log('nikola clean; nikola build; nikola serve');
+  console.log('uv tool run nikola clean; uv tool run nikola build; uv tool run nikola serve');
   console.log('cd ..');
   console.log('git add newsletter*');
   console.log(`git add future-of-newsletters/mail-sent/${dateDir}/`);
