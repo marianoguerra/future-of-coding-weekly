@@ -1,0 +1,238 @@
+<!--
+.. title: Future of Coding Weekly 2025/01 Week 2
+.. slug: future-of-coding-weekly-202501-week-2
+.. date: 2025-01-13 14:41:47 UTC+01:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+💻 Moldable Webfile 📝 Coding is not the new literacy 🖐 Wrapper: Better web-based prototypes for iPad
+
+# Our Work
+
+## 📝 [AI risk I don’t see discussed](https://guyren.me/2024/01/05/AIs-are-Prophets.html) via **Guyren Howe**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/share-your-work.html#2025-01-06T19:30:04.839Z)
+
+Hopefully this is regarded as sufficiently on topic…
+
+
+
+I’ve started a personal blog. My first post is on an [AI risk I don’t see discussed](https://guyren.me/2024/01/05/AIs-are-Prophets.html).
+
+
+
+## 💻 [Moldable Webfile (prototype II)](https://tomlarkworthy.github.io/lopecode/webpage.html) via [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/share-your-work.html#2025-01-06T22:24:08.512Z)
+
+OK I finally put all the pieces together into a coherent whole but its still an MVP
+
+[tomlarkworthy.github.io/lopecode/webpage.html](https://tomlarkworthy.github.io/lopecode/webpage.html)
+
+a self-hosted, self-sustainable, recursively exportable, offline-first, file-first, hermetic, web-based programming substrate based on the Observable runtime (and the source code is an Observable notebook)
+
+I am seeking ideas on what to do next with it next? What would make it desirable to use for a project? There is an AI in it but I don't have a UI for it. Or maybe I figure out how to do content editable cells, or maybe port some bigger demos (e.g. 3d stuff, maybe VR?)
+
+
+
+## 🖐 [Wrapper: Better web-based prototypes for iPad](https://github.com/inkandswitch/wrapper) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/share-your-work.html#2025-01-08T20:50:28.471Z)
+
+Here's a little thing I made that solves an extremely specific problem.
+
+
+
+At Ink & Switch, one of the things we're researching is a new kind of "dynamic notebook" — something sort of like a pad of paper, but programmable. As part of this research we build a lot of little prototype apps. We use the web platform for prototyping because the iteration time is really fast. We run these prototypes on iPad, because the form factor (tablet + stylus) is very close to what we have in mind for our dynamic notebook. But a limitation of the Safari browser on iPad is that you can't receive simultaneous input from the Apple Pencil and your fingers.
+
+
+
+To work around this limitation, we built a little native iPad app in Swift. It loads a URL of your choosing (ie: the live-reloading dev server running your prototype de jour), then captures all incoming touch and pencil events on the native side and forwards them to the JS context. Just like that, your JS code gets full-fidelity (ie: 240 Hz) simultaneous input from fingers and the pen. And, if you want to hack in additional features that aren't available via the browser — like haptic feedback — you can easily whip that up on the Swift side.
+
+
+
+I've just packaged-up this Xcode project and some example JS code and put them up on Github: [Wrapper](https://github.com/inkandswitch/wrapper). The code is covered by the Unlicense (public domain) so that you can scavenge this thing for parts without worry about credit or whatever. Just make shit!
+
+
+
+So, if you have a Mac, an iPad, and an Apple Pencil… and you want to do some experiments with rich gestural interfaces… and you want to write those experiments in JS… and you're in a hurry… then this project  _might_  be useful for you :)
+
+
+
+
+## 📝 [The Organization of Digital Information Systems](https://github.com/altocodenl/todis) via **Federico Pereiro**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/share-your-work.html#2025-01-09T22:03:15.528Z)
+
+Hi everyone! Over the last three months I've written a treatise (fancy noun!) with a view to understand computation systematically. My goal was to create, at least for myself, a coherent picture of what's essential about all this bit pushing we do individually and societally. I intend that picture to be empowering and actionable to those of us trying to make sense of systems, as well as build (much) better systems.
+
+
+
+It's about 40-50 pages long, so it's not short, and probably quite dense, despite me trying to make it as conversational as possible. I have a visual summary of it linked at the top but it's yet incomplete (I'll finish it tomorrow).
+
+
+
+My goal in posting it here is to get some feedback. I'm especially looking for thoughtful disagreement, particularly concerning my main points. Something quite at the top of Paul Graham's disagreement hierarchy. I'm really open to challenge to my main points; if what I wrote is any good, it should be anti-fragile and get better with a good critique. And if it doesn't, hey, at least I learned something!  And I'll be happy to share what I learn from you too (as long as you manage to convince me).
+
+
+
+Here it goes: [github.com/altocodenl/todis](https://github.com/altocodenl/todis)
+
+
+## 💬 [Cole Lawrence](https://github.com/colelawrence)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/share-your-work.html#2025-01-11T12:54:02.219Z)
+
+I’m working on a new way of writing “dense” UI inspired by MVVM + ECS, and this is the debugger for the “View Model Components” (VMCs?) in the UI
+
+The problem I’m usually facing with my apps is that we aim to pack many many features into small areas (for example: context menus, keyboard shortcuts, focus management, spatial navigation, version control diff presentation, multiplayer user presence, and  _then_  the parts that are unique to your app).
+
+My goal in managing this complexity is to be able to write each individual part of the application in its own single file. All things related to “module” editing, diffing, keyboard shortcuts, spatial navigation, CRDT sync, etc should be in a single file. Then, each shared behavior’s logic are implemented in their own single files. This is what is best as well for LLMs to understand and build out features without needing to understand everything all at once.
+
+Here, I’ve taken a video of just the “debugger” I developed in the last two days to observe the state of all these components for each item in the world.
+
+🎥 [Phosphor](http://history.futureofcoding.org/history/msg_files/F08/F088B41P5QC.mp4)
+
+
+# Devlog Together
+
+## 💬 [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/devlog-together.html#2025-01-07T00:22:08.833Z)
+
+Progress on "Emacs for visualizing LÖVE apps": I have the first message between windows. I press a key, the key gets processed by the first window's keymap and dispatched to a function, which reads the selection, parses it and sends a message to the second window. The second window then responds to the message by adding a new object into its scene.
+
+
+
+In principle, this approach feels nice and timeless. I think "every window is a scene and runs its own event loop" is more general a foundation than Emacs's "every window is a buffer containing text." It feels realistic to provide this foundation alongside a wide library of primitives for text rendering and analysis.
+
+
+
+In practice, I've been struggling to find a focus, and I'm probably going to focus on creating tools for myself to more visually debug the LÖVE apps I create. I'm not going to focus at the moment on:
+
+
+
+
+* editing the source code for the environment  _in_  the environment, the way you can modify Emacs sources from within Emacs. I already have a way to do that: you open [a second window](https://git.sr.ht/~akkartik/driver.love) and modify the app live as it runs.
+* interfacing with other processes or tools besides LÖVE, the way Emacs lets you connect to any programming language REPL.
+
+Both these are totally feasible. I don't think any crucial infrastructure is missing here. They're just not priorities for me right now. I plan to focus on more easily adding new windows to a LÖVE app, and creating new kinds of debug UIs in them.
+
+
+
+One open question: supporting focus follows mouse. I don't know if it's possible in Emacs, and even if not I think it makes a lot more sense in a more graphics- and mouse-centered environment. Again, not a priority but perhaps this is a sign this foundation is not quite as timeless as I would like.
+
+🎥 [motley message](http://history.futureofcoding.org/history/msg_files/F08/F087HJGN5FU.webm)
+
+
+
+## 💬 [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/devlog-together.html#2025-01-11T06:32:23.570Z)
+
+The kids have been playing with a pen on a pendulum, I don't know what the technical term is for it, but that didn't stop me from playing with it. This way I can adjust the friction.
+
+🎥 [pendulum](http://history.futureofcoding.org/history/msg_files/F08/F0881G9B2LE.webm)
+
+
+## 💬 [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/devlog-together.html#2025-01-12T13:24:14.649Z)
+
+I think there is a shortcut to direct manipulation by "inverting" grammar of graphics.
+
+🎥 [direct manipulation](http://history.futureofcoding.org/history/msg_files/F08/F088AA7G0RG.mov)
+
+# Reading Together
+
+## 📝 [Naur: Programming as Theory Building](https://pages.cs.wisc.edu/~remzi/Naur.pdf) via **Federico Pereiro**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/reading-together.html#2025-01-09T16:51:34.280Z)
+
+My first time reading a classic: [Naur on programming as theory building]([pages.cs.wisc.edu/~remzi/Naur.pdf](https://pages.cs.wisc.edu/~remzi/Naur.pdf)).
+
+
+
+Loved the article and disagreed with almost everything. Sharing my private thoughts without polish or much justification, in case someone's interested in a dissenting opinion 😅
+
+- I think Naur is not quite right. It's not theory building. It's the building of a representation of reality, that in itself can be a part of reality.
+
+- My take: if programs are much more readable, and we have a set of universal constructs for thinking programs, then reading and modifying a program doesn't require an external entity. There needn't be a private theory of the program except for the program itself (and any documentation in natural language). The theory should be readable from the constraints and the words/calls used in the system.
+
+- Simplicity can be evaluated as relative length of two solutions that do the same thing.
+
+- "Theory" can be rediscovered by studying both the problem domain and the solution.
+
+- Naur's concept of the theory of a program is downright [animist](https://en.wikipedia.org/wiki/Animism). The theory is an entity living in the programmers that created the program, and can only be communicated by them while they are working in the program. When the program stops being worked up, the theory quickly fades and dies. No amount of program or documentation reading is going to revive it.
+
+- I think a more accurate and constructive view of programming considers it akin to an intellectual or scientific discipline, where a thread can be maintained over time through language, even if the chain is not transmitted orally.
+
+# Content
+
+## 🧑‍🏫 [PhD in Digital Movement for Interaction Design](https://www.jobbnorge.no/en/available-jobs/job/272911/phd-in-digital-movement-for-interaction-design) via **Joel Gethin Lewis**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/linking-together.html#2025-01-06T17:01:48.984Z)
+
+Opportunity for a fully funded practice based PhD in Digital Movement for Interaction Design in Oslo, Norway, through my friend Lise Hansen: [jobbnorge.no/en/available-jobs/job/272911/phd-in-digital-movement-for-interaction-design](https://www.jobbnorge.no/en/available-jobs/job/272911/phd-in-digital-movement-for-interaction-design)
+
+
+
+## 🐦 [GalaxyBrain. A powerful JSON-based information operating system](https://x.com/jon/status/1876611121886445574) via [Marcin Ignac](https://twitter.com/marcinignac)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/linking-together.html#2025-01-08T14:40:15.845Z)
+
+"GalaxyBrain. A powerful JSON-based information operating system. " - looks super interesting 
+
+
+## 📝 [Coding is not the new literacy](http://www.chris-granger.com/2015/01/26/coding-is-not-the-new-literacy/) via [Oleksandr Kryvonos](https://twitter.com/o_kryvonos)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/linking-together.html#2025-01-08T21:26:19.847Z)
+
+my notes app suddenly revealed the link I read a while ago, due to the fact that I rewrote search function
+
+## 🎥 [Proofs without words: the example of the Ramanujan continued fraction](https://www.youtube.com/watch?v=jQchTFnKBQs&amp;ab_channel=matsciencechannel) via [Mattia Fregola](https://twitter.com/MattiaFregola)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/linking-together.html#2025-01-10T00:04:36.921Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/jQchTFnKBQs/hqdefault.jpg)
+
+Proofs without words: the example of the Ramanujan continued fraction
+
+## 🎥 [SIGGRAPH Asia 2024 – Real-Time Live!](https://www.youtube.com/watch?v=PsbuACCnQFI&amp;t=483s) via **Dany**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/linking-together.html#2025-01-11T06:10:38.661Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/PsbuACCnQFI/hqdefault.jpg)
+
+Interactive Music Effect Playground, may be of interest.
+
+# Present Company
+
+## 💬 **Tomas Petricek**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/present-company.html#2025-01-06T22:13:21.879Z)
+
+For a research project we're doing, I'm looking for some Excel experts - if you (or someone you know) have done something non-trivial with Excel, please let me know! We are thinking of doing some additions to the spreadsheet programming model and are curious how people currently solve the kind of problems we are interested in - so we want to ask people to solve a series of task and see how they would think about them. (I know it is hard to say who is "Excel expert" - ideally, we are looking for people who will have some thoughts about different ways of structuring larger things or encoding some kind of simulations using Excel.)
+
+
+
+## 📞 [Call for Case Studies](https://rosenfeldmedia.com/designing-with-ai/call-for-case-studies/) via [Vitorio Miliano](http://vitor.io/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/01/W2/present-company.html#2025-01-07T16:45:33.579Z)
+
+Hey, folks, if you're working with AI to help you spec, prototype, or build your projects; or if you're designing forward-looking interfaces to help utilize or apply AI, I'd encourage you to put in for a talk at Rosenfeld Media's upcoming Designing with AI 2025 conference.  A colleague is doing the curation, and they're looking especially for cutting edge explorations like get shown here on the regular (just looking in **#share-your-work**, [Mariano Guerra](https://twitter.com/warianoguerra), **@Francisco Garau**, [Maikel van de Lisdonk](https://www.devhelpr.com/), **@Pavel Mikhailovskii**!).  The CfP is short and it's currently slated to close this week: [rosenfeldmedia.com/designing-with-ai/call-for-case-studies](https://rosenfeldmedia.com/designing-with-ai/call-for-case-studies/) (happy to pass along any questions if you have them).  The conference is fully virtual, they have a great speaker prep process, and there's an honorarium.  Thanks!
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
