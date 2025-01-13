@@ -1,0 +1,249 @@
+[
+    {
+        "text": "I\u2019m working on a new way of writing \u201cdense\u201d UI inspired by MVVM + ECS, and this is the debugger for the \u201cView Model Components\u201d (VMCs?) in the UI\nThe problem I\u2019m usually facing with my apps is that we aim to pack many many features into small areas (for example: context menus, keyboard shortcuts, focus management, spatial navigation, version control diff presentation, multiplayer user presence, and _then_ the parts that are unique to your app).\nMy goal in managing this complexity is to be able to write each individual part of the application in its own single file. All things related to \u201cmodule\u201d editing, diffing, keyboard shortcuts, spatial navigation, CRDT sync, etc should be in a single file. Then, each shared behavior\u2019s logic are implemented in their own single files. This is what is best as well for LLMs to understand and build out features without needing to understand everything all at once.\nHere, I\u2019ve taken a video of just the \u201cdebugger\u201d I developed in the last two days to observe the state of all these components for each item in the world.",
+        "files": [
+            {
+                "id": "F088B41P5QC",
+                "created": 1736599684,
+                "timestamp": 1736599684,
+                "name": "2025-01-11 Phosphor at 09.44AM.mp4",
+                "title": "2025-01-11 Phosphor at 09.44AM.mp4",
+                "mimetype": "video/mp4",
+                "filetype": "mp4",
+                "pretty_type": "MPEG 4 Video",
+                "user": "UFPPABQ7P",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 28164286,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "transcription": {
+                    "status": "none"
+                },
+                "mp4": "https://files.slack.com/files-tmb/T5TCAFTA9-F088B41P5QC-84f45a77c9/2025-01-11_phosphor_at_09.44am.mp4",
+                "url_private": "https://files.slack.com/files-tmb/T5TCAFTA9-F088B41P5QC-84f45a77c9/2025-01-11_phosphor_at_09.44am.mp4",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F088B41P5QC/download/2025-01-11_phosphor_at_09.44am.mp4",
+                "hls": "https://files.slack.com/files-tmb/T5TCAFTA9-F088B41P5QC-84f45a77c9/file.m3u8?_xcb=96a1c",
+                "hls_embed": "data:application/vnd.apple.mpegurl;base64,I0VYVE0zVQojRVhULVgtVkVSU0lPTjozCiNFWFQtWC1JTkRFUEVOREVOVC1TRUdNRU5UUwojRVhULVgtU1RSRUFNLUlORjpCQU5EV0lEVEg9MjQxMzI2MSxBVkVSQUdFLUJBTkRXSURUSD0xODkxMTg1LENPREVDUz0iYXZjMS42NDAwMjgsbXA0YS40MC41IixSRVNPTFVUSU9OPTE0NzJ4MTA4MCxGUkFNRS1SQVRFPTI5Ljk3MApkYXRhOmFwcGxpY2F0aW9uL3ZuZC5hcHBsZS5tcGVndXJsO2Jhc2U2NCxJMFZZVkUwelZRb2pSVmhVTFZndFZrVlNVMGxQVGpvekNpTkZXRlF0V0MxVVFWSkhSVlJFVlZKQlZFbFBUam8zQ2lORldGUXRXQzFOUlVSSlFTMVRSVkZWUlU1RFJUb3hDaU5GV0ZRdFdDMVFURUZaVEVsVFZDMVVXVkJGT2xaUFJBb2pSVmhVU1U1R09qWXVNREEyTEFwb2RIUndjem92TDJacGJHVnpMbk5zWVdOckxtTnZiUzltYVd4bGN5MTBiV0l2VkRWVVEwRkdWRUU1TFVZd09EaENOREZRTlZGRExUZzBaalExWVRjM1l6a3ZabWxzWlY5SVh6STJORjh4T1RJd2VERXdPREJmTmpVd01FdENVRk5mTjFGV1FsSmZNREF3TURFdWRITUtJMFZZVkVsT1JqbzJMakF3Tml3S2FIUjBjSE02THk5bWFXeGxjeTV6YkdGamF5NWpiMjB2Wm1sc1pYTXRkRzFpTDFRMVZFTkJSbFJCT1MxR01EZzRRalF4VURWUlF5MDROR1kwTldFM04yTTVMMlpwYkdWZlNGOHlOalJmTVRreU1IZ3hNRGd3WHpZMU1EQkxRbEJUWHpkUlZrSlNYekF3TURBeUxuUnpDaU5GV0ZSSlRrWTZOaTR3TURZc0NtaDBkSEJ6T2k4dlptbHNaWE11YzJ4aFkyc3VZMjl0TDJacGJHVnpMWFJ0WWk5VU5WUkRRVVpVUVRrdFJqQTRPRUkwTVZBMVVVTXRPRFJtTkRWaE56ZGpPUzltYVd4bFgwaGZNalkwWHpFNU1qQjRNVEE0TUY4Mk5UQXdTMEpRVTE4M1VWWkNVbDh3TURBd015NTBjd29qUlZoVVNVNUdPall1TURBMkxBcG9kSFJ3Y3pvdkwyWnBiR1Z6TG5Oc1lXTnJMbU52YlM5bWFXeGxjeTEwYldJdlZEVlVRMEZHVkVFNUxVWXdPRGhDTkRGUU5WRkRMVGcwWmpRMVlUYzNZemt2Wm1sc1pWOUlYekkyTkY4eE9USXdlREV3T0RCZk5qVXdNRXRDVUZOZk4xRldRbEpmTURBd01EUXVkSE1LSTBWWVZFbE9Sam8yTGpBd05pd0thSFIwY0hNNkx5OW1hV3hsY3k1emJHRmpheTVqYjIwdlptbHNaWE10ZEcxaUwxUTFWRU5CUmxSQk9TMUdNRGc0UWpReFVEVlJReTA0TkdZME5XRTNOMk01TDJacGJHVmZTRjh5TmpSZk1Ua3lNSGd4TURnd1h6WTFNREJMUWxCVFh6ZFJWa0pTWHpBd01EQTFMblJ6Q2lORldGUkpUa1k2Tmk0d01EWXNDbWgwZEhCek9pOHZabWxzWlhNdWMyeGhZMnN1WTI5dEwyWnBiR1Z6TFhSdFlpOVVOVlJEUVVaVVFUa3RSakE0T0VJME1WQTFVVU10T0RSbU5EVmhOemRqT1M5bWFXeGxYMGhmTWpZMFh6RTVNakI0TVRBNE1GODJOVEF3UzBKUVUxODNVVlpDVWw4d01EQXdOaTUwY3dvalJWaFVTVTVHT2pBdU5qWTNMQXBvZEhSd2N6b3ZMMlpwYkdWekxuTnNZV05yTG1OdmJTOW1hV3hsY3kxMGJXSXZWRFZVUTBGR1ZFRTVMVVl3T0RoQ05ERlFOVkZETFRnMFpqUTFZVGMzWXprdlptbHNaVjlJWHpJMk5GOHhPVEl3ZURFd09EQmZOalV3TUV0Q1VGTmZOMUZXUWxKZk1EQXdNRGN1ZEhNS0kwVllWQzFZTFVWT1JFeEpVMVFLCg==",
+                "mp4_low": "https://files.slack.com/files-tmb/T5TCAFTA9-F088B41P5QC-84f45a77c9/2025-01-11_phosphor_at_09.44am_trans.mp4",
+                "duration_ms": 36703,
+                "media_display_type": "video",
+                "thumb_video": "https://files.slack.com/files-tmb/T5TCAFTA9-F088B41P5QC-84f45a77c9/2025-01-11_phosphor_at_09.44am_thumb_video.jpeg",
+                "thumb_video_w": 2256,
+                "thumb_video_h": 1656,
+                "permalink": "https://futureofcoding.slack.com/files/UFPPABQ7P/F088B41P5QC/2025-01-11_phosphor_at_09.44am.mp4",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F088B41P5QC-7ca7f038aa",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible",
+                "media_progress": {
+                    "offset_ms": 36773,
+                    "max_offset_ms": 36773,
+                    "duration_ms": 36773,
+                    "media_watched": true
+                }
+            }
+        ],
+        "upload": false,
+        "user": "UFPPABQ7P",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "XYhn5",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I\u2019m working on a new way of writing \u201cdense\u201d UI inspired by MVVM + ECS, and this is the debugger for the \u201cView Model Components\u201d (VMCs?) in the UI\nThe problem I\u2019m usually facing with my apps is that we aim to pack many many features into small areas (for example: context menus, keyboard shortcuts, focus management, spatial navigation, version control diff presentation, multiplayer user presence, and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "then",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " the parts that are unique to your app).\nMy goal in managing this complexity is to be able to write each individual part of the application in its own single file. All things related to \u201cmodule\u201d editing, diffing, keyboard shortcuts, spatial navigation, CRDT sync, etc should be in a single file. Then, each shared behavior\u2019s logic are implemented in their own single files. This is what is best as well for LLMs to understand and build out features without needing to understand everything all at once.\nHere, I\u2019ve taken a video of just the \u201cdebugger\u201d I developed in the last two days to observe the state of all these components for each item in the world."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1736600042.219749",
+        "client_msg_id": "72703a82-a0f3-48e8-bbca-741eef7b3803",
+        "thread_ts": "1736600042.219749",
+        "reply_count": 3,
+        "reply_users_count": 2,
+        "latest_reply": "1736619961.092209",
+        "reply_users": [
+            "UFPPABQ7P",
+            "UBN9AFS0N"
+        ],
+        "is_locked": false,
+        "subscribed": true,
+        "last_read": "1736603791.309209",
+        "reactions": [
+            {
+                "name": "cake",
+                "users": [
+                    "UBN9AFS0N",
+                    "U85HCL7JP"
+                ],
+                "count": 2
+            },
+            {
+                "name": "+1",
+                "users": [
+                    "U0887QU9G2V"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UFPPABQ7P",
+        "type": "message",
+        "ts": "1736600168.792409",
+        "edited": {
+            "user": "UFPPABQ7P",
+            "ts": "1736600352.000000"
+        },
+        "client_msg_id": "3c241a6f-ecf5-469a-90f1-53bd6a8dc909",
+        "text": "cc <@U05M5A8E0NT> <@U07HKR7UZB2> <@UT9TWSZB5> <@UBN9AFS0N> <@U01PX5VD3S9> <@U03HC3XHZGW>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1736600042.219749",
+        "parent_user_id": "UFPPABQ7P",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "liGEi",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "cc "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U05M5A8E0NT"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U07HKR7UZB2"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UT9TWSZB5"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UBN9AFS0N"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U01PX5VD3S9"
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "U03HC3XHZGW"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UBN9AFS0N",
+        "type": "message",
+        "ts": "1736603791.309209",
+        "client_msg_id": "4660dd46-dc4d-40b5-8a57-7d8ef066256c",
+        "text": "nice! are you presenting it in the next FoC virtual meetup? :slightly_smiling_face:",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1736600042.219749",
+        "parent_user_id": "UFPPABQ7P",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "MO0k3",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "nice! are you presenting it in the next FoC virtual meetup? "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "slightly_smiling_face",
+                                "unicode": "1f642"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UFPPABQ7P",
+        "type": "message",
+        "ts": "1736619961.092209",
+        "client_msg_id": "432B688F-3CE7-47A9-97EB-60C4F059C0E0",
+        "text": "Hmm last time I had shown the prompt editor, I had some really great feedback that I should somehow demonstrate the development cycle using the dev tool so I kinda wanna think about how I can demonstrate that with this",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1736600042.219749",
+        "parent_user_id": "UFPPABQ7P",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nbMjv",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Hmm last time I had shown the prompt editor, I had some really great feedback that I should somehow demonstrate the development cycle using the dev tool so I kinda wanna think about how I can demonstrate that with this"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
