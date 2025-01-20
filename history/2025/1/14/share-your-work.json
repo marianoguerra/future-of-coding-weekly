@@ -1,0 +1,204 @@
+[
+    {
+        "text": "Making direct manipulation diagrams fast to develop.\n\nSo this work was motivated by \"<https://tonsky.me/blog/diagrams/|Where Should Visual Programming Go?>\". I kinda thought dataviz driven development was a step in the right direction but some people here though unidirectional was too limiting. So it made me think about what a bidirection diagram was.\n\nGrammar of graphics provides a nice abstraction of what a scale actually *is.* It's a mapping from dataspace to pixel space. A bidireciton diagram might go in the other direction, mouse movements (actions) are mapped back to changes in data space. Once you consider libraries like Plot are very liberal on what scales they support: non-linear, categorical etc. then the ability to manipulate data points through a diagram is pretty compelling. You stop thinking about data as external data but as control surfaces that live in a weird high dimensional configuration space of your choosing.\n\nInverting scales is reasonably easy, once that general primitive is in place  then you get a shit ton of possible gizmos that take very little time to make look good and work because all the heavy lifting is done in the other direction using an off-the-shelf dataviz library.\n\nFull explanation and code in <https://observablehq.com/@tomlarkworthy/manipulate|a notebook> although the one-weird invert trick is quite general.",
+        "files": [
+            {
+                "id": "F0887K0E431",
+                "created": 1736886361,
+                "timestamp": 1736886361,
+                "name": "direct_manipulation.mov",
+                "title": "direct_manipulation.mov",
+                "mimetype": "video/quicktime",
+                "filetype": "mov",
+                "pretty_type": "QuickTime Movie",
+                "user": "U02E4DAQGSZ",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 12825042,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "transcription": {
+                    "status": "none"
+                },
+                "mp4": "https://files.slack.com/files-tmb/T5TCAFTA9-F0887K0E431-e7145a8b81/direct_manipulation.mp4",
+                "url_private": "https://files.slack.com/files-tmb/T5TCAFTA9-F0887K0E431-e7145a8b81/direct_manipulation.mp4",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F0887K0E431/download/direct_manipulation.mov",
+                "hls": "https://files.slack.com/files-tmb/T5TCAFTA9-F0887K0E431-e7145a8b81/file.m3u8?_xcb=f235c",
+                "hls_embed": "data:application/vnd.apple.mpegurl;base64,I0VYVE0zVQojRVhULVgtVkVSU0lPTjozCiNFWFQtWC1JTkRFUEVOREVOVC1TRUdNRU5UUwojRVhULVgtU1RSRUFNLUlORjpCQU5EV0lEVEg9MTQ3MTY5NixBVkVSQUdFLUJBTkRXSURUSD0xMDMxNzc3LENPREVDUz0iYXZjMS42NDAwMjgsbXA0YS40MC41IixSRVNPTFVUSU9OPTE1MDJ4MTA4MCxGUkFNRS1SQVRFPTI5Ljk3MApkYXRhOmFwcGxpY2F0aW9uL3ZuZC5hcHBsZS5tcGVndXJsO2Jhc2U2NCxJMFZZVkUwelZRb2pSVmhVTFZndFZrVlNVMGxQVGpvekNpTkZXRlF0V0MxVVFWSkhSVlJFVlZKQlZFbFBUam8zQ2lORldGUXRXQzFOUlVSSlFTMVRSVkZWUlU1RFJUb3hDaU5GV0ZRdFdDMVFURUZaVEVsVFZDMVVXVkJGT2xaUFJBb2pSVmhVU1U1R09qWXVNREEyTEFwb2RIUndjem92TDJacGJHVnpMbk5zWVdOckxtTnZiUzltYVd4bGN5MTBiV0l2VkRWVVEwRkdWRUU1TFVZd09EZzNTekJGTkRNeExXVTNNVFExWVRoaU9ERXZabWxzWlY5SVh6STJORjh4T1RJd2VERXdPREJmTmpVd01FdENVRk5mTjFGV1FsSmZNREF3TURFdWRITUtJMFZZVkVsT1JqbzJMakF3Tml3S2FIUjBjSE02THk5bWFXeGxjeTV6YkdGamF5NWpiMjB2Wm1sc1pYTXRkRzFpTDFRMVZFTkJSbFJCT1MxR01EZzROMHN3UlRRek1TMWxOekUwTldFNFlqZ3hMMlpwYkdWZlNGOHlOalJmTVRreU1IZ3hNRGd3WHpZMU1EQkxRbEJUWHpkUlZrSlNYekF3TURBeUxuUnpDaU5GV0ZSSlRrWTZOaTR3TURZc0NtaDBkSEJ6T2k4dlptbHNaWE11YzJ4aFkyc3VZMjl0TDJacGJHVnpMWFJ0WWk5VU5WUkRRVVpVUVRrdFJqQTRPRGRMTUVVME16RXRaVGN4TkRWaE9HSTRNUzltYVd4bFgwaGZNalkwWHpFNU1qQjRNVEE0TUY4Mk5UQXdTMEpRVTE4M1VWWkNVbDh3TURBd015NTBjd29qUlZoVVNVNUdPall1TURBMkxBcG9kSFJ3Y3pvdkwyWnBiR1Z6TG5Oc1lXTnJMbU52YlM5bWFXeGxjeTEwYldJdlZEVlVRMEZHVkVFNUxVWXdPRGczU3pCRk5ETXhMV1UzTVRRMVlUaGlPREV2Wm1sc1pWOUlYekkyTkY4eE9USXdlREV3T0RCZk5qVXdNRXRDVUZOZk4xRldRbEpmTURBd01EUXVkSE1LSTBWWVZFbE9Sam94TGpVd01pd0thSFIwY0hNNkx5OW1hV3hsY3k1emJHRmpheTVqYjIwdlptbHNaWE10ZEcxaUwxUTFWRU5CUmxSQk9TMUdNRGc0TjBzd1JUUXpNUzFsTnpFME5XRTRZamd4TDJacGJHVmZTRjh5TmpSZk1Ua3lNSGd4TURnd1h6WTFNREJMUWxCVFh6ZFJWa0pTWHpBd01EQTFMblJ6Q2lORldGUXRXQzFGVGtSTVNWTlVDZz09Cg==",
+                "mp4_low": "https://files.slack.com/files-tmb/T5TCAFTA9-F0887K0E431-e7145a8b81/direct_manipulation_trans.mp4",
+                "duration_ms": 25525,
+                "media_display_type": "video",
+                "thumb_video": "https://files.slack.com/files-tmb/T5TCAFTA9-F0887K0E431-e7145a8b81/direct_manipulation_thumb_video.jpeg",
+                "thumb_video_w": 1470,
+                "thumb_video_h": 1058,
+                "permalink": "https://futureofcoding.slack.com/files/U02E4DAQGSZ/F0887K0E431/direct_manipulation.mov",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F0887K0E431-d191332716",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U02E4DAQGSZ",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "PpfiN",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Making direct manipulation diagrams fast to develop.\n\nSo this work was motivated by \""
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://tonsky.me/blog/diagrams/",
+                                "text": "Where Should Visual Programming Go?"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\". I kinda thought dataviz driven development was a step in the right direction but some people here though unidirectional was too limiting. So it made me think about what a bidirection diagram was.\n\nGrammar of graphics provides a nice abstraction of what a scale actually "
+                            },
+                            {
+                                "type": "text",
+                                "text": "is.",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " It's a mapping from dataspace to pixel space. A bidireciton diagram might go in the other direction, mouse movements (actions) are mapped back to changes in data space. Once you consider libraries like Plot are very liberal on what scales they support: non-linear, categorical etc. then the ability to manipulate data points through a diagram is pretty compelling. You stop thinking about data as external data but as control surfaces that live in a weird high dimensional configuration space of your choosing.\n\nInverting scales is reasonably easy, once that general primitive is in place  then you get a shit ton of possible gizmos that take very little time to make look good and work because all the heavy lifting is done in the other direction using an off-the-shelf dataviz library.\n\nFull explanation and code in "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://observablehq.com/@tomlarkworthy/manipulate",
+                                "text": "a notebook"
+                            },
+                            {
+                                "type": "text",
+                                "text": " although the one-weird invert trick is quite general."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1736887140.630119",
+        "client_msg_id": "24080905-705b-46f7-8752-a34ecedc27b4",
+        "thread_ts": "1736887140.630119",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1737052400.851609",
+        "reply_users": [
+            "U0887QU9G2V",
+            "U05UK5T7LPP"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "exploding_head",
+                "users": [
+                    "UCUSW7WVD",
+                    "U0123H7JRDM",
+                    "U05UK5T7LPP"
+                ],
+                "count": 3
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "U013ZLJARC7",
+                    "UJBAJNFLK"
+                ],
+                "count": 2
+            }
+        ]
+    },
+    {
+        "user": "U0887QU9G2V",
+        "type": "message",
+        "ts": "1736890584.582399",
+        "edited": {
+            "user": "U0887QU9G2V",
+            "ts": "1736890603.000000"
+        },
+        "client_msg_id": "3e6b1ae6-0fcf-4908-a687-aa0766e862ef",
+        "text": ">  A bidireciton diagram might go in the other direction, mouse movements (actions) are mapped back to changes in data space.\nWow. I cannot unsee this now. Extremely interesting.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1736887140.630119",
+        "parent_user_id": "U02E4DAQGSZ",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "KyX1S",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": " A bidireciton diagram might go in the other direction, mouse movements (actions) are mapped back to changes in data space."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Wow. I cannot unsee this now. Extremely interesting."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "raised_hands",
+                "users": [
+                    "U02E4DAQGSZ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U05UK5T7LPP",
+        "type": "message",
+        "ts": "1737052400.851609",
+        "client_msg_id": "4f97812d-55c8-4089-a461-cb19c4ff27e4",
+        "text": "I'm so hyped for this. Exactly what I wanted from the latent interfaces meetup tbh.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1736887140.630119",
+        "parent_user_id": "U02E4DAQGSZ",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rEMo9",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm so hyped for this. Exactly what I wanted from the latent interfaces meetup tbh."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

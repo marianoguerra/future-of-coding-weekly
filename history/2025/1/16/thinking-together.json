@@ -1,0 +1,611 @@
+[
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1737038043.781959",
+        "client_msg_id": "28c17a4e-8c40-462e-9ad8-a18fdcf1b7a1",
+        "text": "As I understand it, to achieve true concurrency on a single computer, you need to ensure that app code sits in one of the core-private caches (L1, L2, but not L3). <https://open.substack.com/pub/programmingsimplicity/p/practical-parallelism?r=1egdky&amp;utm_campaign=post&amp;utm_medium=web&amp;showWelcomeOnShare=true|Thoughts>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "reply_count": 15,
+        "reply_users_count": 3,
+        "latest_reply": "1737092977.455669",
+        "reply_users": [
+            "UL2SJ88Q3",
+            "UGWUJUZHT",
+            "UNS7QDKFV"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "attachments": [
+            {
+                "from_url": "https://open.substack.com/pub/programmingsimplicity/p/practical-parallelism?r=1egdky&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true",
+                "thumb_url": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d69eba9-d5d3-4387-a046-9b881b00bd45_131x131.png",
+                "thumb_width": 131,
+                "thumb_height": 131,
+                "service_icon": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bf28261-3dbc-4931-99f3-57bb47beeb02%2Fapple-touch-icon-57x57.png",
+                "id": 1,
+                "original_url": "https://open.substack.com/pub/programmingsimplicity/p/practical-parallelism?r=1egdky&amp;utm_campaign=post&amp;utm_medium=web&amp;showWelcomeOnShare=true",
+                "fallback": "Practical Parallelism",
+                "text": "2025-01-16",
+                "title": "Practical Parallelism",
+                "title_link": "https://open.substack.com/pub/programmingsimplicity/p/practical-parallelism?r=1egdky&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true",
+                "service_name": "programmingsimplicity.substack.com"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ZArIA",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "As I understand it, to achieve true concurrency on a single computer, you need to ensure that app code sits in one of the core-private caches (L1, L2, but not L3). "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://open.substack.com/pub/programmingsimplicity/p/practical-parallelism?r=1egdky&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true",
+                                "text": "Thoughts"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737054021.209679",
+        "client_msg_id": "a38aecdf-0aac-4f7e-9dc8-3378722642c3",
+        "text": "that sounds like an untrue scotsman to me :stuck_out_tongue: but maybe you can clarify how you're defining \"true concurrency\"",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QeVh2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "that sounds like an untrue scotsman to me "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "stuck_out_tongue",
+                                "unicode": "1f61b"
+                            },
+                            {
+                                "type": "text",
+                                "text": " but maybe you can clarify how you're defining \"true concurrency\""
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1737058450.848719",
+        "client_msg_id": "0392ae80-49ce-4c19-98e5-7562fb973cfc",
+        "text": "<https://www.google.com/search?client=safari&amp;sca_esv=540dfeac42c719c1&amp;rls=en&amp;sxsrf=ADLYWIKexny3Kjz-0EgeSN9lCkush8yiwA:1737055378868&amp;q=concurrency&amp;si=ACC90nwKPQWKXvO0LWGU61hOTgoDBwhKj56hDTZ5a9FkGxdB-eW_Wi-76RRz5uldqyDSNxGoBx2sNSDo9jWwpWVbYl5rpYamR9g1pxU3hFew6rSrD4pNHnY%3D&amp;expnd=1&amp;sa=X&amp;ved=2ahUKEwjP6b_G-_qKAxUSIjQIHdcDIBAQ2v4IegQIKBAb&amp;biw=1415&amp;bih=760|concurrency>\n...the ability to execute more than one program or task simultaneously...\n\nIn a non-cache CPU, it never happens that tasks run at the same time. They only appear to do so because context-switching happens so fast as to fool us humans. There's only 1 CPU and it gets time-shared between threads.\n\nIn multi-core CPUs on the same chip, the distinction becomes blurred. If the code runs entirely in the private cache, with no cache misses, the code runs (truly) concurrently. Programs can run \"at the same time\", limited by the number of cores available. But, the cores block and wait if the code needs to access shared cache or shared main memory. The hardware determines the synchronization. The software code gets no say in this - it just tries to access memory and may get blocked by the hardware.\n\nIn my mind, L1/L2/L3 caching is just a kludge driven by 1950s desires to share memory on time-shared, single-threaded machines. These days, using bowls full of Arduinos would be a smarter choice if one wanted simple (true) concurrency. It seems to me that the software world is being presented with more and more complicated syntaxes for gluing asynchronousity on top of synchronous languages which run on top of already-asynchronous electronics.\n\nFTR: I don't consider processes that take themselves out of the picture while waiting for async I/O to be \"running\" (synchronously, nor concurrently). Sitting in memory whilst executing no instructions is not \"running\" in my vocabulary. In contrast, operating systems bestow the state named \"Running\" to any process which isn't \"Blocked\", yet, might not actually own CPU time and is not executing opcodes. In my book, any process which is (truly) \"running\" needs to be in charge of a CPU (or a core). Another way to put it: if you have 1,000 processes and fewer than 1,000 cores then the best you can do is to simulate true concurrency. That's the basis of \"threads\" in all programming languages that I know about - simulation of concurrency, not concurrency.\n\nIn my mind the fundamental problem is that, by using hardware to do low-level sync at the memory-access level, we take design decisions out of software artchitects' hands. Something like very explicit message-passing would be better (not the Smalltalk kind of \"message passing\" but the internet kind of message passing). I just don't like hidden, under-the-hood, \"surprise\" blocking where some other process can determine my process' run-time. Hidden blocking is OK if you're building \"calculators\", but, not so OK if you're building internet-y (sequencing) software where you want total control/expression of all latencies and running times.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "attachments": [
+            {
+                "from_url": "https://www.google.com/search?client=safari&sca_esv=540dfeac42c719c1&rls=en&sxsrf=ADLYWIKexny3Kjz-0EgeSN9lCkush8yiwA:1737055378868&q=concurrency&si=ACC90nwKPQWKXvO0LWGU61hOTgoDBwhKj56hDTZ5a9FkGxdB-eW_Wi-76RRz5uldqyDSNxGoBx2sNSDo9jWwpWVbYl5rpYamR9g1pxU3hFew6rSrD4pNHnY%3D&expnd=1&sa=X&ved=2ahUKEwjP6b_G-_qKAxUSIjQIHdcDIBAQ2v4IegQIKBAb&biw=1415&bih=760",
+                "thumb_url": "https://www.gstatic.com/share/dictionary_thumbnail.png",
+                "thumb_width": 180,
+                "thumb_height": 180,
+                "service_icon": "https://www.google.com/favicon.ico",
+                "id": 1,
+                "original_url": "https://www.google.com/search?client=safari&amp;sca_esv=540dfeac42c719c1&amp;rls=en&amp;sxsrf=ADLYWIKexny3Kjz-0EgeSN9lCkush8yiwA:1737055378868&amp;q=concurrency&amp;si=ACC90nwKPQWKXvO0LWGU61hOTgoDBwhKj56hDTZ5a9FkGxdB-eW_Wi-76RRz5uldqyDSNxGoBx2sNSDo9jWwpWVbYl5rpYamR9g1pxU3hFew6rSrD4pNHnY%3D&amp;expnd=1&amp;sa=X&amp;ved=2ahUKEwjP6b_G-_qKAxUSIjQIHdcDIBAQ2v4IegQIKBAb&amp;biw=1415&amp;bih=760",
+                "fallback": "www.google.com: concurrency - Definition",
+                "text": "See synonyms, usage &amp; more",
+                "title": "concurrency - Definition",
+                "title_link": "https://www.google.com/search?client=safari&sca_esv=540dfeac42c719c1&rls=en&sxsrf=ADLYWIKexny3Kjz-0EgeSN9lCkush8yiwA:1737055378868&q=concurrency&si=ACC90nwKPQWKXvO0LWGU61hOTgoDBwhKj56hDTZ5a9FkGxdB-eW_Wi-76RRz5uldqyDSNxGoBx2sNSDo9jWwpWVbYl5rpYamR9g1pxU3hFew6rSrD4pNHnY%3D&expnd=1&sa=X&ved=2ahUKEwjP6b_G-_qKAxUSIjQIHdcDIBAQ2v4IegQIKBAb&biw=1415&bih=760",
+                "service_name": "www.google.com"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "HXEPH",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://www.google.com/search?client=safari&sca_esv=540dfeac42c719c1&rls=en&sxsrf=ADLYWIKexny3Kjz-0EgeSN9lCkush8yiwA:1737055378868&q=concurrency&si=ACC90nwKPQWKXvO0LWGU61hOTgoDBwhKj56hDTZ5a9FkGxdB-eW_Wi-76RRz5uldqyDSNxGoBx2sNSDo9jWwpWVbYl5rpYamR9g1pxU3hFew6rSrD4pNHnY%3D&expnd=1&sa=X&ved=2ahUKEwjP6b_G-_qKAxUSIjQIHdcDIBAQ2v4IegQIKBAb&biw=1415&bih=760",
+                                "text": "concurrency"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n...the ability to execute more than one program or task simultaneously...\n\nIn a non-cache CPU, it never happens that tasks run at the same time. They only appear to do so because context-switching happens so fast as to fool us humans. There's only 1 CPU and it gets time-shared between threads.\n\nIn multi-core CPUs on the same chip, the distinction becomes blurred. If the code runs entirely in the private cache, with no cache misses, the code runs (truly) concurrently. Programs can run \"at the same time\", limited by the number of cores available. But, the cores block and wait if the code needs to access shared cache or shared main memory. The hardware determines the synchronization. The software code gets no say in this - it just tries to access memory and may get blocked by the hardware.\n\nIn my mind, L1/L2/L3 caching is just a kludge driven by 1950s desires to share memory on time-shared, single-threaded machines. These days, using bowls full of Arduinos would be a smarter choice if one wanted simple (true) concurrency. It seems to me that the software world is being presented with more and more complicated syntaxes for gluing asynchronousity on top of synchronous languages which run on top of already-asynchronous electronics.\n\nFTR: I don't consider processes that take themselves out of the picture while waiting for async I/O to be \"running\" (synchronously, nor concurrently). Sitting in memory whilst executing no instructions is not \"running\" in my vocabulary. In contrast, operating systems bestow the state named \"Running\" to any process which isn't \"Blocked\", yet, might not actually own CPU time and is not executing opcodes. In my book, any process which is (truly) \"running\" needs to be in charge of a CPU (or a core). Another way to put it: if you have 1,000 processes and fewer than 1,000 cores then the best you can do is to simulate true concurrency. That's the basis of \"threads\" in all programming languages that I know about - simulation of concurrency, not concurrency.\n\nIn my mind the fundamental problem is that, by using hardware to do low-level sync at the memory-access level, we take design decisions out of software artchitects' hands. Something like very explicit message-passing would be better (not the Smalltalk kind of \"message passing\" but the internet kind of message passing). I just don't like hidden, under-the-hood, \"surprise\" blocking where some other process can determine my process' run-time. Hidden blocking is OK if you're building \"calculators\", but, not so OK if you're building internet-y (sequencing) software where you want total control/expression of all latencies and running times."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737058641.862119",
+        "client_msg_id": "aba56b9e-10fa-4492-8103-4c8ca35c0ad5",
+        "text": "&gt; In a non-cache CPU, it never happens that tasks run at the same time\nthat's not necessarily true, though, right? there's nothing that _requires_ a cache to allow concurrency, and there's not a fundamental reason you couldn't, it's just that they both tend to be present together in modern cpus",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NoZuE",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In a non-cache CPU, it never happens that tasks run at the same time"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "that's not necessarily true, though, right? there's nothing that "
+                            },
+                            {
+                                "type": "text",
+                                "text": "requires",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " a cache to allow concurrency, and there's not a fundamental reason you couldn't, it's just that they both tend to be present together in modern cpus"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737058783.070259",
+        "client_msg_id": "ea7ae13d-ddd0-4552-88de-565060e7e727",
+        "text": "&gt; In my mind the fundamental problem is that, by using hardware to do low-level sync at the memory-access level, we take design decisions out of software artchitects' hands\nWasn't this exactly the shift that approaches like itanium were trying for, and didn't get traction?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8P5rr",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In my mind the fundamental problem is that, by using hardware to do low-level sync at the memory-access level, we take design decisions out of software artchitects' hands"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Wasn't this exactly the shift that approaches like itanium were trying for, and didn't get traction?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1737063413.554569",
+        "edited": {
+            "user": "UGWUJUZHT",
+            "ts": "1737063606.000000"
+        },
+        "client_msg_id": "0ee8d62f-f39f-4116-b5a7-c8810f813560",
+        "text": "> ... nothing that requires a cache to allow concurrency ...\nCorrect, but concurrency - by definition - _requires_ separate CPUs. Caching is just an attempt at decoupling cores without actually using distributed CPUs, whilst continuing to do what we've always been doing...\n\n\"Concurrency\" is just a mis-use of a word from the English language. It would be more accurate to call it \"time-sharing\".\n\n> ... and didn't get traction? ...\nI think that MOP (message-oriented-programming) is necessarily on the horizon, due to the shift in our problem space, from 1950s single-threaded CPUs and building computation-based calculators to today's internet-y, robotics, IoT, etc. thrust.\n\nI need to refresh my memory of what Itanium was attempting to do, but, I suspect that it tried to accommodate synchronous-language-think, which ain't the right way to approach asynchronous problems (and would explain failure ; on top of which, it was probably plagued by the \"if we asked people what they wanted, they'd have said faster horses\" effect).",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "j1ZEo",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "... nothing that requires a cache to allow concurrency ..."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nCorrect, but concurrency - by definition - "
+                            },
+                            {
+                                "type": "text",
+                                "text": "requires",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " separate CPUs. Caching is just an attempt at decoupling cores without actually using distributed CPUs, whilst continuing to do what we've always been doing...\n\n\"Concurrency\" is just a mis-use of a word from the English language. It would be more accurate to call it \"time-sharing\".\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "... and didn't get traction? ..."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI think that MOP (message-oriented-programming) is necessarily on the horizon, due to the shift in our problem space, from 1950s single-threaded CPUs and building computation-based calculators to today's internet-y, robotics, IoT, etc. thrust.\n\nI need to refresh my memory of what Itanium was attempting to do, but, I suspect that it tried to accommodate synchronous-language-think, which ain't the right way to approach asynchronous problems (and would explain failure ; on top of which, it was probably plagued by the \"if we asked people what they wanted, they'd have said faster horses\" effect)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737068415.892669",
+        "client_msg_id": "f8ab00c9-362f-4cd1-81c3-c8a1c18a086f",
+        "text": "&gt; Caching is just an attempt at decoupling cores without actually using distributed CPUs, whilst continuing to do what we've always been doing...\nI think we disagree there... I see that as a side-effect of caching, perhaps, but not at all fundamental to the need or implementation",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "IA3F9",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Caching is just an attempt at decoupling cores without actually using distributed CPUs, whilst continuing to do what we've always been doing..."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think we disagree there... I see that as a side-effect of caching, perhaps, but not at all fundamental to the need or implementation"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737068760.742189",
+        "client_msg_id": "45c0e7e3-62b1-4b38-8192-d1075e423f86",
+        "text": "&gt; \"Concurrency\" is just a mis-use of a word from the English language. It would be more accurate to call it \"time-sharing\".\nI think you're redefining what you're calling \"true\" concurrency. Sure, you can keep drilling down deeper in the stack in search of your truth, but at what point do you stop? I don't choose to stop calling something concurrent just because there's also a need to arbitrate access to shared hardware resources sometimes.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "KlYCL",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\"Concurrency\" is just a mis-use of a word from the English language. It would be more accurate to call it \"time-sharing\"."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think you're redefining what you're calling \"true\" concurrency. Sure, you can keep drilling down deeper in the stack in search of your truth, but at what point do you stop? I don't choose to stop calling something concurrent just because there's also a need to arbitrate access to shared hardware resources sometimes."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737068898.961849",
+        "client_msg_id": "d78fed5e-37b2-4ba4-9599-a0256ca4e34d",
+        "text": "I think there's a reason we've built these abstractions and choose to program on them, rather than try to count cycles and account for discrete hardware unit requirements at a software level",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "HhOoG",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I think there's a reason we've built these abstractions and choose to program on them, rather than try to count cycles and account for discrete hardware unit requirements at a software level"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737069241.813549",
+        "edited": {
+            "user": "UL2SJ88Q3",
+            "ts": "1737069380.000000"
+        },
+        "client_msg_id": "115be68e-f6c4-4bda-a725-02e946e5798d",
+        "text": "> but concurrency - by definition - requires separate CPUs\nAnd also don't agree with that on modern cpus, either... given pipelining has become pretty ubiquitous, each cpu/core is often also concurrently executing different stages of multiple instructions",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "+Bkd8",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "but concurrency - by definition - requires separate CPUs"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "And also don't agree with that on modern cpus, either... given pipelining has become pretty ubiquitous, each cpu/core is often also concurrently executing different stages of multiple instructions"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737069466.219969",
+        "client_msg_id": "c923942a-d633-4634-a7bb-c4c2060a32db",
+        "text": "(though again, there are limits to that imposed by the fundamental physical limits of the hardware, so again we let the hardware arbitrate that, and benefit from it when we can, but recognize that contention for resources can also cause pipeline stalls)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "rYU1Z",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(though again, there are limits to that imposed by the fundamental physical limits of the hardware, so again we let the hardware arbitrate that, and benefit from it when we can, but recognize that contention for resources can also cause pipeline stalls)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737069581.047999",
+        "edited": {
+            "user": "UL2SJ88Q3",
+            "ts": "1737069594.000000"
+        },
+        "client_msg_id": "0bc8be65-65fd-445b-974e-e07e621ee2e9",
+        "text": "None of this fundamentally contradicts your conclusion that maybe we should be moving towards a message passing model, but I don't feel like this is a compelling argument for it in my opinion, either",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ERtWp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "None of this fundamentally contradicts your conclusion that maybe we should be moving towards a message passing model, but I don't feel like this is a compelling argument for it in my opinion, either"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UNS7QDKFV",
+        "type": "message",
+        "ts": "1737092187.583759",
+        "client_msg_id": "870bc603-bed9-4c8e-995e-c606f3fde476",
+        "text": "The Cerebras wafer-scale processors have no shared access to memory (no cache).  Each core can only access it's local memory. Planning the message routes between individual cores becomes one of the challenging parts of programming it.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "oEyDo",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The Cerebras wafer-scale processors have no shared access to memory (no cache).  Each core can only access it's local memory. Planning the message routes between individual cores becomes one of the challenging parts of programming it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737092719.785889",
+        "client_msg_id": "92469ab0-a3b6-406b-81a5-b0a0bc5f4c83",
+        "text": "yeah, I recall the early parallela manycore designs were similar... either the programmer, the tools, or some combination of both had to \"understand\" the implications of interconnects to work well. In the ideal case they could outperform \"classic\" models by a big margin, but in the more realistic case of \"semi-skilled programmer throws code spaghetti at the naive port of gcc's backend\" the results were _way_ worse.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "djbYx",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yeah, I recall the early parallela manycore designs were similar... either the programmer, the tools, or some combination of both had to \"understand\" the implications of interconnects to work well. In the ideal case they could outperform \"classic\" models by a big margin, but in the more realistic case of \"semi-skilled programmer throws code spaghetti at the naive port of gcc's backend\" the results were "
+                            },
+                            {
+                                "type": "text",
+                                "text": "way",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " worse."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737092896.789009",
+        "client_msg_id": "0760aff9-2471-4dd6-9f4b-5a85215a86e4",
+        "text": "ia64 was a different approach, it was much less about moving away from shared memory models, but it also was an attempt to shift the \"understand hardware implications\" to the software side",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "lmknn",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "ia64 was a different approach, it was much less about moving away from shared memory models, but it also was an attempt to shift the \"understand hardware implications\" to the software side"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UL2SJ88Q3",
+        "type": "message",
+        "ts": "1737092977.455669",
+        "client_msg_id": "c84280ef-e2e0-46b7-a54c-450b125808e5",
+        "text": "and I suspect if the backing of the Intel/AMD rivalry wasn't sufficient funding to make that make sense... not going to say it's not possible, but also going to be very skeptical of any \"quick fixes\"",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1737038043.781959",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "UBb00",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "and I suspect if the backing of the Intel/AMD rivalry wasn't sufficient funding to make that make sense... not going to say it's not possible, but also going to be very skeptical of any \"quick fixes\""
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
