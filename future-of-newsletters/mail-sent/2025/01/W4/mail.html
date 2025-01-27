@@ -1,0 +1,513 @@
+<div style="margin-top:1em">
+
+<p>🎥 Embedding a structured editor 🦠 Cells &amp; More Cells 🐛 Debuggers &amp; More Debuggers</p>
+<h1>Two Minute Week</h1><h2>🎥 <a href="https://vimeo.com/1049607806">Embedding a structured editor in blog and slides</a> via <a href="https://twitter.com/CrowdHailer">Peter Saxton</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/two-minute-week.html#2025-01-23T10:37:12.458Z">🧵 conversation</a></p>
+
+
+<p><img src="https://i.vimeocdn.com/video/1973984203-37cdc1b5aa7ff1b5ac5ad399e3a6f87e466f6f80635a7f4dcbac9b6ec45b2213-d_295x166" alt="Vimeo Thumbnail"></p>
+
+
+<p>I've Implemented an embedded version of my editor so I can structurally edit code snippets in blogs or in slides.</p>
+
+
+<p>Using the effects in the web platform I can even send tweets from the snippets in a slide.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🎥 <a href="https://www.youtube.com/watch?v=vrUn0nHqpQ4">Assembly Kickoff 🎮💻 AUTOMAT DEVLOG 2</a> via <strong>Marek Rogalski</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/two-minute-week.html#2025-01-23T12:34:32.072Z">🧵 conversation</a></p>
+
+
+<p><img src="https://img.youtube.com/vi/vrUn0nHqpQ4/hqdefault.jpg" alt="Youtube Thumbnail"></p>
+
+
+<p>Some news from Automat. I'm tackling the problem of control flow now. I think its the central issue for establishing interoperability between different types of software. Knowing when to continue work in parallel vs wait for completion, how long to wait before giving up, whether to retry, alert or crash, when to save &amp; restore state, etc. Generally all the things called "glue code". They're not essential to "solving" any specific problem, but are still necessary for any practical application of any solution. I believe that with proper design all of those functions could be implemented as virtual devices, intuitive enough that folks without formal education could use. That will take time though. <a href="https://www.youtube.com/watch?v=vrUn0nHqpQ4">This is my interim solution</a> . It's meant to allow folks with sufficient dedication to implement the missing functions, without scaring them off. Most importantly it only requires three virtual devices to achieve virtually all control flow primitives (Instruction, Instruction Library &amp; Assembler) so it's feasible to do in a relatively short time.</p>
+
+
+<p>I'm also attaching a WIP design for the "Instruction Library" object. If you're bored you may try to guess what which icon matches each x86_64 register (due to lack of space, only two REX registers are shown) :)</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h1>Our Work</h1><h2>📝 <a href="https://www.todepond.com/lab/cells/draw/table/">Cells: Want to show a grid of cells on a screen?</a> via <a href="https://twitter.com/TodePond">Lu Wilson</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/share-your-work.html#2025-01-19T23:38:31.009Z">🧵 conversation</a></p>
+
+
+<p>i made another explainable about how to draw a grid of cells</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🎥 <a href="https://www.youtube.com/watch?v=aJn9V1yaWd4">Making Cell Episode 1</a> via <strong>Federico Pereiro</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/share-your-work.html#2025-01-21T21:09:50.343Z">🧵 conversation</a></p>
+
+
+<p><img src="https://img.youtube.com/vi/aJn9V1yaWd4/hqdefault.jpg" alt="Youtube Thumbnail"></p>
+
+
+<p>Yesterday I recorded the <a href="https://www.youtube.com/watch?v=aJn9V1yaWd4">first episode</a> of Making Cell, which is basically going to be about building <a href="http://github.com/altocodenl/cell">cell</a> from the ground up, live. In this episode, I explain the basics and put some The Smiths in the background.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>💬 <strong>John Christensen</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/share-your-work.html#2025-01-23T22:40:39.391Z">🧵 conversation</a></p>
+
+
+<p>At yesterday's meetup I demoed a node and wire tool I'm working on in the scientific computing domain.</p>
+
+
+<p><strong>@Márton Gunyhó</strong> had an interesting question, so I'm sharing here in case anyone has any related thoughts:</p>
+<blockquote style="margin-left:1em;color:#555555;font-style:italic">
+
+<p>do you use some graph algorithm to figure out what needs to be recomputed, or do you keep all intermediate values in the wires in memory? I imagine the latter would get pretty heavy pretty fast.</p>
+</blockquote>
+
+
+<p>Currently I've gone with the simple/naive approach of just keeping everything in memory. This is nice because any long-running nodes at the top of the network don't need to recompute when their descendants need to re-run. This does mean that you can run out of memory quickly if you are dealing with large pieces of data though.</p>
+
+
+<p>I'm not sure what my long-term solution is yet. Currently my thoughts are to start dropping/caching-to-disk large pieces of data as memory usage to get too high, and recompute when they are needed again. In the meantime, it's not too bad for the primary use cases I have in mind to simply be content with working with a subset of data that fits into memory.</p>
+
+
+<p><img src="http://history.futureofcoding.org/history/msg_files/F08/F089VC57C5U.png" alt="image.png"></p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>📝 <a href="https://jon.work/og">File Systems: The Original Hypermedia</a> via <strong>Jon Secchis</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/share-your-work.html#2025-01-24T07:30:49.426Z">🧵 conversation</a></p>
+
+
+<p>Wow, lot's of great stuff you all are posting here! So exciting 😃</p>
+
+
+<p>I'd like to share something too, it embraces the "scaling-down" sentiment I am seeing in other projects here.</p>
+
+
+<p>I designed a semantic hypermedia data structure (FIFO) with a "higher-order" syntax, allowing form to be transferred across text/gui substrates. The general idea was to see how closely you can emulate hypermedia documents using just semantic and semiotic rules. These rules are then encoded in a rendering pipeline to systemically present the data on the screen. It sounds fancy but in practice it's very mundane.</p>
+
+
+<p>FIFO's syntax is actually inspired by the file system information model, which, as we know, has these properties, allowing trees to be rendered systemically and consistently in whatever style, but without any loss in meaning. Not only file systems, though, this is a very pervasive modality, such as the universality of frequencies in relation to the particularities of timbre, or natural language itself, which is very malleable in terms of encoding, preserving meaning mostly intact regardless of representation. This sort of thing is only possible with models that are purely abstract, immaterial, but yet well defined.</p>
+
+
+<p>Now this is not just for fun, it can be very useful to have a document language like in some scenarios, for instance, to very cheaply and quicky compose and distribute multimedia information. I made my website using FIFO, and also a portfolio for a friend of mine. It's just a proof of concept at this point, I invested very little in the rendering part, just enough to make it usable. In the future I'd like to make an editor for it, for now I just write it by hand. You can check the links below to see it in practice. Before anyone asks why bother with all the work to have a worse version of markdown, consider that: 1) this is not markup but a data structure, it has it's own in-memory DOM and query interface, 2) it's extensible, 3) it's hierarchical, so you can have directories in the document, 4) it's mathematically rigorous, 5) is composable, and some more things. The fact it looks like a basic document is consequential, as the whole idea was to capture the stereotype but starting from a different principles. There can be different visual renditions, too, I'm just not so much creative in this department.</p>
+
+
+<p>visual repr: <a href="https://jon.work/og">jon.work/og</a></p>
+
+
+<p>text repr: <a href="https://jon.work/og/index.fifo.txt">jon.work/og/index.fifo.txt</a></p>
+
+
+<p>visual repr: <a href="https://jon.work/fifo">jon.work/fifo</a></p>
+
+
+<p>text repr: <a href="https://jon.work/fifo/index.fifo.txt">jon.work/fifo/index.fifo.txt</a></p>
+
+
+<p>visual repr: <a href="https://henriquecesar.pages.dev">henriquecesar.pages.dev</a></p>
+
+
+<p>text repr: <a href="https://henriquecesar.pages.dev/index.fifo.txt">henriquecesar.pages.dev/index.fifo.txt</a></p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🤏 <a href="https://wasmgroundup.com/blog/wasm-compiler-in-a-tweet/">A WebAssembly compiler that fits in a tweet</a> via <a href="https://twitter.com/warianoguerra">Mariano Guerra</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/share-your-work.html#2025-01-24T17:09:31.492Z">🧵 conversation</a></p>
+
+
+<p>I wrote a blog post undoing one by one the tricks I used to write a Wasm compiler for a Reverse Polish Notation calculator that fits in a tweet</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h1>Devlog Together</h1><h2>🎠 <a href="https://archive.org/details/akkartik-freewheeling-2025-01-19-debug">Infrastructure for Graphical Debugging</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/devlog-together.html#2025-01-19T23:38:33.116Z">🧵 conversation</a></p>
+
+
+<p><a href="https://archive.org/details/akkartik-freewheeling-2025-01-19-debug">4-minute video</a> update on my "Emacs for visualizing LÖVE apps": it no longer looks very much like Emacs at all. I think all it shares with Emacs is a flat namespace of handler functions that you can compose to create windows with different experiences around shared data.</p>
+
+
+<p><a href="https://history.futureofcoding.org/?fromDate=2025-01-04&amp;toDate=2025-01-10&amp;channel=devlog-together&amp;filter=#2025-01-07T00:22:08.833Z">💬 #devlog-together@2025-01-07</a></p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>💬 <a href="https://jimmyhmiller.github.io/">Jimmy Miller</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/devlog-together.html#2025-01-20T17:50:05.303Z">🧵 conversation</a></p>
+
+
+<p>As I was trying to build a debugger (well, a frontend to lldb right now) for my language, in my language (beagle), I was getting a weird bug I couldn't figure out. So I decided to build a little compiler explorer tool for it. The left is the code, the middle is my (already register allocated) IR, and the right is the machine code. (Don't look too close, there are some bugs in how I print the machine code like  <code>and</code>  doesn't apply the shift).</p>
+
+
+<p>The UI is incredibly ugly, because hopefully this is the last UI I need to build for my language that isn't built in the language itself. Using the UI I was able to figure out the bug. It turns out, if I had a compilation cycle with code &gt; 3 pages of memory, I wasn't doing the accounting properly and writing the over existing code. Ironically, the way I built this tool meant, I saw my code was right, but the code I was stepping into the debugger was wrong. So the tool showed me the bug by the absence of the bug...</p>
+
+
+<p>Now I'm continuing on to building the debugger in itself. Having a real application is helping me realize features I need and forcing me to think about what I want my language to feel like to program.</p>
+
+
+<p><img src="http://history.futureofcoding.org/history/msg_files/F08/F0891839A07.png" alt="Screenshot 2025-01-20 at 12.05.13 PM.png"></p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>💬 <a href="https://webcode.run">Tom Larkworthy</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/devlog-together.html#2025-01-21T20:56:55.646Z">🧵 conversation</a></p>
+
+
+<p>I added the missing ability to upload File Attachments into the HTML bundle thing (this also adds the ability to add local files to Observable notebooks as its all userspace).</p>
+
+
+<p>I am somewhat at a fork in the road about what to do about state. I prototype a cell mutating itself, and now I also have the ability to programmatically write binary blobs into itself.  IndexDB is not so relevant here because every time you fork, you lose that kind of browser state as the domain switches).</p>
+
+
+<p>So should I use cells to store state? they are cool because they are reactive and programmable, or do I use files to store state? Files are a bit more classic, maybe a bit easier to eject and upload into a different notebook. I think I lean towards files as the long term data store, seems like it would be easier to interop with other systems.</p>
+
+
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F0897T7M5GF.mov">Lope</a></p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>📱 <a href="https://akkartik.itch.io/carousel/devlog/678890/new-version-after-51-days">A program on my phone with a custom debug UI</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/devlog-together.html#2025-01-22T07:34:30.760Z">🧵 conversation</a></p>
+
+
+<p>A program on my phone with a custom debug UI.</p>
+
+
+<p>Pretty hilarious. After spending a week creating spaces for custom debug UIs, I realize a different fork can already do all that. On my phone. By repurposing <a href="https://akkartik.itch.io/carousel/devlog/678890/new-version-after-51-days">a script I wrote a year ago</a>.</p>
+
+
+<p>I did deliberately design screens in Lua Carousel to support sharing and exchanging data. But I didn't appreciate  <em>all</em>  the benefits.</p>
+
+
+<p><a href="https://history.futureofcoding.org/?fromDate=2025-01-16&amp;toDate=2025-01-22&amp;channel=devlog-together&amp;filter=#2025-01-19T23:38:33.116Z">💬 #devlog-together@2025-01-19</a></p>
+
+
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F089MQC22MT.webm">hilbert debug phone spedup</a></p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🔤 <a href="https://mathstodon.xyz/@vez/113828660230730270">Sand Letters</a> via <a href="http://ivanish.ca/">Ivan Reese</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/devlog-together.html#2025-01-22T17:54:53.612Z">🧵 conversation</a></p>
+
+
+<p>I'm tinkering on a little <a href="https://mathstodon.xyz/@vez/113828660230730270">sand experiment</a> with <strong>@Elliot</strong>. Without dipping too far into spoilers, you have a small selection of tools you can use to fill the screen with grains of sand and then move them around, with  <em>brushes</em>  (of a sort) that each have a bit of logic (eg: scatter the sand randomly, push the sand downwards, merge sand grains together). What's fun about these  <em>brushes</em>  (of a sort) is that they apply some behaviour that feels like a computation. So you sort of  <em>brush</em>  your computation over some data (sand).</p>
+
+
+<p>One possibility I've been mulling, that I'd love to hear some ideas for, is a brush that does cellular automata. The brush might use some global grid (discrete) or sense of proximity (continuous), and apply some CA-esq rules depending on the density of the sand. Then you'd just  <em>brush</em>  that computation onto the sand to advance the state of the CA. Maybe each brush stroke advances the CA one step wherever you apply it, or maybe the CA runs continuously but only where you're brushing. The thing I'm presently brainstorming is… how might one specify the CA-esq rules just using sand and brushes?</p>
+
+
+<p><img src="https://media.mathstodon.xyz/media_attachments/files/113/828/657/561/101/720/original/df9822f366f747d6.png" alt="sand letters"></p>
+
+
+<p>sand letters</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🗨️ <a href="http://akkartik.name/about">Kartik Agaram</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/devlog-together.html#2025-01-23T06:02:30.216Z">🧵 conversation</a></p>
+
+
+<p>With <a href="https://history.futureofcoding.org/?fromDate=2025-01-13&amp;toDate=2025-01-19&amp;channel=devlog-together&amp;filter=#2025-01-16T19:22:06.025Z">💬 #devlog-together@2025-01-16</a> on my mind, here's <a href="https://akkartik.name/federalist1-with-example-comment.html">an example single-file html</a> with some support for annotation. Save it locally, swap out the text with some stuff to read, take notes on it as you read, save your notes locally. Thanks <strong>@Eli Mellen</strong> and <a href="https://webcode.run">Tom Larkworthy</a> in particular for the inspiration. Based on <a href="https://cristobal.space/">Cristóbal Sciutto</a>'s <a href="https://cristobal.space/note">note example</a>. Suggestions and feature ideas welcome.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🎠 <a href="https://akkartik.name/post/2025-01-19-devlog">building out a custom debug UI</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/devlog-together.html#2025-01-25T01:53:29.628Z">🧵 conversation</a></p>
+
+
+<p>One nice thing about <a href="https://akkartik.name/post/2025-01-19-devlog">building out a custom debug UI</a> as I'm writing a program: it turns into an explorable explanation by the time I have a working program. Here's a (silent) explorable explanation for a simple program that I nonetheless struggled to get right.</p>
+
+
+<p>Each screen is a hundred lines beyond <a href="https://akkartik.itch.io/carousel">Lua Carousel</a> (which has existed before this whole idea of debug UIs was a twinkle in my eye)</p>
+
+
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08A5SN05D3.webm">freewheeling debug</a></p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>📔 <a href="https://tomlarkworthy.moldable.app/index.html">Added a context menu</a> via <a href="https://webcode.run">Tom Larkworthy</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/devlog-together.html#2025-01-25T14:13:12.216Z">🧵 conversation</a></p>
+
+
+<p>Added a context menu so it was a bit more obvious how to add new cells. hosted page is <a href="https://tomlarkworthy.moldable.app/index.html">here</a>. Maybe this is enough webpage stuff for now and I should start porting my notebooks. Its getting a bit laggy now as well which I think is because the reactivity is not fine grained for most of the UI (underlying calculations are though).</p>
+
+
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08ANBJTA9F.mp4">context menu</a></p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h1>Thinking Together</h1><h2>📝 <a href="https://open.substack.com/pub/programmingsimplicity/p/whence-bloat?r=1egdky&amp;utm_campaign=post&amp;utm_medium=web&amp;showWelcomeOnShare=true_">Whence Bloat?</a> via <a href="https://guitarvydas.github.io/2021/09/23/Manifesto.html">Paul Tarvydas</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/thinking-together.html#2025-01-21T16:37:22.946Z">🧵 conversation</a></p>
+
+
+<p><a href="https://open.substack.com/pub/programmingsimplicity/p/whence-bloat?r=1egdky&amp;utm_campaign=post&amp;utm_medium=web&amp;showWelcomeOnShare=true_">Doodles</a> for discussion towards simplification of computers for non-programmers.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>💬 <strong>Karl Toby Rosenberg</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/thinking-together.html#2025-01-21T18:03:09.068Z">🧵 conversation</a></p>
+
+
+<p>I found that indentation in programming languages like Python, at least with some of my students, seems to be a point of confusion. This idea of introducing spatial thinking and jumping around seems to conflict with our learned way of reading text on a page. The closest thing is textual paragraph indentation.</p>
+
+
+<p>Maybe there are some studies that contradict me, but couldn’t braces or begin/ends actually be better? Or something built-into the editor.</p>
+
+
+<p>Why couldn’t this be acceptable?</p>
+<pre><code># instead of:
+
+if bla:
+
+    do_bla()
+
+   if blabla:
+
+       do_blabla()
+
+   else:
+
+       other()
+
+else:
+
+    other()
+
+
+
+# do
+
+if bla {
+
+do_bla()
+
+if blabla() {
+
+do_blabla()
+
+} 
+
+else {
+
+other()
+
+}
+
+else {
+
+other()
+
+}
+
+
+
+</code></pre>
+
+<p>Okay it’s hard to read, but it makes me think: any block of code could really be its own function, and suppose we had a kind of function that was purely an inline macro to jump to without any stack rules. The goal would just be to make code look as procedural/linear as possible.</p>
+<pre><code>if bla do_bla() else other()
+
+
+
+#define do_bla somewhere somehow in a way that keeps the same scope without param/stack rules
+
+</code></pre>
+
+<p>Sure this would probably require more annoying steps and jumps for some, but I do wonder how it might impact early learners or maybe prove useful (or not useful) for understanding control flow </p>
+
+
+<p>Maybe if an editor could automatically inline code folding off and off with these macros…</p>
+
+
+<p>Probably more of a structured/dynamic editor that isn’t just pure text.</p>
+
+
+<p>I’m sure this path has been followed before, but I wonder.</p>
+
+
+<p>It’s really just closer to ASM languages with the conditional jumps and islands of code. Strangely, I find those pretty not so hard to understand. No nesting.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>📝 <a href="https://federicopereiro.com/ai-summer/">Three thoughts on the summer of AI</a> via <strong>Federico Pereiro</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/thinking-together.html#2025-01-21T20:56:57.224Z">🧵 conversation</a></p>
+
+
+<p>Hi everyone! I just posted a short article with three thoughts on the "AI summer": <a href="https://federicopereiro.com/ai-summer/">federicopereiro.com/ai-summer</a></p>
+
+
+<p>If anyone has similar (or contrasting) experiences, I'd be glad to hear them!</p>
+<ul><li>UI through AI: the possibility of replacing more parts of the UI with AI</li><li>LLMs shrinking the area of training with own data</li><li>Temperature rising</li></ul></div>
+
+<br>
+
+<div style="margin-top:1em"><h2>💬 <strong>Xavier Lambein</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/thinking-together.html#2025-01-23T09:11:18.952Z">🧵 conversation</a></p>
+
+
+<p>A thought occurred to me while checking Kartik Agaram's post on <strong>#devlog-together</strong> A Web page is a convenient medium to write a small application for yourself and distribute it. But it's also limiting, because of the browser. You can't easily edit local files, requests are limited by CORS, you can lose data if the browser's cache is emptied, etc.</p>
+
+
+<p>So I'm wondering: is there a sort of "browser for local apps", which would be just a webview with some of the browser's limitations lifted? For example, I could use Kartik's single-page app for annotating text, but instead of saving my changes by downloading the saved file, it would use the filesystem directly.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>💬 <strong>Jon Secchis</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/thinking-together.html#2025-01-24T23:14:48.011Z">🧵 conversation</a></p>
+
+
+<p>I just realized that if browsers could display notification badges when a site is closed and showed it on the bookmarked item in the fav bar while the site is not open (no tabs), that'd be super cool and useful! Like I could visibly place sites I commonly expect traffic and allow them to fetch notifications in the background such as this very platform, email, etc. Then I wouldn't need to open the site, "waste" time/resources just to check for new messages and such</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h1>Content</h1><h2>📝 <a href="https://corecursive.com/hedy-with-felienne-hermans/">From Burnout to Breakthrough - CoRecursive Podcast</a> via <strong>Tim Schafer</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/linking-together.html#2025-01-21T05:23:20.584Z">🧵 conversation</a></p>
+
+
+<p><a href="https://www.hedycode.com/">Hedy: Textual programming for the classroom</a></p>
+<blockquote style="margin-left:1em;color:#555555;font-style:italic">
+
+<p>📝 <a href="https://corecursive.com/hedy-with-felienne-hermans/">From Burnout to Breakthrough - CoRecursive Podcast</a></p>
+
+
+<p>Can you imagine risking your career to making coding easier to learn? Meet Felienne Hermans, a professor who did just that by stepping beyond academia to redefine coding education. Disillusioned by her research's limited impact, Felienne discovered a new calling in teaching coding to underserved students. Her journey led to the creation of Hedy, a programming language designed to dismantle... […]</p>
+</blockquote>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🤔 <a href="https://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">What is Code? by Paul Ford</a> via <strong>Jasmine Otto</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/linking-together.html#2025-01-21T19:55:11.631Z">🧵 conversation</a></p>
+
+
+<p>god, this longread on the software industry hasn't aged in a decade</p>
+<blockquote style="margin-left:1em;color:#555555;font-style:italic">
+
+<p>Somehow it keeps working out. The industry is always promising to eat itself, to come up with a paradigm so perfect that we can all stop wasting our time and enter a world of pure digital thought. It never happens.</p>
+</blockquote>
+
+
+<p>it's very much a bird's eye view but there's a fantastic balance between the beauty and the ravenous ouroborous</p>
+<blockquote style="margin-left:1em;color:#555555;font-style:italic">
+
+<p>Languages are liquid infrastructure. You download a few programs and, whoa, suddenly you have a working Clojure environment. Which is actually the Java Runtime Environment. You grab an old PC that’s outlived its usefulness, put Linux on it, and suddenly you have a powerful Web server.</p>
+</blockquote>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🧱 <a href="https://www.youtube.com/live/Jff0pIbj8PM?si=aB3FVyPyoLlx9ndZ&amp;t=6092">Pantograph, a structure editor</a> via <strong>Xavier Lambein</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/linking-together.html#2025-01-24T12:51:48.362Z">🧵 conversation</a></p>
+
+
+<p>Very cool work on a typed structure editor presented yesterday at POPL: <a href="https://www.youtube.com/live/Jff0pIbj8PM?si=aB3FVyPyoLlx9ndZ&amp;t=6092">Pantograph, a structure editor</a></p>
+
+
+<p>With a demo available online here: <a href="https://pantographeditor.github.io/Pantograph/">pantographeditor.github.io/Pantograph</a> I just worked through the tutorial myself, it's very pleasant to use overall.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🎥 <a href="https://www.youtube.com/watch?v=pzf3VlKNLiI">UNIX before Linux (1982)</a> via <strong>Jon Secchis</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/linking-together.html#2025-01-24T15:48:39.957Z">🧵 conversation</a></p>
+
+
+<p><img src="https://img.youtube.com/vi/pzf3VlKNLiI/hqdefault.jpg" alt="Youtube Thumbnail"></p>
+
+
+<p>Worth rewatching and reflecting on what we had vs what we have now. Can be pretty chilling depending on how you frame the comparison</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🐦 <a href="https://x.com/alexwarth/status/1882843343979524262">Alex Warth (@alexwarth) on X</a> via <a href="https://dekorte.com/">Steve Dekorte</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/linking-together.html#2025-01-25T00:44:30.949Z">🧵 conversation</a></p>
+<blockquote style="margin-left:1em;color:#555555;font-style:italic">
+
+<p>🐦 <a href="https://x.com/alexwarth/status/1882843343979524262">Alex Warth (@alexwarth) on X</a>: Sketchpad running on the iPad!</p>
+
+
+<p>(This is my plug for the @inkandswitch wrapper, check it out at <a href="https://t.co/bkx9dhM17r">https://t.co/bkx9dhM17r</a>)</p>
+
+
+<p><img src="https://pbs.twimg.com/ext_tw_video_thumb/1882834812123357184/pu/img/-txRyn5S1WxBS50t.jpg:large" alt="Tweet Thumbnail"></p>
+</blockquote>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>💡 <a href="https://dev.to/janeori/expert-css-the-cpu-hack-4ddj">Expert CSS: The CPU Hack</a> via <strong>Roma Komarov</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/linking-together.html#2025-01-25T18:01:56.358Z">🧵 conversation</a></p>
+
+
+<p>Finally spent time understanding what's going on in <a href="https://dev.to/janeori/expert-css-the-cpu-hack-4ddj">dev.to/janeori/expert-css-the-cpu-hack-4ddj</a></p>
+
+
+<p>(but only for the main technique, not the way it is used for the demos in the article, like in the Game of Life demo — <a href="https://codepen.io/propjockey/pen/NWEYdjY">codepen.io/propjockey/pen/NWEYdjY</a> (Chrome only))</p>
+
+
+<p>Basically, re-evaluation of state in pure CSS (turing complete, all of that) using the interactions between animations and custom properties (and, currently, Chrome-only details of their implementation)</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h1>Present Company</h1><h2>🗽 <a href="https://eieio.games/blog/the-nyc-game-art-tech-triangle/">The NYC Tech/Art/Games Triangle</a> via <a href="http://ivanish.ca/">Ivan Reese</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/01/W4/present-company.html#2025-01-22T23:19:29.355Z">🧵 conversation</a></p>
+
+
+<p><a href="https://eieio.games/blog/the-nyc-game-art-tech-triangle/">The NYC Tech/Art/Games </a><a href="https://eieio.games/blog/the-nyc-game-art-tech-triangle/">Triangle</a> </p>
+</div>
+
+<br><hr style="border:0;border-top:1px solid #cccccc">
+
+<p>👨🏽‍💻 By <a href="https://bsky.app/profile/marianoguerra.org" target="_blank">🦋 @marianoguerra.org</a> <a href="https://hachyderm.io/@marianoguerra" target="_blank">🐘 @marianoguerra@hachyderm.io</a> <a href="https://twitter.com/warianoguerra" target="_blank">🐦 @warianoguerra</a></p>
+
+<p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/" target="_blank">Future of Coding Community</a></p>
+
+<p>✉️ Not subscribed yet? <a href="https://newsletter.futureofcoding.org/join/" target="_blank">Subscribe to the Newsletter</a> / <a href="https://newsletter.futureofcoding.org/archive.html" target="_blank">Archive</a> / <a href="https://history.futureofcoding.org/newsletter/rss.xml" target="_blank">RSS</a></p>
+
+<p>🎙 Prefer podcasts? check the <a href="https://futureofcoding.org/episodes/" target="_blank">Future of Coding Podcast</a></p>
+
+<p></p>
