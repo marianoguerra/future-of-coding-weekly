@@ -1,0 +1,46 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-01-27T03:09:27.242Z" class="post"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-24&amp;toDate=2025-01-30&amp;channel=devlog-together&amp;filter=#2025-01-27T03:09:27.242Z" class="date">2025-01-27 03:09:27</a> <div class="message"><p>Created yet another diagram-to-json converter in Javascript by asking Claude 3.5 nicely to convert the existing Odin version to <a href="https://github.com/guitarvydas/0D/blob/main/das2json/das2json.js">Javascript</a>.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"></div></div><div id="2025-01-30T19:41:01.958Z" class="post"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=devlog-together&amp;filter=#2025-01-30T19:41:01.958Z" class="date">2025-01-30 19:41:01</a> <div class="message"><p>I got live update messages to work in DPLWB. <a href="http://Draw.io">Draw.io</a> -&gt; choreographer.py -&gt; spawn transpiler -&gt; choreographer.py -&gt; dplwb.html. The transpiler, while working, sends little updates (JSON objects (an array of one object consisting of a pair of strings)) to the choreographer which are immediately sent to dplwb.html. Final result is sent to dplwb.html as an array of JSON objects. Turn-around is "fast enough" (seconds) to be usable in bootstrapping and debugging this stuff more deeply. [DPLWB == Diagrammatic Programming Language WorkBench]</p>
+</div> <div class="attachments"></div> <div class="files"><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08AZLD3JMB.mp4">DPLWB with Live Updates.mp4</a></p>
+</div> <div class="replies"></div></div><div id="2025-02-01T22:35:35.894Z" class="post"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-29&amp;toDate=2025-02-04&amp;channel=devlog-together&amp;filter=#2025-02-01T22:35:35.894Z" class="date">2025-02-01 22:35:35</a> <div class="message"><p>I've been tinkering on a way to handle continuous numeric input. Or, in plainspeak, a  <em>knob</em> … that you can turn. But it's, like,  <em>good</em> , as far as knobs go. (Fake computer knobs, at least.)</p>
+<ul><li>It does the usual thing… you can drag up-and-down to turn the knob. Classic.</li><li>Oh! You can also drag left and right to turn the knob. That's nice.</li><li>Wait… you can crank in circles around the knob? And that works well too?</li><li>But but but… you can also crank in circles, like, anywhere on the screen!</li></ul><p>The goal is "do what I mean" gestural input. Granted, it's currently dumb and could be better, which is why I'm still tinkering on it.</p>
+<p>You can play with it <a href="https://good-knob.surge.sh">here</a>. Code is <a href="https://github.com/ivanreese/knob">here</a>.</p>
+</div> <div class="attachments"></div> <div class="files"><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08BBU30B0A.mp4">GOOD KNOB.mp4</a></p>
+</div> <div class="replies"><div id="2025-02-01T23:04:23.923Z" class="reply"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-29&amp;toDate=2025-02-04&amp;channel=devlog-together&amp;filter=#2025-02-01T23:04:23.923Z" class="date">2025-02-01 23:04:23</a> <div class="message"><p>I tried making one once and yeah, its really hard mapping the polar look to mouse. I just did the up or right for +ve and it just seems wrong when its at certain angles. If you do a drag it can be really sensitive to the singularity that exists near the center which is where you naturally start a drag  so its pretty interesting you are removing that singularity with a local center of rotation. How are you tracking that?</p>
+<p><a href="https://observablehq.com/@tomlarkworthy/audio-inputs#cell-906">observablehq.com/@tomlarkworthy/audio-inputs#cell-906</a></p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-02-01T23:11:14.359Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-29&amp;toDate=2025-02-04&amp;channel=devlog-together&amp;filter=#2025-02-01T23:11:14.359Z" class="date">2025-02-01 23:11:14</a> <div class="message"><p>I remember the path that the mouse has moved, take a bounding box of that path, take the center of the box, and use that as the local center of rotation. I also discard older segments of the path, keeping roughly 4pi*r of them, since that's enough to figure out roughly where the local center ought to be.</p>
+<p>The logic for switching between modes on the fly (horizontal, vertical, or angular) is a bit dodgy. That's something that could be better, but there are also unavoidable edge cases — like when dragging rightward at the bottom of the circle (which could mean "increase the value" when treating the input as horizontal or "decrease the value" when treating it as angular), so my current approach is just to pick whichever one seems most likely and kinda lock-in on it after a handful of samples.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-02-02T04:48:45.646Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-30&amp;toDate=2025-02-05&amp;channel=devlog-together&amp;filter=#2025-02-02T04:48:45.646Z" class="date">2025-02-02 04:48:45</a> <div class="message"><p>for me on my mac: works on Chrome, doesn't work on Firefox (looks like it's loading forever), doesn't work on Safari (same).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-02-02T05:11:23.665Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-30&amp;toDate=2025-02-05&amp;channel=devlog-together&amp;filter=#2025-02-02T05:11:23.665Z" class="date">2025-02-02 05:11:23</a> <div class="message"><p>Weird. I only use safari</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-02-02T08:03:08.935Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-30&amp;toDate=2025-02-05&amp;channel=devlog-together&amp;filter=#2025-02-02T08:03:08.935Z" class="date">2025-02-02 08:03:08</a> <div class="message"><p>For me it works fine in Firefox on the mac.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-02-02T08:03:19.872Z" class="reply"><span class="user">Christopher Shank</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-30&amp;toDate=2025-02-05&amp;channel=devlog-together&amp;filter=#2025-02-02T08:03:19.872Z" class="date">2025-02-02 08:03:19</a> <div class="message"><p>Is this licensed? I have a couple of ideas to riff on this</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-02-02T15:31:35.598Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-30&amp;toDate=2025-02-05&amp;channel=devlog-together&amp;filter=#2025-02-02T15:31:35.598Z" class="date">2025-02-02 15:31:35</a> <div class="message"><p><a href="https://mobile.twitter.com/chrisshank23">Christopher Shank</a> ah, good point — it's unlicense'd now, have at!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-02-03T07:03:49.559Z" class="reply"><span class="user">William Taysom</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-31&amp;toDate=2025-02-06&amp;channel=devlog-together&amp;filter=#2025-02-03T07:03:49.559Z" class="date">2025-02-03 07:03:49</a> <div class="message"><p>Versatile.  Interesting contrast to what I usually see in fancy knobs (and sliders) that use the second dimension for tuning.  For example, a radial knob where distance from the center decreases the amount of turning that happens.  I was just using this in OmniGraffle a second ago to precisely rotate a shape.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-01-29T23:11:42.196Z" class="post"><span class="user">Christopher Shank</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-26&amp;toDate=2025-02-01&amp;channel=two-minute-week&amp;filter=#2025-01-29T23:11:42.196Z" class="date">2025-01-29 23:11:42</a> <div class="message"><p>I put together a brief writeup about how I've been doing semantic zoom with just a little CSS. I feel like I haven't seen a lot of recent visual programming interfaces (although there are certainly a lot of prior art) take advantage of fluid zooming and geometric encapsulation. Here's a couple small demos:</p>
+<p><a href="https://bsky.app/profile/chrisshank.com/post/3lgu3v6nfq22s">bsky.app/profile/chrisshank.com/post/3lgu3v6nfq22s</a></p>
+</div> <div class="attachments"></div> <div class="files"><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08AWVB4U0K.mov">Screen Recording 2025-01-28 at 3.41.03 PM.mov</a></p>
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08AX00PEKV.mov">Screen Recording 2024-12-26 at 4.06.11 PM.mov</a></p>
+<p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08AQDWFPJA.mov">Screen Recording 2024-12-24 at 11.53.48 AM.mov</a></p>
+</div> <div class="replies"><div id="2025-01-30T01:33:58.829Z" class="reply"><span class="user">Jason Morris</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=two-minute-week&amp;filter=#2025-01-30T01:33:58.829Z" class="date">2025-01-30 01:33:58</a> <div class="message"><p>I have been moaning about the under-utilization of zoom and visual nesting for a long time, and this is a really nice low overhead approach. Are there downsides? It feels like needing to recalculate for every element in the DOM, regardless of whether it is in the viewport, is going to slow things down when you get to a certain volume of elements, maybe?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-01-30T02:42:01.390Z" class="reply"><span class="user">Christopher Shank</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=two-minute-week&amp;filter=#2025-01-30T02:42:01.390Z" class="date">2025-01-30 02:42:01</a> <div class="message"><p>I'd like to have a better grasp of where that threshold is, but I'm not sure at the moment. There's a good amount of low-hanging optimizations:</p>
+<ul><li>What properties are being animated? Need to be careful about properties that cause large reflows like width/height/font-size. Properties like opacity, translate, scale, etc. should be consistently performant.</li><li>If possible, applying <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/contain">contains</a> properties to each element can really help browsers optimize rendering/layout. Some simple testing I've done shows that this could cut rendering time by 2-3x.</li><li>I want to build primitive(s) that don't render offscreen elements. We may even be able to do it with just CSS using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility">content-visibility</a>.</li><li>In the future, <a href="https://scroll-driven-animations.style/">scroll-driven animations</a> could potentially provide performance benefits since it's running off the main thread (I think browsers have a dedicated thread for scrolling) and zooming usually hijacks the  <code>wheel</code>  event.</li><li>It should be possible to hide (i.e.  <code>display: none</code> ) elements that are too scaled out in the near future with CSS  <code>if()</code></li></ul><p>It's going to require some care, but I'm (currently) optimistic this can scale pretty well.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-01-30T02:44:19.588Z" class="reply"><span class="user">Christopher Shank</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=two-minute-week&amp;filter=#2025-01-30T02:44:19.588Z" class="date">2025-01-30 02:44:19</a> <div class="message"><p>Performance aside, I'm finding the ability to easily start prototyping these types of zoom interactions valuable in and of itself! For example, here is the CSS for the first demo, the zooming logic is about 10 lines of CSS:</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F08/F08AR51SLF8.png" alt="image.png"></p>
+<p><img src="http://history.futureofcoding.org/history/msg_files/F08/F08AUU5KJMT.png" alt="image.png"></p>
+</div></div><div id="2025-01-30T03:15:30.174Z" class="reply"><span class="user">Daniel Garcia</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=two-minute-week&amp;filter=#2025-01-30T03:15:30.174Z" class="date">2025-01-30 03:15:30</a> <div class="message"><p>This is really cool!</p>
+<p>Can you share the code that updates the “—folk-scale” variable?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-01-30T03:20:31.310Z" class="reply"><span class="user">Christopher Shank</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=two-minute-week&amp;filter=#2025-01-30T03:20:31.310Z" class="date">2025-01-30 03:20:31</a> <div class="message"><p>Thanks <a href="https://pel-daniel.github.io/cv/">Daniel Garcia</a>! It's a custom element defined here (still pretty WIP) <a href="https://github.com/folk-systems/folk-canvas/blob/main/labs/folk-pinch.ts">github.com/folk-systems/folk-canvas/blob/main/labs/folk-pinch.ts</a></p>
+<p>If you're looking for something already published (but a little outdated) check out <a href="https://github.com/GoogleChromeLabs/pinch-zoom">github.com/GoogleChromeLabs/pinch-zoom</a></p>
+<p>Also worth noting that a white boarding app like tldraw have  <code>--tl-zoom</code>  .</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-01-30T05:17:26.813Z" class="reply"><span class="user">Andrew F</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=two-minute-week&amp;filter=#2025-01-30T05:17:26.813Z" class="date">2025-01-30 05:17:26</a> <div class="message"><p>I've got a bit of a similar thing going on with my main project right now, <a href="http://laminarnotes.com">laminarnotes.com</a>, though I haven't really tried to make my zoom continuous (and it's also not a programming interface (yet)). I'll have to see if I can use any of your tricks.</p>
+<p>Performance is definitely a problem. I have to virtualize any element that's not on the screen just to get it tolerable.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-01-30T06:09:26.476Z" class="reply"><span class="user">Tudor Girba</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=two-minute-week&amp;filter=#2025-01-30T06:09:26.476Z" class="date">2025-01-30 06:09:26</a> <div class="message"><p>Elegant!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-01-30T06:29:24.074Z" class="reply"><span class="user">Christopher Shank</span> <a href="https://history.futureofcoding.org/?fromDate=2025-01-27&amp;toDate=2025-02-02&amp;channel=two-minute-week&amp;filter=#2025-01-30T06:29:24.074Z" class="date">2025-01-30 06:29:24</a> <div class="message"><p><a href="http://github.com/andrewf">Andrew F</a> super cool, next thing I want to figure out how to apply this to nested/recursive structures.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
