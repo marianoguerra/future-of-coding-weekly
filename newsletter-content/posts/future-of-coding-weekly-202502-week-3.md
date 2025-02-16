@@ -1,0 +1,187 @@
+<!--
+.. title: Future of Coding Weekly 2025/02 Week 3
+.. slug: future-of-coding-weekly-202502-week-3
+.. date: 2025-02-16 23:01:23 UTC+01:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🎙️ FoC 75 • A Case for Feminism in Programming Language Design 💡 The Power of Creative Coding 🤔 The Future of Programming with Jonathan Edwards
+
+# Two Minute Week
+
+## 💬 [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/two-minute-week.html#2025-02-15T18:33:38.495Z)
+
+My actual target goal at-the-moment is being able to export some of the existing notebooks I have on Observable to my offline-first file format, which led me to develop a programmable import so I can script grabbing other notebooks in a batch export. But after I got the programmable import working, I could not actually see the imported notebook. So that led me to add opening dependancies as extra panels in the golden layout. I was surprised when I first saw dependancies that they were actually executing, although its kinda obvious in retrospect coz of how Observable runtime works*. When I saw them running I then wanted to edit them, which I just added.  Then, as a consequence of the editor being implemented in userspace, you can now live edit the development tooling itself! Kinda cool.
+
+
+
+I still have not achieved my goal, but I am happy that these synergies are starting to emerge from combining userspace and development tooling inside a shared runtime.
+
+
+
+ `*`  I have not chewed through the fully consequences of this, but it means you no longer need to plumb development aids all the way to the top like in Observable. For example, an LLM coding assistant can offer its advice without its UI spilling into the primary notebook.
+
+🎥 [live editing ui](http://history.futureofcoding.org/history/msg_files/F08/F08DADN2GBG.mp4)
+
+
+# Our Work
+
+## 🎥 [Origins of Multitasking and Coroutines](https://www.youtube.com/watch?v=_RSOHszYP1g) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/share-your-work.html#2025-02-13T16:10:28.492Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/_RSOHszYP1g/hqdefault.jpg)
+
+I found myself explaining how bare CPU hardware works and waving my hands in front of the camera, at this week's online Torlisp meeting. Later, I drew the pictures in [draw.io](http://draw.io) and created a Keynote (Apple's version of Powerpoint) slide deck. FWIW, here it is (with some AI for generating the narrator's voice): 🎥 [Origins of Multitasking and Coroutines](https://www.youtube.com/watch?v=_RSOHszYP1g)
+
+## 🎙️ [Future of Coding • Episode 75 • A Case for Feminism in Programming Language Design](https://futureofcoding.org/episodes/075) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/share-your-work.html#2025-02-16T19:53:26.353Z)
+
+
+In the academic field of programming language research, there are a few prestigious conferences that you must present at to advance in your career. These conferences are rather selective about which presentations they’ll accept. If your research work involves proving formal properties about a programming language, you’ll have their ear. But if your work looks at, say, the human factors of language design, you might as well not bother applying — and thus, not bother pursuing that work in the first place. Why is the formalistic, systems-focused work elevated, and the human-focused work diminished? And what are the downstream consequences, the self-reinforcing feedback loops that come from this narrow focus?
+
+
+
+In this episode we discuss a paper by [Felienne Hermans](https://www.felienne.com/) and [Ari Schlesinger](https://arischlesinger.com/) titled, [A case for Feminism in Programming Language Design](https://www.felienne.com/archives/8470). It applies the lens of intersectional feminism to reveal a startling lack of [“Yes, and…”](https://en.wikipedia.org/wiki/Yes,_and...) in academic computer science, where valuable avenues of inquiry are closed off, careers are stifled, and people are unintentionally driven away from contributing to the field, simply because their passions and expertise don’t conform to a set of invisible expectations. Through heartbreaking personal anecdotes and extensive supporting references, the paper makes the case that there’s a lot of high-value greenfield work to be done, and people who would love to do it — but we will need to collectively identify, understand, and then fix a few broken incentives before it’ll happen.
+
+
+## 🔌 [Functioncharts: A Graphical Programming Language](https://github.com/billbudge/WebEditorFramework/tree/main/examples/functioncharts) via **Bill Budge**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/share-your-work.html#2025-02-16T20:54:17.829Z)
+
+Functioncharts are a new kind of diagram for programs, with the audacious goal of being as expressive as any textual programming languages. It supports creating abstractions, and first-class iteration and recursion. The first version of this diagram is for a Javascript-like language, but it could be adapted for others (WebAssembly?) It was inspired by and borrows ideas from the Statechart formalism.
+
+
+
+This editor project started as a specialized drawing tool to allow me to explain the ideas. But I found that trying to build actual programs was the only way to find out what worked and what didn't. The GitHub pages are the documentation for now. The editor is usable but unstable. There is no code generation or iterpreter yet.
+
+Read the doc first. You can [try the editor at this link (warning, it is a buggy prototype)](https://billbudge.github.io/WebEditorFramework/examples/functioncharts/)
+
+As a warm-up for this project, I also developed a [Statechart editor.](https://github.com/billbudge/WebEditorFramework/tree/main/examples/statecharts)
+
+[billbudge.github.io/WebEditorFramework/examples/statecharts](https://billbudge.github.io/WebEditorFramework/examples/statecharts/)
+
+
+
+# Devlog Together
+
+## 💻 [Living deps](https://tomlarkworthy.moldable.app/index.html) via [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/devlog-together.html#2025-02-10T21:51:23.346Z)
+
+now in the single file programming substrate you can look at your dependancies and they are things that are running. I was kinda surprised when I first saw their demos were executing. prototype [here](https://tomlarkworthy.moldable.app/index.html)
+
+🎥 [living deps](http://history.futureofcoding.org/history/msg_files/F08/F08CNJ5NZDZ.mov)
+
+
+## 🎠 [Extremely simple static site generator](https://git.sr.ht/~akkartik/gen_site/) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/devlog-together.html#2025-02-13T17:07:20.189Z)
+
+I seem to be alternating between working with html and Lua/LÖVE. In the last few days I've been trying to extract some more timeless tools out of the ad hoc static site I replaced my old Rails website with a couple of years ago. [Here's the project.](https://git.sr.ht/~akkartik/gen_site/) Requires just Lua (any version after 5.1) and nothing else. In particular, it doesn't mess with any Markdown variant, just leaves you to edit raw HTML.
+
+
+
+There's 3 tools that you can use independently that read a common data source of files with some  `---`  metadata up top and a small number of  `VARIABLES`  that get substituted in. Each tool is self-contained in a single  `.lua`  file and so easy to mix and match. For example, my site has two distinct blogs (main site and devlog). I run the first tool once and the others twice each.
+
+
+
+I can't quite cut my site over to this, though. Open questions I ran into with my site:
+
+
+
+
+* How to style the pagination links. Those bits of html are hard-coded in the generator.
+* Some of my older blog posts have no titles. Then I want to show the date in the  `<title>`  tag, but show no title in the  `<body>`  (because I already show the date and it would be redundant). It's unclear how to do that without a whole templating language.
+
+
+
+I'm sure there are others. SSGs seem to be one of those things that everyone a unique-snowflake version of. But check it out if you're willing to leave Markdown behind. Using HTML is more accessible than Markdown. For example, it lets you distinguish a couple of key categories of  `<code>` : keyboard shortcuts with  `<kbd>` , references to names in other snippets with   `<var>`  and computer output with  `<samp>` . Markdown's backticks can't do that. It doesn't matter if you never share your posts, and it's natural to not want to look at HTML given how monstrous it can get. But HTML also has a lovely core that a lot of civilizational effort went into, and it's sad that layers above don't use all of it. A little more manual labor can provide a nicer reading experience for others.
+
+
+# Thinking Together
+
+## 💭 [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/thinking-together.html#2025-02-10T21:32:37.101Z)
+
+Trolling for ideas on which way I should go. I have too many choices in front of me and way too many learning curve(s) to go down. I've got a drawware REPL that uses 3 windows: (1) [draw.io](http://draw.io), (2) browser that displays output of run, (3) python glue running in a terminal window that watches the timestamp on the [draw.io](http://draw.io) file, and spawns a compile/run cycle when the drawing changes. The python glue creates 2 websockets (1) a 1-way conduit to the browser to send it JSON key/value objects (strings) and (2) a 1-way conduit from the spawned compiler which sends key/value messages which get forwarded to the browser. The effect is like  `printfs`  but in a browser instead of a console (and more useful than  `printf`  because it doesn't need to be sequentially inserted into the circuit). It knows how to shell-out to command-line commands. This is a VSH - a Visual SHell to replace /bin/bash. The whole mess works "fast enough" to act as a code development REPL. What's the best way to package the whole thing into a singly-deployable app? (single from users' perspective, maybe retain all processes and windows). Should I dump the browser and go with some local GUI package (what?). Should I be looking at redbean? Should I be looking at Glamorous Toolkit? CLOG? Keeping the browsers and sockets makes it scalable across distributed machines and might result in new ideas. I want to keep [draw.io](http://draw.io), since it saves me a lot of work (it's a PITA to use, but better than anything I could build myself). Keeping Python and JS lets me forego actual coding (I just ask AI to build the thingies - AI has been trained on zillions of lines of code in JS and Python). I'm good with Common Lisp, Python and JS (but, hand-written JS usually creates mysterious failures that are hard to debug. Lispworks debugger is the "best", next is Python). I'm good with cranking out little nano-DSLs using OhmJS (t2t), so I can generate code instead of writing tricky code.
+
+
+
+This is VSH, using websockets instead of UNIX pipes. Using 2D node-and-arrow drawings instead of 1D text on the command line shell syntax.
+
+![workflow sketch.drawio.png](http://history.futureofcoding.org/history/msg_files/F08/F08D19LAW9X.png)
+
+
+## 💬 [Oleksandr Kryvonos](https://twitter.com/o_kryvonos)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/thinking-together.html#2025-02-11T09:17:08.437Z)
+
+What if we use GPU / NPU / TPU to run Prolog several magnitudes faster?
+
+Using technique of encoding words into numbers as LLM does?
+
+# Content
+
+## 🎥 [Surface-Stable Fractal Dithering Explained](https://www.youtube.com/watch?v=HPqGaIMVuLs&amp;ab_channel=runevision) via [Mattia Fregola](https://twitter.com/MattiaFregola)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/linking-together.html#2025-02-10T02:56:42.668Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/HPqGaIMVuLs/hqdefault.jpg)
+
+Worth watching even just because of this :D
+
+
+![Screenshot 2025-02-10 at 1.55.30 PM.png](http://history.futureofcoding.org/history/msg_files/F08/F08CEFJEA2H.png)
+
+
+
+## 💡 [The Power of Creative Coding](https://mirror.as35701.net/video.fosdem.org/2025/janson/fosdem-2025-5369-program-to-learn-the-power-of-creative-coding.av1.webm) via **Xavier Lambein**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/linking-together.html#2025-02-10T10:11:39.241Z)
+
+Great talk at FOSDEM about LOGO, Smalltalk and Scratch
+
+
+## 🤔 [ The Future of Programming with Jonathan Edwards | Philomatics Podcast #1 ](https://www.youtube.com/watch?si=TLsC6pZspe5ZXsfC&v=BdoWZPvfZSE&feature=youtu.be) via [Steve Dekorte](https://dekorte.com/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/linking-together.html#2025-02-11T19:28:59.096Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/BdoWZPvfZSE/hqdefault.jpg)
+
+
+
+## 🎥 [Deep Dive into LLMs like ChatGPT](https://youtu.be/7xTGNNLPyMI?si=xMNQqpw5a570YMF-) via [Oleksandr Kryvonos](https://twitter.com/o_kryvonos)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/linking-together.html#2025-02-11T21:40:06.238Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/7xTGNNLPyMI/hqdefault.jpg)
+
+Demystyfication of LLMs (at least for me)
+
+
+## 📝 [Toward Convivial Computing](https://direct.mit.edu/books/edited-volume/4247/chapter-abstract/178361/Toward-Convivial-Computing?redirectedFrom=fulltext) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/02/W3/linking-together.html#2025-02-15T07:10:32.974Z)
+
+[Toward Convivial Computing ](https://direct.mit.edu/books/edited-volume/4247/chapter-abstract/178361/Toward-Convivial-Computing?redirectedFrom=fulltext) by Terry Winograd (1979). I was intrigued by the term "convivial", but it turns out not to be a reference to Illich's work at all. It's about what we call "explainable AI" today, except that it's about first-generation AI, meaning expert systems etc.
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
