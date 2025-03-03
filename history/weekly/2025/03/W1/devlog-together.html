@@ -1,0 +1,70 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-03-01T10:44:28.873Z" class="post"><span class="user">Roma Komarov</span> <a href="https://history.futureofcoding.org/?fromDate=2025-02-26&amp;toDate=2025-03-04&amp;channel=devlog-together&amp;filter=#2025-03-01T10:44:28.873Z" class="date">2025-03-01 10:44:28</a> <div class="message"><p>Something I've been very slowly working on for years (with long multi-month spans of not doing anything). Sharing to manifest more work 🙂</p>
+<p>Basically, a test bed for CSS and web components: allows generating permutations between various CSS custom properties, HTML attributes, and more. It was already instrumental for some of my web platform testing, as it is an effortless way of displaying all the possible options at the same time, and then cross-browser comparison can show the difference. A lot of what is there I already use in production in the design system I am working on in my company, but that implementation relies heavily on React.</p>
+<p>What I am working will, ideally, be frameworkless, and done only with the web platform in mind. Currently, some of its bits are using Preact, but I really want to step away from it, and do  <em>everything</em>  with web components, and not rely on something external.</p>
+</div> <div class="attachments"></div> <div class="files"><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08FZUBUUC9.mov">Screen Recording 2025-03-01 at 11.35.58.mov</a></p>
+</div> <div class="replies"><div id="2025-03-01T11:04:32.830Z" class="reply"><span class="user">Roma Komarov</span> <a href="https://history.futureofcoding.org/?fromDate=2025-02-26&amp;toDate=2025-03-04&amp;channel=devlog-together&amp;filter=#2025-03-01T11:04:32.830Z" class="date">2025-03-01 11:04:32</a> <div class="message"><p>Usage of this is just:</p>
+<pre><code>    &lt;style&gt;
+
+        .test {
+
+            width: 100%;
+
+            background: var(--dial-bg, pink);
+
+            border: 2px var(--dial-border, solid);
+
+            box-sizing: border-box;
+
+            padding: var(--dial-padding, 16px);
+
+        }
+
+    &lt;/style&gt;
+
+    &lt;css-lab dials="
+
+        bg: pink|hotpink|yellow;
+
+        padding: initial | 8px | 16px;
+
+        border: solid | dashed;
+
+    "&gt;
+
+      &lt;div class="test"&gt;Hello world!&lt;/div&gt;
+
+    &lt;/css-lab&gt;</code></pre><p>Although, it will likely change a lot over time, but I am trying to make it as simple as possible to use for myself.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-03-01T11:11:10.048Z" class="reply"><span class="user">Roma Komarov</span> <a href="https://history.futureofcoding.org/?fromDate=2025-02-26&amp;toDate=2025-03-04&amp;channel=devlog-together&amp;filter=#2025-03-01T11:11:10.048Z" class="date">2025-03-01 11:11:10</a> <div class="message"><p>And the way it works in our design system. The context is rather different, where we want to show the generated code to use for every permutation, but also not complete in some ways, and is less about exploration (no two-way feedback from the controls). But we're pretty happy with how it works, and even saw other design systems adopt a few things from our design &amp; implementation (with explicit mentions).</p>
+</div> <div class="attachments"></div> <div class="files"><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08F88034JK.mov">Screen Recording 2025-03-01 at 12.08.02.mov</a></p>
+</div></div></div></div><div id="2025-03-02T16:36:20.392Z" class="post"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-02-27&amp;toDate=2025-03-05&amp;channel=devlog-together&amp;filter=#2025-03-02T16:36:20.392Z" class="date">2025-03-02 16:36:20</a> <div class="message"><p>I've got module loading working. Its a combination of a few pieces I worked on. programmatic import + modules as panels + mutable fileattachments. Its a little different to observable where you only import via an import statement. Now you add a module to the bundle, which better in the multi-module UI world as a module can be useful without being directly linked (e.g. it can just implement a useful tool).</p>
+<p>The list of modules is recorded in a JSON file attachment. This list of extra modules is programatically imported on startup. The programatic import first tries to load the module from the bundle local-first, if it can't find it it falls back to the Observable API. So this mechanism allows you to initialize from the Observable ecosystem, but once loaded into the runtime, subsequent exports include it in the bundle and it becomes a vendored local-first dependancy.</p>
+</div> <div class="attachments"></div> <div class="files"><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F08/F08G29N1GU9.mp4">module_loading.mp4</a></p>
+</div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>
