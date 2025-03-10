@@ -18,7 +18,6 @@ function generateScriptForThisWeek(now, dayNumber) {
   console.log(
     `sed 's/title = "Future of Coding Weekly"/title = "Future of Coding Weekly ${curYear}\\/${monthStr} Week ${weekNumber}"/g' future-of-newsletters/resources/mail-send-config.toml |\n save future-of-newsletters/mail-sent/${dateDir}/config.toml`
   );
-  console.log(`bat future-of-newsletters/mail-sent/${dateDir}/config.toml`);
   console.log(`focWeekExport "${prevDateStr}" "${nextDateStr}"`);
   console.log(
     `https://github.com/marianoguerra/future-of-coding-weekly/issues/new?&template=newsletter-week-issue.md&title=Future+of+Coding+Weekly+${curYear}%2F${monthStr}+Week+${weekNumber}`
@@ -38,13 +37,13 @@ function generateScriptForThisWeek(now, dayNumber) {
   console.log('git push origin');
   console.log('focRemotePull');
   console.log('firefox ' + newsletterUrl);
-  console.log("# Don't run inside a nix-shell");
   console.log(
     `cd future-of-newsletters/foc-server/;cargo run -- send-newsletter --config-path ./resources/base-config.toml --mail-path ../mail-sent/${dateDir}/ --db-path ~/.foc/justmariano.db`
   );
   console.log(
     `cargo run -- send-newsletter --config-path ./resources/base-config.toml --mail-path ../mail-sent/${dateDir}/ --db-path ~/.foc/foc.db`
   );
+  console.log(`open unsub.csv | from csv | each {|line| foc unsubscribe --db-path ./foc.db --mail $line.mail }`);
 }
 function dateStrAddDays(days) {
   const d = new Date();
