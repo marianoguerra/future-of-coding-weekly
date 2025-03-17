@@ -1,0 +1,552 @@
+[
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742095730.055319",
+        "client_msg_id": "1efd1d64-1a89-4366-9d8a-d2172e497862",
+        "text": "I wrote up some overall design direction for zest - <https://github.com/jamii/zest/blob/main/docs/rationale.md>.\n\nCurrently bogged down in figuring out how to combine staged compilation and modules (<https://github.com/jamii/zest/issues/1>), but once I figure that out I can finally start fleshing out the <https://github.com/jamii/zest/blob/main/lib/runtime.zest|runtime>.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "reply_count": 11,
+        "reply_users_count": 3,
+        "latest_reply": "1742181508.489939",
+        "reply_users": [
+            "UJBAJNFLK",
+            "U71PMQ1V0",
+            "UGWUJUZHT"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "t3OnI",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I wrote up some overall design direction for zest - "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/jamii/zest/blob/main/docs/rationale.md"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\nCurrently bogged down in figuring out how to combine staged compilation and modules ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/jamii/zest/issues/1"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), but once I figure that out I can finally start fleshing out the "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://github.com/jamii/zest/blob/main/lib/runtime.zest",
+                                "text": "runtime"
+                            },
+                            {
+                                "type": "text",
+                                "text": "."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heartbeat",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UJBAJNFLK",
+        "type": "message",
+        "ts": "1742114140.712269",
+        "client_msg_id": "7f3f63fc-2c9a-4a06-ba68-47561ccc8dde",
+        "text": "I like your wish list! And your so-far-documented design decisions look reasonable. At least in theory, it takes an implementation to find out how they work in practice.\n\nWondering: have you compared your design in detail with existing systems? I think that would help in understanding what exactly you are missing, and to what degree such features can be added without creating problems elsewhere.\n\nFor example, at first sight your with list and design decisions has a huge overlap with Common Lisp. What I cannot judge easily is how difficult it would be to morph Common Lisp towards full alignment with your goals. Given how well understood Common Lisp is (both good and bad aspects), a detailed comparison should be helpful.\n\nFor for staged compilation and modules, Racket has probably the most sophisticated approach today, but it may well be more sophisticated that you would like for your system, given that Racket allows each module to be written in a different language.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Rd1Gg",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I like your wish list! And your so-far-documented design decisions look reasonable. At least in theory, it takes an implementation to find out how they work in practice.\n\nWondering: have you compared your design in detail with existing systems? I think that would help in understanding what exactly you are missing, and to what degree such features can be added without creating problems elsewhere.\n\nFor example, at first sight your with list and design decisions has a huge overlap with Common Lisp. What I cannot judge easily is how difficult it would be to morph Common Lisp towards full alignment with your goals. Given how well understood Common Lisp is (both good and bad aspects), a detailed comparison should be helpful.\n\nFor for staged compilation and modules, Racket has probably the most sophisticated approach today, but it may well be more sophisticated that you would like for your system, given that Racket allows each module to be written in a different language."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742163784.873589",
+        "client_msg_id": "d197a73a-43d8-4b80-a7c5-8e42daba77e1",
+        "text": "Ah, I forgot to add the problems from <https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/> to the 'legible' side of the wishlist. I'm explicitly trying to avoid the lisp/smalltalk model where loading code means executing a series of side-effects against a mutable environment.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "YRady",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Ah, I forgot to add the problems from "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/"
+                            },
+                            {
+                                "type": "text",
+                                "text": " to the 'legible' side of the wishlist. I'm explicitly trying to avoid the lisp/smalltalk model where loading code means executing a series of side-effects against a mutable environment."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742163812.664039",
+        "client_msg_id": "962b293a-2163-4eaf-8367-fa32e7b696dd",
+        "text": "In particular I don't want to allow things like:\n\n```if ((new Date()).getDay() == 1) { \n    Date.prototype.getDay = function() { return \"funday\" } \n}```",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7cs2D",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "In particular I don't want to allow things like:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "if ((new Date()).getDay() == 1) { \n    Date.prototype.getDay = function() { return \"funday\" } \n}"
+                            }
+                        ],
+                        "border": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742163937.535709",
+        "edited": {
+            "user": "U71PMQ1V0",
+            "ts": "1742164015.000000"
+        },
+        "client_msg_id": "552f222e-9849-4edb-b887-30b6fa655ba1",
+        "text": "I added:\n\u2022 code-based rather than image-based - the code running now is the code that you loaded, nobody can sneak in and change it at runtime, you can understand the system by reading the code\n\u2022 no mutable environments\n\u2022 file/module/expr load order is not observable\n\u2022 no side-effects at load-time, <https://doc.rust-lang.org/1.4.0/complement-design-faq.html#there-is-no-life-before-or-after-main-(no-static-ctors/dtors)|no life before main>\n\u2022 no non-determism at load-time - loading the same code always produces the same program\n\u2022 cf <https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/|there are no strings on me>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8uO/r",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I added:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "code-based rather than image-based - the code running now is the code that you loaded, nobody can sneak in and change it at runtime, you can understand the system by reading the code"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "no mutable environments"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "file/module/expr load order is not observable"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "no side-effects at load-time, "
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://doc.rust-lang.org/1.4.0/complement-design-faq.html#there-is-no-life-before-or-after-main-(no-static-ctors/dtors)",
+                                        "text": "no life before main"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "no non-determism at load-time - loading the same code always produces the same program"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "cf "
+                                    },
+                                    {
+                                        "type": "link",
+                                        "url": "https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/",
+                                        "text": "there are no strings on me"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742167744.787589",
+        "client_msg_id": "2461200f-d902-4ab6-bcac-93ab9d78ab14",
+        "text": "Also under performance:\n\u2022 reflection and meta-programming are predictably staged away",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "gTfHk",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Also under performance:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "reflection and meta-programming are predictably staged away"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742167901.091149",
+        "client_msg_id": "942217b9-841b-4a3d-8d84-023c811693e3",
+        "text": "The closest existing languages are zig and julia, which both feature type-checking after specialization and staging via specialization (values lifted to types) rather than quoting.\n\nThe latter means you can understand the program via its dynamic semantics. Type-checking and staging only affect performance - they can't change the result of the program.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "/h1VP",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The closest existing languages are zig and julia, which both feature type-checking after specialization and staging via specialization (values lifted to types) rather than quoting.\n\nThe latter means you can understand the program via its dynamic semantics. Type-checking and staging only affect performance - they can't change the result of the program."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742167939.197649",
+        "client_msg_id": "10ec26d5-5552-432d-a39b-54fc802e8f38",
+        "text": "But neither of those languages have the restriction to value semantics, which complicates the module system.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "N6YgE",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "But neither of those languages have the restriction to value semantics, which complicates the module system."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742174396.096849",
+        "client_msg_id": "e9cc2350-5dcd-4a5c-b393-ac7c5880e67b",
+        "text": "<https://docs.racket-lang.org/reference/eval-model.html#(part._separate-compilation)> in particular is very unsatisfying. It means you can't give describe the meaning of a racket program without resorting to talking about a *lot* of compiler machinery.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "y3ErU",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://docs.racket-lang.org/reference/eval-model.html#(part._separate-compilation)"
+                            },
+                            {
+                                "type": "text",
+                                "text": " in particular is very unsatisfying. It means you can't give describe the meaning of a racket program without resorting to talking about a "
+                            },
+                            {
+                                "type": "text",
+                                "text": "lot",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " of compiler machinery."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742174954.842829",
+        "client_msg_id": "a44c4236-a8b2-46f7-929b-494a6aedbcc2",
+        "text": "I'm less familiar with common lisp, but searching for \"common lisp load order\" lead to <https://www.reddit.com/r/Common_Lisp/comments/xt7jn4/how_to_build_a_proper_loading_order_from_asdf/>, which is about the experience I expected.\n\n&gt; you wouldn't be able to reproduce that way; file compilation has different semantics than repl interaction (the latter happens strictly at \"load\" or \"execute\" time, while the former happens partially at \"compile\" time)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "pYtVB",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I'm less familiar with common lisp, but searching for \"common lisp load order\" lead to "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.reddit.com/r/Common_Lisp/comments/xt7jn4/how_to_build_a_proper_loading_order_from_asdf/"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", which is about the experience I expected.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "you wouldn't be able to reproduce that way; file compilation has different semantics than repl interaction (the latter happens strictly at \"load\" or \"execute\" time, while the former happens partially at \"compile\" time)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1742177794.374729",
+        "client_msg_id": "a4985399-1d44-4629-81ad-bf11fedeb7e9",
+        "text": "FWIW: ASDF is not part of CL. It is a program written in CL that defines a \"declarative\" DSL with lots of hoary edge cases for determining dependences and loading the minimum number of files. It was invented back when machines ran slowly enough that Makefile seemed like a good idea for minimizing CPU cycles. The basic load function defined by the CL language is (LOAD ...) which you can run from the REPL. One can forego the use of ASDF and simply write a .lisp file with a bunch of (LOAD ...)s in it. It is my understanding that modern CL REPLs actually compile every command, then run the compiled command. In essence, if you type (LOAD \"filename\") at the REPL, the REPL compiles the command into a small binary program, then runs it, actually running the LOAD command built into the Lisp language. ASDF just generates a bunch of (LOAD ...) commands. The definitive reference for CL is <https://www.lispworks.com/documentation/HyperSpec/Front/Contents.htm|CLHS>, but it reads like a ton of bricks (it helps to have a degree in Law). If I had to re-learn Lisp, I would probably start with <https://gigamonkeys.com/book/|Practical Common Lisp>",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "EHiW+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "FWIW: ASDF is not part of CL. It is a program written in CL that defines a \"declarative\" DSL with lots of hoary edge cases for determining dependences and loading the minimum number of files. It was invented back when machines ran slowly enough that Makefile seemed like a good idea for minimizing CPU cycles. The basic load function defined by the CL language is (LOAD ...) which you can run from the REPL. One can forego the use of ASDF and simply write a .lisp file with a bunch of (LOAD ...)s in it. It is my understanding that modern CL REPLs actually compile every command, then run the compiled command. In essence, if you type (LOAD \"filename\") at the REPL, the REPL compiles the command into a small binary program, then runs it, actually running the LOAD command built into the Lisp language. ASDF just generates a bunch of (LOAD ...) commands. The definitive reference for CL is "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.lispworks.com/documentation/HyperSpec/Front/Contents.htm",
+                                "text": "CLHS"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", but it reads like a ton of bricks (it helps to have a degree in Law). If I had to re-learn Lisp, I would probably start with "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://gigamonkeys.com/book/",
+                                "text": "Practical Common Lisp"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "U71PMQ1V0"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1742181508.489939",
+        "client_msg_id": "a1414d8e-3410-4bba-a1d0-ba3f2e46cfce",
+        "text": "So still the same model I was complaining about in <https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/>.\n\n&gt; Most live systems gain their interactivity from mutable environments and late binding. Code loading is an imperative process that can cause arbitrary side effects. The behaviour of the system can depend on what order code was loaded in, and when. There isn't even any guarantee that loading the same code in the same order will reproduce the same system.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1742095730.055319",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "j9dAt",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So still the same model I was complaining about in "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/"
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Most live systems gain their interactivity from mutable environments and late binding. Code loading is an imperative process that can cause arbitrary side effects. The behaviour of the system can depend on what order code was loaded in, and when. There isn't even any guarantee that loading the same code in the same order will reproduce the same system."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
