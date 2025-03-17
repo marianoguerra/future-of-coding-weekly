@@ -1,0 +1,296 @@
+<!--
+.. title: Future of Coding Weekly 2025/03 Week 3
+.. slug: future-of-coding-weekly-202503-week-3
+.. date: 2025-03-17 10:12:04 UTC+01:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+📢 Workshop on Live Programming (LIVE) 🐛 in-notebook debugger 📝 Zest: a language for malleable and legible systems
+
+# Our Work
+
+## 📘 [WebAssembly from the Ground Up - learn WASM by building a compiler](https://wasmgroundup.com/) via [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/share-your-work.html#2025-03-10T13:13:41.653Z)
+
+After two and a half years of work with [Patrick Dubroy](https://twitter.com/dubroy), we are happy to announce the release of [WebAssembly from the Ground Up](https://wasmgroundup.com/), a book that teaches you about WebAssembly 1.0 by building a simple compiler in JavaScript with [Ohm/JS](https://ohmjs.org/).
+
+
+
+Here’s a 25% discount code you can use:  `FOCWASM25`
+
+
+
+We decided to do a “digital first” book to take advantage of interactivity and “explorable explanations”, and learned a couple of things along the way.
+
+
+
+We also decided that all the code should be in the book and that it should run if you copy and paste the snippets as you read.
+
+To achieve this we had to create most of the tooling around the book ourselves:
+
+* The server that handles authentication and access to the book
+* The script that extracts the snippets from the original source code and generates:
+    * The snippets you can copy to clipboard.
+    * The “Copy up to here” code segments.
+    * The checkpoints and chapter modules in the code repo, accessible through stackblitz.
+    * The emit library, a standalone library to emit WebAssembly 1.0 binary modules.
+* The early access feedback system using embedded [hypothes.is](https://hypothes.is/)
+* PDF generation (puppeteer, pdftk, imagemagick, poppler).
+* A tool to generate code snippet ranges for “highlight on text hover”.
+
+
+
+We plan on writing about some of our takeaways in the coming weeks, but that will have to wait. 😅
+
+
+
+Let us know if you have any questions!
+
+## 🎥 [Visualizing Models - Actuarial Playground](https://www.youtube.com/watch?v=S-cX7CmH0eA) via **Declan**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/share-your-work.html#2025-03-14T09:16:47.905Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/S-cX7CmH0eA/hqdefault.jpg)
+
+Hey all, I released [ActuarialPlayground.com](http://ActuarialPlayground.com) : an interactive and visual actuarial cashflow model, where the calculations are described by calculang.
+
+There is a 7min video where I [use the Playground to explore some things here](https://www.youtube.com/watch?v=S-cX7CmH0eA)
+
+I made remarks about the calculang model and especially model composition, that you can read under the '❓' tab
+
+calculang outputs a JS bundle you can see under '🌟' - obviously a lot can be done with it in a pretty familiar way
+
+This is a contrast to calculations rigidly defined in specialised tools, without composition, and without being able to break out or integrate in a tight visual/interactive and exploratory loop
+
+## 🦋 [Do you want to know what was the secret to Flash websites?](https://bsky.app/profile/mrogalski.eu/post/3lkg25qntbk2l) via **Marek Rogalski**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/share-your-work.html#2025-03-15T11:59:06.276Z)
+
+I've turned some notes related to Flash from the last FoC meetup in Berlin into a thread here:
+
+> @mrogalski.eu: Do you want to know what was the secret to Flash websites?
+>
+> Instead of presupposing that "everything is a document" &amp; "documents are a collection of boxes within other boxes" it went with "everything is a movie clip" &amp; "movie clip is a collection of other movie clips" (Clips all the way down!) :thread::point_down:
+
+# Devlog Together
+
+## 💬 [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/devlog-together.html#2025-03-10T12:29:00.442Z)
+
+In my very-biased view, this looks a lot like what I think of as "layering". I don't trust comments, so I want a way to make diagrams tightly bound to the code itself, i.e. generate code from diagrams (syntax == figures, not just characters). In my view, to get "layering" you need total isolation (encapsulation of data is not enough, you also need to guarantee that the control flow is isolated). To consider: the stuff inside of boxes is important, but, are (some of) the flows important, too? I.E. I see the arrow in the first diagram as a data flow and a "sequencing" thing - it kicks off the box to the right (the Main page) box needs to wait until it gets a signal to begin (I call that sequencing and timing). The 2nd drawing shows 6 boxes and no arrows. Does that mean that they can be viewed in any order, i.e. how are they different from "TABs" on the window? I think that I want a viewer/editor that gives me hierarchical TABs, or, clickable boxes. Double-click on a box and you get to view its innards. Make some other gesture and you go back. Does this mean that you need a "map" off to the edge of the window to show where in the hierarchy you are? The popular web browsers I've used flit really close to this flame, but, don't satisfy...
+
+
+## 🐛 [in-notebook debugger](https://observablehq.com/@tomlarkworthy/ndd) via [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/devlog-together.html#2025-03-11T05:39:23.515Z)
+
+I am in the fixing all the reactivity glitches before release stage. They are so difficult to debug, clicking a link opens a panel which syncs the hash URL, which retriggers another cell that get the stale version of the URL which may cause a cycle and the app starts flickering... or something like that.
+
+
+
+I had to upgrade my [in-notebook debugger ](https://observablehq.com/@tomlarkworthy/ndd)to work across notebooks so I can visualize the evolution of the runtime state w.r.t. time. It worked! I figured it out. Pictured is the trace of a self-triggering reactivity loop. Its still hard to understand but you can see a lot of ticks with a regular pattern, and critically, the name of the cells. There were over 1000 cells in the notebook, so knowing the 15 that were implicated in the cycle is helpful.
+
+![image.png](http://history.futureofcoding.org/history/msg_files/F08/F08HTA7UHS4.png)
+
+
+## 📝 [Zest is a (very wip) programming language for building systems that are both malleable and legible](https://github.com/jamii/zest/blob/main/docs/rationale.md) via [Jamie Brandon](https://scattered-thoughts.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/devlog-together.html#2025-03-16T03:28:50.055Z)
+
+I wrote up some overall design direction for zest - [github.com/jamii/zest/blob/main/docs/rationale.md](https://github.com/jamii/zest/blob/main/docs/rationale.md).
+
+
+
+Currently bogged down in figuring out how to combine staged compilation and modules ([github.com/jamii/zest/issues/1](https://github.com/jamii/zest/issues/1)), but once I figure that out I can finally start fleshing out the [runtime](https://github.com/jamii/zest/blob/main/lib/runtime.zest).
+
+# Thinking Together
+
+## 📝 [How Did We Get Here?](https://programmingsimplicity.substack.com/p/how-did-we-get-here?r=1egdky) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/thinking-together.html#2025-03-10T11:15:09.408Z)
+
+I’ve come to believe that we’re missing out on approximately 90% of what’s possible because of how we program. It’s not just about the syntax, it goes much deeper - it’s rooted in culture, religion, dogmatism, and closed-mindedness. I think the word “function” has been overused, and the emphasis on efficiency has gone too far. Here are a few thoughts… YMMV. What do you think? [How Did We Get Here?](https://programmingsimplicity.substack.com/p/how-did-we-get-here?r=1egdky) [The Best Programming Language](https://programmingsimplicity.substack.com/p/the-best-programming-language?r=1egdky)
+
+## 💬 [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/thinking-together.html#2025-03-10T11:15:48.018Z)
+
+I’m curious about your thoughts on this idea: Glamorous Toolkit and Live Programming environments seem to essentially be REPLs  that use modernized input and output technologies.
+
+
+
+Back in the 1950s, REPLs used the best I/O and interface tech they had back then - mostly text-based command lines because computers couldn’t do much else. But now, environments like Glamorous Toolkit make output look better with graphics instead of just printing text, and Live Programming environments have GUIs with interactive stuff like sliders to change things while the program is running.
+
+
+
+The only tricky part in designing modern REPLs seems to be figuring out how to keep things flexible while still working with strongly-typed, functional programming languages.
+
+
+
+Do you think I’m oversimplifying these modern programming environments? Am I missing something important about how they differ from traditional REPLs?
+
+
+
+
+## 🔍 [zoomable hypertext](https://folk.systems/canvas/space/hypertext-zui) via [Orion Reed](https://twitter.com/OrionReedOne)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/thinking-together.html#2025-03-11T12:49:50.793Z)
+
+I'm not really sold on ZUIs (zoomable user interfaces) but I became a bit more enticed once I realised that you could make ZUIs for  _graphs_  instead of  _trees._ Where you can zoom into things and eventually get back to where you started... I feel like (aside from the potential motion sickness) it induces this visceral sense of how software and data topologies are governed by laws that we made up... And that, so long as we don't break any actual physical laws we are free to make up the semantic rules as we please...
+
+
+
+Anyway, made this [zoomable hypertext](https://folk.systems/canvas/space/hypertext-zui) thing the other day to figure out how you would do infinite zoom in an infinite coordinate space that has this weird graph topology, where you can have  `A --inside-> B --inside-> A`
+
+
+
+Ended up with what I called a Shifting-Origin Graph which has a series of matrix transforms that can traverse through the graph with you, keeping floating point precision at bay and keeping memory usage fixed.
+
+
+
+I would be curious to hear takes on ZUIs here, I feel like there's a more general view on them that would be more compelling to me, I got a glimpse of that as I made this experiment, realising that it would open up some interesting semantics that aren't really to do with ZUIs, and more to do with the ability to warp space in new ways.
+
+🎥 [Screen Recording](http://history.futureofcoding.org/history/msg_files/F08/F08HA1KF0E8.mov)
+
+## 📏 [Programming Language Sizes](https://programmingsimplicity.substack.com/p/programming-language-sizes?r=1egdky) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/thinking-together.html#2025-03-13T11:20:29.467Z)
+
+Lua is 1,250x larger than Sector Lisp. Rust is 750,000x larger than Sector Lisp.
+
+Are my numbers and data correct?
+
+## ✊ [The Data-First movement](https://duncancragg.substack.com/p/the-data-first-movement) via [Duncan Cragg](https://twitter.com/Duncan__Cragg)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/thinking-together.html#2025-03-13T12:02:13.751Z)
+
+🤗
+
+> 📝 [The Data-First movement](https://duncancragg.substack.com/p/the-data-first-movement)
+>
+>We should talk.
+
+
+## 💬 **Arvind Thyagarajan**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/thinking-together.html#2025-03-14T05:09:45.353Z)
+
+why  ~is~  does it feel like the world of "what people and businesses are paying for today to lower the barrier to entry for computational needs" is an almost non-intersecting set with "what excites us about lowering the barrier to entry for computational needs"?
+
+## 📢 [Workshop on Live Programming (LIVE)](https://liveprog.org/) via [Jonathan Edwards](https://twitter.com/jonathoda/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/thinking-together.html#2025-03-14T17:14:26.286Z)
+
+You should definitely submit a demo to the [LIVE Programming Workshop](https://liveprog.org) this year! It is being held entirely online so no excuses. Submit by July 21
+
+>The 11th Workshop on Live Programming (LIVE 2025) will take place online. LIVE invites submissions of ideas for improving the immediacy, usability, and learnability of programming.
+
+
+
+## 💬 [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/thinking-together.html#2025-03-16T03:43:56.964Z)
+
+Rhetorical question?: how would your programming workflow change if you deeply believed that creating SCNs was cheap and easy? Perl leaned heavily on REGEX. REGEX was once thought to be hoary and problematic. Perl made it accessible. New kinds of things were invented when Perl started being widely used. T2t is “better” than REGEX, because t2t makes it easy to deal with patterns containing recursive nesting. CFGs, like YACC, make it possible to parse recursively nested text, but, CFGs need painful, full specification of too much detail. If you had a way to specify pattern-matching using tiny DSLs that didn’t cost a lot of time to build, how would your workflow change? ['t2t' leans heavily on PEG and esp. OhmJS] [SCN === Solution Centric Notation, essentially a nano-DSL, I think of Richard Feynman breaking away from mathematical/Gutenberg notation and inventing and using Feynman diagrams. Language affects thought, notation affects thought].
+
+# Content
+
+## 🎥 [Liber Indigo - Metaphysical Prisoners of the Desktop](https://youtu.be/pGpBQgZ5IsI) via [Andreas S](https://twitter.com/curious_reader)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/linking-together.html#2025-03-10T09:51:13.087Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/pGpBQgZ5IsI/hqdefault.jpg)
+
+Interfaces and mysticism 👀
+
+## 📝 [The program is the database is the interface](https://www.scattered-thoughts.net/writing/the-program-is-the-database-is-the-interface/) via [Steve Dekorte](https://dekorte.com/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/linking-together.html#2025-03-10T16:29:51.811Z)
+
+## 📢 [Algorithmic Pattern - Sheffield and Online, September 2025](https://2025.algorithmicpattern.org/call/) via **Alex McLean**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/linking-together.html#2025-03-10T18:38:43.728Z)
+
+Algorithmic Pattern is a new festival and conference for people curious about the practice and culture of algorithmic pattern-making, across algorithmic music, arts and craft. The first edition will take place both in  Sheffield UK and online, during September 2025.
+
+The call for talks/papers is now open, please see our website for details: [2025.algorithmicpattern.org/call](https://2025.algorithmicpattern.org/call/)
+
+## 🎥 [Computers for Cynics 2 - It All Went Wrong at Xerox PARC](https://www.youtube.com/watch?v=c6SUOeAqOjU&amp;t=0s) via [Christopher Shank](https://mobile.twitter.com/chrisshank23)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/linking-together.html#2025-03-11T05:55:12.275Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/c6SUOeAqOjU/hqdefault.jpg)
+
+"Computers for Cynics 2 - It All Went Wrong at Xerox PARC" by Ted Nelson (2012)
+
+## 📝 [Compiling C++ with the Clang API](https://maskray.me/blog/2025-03-09-compiling-c++-with-clang-api) via **Marek Rogalski**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/linking-together.html#2025-03-11T21:03:30.194Z)
+
+Here is a quick and dirty way to bootstrap a new programming system: transpilation. And a fun fact: C++ started out as a transpiler.
+
+## 📝 [Rewilding Software Engineering](https://medium.com/feenk/rewilding-software-engineering-a3601a066e50) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/linking-together.html#2025-03-14T08:31:00.911Z)
+
+[This book chapter](https://medium.com/feenk/rewilding-software-engineering-a3601a066e50) by [Tudor Girba](https://twitter.com/girba) and Simon Wardley is a good introduction/motivation for Moldable Development.
+
+## 📇 [Folk Computer: Tableshots](https://folk.computer/notes/tableshots) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/linking-together.html#2025-03-15T15:26:42.842Z)
+
+[Folk Computer: Tableshots](https://folk.computer/notes/tableshots)
+
+
+
+I've never quite seen this page before.
+
+
+
+By [Cristóbal Sciutto](https://cristobal.space) to boot, who's been a big influence on me in recent years. Universes colliding.
+
+
+# 🤖
+
+## 💬 **Greg Bylenok**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/of-ai.html#2025-03-12T02:26:21.202Z)
+
+What if "vibe coding" is the real future of coding? Is "programming as theory building" a dead-end? Having a bit of an existential crisis here. Anyone else?
+
+## 🟧 [HN Discussion](https://news.ycombinator.com/item?id=43373199) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W3/of-ai.html#2025-03-15T21:26:33.982Z)
+
+I like this comment:
+
+
+
+
+
+
+> What I am missing, and would buy as an app, is the ability to code on an Android tablet with pen.
+
+Regardless of the programming language, writing code as I do on paper, with the difference it is straight into the editor window.
+
+No side panel, where I have to write one word after the other with pauses and correction, or that some apps (looking at you Pydroid) for whatever reason disable.
+
+Straight like Apple's math demo, to make it more precise.
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
