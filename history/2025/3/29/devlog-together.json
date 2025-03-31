@@ -1,0 +1,143 @@
+[
+    {
+        "text": "Working on a proposal for the algorithm of fit-to-width text for CSS. Planning to present it to CSSWG next week if all goes right :)\n\nI already have a technique that handles a few main use cases (<https://kizu.dev/fit-to-width/>), but if we want it to be native, we need to handle a bunch more: specifically, a case when a line of text has \u201cstatic\u201d elements that do not change their dimensions in response to the font-size change. This, with added handling of optical sizing of a font, requires us to basically render the same line box up to 4 times, but with 2 of those being optional (when no static elements, or no optical sizing axis present in the fonts used).\n\nSo mostly working on fine-tuning the algorithm + making a prototype of it with custom elements & shadow DOM (with no runtime JS for layout, only for duplicating the content to emulate multiple renders), and also thinking about what an API for this property could look like, with possible options, etc. And will need to also think how some other edge cases will need to be handled (reverse dependence on the font-size, initial-letter, and a bunch more).",
+        "files": [
+            {
+                "id": "F08KZMQQWMA",
+                "created": 1743243991,
+                "timestamp": 1743243991,
+                "name": "Screen Recording 2025-03-29 at 11.25.43.mov",
+                "title": "Screen Recording 2025-03-29 at 11.25.43.mov",
+                "mimetype": "video/quicktime",
+                "filetype": "mov",
+                "pretty_type": "QuickTime Movie",
+                "user": "U087592N6HE",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 21726891,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "transcription": {
+                    "status": "none"
+                },
+                "mp4": "https://files.slack.com/files-tmb/T5TCAFTA9-F08KZMQQWMA-976e3ad233/screen_recording_2025-03-29_at_11.25.43.mp4",
+                "url_private": "https://files.slack.com/files-tmb/T5TCAFTA9-F08KZMQQWMA-976e3ad233/screen_recording_2025-03-29_at_11.25.43.mp4",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F08KZMQQWMA/download/screen_recording_2025-03-29_at_11.25.43.mov",
+                "hls": "https://files.slack.com/files-tmb/T5TCAFTA9-F08KZMQQWMA-976e3ad233/file.m3u8?_xcb=34d4b",
+                "hls_embed": "data:application/vnd.apple.mpegurl;base64,I0VYVE0zVQojRVhULVgtVkVSU0lPTjozCiNFWFQtWC1JTkRFUEVOREVOVC1TRUdNRU5UUwojRVhULVgtU1RSRUFNLUlORjpCQU5EV0lEVEg9MzQ0MDk2OSxBVkVSQUdFLUJBTkRXSURUSD0yNzUwMDcxLENPREVDUz0iYXZjMS42NDAwMjAsbXA0YS40MC41IixSRVNPTFVUSU9OPTExMDh4MTA4MCxGUkFNRS1SQVRFPTI5Ljk3MApkYXRhOmFwcGxpY2F0aW9uL3ZuZC5hcHBsZS5tcGVndXJsO2Jhc2U2NCxJMFZZVkUwelZRb2pSVmhVTFZndFZrVlNVMGxQVGpvekNpTkZXRlF0V0MxVVFWSkhSVlJFVlZKQlZFbFBUam8zQ2lORldGUXRXQzFOUlVSSlFTMVRSVkZWUlU1RFJUb3hDaU5GV0ZRdFdDMVFURUZaVEVsVFZDMVVXVkJGT2xaUFJBb2pSVmhVU1U1R09qWXVNREEyTEFwb2RIUndjem92TDJacGJHVnpMbk5zWVdOckxtTnZiUzltYVd4bGN5MTBiV0l2VkRWVVEwRkdWRUU1TFVZd09FdGFUVkZSVjAxQkxUazNObVV6WVdReU16TXZabWxzWlY5SVh6STJORjh4T1RJd2VERXdPREJmTmpVd01FdENVRk5mTjFGV1FsSmZNREF3TURFdWRITUtJMFZZVkVsT1JqbzJMakF3Tml3S2FIUjBjSE02THk5bWFXeGxjeTV6YkdGamF5NWpiMjB2Wm1sc1pYTXRkRzFpTDFRMVZFTkJSbFJCT1MxR01EaExXazFSVVZkTlFTMDVOelpsTTJGa01qTXpMMlpwYkdWZlNGOHlOalJmTVRreU1IZ3hNRGd3WHpZMU1EQkxRbEJUWHpkUlZrSlNYekF3TURBeUxuUnpDaU5GV0ZSSlRrWTZOaTR3TURZc0NtaDBkSEJ6T2k4dlptbHNaWE11YzJ4aFkyc3VZMjl0TDJacGJHVnpMWFJ0WWk5VU5WUkRRVVpVUVRrdFJqQTRTMXBOVVZGWFRVRXRPVGMyWlROaFpESXpNeTltYVd4bFgwaGZNalkwWHpFNU1qQjRNVEE0TUY4Mk5UQXdTMEpRVTE4M1VWWkNVbDh3TURBd015NTBjd29qUlZoVVNVNUdPak11TlRBekxBcG9kSFJ3Y3pvdkwyWnBiR1Z6TG5Oc1lXTnJMbU52YlM5bWFXeGxjeTEwYldJdlZEVlVRMEZHVkVFNUxVWXdPRXRhVFZGUlYwMUJMVGszTm1VellXUXlNek12Wm1sc1pWOUlYekkyTkY4eE9USXdlREV3T0RCZk5qVXdNRXRDVUZOZk4xRldRbEpmTURBd01EUXVkSE1LSTBWWVZDMVlMVVZPUkV4SlUxUUsK",
+                "mp4_low": "https://files.slack.com/files-tmb/T5TCAFTA9-F08KZMQQWMA-976e3ad233/screen_recording_2025-03-29_at_11.25.43_trans.mp4",
+                "duration_ms": 21521,
+                "media_display_type": "video",
+                "thumb_video": "https://files.slack.com/files-tmb/T5TCAFTA9-F08KZMQQWMA-976e3ad233/screen_recording_2025-03-29_at_11.25.43_thumb_video.jpeg",
+                "thumb_video_w": 1082,
+                "thumb_video_h": 1056,
+                "permalink": "https://futureofcoding.slack.com/files/U087592N6HE/F08KZMQQWMA/screen_recording_2025-03-29_at_11.25.43.mov",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F08KZMQQWMA-ce57ee1db7",
+                "is_starred": false,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U087592N6HE",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "ako9s",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Working on a proposal for the algorithm of fit-to-width text for CSS. Planning to present it to CSSWG next week if all goes right :)\n\nI already have a technique that handles a few main use cases ("
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://kizu.dev/fit-to-width/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "), but if we want it to be native, we need to handle a bunch more: specifically, a case when a line of text has \u201cstatic\u201d elements that do not change their dimensions in response to the font-size change. This, with added handling of optical sizing of a font, requires us to basically render the same line box up to 4 times, but with 2 of those being optional (when no static elements, or no optical sizing axis present in the fonts used).\n\nSo mostly working on fine-tuning the algorithm + making a prototype of it with custom elements & shadow DOM (with no runtime JS for layout, only for duplicating the content to emulate multiple renders), and also thinking about what an API for this property could look like, with possible options, etc. And will need to also think how some other edge cases will need to be handled (reverse dependence on the font-size, initial-letter, and a bunch more)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1743244344.627349",
+        "edited": {
+            "user": "U087592N6HE",
+            "ts": "1743244371.000000"
+        },
+        "client_msg_id": "c7400291-235b-4c48-a009-69076c2faef2",
+        "thread_ts": "1743244344.627349",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1743271198.267939",
+        "reply_users": [
+            "U0378MDUG1Y"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UGWUJUZHT"
+                ],
+                "count": 1
+            },
+            {
+                "name": "cake",
+                "users": [
+                    "U85HCL7JP",
+                    "U0378MDUG1Y",
+                    "U013ZLJARC7"
+                ],
+                "count": 3
+            },
+            {
+                "name": "+1::skin-tone-3",
+                "users": [
+                    "UE6EFEPTQ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U0378MDUG1Y",
+        "type": "message",
+        "ts": "1743271198.267939",
+        "client_msg_id": "6F1DC27E-102F-44F2-B748-9A9996C69DC8",
+        "text": "Oh wow this is awesome! Definitely interested in how the custom element comes out!",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1743244344.627349",
+        "parent_user_id": "U087592N6HE",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7EAp1",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Oh wow this is awesome! Definitely interested in how the custom element comes out!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
