@@ -167,7 +167,7 @@ fn merge_options<T: Clone>(left: Option<&T>, right: Option<&T>) -> Option<T> {
 }
 
 pub async fn make_aws_client() -> Client {
-    let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
+    let region_provider = RegionProviderChain::first_try("us-east-1");
     let config = aws_config::from_env().region(region_provider).load().await;
 
     aws_sdk_ses::Client::new(&config)
@@ -281,7 +281,7 @@ Please confirm your subscription by clicking the link below:
 
 {{confirm_link}}
 
-If you don't want to subscribe, please ignore this email. 
+If you don't want to subscribe, please ignore this email.
 
 ---
 
