@@ -1,0 +1,222 @@
+🎥 Virtual Meetup 9 • March 26 ✍️ A programming language of flowing strands 🛸 HyperDoc demo
+
+# Two Minute Week
+
+## 💬 [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/two-minute-week.html#2025-03-29T21:46:29.331Z)
+
+I am back to bug hunting. Reactive live coding is great when it works but the bugs can be devilishly difficult. The best methodology I have is plotting all the transitions on a timeseries and zooming RIGHT IN. Its a technique I keep coming back to and it has fixed quite a few subtle issues. I used to think the dependancy graph would be useful but actually a lot of the reactivity bugs occur via hidden event coupling occurring outside the programming model, for example, mouse events, url events, local storage events. They can cause different cells to trigger each other but not through the normal notification mechanisms.
+
+🎥 [debugging reactive](http://history.futureofcoding.org/history/msg_files/F08/F08L02FE6LT.mp4)
+
+# Our Work
+
+## 🛸 [HyperDoc demo](https://hyperdoc.khinsen.net/) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/share-your-work.html#2025-03-24T06:10:46.509Z)
+
+My main recent FoC-related project is a framework for creating explorable, explainable, Web-publishable, composable, and convivial hypertext systems that integrate code. Combining aspects of explorable explanations, literate programming, and computational notebooks. The two principal intended use cases are (1) programs written for people to read, and only incidentally for machines to execute, and (2) scientific publications using computation.
+
+
+
+A first demo is now available for browsing: [hyperdoc.khinsen.net](https://hyperdoc.khinsen.net/)
+
+
+
+This is what I will present at the upcoming meetup on Wednesday.
+
+
+## 🖼️ [Open Canvas Interchange Format (OCIF)](https://spec.canvasprotocol.org/) via [Maikel van de Lisdonk](https://www.devhelpr.com/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/share-your-work.html#2025-03-28T10:43:22.825Z)
+
+Last FoC meetup I showed the Open Canvas Interchange Format we're working at with the Open Canvas Working Group. We want to create a new spec to help (infinite) canvas apps enable interchanging their canvases with each other. More info can be found here [canvasprotocol.org](https://canvasprotocol.org/) and this points to the latest version of the spec on github : [spec.canvasprotocol.org](https://spec.canvasprotocol.org/) .. and in case you want to help developing this: we meet every two weeks and here's the link to our [next meetup upcoming tuesday](https://lu.ma/iv4q484x)
+
+
+## 📝 [A markup language and hypertext browser in 600 lines of code.](https://akkartik.name/post/luaML2) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/share-your-work.html#2025-03-29T19:48:43.152Z)
+
+# Devlog Together
+
+## 🗒️ [The first version of the new multi-notebook architecture](https://tomlarkworthy.github.io/lopecode/@tomlarkworthy_lopepage.html#modules=%40tomlarkworthy%2Fmodule-selection&view=R100%28C50%28S50%28%40tomlarkworthy%2Fmodule-selection%29%2CS50%28%40tomlarkworthy%2Feditor%29%29%2CS50%28%40tomlarkworthy%2Ffileattachments%29%29) via [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/devlog-together.html#2025-03-28T21:51:12.135Z)
+
+Just got Lopecode's plain text serialisation format deterministic so its now git diff friendly! The first version of the new multi-notebook architecture is public [here](https://tomlarkworthy.github.io/lopecode/@tomlarkworthy_lopepage.html#modules=%40tomlarkworthy%2Fmodule-selection&view=R100%28C50%28S50%28%40tomlarkworthy%2Fmodule-selection%29%2CS50%28%40tomlarkworthy%2Feditor%29%29%2CS50%28%40tomlarkworthy%2Ffileattachments%29%29) from the [lopecode repository](https://github.com/tomlarkworthy/lopecode/tree/main). The code editing experience sucks and I lost a lot of functionality switching to dockered multi-notebook but it is so much better being able to work on two or more reactively linked notebooks at the same time it will be worth the backward step long term.
+
+![image.png](http://history.futureofcoding.org/history/msg_files/F08/F08KY0AEMPV.png)
+
+
+
+## 📏 [Fit-to-Width Text: A New Technique](https://kizu.dev/fit-to-width/) via **Roma Komarov**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/devlog-together.html#2025-03-29T10:32:24.627Z)
+
+Working on a proposal for the algorithm of fit-to-width text for CSS. Planning to present it to CSSWG next week if all goes right :)
+
+
+
+I already have a technique that handles a few main use cases ([kizu.dev/fit-to-width](https://kizu.dev/fit-to-width/)), but if we want it to be native, we need to handle a bunch more: specifically, a case when a line of text has “static” elements that do not change their dimensions in response to the font-size change. This, with added handling of optical sizing of a font, requires us to basically render the same line box up to 4 times, but with 2 of those being optional (when no static elements, or no optical sizing axis present in the fonts used).
+
+
+
+So mostly working on fine-tuning the algorithm + making a prototype of it with custom elements & shadow DOM (with no runtime JS for layout, only for duplicating the content to emulate multiple renders), and also thinking about what an API for this property could look like, with possible options, etc. And will need to also think how some other edge cases will need to be handled (reverse dependence on the font-size, initial-letter, and a bunch more).
+
+🎥 [Screen Recording](http://history.futureofcoding.org/history/msg_files/F08/F08KZMQQWMA.mov)
+
+
+## ✍️ [codeberg.org/nilesh/grapher](https://codeberg.org/nilesh/grapher) via **Nilesh Trivedi**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/devlog-together.html#2025-03-30T11:09:07.767Z)
+
+Today I added Knotend-like keyboard shortcuts to my Graph editor app: [codeberg.org/nilesh/grapher](https://codeberg.org/nilesh/grapher)
+
+
+
+Because this editor supports compound graphs where, besides adjacency edges, nodes can also be nested using at most 1 parent per node, I needed 4 separate actions on graphs for the currently selected node:
+
+
+
+
+* Add a destination node (using the  `Tab`  key)
+* Add a source node (using  `Shift+Tab`  )
+* Add a child node (using  `~` )
+* Add a parent node (using  `Ctrl+~` )
+
+
+
+I haven't yet added keyboard shortcuts for adding "sibling" nodes.
+
+
+
+Also felt sad that we don't have standardized UI components with keyboard shortcuts for manipulating trees, DAGs, plain graphs, compound graphs or hypergraphs.
+
+
+# Thinking Together
+
+## 🎥 [How I Animated This Video](https://www.youtube.com/watch?v=tq_KOmXyVDo) via [xyzzy](http://blog.xyzzyapps.link)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/thinking-together.html#2025-03-28T12:43:16.687Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/tq_KOmXyVDo/hqdefault.jpg)
+
+I can't take AI seriously.
+
+
+
+Not my video but I have worked with ebsynth ... it is a completely analogue algorithm.
+
+Style transfer without AI. It is built on old analogue aglorithm called patch match I believe.
+
+
+
+[Stylizing Video by Example](https://dcgi.fel.cvut.cz/home/sykorad/ebsynth.html)
+
+
+
+
+
+The future of code licensing is even stronger copyright protections for software authors / artists. AI has made a mockery of opensource and creative commons.
+
+
+
+[[Intellectual Property Stuff and Trademarks](https://blog.xyzzyapps.link/2025/03/08/intellectual-property-stuff-and-trademarks/)](https://blog.xyzzyapps.link/2025/03/08/intellectual-property-stuff-and-trademarks/)
+
+
+## 📝 [post](https://futureofcoding.slack.com/archives/C01932BJGE8/p1742849850574819?thread_ts=1742840898.166569&cid=C01932BJGE8) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/thinking-together.html#2025-03-29T14:28:59.101Z)
+
+I have come to the conclusion that  _all_  PLs are VPLs. The first VPL I learned was  _assembler_ . Pond'ring aloud, thoughts welcome...
+
+
+
+Background: Inspired by the [💬 #present-company@2025-03-24](https://history.futureofcoding.org/?fromDate=2025-03-21&toDate=2025-03-27&channel=present-company&filter=#2025-03-24T20:57:30.574Z) by [Duncan Cragg](https://twitter.com/Duncan__Cragg), I started to categorize VPLs. I think that I'm up to 9 simple variants.  The main knobs that can be turned for PL design seem to be: (1) syntax affected by visualization technology, e.g. 1960s grids of non-overlapping pixmaps called "characters" vs. more modern raster graphics and vector graphics, (2) semantics of control-flow, e.g. 1960s sequentialism implied by line-by-line reading of code and blocking function calls vs. 1970s control-flow isolation like UNIX processes vs. more modern closures (effectively invented in the 1950s :-)). [FTR, assembler is position-based, using crude graphical grids of columns and rows, whereas C is not position-based, using simple eye-candy indentation for human (vs. machine) readability].
+> [March 24th, 2025 1:57 PM] fp: <http://blog.interfacevision.com/design/design-visual-progarmming-languages-snapshots/>
+> 
+> this one - is that it? [update: no, but it's a fun page!]
+
+# Content
+
+## 📘 [Reflections on writing a book](https://dubroy.com/blog/reflections-on-writing-a-book/) via [Patrick Dubroy](https://twitter.com/dubroy)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/linking-together.html#2025-03-27T16:31:09.722Z)
+
+Hello! Thought some people here might be interested in my most recent blog post — [Reflections on writing a book](https://dubroy.com/blog/reflections-on-writing-a-book/). It's about some of the things [Mariano Guerra](https://twitter.com/warianoguerra) and I learned in over the 2.5 year it took us to write our book ([💬 #share-your-work@2025-03-10](https://history.futureofcoding.org/?fromDate=2025-03-07&toDate=2025-03-13&channel=share-your-work&filter=#2025-03-10T13:13:41.653Z))
+
+## ✍️ [Rivulet: a programming language of flowing strands](https://github.com/rottytooth/Rivulet) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/linking-together.html#2025-03-27T17:47:26.927Z)
+
+I don't even.. just check this out.
+
+## 🎞️ [Pas a Pas](https://ishback.com/pasapas/index.html) via [Tak Tran](https://twitter.com/zlog)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/linking-together.html#2025-03-30T21:05:43.572Z)
+
+[Pas a Pas](https://ishback.com/pasapas/index.html): A tangible interface for making stop motion animation
+
+# Present Company
+
+## 💬 [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/present-company.html#2025-03-24T15:33:23.707Z)
+
+I did some vibe coding with Cursor and it got stuck in a loop of writing a buggy shell script, running it, looking at the output (unchanged because bugs), going "hmm let's fix that", then writing the exact same shell script.
+
+
+## 💬 **Andrew Beyer**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/present-company.html#2025-03-24T18:28:18.166Z)
+
+I feel like I saw a really good literature review "state of the world" wrt visual/graphical programming a while back (probably here, though could have been elsewhere) but apparently didn't save the link and can't find it again...
+
+
+
+So, anyone have any favorites or good pointers for something like that?
+
+## 💅 [Category:Design Aesthetics | Aesthetics Wiki | Fandom](https://aesthetics.fandom.com/wiki/Category:Design_Aesthetics) via **Marek Rogalski**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/present-company.html#2025-03-25T12:23:39.328Z)
+
+Here is a game:
+
+
+
+
+* Go to [aesthetics.fandom.com/wiki/Category:Design_Aesthetics](https://aesthetics.fandom.com/wiki/Category:Design_Aesthetics)
+* Check out some of the design styles
+* Come back here and post your favourite one that you wish were used more in FoC UIs
+
+## 🎥 [Virtual Meetup 9 • March 26, 2025](https://youtu.be/NSv4k95nrHU) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/present-company.html#2025-03-26T23:24:17.633Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/NSv4k95nrHU/hqdefault.jpg)
+
+Here's the recording of the [Future of Coding Virtual Meetup 9](https://youtu.be/NSv4k95nrHU). See you next month!
+
+## 📋 [13 things I would have told myself before building an autorouter](https://blog.autorouting.com/p/13-things-i-would-have-told-myself) via [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/03/W5/present-company.html#2025-03-28T05:13:16.440Z)
+
+A dataviz driven development win. 
+
+ _"If you do not have a visualization for a problem, you will never solve it"_ 
+
+
+Also in spatial domain. Code + dataviz is my future of coding.
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
