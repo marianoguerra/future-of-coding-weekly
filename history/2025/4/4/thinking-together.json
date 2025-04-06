@@ -1,0 +1,127 @@
+[
+    {
+        "user": "U71PMQ1V0",
+        "type": "message",
+        "ts": "1743802600.663139",
+        "client_msg_id": "e3134d2b-21fe-444a-b301-ea3d337bd93e",
+        "text": "<https://www.scattered-thoughts.net/writing/a-rough-survey-of-compilation-recompilation-and-compile-time-evaluation>\n\nI'm curious if anyone knows of languages that have different approaches to the ones I covered here.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1743802600.663139",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1743856417.763329",
+        "reply_users": [
+            "U02E4DAQGSZ",
+            "UGWUJUZHT"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "68Pfp",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "link",
+                                "url": "https://www.scattered-thoughts.net/writing/a-rough-survey-of-compilation-recompilation-and-compile-time-evaluation"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI'm curious if anyone knows of languages that have different approaches to the ones I covered here."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U02E4DAQGSZ",
+        "type": "message",
+        "ts": "1743847606.400079",
+        "client_msg_id": "ffba2a39-7c00-445a-9e74-71cd07af9f8a",
+        "text": "The article seems motivated by research around a better version of hot-reloading (?). I think about 1. Erlang (you have in the article), also 2. Vite which manages to bolt on hot reloading by exploiting dynamic imports and adds a layer of indirection there, which does not work reliably but works enough to create value and also 3. Observable runtime, which is a runtime that that first class support for swapping an implementation and recomputing the dependancy graph (it has a compilation process too but its kind of trivial). JS simplifies things in that you can't swap in the middle of a function because its single threaded, Erlang also works by having a higher level runtime scheduler deciding when to swap. I think that runtime support is essential for top recompilation. I keep thinking it be awesome if go was hot-swapable but I think it always feel like you need an actor like system with serializable messages communicating between them, and then its not like go anymore.\nAnyway, Observable has the best hot-reload IMHO, aided by a combination of JS affordances (dynamic imports, single threaded, garbage collection), Runtime support (explicit dependancy graph, cell based construction which I feel is basically an actor system).\n\nYou don't really explicitly mention actor systems but they are perfect for defining boundaries for partial recompilation. Observable goes a little beyond Erlang in the sense that when a cell is recomputed, all downstream cells are recomputed which can be thought of replaying their messages that were tainted with the old code. There still exists a problem that the final state is non-deterministic based on the message processing order (same as Erlang) which is the manifestation of non-determinism in the schedular. Would be nice to fix that (I have no idea how).",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1743802600.663139",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "n3NTw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "The article seems motivated by research around a better version of hot-reloading (?). I think about 1. Erlang (you have in the article), also 2. Vite which manages to bolt on hot reloading by exploiting dynamic imports and adds a layer of indirection there, which does not work reliably but works enough to create value and also 3. Observable runtime, which is a runtime that that first class support for swapping an implementation and recomputing the dependancy graph (it has a compilation process too but its kind of trivial). JS simplifies things in that you can't swap in the middle of a function because its single threaded, Erlang also works by having a higher level runtime scheduler deciding when to swap. I think that runtime support is essential for top recompilation. I keep thinking it be awesome if go was hot-swapable but I think it always feel like you need an actor like system with serializable messages communicating between them, and then its not like go anymore.\nAnyway, Observable has the best hot-reload IMHO, aided by a combination of JS affordances (dynamic imports, single threaded, garbage collection), Runtime support (explicit dependancy graph, cell based construction which I feel is basically an actor system).\n\nYou don't really explicitly mention actor systems but they are perfect for defining boundaries for partial recompilation. Observable goes a little beyond Erlang in the sense that when a cell is recomputed, all downstream cells are recomputed which can be thought of replaying their messages that were tainted with the old code. There still exists a problem that the final state is non-deterministic based on the message processing order (same as Erlang) which is the manifestation of non-determinism in the schedular. Would be nice to fix that (I have no idea how)."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1743856417.763329",
+        "client_msg_id": "2bbf5941-b456-4c70-b443-c2afa064a21e",
+        "text": "&gt; ... actor systems ... are perfect for defining boundaries for partial recompilation\n:100:\nFunction-calling makes hot-reloading more difficult than necessary. Units of software that have, both, input queues and output queues make hot-reloading easier to think about.\n\n&gt; .. final state is non-deterministic ... Would be nice to fix that (I have no idea how).\nThe way to fix this is: don't fix it. Don't hide a fix in the engine, under the hood. Allow Software Architects and Software Engineers to deal with the issue on a custom, per-project basis. Give 'em textbooks filled with suggestions and algorithms. Assume that SW Architects and SW Engineers are smart enough to figure out which option to choose to solve a particular problem. Imagine if Civil Engineers had to use a unified bridge design for every bridge over rivers. All bridges would be the same and none of them would be any good in practice. In the current programming workflow, general purpose programming languages try to solve every problem at once and programmers need to waste time and efficiency playing whack-a-mole. One's programming mindset changes, for the better, when one knows that willy-nilly, blocking function calls are not allowed to cross software unit boundaries.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1743802600.663139",
+        "parent_user_id": "U71PMQ1V0",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "oFk33",
+                "elements": [
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "... actor systems ... are perfect for defining boundaries for partial recompilation"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "emoji",
+                                "name": "100",
+                                "unicode": "1f4af"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nFunction-calling makes hot-reloading more difficult than necessary. Units of software that have, both, input queues and output queues make hot-reloading easier to think about.\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": ".. final state is non-deterministic ... Would be nice to fix that (I have no idea how)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe way to fix this is: don't fix it. Don't hide a fix in the engine, under the hood. Allow Software Architects and Software Engineers to deal with the issue on a custom, per-project basis. Give 'em textbooks filled with suggestions and algorithms. Assume that SW Architects and SW Engineers are smart enough to figure out which option to choose to solve a particular problem. Imagine if Civil Engineers had to use a unified bridge design for every bridge over rivers. All bridges would be the same and none of them would be any good in practice. In the current programming workflow, general purpose programming languages try to solve every problem at once and programmers need to waste time and efficiency playing whack-a-mole. One's programming mindset changes, for the better, when one knows that willy-nilly, blocking function calls are not allowed to cross software unit boundaries."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

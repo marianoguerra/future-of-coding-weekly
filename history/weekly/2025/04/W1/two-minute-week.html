@@ -1,0 +1,40 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-03-29T21:46:29.331Z" class="post"><span class="user"></span> <a href="https://history.futureofcoding.org/?fromDate=2025-03-26&amp;toDate=2025-04-01&amp;channel=two-minute-week&amp;filter=#2025-03-29T21:46:29.331Z" class="date">🕰️ 2025-03-29 21:46:29</a> <div class="message"><p>...</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2025-04-01T17:27:10.942Z" class="reply"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-03-29&amp;toDate=2025-04-04&amp;channel=two-minute-week&amp;filter=#2025-04-01T17:27:10.942Z" class="date">2025-04-01 17:27:10</a> <div class="message"><p>Yeah I do think often "what are the rules of reactivity to avoid these situations?". I think one risky problem class is joining async streams via different paths, it often ends up double triggering the common one, in a non-deterministic way because of the async tasks in the middle, whereas in normal programming you would join with  <code>await Promise.all([task1, task2])</code>  . In Rx this is a <a href="https://www.learnrxjs.io/learn-rxjs/operators/combination/zip">zip</a>. Observable went for limited stream combine operators, but even in Rx world, if you zip and then accidentally go out of sync, you get a different type of reactivity bug, so zip is not really the correct answer either, coz there is nothing enforcing the streams are publishing at the same rate.</p>
+<p>I look at Rust borrow checker and that it does some kind of resource counting in the type system, so that seems kinda like it might be the right path, but its not "easy", either to develop or for people to use. So I dunno. Its an outstanding problem with reactive systems: joining streams in a non-fragile way. When you visualize it at least the problem sometimes becomes apparent, and visualization also catches the unintended coupling that occurs as well in impure systems. So thats my best workable solution for now.</p>
+<pre><code>            Parent
+
+           /     \
+
+ async task1     async task2
+
+            \   /
+
+           common</code></pre></div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
