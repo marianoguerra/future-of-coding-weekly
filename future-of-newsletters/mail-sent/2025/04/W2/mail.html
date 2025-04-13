@@ -1,0 +1,155 @@
+<div style="margin-top:1em">
+
+<p>🎥 This Game Did Everything. What Happened? 📝 Self-Steering Language Models Ω OhmJS: A JavaScript library for building parsers, interpreters, compilers, and more</p>
+<h1>Devlog Together</h1><h2>🎠 <a href="https://akkartik.name/post/luaML2">A markup language and hypertext browser in 600 lines of code</a> via <a href="http://akkartik.name/about">Kartik Agaram</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/devlog-together.html#2025-04-07T07:12:02.081Z">🧵 conversation</a></p>
+
+
+<p>I've integrated my <a href="https://akkartik.name/post/luaML2">recent</a> <a href="https://history.futureofcoding.org/?fromDate=2025-04-02&amp;toDate=2025-04-08&amp;channel=share-your-work&amp;filter=#2025-04-05T06:28:02.122Z">💬 #share-your-work@2025-04-05</a> into <a href="https://git.sr.ht/~akkartik/template-carousel2">my template repository for building apps based on the Lua Carousel UI</a> which supports making changes to apps on the phone (or computer). Now any new app built from this starting point will have a rudimentary system of online help for the entire stack:</p>
+<ul><li>Lua Carousel</li><li>LÖVE</li><li>Lua programming language syntax</li></ul>
+
+<p>And there's tooling for authors to draw box-and-arrow diagrams in the environment and hyperlink boxes to code in the app.</p>
+
+
+<p>It's all very janky, but the combination of editing on the phone, box-and-arrow diagrams and hyperlinks everywhere seems to result in a somewhat unique programming environment worth exploring further. I'm not sure what I'll do next. Probably build some simple apps and try to build experiences for understanding their source code. This is a little bit like Literate Programming, but just a touch more graphical. LP + image maps, perhaps.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🚪 <a href="https://observablehq.com/@tomlarkworthy/jumpgate">Jumpgate: Bulk transfer notebooks between storage mediums.</a> via <a href="https://webcode.run">Tom Larkworthy</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/devlog-together.html#2025-04-12T13:05:41.415Z">🧵 conversation</a></p>
+
+
+<p>I am back on the original goal of exporting my Observable notebooks to my offline-first format (lopecode), in a way that preserves editability. I started a notebook called jumpgate, that can do the conversion, and then opens a PR against Github. The first notebook I am trying to get this working with is Jumpgate itself.</p>
+
+
+<p>I use lightning-fs + isomorphic-git to do the Github part within a browser. The prototype is working</p>
+
+
+<p>sourcecode on Observable: <a href="https://observablehq.com/@tomlarkworthy/jumpgate">observablehq.com/@tomlarkworthy/jumpgate</a></p>
+
+
+<p>git PR opened by the notebook: <a href="https://github.com/tomlarkworthy/lopecode/pull/4">github.com/tomlarkworthy/lopecode/pull/4</a></p>
+
+
+<p>as my repo is configured as a static host as well, we can see the result of jumpgate after going through the jumpgate here: <a href="https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_jumpgate.html#view=S100%28%40tomlarkworthy%2Fmodule-selection%29">tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_jumpgate.html#view=S100%28%40tomlarkworthy%2Fmodule-selection%29</a></p>
+
+
+<p>Currently its slow as hell as the git checkout takes a long time. lightning-fs is storing itself in indexdb so there is not need to do a full checkout everytime, we should be able to merge with what exists. I went with simplicity for now as the stateful logic gets complicated as you have to do different git commands depending on whether you have done an initial clone etc.</p>
+
+
+<p>I am not sure how to manage the PR branch either, I keep force pushing a single branch but thats probably not correct either, I should use a fresh one each time but then you need to be careful not to fill indexdb with orphaned work. If anyone has a strong opinion on what the ideal github workflow for syncing offline files is LMK</p>
+
+
+<p>The jumpgate does not add the extra functionality to make a notebook editable, I need to next mixin with my editor notebooks to get the thing to do what I want. Good stage though, Having notebooks open PRs is cool.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🌝 <a href="https://ezhik.jp/f-string.lua/">f-string.lua – ezhik.jp</a> via <strong>Ezhik</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/devlog-together.html#2025-04-13T13:10:55.668Z">🧵 conversation</a></p>
+
+
+<p>Keep getting sidetracked by making little Lua libraries. This one implements Python-style f-strings in Lua. Pretty cool to have a language that lets you go this far with its syntax. With just a little bit of work this could be extended to implement <a href="https://peps.python.org/pep-0750/">Python's template strings (PEP 750)</a> and then we could use Lua to make all sorts of DSLs. My initial motivation was easier printf debugging, though 😅.</p>
+
+
+<p>I started working on this on an iPad with the Codea app, of all things. Was fun, but sadly I couldn't use any of the Bret Victor-inspired things they had in it since I wasn't using any of the app-specific libraries they had.</p>
+
+
+<p>Though putting aside the library, I think at this point the most interesting thing I did is actually making it possible to use it right on my website without having to install or download anything.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>Ω <a href="http://ohmjs.org">OhmJS: A JavaScript library for building parsers, interpreters, compilers, and more</a> via <a href="https://guitarvydas.github.io/2021/09/23/Manifesto.html">Paul Tarvydas</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/devlog-together.html#2025-04-13T16:19:58.666Z">🧵 conversation</a></p>
+
+
+<p>If you enjoyed fooling with parsers, I would recommend looking into <a href="http://ohmjs.org">OhmJS</a>. OhmJS (plus Ohm-editor) saves a lot of work when building parsers. A game changer. There is the other half, too - once you've parsed something, what do you do with the information? I've found that doing simple string-rewriting is very, very powerful, while sounding overly-restrictive on the surface. One can design and build whole new languages by transpiling them into existing languages for compilation (that's how I use my 't2t' and 'tmx' stuff). I consider the shell (/bin/bash, /bin/zsh, etc.) to be my IDE. PLs are just "little tools" that plug into the IDE. I don't have to stick to using one language. I can pick and choose. Transpiling a new language (or nano-DSL, or Diagrammatic Programming Language) into some other language fits neatly into this workflow. The fact that OhmJS is written in JS doesn't mean that you have to use JS. You can map XYZ to Lua (or whatever). I can supply a /lot/ more info, if this interests you.</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h1>Content</h1><h2>💬 <strong>Walker Griggs</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/linking-together.html#2025-04-08T19:11:31.847Z">🧵 conversation</a></p>
+
+
+<p>Meta information diet thread: What are blogs / publications that you read frequently?</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>🎥 <a href="https://www.youtube.com/watch?v=AVaj_3134zU">This Game Did Everything. What Happened?</a> via <a href="https://twitter.com/warianoguerra">Mariano Guerra</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/linking-together.html#2025-04-13T12:41:49.603Z">🧵 conversation</a></p>
+
+
+<p><img src="https://img.youtube.com/vi/AVaj_3134zU/hqdefault.jpg" alt="Youtube Thumbnail"></p>
+
+
+<p><a href="https://www.youtube.com/watch?v=AVaj_3134zU">This Game Did Everything. What Happened?</a></p>
+<blockquote style="margin-left:1em;color:#555555;font-style:italic">
+
+<p>Dreams is a 2020 game creation system video game developed by Media Molecule for the PlayStation 4. Players can create and play user-generated content in the forms of games, audiovisual experiences and game assets, which can be shared or remixed to be used in other players' creations.</p>
+</blockquote>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h1>🤖</h1><h2>💬 <strong>Arvind Thyagarajan</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/of-ai.html#2025-04-09T16:07:48.767Z">🧵 conversation</a></p>
+
+
+<p>Has anyone played extensively with the swathe of "speak english into code" systems out there, from idea through to deployment to an appreciative public? (I haven't...)</p>
+
+
+<p>I'm wondering if, at the end of the day, you still have to be somewhat of a textual code / software engineering native in order to take advantage of this particular present-future of coding? Or if it's truly democratising access to practical computation (i.e. domain specific to the domain of semi-commercial tools, apps, integrations that software engineers work on)</p>
+
+
+<p>I feel a lot of public excitement around it that I'm not feeling -- but as someone keen on encouraging everyone to act computationally for themselves, public excitement is * <em>the</em>  metric so I'll admit to being mildly envious 🙂</p>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>📝 <a href="https://arxiv.org/abs/2504.07081">Self-Steering Language Models</a> via <a href="https://twitter.com/jackrusher">Jack Rusher</a></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/of-ai.html#2025-04-10T16:48:33.602Z">🧵 conversation</a></p>
+
+
+<p>For anyone working with LLMs (from my colleagues at the lab where I’ve been helping out the last few months):</p>
+<blockquote style="margin-left:1em;color:#555555;font-style:italic">
+
+<p>📝 <a href="https://arxiv.org/abs/2504.07081">Self-Steering Language Models</a></p>
+
+
+<p>While test-time reasoning enables language models to tackle complex tasks, searching or planning in natural language can be slow, costly, and error-prone. But even when LMs struggle to emulate the precise reasoning steps needed to solve a problem, they often excel at describing its abstract structure--both how to verify solutions and how to search for them. This paper introduces DisCIPL, a method for "self-steering" LMs where a Planner model generates a task-specific inference program that is executed by a population of Follower models. Our approach equips LMs with the ability to write recursive search procedures that guide LM inference, enabling new forms of verifiable and efficient reasoning. When instantiated with a small Follower (e.g., Llama-3.2-1B), DisCIPL matches (and sometimes outperforms) much larger models, including GPT-4o and o1, on challenging constrained generation tasks. In decoupling planning from execution, our work opens up a design space of highly-parallelized Monte Carlo inference strategies that outperform standard best-of-N sampling, require no finetuning, and can be implemented automatically by existing LMs.</p>
+</blockquote>
+</div>
+
+<br>
+
+<div style="margin-top:1em"><h2>💬 <strong>Ezhik</strong></h2>
+
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/04/W2/of-ai.html#2025-04-13T13:35:15.652Z">🧵 conversation</a></p>
+
+
+<p>I wanted to learn how the CodeMirror editor works, so I asked GitHub Copilot's agent mode to build a little app that uses it for me. We had a back-and-forth where I pointed out the bugs I've seen in the UI and then it fixed it. But all this took place without me having to look at the actual code, so I don't really feel like I learned anything from this experience. That makes me wonder - do people here use these tools for learning, and if so, how?</p>
+</div>
+
+<br><hr style="border:0;border-top:1px solid #cccccc">
+
+<p>👨🏽‍💻 By <a href="https://bsky.app/profile/marianoguerra.org" target="_blank">🦋 @marianoguerra.org</a> <a href="https://hachyderm.io/@marianoguerra" target="_blank">🐘 @marianoguerra@hachyderm.io</a> <a href="https://twitter.com/warianoguerra" target="_blank">🐦 @warianoguerra</a></p>
+
+<p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/" target="_blank">Future of Coding Community</a></p>
+
+<p>✉️ Not subscribed yet? <a href="https://newsletter.futureofcoding.org/join/" target="_blank">Subscribe to the Newsletter</a> / <a href="https://newsletter.futureofcoding.org/archive.html" target="_blank">Archive</a> / <a href="https://history.futureofcoding.org/newsletter/rss.xml" target="_blank">RSS</a></p>
+
+<p>🎙 Prefer podcasts? check the <a href="https://futureofcoding.org/episodes/" target="_blank">Future of Coding Podcast</a></p>
+
+<p></p>

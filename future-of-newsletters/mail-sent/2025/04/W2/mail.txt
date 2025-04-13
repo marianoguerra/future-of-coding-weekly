@@ -1,0 +1,140 @@
+🎥 This Game Did Everything. What Happened? 📝 Self-Steering Language Models Ω OhmJS: A JavaScript library for building parsers, interpreters, compilers, and more
+
+# Devlog Together
+
+## 🎠 [A markup language and hypertext browser in 600 lines of code](https://akkartik.name/post/luaML2) via [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/devlog-together.html#2025-04-07T07:12:02.081Z)
+
+I've integrated my [recent](https://akkartik.name/post/luaML2) [💬 #share-your-work@2025-04-05](https://history.futureofcoding.org/?fromDate=2025-04-02&toDate=2025-04-08&channel=share-your-work&filter=#2025-04-05T06:28:02.122Z) into [my template repository for building apps based on the Lua Carousel UI](https://git.sr.ht/~akkartik/template-carousel2) which supports making changes to apps on the phone (or computer). Now any new app built from this starting point will have a rudimentary system of online help for the entire stack:
+
+
+
+
+* Lua Carousel
+* LÖVE
+* Lua programming language syntax
+
+
+
+And there's tooling for authors to draw box-and-arrow diagrams in the environment and hyperlink boxes to code in the app.
+
+
+
+It's all very janky, but the combination of editing on the phone, box-and-arrow diagrams and hyperlinks everywhere seems to result in a somewhat unique programming environment worth exploring further. I'm not sure what I'll do next. Probably build some simple apps and try to build experiences for understanding their source code. This is a little bit like Literate Programming, but just a touch more graphical. LP + image maps, perhaps.
+
+## 🚪 [Jumpgate: Bulk transfer notebooks between storage mediums.](https://observablehq.com/@tomlarkworthy/jumpgate) via [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/devlog-together.html#2025-04-12T13:05:41.415Z)
+
+I am back on the original goal of exporting my Observable notebooks to my offline-first format (lopecode), in a way that preserves editability. I started a notebook called jumpgate, that can do the conversion, and then opens a PR against Github. The first notebook I am trying to get this working with is Jumpgate itself.
+
+I use lightning-fs + isomorphic-git to do the Github part within a browser. The prototype is working
+
+sourcecode on Observable: [observablehq.com/@tomlarkworthy/jumpgate](https://observablehq.com/@tomlarkworthy/jumpgate)
+
+git PR opened by the notebook: [github.com/tomlarkworthy/lopecode/pull/4](https://github.com/tomlarkworthy/lopecode/pull/4)
+
+as my repo is configured as a static host as well, we can see the result of jumpgate after going through the jumpgate here: [tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_jumpgate.html#view=S100%28%40tomlarkworthy%2Fmodule-selection%29](https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_jumpgate.html#view=S100%28%40tomlarkworthy%2Fmodule-selection%29)
+
+
+
+Currently its slow as hell as the git checkout takes a long time. lightning-fs is storing itself in indexdb so there is not need to do a full checkout everytime, we should be able to merge with what exists. I went with simplicity for now as the stateful logic gets complicated as you have to do different git commands depending on whether you have done an initial clone etc.
+
+I am not sure how to manage the PR branch either, I keep force pushing a single branch but thats probably not correct either, I should use a fresh one each time but then you need to be careful not to fill indexdb with orphaned work. If anyone has a strong opinion on what the ideal github workflow for syncing offline files is LMK
+
+
+
+The jumpgate does not add the extra functionality to make a notebook editable, I need to next mixin with my editor notebooks to get the thing to do what I want. Good stage though, Having notebooks open PRs is cool.
+
+## 🌝 [f-string.lua – ezhik.jp](https://ezhik.jp/f-string.lua/) via **Ezhik**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/devlog-together.html#2025-04-13T13:10:55.668Z)
+
+Keep getting sidetracked by making little Lua libraries. This one implements Python-style f-strings in Lua. Pretty cool to have a language that lets you go this far with its syntax. With just a little bit of work this could be extended to implement [Python's template strings (PEP 750)](https://peps.python.org/pep-0750/) and then we could use Lua to make all sorts of DSLs. My initial motivation was easier printf debugging, though 😅.
+
+
+
+I started working on this on an iPad with the Codea app, of all things. Was fun, but sadly I couldn't use any of the Bret Victor-inspired things they had in it since I wasn't using any of the app-specific libraries they had.
+
+
+
+Though putting aside the library, I think at this point the most interesting thing I did is actually making it possible to use it right on my website without having to install or download anything.
+
+
+
+## Ω [OhmJS: A JavaScript library for building parsers, interpreters, compilers, and more](http://ohmjs.org) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/devlog-together.html#2025-04-13T16:19:58.666Z)
+
+If you enjoyed fooling with parsers, I would recommend looking into [OhmJS](http://ohmjs.org). OhmJS (plus Ohm-editor) saves a lot of work when building parsers. A game changer. There is the other half, too - once you've parsed something, what do you do with the information? I've found that doing simple string-rewriting is very, very powerful, while sounding overly-restrictive on the surface. One can design and build whole new languages by transpiling them into existing languages for compilation (that's how I use my 't2t' and 'tmx' stuff). I consider the shell (/bin/bash, /bin/zsh, etc.) to be my IDE. PLs are just "little tools" that plug into the IDE. I don't have to stick to using one language. I can pick and choose. Transpiling a new language (or nano-DSL, or Diagrammatic Programming Language) into some other language fits neatly into this workflow. The fact that OhmJS is written in JS doesn't mean that you have to use JS. You can map XYZ to Lua (or whatever). I can supply a /lot/ more info, if this interests you.
+
+# Content
+
+## 💬 **Walker Griggs**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/linking-together.html#2025-04-08T19:11:31.847Z)
+
+Meta information diet thread: What are blogs / publications that you read frequently?
+
+
+## 🎥 [This Game Did Everything. What Happened?](https://www.youtube.com/watch?v=AVaj_3134zU) via [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/linking-together.html#2025-04-13T12:41:49.603Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/AVaj_3134zU/hqdefault.jpg)
+
+[This Game Did Everything. What Happened?](https://www.youtube.com/watch?v=AVaj_3134zU)
+
+
+
+
+
+
+> Dreams is a 2020 game creation system video game developed by Media Molecule for the PlayStation 4. Players can create and play user-generated content in the forms of games, audiovisual experiences and game assets, which can be shared or remixed to be used in other players' creations.
+
+# 🤖
+
+## 💬 **Arvind Thyagarajan**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/of-ai.html#2025-04-09T16:07:48.767Z)
+
+Has anyone played extensively with the swathe of "speak english into code" systems out there, from idea through to deployment to an appreciative public? (I haven't...)
+
+
+
+I'm wondering if, at the end of the day, you still have to be somewhat of a textual code / software engineering native in order to take advantage of this particular present-future of coding? Or if it's truly democratising access to practical computation (i.e. domain specific to the domain of semi-commercial tools, apps, integrations that software engineers work on)
+
+
+
+I feel a lot of public excitement around it that I'm not feeling -- but as someone keen on encouraging everyone to act computationally for themselves, public excitement is * *the*  metric so I'll admit to being mildly envious 🙂
+
+
+## 📝 [Self-Steering Language Models](https://arxiv.org/abs/2504.07081) via [Jack Rusher](https://twitter.com/jackrusher)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/of-ai.html#2025-04-10T16:48:33.602Z)
+
+For anyone working with LLMs (from my colleagues at the lab where I’ve been helping out the last few months):
+
+> 📝 [Self-Steering Language Models](https://arxiv.org/abs/2504.07081)
+>
+>While test-time reasoning enables language models to tackle complex tasks, searching or planning in natural language can be slow, costly, and error-prone. But even when LMs struggle to emulate the precise reasoning steps needed to solve a problem, they often excel at describing its abstract structure--both how to verify solutions and how to search for them. This paper introduces DisCIPL, a method for "self-steering" LMs where a Planner model generates a task-specific inference program that is executed by a population of Follower models. Our approach equips LMs with the ability to write recursive search procedures that guide LM inference, enabling new forms of verifiable and efficient reasoning. When instantiated with a small Follower (e.g., Llama-3.2-1B), DisCIPL matches (and sometimes outperforms) much larger models, including GPT-4o and o1, on challenging constrained generation tasks. In decoupling planning from execution, our work opens up a design space of highly-parallelized Monte Carlo inference strategies that outperform standard best-of-N sampling, require no finetuning, and can be implemented automatically by existing LMs.
+
+
+## 💬 **Ezhik**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/04/W2/of-ai.html#2025-04-13T13:35:15.652Z)
+
+I wanted to learn how the CodeMirror editor works, so I asked GitHub Copilot's agent mode to build a little app that uses it for me. We had a back-and-forth where I pointed out the bugs I've seen in the UI and then it fixed it. But all this took place without me having to look at the actual code, so I don't really feel like I learned anything from this experience. That makes me wonder - do people here use these tools for learning, and if so, how?
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
