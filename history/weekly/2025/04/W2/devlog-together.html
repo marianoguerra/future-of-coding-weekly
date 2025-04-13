@@ -1,0 +1,51 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-04-07T07:12:02.081Z" class="post"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-04-04&amp;toDate=2025-04-10&amp;channel=devlog-together&amp;filter=#2025-04-07T07:12:02.081Z" class="date">2025-04-07 07:12:02</a> <div class="message"><p>I've integrated my <a href="https://akkartik.name/post/luaML2">recent</a> <a href="https://history.futureofcoding.org/?fromDate=2025-04-02&amp;toDate=2025-04-08&amp;channel=share-your-work&amp;filter=#2025-04-05T06:28:02.122Z">💬 #share-your-work@2025-04-05</a> into <a href="https://git.sr.ht/~akkartik/template-carousel2">my template repository for building apps based on the Lua Carousel UI</a> which supports making changes to apps on the phone (or computer). Now any new app built from this starting point will have a rudimentary system of online help for the entire stack:</p>
+<ul><li>Lua Carousel</li><li>LÖVE</li><li>Lua programming language syntax</li></ul><p>And there's tooling for authors to draw box-and-arrow diagrams in the environment and hyperlink boxes to code in the app.</p>
+<p>It's all very janky, but the combination of editing on the phone, box-and-arrow diagrams and hyperlinks everywhere seems to result in a somewhat unique programming environment worth exploring further. I'm not sure what I'll do next. Probably build some simple apps and try to build experiences for understanding their source code. This is a little bit like Literate Programming, but just a touch more graphical. LP + image maps, perhaps.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"></div></div><div id="2025-04-12T13:05:41.415Z" class="post"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-04-09&amp;toDate=2025-04-15&amp;channel=devlog-together&amp;filter=#2025-04-12T13:05:41.415Z" class="date">2025-04-12 13:05:41</a> <div class="message"><p>I am back on the original goal of exporting my Observable notebooks to my offline-first format (lopecode), in a way that preserves editability. I started a notebook called jumpgate, that can do the conversion, and then opens a PR against Github. The first notebook I am trying to get this working with is Jumpgate itself.</p>
+<p>I use lightning-fs + isomorphic-git to do the Github part within a browser. The prototype is working</p>
+<p>sourcecode on Observable: <a href="https://observablehq.com/@tomlarkworthy/jumpgate">observablehq.com/@tomlarkworthy/jumpgate</a></p>
+<p>git PR opened by the notebook: <a href="https://github.com/tomlarkworthy/lopecode/pull/4">github.com/tomlarkworthy/lopecode/pull/4</a></p>
+<p>as my repo is configured as a static host as well, we can see the result of jumpgate after going through the jumpgate here: <a href="https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_jumpgate.html#view=S100%28%40tomlarkworthy%2Fmodule-selection%29">tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_jumpgate.html#view=S100%28%40tomlarkworthy%2Fmodule-selection%29</a></p>
+<p>Currently its slow as hell as the git checkout takes a long time. lightning-fs is storing itself in indexdb so there is not need to do a full checkout everytime, we should be able to merge with what exists. I went with simplicity for now as the stateful logic gets complicated as you have to do different git commands depending on whether you have done an initial clone etc.</p>
+<p>I am not sure how to manage the PR branch either, I keep force pushing a single branch but thats probably not correct either, I should use a fresh one each time but then you need to be careful not to fill indexdb with orphaned work. If anyone has a strong opinion on what the ideal github workflow for syncing offline files is LMK</p>
+<p>The jumpgate does not add the extra functionality to make a notebook editable, I need to next mixin with my editor notebooks to get the thing to do what I want. Good stage though, Having notebooks open PRs is cool.</p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://observablehq.com/@tomlarkworthy/jumpgate">Jumpgate</a></p>
+<p>Bulk transfer notebooks between storage mediums. TODO make offline first (including runtime) Source configuration Source to filesystem Target configuration Deps</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"></div></div><div id="2025-04-13T13:10:55.668Z" class="post"><span class="user">Ezhik</span> <a href="https://history.futureofcoding.org/?fromDate=2025-04-10&amp;toDate=2025-04-16&amp;channel=devlog-together&amp;filter=#2025-04-13T13:10:55.668Z" class="date">2025-04-13 13:10:55</a> <div class="message"><p>Keep getting sidetracked by making little Lua libraries. This one implements Python-style f-strings in Lua. Pretty cool to have a language that lets you go this far with its syntax. With just a little bit of work this could be extended to implement <a href="https://peps.python.org/pep-0750/">Python's template strings (PEP 750)</a> and then we could use Lua to make all sorts of DSLs. My initial motivation was easier printf debugging, though 😅.</p>
+<p>I started working on this on an iPad with the Codea app, of all things. Was fun, but sadly I couldn't use any of the Bret Victor-inspired things they had in it since I wasn't using any of the app-specific libraries they had.</p>
+<p>Though putting aside the library, I think at this point the most interesting thing I did is actually making it possible to use it right on my website without having to install or download anything.</p>
+<p><a href="https://ezhik.jp/f-string.lua/">ezhik.jp/f-string.lua</a></p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://ezhik.jp/f-string.lua/">f-string.lua – ezhik.jp</a></p>
+<p>A Python-like f-string implementation for Lua.</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"></div></div><div id="2025-04-13T16:19:58.666Z" class="post"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-04-10&amp;toDate=2025-04-16&amp;channel=devlog-together&amp;filter=#2025-04-13T16:19:58.666Z" class="date">2025-04-13 16:19:58</a> <div class="message"><p>If you enjoyed fooling with parsers, I would recommend looking into <a href="http://ohmjs.org">OhmJS</a>. OhmJS (plus Ohm-editor) saves a lot of work when building parsers. A game changer. There is the other half, too - once you've parsed something, what do you do with the information? I've found that doing simple string-rewriting is very, very powerful, while sounding overly-restrictive on the surface. One can design and build whole new languages by transpiling them into existing languages for compilation (that's how I use my 't2t' and 'tmx' stuff). I consider the shell (/bin/bash, /bin/zsh, etc.) to be my IDE. PLs are just "little tools" that plug into the IDE. I don't have to stick to using one language. I can pick and choose. Transpiling a new language (or nano-DSL, or Diagrammatic Programming Language) into some other language fits neatly into this workflow. The fact that OhmJS is written in JS doesn't mean that you have to use JS. You can map XYZ to Lua (or whatever). I can supply a /lot/ more info, if this interests you.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>
