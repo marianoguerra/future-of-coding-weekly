@@ -146,7 +146,7 @@ def insert_msg(cur, msg, channel):
     cur.execute(INSERT_MSG_QUERY, values)
 
     msg_ts = msg.get('ts', '?')
-    replies = [to_reply_row(reply, msg_ts) for reply in reply in msg.get('replies', [])]
+    replies = [to_reply_row(reply, msg_ts) for reply in msg.get('replies', [])]
     cur.executemany(INSERT_REPLY_QUERY, replies)
 
     for reaction in msg.get('reactions', []):
