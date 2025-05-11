@@ -1,0 +1,150 @@
+<!--
+.. title: Future of Coding Weekly 2025/05 Week 2
+.. slug: future-of-coding-weekly-202505-week-2
+.. date: 2025-05-11 23:35:05 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🪡 Stitch: Prototype quickly on modern technology 🎥 FoC Virtual Meetup 10  📝 The Unix Binary wants to be a Smalltalk Method, Not an Object
+
+# Two Minute Week
+
+## 💬 **Marek Rogalski**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/two-minute-week.html#2025-05-09T17:40:11.786Z)
+
+Here is an overview of a the most complex macro that Automat played so far. It has a little bit of everything: OCR, Assembly, hacky string processing, fine-tuned keystroke sequences. The end result is about 2x faster than manual execution and pretty satisfying to watch.
+
+🎥 [Skyrim Ingredient Farming #2](http://history.futureofcoding.org/history/msg_files/F08/F08RS0APLTV.mp4)
+
+# Our Work
+
+## 🧮 [ActuarialPlayground.com](http://ActuarialPlayground.com) via **Declan**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/share-your-work.html#2025-05-05T17:34:28.042Z)
+
+As an example of how I've been using model composition in calculang, I added notes to [ActuarialPlayground.com](http://ActuarialPlayground.com) on manipulating the formulas to do mortgage protection - by composing with an old loan calculator model (via just a plain old URL).
+
+[Here are the formula changes](https://github.com/declann/ActuarialPlayground.com/commit/9e487b7e18570e1043ac7f6f4539bf002f8926df#diff-30314a7cf03cb75b7246e76210af5cd0b97071f1ac89a5757d9f62e82a3d1c2d), you can interactively swap them on the website, under 💬
+
+## 🪡 [Stitch: Prototype quickly on modern technology. Free and open source](https://stitchdesign.app/) via [Nick Arner](https://twitter.com/nickarner)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/share-your-work.html#2025-05-05T22:15:29.425Z)
+
+Hey all! Excited to share a new project some of us (Elliot Boschewitz, Christian Clampitt, Adam Menges, and myself) have been hacking on, Stitch: [stitchdesign.app](https://stitchdesign.app/)
+
+
+
+We’re ready to add people in mass to the TestFlight. It’s an  *open source*  version of a visual programming environment, similar to Origami or Quartz Composer.
+
+
+
+In addition to being able to build anything those two can, it also supports AR, CoreML, and native 3D support. As well as being built in SwiftUI, so it runs on basically any Apple device and is easy to hack on and improve.
+
+
+
+It’s open source, and we welcome new contributions! [github.com/StitchDesign/Stitch](https://github.com/StitchDesign/Stitch)
+
+## 💬 **Dave Mason**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/thinking-together.html#2025-05-07T22:09:32.173Z)
+
+Teaching Computer Science in the AI Age - discuss!
+
+
+## 💬 **Isaac Carrasco-Ortiz**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/thinking-together.html#2025-05-08T13:55:12.586Z)
+
+From a health webpage on mental overstimulation. This phrase is particularly interesting to me:
+
+
+
+“It can feel like you have too many tabs opened on your mental browser and your brain doesn’t know what to do.”
+
+
+
+What’s the idea behind using technological metaphors to describe something human? Shouldn’t it be the other way around? What does that tell us about the way we make sense of our everyday technologies? Hmm… 🤔
+
+![IMG_1267](http://history.futureofcoding.org/history/msg_files/F08/F08RA09DRPG.jpg)
+
+
+
+# Content
+
+## 📝 [What If We Made Advertising Illegal?](https://simone.org/advertising/) via [Andreas S](https://twitter.com/curious_reader)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/linking-together.html#2025-05-05T14:49:09.353Z)
+
+Only the good things from [HN](https://news.ycombinator.com/item?id=43595269) 🙂 [simone.org/advertising](https://simone.org/advertising/)
+
+## 📝 [The Google Zanzibar Paper, annotated by AuthZed](https://authzed.com/zanzibar) via **Walker Griggs**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/linking-together.html#2025-05-05T16:31:03.990Z)
+
+Perhaps a meta question for  _sharing_ annotations -- [does anyone know if this is an off-the-shelf solution for hosting paper annotations?](https://authzed.com/zanzibar) It reminds me of Fermet's [Margins](https://fermatslibrary.com/margins) solution but didn't find a clear signal in the source at first glance
+
+## 📝 [The Curse of Knowing How, or; Fixing Everything](https://notashelf.dev/posts/curse-of-knowing) via **Maximilian Ernestus**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/linking-together.html#2025-05-07T22:10:29.109Z)
+
+Talking about feelings again:
+
+[notashelf.dev/posts/curse-of-knowing](https://notashelf.dev/posts/curse-of-knowing)
+
+This resonated a lot with me. Not sure yet what will come out of it in the coming days.
+
+## 📝 [The Unix Binary wants to be a Smalltalk Method, Not an Object](https://programmingmadecomplicated.wordpress.com/2025/01/21/the-unix-binary-wants-to-be-a-smalltalk-method-not-an-object/) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/linking-together.html#2025-05-09T11:19:16.970Z)
+
+[The Unix Binary wants to be a Smalltalk Method, Not an Object](https://programmingmadecomplicated.wordpress.com/2025/01/21/the-unix-binary-wants-to-be-a-smalltalk-method-not-an-object/) by **@Joel Jakubovic**. A bit lengthy, but has interesting insights.
+
+
+## 📝 [An Overview + Detail Layout for Visualizing Compound Graphs](https://arxiv.org/abs/2408.04045) via **Nilesh Trivedi**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/linking-together.html#2025-05-10T06:51:27.084Z)
+
+I stumbled upon this solution to the problem of visualizing large compound graphs (where nodes can be nested inside each other)
+
+![image.png](http://history.futureofcoding.org/history/msg_files/F08/F08RKSAG95L.png)
+
+## 🐌 [Slow Software for a Burning World 🔥](https://bonfirenetworks.org/posts/slow_software_for_a_burning_world/) via [Andreas S](https://twitter.com/curious_reader)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/linking-together.html#2025-05-10T08:18:25.192Z)
+
+Like mastodon but with values?
+
+Has anyone heard of it or can make meaningful distinctions?
+
+## 🦀 [Rust Dependencies Scare Me](https://vincents.dev/blog/rust-dependencies-scare-me/?) via [Andreas S](https://twitter.com/curious_reader)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/linking-together.html#2025-05-10T12:17:19.456Z)
+
+Complexity..
+
+# Present Company
+
+## 🎥 [Virtual Meetup 10 • April 30, 2025](https://www.youtube.com/watch?v=2TV_OExsU4I) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W2/present-company.html#2025-05-05T23:52:25.456Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/2TV_OExsU4I/hqdefault.jpg)
+
+Here's the recording of the most recent [F# or C#](https://www.youtube.com/watch?v=2TV_OExsU4I) virtual meetup.
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
