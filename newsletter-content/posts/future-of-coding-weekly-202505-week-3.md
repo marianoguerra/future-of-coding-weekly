@@ -1,0 +1,136 @@
+<!--
+.. title: Future of Coding Weekly 2025/05 Week 3
+.. slug: future-of-coding-weekly-202505-week-3
+.. date: 2025-05-18 23:05:52 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🎥 Computational Public Space 📸 Notes from Srceenshot Conf! 🎥 How to Do Ambitious Research in the Modern Era
+
+# Our Work
+
+## 🎠 by [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/share-your-work.html#2025-05-12T16:12:45.676Z)
+
+Lua Carousel now comes with a comprehensive system of online help you can run on computer or phone:
+
+
+
+
+* A tutorial for using it tailored towards programmers
+* Exercises for learning programming
+* Lots of example programs you can run right from within it, clone and remix
+* Reference documentation for available capabilities, while carefully exposing the level in the stack that provides them. (I believe this is critical information for people to be aware of. Abstracting it is counter-productive.)
+
+
+
+Try it out by installing [LÖVE](https://love2d.org) for your platform. It's completely open source and live editable on a computer.
+
+
+🎥 [carousel docs](http://history.futureofcoding.org/history/msg_files/F08/F08SC8RQS01.webm)
+
+## 📝 [Critical Architecture/Software Theory](https://tomasp.net/architecture/) via **Tomas Petricek**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/share-your-work.html#2025-05-12T20:11:41.700Z)
+
+I've been reading various books on architecture theory and (obviously) thinking how the ideas there might apply to programming. It is all still very much early ideas (basically trying to find programming equivalents for lots of interesting ideas I came across) - but I would love to hear what people think about it: [tomasp.net/architecture](https://tomasp.net/architecture/)
+
+
+
+([There is also a PDF version](https://tomasp.net/architecture/pdf/draft-april-2025.pdf))
+
+# Reading Together
+
+## 💬 **Mr. Rogers**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/reading-together.html#2025-05-14T08:08:11.108Z)
+
+Anyone wanna work through SICP with me? I tried a few years ago when I was picking up programming, but I was in over my head.
+
+
+
+I think I could swing it now. It'd be cool to learn Clojure after as well.
+
+
+# Content
+
+## 📝 [Policy of transience](https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/transience/) via **Spencer Fleming**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/linking-together.html#2025-05-13T16:22:03.182Z)
+
+Neat article from [lobste.rs](http://lobste.rs), I have almost the exact opposite habits so its cool to see another perspective
+
+## 🐦 [Kevin G. R. Greer](https://x.com/kgrgreer/status/1921988912857141638?s=46) via [Steve Dekorte](https://dekorte.com/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/linking-together.html#2025-05-13T16:31:14.428Z)
+
+> One of the most important but least discussed concepts in software design is creating interfaces which aren't perfect for anything, but which are perfect for everything. Ex. files, DAOs, contexts, spreadsheets, ...
+
+## 🎥 [How to Do Ambitious Research in the Modern Era](https://www.youtube.com/watch?v=w7DVlI_Ztq8) via [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/linking-together.html#2025-05-14T10:01:42.191Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/w7DVlI_Ztq8/hqdefault.jpg)
+
+
+## 🕹️ [RPG in a Box](https://rpginabox.com/) via **Eli Mellen**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/linking-together.html#2025-05-14T16:08:04.944Z)
+
+I’m always on the lookout for new programming interfaces in games and tools for making games since it’s one of the commercial spaces where folks focus on innovative graphical programming systems.
+
+
+
+[Was excited to discover this new (to me) game maker this morning](https://rpginabox.com/)[.](https://rpginabox.com/)
+
+>Bring your stories and ideas to life! RPG in a Box lets you create games and other interactive experiences in a fun and simple way!
+
+## 📸 [Notes from Srceenshot Conf!](https://cristobal.arquipelago.org/writing/screenshot.html) via **Nilesh Trivedi**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/linking-together.html#2025-05-15T04:15:28.217Z)
+
+
+> During the opening of the conference, Omar honed in on the subversive nature of the screenshot. In popular computing, it circumvents the app siloes that define our contemporary digital ecosystems. A screenshot doesn't need a log in, bypasses DRMs, and is interoperable in practically every single computational device. Even in the "high-culture" of computing, where text is dominant, screenshots prove subversive.
+
+...
+
+And yet, to imagine what an image-oriented computer might be seems to offer a new avant-garde for computing.
+
+## 🎥 [Computational Public Space](https://youtube.com/watch?v=PixPSNRDNMU) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/linking-together.html#2025-05-15T21:43:53.200Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/PixPSNRDNMU/hqdefault.jpg)
+
+Wake up babe
+
+## 🪬 [Mystical](https://suberic.net/~dmm/projects/mystical/README.html) via [Christopher Shank](https://mobile.twitter.com/chrisshank23)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/linking-together.html#2025-05-18T02:19:53.553Z)
+
+Mystical: a programming language based on arcane rings
+
+
+
+# 🤖
+
+## 📝 [AlphaEvolve: A Gemini-powered coding agent for designing advanced algorithms](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) via **Nilesh Trivedi**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W3/of-ai.html#2025-05-14T16:13:40.331Z)
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
