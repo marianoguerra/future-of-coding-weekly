@@ -1,0 +1,145 @@
+<!--
+.. title: Future of Coding Weekly 2025/05 Week 4
+.. slug: future-of-coding-weekly-202505-week-4
+.. date: 2025-05-26 10:33:00 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🧰 Scrappy: make little apps for you and your friends 🎙️ Lu Wilson on Art of Creative Coding 🎥 ESP32 Composite Video
+
+# Our Work
+
+## 🧰 [Scrappy: make little apps for you and your friends](https://pontus.granstrom.me/scrappy/) via **Pontus Granström**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/share-your-work.html#2025-05-20T18:54:30.134Z)
+
+Hi! Me and **John Chang** have been exploring home-made software together, and we’ve created Scrappy, a tool for making little apps for just you and your friends. It’s a pretty rough prototype, but it’s real and you can try it for yourself — we wanted to contribute more than a vision statement. Very curious what you think of it!
+
+## 💬 [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/share-your-work.html#2025-05-24T22:03:38.356Z)
+
+The advantageous that reactive programming on a reflective substrate has over mainstream testing methodologies.
+
+[Reactive Reflective Testing in Lopebook](https://tomlarkworthy.github.io/lopebooks/notebooks/@tomlarkworthy_reactive-reflective-testing.html)
+
+
+# Devlog Together
+
+## 💬 [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/devlog-together.html#2025-05-21T19:55:59.330Z)
+
+Literate Programming with a little bit of spatiality.
+
+![snake-centers.png](http://history.futureofcoding.org/history/msg_files/F08/F08T1Q46S15.png)
+
+
+
+## 💬 [Kartik Agaram](http://akkartik.name/about)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/devlog-together.html#2025-05-22T15:09:02.839Z)
+
+First draft of a complete running program. I automatically "tangle" the code from the markup to check that I didn't forget to include something.
+
+
+
+The picture is blurry, but in practice I can zoom in and out using mouse wheel or pinch gesture.
+
+
+
+The editing experience is terrible. All the lines are absolutely positioned and not integrated with the markup. But code is read more than it's written 😛
+
+![snake-centers3.png](http://history.futureofcoding.org/history/msg_files/F08/F08TYELLFUZ.png)
+
+
+# Thinking Together
+
+## 🎥 [Net Inclusion 2025: Day 2](https://www.youtube.com/watch?v=e51nusl7Gi8) via **Isaac Carrasco-Ortiz**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/thinking-together.html#2025-05-21T20:13:38.582Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/e51nusl7Gi8/hqdefault.jpg)
+
+National Digital Inclusion Alliance's Net Inclusion 2025 conference is currently live discussing the intersection between skills using AI and general digital literacy training
+
+
+
+## 💬 **Marek Rogalski**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/thinking-together.html#2025-05-22T07:10:11.070Z)
+
+Procedural Programming + 👀 + 🤏 = Block Based Programming
+
+Functional Programming + 👀 + 🤏  = Nodes And Wires
+
+Object-Oriented Programming + 👀 + 🤏  = ❓
+
+
+
+I'm looking for a term that describes a class of visual environments, where behavior is organized into stateful objects, subject to direct manipulation by the user. Examples of those environments might be The Alternate Reality Kit, Automat or Scrappy. I don't think I've ever stumbled upon a term for such a class. Or maybe I'm just not well versed in visual programming nomenclature. Do you know how they're called? Or how would you call them yourself?
+
+
+# Content
+
+## 📝 [Idea: Make a Recipe from the code comments.  Code recipes is a view mode…](https://www.linkedin.com/posts/ahmetson_idea-make-a-recipe-from-the-code-comments-activity-7330996208393490432-iatA?utm_source=share&utm_medium=member_desktop&rcm=ACoAABKP8C0BqAZeDHplB5MIP1xfu7-fWDyyUK4) via **Medet Ahmetson**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/linking-together.html#2025-05-21T16:47:30.691Z)
+
+I got an idea about a code view as a comment lines. Just sharing, might hope someone to grab and build his next AI startup:
+
+Code recipes is a view mode in your editor to read it. 
+
+In code recipe mode, instead seeing a programming language grammar words, we see the comment line for each programming language command. For example, can you understand what does following piece of code do?
+
+But, in code editor mode, I would read the code piece as the bullet points:
+- Convert source code into ontological json data. Ontological json data is called &amp;#39;contents&amp;#39;. // ...this.identifyContent(...
+- content is created, lets create its restful api // ...PageLevel.rest...
+- Re-identify page-rest if extensions ask for. // ...extension.afterPageRestCreation(..
+- to make CSS Selector &amp;#39;module &gt; .page-content&amp;#39;, so lets find module in reflect object tree // ...rest.get(..moduleURL...)...
+- make the branch as a sub-branch of the reflect. // pageRest.setRootNode(moduleNode)
+- keep alive the page rest object, so that reflect rest could refer to it. // _pageRests[moduleURL] &amp;#61; pageRest
+
+In above list, instead the code, we see the comment lines. And instead comments we see highlighted pieces in the code line. The comment with the highlighted code pieces should be in grey, although I didn&amp;#39;t know how to change font colour in LinkedIn. And that code is interactive, clicking on the highlighted codes will expand it or redirect the user to the whole line.
+
+This mode is now possible with the LLMs. I as a developer write the comments on the complex parts, or in necessary parts. Often intentionally not putting comments on the code lines that I think are self explanatory, there comments are actually distracting and irritating. But now, LLMs could do really well about describing the command lines. You could highlight for the AI the parts, that are the main focus of the code piece. And for the readers as well. :)
+
+I also think, maybe add some emojis or smileys next to the recipe code views, so its easier and enjoyable to do the most hated thing: to read someone else&amp;#39;s code.
+
+The code recipe isn&amp;#39;t good when debugging code errors, when you need to optimize or write the code piece itself. But if you want to understand the code at the architectural, business flow level through the code, for refactoring or for modification, then code recipe is another nice-to-use way. :) I would be glad to see it.
+
+
+
+## 🎙️ [Lu Wilson on Art of Creative Coding by The Orthogonal Bet](https://creators.spotify.com/pod/profile/theorthogonalbet/episodes/Lu-Wilson-on-Art-of-Creative-Coding-e32t5lb) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/linking-together.html#2025-05-22T11:19:05.981Z)
+
+Nice podcast episode with [Lu Wilson](https://twitter.com/TodePond): 
+
+>In this episode of The Orthogonal Bet, host Samuel Arbesman speaks with Lu Wilson, a programmer and creative coder who also works as a software engineer at tldraw, a Lux Capital portfolio company. Lu’s creative work is broad, strange, and delightful in all the best ways—perhaps best exemplified by the Todepond videos, a mindbending series that reimagines computing through playful, experimental lenses.Together, Samuel and Lu explore the world of Todepond, the ethos of creative coding, and Lu’s unconventional path through education. Their conversation spans topics like cellular automata, the programming language Logo, the history of computing, and the evolving role of artificial intelligence. They also dive into Lu’s work at tldraw, collaborative software, and the importance of cultivating community in tech.
+
+
+
+## 🎥 [ESP32 Composite Video](https://www.youtube.com/watch?v=5t1_XNc3vNw) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/05/W4/linking-together.html#2025-05-22T11:50:21.665Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/5t1_XNc3vNw/hqdefault.jpg)
+
+This might be of interest to anyone with a hardware bent. One of the comments below it is: "... The animated explanation of the tv lines and timing are the best i have ever seen. ..."
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
