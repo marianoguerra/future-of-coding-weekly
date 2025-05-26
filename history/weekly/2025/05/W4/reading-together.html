@@ -1,0 +1,43 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-04-12T13:05:41.415Z" class="post"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-04-09&amp;toDate=2025-04-15&amp;channel=devlog-together&amp;filter=#2025-04-12T13:05:41.415Z" class="date">🕰️ 2025-04-12 13:05:41</a> <div class="message"><p>I am back on the original goal of exporting my Observable notebooks to my offline-first format (lopecode), in a way that preserves editability. I started a notebook called jumpgate, that can do the conversion, and then opens a PR against Github. The first notebook I am trying to get this working with is Jumpgate itself.</p>
+<p>I use lightning-fs + isomorphic-git to do the Github part within a browser. The prototype is working</p>
+<p>sourcecode on Observable: <a href="https://observablehq.com/@tomlarkworthy/jumpgate">observablehq.com/@tomlarkworthy/jumpgate</a></p>
+<p>git PR opened by the notebook: <a href="https://github.com/tomlarkworthy/lopecode/pull/4">github.com/tomlarkworthy/lopecode/pull/4</a></p>
+<p>as my repo is configured as a static host as well, we can see the result of jumpgate after going through the jumpgate here: <a href="https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_jumpgate.html#view=S100%28%40tomlarkworthy%2Fmodule-selection%29">tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_jumpgate.html#view=S100%28%40tomlarkworthy%2Fmodule-selection%29</a></p>
+<p>Currently its slow as hell as the git checkout takes a long time. lightning-fs is storing itself in indexdb so there is not need to do a full checkout everytime, we should be able to merge with what exists. I went with simplicity for now as the stateful logic gets complicated as you have to do different git commands depending on whether you have done an initial clone etc.</p>
+<p>I am not sure how to manage the PR branch either, I keep force pushing a single branch but thats probably not correct either, I should use a fresh one each time but then you need to be careful not to fill indexdb with orphaned work. If anyone has a strong opinion on what the ideal github workflow for syncing offline files is LMK</p>
+<p>The jumpgate does not add the extra functionality to make a notebook editable, I need to next mixin with my editor notebooks to get the thing to do what I want. Good stage though, Having notebooks open PRs is cool.</p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://observablehq.com/@tomlarkworthy/jumpgate">Jumpgate</a></p>
+<p>Bulk transfer notebooks between storage mediums. TODO make offline first (including runtime) Source configuration Source to filesystem Target configuration Deps</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2025-05-19T20:32:41.587Z" class="reply"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-16&amp;toDate=2025-05-22&amp;channel=devlog-together&amp;filter=#2025-05-19T20:32:41.587Z" class="date">2025-05-19 20:32:41</a> <div class="message"><p>I am writing a computational blog post and I want the windows arranged a certain way. Jumpgate supports injecting the window configuration but I have to keep specifying it and its annoying when iterating. So I added form population via URL parameters so now I just need a web link to have a specific export preconfigured. That is the next step in exporting everything repeatably, by building up a list of exports as a list of links to Jumpgate.</p>
+<p>The other thing heavier usage of Jumpgate showed was the git checkout step was slow, over 30 seconds, bottlenecked by the necessary git CORS proxy, so I made my own isomorphic-git proxy. Its super easy to setup on CloudFlare and in reduced my checkout to 3s! The instructions are making their <a href="https://github.com/isomorphic-git/isomorphic-git/pull/2095">way upstream</a> if browser interaction with git interests you.</p>
+<p>Still, the git checkout step is not scaling well. Every notebook is 1-2Mb, and they all get downloaded before I can push a new version. I experimented with merging empty repositories, that works for unseen files, but not for updates to existing files (merge conflict between unrelated histories). git sparse checkout  <em>should</em>  be the answer, but not supported by isomorphic git ;'( Other ideas welcome. There have been several failed attempts to add sparse checkouts to isomorphic git, so its not an easy feature.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>

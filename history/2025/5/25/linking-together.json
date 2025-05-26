@@ -1,0 +1,368 @@
+[
+    {
+        "subtype": "thread_broadcast",
+        "user": "U02QC0PPER3",
+        "thread_ts": "1745928482.524589",
+        "root": {
+            "user": "U02QC0PPER3",
+            "type": "message",
+            "ts": "1745928482.524589",
+            "edited": {
+                "user": "U02QC0PPER3",
+                "ts": "1745928533.000000"
+            },
+            "client_msg_id": "8025f419-1d63-4ca5-83a2-d06eed20dc3d",
+            "text": "<https://algot.org/> \u2014 a research visual, by-demonstration (aka code while seeing concrete values :cake:), language operating on graphs.  Papers largely closed-access but <https://people.inf.ethz.ch/~sverrirt/publications/|preprints here>.\nI find it a bit hard to imagine how one uses it from screenshots, and ~didn't find videos / lectures?~ OK here's a (silent) demo: <https://vimeo.com/729159376>\n\nIn some ways similar to <https://www.youtube.com/watch?v=4rLGHBio5UI|Subsequently> in de-ambiguating user intent by \"demonstration\" not being \"say the result\" but \"pick an action\".",
+            "team": "T5TCAFTA9",
+            "thread_ts": "1745928482.524589",
+            "reply_count": 1,
+            "reply_users_count": 1,
+            "latest_reply": "1748124014.443639",
+            "reply_users": [
+                "U02QC0PPER3"
+            ],
+            "is_locked": false,
+            "subscribed": false,
+            "attachments": [
+                {
+                    "from_url": "https://vimeo.com/729159376",
+                    "service_icon": "https://a.slack-edge.com/80588/img/unfurl_icons/vimeo.png",
+                    "thumb_url": "https://i.vimeocdn.com/video/1467699185-7f12f75960fc93dce9549b8f586e86b182b5064a8ce1cd0eb5a1028bf3e28902-d_295x166",
+                    "thumb_width": 295,
+                    "thumb_height": 166,
+                    "video_html": "<iframe src=\"https://player.vimeo.com/video/729159376?autoplay=1&amp;app_id=122963\" width=\"400\" height=\"311\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media\" title=\"Algot Tutorial\"></iframe>",
+                    "video_html_width": 400,
+                    "video_html_height": 311,
+                    "id": 1,
+                    "original_url": "https://vimeo.com/729159376",
+                    "fallback": "Vimeo Video: Algot Tutorial",
+                    "title": "Algot Tutorial",
+                    "title_link": "https://vimeo.com/729159376",
+                    "author_name": "VS Submission",
+                    "author_link": "https://vimeo.com/user180102501",
+                    "service_name": "Vimeo",
+                    "service_url": "https://vimeo.com/"
+                }
+            ],
+            "blocks": [
+                {
+                    "type": "rich_text",
+                    "block_id": "I4Asu",
+                    "elements": [
+                        {
+                            "type": "rich_text_section",
+                            "elements": [
+                                {
+                                    "type": "link",
+                                    "url": "https://algot.org/"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": " \u2014 a research visual, by-demonstration (aka code while seeing concrete values "
+                                },
+                                {
+                                    "type": "emoji",
+                                    "name": "cake",
+                                    "unicode": "1f370"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": "), language operating on graphs.  Papers largely closed-access but "
+                                },
+                                {
+                                    "type": "link",
+                                    "url": "https://people.inf.ethz.ch/~sverrirt/publications/",
+                                    "text": "preprints here"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": ".\nI find it a bit hard to imagine how one uses it from screenshots, and "
+                                },
+                                {
+                                    "type": "text",
+                                    "text": "didn't find videos / lectures?",
+                                    "style": {
+                                        "strike": true
+                                    }
+                                },
+                                {
+                                    "type": "text",
+                                    "text": " OK here's a (silent) demo: "
+                                },
+                                {
+                                    "type": "link",
+                                    "url": "https://vimeo.com/729159376"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": "\n\nIn some ways similar to "
+                                },
+                                {
+                                    "type": "link",
+                                    "url": "https://www.youtube.com/watch?v=4rLGHBio5UI",
+                                    "text": "Subsequently"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": " in de-ambiguating user intent by \"demonstration\" not being \"say the result\" but \"pick an action\"."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "type": "message",
+        "ts": "1748124014.443639",
+        "client_msg_id": "8958d938-d934-4590-a572-19a83adf560e",
+        "text": "I've read the central paper on Algot: \"<https://people.inf.ethz.ch/~sverrirt/pdf/syntaxsemanticsgap2022.pdf|Bridging the Syntax-Semantics Gap of Programming>\". Salient points [my opinions bracketed]:\n\nIt's PBDemonstration, where user conveys intent by actions, and not PBExample where intent is inferred from before/after or input/output pairs.  They attack the gap _during program construction_, admit it's weak for later comprehension.\n\nState is _graph_ with nodes containing numbers (to be extended in future).  Graph for pedagogical reasons \u2014 covers structures they want to teach + visualization is _universally understood_.\n[Target audience not explicitly stated; seems to be for beginning CS students? I'm personally more interested in PBD for end-user programming; but then I wouldn't teach them linked lists or binary search trees...]\n\nIt's showing concrete data when directly-manipulating top-level state. :cake:\nBut when demonstrating a procedure (\"helper\"), in Input stage you denote parameters (+ pattern matching) by adding \"abstract\" nodes. IIUC new nodes created during your hepler are also abstract? Unlike concrete state nodes, you won't see abstracts' value at Action stage :see_no_evil:, only their label letter.  (Also, not all nodes will exist in all executions \u2325)\n[This is serious unsolved gap! Inherent question of how PBD can be parametrized \u2014 you don't see _actual_ semantics, but some \u2248symbolic approximation.]\nThey aspire to improve this in future by letting you pick example inputs and see actual values [they cite <https://arxiv.org/abs/1902.00549> which is good read and <https://fermatslibrary.com/s/ancient-babylonian-algorithms|wonderfully>-motivated title]\n\nThey believe nested conditionals and loops to be confusing for beginners.\n=&gt; No loops, only recursion.\n=&gt; Boolean checks can only be made in Query stage before procedure starts (pro: order doesn't matter), and then Action stage code is *flat*, with *optional predication* \u2014 each step may be conditioned on each query being true/false/don't care.  [Heresy #1 :thinking_face: Personally I'm skeptical flatness scales well to complex codebases?]\n  Con: if you need checks and/or pattern matching depending on prior checks, you'll want to extract a 2nd procedure.  Each procedure has Input+Query stages, so not really as flat as it sounds!   (technically they reduce the need by allowing empty-set pattern matches [?] but they admit guard-before-access is mentally clearer.)\n\n[Most interesting heresy :clap::open_mouth: #2, emphasis mine:]\n&gt; 4.1 State Should Be Relatable, Visible and Editable\n&gt; ... Conventional imperative languages such as C, Java, and C#, also separate state into local variables on the stack and objects living on the heap. This separation can be confusing and lead to misunderstandings.\n&gt; ... Even systems designed for beginners like Scratch tend to scatter state by maintaining variables, position for individual objects, or drawings on screen. *We believe that a scattered state leads to additional cognitive overhead and instead intend to maintain a single central state. Algot avoids variables as separate entities from other state.*\n\u2022 Instead of local variables, one is supposed to insert a new (disconnected) node to the global graph, mutate/grow connections, and remove it from the graph when done.   (you do bind a local name to it, but that's immutable \u2014 the state lives in node's content and connections, and cosmetic \u2014 you don't really reference by name, you click it)\n\u2022 They didn't 100% banish scattered stack state: Procedure parameters get bound (by ref.) to concrete nodes given as arguments \u2014 so there are hidden activation records somewhere.\n\u2022 The recursive examples given do materialize in global state parts of what'd usually be implicit in stack :+1:.  E.g. fibonacci works with explicit linked list of prior results.  Is this purely stylistic?  No, it's encouraged by IIUC *not having return values!*  [interesting heresy #3! :open_mouth:]  Procedures can \"return\" results by mutating the global state graph (possibly via output parameter pointing there).  Even builtins like \"add\" take assembly-like src1, src2, dest.\n[All in all, my first instinct was to protest, but the goals are interesting and the choices nicely provocative :thinking_face:]",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "oWL9H",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I've read the central paper on Algot: \""
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://people.inf.ethz.ch/~sverrirt/pdf/syntaxsemanticsgap2022.pdf",
+                                "text": "Bridging the Syntax-Semantics Gap of Programming"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\". Salient points [my opinions bracketed]:\n\nIt's PBDemonstration, where user conveys intent by actions, and not PBExample where intent is inferred from before/after or input/output pairs.  They attack the gap "
+                            },
+                            {
+                                "type": "text",
+                                "text": "during program construction",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", admit it's weak for later comprehension.\n\nState is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "graph",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " with nodes containing numbers (to be extended in future).  Graph for pedagogical reasons \u2014 covers structures they want to teach + visualization is"
+                            },
+                            {
+                                "type": "text",
+                                "text": " universally understood",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ".\n[Target audience not explicitly stated; seems to be for beginning CS students? I'm personally more interested in PBD for end-user programming; but then I wouldn't teach them linked lists or binary search trees...]\n\nIt's showing concrete data when directly-manipulating top-level state. "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "cake",
+                                "unicode": "1f370"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\nBut when demonstrating a procedure (\"helper\"), in Input stage you denote parameters (+ pattern matching) by adding \"abstract\" nodes. IIUC new nodes created during your hepler are also abstract? Unlike concrete state nodes, you won't see abstracts' value at Action stage "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "see_no_evil",
+                                "unicode": "1f648"
+                            },
+                            {
+                                "type": "text",
+                                "text": ", only their label letter.  (Also, not all nodes will exist in all executions \u2325)\n[This is serious unsolved gap! Inherent question of how PBD can be parametrized \u2014 you don't see "
+                            },
+                            {
+                                "type": "text",
+                                "text": "actual",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " semantics, but some \u2248symbolic approximation.]\nThey aspire to improve this in future by letting you pick example inputs and see actual values [they cite "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://arxiv.org/abs/1902.00549"
+                            },
+                            {
+                                "type": "text",
+                                "text": " which is good read and "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://fermatslibrary.com/s/ancient-babylonian-algorithms",
+                                "text": "wonderfully"
+                            },
+                            {
+                                "type": "text",
+                                "text": "-motivated title]\n\nThey believe nested conditionals and loops to be confusing for beginners.\n=> No loops, only recursion.\n=> Boolean checks can only be made in Query stage before procedure starts (pro: order doesn't matter), and then Action stage code is "
+                            },
+                            {
+                                "type": "text",
+                                "text": "flat",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", with "
+                            },
+                            {
+                                "type": "text",
+                                "text": "optional predication",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " \u2014 each step may be conditioned on each query being true/false/don't care.  [Heresy #1 "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "thinking_face",
+                                "unicode": "1f914"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Personally I'm skeptical flatness scales well to complex codebases?]\n  Con: if you need checks and/or pattern matching depending on prior checks, you'll want to extract a 2nd procedure.  Each procedure has Input+Query stages, so not really as flat as it sounds!   (technically they reduce the need by allowing empty-set pattern matches [?] but they admit guard-before-access is mentally clearer.)\n\n[Most interesting heresy "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "clap",
+                                "unicode": "1f44f"
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "open_mouth",
+                                "unicode": "1f62e"
+                            },
+                            {
+                                "type": "text",
+                                "text": " #2, emphasis mine:]\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_quote",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "4.1 State Should Be Relatable, Visible and Editable\n... Conventional imperative languages such as C, Java, and C#, also separate state into local variables on the stack and objects living on the heap. This separation can be confusing and lead to misunderstandings.\n... Even systems designed for beginners like Scratch tend to scatter state by maintaining variables, position for individual objects, or drawings on screen. "
+                            },
+                            {
+                                "type": "text",
+                                "text": "We believe that a scattered state leads to additional cognitive overhead and instead intend to maintain a single central state. Algot avoids variables as separate entities from other state.",
+                                "style": {
+                                    "bold": true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Instead of local variables, one is supposed to insert a new (disconnected) node to the global graph, mutate/grow connections, and remove it from the graph when done.   (you do bind a local name to it, but that's immutable \u2014 the state lives in node's content and connections, and cosmetic \u2014 you don't really reference by name, you click it)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "They didn't 100% banish scattered stack state: Procedure parameters get bound (by ref.) to concrete nodes given as arguments \u2014 so there are hidden activation records somewhere."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "The recursive examples given do materialize in global state parts of what'd usually be implicit in stack "
+                                    },
+                                    {
+                                        "type": "emoji",
+                                        "name": "+1",
+                                        "unicode": "1f44d"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ".  E.g. fibonacci works with explicit linked list of prior results.  Is this purely stylistic?  No, it's encouraged by IIUC "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "not having return values!",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "  [interesting heresy #3! "
+                                    },
+                                    {
+                                        "type": "emoji",
+                                        "name": "open_mouth",
+                                        "unicode": "1f62e"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "]  Procedures can \"return\" results by mutating the global state graph (possibly via output parameter pointing there).  Even builtins like \"add\" take assembly-like src1, src2, dest."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\n[All in all, my first instinct was to protest, but the goals are interesting and the choices nicely provocative "
+                            },
+                            {
+                                "type": "emoji",
+                                "name": "thinking_face",
+                                "unicode": "1f914"
+                            },
+                            {
+                                "type": "text",
+                                "text": "]"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,48 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-04-12T13:05:41.415Z" class="post"><span class="user"></span> <a href="https://history.futureofcoding.org/?fromDate=2025-04-09&amp;toDate=2025-04-15&amp;channel=devlog-together&amp;filter=#2025-04-12T13:05:41.415Z" class="date">🕰️ 2025-04-12 13:05:41</a> <div class="message"><p>...</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2025-05-19T20:32:41.587Z" class="reply"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-16&amp;toDate=2025-05-22&amp;channel=devlog-together&amp;filter=#2025-05-19T20:32:41.587Z" class="date">2025-05-19 20:32:41</a> <div class="message"><p>I am writing a computational blog post and I want the windows arranged a certain way. Jumpgate supports injecting the window configuration but I have to keep specifying it and its annoying when iterating. So I added form population via URL parameters so now I just need a web link to have a specific export preconfigured. That is the next step in exporting everything repeatably, by building up a list of exports as a list of links to Jumpgate.</p>
+<p>The other thing heavier usage of Jumpgate showed was the git checkout step was slow, over 30 seconds, bottlenecked by the necessary git CORS proxy, so I made my own isomorphic-git proxy. Its super easy to setup on CloudFlare and in reduced my checkout to 3s! The instructions are making their <a href="https://github.com/isomorphic-git/isomorphic-git/pull/2095">way upstream</a> if browser interaction with git interests you.</p>
+<p>Still, the git checkout step is not scaling well. Every notebook is 1-2Mb, and they all get downloaded before I can push a new version. I experimented with merging empty repositories, that works for unseen files, but not for updates to existing files (merge conflict between unrelated histories). git sparse checkout  <em>should</em>  be the answer, but not supported by isomorphic git ;'( Other ideas welcome. There have been several failed attempts to add sparse checkouts to isomorphic git, so its not an easy feature.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2025-05-21T19:55:59.330Z" class="post"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-18&amp;toDate=2025-05-24&amp;channel=devlog-together&amp;filter=#2025-05-21T19:55:59.330Z" class="date">2025-05-21 19:55:59</a> <div class="message"><p>Literate Programming with a little bit of spatiality.</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F08/F08T1Q46S15.png" alt="snake-centers.png"></p>
+</div> <div class="replies"></div></div><div id="2025-05-22T15:09:02.839Z" class="post"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-19&amp;toDate=2025-05-25&amp;channel=devlog-together&amp;filter=#2025-05-22T15:09:02.839Z" class="date">2025-05-22 15:09:02</a> <div class="message"><p>First draft of a complete running program. I automatically "tangle" the code from the markup to check that I didn't forget to include something.</p>
+<p>The picture is blurry, but in practice I can zoom in and out using mouse wheel or pinch gesture.</p>
+<p>The editing experience is terrible. All the lines are absolutely positioned and not integrated with the markup. But code is read more than it's written 😛</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F08/F08TYELLFUZ.png" alt="snake-centers3.png"></p>
+</div> <div class="replies"><div id="2025-05-22T16:05:05.593Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-19&amp;toDate=2025-05-25&amp;channel=devlog-together&amp;filter=#2025-05-22T16:05:05.593Z" class="date">2025-05-22 16:05:05</a> <div class="message"><p>Looks promising! I do believe that it is important to start designing for the reader. Otherwise, as a developer, you will inevitable optimize for the developer side.</p>
+<p>How would you handle bigger code? By growing the canvas, or by introducing pages?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-05-22T17:16:14.685Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-19&amp;toDate=2025-05-25&amp;channel=devlog-together&amp;filter=#2025-05-22T17:16:14.685Z" class="date">2025-05-22 17:16:14</a> <div class="message"><p>It's hypertext, so I could have links. I'm imagining links closing some outer levels of detail and opening inner ones.</p>
+<p>All this is influenced by reading Christopher Alexander on "the fundamental unfolding process".</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-05-23T06:23:37.021Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-20&amp;toDate=2025-05-26&amp;channel=devlog-together&amp;filter=#2025-05-23T06:23:37.021Z" class="date">2025-05-23 06:23:37</a> <div class="message"><p>Ohhh, I should read that. Is that in one of his books? Or some article?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-05-23T12:15:39.660Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-20&amp;toDate=2025-05-26&amp;channel=devlog-together&amp;filter=#2025-05-23T12:15:39.660Z" class="date">2025-05-23 12:15:39</a> <div class="message"><p>It's "The Nature of Order". Volume 2 of 4 😅</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-05-23T12:52:44.215Z" class="reply"><span class="user">Konrad Hinsen</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-20&amp;toDate=2025-05-26&amp;channel=devlog-together&amp;filter=#2025-05-23T12:52:44.215Z" class="date">2025-05-23 12:52:44</a> <div class="message"><p>Ouch... The Nature of Order is on my reading list for retirement, as I don't expect to find time before. But retirement is still many years in the future!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-05-23T13:03:11.011Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-20&amp;toDate=2025-05-26&amp;channel=devlog-together&amp;filter=#2025-05-23T13:03:11.011Z" class="date">2025-05-23 13:03:11</a> <div class="message"><p>It's surprising short given the length, because of the number of pictures. But then I spend 6 months thinking about a chapter.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-05-23T13:19:18.721Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-20&amp;toDate=2025-05-26&amp;channel=devlog-together&amp;filter=#2025-05-23T13:19:18.721Z" class="date">2025-05-23 13:19:18</a> <div class="message"><p>Anyways, no deferred life plans for me. And starting isn't a commitment to finishing either.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>

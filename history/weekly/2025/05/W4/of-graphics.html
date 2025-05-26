@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-04-29T12:08:02.524Z" class="post"><span class="user">Beni Cherniavsky-Paskin</span> <a href="https://history.futureofcoding.org/?fromDate=2025-04-26&amp;toDate=2025-05-02&amp;channel=linking-together&amp;filter=#2025-04-29T12:08:02.524Z" class="date">🕰️ 2025-04-29 12:08:02</a> <div class="message"><p><a href="https://algot.org/">algot.org</a> — a research visual, by-demonstration (aka code while seeing concrete values 🍰), language operating on graphs.  Papers largely closed-access but <a href="https://people.inf.ethz.ch/~sverrirt/publications/">preprints here</a>.</p>
+<p>I find it a bit hard to imagine how one uses it from screenshots, and  ~didn't find videos / lectures?~  OK here's a (silent) demo: <a href="https://vimeo.com/729159376">vimeo.com/729159376</a></p>
+<p>In some ways similar to <a href="https://www.youtube.com/watch?v=4rLGHBio5UI">Subsequently</a> in de-ambiguating user intent by "demonstration" not being "say the result" but "pick an action".</p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://vimeo.com/729159376">Algot Tutorial</a></p>
+<p><img src="https://i.vimeocdn.com/video/1467699185-7f12f75960fc93dce9549b8f586e86b182b5064a8ce1cd0eb5a1028bf3e28902-d_295x166" alt="Algot Tutorial"></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2025-05-24T22:00:14.443Z" class="reply"><span class="user">Beni Cherniavsky-Paskin</span> <a href="https://history.futureofcoding.org/?fromDate=2025-05-21&amp;toDate=2025-05-27&amp;channel=linking-together&amp;filter=#2025-05-24T22:00:14.443Z" class="date">2025-05-24 22:00:14</a> <div class="message"><p>I've read the central paper on Algot: "<a href="https://people.inf.ethz.ch/~sverrirt/pdf/syntaxsemanticsgap2022.pdf">Bridging the Syntax-Semantics Gap of Programming</a>". Salient points [my opinions bracketed]:</p>
+<p>It's PBDemonstration, where user conveys intent by actions, and not PBExample where intent is inferred from before/after or input/output pairs.  They attack the gap  <em>during program construction</em> , admit it's weak for later comprehension.</p>
+<p>State is  <em>graph</em>  with nodes containing numbers (to be extended in future).  Graph for pedagogical reasons — covers structures they want to teach + visualization is <em>universally understood</em> .</p>
+<p>[Target audience not explicitly stated; seems to be for beginning CS students? I'm personally more interested in PBD for end-user programming; but then I wouldn't teach them linked lists or binary search trees...]</p>
+<p>It's showing concrete data when directly-manipulating top-level state. 🍰</p>
+<p>But when demonstrating a procedure ("helper"), in Input stage you denote parameters (+ pattern matching) by adding "abstract" nodes. IIUC new nodes created during your hepler are also abstract? Unlike concrete state nodes, you won't see abstracts' value at Action stage 🙈, only their label letter.  (Also, not all nodes will exist in all executions ⌥)</p>
+<p>[This is serious unsolved gap! Inherent question of how PBD can be parametrized — you don't see  <em>actual</em>  semantics, but some ≈symbolic approximation.]</p>
+<p>They aspire to improve this in future by letting you pick example inputs and see actual values [they cite <a href="https://arxiv.org/abs/1902.00549">arxiv.org/abs/1902.00549</a> which is good read and <a href="https://fermatslibrary.com/s/ancient-babylonian-algorithms">wonderfully</a>-motivated title]</p>
+<p>They believe nested conditionals and loops to be confusing for beginners.</p>
+<p>=&gt; No loops, only recursion.</p>
+<p>=&gt; Boolean checks can only be made in Query stage before procedure starts (pro: order doesn't matter), and then Action stage code is  <em>flat</em> , with  <em>optional predication</em>  — each step may be conditioned on each query being true/false/don't care.  [Heresy #1 🤔 Personally I'm skeptical flatness scales well to complex codebases?]</p>
+<p>  Con: if you need checks and/or pattern matching depending on prior checks, you'll want to extract a 2nd procedure.  Each procedure has Input+Query stages, so not really as flat as it sounds!   (technically they reduce the need by allowing empty-set pattern matches [?] but they admit guard-before-access is mentally clearer.)</p>
+<p>[Most interesting heresy 👏😮 #2, emphasis mine:]</p>
+<blockquote><p>4.1 State Should Be Relatable, Visible and Editable</p>
+</blockquote>
+<p>... Conventional imperative languages such as C, Java, and C#, also separate state into local variables on the stack and objects living on the heap. This separation can be confusing and lead to misunderstandings.</p>
+<p>... Even systems designed for beginners like Scratch tend to scatter state by maintaining variables, position for individual objects, or drawings on screen. 
+&gt;  <em>We believe that a scattered state leads to additional cognitive overhead and instead intend to maintain a single central state. Algot avoids variables as separate entities from other state.</em> </p>
+<ul><li>Instead of local variables, one is supposed to insert a new (disconnected) node to the global graph, mutate/grow connections, and remove it from the graph when done.   (you do bind a local name to it, but that's immutable — the state lives in node's content and connections, and cosmetic — you don't really reference by name, you click it)</li><li>They didn't 100% banish scattered stack state: Procedure parameters get bound (by ref.) to concrete nodes given as arguments — so there are hidden activation records somewhere.</li><li>The recursive examples given do materialize in global state parts of what'd usually be implicit in stack 👍.  E.g. fibonacci works with explicit linked list of prior results.  Is this purely stylistic?  No, it's encouraged by IIUC  <em>not having return values!</em>   [interesting heresy #3! 😮]  Procedures can "return" results by mutating the global state graph (possibly via output parameter pointing there).  Even builtins like "add" take assembly-like src1, src2, dest.</li></ul><p>[All in all, my first instinct was to protest, but the goals are interesting and the choices nicely provocative 🤔]</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
