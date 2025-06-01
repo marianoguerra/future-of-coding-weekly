@@ -1,0 +1,199 @@
+<!--
+.. title: Future of Coding Weekly 2025/06 Week 1
+.. slug: future-of-coding-weekly-202506-week-1
+.. date: 2025-06-01 22:43:40 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🎥 Virtual Meetup 11 • May 2025 🛸 TinyBoxer: A tiny programming system inspired by Boxer 📘 The Magic of Code
+
+# Two Minute Week
+
+## 🎥 [Using lopecode to a create a programmable offline-first single file audio application](https://www.youtube.com/watch?v=gGbLR_qJ6_E) via [Tom Larkworthy](https://webcode.run)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/two-minute-week.html#2025-05-31T15:37:00.196Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/gGbLR_qJ6_E/hqdefault.jpg)
+
+Dusted off an old project from 2021; a programmable audio sequencer. It stalled because there was no good way to store state in Observable, but with Lopecode, there is! Notebooks can write back into their own FileAttachments, which are bundled when exporting. So I just added some serialisation code and suddenly that project is much more useful. You can actually save the good settings as a hermetic file, completely sure that no external software changes will ever damage that moment in time. ([online notebook](https://tomlarkworthy.github.io/lopebooks/notebooks/@tomlarkworthy_sequencer.html))
+
+# Our Work
+
+## 📘 [The Magic of Code](https://themagicofcode.com/) via **Sam Arbesman**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/share-your-work.html#2025-05-27T20:10:07.517Z)
+
+My book "The Magic of Code" is finally going to be seeing the light of day in a few weeks! And it explores a bunch of topics and ideas that I think folks here will find interesting.
+
+## 🧑‍💻 [OCIF Generator](https://ocif-generator.vercel.app) via [Maikel van de Lisdonk](https://www.devhelpr.com/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/share-your-work.html#2025-05-29T07:26:28.933Z)
+
+Hi,
+
+
+
+Yesterdays awesome demo of Scrappy during the FoC meetup and the small "one more thing"-moment about integrating Scrappy with AI/LLMs, reminded me of posting something here about 2 of my own recent new side projects:
+
+
+
+- [ocif-generator.vercel.app](https://ocif-generator.vercel.app) : generate OCIF files and view them as JSON/SVG/React-flow
+
+- [app.prompttoform.ai](https://app.prompttoform.ai)  : generate complex forms and play with them in the preview and also view its structure in the flow tab using react-flow. The latter is especially handy when the form contains multiple steps and has decisions in them (because you can build decision tree's with this generator).
+
+
+
+Both tools use structured output using json schema's for the llm's, which allows for a lot of control instead of just prompting and trying to get structured output via a text prompt. Both of these tools were coded using a lot of AI as well (using Cursor).
+
+
+
+The OCIF-generator was demoed yesterday at localfirst-conf by one of the OCWG core members **@Jess Martin**
+
+
+
+My plan is to integrate both of the above with my own infinte canvas visual programming system: [codeflowcanvas.io](https://codeflowcanvas.io).
+
+
+
+Check [canvasprotocol.org](https://canvasprotocol.org) for more info about OCIF.
+
+
+
+## 📊 [Gloodata: A low-code platform designed for developers. No UI or LLM code required. ](https://gloodata.com/) via [Mariano Guerra](https://twitter.com/warianoguerra)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/share-your-work.html#2025-05-29T11:01:38.598Z)
+
+I made two demo extensions for [gloodata](https://gloodata.com/) to showcase its capabilities and how to use it to create interactive data exploration tools enabled by LLMs, here they are:
+
+
+
+- [Our World in Data Demography & Fertility](https://ourworldindata.org/explorers/population-and-demography) Explorer with DuckDB
+
+	- [🎥 Demo](https://www.youtube.com/watch?v=fA06oOxKh3w)
+
+	- [🧑‍💻 Extension Repo](https://github.com/gloodata/extension-demography)
+
+- GitHub Repository Explorer with SQLite
+
+	- [🎥 Demo](https://www.youtube.com/watch?v=EV5E5gR5oKM)
+
+	- [🧑‍💻 Extension Repo](https://github.com/gloodata/extension-github-repo-explorer/)
+
+![ext-preview.webp](http://history.futureofcoding.org/history/msg_files/F08/F08UAKDLRS7.webp)
+
+
+## 📝 [The case for using a web browser as your terminal](https://blog.pomdtr.me/posts/tweety-v1/) via **Achille Lacoin**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/share-your-work.html#2025-05-29T15:39:22.167Z)
+
+I've written a little something on why I use a web browser as my terminal emulator
+
+
+
+## 📝 [Purpose of Programming Languages](https://programmingsimplicity.substack.com/p/purpose-of-programming-languages?r=1egdky) via [Paul Tarvydas](https://guitarvydas.github.io/2021/09/23/Manifesto.html)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/share-your-work.html#2025-05-30T23:55:07.127Z)
+
+
+## 🧑‍💻 [Tweety: An integrated terminal for your browser](https://github.com/pomdtr/tweety) via **Achille Lacoin**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/share-your-work.html#2025-05-31T14:12:56.455Z)
+
+I'm working on converting [tweety](https://github.com/pomdtr/tweety) to a chrome extension (as it is much more secure), and it opens some cool new usecases.
+
+
+
+Ex: querying the chrome extension api from the shell !
+
+![image.png](http://history.futureofcoding.org/history/msg_files/F08/F08UELF66NB.png)
+
+
+# Devlog Together
+
+## 💬 [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/devlog-together.html#2025-05-30T03:23:36.334Z)
+
+In a visual programming environment, points (like, x/y[/z/...] positions) are as important as strings are in a textual environment.
+
+
+
+If a visual programming environment doesn't have fantastic affordances for working with points, I can't take it seriously.
+
+# Thinking Together
+
+## 💬 **Scott**
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/thinking-together.html#2025-05-27T21:36:00.844Z)
+
+I've recently been going down the cybernetics rabbit hole and am curious if anyone knows of any attempts at implementing Beer's Viable System Model in software? I feel like it might be a really powerful paradigm for an ai agent/automation framework... recursive systems built around feedback loops with LLMs in the mix for different responsibilities
+
+
+
+## 💬 [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/thinking-together.html#2025-05-29T05:07:04.026Z)
+
+Here's a fun little game.
+
+
+
+ `PbD`  = programming by demonstration
+
+ `PbE`  = programming by example
+
+
+
+What are the other  `Pb_` s?
+
+
+
+(Please bring "wrong answers only" energy!)
+
+
+# Content
+
+## 🛸 [TinyBoxer: A tiny programming system inspired by Boxer leveraging the HTML DOM structure. Illustrates naive realism, explicit structure and evaluation by copy & replace.](https://github.com/tpetricek/tiny-boxer) via [Konrad Hinsen](https://khinsen.net/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/linking-together.html#2025-05-30T09:03:36.078Z)
+
+"Tiny boxer" by **@Tomas Petricek**, a small boxer-like environment that runs in the browser: [github.com/tpetricek/tiny-boxer](https://github.com/tpetricek/tiny-boxer)
+
+# Present Company
+
+## 🎥 [Virtual Meetup 11 • May 2025](https://www.youtube.com/watch?v=LLGb5qEFQos&amp;index=1) via [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/present-company.html#2025-05-29T00:15:13.774Z)
+
+![Youtube Thumbnail](https://img.youtube.com/vi/LLGb5qEFQos/hqdefault.jpg)
+
+Here's the recording of today's [Finneas O'Connell](https://www.youtube.com/watch?v=LLGb5qEFQos&list=PLCC8lmauZTzeEP7mIsOOI4HKeeyBN2rIy&index=1) virtual meetup.
+
+
+
+Great demos! Excited for next month. Thanks everyone who presented and attended.
+
+## 💬 [Ivan Reese](http://ivanish.ca/)
+
+[🧵 conversation](https://history.futureofcoding.org/history/weekly/2025/06/W1/present-company.html#2025-05-29T20:47:49.571Z)
+
+🥱 Strings are just arrays of numbers.
+
+🧐 Numbers are just arrays of booleans with a sufficiently small word size.
+
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
