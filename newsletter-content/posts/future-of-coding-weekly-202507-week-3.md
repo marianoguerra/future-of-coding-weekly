@@ -1,0 +1,128 @@
+<!--
+.. title: Future of Coding Weekly 2025/07 Week 3
+.. slug: future-of-coding-weekly-202507-week-3
+.. date: 2025-07-21 11:05:28 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🎥 Casey Muratori – The Big OOPs: Anatomy of a Thirty-five-year Mistake 📝Composable higher-order reactors 📝 Introducing XMLUI
+
+# Two Minute Week
+
+
+## 🗨️ **Jasmine Otto**:
+
+[🧵 conversation @ 2025-07-17](https://history.futureofcoding.org/history/weekly/2025/07/W3/two-minute-week.html#2025-07-17T16:58:46.861Z)
+
+Feeling excited to demo multiplayer Bitsy on Wednesday!
+
+![demo](http://history.futureofcoding.org/history/msg_files/F09/F0968Q3HRRT.gif)
+
+# Share Your Work
+
+
+## 🗨️ **guitarvydas**: [📝 On Options For Programming](https://open.substack.com/pub/programmingsimplicity/p/on-options-for-programming?r=1egdky&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true)
+
+[🧵 conversation @ 2025-07-17](https://history.futureofcoding.org/history/weekly/2025/07/W3/share-your-work.html#2025-07-17T13:36:31.595Z)
+
+I've stated that CPUs don't implement "functions". In this [article](https://open.substack.com/pub/programmingsimplicity/p/on-options-for-programming?r=1egdky&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true), I say this again, hopefully in a better way.
+
+# Thinking Together
+
+
+## 🗨️ **guitarvydas**: [📝 Programming and Macros in 2025](https://programmingsimplicity.substack.com/p/programming-and-macros-in-2025?r=1egdky)
+
+[🧵 conversation @ 2025-07-16](https://history.futureofcoding.org/history/weekly/2025/07/W3/thinking-together.html#2025-07-16T12:21:06.677Z)
+
+
+![Programming and Macros in 2025](https://substackcdn.com/image/fetch/$s_!ruxh!,w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bc76c2d-b437-4a9b-af78-3f4b2d000eec_251x221.png)
+
+
+## 🗨️ **guitarvydas**: [🎥 Casey Muratori – The Big OOPs: Anatomy of a Thirty-five-year Mistake – BSC 2025](https://www.youtube.com/watch?v=wo84LFzx5nI)
+
+[🧵 conversation @ 2025-07-19](https://history.futureofcoding.org/history/weekly/2025/07/W3/thinking-together.html#2025-07-19T18:47:06.835Z)
+
+Watching [this](https://futureofcoding.slack.com/archives/C5U3SEW6A/p1752783700147739?thread_ts=1752395773.053399&cid=C5U3SEW6A) (again). I find myself wondering if this can be related to Morrison's FBP ([flow based programming](https://jpaulm.github.io/fbp/)), especially his "conveyor belt" model. It, also, underlines my feeling that there should be a strong separation between the expression of programs in human-oriented terms, vs. some kind of automatic mapping from that human-readable domain to something production engineered to run on hardware CPUs. Currently, popular programming languages try to do both at once, usually leaning on humans to express code in ways that can be optimized for hardware (based on old-fashioned 1960s biases). I think that there should be two distinct languages and some automagic tooling that transforms from one to the other. A simple example is Prolog. Someone wrote a Prolog "engine" in machine code (or assembler, or an ancestor of assembler, like Lisp/Python/Haskell/C/etc). Prolog code allows humans to express "relational logic", then maps that logic onto operations for the engine (e.g. WAM).
+
+![Casey Muratori – The Big OOPs: Anatomy of a Thirty-five-year Mistake – BSC 2025](https://i.ytimg.com/vi/wo84LFzx5nI/hqdefault.jpg)
+
+
+## 🗨️ **Dave Bauer**:
+
+[🧵 conversation @ 2025-07-20](https://history.futureofcoding.org/history/weekly/2025/07/W3/thinking-together.html#2025-07-20T16:29:42.339Z)
+
+I've been reflecting on this video and now I need to go learn about Flow Based Programming. I have been trying to imagine what changes could be made to some of the code I've developed if a model hierarchy was not the only possible solution.
+
+
+# Linking Together
+
+
+## 🗨️ **Nilesh Trivedi**: [📝Composable higher-order reactors as the basis for a live reactive programming environment](https://doi.org/10.1145/3281278.3281284)
+
+
+
+
+[🧵 conversation @ 2025-07-17](https://history.futureofcoding.org/history/weekly/2025/07/W3/linking-together.html#2025-07-17T06:13:11.453Z)
+
+Came across this during my search for ideas on [distributed reactivity](https://futureofcoding.slack.com/archives/C5T9GPWFL/p1751954442859169?thread_ts=1751954442.859169&cid=C5T9GPWFL):
+
+[Composable higher-order reactors as the basis for a live reactive programming environment](https://doi.org/10.1145/3281278.3281284)
+
+[📝 [July 7th, 2025 11:00 PM] nilesh.tr: Folks, can you please point me to recent efforts in Distributed Reactive Programming?...](https://futureofcoding.slack.com/archives/C5T9GPWFL/p1751954442859169?thread_ts=1751954442.859169&amp;cid=C5T9GPWFL)
+
+> Folks, can you please point me to recent efforts in Distributed Reactive Programming? How can we build whole systems (spanning multiple simultaneous users as well as the database) in React/Vue/Svelte- like way, instead of just UI components? What are the typical challenges and the unsolved problems?
+
+
+## 🗨️ **misha**: [🎥 Casey Muratori – The Big OOPs: Anatomy of a Thirty-five-year Mistake – BSC 2025](https://www.youtube.com/watch?v=wo84LFzx5nI)
+
+[🧵 conversation @ 2025-07-17](https://history.futureofcoding.org/history/weekly/2025/07/W3/linking-together.html#2025-07-17T20:21:40.147Z)
+
+## 🗨️ **misha**: [🎥 Over the Shoulder 1 - Text Preprocessing in Forth](https://youtu.be/mvrE2ZGe-rs?t=1061)
+
+[🧵 conversation @ 2025-07-18](https://history.futureofcoding.org/history/weekly/2025/07/W3/linking-together.html#2025-07-18T09:33:12.215Z)
+
+forth "repl"
+
+![Over the Shoulder 1 - Text Preprocessing in Forth](https://i.ytimg.com/vi/mvrE2ZGe-rs/hqdefault.jpg)
+
+
+## 🗨️ **Konrad Hinsen**: [📝 Introducing XMLUI](https://blog.jonudell.net/2025/07/18/introducing-xmlui/)
+
+[🧵 conversation @ 2025-07-19](https://history.futureofcoding.org/history/weekly/2025/07/W3/linking-together.html#2025-07-19T19:36:11.056Z)
+
+Very mixed feelings about [XMLUI](https://blog.jonudell.net/2025/07/18/introducing-xmlui/) . I like the motivation and the overall approach to an accessible glue language, but just about everything about the implementation feels wrong. XML syntax is perhaps the worst - does anyone really want to stare at that kind of code?
+
+> In the mid-1990s you could create useful software without being an ace coder. You had Visual Basic, you had a rich ecosystem of components, you could wire them together to create apps, standing on …
+
+## 🗨️ **Natalie Freed**:
+
+[🧵 conversation @ 2025-07-19](https://history.futureofcoding.org/history/weekly/2025/07/W3/linking-together.html#2025-07-19T23:52:19.581Z)
+
+Does anyone know where this quote comes from? "How is the abstraction, for understanding? Is it well designed to help you see what is happening underneath?" I was so certain it was from Learnable Programming or another Victor piece but I cannot for the life of me track it down. Maybe it's my paraphrase or misquote of someone and that's why I can't seem to Google it? Let me know if this rings a bell for anyone!
+
+
+# Present Company
+
+
+## 🗨️ **Maikel**:
+
+[🧵 conversation @ 2025-07-14](https://history.futureofcoding.org/history/weekly/2025/07/W3/present-company.html#2025-07-14T19:10:52.576Z)
+
+Next week we have a FoC meetup planned (23th of july, see announcement in the message above)... but we're still looking for one person who wants to present / demo something about their FoC project.. if you have interest please let us know 😊
+
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
