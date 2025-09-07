@@ -1,0 +1,182 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-09-04T14:34:49.307Z" class="post"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-01&amp;toDate=2025-09-07&amp;channel=thinking-together&amp;filter=#2025-09-04T14:34:49.307Z" class="date">2025-09-04 14:34:49</a> <div class="message"><p>Pond'ring aloud:</p>
+<p>We know that "loop" is recursion, but recursion is often expressed in too-academic a manner.</p>
+<p>We know that recursion consists of 2 parts:</p>
+<ul><li>termination case</li><li>recursion case.</li></ul><p>I'm thinking about what might be a less-inhumane syntax for expressing a recursive solution. Suitable for non-programmers and LLMs?</p>
+<p>[aside: the goal is not "efficiency" at the machine level, but expressiveness and human (non-programmer) understandability]</p>
+<pre><code>humane syntax???:
+
+----------------
+
+
+
+break down member (x, list) -&gt; ([#found | #not-found], value) {
+
+    finish when list is empty { ^ #not-found, ɸ }
+
+    finish when x in list     { ^ #found, list }
+
+    decompose list' &lt;- rest (list) {
+
+        ^ again (x, list')
+
+    }
+
+}
+
+
+
+break down append (x, list) -&gt; value {
+
+    finish when list is empty { ^ x }
+
+    decompose «item» &lt;- first (list), «list'» &lt;- rest (list) {
+
+        ^ prepend «item» onto again (x, «list'»))
+
+    }
+
+}</code></pre><pre><code>inhumane syntax:
+
+----------------
+
+
+
+(defun my_member (x lis)
+
+  (cond ((null lis) (values nil nil))
+
+        ((eq x (car lis)) (values t lis))
+
+    (t (my_member x (cdr lis)))))
+
+
+
+
+
+(defun my_append (lis x)
+
+  (cond ((null lis) x)
+
+        (t (cons (car lis) (my_append (cdr lis) x)))))</code></pre><p>[aside: "send ..." sends something forward asynchronously instead of returning it synchronously to the caller and unblocking the caller]</p>
+<pre><code>less-inhumane syntax involving async ports:
+
+-------------------------------------------
+
+
+
+break down member (x, list) output ports: { success: [#found | #not-found], value: object } {
+
+    finish when list is empty { send success: #not-found, send value: ɸ }
+
+    finish when x in list     { send success: #found, send value: list }
+
+    decompose list' &lt;- rest (list) {
+
+        ^again (x, list')
+
+    }
+
+}
+
+
+
+break down append (x, list) output port: { value: object } {
+
+    finish when list is empty { send value: x }
+
+    decompose «item» &lt;- first (list), «list'» &lt;- rest (list) {
+
+        send value: prepend «item» onto ^again (x, «list'»))
+
+    }
+
+}</code></pre><p>suggestions / comments?</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2025-09-04T17:22:41.532Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-01&amp;toDate=2025-09-07&amp;channel=thinking-together&amp;filter=#2025-09-04T17:22:41.532Z" class="date">2025-09-04 17:22:41</a> <div class="message"><p>I don't really have a sense for what about the first syntax make it seem more "humane" to you. But FWIW, here's how Dijkstra (likely also "too-academic") would implement  <code>member</code>  and  <code>append</code> , respectively:</p>
+<pre><code>i := list.lob;
+
+do
+
+  i &lt;= list.hib and list(i) != x -&gt; i := i+1
+
+od
+
+{i now describes where to find x, if valid}</code></pre><pre><code>list:hiext(x)</code></pre><p>(At least as of 1977, Dijkstra doesn't seem to think about function boundaries at all.)</p>
+<p>(Dijkstra recommended designing data structures out of arrays, in the way Lisp designs them out of cons pairs.)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-04T17:26:06.902Z" class="reply"><span class="user">When Leggett</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-01&amp;toDate=2025-09-07&amp;channel=thinking-together&amp;filter=#2025-09-04T17:26:06.902Z" class="date">2025-09-04 17:26:06</a> <div class="message"><p>So in your language, would it be illegal to make a recursive call? Requiring the use of this special syntax?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-04T18:33:53.882Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-01&amp;toDate=2025-09-07&amp;channel=thinking-together&amp;filter=#2025-09-04T18:33:53.882Z" class="date">2025-09-04 18:33:53</a> <div class="message"><p>This isn't an attempt to banish recursion, only to capture its essence and give it a different (better?) syntax.</p>
+<p>I am tinkering and brainstorming with ideas. I don't necessarily believe in this particular syntax, but, I do know that trying  <em>something</em> , then critiquing it tends to move ideas forward...</p>
+<p>IMO, the essence of recursion is: divide and conquer.</p>
+<p>I am trying to do something that I thought would be simple, but am finding that it requires way more detail than I would expect anyone but a programmer would have the patience for. I have been trying to explain to an LLM (Claude 4.0) what I want, but, it keeps making blunders (due to my fault in not supplying enough niggly details, it gets really, really close, but always leaves out some important detailed edge-case).</p>
+<p>Syntax-wise, I know that Loop is too low-level and leaves too many foot-guns lying around. Recursion is better, but too weird-looking. I'm wondering if there is a way to express the essence of divide-and-conquer in a less inhumane way. Maybe this needs multiple syntaxes? Or, maybe it just can't be expressed any better. We do see lots of attempts to define and improve on low-level loop, for, while, etc. syntaxes.</p>
+<p>The Dijkstra thing smacks of too much low-levelness, esp. to someone who thinks that an array is just a list with its CDRs optimized away.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-04T19:05:39.547Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-01&amp;toDate=2025-09-07&amp;channel=thinking-together&amp;filter=#2025-09-04T19:05:39.547Z" class="date">2025-09-04 19:05:39</a> <div class="message"><p>Programming is like a Necker cube. Each of us has a slightly different perspective on what is good and what is bad. The interesting question for me lately is: at what point should one give up on finding an axis of good-bad that everyone will get on board with, and instead focus on other aspects that seem more well-posed.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-04T19:18:50.496Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-01&amp;toDate=2025-09-07&amp;channel=thinking-together&amp;filter=#2025-09-04T19:18:50.496Z" class="date">2025-09-04 19:18:50</a> <div class="message"><p>I agree, with the nuance that there are multiple possible syntaxes / perspectives. There's what academic-analysts think is useful, there's what programmers think is useful, there's what non-programmers think is useful, etc. LLMs seem to come close to providing syntax for non-programmers, but, in this case, the LLM couldn't infer sufficient detail from my prompt. In other cases, I asked for smaller snippets and was very satisfied. I wonder what the "grain" size is for getting reliable results?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-04T19:47:08.541Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-01&amp;toDate=2025-09-07&amp;channel=thinking-together&amp;filter=#2025-09-04T19:47:08.541Z" class="date">2025-09-04 19:47:08</a> <div class="message"><p>Absolutely, multiple perspectives. That's what I was getting at with the Necker cube analogy. None of them more right than the others. </p>
+<p>But you often strike me as too attached to one perspective and ignoring the others. With any tool you're only going to get out what you put in.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-04T19:49:44.150Z" class="reply"><span class="user">Kartik Agaram</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-01&amp;toDate=2025-09-07&amp;channel=thinking-together&amp;filter=#2025-09-04T19:49:44.150Z" class="date">2025-09-04 19:49:44</a> <div class="message"><p>Where I am: Recursion or iteration? Necker cube. Low level or high level? Necker cube. Academics or builders? Necker cube. Natural language or formal language? Necker cube. Correctness or friendliness? Necker cube. Companies or people? People, people, people.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-06T11:07:31.606Z" class="reply"><span class="user">misha</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-03&amp;toDate=2025-09-09&amp;channel=thinking-together&amp;filter=#2025-09-06T11:07:31.606Z" class="date">2025-09-06 11:07:31</a> <div class="message"><p>Syntax is "rules". I argue that your "humane" samples have way more syntax than lisp ones.</p>
+<p>You throw a lot of english words in there as a separate syntax element each.</p>
+<p>This maybe would make my mom</p>
+<p>1)  <em>think</em>  she kinda gets what this is about just because of familiar words</p>
+<p>2) when she  <em>reads</em>  this.</p>
+<p>But</p>
+<p>1) I doubt she would actually  <em>understand</em>  what's that all about w/o further explanation</p>
+<p>2) And certainly she would not be able to  <em>write</em>  anything in this syntax after seeing these 2 samples (I know because I can't).</p>
+<p>Lisp's  ~syntax~  shape is way closer to the actual "abstract shape" of the problem essence: base cases + recur case + branching (picking only 1 of them at time).</p>
+<p>Lisp shape has fewer (but not 0) thing to question, e.g. are different parens mean different things? (yes they do, that's why vanilla lisp sucks to read and scared off so many people)</p>
+<p>Specifically  <em>these</em>  lisp samples suck because nobody knows what the <strong>**  <code>eq</code>   <code>*t*</code>   <code>*car*</code>   <code>*cdr*</code>  </strong>  <code>*values*</code>  ** are. But those are names, not structure, not syntax. (ok, maybe  <code>values</code>  is somehow syntax, I don't know why it is there, what it does, and why would I care to have there anything other than  <code>yes</code>  or  <code>no</code>  )</p>
+<p>Here is the clojure example (notice I redefined only 3 words, and honestly, I think  <code>true</code>   <code>false</code>   <code>defn</code>  would be ok w/o substituting them)</p>
+<pre><code>;; defn renaming needs to be done differently, via new defmacro, but it can be done globally once, and here it just illustrates the point: "keep the structure, use better names":
+
+(let [NO  false
+
+      YES true
+
+      new-function defn]
+
+
+
+  (new-function is-x-in-list? [x list]
+
+    (if (empty? list)
+
+      NO
+
+      (if (= x (first list))
+
+        YES
+
+        (is-x-in-list? x (rest list))))))</code></pre><p>It has the same  <em>structure</em>  as vanilla lisp samples, but much more "humane" (more widely recognizable names (to make 'em even more "humane" – maybe replace with chinese mandarin))</p>
+<p>It explicitly has different types of words grouping: () and []</p>
+<p>My mom would still have questions, but way fewer than in case of "humane" and vanilla lisp samples.</p>
+<p>On the other hand, questions to the "humane" samples  <em>I</em> have (to slightly better understand semantics, and maybe to try to write my own fns in this syntax):</p>
+<ul><li>why there are commas there, but not here?</li><li>what   <code>#</code>   <code>^</code>   <code>ɸ</code>   <code>'</code>    <code>|</code>   <code>-&gt;</code>   <code>&lt;-</code>  are?</li><li>where does function name ends and arg name starts?</li><li>why some args are in () and some are inline?</li><li>I presume [] is a grouping around "regex or", and () - around return type? (try to explain it to my mom)</li><li>why  <code>«»</code>  in the second sample but not in first?</li><li>is  <code>break down</code>  a part of fn name or some keywords? why have them? what other options are? are those required?</li><li>if  <code>^</code>  is  <code>return</code>  indicator, why say  <code>finish</code>  ? if  <code>finish</code>  is  <code>return</code>  <ul><li>why say  <code>^</code>  ?</li></ul></li><li><code>^</code>  is in every {}, is it required? are those separate concepts, or is it just grouping syntax  <code>{^ ...}</code> ?</li><li>would  <code>«</code>  and  <code>»</code>  be the same as  <code>"</code>   <code>"</code>  or do I need to find them on my keyboard?</li><li>is  <code>ɸ</code>  – some constant? if yes, why not  <code>#ɸ</code>  (because  <code>#found</code>  seems like a constant, and  <code>#</code>  seems like a way to mark constants). if not a constant, but some  <em>type</em>  (like  <code>value</code>  presumably is, can there be different  <code>ɸ</code>  ? (assuming that's an empty set. but we receive list (something sequential) and return set? huh.)</li><li>is  <code>))</code>  in  <code>(x, «list'»))</code>   <ul><li>a typo? or some syntactic thing?</li></ul></li><li>there are commas  <code>,</code>  between words in  <code>{ ^ #found, list }</code>  , but not right after  <code>^</code>  , is comma - separating args, and args are not in parens (see  <code>decompose</code>   and  <code>^</code>  ), but  <code>rest (list)</code>  seems like a function call, with parens... huh.</li><li>So if  <code>^</code>  is a fn call, how do I start another fn call after  <code>^</code>   (how do I stop the args)? Or is  <code>^</code>   – a syntactical keyword? Should it be be the last "line" in {} block? Why last  <code>decompose</code>  "line" in both samples is without  <code>^</code>  ? does {} "returns"  <code>^</code>  inside of it?</li><li>there are commas  <code>,</code>  between words in  <code>{ ^ #found, list }</code>  , but not between 2  <code>finish</code>  lines. why?</li></ul><p>(and few more :) )</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>

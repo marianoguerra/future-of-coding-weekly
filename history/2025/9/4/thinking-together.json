@@ -1,0 +1,1337 @@
+[
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1756996489.307289",
+        "client_msg_id": "972a9481-19f2-4395-b955-26c7257e8b62",
+        "text": "Pond'ring aloud:\nWe know that \"loop\" is recursion, but recursion is often expressed in too-academic a manner.\nWe know that recursion consists of 2 parts:\n1. termination case\n2. recursion case.\nI'm thinking about what might be a less-inhumane syntax for expressing a recursive solution. Suitable for non-programmers and LLMs?\n\n[aside: the goal is not \"efficiency\" at the machine level, but expressiveness and human (non-programmer) understandability]\n\n\n```humane syntax???:\n----------------\n\nbreak down member (x, list) -&gt; ([#found | #not-found], value) {\n    finish when list is empty { ^ #not-found, \u0278 }\n    finish when x in list     { ^ #found, list }\n    decompose list' &lt;- rest (list) {\n\t    ^ again (x, list')\n\t}\n}\n\nbreak down append (x, list) -&gt; value {\n    finish when list is empty { ^ x }\n    decompose \u00abitem\u00bb &lt;- first (list), \u00ablist'\u00bb &lt;- rest (list) {\n        ^ prepend \u00abitem\u00bb onto again (x, \u00ablist'\u00bb))\n    }\n}```\n\n```inhumane syntax:\n----------------\n\n(defun my_member (x lis)\n  (cond ((null lis) (values nil nil))\n        ((eq x (car lis)) (values t lis))\n\t(t (my_member x (cdr lis)))))\n\n\n(defun my_append (lis x)\n  (cond ((null lis) x)\n        (t (cons (car lis) (my_append (cdr lis) x)))))```\n\n[aside: \"send ...\" sends something forward asynchronously instead of returning it synchronously to the caller and unblocking the caller]\n```less-inhumane syntax involving async ports:\n-------------------------------------------\n\nbreak down member (x, list) output ports: { success: [#found | #not-found], value: object } {\n    finish when list is empty { send success: #not-found, send value: \u0278 }\n    finish when x in list     { send success: #found, send value: list }\n    decompose list' &lt;- rest (list) {\n\t    ^again (x, list')\n\t}\n}\n\nbreak down append (x, list) output port: { value: object } {\n    finish when list is empty { send value: x }\n    decompose \u00abitem\u00bb &lt;- first (list), \u00ablist'\u00bb &lt;- rest (list) {\n        send value: prepend \u00abitem\u00bb onto ^again (x, \u00ablist'\u00bb))\n    }\n}```\nsuggestions / comments?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "reply_count": 8,
+        "reply_users_count": 4,
+        "latest_reply": "1757156851.606799",
+        "reply_users": [
+            "UCUSW7WVD",
+            "U08DYF4SEAE",
+            "UGWUJUZHT",
+            "U07BD7U4S4R"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "8yMvX",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Pond'ring aloud:\nWe know that \"loop\" is recursion, but recursion is often expressed in too-academic a manner.\nWe know that recursion consists of 2 parts:\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "termination case"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "recursion case."
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "ordered",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nI'm thinking about what might be a less-inhumane syntax for expressing a recursive solution. Suitable for non-programmers and LLMs?\n\n[aside: the goal is not \"efficiency\" at the machine level, but expressiveness and human (non-programmer) understandability]\n\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "humane syntax???:\n----------------\n\nbreak down member (x, list) -> ([#found | #not-found], value) {\n    finish when list is empty { ^ #not-found, \u0278 }\n    finish when x in list     { ^ #found, list }\n    decompose list' <- rest (list) {\n\t    ^ again (x, list')\n\t}\n}\n\nbreak down append (x, list) -> value {\n    finish when list is empty { ^ x }\n    decompose \u00abitem\u00bb <- first (list), \u00ablist'\u00bb <- rest (list) {\n        ^ prepend \u00abitem\u00bb onto again (x, \u00ablist'\u00bb))\n    }\n}"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "inhumane syntax:\n----------------\n\n(defun my_member (x lis)\n  (cond ((null lis) (values nil nil))\n        ((eq x (car lis)) (values t lis))\n\t(t (my_member x (cdr lis)))))\n\n\n(defun my_append (lis x)\n  (cond ((null lis) x)\n        (t (cons (car lis) (my_append (cdr lis) x)))))"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\n\n[aside: \"send ...\" sends something forward asynchronously instead of returning it synchronously to the caller and unblocking the caller]\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "less-inhumane syntax involving async ports:\n-------------------------------------------\n\nbreak down member (x, list) output ports: { success: [#found | #not-found], value: object } {\n    finish when list is empty { send success: #not-found, send value: \u0278 }\n    finish when x in list     { send success: #found, send value: list }\n    decompose list' <- rest (list) {\n\t    ^again (x, list')\n\t}\n}\n\nbreak down append (x, list) output port: { value: object } {\n    finish when list is empty { send value: x }\n    decompose \u00abitem\u00bb <- first (list), \u00ablist'\u00bb <- rest (list) {\n        send value: prepend \u00abitem\u00bb onto ^again (x, \u00ablist'\u00bb))\n    }\n}"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "suggestions / comments?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1757006561.532639",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1757006859.000000"
+        },
+        "client_msg_id": "b35a8e63-0646-4a1e-98e1-72ac3a6b5b41",
+        "text": "I don't really have a sense for what about the first syntax make it seem more \"humane\" to you. But FWIW, here's how Dijkstra (likely also \"too-academic\") would implement `member` and `append`, respectively:\n\n```i := list.lob;\ndo\n  i <= list.hib and list(i) != x -> i := i+1\nod\n{i now describes where to find x, if valid}```\n```list:hiext(x)```\n(At least as of 1977, Dijkstra doesn't seem to think about function boundaries at all.)\n\n(Dijkstra recommended designing data structures out of arrays, in the way Lisp designs them out of cons pairs.)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "Wr6P2",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I don't really have a sense for what about the first syntax make it seem more \"humane\" to you. But FWIW, here's how Dijkstra (likely also \"too-academic\") would implement "
+                            },
+                            {
+                                "type": "text",
+                                "text": "member",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "append",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", respectively:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "i := list.lob;\ndo\n  i <= list.hib and list(i) != x -> i := i+1\nod\n{i now describes where to find x, if valid}"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "list:hiext(x)"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\n(At least as of 1977, Dijkstra doesn't seem to think about function boundaries at all.)\n\n(Dijkstra recommended designing data structures out of arrays, in the way Lisp designs them out of cons pairs.)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U08DYF4SEAE",
+        "type": "message",
+        "ts": "1757006766.902639",
+        "client_msg_id": "6aab8d01-d2fe-47bf-a259-c12d3f52a1f0",
+        "text": "So in your language, would it be illegal to make a recursive call? Requiring the use of this special syntax?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "88CN8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "So in your language, would it be illegal to make a recursive call? Requiring the use of this special syntax?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "heavy_plus_sign",
+                "users": [
+                    "UCUSW7WVD"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1757010833.882319",
+        "client_msg_id": "468b61d1-6859-494d-ab2a-d79140f07cfa",
+        "text": "This isn't an attempt to banish recursion, only to capture its essence and give it a different (better?) syntax.\n\nI am tinkering and brainstorming with ideas. I don't necessarily believe in this particular syntax, but, I do know that trying _something_, then critiquing it tends to move ideas forward...\n\nIMO, the essence of recursion is: divide and conquer.\n\nI am trying to do something that I thought would be simple, but am finding that it requires way more detail than I would expect anyone but a programmer would have the patience for. I have been trying to explain to an LLM (Claude 4.0) what I want, but, it keeps making blunders (due to my fault in not supplying enough niggly details, it gets really, really close, but always leaves out some important detailed edge-case).\n\nSyntax-wise, I know that Loop is too low-level and leaves too many foot-guns lying around. Recursion is better, but too weird-looking. I'm wondering if there is a way to express the essence of divide-and-conquer in a less inhumane way. Maybe this needs multiple syntaxes? Or, maybe it just can't be expressed any better. We do see lots of attempts to define and improve on low-level loop, for, while, etc. syntaxes.\n\nThe Dijkstra thing smacks of too much low-levelness, esp. to someone who thinks that an array is just a list with its CDRs optimized away.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "j+I53",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "This isn't an attempt to banish recursion, only to capture its essence and give it a different (better?) syntax.\n\nI am tinkering and brainstorming with ideas. I don't necessarily believe in this particular syntax, but, I do know that trying "
+                            },
+                            {
+                                "type": "text",
+                                "text": "something",
+                                "style": {
+                                    "italic": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": ", then critiquing it tends to move ideas forward...\n\nIMO, the essence of recursion is: divide and conquer.\n\nI am trying to do something that I thought would be simple, but am finding that it requires way more detail than I would expect anyone but a programmer would have the patience for. I have been trying to explain to an LLM (Claude 4.0) what I want, but, it keeps making blunders (due to my fault in not supplying enough niggly details, it gets really, really close, but always leaves out some important detailed edge-case).\n\nSyntax-wise, I know that Loop is too low-level and leaves too many foot-guns lying around. Recursion is better, but too weird-looking. I'm wondering if there is a way to express the essence of divide-and-conquer in a less inhumane way. Maybe this needs multiple syntaxes? Or, maybe it just can't be expressed any better. We do see lots of attempts to define and improve on low-level loop, for, while, etc. syntaxes.\n\nThe Dijkstra thing smacks of too much low-levelness, esp. to someone who thinks that an array is just a list with its CDRs optimized away."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1757012739.547489",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1757012747.000000"
+        },
+        "client_msg_id": "b64e574a-3d79-4253-8762-92d6cc097a0b",
+        "text": "Programming is like a Necker cube. Each of us has a slightly different perspective on what is good and what is bad. The interesting question for me lately is: at what point should one give up on finding an axis of good-bad that everyone will get on board with, and instead focus on other aspects that seem more well-posed.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "yZ+DD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Programming is like a Necker cube. Each of us has a slightly different perspective on what is good and what is bad. The interesting question for me lately is: at what point should one give up on finding an axis of good-bad that everyone will get on board with, and instead focus on other aspects that seem more well-posed."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UGWUJUZHT",
+        "type": "message",
+        "ts": "1757013530.496009",
+        "client_msg_id": "667f236a-f465-49c6-a173-a4bd497eb2d8",
+        "text": "I agree, with the nuance that there are multiple possible syntaxes / perspectives. There's what academic-analysts think is useful, there's what programmers think is useful, there's what non-programmers think is useful, etc. LLMs seem to come close to providing syntax for non-programmers, but, in this case, the LLM couldn't infer sufficient detail from my prompt. In other cases, I asked for smaller snippets and was very satisfied. I wonder what the \"grain\" size is for getting reliable results?",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "7uoGK",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I agree, with the nuance that there are multiple possible syntaxes / perspectives. There's what academic-analysts think is useful, there's what programmers think is useful, there's what non-programmers think is useful, etc. LLMs seem to come close to providing syntax for non-programmers, but, in this case, the LLM couldn't infer sufficient detail from my prompt. In other cases, I asked for smaller snippets and was very satisfied. I wonder what the \"grain\" size is for getting reliable results?"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1757015228.541209",
+        "client_msg_id": "02ea8344-2206-4d95-88de-10515cbe4bb5",
+        "text": "Absolutely, multiple perspectives. That's what I was getting at with the Necker cube analogy. None of them more right than the others. \n\nBut you often strike me as too attached to one perspective and ignoring the others. With any tool you're only going to get out what you put in.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "bRHan",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Absolutely, multiple perspectives. That's what I was getting at with the Necker cube analogy. None of them more right than the others. \n\nBut you often strike me as too attached to one perspective and ignoring the others. With any tool you're only going to get out what you put in."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "UCUSW7WVD",
+        "type": "message",
+        "ts": "1757015384.150139",
+        "edited": {
+            "user": "UCUSW7WVD",
+            "ts": "1757015488.000000"
+        },
+        "client_msg_id": "c5336210-116b-42c4-ac08-2a05d4642f4c",
+        "text": "Where I am: Recursion or iteration? Necker cube. Low level or high level? Necker cube. Academics or builders? Necker cube. Natural language or formal language? Necker cube. Correctness or friendliness? Necker cube. Companies or people? People, people, people.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "NtL4d",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Where I am: Recursion or iteration? Necker cube. Low level or high level? Necker cube. Academics or builders? Necker cube. Natural language or formal language? Necker cube. Correctness or friendliness? Necker cube. Companies or people? People, people, people."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "reactions": [
+            {
+                "name": "clap",
+                "users": [
+                    "U08DYF4SEAE"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "U07BD7U4S4R",
+        "type": "message",
+        "ts": "1757156851.606799",
+        "edited": {
+            "user": "U07BD7U4S4R",
+            "ts": "1757240015.000000"
+        },
+        "client_msg_id": "8def9f84-c479-4b3b-b08f-284dd6bea5a3",
+        "text": "Syntax is \"rules\". I argue that your \"humane\" samples have way more syntax than lisp ones.\nYou throw a lot of english words in there as a separate syntax element each.\nThis maybe would make my mom\n1) *think* she kinda gets what this is about just because of familiar words\n2) when she *reads* this.\nBut\n1) I doubt she would actually *understand* what's that all about w/o further explanation\n2) And certainly she would not be able to *write* anything in this syntax after seeing these 2 samples (I know because I can't).\n\nLisp's ~syntax~ shape is way closer to the actual \"abstract shape\" of the problem essence: base cases + recur case + branching (picking only 1 of them at time).\nLisp shape has fewer (but not 0) thing to question, e.g. are different parens mean different things? (yes they do, that's why vanilla lisp sucks to read and scared off so many people)\n\nSpecifically *these* lisp samples suck because nobody knows what the **** `eq` *`t`* *`car`* *`cdr`* *`values`* are. But those are names, not structure, not syntax. (ok, maybe `values` is somehow syntax, I don't know why it is there, what it does, and why would I care to have there anything other than `yes` or `no` )\n\nHere is the clojure example (notice I redefined only 3 words, and honestly, I think `true` `false` `defn` would be ok w/o substituting them)\n```;; defn renaming needs to be done differently, via new defmacro, but it can be done globally once, and here it just illustrates the point: \"keep the structure, use better names\":\n(let [NO  false\n      YES true\n      new-function defn]\n\n  (new-function is-x-in-list? [x list]\n    (if (empty? list)\n      NO\n      (if (= x (first list))\n        YES\n        (is-x-in-list? x (rest list))))))```\nIt has the same *structure* as vanilla lisp samples, but much more \"humane\" (more widely recognizable names (to make 'em even more \"humane\" \u2013 maybe replace with chinese mandarin))\nIt explicitly has different types of words grouping: () and []\nMy mom would still have questions, but way fewer than in case of \"humane\" and vanilla lisp samples.\n\nOn the other hand, questions to the \"humane\" samples *I* have (to slightly better understand semantics, and maybe to try to write my own fns in this syntax):\n\u2022 why there are commas there, but not here?\n\u2022 what  `#` `^` `\u0278` `'`  `|` `->` `<-` are?\n\u2022 where does function name ends and arg name starts?\n\u2022 why some args are in () and some are inline?\n\u2022 I presume [] is a grouping around \"regex or\", and () - around return type? (try to explain it to my mom)\n\u2022 why `\u00ab\u00bb` in the second sample but not in first?\n\u2022 is `break down` a part of fn name or some keywords? why have them? what other options are? are those required?\n\u2022 if `^` is `return` indicator, why say `finish` ? if `finish` is `return` - why say `^` ?\n\u2022 `^` is in every {}, is it required? are those separate concepts, or is it just grouping syntax `{^ ...}`?\n\u2022 would `\u00ab` and `\u00bb` be the same as `\"` `\"` or do I need to find them on my keyboard?\n\u2022 is `\u0278` \u2013 some constant? if yes, why not `#\u0278` (because `#found` seems like a constant, and `#` seems like a way to mark constants). if not a constant, but some *type* (like `value` presumably is, can there be different `\u0278` ? (assuming that's an empty set. but we receive list (something sequential) and return set? huh.)\n\u2022 is `))` in `(x, \u00ablist'\u00bb))`  - a typo? or some syntactic thing?\n\u2022 there are commas `,` between words in `{ ^ #found, list }` , but not right after `^` , is comma - separating args, and args are not in parens (see `decompose`  and `^` ), but `rest (list)` seems like a function call, with parens... huh. \n\u2022 So if `^` is a fn call, how do I start another fn call after `^`  (how do I stop the args)? Or is `^`  \u2013 a syntactical keyword? Should it be be the last \"line\" in {} block? Why last `decompose` \"line\" in both samples is without `^` ? does {} \"returns\" `^` inside of it?\n\u2022 there are commas `,` between words in `{ ^ #found, list }` , but not between 2 `finish` lines. why?\n(and few more :) )",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1756996489.307289",
+        "parent_user_id": "UGWUJUZHT",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "kr/UR",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Syntax is \"rules\". I argue that your \"humane\" samples have way more syntax than lisp ones.\nYou throw a lot of english words in there as a separate syntax element each.\nThis maybe would make my mom\n1) "
+                            },
+                            {
+                                "type": "text",
+                                "text": "think",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " she kinda gets what this is about just because of familiar words\n2) when she "
+                            },
+                            {
+                                "type": "text",
+                                "text": "reads",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " this.\nBut\n1) I doubt she would actually "
+                            },
+                            {
+                                "type": "text",
+                                "text": "understand",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " what's that all about w/o further explanation\n2) And certainly she would not be able to "
+                            },
+                            {
+                                "type": "text",
+                                "text": "write",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " anything in this syntax after seeing these 2 samples (I know because I can't).\n\nLisp's "
+                            },
+                            {
+                                "type": "text",
+                                "text": "syntax",
+                                "style": {
+                                    "strike": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " shape is way closer to the actual \"abstract shape\" of the problem essence: base cases + recur case + branching (picking only 1 of them at time).\nLisp shape has fewer (but not 0) thing to question, e.g. are different parens mean different things? (yes they do, that's why vanilla lisp sucks to read and scared off so many people)\n\nSpecifically "
+                            },
+                            {
+                                "type": "text",
+                                "text": "these",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " lisp samples suck because nobody knows what the **** "
+                            },
+                            {
+                                "type": "text",
+                                "text": "eq",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "t",
+                                "style": {
+                                    "bold": true,
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "car",
+                                "style": {
+                                    "bold": true,
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "cdr",
+                                "style": {
+                                    "bold": true,
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "values",
+                                "style": {
+                                    "bold": true,
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " ",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "are. But those are names, not structure, not syntax. (ok, maybe "
+                            },
+                            {
+                                "type": "text",
+                                "text": "values",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " is somehow syntax, I don't know why it is there, what it does, and why would I care to have there anything other than "
+                            },
+                            {
+                                "type": "text",
+                                "text": "yes",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " or "
+                            },
+                            {
+                                "type": "text",
+                                "text": "no",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " )\n\nHere is the clojure example (notice I redefined only 3 words, and honestly, I think "
+                            },
+                            {
+                                "type": "text",
+                                "text": "true",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "false",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "text",
+                                "text": "defn",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " would be ok w/o substituting them)\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_preformatted",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": ";; defn renaming needs to be done differently, via new defmacro, but it can be done globally once, and here it just illustrates the point: \"keep the structure, use better names\":\n(let [NO  false\n      YES true\n      new-function defn]\n\n  (new-function is-x-in-list? [x list]\n    (if (empty? list)\n      NO\n      (if (= x (first list))\n        YES\n        (is-x-in-list? x (rest list))))))"
+                            }
+                        ],
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "It has the same "
+                            },
+                            {
+                                "type": "text",
+                                "text": "structure",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " as vanilla lisp samples, but much more \"humane\" (more widely recognizable names (to make 'em even more \"humane\" \u2013 maybe replace with chinese mandarin))\nIt explicitly has different types of words grouping: () and []\nMy mom would still have questions, but way fewer than in case of \"humane\" and vanilla lisp samples.\n\nOn the other hand, questions to the \"humane\" samples "
+                            },
+                            {
+                                "type": "text",
+                                "text": "I ",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": "have (to slightly better understand semantics, and maybe to try to write my own fns in this syntax):\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "why there are commas there, but not here?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "what  "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "#",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "\u0278",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "'",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "  "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "|",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "->",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "<-",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " are?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "where does function name ends and arg name starts?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "why some args are in () and some are inline?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I presume [] is a grouping around \"regex or\", and () - around return type? (try to explain it to my mom)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "why "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "\u00ab\u00bb",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " in the second sample but not in first?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "is "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "break down",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " a part of fn name or some keywords? why have them? what other options are? are those required?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "if "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " is "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "return",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " indicator, why say "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "finish",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " ? if "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "finish",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " is "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "return",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " - why say "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " ?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " is in every {}, is it required? are those separate concepts, or is it just grouping syntax "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "{^ ...}",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "would "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "\u00ab",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " and "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "\u00bb",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " be the same as "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "\"",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "\"",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " or do I need to find them on my keyboard?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "is "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "\u0278",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " \u2013 some constant? if yes, why not "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "#\u0278",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " (because "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "#found",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " seems like a constant, and "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "#",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " seems like a way to mark constants). if not a constant, but some "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "type",
+                                        "style": {
+                                            "bold": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " (like "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "value",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " presumably is, can there be different "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "\u0278",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " ? (assuming that's an empty set. but we receive list (something sequential) and return set? huh.)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "is "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "))",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " in "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "(x, \u00ablist'\u00bb))",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "  - a typo? or some syntactic thing?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "there are commas "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ",",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " between words in "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "{ ^ #found, list }",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " , but not right after "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " , is comma - separating args, and args are not in parens (see "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "decompose",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "  and "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " ), but "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "rest (list)",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " seems like a function call, with parens... huh. "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "So if "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " is a fn call, how do I start another fn call after "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "  (how do I stop the args)? Or is "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "  \u2013 a syntactical keyword? Should it be be the last \"line\" in {} block? Why last "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "decompose",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " \"line\" in both samples is without "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " ? does {} \"returns\" "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "^",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " inside of it?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "there are commas "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": ",",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " between words in "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "{ ^ #found, list }",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " , but not between 2 "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": "finish",
+                                        "style": {
+                                            "code": true
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " lines. why?"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "(and few more :) )"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
