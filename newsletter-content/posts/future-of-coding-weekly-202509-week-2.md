@@ -1,0 +1,198 @@
+<!--
+.. title: Future of Coding Weekly 2025/09 Week 2
+.. slug: future-of-coding-weekly-202509-week-2
+.. date: 2025-09-07 23:40:13 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+🎼 Unleashing Creative Expression in Music Score Writing 📝 Type Checking is a Symptom, Not a Solution 🤔 What Declarative Languages Are
+
+# Two Minute Week
+
+
+## 🗨️ **Jasmine Otto**: [♾️ Infinite Love Triangles (and other Graph Coloring Experiments)](https://observablehq.com/@jazztap/infinite-love-triangles)
+
+[🧵 conversation @ 2025-09-05](https://history.futureofcoding.org/history/weekly/2025/09/W1/two-minute-week.html#2025-09-05T17:59:22.133Z)
+
+Someone asked me to define a "splot", which is like a flood-fill texture for narrative design. In addition to doing that, I've started teaching robots to spill tea. Hmm 
+
+[Infinite Love Triangles (and other Graph Coloring Experiments)](https://observablehq.com/@jazztap/infinite-love-triangles)
+
+> Wave Function Collapse (WFC) is an algorithm for constraint propagation on adjacency graphs. Game designers use it to procedurally generate interesting levels for players to traverse. Let's use it to generate toxic relationships instead. Now we have a bunch of interesting relationship roles that might get thrown around when heartbreak happens. Red is for traitors, orange is for their enablers, and yellow is for people who got hurt. (Green doesn't care, and teal tries to help.) Use these buttons to assign ne
+
+![Infinite Love Triangles (and other Graph Coloring Experiments)](https://static.observableusercontent.com/thumbnail/83496ff041d8ca883c19ef0e56954c45eab70463415b2c941bc9e8a47dabe691.jpg)
+
+
+# Share Your Work
+
+
+## 🗨️ **guitarvydas**: [📝 Type Checking is a Symptom, Not a Solution](https://programmingsimplicity.substack.com/p/type-checking-is-a-symptom-not-a?r=1egdky)
+
+[🧵 conversation @ 2025-09-05](https://history.futureofcoding.org/history/weekly/2025/09/W1/share-your-work.html#2025-09-05T03:44:19.922Z)
+
+# DevLog Together
+
+
+## 🗨️ **Tom Larkworthy**:
+
+[🧵 conversation @ 2025-09-07](https://history.futureofcoding.org/history/weekly/2025/09/W1/devlog-together.html#2025-09-07T18:47:35.566Z)
+
+Trying to properly learn codemirror 6. I upgraded my AI with code [search](https://observablehq.com/@tomlarkworthy/robocoop-2) and optimised its prompt with [GEPA](https://observablehq.com/@tomlarkworthy/gepa) so it could help me program codemirror better. Given Observable is going plain Javascript, that simplifies things a bit language-wise and its just a matter of getting the off-the-shelf JS language syntax highlight working + injecting runtime state for code completion based on the current state of the runtime. My new [prototype](https://observablehq.com/@tomlarkworthy/runtime-variable-editor) runtime editor lets you change the runtime graph using the plain JS SDK instead of the higher level cell model. Anyway, nice to start understanding about 3% of codemirror's programming model. I think getting rid of cells will make things more straight forward.
+
+![📷 image.png](https://history.futureofcoding.org/history/msg_files/F09/F09ERUG6FB2.png)
+
+
+# Thinking Together
+
+
+## 🗨️ **guitarvydas**:
+
+[🧵 conversation @ 2025-09-04](https://history.futureofcoding.org/history/weekly/2025/09/W1/thinking-together.html#2025-09-04T14:34:49.307Z)
+
+Pond'ring aloud:  
+We know that "loop" is recursion, but recursion is often expressed in too-academic a manner.  
+We know that recursion consists of 2 parts:
+
+1. termination case
+2. recursion case.
+
+I'm thinking about what might be a less-inhumane syntax for expressing a recursive solution. Suitable for non-programmers and LLMs?  
+  
+[aside: the goal is not "efficiency" at the machine level, but expressiveness and human (non-programmer) understandability]
+
+```
+humane syntax???:  
+----------------  
+  
+break down member (x, list) -> ([#found | #not-found], value) {  
+    finish when list is empty { ^ #not-found, ɸ }  
+    finish when x in list     { ^ #found, list }  
+    decompose list' <- rest (list) {  
+	    ^ again (x, list')  
+	}  
+}  
+  
+break down append (x, list) -> value {  
+    finish when list is empty { ^ x }  
+    decompose «item» <- first (list), «list'» <- rest (list) {  
+        ^ prepend «item» onto again (x, «list'»))  
+    }  
+}
+```
+
+```
+inhumane syntax:  
+----------------  
+  
+(defun my_member (x lis)  
+  (cond ((null lis) (values nil nil))  
+        ((eq x (car lis)) (values t lis))  
+	(t (my_member x (cdr lis)))))  
+  
+  
+(defun my_append (lis x)  
+  (cond ((null lis) x)  
+        (t (cons (car lis) (my_append (cdr lis) x)))))
+```
+
+[aside: "send ..." sends something forward asynchronously instead of returning it synchronously to the caller and unblocking the caller]
+
+```
+less-inhumane syntax involving async ports:  
+-------------------------------------------  
+  
+break down member (x, list) output ports: { success: [#found | #not-found], value: object } {  
+    finish when list is empty { send success: #not-found, send value: ɸ }  
+    finish when x in list     { send success: #found, send value: list }  
+    decompose list' <- rest (list) {  
+	    ^again (x, list')  
+	}  
+}  
+  
+break down append (x, list) output port: { value: object } {  
+    finish when list is empty { send value: x }  
+    decompose «item» <- first (list), «list'» <- rest (list) {  
+        send value: prepend «item» onto ^again (x, «list'»))  
+    }  
+}
+```
+
+suggestions / comments?
+
+
+# Linking Together
+
+
+## 🗨️ **Konrad Hinsen**: [👨‍💼 Issue 084: Spreadsheets](https://deprogrammaticaipsum.com/issue-84-spreadsheets/)
+
+[🧵 conversation @ 2025-09-01](https://history.futureofcoding.org/history/weekly/2025/09/W1/linking-together.html#2025-09-01T05:41:14.465Z)
+
+A few articles on spreadsheets that are well worth reading: 
+
+[Issue 084: Spreadsheets](https://deprogrammaticaipsum.com/issue-84-spreadsheets/)
+
+> Welcome to the 84th issue of De Programmatica Ipsum, about Spreadsheets. In this edition, we declare spreadsheets the most popular software programming environment of all time; in the Library section, we learn how to use Lotus 1-2-3 for science reading "Spreadsheet Physics" by Charles Misner and Patrick Cooney; and in our Vidéothèque section, we discover that Excel is a Turing-complete, functional programming language through the eyes of Dr. Felienne Hermans.
+
+![Issue 084: Spreadsheets](https://deprogrammaticaipsum.com/issue-84-spreadsheets/towfiqu-barbhuiya-nApaSgkzaxg-unsplash.jpg)
+
+
+## 🗨️ **Nilesh Trivedi**: [🤖 Coding Agent Builders Mixer · Luma](https://luma.com/o26hrnb4)
+
+[🧵 conversation @ 2025-09-05](https://history.futureofcoding.org/history/weekly/2025/09/W1/linking-together.html#2025-09-05T05:10:25.832Z)
+
+I am hosting an online mixer this Sunday for those who are building coding agents: 
+
+[Coding Agent Builders Mixer · Luma](https://luma.com/o26hrnb4)
+
+> If you're building Coding Agents using LLMs, this online meetup should help you connect with similar folks and discover ideas and opportunities.
+
+![Coding Agent Builders Mixer · Luma](https://og.luma.com/cdn-cgi/image/format=auto,fit=cover,dpr=1,anim=false,background=white,quality=75,width=800,height=419/api/event-one?calendar_avatar=https%3A%2F%2Fcdn.lu.ma%2Favatars-default%2Fcommunity_avatar_12.png&calendar_name&color0=%230e1735&color1=%237c8bbf&color2=%23404878&color3=%23cad1e6&host_avatar=https%3A%2F%2Fcdn.lu.ma%2Favatars-default%2Favatar_37.png&host_name=Nilesh%20Trivedi&img=https%3A%2F%2Fimages.lumacdn.com%2Fevent-covers%2F7x%2Fb9461ca5-f3b2-4176-85d0-2109a873571b.png&name=Coding%20Agent%20Builders%20Mixer)
+
+
+## 🗨️ **Ivan Reese**:
+
+[🧵 conversation @ 2025-09-05](https://history.futureofcoding.org/history/weekly/2025/09/W1/linking-together.html#2025-09-05T14:36:12.677Z)
+
+> there's actually a surprisingly simple and useful definition of declarative language: a declarative language is any language with a semantics [that] has some nontrivial existential quantifiers in it.
+
+[What Declarative Languages Are](https://semantic-domain.blogspot.com/2013/07/what-declarative-languages-are.html?m=1)
+
+
+# Music
+
+
+## 🗨️ **avon**:
+
+[🧵 conversation @ 2025-09-02](https://history.futureofcoding.org/history/weekly/2025/09/W1/of-music.html#2025-09-02T19:17:52.683Z)
+
+Hi all, I remember running into a wonderful blog post a while back where the author described recreating a DAW from a sort of hazel(<https://github.com/hazelgrove/hazel>)-like moldable programming environment. I unfortunately cannot find the post in my bookmarks, and my searching the last few weeks has turned up empty. Does this ring a bell for anyone?
+
+
+## 🗨️ **avon**: [🎼 EuterPen: Unleashing Creative Expression in Music Score Writing](https://dl.acm.org/doi/pdf/10.1145/3706598.3713488)
+
+[🧵 conversation @ 2025-09-05](https://history.futureofcoding.org/history/weekly/2025/09/W1/of-music.html#2025-09-05T19:18:45.890Z)
+
+Searching for that livecoding blog post I mentioned above, I found this really amazing programmable ink software for composing:  
+[🎼 EuterPen: Unleashing Creative Expression in Music Score Writing](https://dl.acm.org/doi/pdf/10.1145/3706598.3713488) By Vincent Cavez, Caroline Appert, Catherine Letondal, Emmanuel Pietriga   
+  
+[Video demo](https://youtu.be/Ft8iVLEYzuQ)  
+  
+The pattern manipulation & search operations are especially interesting imo.
+
+
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
