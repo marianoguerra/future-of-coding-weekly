@@ -1,0 +1,166 @@
+<!--
+.. title: Future of Coding Weekly 2025/09 Week 4
+.. slug: future-of-coding-weekly-202509-week-4
+.. date: 2025-09-21 22:26:03 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+📑 Dynamic Abstractions Reading Group 🎥 hirba - Legible live programming through rich in-context representations 📢 LIVE 2025: Workshop on Live Programming
+
+# Share Your Work
+
+
+## 🗨️ **Jasmine Otto**:
+
+[🧵 conversation @ 2025-09-15](https://history.futureofcoding.org/history/weekly/2025/09/W3/share-your-work.html#2025-09-15T16:48:11.172Z)
+
+I am giving a talk on boundary objects this Fri for the Dynamic Abstractions reading group, at 9am PT. I've linked couple readings from CSCW (Ribes on domain, and Star on good ol' fashioned AI) and my BELIV paper. [📑 Dynamic Abstractions Reading Group](https://dynamicabstractions.github.io/reading-group/)  
+  
+In the meantime - we've got four great talks on the ladder of abstraction, constructivism & Building SimCity, and the design of intelligent interfaces & systems. Ian Arawjo's latest about how notations emerge is solid gold if you're thinking about non-code coding interfaces. (40min video + 20min q&a, through the link, scroll down.)
+
+
+## 🗨️ **Gregor**:
+
+[🧵 conversation @ 2025-09-17](https://history.futureofcoding.org/history/weekly/2025/09/W3/share-your-work.html#2025-09-17T13:29:18.878Z)
+
+[Here](https://bsky.app/profile/watwa.re/post/3lyzwspp7rs2z) is some ideas I've been thinking about for my coding environment, as always happy to get feedback!
+
+> [🦋 watwa.re](https://bsky.app/profile/watwa.re/post/3lyzwspp7rs2z): My ideas are faster than my fingers so I've did some Figma prototyping and video editing to talk about some of my new ideas before they are actual coded reality
+> 
+> [🎥 hirba - Legible live programming through rich in-context representations ](https://youtu.be/2DRWUgK-RdA)
+
+
+
+# Thinking Together
+
+
+## 🗨️ **guitarvydas**: [📝 Simplicity](https://programmingsimplicity.substack.com/p/simplicity-1d3?r=1egdky)
+
+[🧵 conversation @ 2025-09-15](https://history.futureofcoding.org/history/weekly/2025/09/W3/thinking-together.html#2025-09-15T09:43:40.284Z)
+
+## 🗨️ **Joel**: [🎥 Saul Bass: On Making Money vs Quality Work](https://www.youtube.com/watch?v=tfDCNpaPBiA)
+
+[🧵 conversation @ 2025-09-17](https://history.futureofcoding.org/history/weekly/2025/09/W3/thinking-together.html#2025-09-17T11:56:55.953Z)
+
+## 🗨️ **Chris Knott**:
+
+[🧵 conversation @ 2025-09-17](https://history.futureofcoding.org/history/weekly/2025/09/W3/thinking-together.html#2025-09-17T16:55:47.178Z)
+
+Does anyone remember a paper about a low level data format that was a kind of structured JSON thing, but it was a binary format and gracefully simplified into a raw string or raw int if that was the only data. It was definitely posted here at some point, maybe 5yrs ago though…!
+
+
+## 🗨️ **Hemi Edwards**:
+
+[🧵 conversation @ 2025-09-17](https://history.futureofcoding.org/history/weekly/2025/09/W3/thinking-together.html#2025-09-17T22:36:07.641Z)
+
+[guitarvydas](#user?key=UGWUJUZHT) A friend of mine and I were exploring this subject. He was a computer engineer trained at MIT back in the mid 1980s and had developed expertise in higher level languages like Go and Ruby, but was interested in going back to first-principles. He was interested in the possibilities offered by UML and generating domain specific language to solve problems. I actually thought about combining UML with a TLA+. UML could be used as a visual representation of a system's design and TLA+ could perform the role of specification and verification of the system's model and then generate Ada code to build mission critical system, like they do in aerospace.
+
+
+# Linking Together
+
+
+## 🗨️ **ruru4143**: [📝 Introducing the HandAxe Collections Pattern Language - Strange Loop](https://thestrangeloop.com/2022/introducing-the-handaxe-collections-pattern-language.html)
+
+[🧵 conversation @ 2025-09-16](https://history.futureofcoding.org/history/weekly/2025/09/W3/linking-together.html#2025-09-16T15:01:42.161Z)
+
+[Introducing the HandAxe Collections Pattern Language](https://thestrangeloop.com/2022/introducing-the-handaxe-collections-pattern-language.html) is a abstract rundown on all operations you can have on common collection types. The switch to edges instead of indices is really nice.  
+  
+Sadly this is the only public artifact of this project
+
+## 🗨️ **misha**:
+
+[🧵 conversation @ 2025-09-18](https://history.futureofcoding.org/history/weekly/2025/09/W3/linking-together.html#2025-09-18T07:11:11.141Z)
+
+Please, share your favorite resources about approaches to versioning of APIs, DB schemas, code libraries etc.  
+Versions rollout, support, and deprecation still feel unsolved and ad-hoc.
+
+
+## 🗨️ **Joshua Horowitz**:
+
+[🧵 conversation @ 2025-09-20](https://history.futureofcoding.org/history/weekly/2025/09/W3/linking-together.html#2025-09-20T00:25:31.732Z)
+
+The LIVE Workshop (all about live programming) is free & online this year, and coming up soon. We will be “premiering” presentation videos on Saturday, September 27, after which they will be available to watch on your own time if you prefer. Then, on Saturday, October 4, we will have live (har har) Q & A and discussion over Zoom.  
+  
+Details are up at <https://liveprog.org/>. We’re still finalizing schedule, links, etc., but you can read a bit about the 12 exciting projects that will be discussed at the workshop.  
+  
+I hope some of you can come!
+
+
+# End User Programming
+
+
+## 🗨️ **Beni Cherniavsky-Paskin**:
+
+[🧵 conversation @ 2025-09-15](https://history.futureofcoding.org/history/weekly/2025/09/W3/of-end-user-programming.html#2025-09-15T10:03:54.234Z)
+
+[EUDability: a new construct at the intersection of end-user development and computational thinking](https://ssrn.com/abstract=4129683)  
+[I don't know why it was so hard for me to wade through this paper, despite being squarely in my interests.  
+I feel the academic format is a poor match for the content which could be a good blog post?]  
+  
+The goal is extending "usability" so "use" includes end-user programming.  
+... They observe that "computational thinking" skills become a "literacy" when practiced, including the experience of when to apply which skill. [by that stage the paper still feels like a lot of word shuffling]...  
+The real stuff only comes in pp. 25–27 where they identify qualities ("dimensions") by which the software can help users apply those computational skills:
+
+* Concreteness: this dimension refers to the capability of a EUD environment of presenting concepts and requests in a concrete way, without requiring the user highly-developed abstraction skills;
+* Modularity: this dimension regards the availability in a EUD environment of different elements, blocks, modules or similar things, which help end-user developers decompose a problem and identify the pieces that may compose its solution;
+* Structuredness: when a EUD environment supports the structuring of a solution in a step-by-step process and facilitates the connections between the input and output of the different steps, it can be considered as having the structuredness property;
+* Reusability: when the outcome of a EUD activity can be reused in other situations and possibly shared among different end-user developers, the EUD environment possesses the reusability property;
+* Testability: this dimension refers to the capability of testing the outcome of the EUD activity within the EUD environment.
+
+and the payoff is this diagram where everything falls neatly in place:
+
+![📷 image.png](https://history.futureofcoding.org/history/msg_files/F09/F09FCFKSEDA.png)
+
+
+# AI
+
+
+## 🗨️ **Brian Hempel**:
+
+[🧵 conversation @ 2025-09-15](https://history.futureofcoding.org/history/weekly/2025/09/W3/of-ai.html#2025-09-15T21:01:31.830Z)
+
+Hi FoC AI-interested folks! Hope this isn’t spammy, but we are running a study on how experienced developers leverage AI agents directly in their coding environments and we are looking for developers that use AI agents so we can sort out what’s hype and what’s actually working and then publish that publicly for all to know. It’s a paid study ($100 Amazon gift card) through UC San Diego’s Foundation Interface Lab.  
+  
+In particular, we’re looking for people using terminal-based agents like Claude Code, OpenCode, Gemini CLI, or Codex CLI. We’ve already interviewed many Cursor and Copilot users.  
+  
+What’s involved?  
+• 90-minute remote user study (via Zoom)  
+• Working through a programming task of your choosing that involves agents while you code  
+  
+Who can join?  
+• You must be located in the U.S and 18 years of age or older  
+• You are a professional software engineer or developer with 3 or more years of experience  
+• You are a professional software engineer or developer who uses agentic programming workflows (e.g., Cursor, Windsurf, Claude Code, etc.).  
+  
+If you are interested in participating, please fill out this short [Google Form](https://forms.gle/keMeRNSvdicARJoXA). We will be in touch with you ASAP to schedule a meeting.  
+  
+By participating, you will help advance the state of human knowledge about the fast-evolving roles and practices of coding agents, potentially leading to more intelligent, efficient, and accessible software development. Thanks for considering!
+
+
+# Present Company
+
+## 🗨️ **Kartik Agaram**: [📝 Less is safer: how Obsidian reduces the risk of supply chain attacks](https://obsidian.md/blog/less-is-safer)
+
+[🧵 conversation @ 2025-09-19](https://history.futureofcoding.org/history/weekly/2025/09/W3/present-company.html#2025-09-19T23:52:51.603Z)
+
+I'm glad to see a big player in the JS eco-system address supply chain security head on.   
+  
+> Supply chain attacks are malicious updates that sneak into open source code used by many apps. Here’s how we design Obsidian to ensure that the app is a secure and private environment for your thoughts.
+
+
+
+
+----------
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
+
