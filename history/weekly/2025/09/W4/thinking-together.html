@@ -1,0 +1,50 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-09-22T03:27:17.723Z" class="post"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T03:27:17.723Z" class="date">2025-09-22 03:27:17</a> <div class="message"><p><a href="https://programmingsimplicity.substack.com/p/recursive-asynchronous-layering-what?r=1egdky">programmingsimplicity.substack.com/p/recursive-asynchronous-layering-what?r=1egdky</a></p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://programmingsimplicity.substack.com/p/recursive-asynchronous-layering-what?r=1egdky">Recursive, Asynchronous Layering: What Shell Scripts Teach Us About Program Architecture</a></p>
+<p>2025-09-18</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2025-09-22T18:18:54.411Z" class="reply"><span class="user">Jasmine Otto</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T18:18:54.411Z" class="date">2025-09-22 18:18:54</a> <div class="message"><p>The 'ticking' property of 'container parts' sounds like a useful guarantee for reasoning about async computational graphs (sections 3 - 4). So leaves have to be a function that returns, but containers can sit around listening for inputs.</p>
+<p>I've been struggling with the compositionality of String -&gt; String functions for expressive social simulation. This sort of control flow architecture will help.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-22T18:27:13.798Z" class="reply"><span class="user">Jasmine Otto</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T18:27:13.798Z" class="date">2025-09-22 18:27:13</a> <div class="message">
+<blockquote><p>$4</p>
+</blockquote>
+<ol start="2"><li>Routes messages to appropriate children according to wire table</li></ol><p>It sounds like the wire spec is really a [Sender, Receiver, Condition] entry. 'direction' is determined by the container/leaf-ness of Sender and Receiver. But we should write down a rule for whether the wire will transmit or not.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-22T18:38:44.350Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T18:38:44.350Z" class="date">2025-09-22 18:38:44</a> <div class="message"><p>in general: I consider units of software to be more primitive than “functions”. A Part is ready to run if it has any messages in its input queue. When it is chosen to run, it might produce zero or more output messages and queues them up on its output queue. The Container routes the output messages, then loops around again to check if message routing has caused any other child parts to become “ready”. It does this over and over again until there are no inputs on any child queues and there are only messages queued up on its own output queue. I call this repetition “ticking”. Operating system Dispatchers() do this, but they set a timer to interrupt a long-running child and to return control back to the Dispatcher(). In the PBP case, one is simply building a program, so preemption isn’t required (it’s “just a bug” to have a too-long-running part), hence, we can whittle away a lot of hardware and CPU cycles and make the whole thing more “efficient”. … back to my use of the word “function” - “functions” imply a hard-wired routing policy, i.e. callee must /always/ send info back to the caller. I contend that it is important to be able to /not/ hard-wire that routing policy in /all/ code. IOW, a “part” is something more-primitive than a “function”, in my mind.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-22T18:42:53.051Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T18:42:53.051Z" class="date">2025-09-22 18:42:53</a> <div class="message"><p>I don’t yet grok what is meant by  <code>[Sender, Receiver, Condition]</code> . As soon as I see the word  <code>condition</code>  my neurons see “state machine” (or statechart). IMM, ‘wires’ (arrows) are tubes through which data flows. If that’s what is meant, then I don’t get it yet. If that’s not what is meant, then I don’t get it yet. Hmm, mulling….</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-22T18:48:17.979Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T18:48:17.979Z" class="date">2025-09-22 18:48:17</a> <div class="message"><p>I learned the word “tick” from a colleague who is building robotics with ROS.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-22T18:49:47.138Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T18:49:47.138Z" class="date">2025-09-22 18:49:47</a> <div class="message"><p>FYI, “wires” can only be defined in Containers. I don’t/can’t care what’s inside Leaves.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-22T20:33:00.231Z" class="reply"><span class="user">Jasmine Otto</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T20:33:00.231Z" class="date">2025-09-22 20:33:00</a> <div class="message"><p>I'm seeing the distinction between Containers, Parts, and Leaves more sharply, thanks. I agree it's a good idea to eradicate 'function' in this context b/c it could mean either an ideal function (with no stateful beliefs like the input/output queues), or a function on a call stack (which drags in conventional imperative beliefs about the runtime).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-22T20:37:53.476Z" class="reply"><span class="user">Jasmine Otto</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T20:37:53.476Z" class="date">2025-09-22 20:37:53</a> <div class="message"><p>I think the Container and the list of wire specs are the same thing, up to guarantees about which parts ought to eventually be ready, i.e. the implementation of ticking. (But this is where I need to read up on propagators for real.) I'm not sure what the utility of more than one Container is.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-22T21:37:40.845Z" class="reply"><span class="user">Paul Tarvydas</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-19&amp;toDate=2025-09-25&amp;channel=thinking-together&amp;filter=#2025-09-22T21:37:40.845Z" class="date">2025-09-22 21:37:40</a> <div class="message">
+<blockquote><p>I'm not sure what the utility of more than one Container is.</p>
+</blockquote>
+<p>Architectural layering. Isolation of data /and/ control-flow. LEGO®-like parts that snap together. You can create a large system which is simple enough to understand at every layer. “Functions” promise that kind of composability, but, the underlying “blocking” nature of function calling (caller must suspend waiting for callee) hampers pluggability. In my eyes, current software practices based on code libraries lead to bloat and to fragility and increasing complexity and to gotchas. Analogy: the “ideal” way to build programs would be to create multiply-threaded architectures and use 1 Arduino (or other small machine) for each thread in a program (i.e. no operating system or other bloatware needed). If I were to build a system like this with 1,000 Arduinos, I’d find some way to group them in a hierarchical fashion (think ORG chart in business, and, middle-management) and this leads to “multiple Container” thinking. This is what most programmers think that they are doing, but, I contend that they are not because of the hidden gotchas that function calls/returns entail.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-09-23T14:01:13.373Z" class="reply"><span class="user">brett g porter</span> <a href="https://history.futureofcoding.org/?fromDate=2025-09-20&amp;toDate=2025-09-26&amp;channel=thinking-together&amp;filter=#2025-09-23T14:01:13.373Z" class="date">2025-09-23 14:01:13</a> <div class="message"><p>Thank you for the idea of a "wire table" -- might have just knocked loose some things I've been stumbling on in my head.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
