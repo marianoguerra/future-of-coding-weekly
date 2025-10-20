@@ -1,0 +1,41 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-10-04T19:27:55.461Z" class="post"><span class="user"></span> <a href="https://history.futureofcoding.org/?fromDate=2025-10-01&amp;toDate=2025-10-07&amp;channel=devlog-together&amp;filter=#2025-10-04T19:27:55.461Z" class="date">🕰️ 2025-10-04 19:27:55</a> <div class="message"><p>...</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2025-10-13T14:27:10.222Z" class="reply"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-10-10&amp;toDate=2025-10-16&amp;channel=devlog-together&amp;filter=#2025-10-13T14:27:10.222Z" class="date">2025-10-13 14:27:10</a> <div class="message"><p>One lame issue is Notebook 2.0, it does not support importing other Notebook 2.0s which kinda breaks my plan.</p>
+<p>Upvote the feature request here <a href="https://github.com/observablehq/notebook-kit/issues/96">github.com/observablehq/notebook-kit/issues/96</a> (they will do it and its a matter of when)</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2025-10-17T07:14:36.050Z" class="post"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-10-14&amp;toDate=2025-10-20&amp;channel=devlog-together&amp;filter=#2025-10-17T07:14:36.050Z" class="date">2025-10-17 07:14:36</a> <div class="message"><p>Now that FoC stands for "feeling of computing", I can share this — I recently built a <a href="https://automerge.org">new website for Automerge</a>, along with the absurdly talented designer Todd Matthews. The site includes an interactive demo and a bunch of illustrations that attempt to give newcomers a sense of what Automerge does. Like, on one level, we say what it does quite directly with words. But I think it's good to also try to, like,  <em><em>show</em></em>  that somehow, even though it's occasionally a bit abstract.</p>
+<p>It was a deeply rewarding challenge, coming up with visuals where every detail (dash patterns, directions of lines, use of shapes) had to be both pleasing to look at but also  <em><em>true to the meaning</em></em> , and consistent with the other meanings.</p>
+<p>You can take something technical — "everyone has their own copy of the data, changes queue, you sync with your peers, everything converges on a consistent state" — and put that into imagery.</p>
+<p>Now, of course, I want to actually use the imagery to do the technical thing.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"></div></div><div id="2025-10-19T19:14:58.957Z" class="post"><span class="user">Tom Larkworthy</span> <a href="https://history.futureofcoding.org/?fromDate=2025-10-16&amp;toDate=2025-10-22&amp;channel=devlog-together&amp;filter=#2025-10-19T19:14:58.957Z" class="date">2025-10-19 19:14:58</a> <div class="message"><p>Been thinking how Observable Notebook 2.0 format helps me. I conclude, that kind of transformation should NOT be in the low level. To run Notebook 2.0 you need compilers, but to run Lopecode the format is the low level raw JavaScript so Notebook 2.0 format puts specialised parsers/compilers in the loading path. Compilers and language choices should be in userspace, where they can be changed by the user. So I will revisit Notebook 2.0 when I have fixed the lower layer. I think it be neat as a userspace module.</p>
+<p>So I return to where I left off. Bugs in importing from the net. I am redoing the foundational technology. I ditched importmaps and moved over to es-module-shims. It has allowed me to fix a problem that locally loaded models could not be deduped with network imported ones, which ends up causing semantic issues. importmaps are 1-way doors, es-module-shims gives you total control over import semantics at any point in time. Its a really amazing piece of software I recommend learning how it works. It has a C written Lezer parser doing the minimum parsing possible in the fastest possible way to read source code and swap "import" for "importShim" thus enclosing all import calls with a wrapper for customization.</p>
+<p>Anyway, in the process I noticed defining the stdlib in the system space was also questionable because half those libs are broken (duckdb) and it takes up 50% of the system overheads for a large amount of extraneous code. Notebook 2.0 redid the stdlib =&gt; stdlib is subject to churn. So by a similar argument the stdlib definition should be in userspace too.</p>
+<p>I spent a weekend on it and got surprisingly far. I can display some things, es-module-shim dedupuing seems to work and I added a userspace boot module that defines the stdlib and  <em>then</em>  loads the main module which I think its an improvement and allows the serialization format bootstrap process to be very small (26Kb). In that 26Kb you get a hot swapping reactive runtime and total control over ESM import semantics in a local-file.</p>
+</div> <div class="attachments"></div> <div class="files"><p><img src="http://history.futureofcoding.org/history/msg_files/F09/F09LWTKBF47.png" alt="image.png"></p>
+</div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>

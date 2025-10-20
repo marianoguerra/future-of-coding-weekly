@@ -1,0 +1,95 @@
+[
+    {
+        "text": "Been thinking how Observable Notebook 2.0 format helps me. I conclude, that kind of transformation should NOT be in the low level. To run Notebook 2.0 you need compilers, but to run Lopecode the format is the low level raw JavaScript so Notebook 2.0 format puts specialised parsers/compilers in the loading path. Compilers and language choices should be in userspace, where they can be changed by the user. So I will revisit Notebook 2.0 when I have fixed the lower layer. I think it be neat as a userspace module.\n\nSo I return to where I left off. Bugs in importing from the net. I am redoing the foundational technology. I ditched importmaps and moved over to es-module-shims. It has allowed me to fix a problem that locally loaded models could not be deduped with network imported ones, which ends up causing semantic issues. importmaps are 1-way doors, es-module-shims gives you total control over import semantics at any point in time. Its a really amazing piece of software I recommend learning how it works. It has a C written Lezer parser doing the minimum parsing possible in the fastest possible way to read source code and swap \"import\" for \"importShim\" thus enclosing all import calls with a wrapper for customization.\n\nAnyway, in the process I noticed defining the stdlib in the system space was also questionable because half those libs are broken (duckdb) and it takes up 50% of the system overheads for a large amount of extraneous code. Notebook 2.0 redid the stdlib =&gt; stdlib is subject to churn. So by a similar argument the stdlib definition should be in userspace too.\n\nI spent a weekend on it and got surprisingly far. I can display some things, es-module-shim dedupuing seems to work and I added a userspace boot module that defines the stdlib and *then* loads the main module which I think its an improvement and allows the serialization format bootstrap process to be very small (26Kb). In that 26Kb you get a hot swapping reactive runtime and total control over ESM import semantics in a local-file.",
+        "files": [
+            {
+                "id": "F09LWTKBF47",
+                "created": 1760892229,
+                "timestamp": 1760892229,
+                "name": "image.png",
+                "title": "image.png",
+                "mimetype": "image/png",
+                "filetype": "png",
+                "pretty_type": "PNG",
+                "user": "U02E4DAQGSZ",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 1258274,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https://files.slack.com/files-pri/T5TCAFTA9-F09LWTKBF47/image.png",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F09LWTKBF47/download/image.png",
+                "media_display_type": "unknown",
+                "thumb_64": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_64.png",
+                "thumb_80": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_80.png",
+                "thumb_360": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_360.png",
+                "thumb_360_w": 360,
+                "thumb_360_h": 185,
+                "thumb_480": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_480.png",
+                "thumb_480_w": 480,
+                "thumb_480_h": 246,
+                "thumb_160": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_160.png",
+                "thumb_720": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_720.png",
+                "thumb_720_w": 720,
+                "thumb_720_h": 370,
+                "thumb_800": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_800.png",
+                "thumb_800_w": 800,
+                "thumb_800_h": 411,
+                "thumb_960": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_960.png",
+                "thumb_960_w": 960,
+                "thumb_960_h": 493,
+                "thumb_1024": "https://files.slack.com/files-tmb/T5TCAFTA9-F09LWTKBF47-6deb5b7fae/image_1024.png",
+                "thumb_1024_w": 1024,
+                "thumb_1024_h": 526,
+                "original_w": 3456,
+                "original_h": 1774,
+                "thumb_tiny": "AwAZADC8IowqptJU8gEZH69KUwoQQRwfw/XrQ6BpFyTxzjnGR+lK33+Uz3B4/wA//rp2AafLj5KkY5yFz+NBZVUbZEVV65xjH9KGHyOQrI2Dgjn9B1qN3WFVNyc+hK5Gf1xSAnVgRjeC2BnFKoOOSeexxx+VVRd2vIjcBm4+VDnPbtSxtO7kbm2cdVw3I9xjjrQBMjhmICFT3ypH69KcSA2Dt5wOvJ61Qu/9S/8AwP8A9DFaDdPxH86tq2oDdx8zA2kd8Hke/wCmKhvYWuIxGnDA7snOPzqzQelQBmQ6dMkyOWTCsCcE/wCFaWBxwOOntTJPvxf75/8AQTUlAH//2Q==",
+                "permalink": "https://feelingofcomputing.slack.com/files/UBN9AFS0N/F09LWTKBF47/image.png",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F09LWTKBF47-5b1431e7ae",
+                "is_starred": false,
+                "skipped_shares": true,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U02E4DAQGSZ",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "nTpMh",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Been thinking how Observable Notebook 2.0 format helps me. I conclude, that kind of transformation should NOT be in the low level. To run Notebook 2.0 you need compilers, but to run Lopecode the format is the low level raw JavaScript so Notebook 2.0 format puts specialised parsers/compilers in the loading path. Compilers and language choices should be in userspace, where they can be changed by the user. So I will revisit Notebook 2.0 when I have fixed the lower layer. I think it be neat as a userspace module.\n\nSo I return to where I left off. Bugs in importing from the net. I am redoing the foundational technology. I ditched importmaps and moved over to es-module-shims. It has allowed me to fix a problem that locally loaded models could not be deduped with network imported ones, which ends up causing semantic issues. importmaps are 1-way doors, es-module-shims gives you total control over import semantics at any point in time. Its a really amazing piece of software I recommend learning how it works. It has a C written Lezer parser doing the minimum parsing possible in the fastest possible way to read source code and swap \"import\" for \"importShim\" thus enclosing all import calls with a wrapper for customization.\n\nAnyway, in the process I noticed defining the stdlib in the system space was also questionable because half those libs are broken (duckdb) and it takes up 50% of the system overheads for a large amount of extraneous code. Notebook 2.0 redid the stdlib => stdlib is subject to churn. So by a similar argument the stdlib definition should be in userspace too.\n\nI spent a weekend on it and got surprisingly far. I can display some things, es-module-shim dedupuing seems to work and I added a userspace boot module that defines the stdlib and "
+                            },
+                            {
+                                "type": "text",
+                                "text": "then",
+                                "style": {
+                                    "bold": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " loads the main module which I think its an improvement and allows the serialization format bootstrap process to be very small (26Kb). In that 26Kb you get a hot swapping reactive runtime and total control over ESM import semantics in a local-file."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1760901298.957959",
+        "client_msg_id": "602ebe1b-c69b-4b85-bc49-853913d11763"
+    }
+]
