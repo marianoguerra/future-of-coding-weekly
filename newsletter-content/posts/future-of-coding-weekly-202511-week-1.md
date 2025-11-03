@@ -1,0 +1,117 @@
+<!--
+.. title: Future of Coding Weekly 2025/11 Week 1
+.. slug: future-of-coding-weekly-202511-week-1
+.. date: 2025-11-03 13:54:07 UTC+01:00
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+-->
+
+# Two Minute Week
+
+## 🗨️ **Kartik Agaram**:
+
+[🧵 conversation @ 2025-10-31](https://history.futureofcoding.org/history/weekly/2025/11/W1/two-minute-week.html#2025-10-31T06:24:56.324Z)
+
+A little experiment with scrollbars
+
+[🎥 scrollbar](https://history.futureofcoding.org/history/msg_files/F09/F09Q96JDF9P.webm)
+
+# Share Your Work
+
+## 🗨️ **When Leggett**: [📝 for Server User-Agents](https://its.whenthetimeca.me/p/for-server-user-agents)
+
+[🧵 conversation @ 2025-10-30](https://history.futureofcoding.org/history/weekly/2025/11/W1/share-your-work.html#2025-10-30T17:55:42.128Z)
+
+So I spent most of last week in Mountain View for the 41st Internet Identity Workshop. While I was there, I was advocating for something that I've been calling Server User-Agents, and I think they're a fundamental missing piece of architecture
+
+This week I spent time putting my notes and conversations together and wrote a deep article about the concept, although it is still very early and intentionally a loose sort of spec. Its more a call for participation.
+
+<https://its.whenthetimeca.me/p/for-server-user-agents>
+
+[📝 for Server User-Agents](https://its.whenthetimeca.me/p/for-server-user-agents)
+
+> Notes from the 41st IIW
+
+![for Server User-Agents](https://substackcdn.com/image/fetch/$s_!J9W_!,w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0181eeee-78f7-403c-8692-fd92eaac5631_1434x1072.png)
+
+## 🗨️ **When Leggett**:
+
+[🧵 conversation @ 2025-10-30](https://history.futureofcoding.org/history/weekly/2025/11/W1/share-your-work.html#2025-10-30T17:56:39.451Z)
+
+I think its relevant to this community too, although maybe a little outside the center
+
+## 🗨️ **Eli**:
+
+[🧵 conversation @ 2025-10-31](https://history.futureofcoding.org/history/weekly/2025/11/W1/share-your-work.html#2025-10-31T15:33:57.139Z)
+
+Here is a little work in progress snippet of a thing. It applies a heat map kinda color scheme to git diffs, the idea being that its rules can be tuned to call out places in the code that need closer attention when reviewing the diff. The rules are very much still a work in progress, and I'm super duper open to suggestions for ways to approach creating these rules.
+
+Rambling video, be warned. I apologies for having the crunchiest, noisiest mouse wheel ever in the history of the recorded universe. Its like an ASMR halloween nightmare.
+
+[🎥 video](https://history.futureofcoding.org/history/msg_files/F09/F09PTFM25FV.mkv)
+
+# DevLog Together
+
+## 🗨️ **Tom Larkworthy**:
+
+[🧵 conversation @ 2025-11-01](https://history.futureofcoding.org/history/weekly/2025/11/W1/devlog-together.html#2025-11-01T18:42:48.488Z)
+
+Notebook kit ships with themes, so I can reuse them for the Lopebook. I think they look better than the original!
+
+Happy about how they are implemented, they use CSS imports, which resolve through es-module-shims, so I can serve them locally, and fallback to network. This means the local file includes just the current theme, and you do a network fetch only when changing themes, keeping the bundle size small and local-first.  
+Also thanks to the magic of es-module-shims, the CSS is fetched directly from Github raw URLs, as I can switch the content-type to test/css programatically. es-module-shims is so powerful for local-first stuff.
+
+[🎥 styles](https://history.futureofcoding.org/history/msg_files/F09/F09PQKKKB5M.mov)
+
+# Linking Together
+
+## 🗨️ **Tommy Palmer**: [📝 Everything Is Television](https://www.derekthompson.org/p/why-everything-became-television)
+
+[🧵 conversation @ 2025-10-29](https://history.futureofcoding.org/history/weekly/2025/11/W1/linking-together.html#2025-10-29T15:55:11.601Z)
+
+I’m a bit of a lurker here (can’t even remember if I did an intro post) but I thought people might like this [📝 Everything Is Television](https://www.derekthompson.org/p/why-everything-became-television)
+
+> A theory of culture and attention
+
+## 🗨️ **guitarvydas**:
+
+[🧵 conversation @ 2025-10-30](https://history.futureofcoding.org/history/weekly/2025/11/W1/linking-together.html#2025-10-30T14:47:07.223Z)
+
+a bunch of links to [various books](http://stephane.ducasse.free.fr/FreeBooks/) about smalltalk, maybe of interest (to me, part 4 of the blue book is quite interesting)
+
+## 🗨️ **Konrad Hinsen**: [🎥 PROG Rock: Listening to old Lisp code](https://www.youtube.com/watch?v=0pKU5lcfMYw&index=9)
+
+[🧵 conversation @ 2025-10-30](https://history.futureofcoding.org/history/weekly/2025/11/W1/linking-together.html#2025-10-30T14:55:42.530Z)
+
+![PROG Rock: Listening to old Lisp code](https://i.ytimg.com/vi/0pKU5lcfMYw/hqdefault.jpg)
+
+## 🗨️ **Jon Tran**: [📝 Five Pillars of Pipe](https://medium.com/@toplinesoftsys/five-pillars-of-pipe-b2de5f0d1421)
+
+[🧵 conversation @ 2025-10-31](https://history.futureofcoding.org/history/weekly/2025/11/W1/linking-together.html#2025-10-31T04:08:08.371Z)
+
+## 🗨️ **Ivan Reese**:
+
+[🧵 conversation @ 2025-10-31](https://history.futureofcoding.org/history/weekly/2025/11/W1/linking-together.html#2025-10-31T06:25:48.263Z)
+
+Folks who came out to the SF meetup, and others besides, might find this new [pseudo-rebirth of cohost as](https://blog.curiousquail.com/the-website-league-is-here/) [a bunch of federated websites](https://blog.curiousquail.com/the-website-league-is-here/) intriguing. I certainly do.
+
+# Present Company
+
+## 🗨️ **Jon Tran**:
+
+[🧵 conversation @ 2025-10-29](https://history.futureofcoding.org/history/weekly/2025/11/W1/present-company.html#2025-10-29T22:01:44.371Z)
+
+The company I work for has an open role to work on a programming language for mechanical CAD. The project was originally inspired by sketch-n-sketch, where you can draw/edit in the scene and it updates the code, and vice versa. We're also working on integrating a constraint solver. The GUI, interpreter, and solver are open source. I'll put details in the thread.
+
+---
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
