@@ -16,7 +16,7 @@
 <link href="assets/css/theme.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="prefetch" href="posts/future-of-coding-weekly-202511-week-4/" type="text/html">
+<link rel="prefetch" href="posts/future-of-coding-weekly-202512-week-1/" type="text/html">
 </head>
 <body>
 
@@ -50,7 +50,70 @@
 <p style="font-size:1.5rem;margin-bottom:2rem;text-align:center">✉️ Not subscribed yet? <a href="https://newsletter.futureofcoding.org/join/" target="_blank">Subscribe to the Newsletter</a></p>
     
 
-    <article><h1 class="title"><a href="posts/future-of-coding-weekly-202511-week-4/">Future of Coding Weekly 2025/11 Week 4</a></h1>
+    <article><h1 class="title"><a href="posts/future-of-coding-weekly-202512-week-1/">Future of Coding Weekly 2025/12 Week 1</a></h1>
+      <h2 class="subtitle is-6">2025-11-30 22:19</h2>
+      <div class="content">
+    <p>📢 Announcing Unison 1.0 📄 Towards Pen-and-Paper-Style Equational Reasoning 🧑‍💻 Tom Larkworthy go brrr</p>
+<h2>Two Minute Week</h2>
+<h3>🗨️ <strong>Tom Larkworthy</strong>
+</h3>
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/12/W1/two-minute-week.html#2025-11-30T19:55:34.204Z">🧵 conversation @ 2025-11-30</a></p>
+<p>I have written a userspace hook to intercept all code changes in the Observable Runtime, which allows point-in-time recovery by rewriting the cells to be the same as in the past. Furthermore, its a building block towards serializing and replaying the history from IndexDB, so you don't lose changes if you refresh and/or forget to export to file.<br>
+Its cool that can be done from userspace, a year ago I felt history might be a challenge, but no!</p>
+<p><a href="https://history.futureofcoding.org/history/msg_files/F0A/F0A0KQT8ZC6.mp4">🎥 Change History</a></p>
+<h2>Share Your Work</h2>
+<h3>🗨️ <strong>Dennis Hansen</strong>
+</h3>
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/12/W1/share-your-work.html#2025-11-30T01:53:48.140Z">🧵 conversation @ 2025-11-30</a></p>
+<p><a href="https://history.futureofcoding.org/history/msg_files/F0A/F0A0P50HRLL.mov">🎥 Calculator go brrr</a></p>
+<h2>DevLog Together</h2>
+<h3>🗨️ <strong>Tom Larkworthy</strong>
+</h3>
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/12/W1/devlog-together.html#2025-11-24T19:32:31.062Z">🧵 conversation @ 2025-11-24</a></p>
+<p>Been working on a different Agentic AI concept, but the Agent is under performing and coding and its not actually useful (unlike <a href="https://observablehq.com/@tomlarkworthy/robocoop-2">robocoop-2</a> which is good).</p>
+<p>Switched to getting a nice way to remember state. Using IndexDB to persist across page refreshes and mutable FileAttachments to carry state between exports (<a href="https://observablehq.com/@tomlarkworthy/local-state">localState</a>).<br>
+Brought in ProseMirror to make a notion-like directly editable markdown interface (<a href="https://observablehq.com/@tomlarkworthy/markdowninput">markdownInput</a>), because its quite annoying to have to write markdown using a programming language and I want to write more in Lopecode.</p>
+<p><a href="https://history.futureofcoding.org/history/msg_files/F09/F09UT4ZF751.mp4">🎥 Markdown Input</a></p>
+<h3>🗨️ <strong>Tom Larkworthy</strong>
+</h3>
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/12/W1/devlog-together.html#2025-11-30T11:25:11.145Z">🧵 conversation @ 2025-11-30</a></p>
+<p>I forgot you can shadow Observable Runtime standard functions. So I redid the markdown editor. Its not a distinct function anymore, it overloads the md library function which means it applies to existing notebooks. It serializes modifications as code changes, so there is no difference in representation to the existing markdown.<br>
+The reason I implemented this was someone said they expected to be able to edit prose like in Notion, and I do personally feel the Observable experience is not great for the documentation part, as you have to write it in code which located in a different part of the UI to the bit your are reading, which is not natural. Inline editing feels much better. Very happy this can be achieved in userspace without any architectural changes and is backwards compatible to what has already been written.</p>
+<p><a href="https://history.futureofcoding.org/history/msg_files/F0A/F0A058MSRRD.mov">🎥 inline edit</a></p>
+<h2>Thinking Together</h2>
+<h3>🗨️ <strong>Tom Larkworthy</strong>
+</h3>
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/12/W1/thinking-together.html#2025-11-26T19:50:58.018Z">🧵 conversation @ 2025-11-26</a></p>
+<p><a href="posts/future-of-coding-weekly-202512-week-1/#user?key=U06BUK2M2RH">Dennis Hansen</a> Great workshop on Artifact. I recognized the situation where you have to synchronise updates to do their thing before letting the outer thing tick on. Its in this notebook which is also a dataflow graph based programming environment but that is not graphical<br><a href="https://observablehq.com/@tomlarkworthy/flow-queue">https://observablehq.com/@tomlarkworthy/flow-queue</a></p>
+<p>It interesting seeing the same thing manifest. I think its because values propagate through the program asynchronously, but you sort of want functional reuse or recursion, but calling a function actually takes time now in the async world, so to get that "request/response" functional interface you need the converter from async to sync, which involves a synchronisation barrier to bring back the functional abstraction. After trying to work with it a while I sorta decided its annoying for some problems. The nice thing about a function call is the caller is stopped until the the call finishes, and the result is wired back to the caller, although many different places may make a call to the same function. Its harder to do on a static dataflow graph.</p>
+<p>I think the functional calling primitive is something you could probably put into to your cells as they have routing ability (remember who sent me a value and next time I get a value send it back to the initiator?).</p>
+<p>I share coz sometimes seeing the same thing in a different context can give helpful for perspective. See your work made me thing about the fact I put a queue in my flow-queue which makes it kinda of an actor too, even though the underlying dataflow paradigm of Observable does not have queueing between cells. I had to add the queue to get to the functional interface, to be able to process one thing at a time on the static dataflow graph 🤔</p>
+<h3>🗨️ <strong>Medet Ahmetson</strong>
+</h3>
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/12/W1/thinking-together.html#2025-11-26T21:24:14.928Z">🧵 conversation @ 2025-11-26</a></p>
+<p>What do you guys think? About a project run by multiple online communities, each responsible for some aspect or feature. For example, right now, I'm working on a gamified collaboration platform. And instead, keeping the leaderboard of the most active users on platform, maybe contact specific organizations who already does it. If I will add the admin panel, and they handle it on the platform.</p>
+<h2>Linking Together</h2>
+<h3>🗨️ <strong>Eli</strong>
+</h3>
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/12/W1/linking-together.html#2025-11-25T18:09:13.576Z">🧵 conversation @ 2025-11-25</a></p>
+<p><a href="https://steuwer.info/files/publications/2026/POPL-Lean-Egg.pdf">EGG</a>, from "Towards Pen-and-Paper-Style Equational Reasoning in Interactive Theorem Provers by Equality Saturation"</p>
+<p><img alt="📷 Screenshot 2025-11-25 at 1.08.38 PM.png" src="https://history.futureofcoding.org/history/msg_files/F09/F09URV16S6B.png"></p>
+<h3>🗨️ <strong>shalabh</strong>: <a href="https://www.unison-lang.org/unison-1-0/">📢 Announcing Unison 1.0</a>
+</h3>
+<p><a href="https://history.futureofcoding.org/history/weekly/2025/12/W1/linking-together.html#2025-11-26T01:56:53.754Z">🧵 conversation @ 2025-11-26</a></p>
+<p>Unision 1.0 released: <a href="https://www.unison-lang.org/unison-1-0/">https://www.unison-lang.org/unison-1-0/</a><br>
+Key ideas are ‘content hash’ identifies functions and code lives in a DB.</p>
+<p><a href="https://www.unison-lang.org/unison-1-0/">📝 Announcing Unison 1.0</a></p>
+<blockquote>
+<p>After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison.</p>
+</blockquote>
+<hr>
+<p>👨🏽‍💻 By 🐘 <a href="https://hachyderm.io/@marianoguerra">@marianoguerra@hachyderm.io</a> 🐦 <a href="https://twitter.com/warianoguerra">@warianoguerra</a></p>
+<p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/">Future of Coding Community</a></p>
+<p>✉️ Not subscribed yet? <a href="https://newsletter.futureofcoding.org/join/">Subscribe to the Newsletter</a> / <a href="https://newsletter.futureofcoding.org/archive.html">Archive</a> / <a href="https://history.futureofcoding.org/newsletter/rss.xml">RSS</a></p>
+<p>🎙️ Prefer podcasts? check the <a href="https://futureofcoding.org/episodes/">Future of Coding Podcast</a></p>
+      </div>
+    </article><article><h1 class="title"><a href="posts/future-of-coding-weekly-202511-week-4/">Future of Coding Weekly 2025/11 Week 4</a></h1>
       <h2 class="subtitle is-6">2025-11-24 11:33</h2>
       <div class="content">
     <p>🎙️ TodePond and Dave Ackley 🎼 Thuja: Algorithmic composition with Csound 🧑‍💻 OpenAI constrained generation with Context‑Free Grammar</p>
@@ -682,96 +745,6 @@ PPS. I showed a very early prototype to <a href="posts/future-of-coding-weekly-2
 <p>If it's appreciated I'll post some updates somewhere here on Slack every now and then. Let me know if you have any questions or comments!</p>
 <p><a href="https://www.youtube.com/watch?v=j5dqxRUmf6U">🎥 Comper update July 2025</a></p>
 <p><img alt="Comper update July 2025" src="https://i.ytimg.com/vi/j5dqxRUmf6U/hqdefault.jpg"></p>
-<hr>
-<p>👨🏽‍💻 By 🐘 <a href="https://hachyderm.io/@marianoguerra">@marianoguerra@hachyderm.io</a> 🐦 <a href="https://twitter.com/warianoguerra">@warianoguerra</a></p>
-<p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/">Future of Coding Community</a></p>
-<p>✉️ Not subscribed yet? <a href="https://newsletter.futureofcoding.org/join/">Subscribe to the Newsletter</a> / <a href="https://newsletter.futureofcoding.org/archive.html">Archive</a> / <a href="https://history.futureofcoding.org/newsletter/rss.xml">RSS</a></p>
-<p>🎙️ Prefer podcasts? check the <a href="https://futureofcoding.org/episodes/">Future of Coding Podcast</a></p>
-      </div>
-    </article><article><h1 class="title"><a href="posts/future-of-coding-weekly-202509-week-4/">Future of Coding Weekly 2025/09 Week 4</a></h1>
-      <h2 class="subtitle is-6">2025-09-21 22:26</h2>
-      <div class="content">
-    <p>📑 Dynamic Abstractions Reading Group 🎥 hirba - Legible live programming through rich in-context representations 📢 LIVE 2025: Workshop on Live Programming</p>
-<h2>Share Your Work</h2>
-<h3>🗨️ <strong>Jasmine Otto</strong>:</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/share-your-work.html#2025-09-15T16:48:11.172Z">🧵 conversation @ 2025-09-15</a></p>
-<p>I am giving a talk on boundary objects this Fri for the Dynamic Abstractions reading group, at 9am PT. I've linked couple readings from CSCW (Ribes on domain, and Star on good ol' fashioned AI) and my BELIV paper. <a href="https://dynamicabstractions.github.io/reading-group/">📑 Dynamic Abstractions Reading Group</a>  </p>
-<p>In the meantime - we've got four great talks on the ladder of abstraction, constructivism &amp; Building SimCity, and the design of intelligent interfaces &amp; systems. Ian Arawjo's latest about how notations emerge is solid gold if you're thinking about non-code coding interfaces. (40min video + 20min q&amp;a, through the link, scroll down.)</p>
-<h3>🗨️ <strong>Gregor</strong>:</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/share-your-work.html#2025-09-17T13:29:18.878Z">🧵 conversation @ 2025-09-17</a></p>
-<p><a href="https://bsky.app/profile/watwa.re/post/3lyzwspp7rs2z">Here</a> is some ideas I've been thinking about for my coding environment, as always happy to get feedback!</p>
-<blockquote>
-<p><a href="https://bsky.app/profile/watwa.re/post/3lyzwspp7rs2z">🦋 watwa.re</a>: My ideas are faster than my fingers so I've did some Figma prototyping and video editing to talk about some of my new ideas before they are actual coded reality</p>
-<p><a href="https://youtu.be/2DRWUgK-RdA">🎥 hirba - Legible live programming through rich in-context representations </a></p>
-</blockquote>
-<h2>Thinking Together</h2>
-<h3>🗨️ <strong>guitarvydas</strong>: <a href="https://programmingsimplicity.substack.com/p/simplicity-1d3?r=1egdky">📝 Simplicity</a>
-</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/thinking-together.html#2025-09-15T09:43:40.284Z">🧵 conversation @ 2025-09-15</a></p>
-<h3>🗨️ <strong>Joel</strong>: <a href="https://www.youtube.com/watch?v=tfDCNpaPBiA">🎥 Saul Bass: On Making Money vs Quality Work</a>
-</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/thinking-together.html#2025-09-17T11:56:55.953Z">🧵 conversation @ 2025-09-17</a></p>
-<h3>🗨️ <strong>Chris Knott</strong>:</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/thinking-together.html#2025-09-17T16:55:47.178Z">🧵 conversation @ 2025-09-17</a></p>
-<p>Does anyone remember a paper about a low level data format that was a kind of structured JSON thing, but it was a binary format and gracefully simplified into a raw string or raw int if that was the only data. It was definitely posted here at some point, maybe 5yrs ago though…!</p>
-<h3>🗨️ <strong>Hemi Edwards</strong>:</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/thinking-together.html#2025-09-17T22:36:07.641Z">🧵 conversation @ 2025-09-17</a></p>
-<p><a href="posts/future-of-coding-weekly-202509-week-4/#user?key=UGWUJUZHT">guitarvydas</a> A friend of mine and I were exploring this subject. He was a computer engineer trained at MIT back in the mid 1980s and had developed expertise in higher level languages like Go and Ruby, but was interested in going back to first-principles. He was interested in the possibilities offered by UML and generating domain specific language to solve problems. I actually thought about combining UML with a TLA+. UML could be used as a visual representation of a system's design and TLA+ could perform the role of specification and verification of the system's model and then generate Ada code to build mission critical system, like they do in aerospace.</p>
-<h2>Linking Together</h2>
-<h3>🗨️ <strong>ruru4143</strong>: <a href="https://thestrangeloop.com/2022/introducing-the-handaxe-collections-pattern-language.html">📝 Introducing the HandAxe Collections Pattern Language - Strange Loop</a>
-</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/linking-together.html#2025-09-16T15:01:42.161Z">🧵 conversation @ 2025-09-16</a></p>
-<p><a href="https://thestrangeloop.com/2022/introducing-the-handaxe-collections-pattern-language.html">Introducing the HandAxe Collections Pattern Language</a> is a abstract rundown on all operations you can have on common collection types. The switch to edges instead of indices is really nice.  </p>
-<p>Sadly this is the only public artifact of this project</p>
-<h3>🗨️ <strong>misha</strong>:</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/linking-together.html#2025-09-18T07:11:11.141Z">🧵 conversation @ 2025-09-18</a></p>
-<p>Please, share your favorite resources about approaches to versioning of APIs, DB schemas, code libraries etc.<br>
-Versions rollout, support, and deprecation still feel unsolved and ad-hoc.</p>
-<h3>🗨️ <strong>Joshua Horowitz</strong>:</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/linking-together.html#2025-09-20T00:25:31.732Z">🧵 conversation @ 2025-09-20</a></p>
-<p>The LIVE Workshop (all about live programming) is free &amp; online this year, and coming up soon. We will be “premiering” presentation videos on Saturday, September 27, after which they will be available to watch on your own time if you prefer. Then, on Saturday, October 4, we will have live (har har) Q &amp; A and discussion over Zoom.  </p>
-<p>Details are up at <a href="https://liveprog.org/">https://liveprog.org/</a>. We’re still finalizing schedule, links, etc., but you can read a bit about the 12 exciting projects that will be discussed at the workshop.  </p>
-<p>I hope some of you can come!</p>
-<h2>End User Programming</h2>
-<h3>🗨️ <strong>Beni Cherniavsky-Paskin</strong>:</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/of-end-user-programming.html#2025-09-15T10:03:54.234Z">🧵 conversation @ 2025-09-15</a></p>
-<p><a href="https://ssrn.com/abstract=4129683">EUDability: a new construct at the intersection of end-user development and computational thinking</a><br>
-[I don't know why it was so hard for me to wade through this paper, despite being squarely in my interests.<br>
-I feel the academic format is a poor match for the content which could be a good blog post?]  </p>
-<p>The goal is extending "usability" so "use" includes end-user programming.<br>
-... They observe that "computational thinking" skills become a "literacy" when practiced, including the experience of when to apply which skill. [by that stage the paper still feels like a lot of word shuffling]...<br>
-The real stuff only comes in pp. 25–27 where they identify qualities ("dimensions") by which the software can help users apply those computational skills:</p>
-<ul>
-<li>Concreteness: this dimension refers to the capability of a EUD environment of presenting concepts and requests in a concrete way, without requiring the user highly-developed abstraction skills;</li>
-<li>Modularity: this dimension regards the availability in a EUD environment of different elements, blocks, modules or similar things, which help end-user developers decompose a problem and identify the pieces that may compose its solution;</li>
-<li>Structuredness: when a EUD environment supports the structuring of a solution in a step-by-step process and facilitates the connections between the input and output of the different steps, it can be considered as having the structuredness property;</li>
-<li>Reusability: when the outcome of a EUD activity can be reused in other situations and possibly shared among different end-user developers, the EUD environment possesses the reusability property;</li>
-<li>Testability: this dimension refers to the capability of testing the outcome of the EUD activity within the EUD environment.</li>
-</ul>
-<p>and the payoff is this diagram where everything falls neatly in place:</p>
-<p><img alt="📷 image.png" src="https://history.futureofcoding.org/history/msg_files/F09/F09FCFKSEDA.png"></p>
-<h2>AI</h2>
-<h3>🗨️ <strong>Brian Hempel</strong>:</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/of-ai.html#2025-09-15T21:01:31.830Z">🧵 conversation @ 2025-09-15</a></p>
-<p>Hi FoC AI-interested folks! Hope this isn’t spammy, but we are running a study on how experienced developers leverage AI agents directly in their coding environments and we are looking for developers that use AI agents so we can sort out what’s hype and what’s actually working and then publish that publicly for all to know. It’s a paid study ($100 Amazon gift card) through UC San Diego’s Foundation Interface Lab.  </p>
-<p>In particular, we’re looking for people using terminal-based agents like Claude Code, OpenCode, Gemini CLI, or Codex CLI. We’ve already interviewed many Cursor and Copilot users.  </p>
-<p>What’s involved?<br>
-• 90-minute remote user study (via Zoom)<br>
-• Working through a programming task of your choosing that involves agents while you code  </p>
-<p>Who can join?<br>
-• You must be located in the U.S and 18 years of age or older<br>
-• You are a professional software engineer or developer with 3 or more years of experience<br>
-• You are a professional software engineer or developer who uses agentic programming workflows (e.g., Cursor, Windsurf, Claude Code, etc.).  </p>
-<p>If you are interested in participating, please fill out this short <a href="https://forms.gle/keMeRNSvdicARJoXA">Google Form</a>. We will be in touch with you ASAP to schedule a meeting.  </p>
-<p>By participating, you will help advance the state of human knowledge about the fast-evolving roles and practices of coding agents, potentially leading to more intelligent, efficient, and accessible software development. Thanks for considering!</p>
-<h2>Present Company</h2>
-<h3>🗨️ <strong>Kartik Agaram</strong>: <a href="https://obsidian.md/blog/less-is-safer">📝 Less is safer: how Obsidian reduces the risk of supply chain attacks</a>
-</h3>
-<p><a href="https://history.futureofcoding.org/history/weekly/2025/09/W3/present-company.html#2025-09-19T23:52:51.603Z">🧵 conversation @ 2025-09-19</a></p>
-<p>I'm glad to see a big player in the JS eco-system address supply chain security head on.   </p>
-<blockquote>
-<p>Supply chain attacks are malicious updates that sneak into open source code used by many apps. Here’s how we design Obsidian to ensure that the app is a secure and private environment for your thoughts.</p>
-</blockquote>
 <hr>
 <p>👨🏽‍💻 By 🐘 <a href="https://hachyderm.io/@marianoguerra">@marianoguerra@hachyderm.io</a> 🐦 <a href="https://twitter.com/warianoguerra">@warianoguerra</a></p>
 <p>💬 Not a member yet? Check the <a href="https://futureofcoding.org/">Future of Coding Community</a></p>

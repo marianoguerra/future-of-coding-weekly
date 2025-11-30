@@ -1,0 +1,105 @@
+<!--
+.. title: Future of Coding Weekly 2025/12 Week 1
+.. slug: future-of-coding-weekly-202512-week-1
+.. date: 2025-11-30 22:19:26 UTC+01:00
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+-->
+
+📢 Announcing Unison 1.0 📄 Towards Pen-and-Paper-Style Equational Reasoning 🧑‍💻 Tom Larkworthy go brrr
+
+# Two Minute Week
+
+## 🗨️ **Tom Larkworthy**
+
+[🧵 conversation @ 2025-11-30](https://history.futureofcoding.org/history/weekly/2025/12/W1/two-minute-week.html#2025-11-30T19:55:34.204Z)
+
+I have written a userspace hook to intercept all code changes in the Observable Runtime, which allows point-in-time recovery by rewriting the cells to be the same as in the past. Furthermore, its a building block towards serializing and replaying the history from IndexDB, so you don't lose changes if you refresh and/or forget to export to file.  
+Its cool that can be done from userspace, a year ago I felt history might be a challenge, but no!
+
+[🎥 Change History](https://history.futureofcoding.org/history/msg_files/F0A/F0A0KQT8ZC6.mp4)
+
+# Share Your Work
+
+## 🗨️ **Dennis Hansen**
+
+[🧵 conversation @ 2025-11-30](https://history.futureofcoding.org/history/weekly/2025/12/W1/share-your-work.html#2025-11-30T01:53:48.140Z)
+
+[🎥 Calculator go brrr](https://history.futureofcoding.org/history/msg_files/F0A/F0A0P50HRLL.mov)
+
+# DevLog Together
+
+## 🗨️ **Tom Larkworthy**
+
+[🧵 conversation @ 2025-11-24](https://history.futureofcoding.org/history/weekly/2025/12/W1/devlog-together.html#2025-11-24T19:32:31.062Z)
+
+Been working on a different Agentic AI concept, but the Agent is under performing and coding and its not actually useful (unlike [robocoop-2](https://observablehq.com/@tomlarkworthy/robocoop-2) which is good).
+
+Switched to getting a nice way to remember state. Using IndexDB to persist across page refreshes and mutable FileAttachments to carry state between exports ([localState](https://observablehq.com/@tomlarkworthy/local-state)).  
+Brought in ProseMirror to make a notion-like directly editable markdown interface ([markdownInput](https://observablehq.com/@tomlarkworthy/markdowninput)), because its quite annoying to have to write markdown using a programming language and I want to write more in Lopecode.
+
+[🎥 Markdown Input](https://history.futureofcoding.org/history/msg_files/F09/F09UT4ZF751.mp4)
+
+## 🗨️ **Tom Larkworthy**
+
+[🧵 conversation @ 2025-11-30](https://history.futureofcoding.org/history/weekly/2025/12/W1/devlog-together.html#2025-11-30T11:25:11.145Z)
+
+I forgot you can shadow Observable Runtime standard functions. So I redid the markdown editor. Its not a distinct function anymore, it overloads the md library function which means it applies to existing notebooks. It serializes modifications as code changes, so there is no difference in representation to the existing markdown.  
+The reason I implemented this was someone said they expected to be able to edit prose like in Notion, and I do personally feel the Observable experience is not great for the documentation part, as you have to write it in code which located in a different part of the UI to the bit your are reading, which is not natural. Inline editing feels much better. Very happy this can be achieved in userspace without any architectural changes and is backwards compatible to what has already been written.
+
+[🎥 inline edit](https://history.futureofcoding.org/history/msg_files/F0A/F0A058MSRRD.mov)
+
+# Thinking Together
+
+## 🗨️ **Tom Larkworthy**
+
+[🧵 conversation @ 2025-11-26](https://history.futureofcoding.org/history/weekly/2025/12/W1/thinking-together.html#2025-11-26T19:50:58.018Z)
+
+[Dennis Hansen](#user?key=U06BUK2M2RH) Great workshop on Artifact. I recognized the situation where you have to synchronise updates to do their thing before letting the outer thing tick on. Its in this notebook which is also a dataflow graph based programming environment but that is not graphical  
+<https://observablehq.com/@tomlarkworthy/flow-queue>
+
+It interesting seeing the same thing manifest. I think its because values propagate through the program asynchronously, but you sort of want functional reuse or recursion, but calling a function actually takes time now in the async world, so to get that "request/response" functional interface you need the converter from async to sync, which involves a synchronisation barrier to bring back the functional abstraction. After trying to work with it a while I sorta decided its annoying for some problems. The nice thing about a function call is the caller is stopped until the the call finishes, and the result is wired back to the caller, although many different places may make a call to the same function. Its harder to do on a static dataflow graph.
+
+I think the functional calling primitive is something you could probably put into to your cells as they have routing ability (remember who sent me a value and next time I get a value send it back to the initiator?).
+
+I share coz sometimes seeing the same thing in a different context can give helpful for perspective. See your work made me thing about the fact I put a queue in my flow-queue which makes it kinda of an actor too, even though the underlying dataflow paradigm of Observable does not have queueing between cells. I had to add the queue to get to the functional interface, to be able to process one thing at a time on the static dataflow graph 🤔
+
+## 🗨️ **Medet Ahmetson**
+
+[🧵 conversation @ 2025-11-26](https://history.futureofcoding.org/history/weekly/2025/12/W1/thinking-together.html#2025-11-26T21:24:14.928Z)
+
+What do you guys think? About a project run by multiple online communities, each responsible for some aspect or feature. For example, right now, I'm working on a gamified collaboration platform. And instead, keeping the leaderboard of the most active users on platform, maybe contact specific organizations who already does it. If I will add the admin panel, and they handle it on the platform.
+
+# Linking Together
+
+## 🗨️ **Eli**
+
+[🧵 conversation @ 2025-11-25](https://history.futureofcoding.org/history/weekly/2025/12/W1/linking-together.html#2025-11-25T18:09:13.576Z)
+
+[EGG](https://steuwer.info/files/publications/2026/POPL-Lean-Egg.pdf), from "Towards Pen-and-Paper-Style Equational Reasoning in Interactive Theorem Provers by Equality Saturation"
+
+![📷 Screenshot 2025-11-25 at 1.08.38 PM.png](https://history.futureofcoding.org/history/msg_files/F09/F09URV16S6B.png)
+
+## 🗨️ **shalabh**: [📢 Announcing Unison 1.0](https://www.unison-lang.org/unison-1-0/)
+
+[🧵 conversation @ 2025-11-26](https://history.futureofcoding.org/history/weekly/2025/12/W1/linking-together.html#2025-11-26T01:56:53.754Z)
+
+Unision 1.0 released: <https://www.unison-lang.org/unison-1-0/>  
+Key ideas are ‘content hash’ identifies functions and code lives in a DB.
+
+[📝 Announcing Unison 1.0](https://www.unison-lang.org/unison-1-0/)
+
+> After years of engineering, design, and community collaboration, we're excited to release Unison 1.0. This version delivers a refined programming workflow and a mature toolchain. Join us as we celebrate this milestone and look ahead to the future of Unison.
+
+---
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
