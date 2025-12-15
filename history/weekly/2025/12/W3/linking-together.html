@@ -1,0 +1,58 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-12-12T00:41:03.728Z" class="post"><span class="user">Shalabh</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-09&amp;toDate=2025-12-15&amp;channel=linking-together&amp;filter=#2025-12-12T00:41:03.728Z" class="date">2025-12-12 00:41:03</a> <div class="message"><p>saw this new paper by <a href="https://twitter.com/jonathoda/">Jonathan Edwards</a> and <strong>@Tomas Petricek</strong></p>
+<p>still reading it - very fun, discusses version control for structured data and schema evolution</p>
+<p><a href="https://www.arxiv.org/abs/2512.09762">arxiv.org/abs/2512.09762</a></p>
+<blockquote><p> <em>Baseline: Operation-Based Evolution and Versioning of Data</em> </p>
+</blockquote>
+<p>&lt;snipped in favor of slack provided summary below&gt;</p>
+<p>looks like it builds on their previous work, eg <a href="https://alarmingdevelopment.org/?p=1716">alarmingdevelopment.org/?p=1716</a></p>
+<p>i think schema evolution is one of the unsolved problems so glad to see this. i'm also in the "store structures not text blobs" camp so happy to see a framework in place that doesn't require anyone to invent the entire representation stack there.</p>
+</div> <div class="attachments"><blockquote><p>📝 <a href="https://www.arxiv.org/abs/2512.09762">Baseline: Operation-Based Evolution and Versioning of Data</a></p>
+<p>Baseline is a platform for richly structured data supporting change in multiple dimensions: mutation over time, collaboration across space, and evolution through design changes. It is built upon Operational Differencing, a new technique for managing data in terms of high-level operations that include refactorings and schema changes. We use operational differencing to construct an operation-based form of version control on data structures used in programming languages and relational databases.
+ This approach to data version control does fine-grained diffing and merging despite intervening structural transformations like schema changes. It offers users a simplified conceptual model of version control for ad hoc usage: There is no repo; Branching is just copying. The informaton maintained in a repo can be synthesized more precisely from the append-only histories of branches. Branches can be flexibly shared as is commonly done with document files, except with the added benefit of diffing and merging.
+ We conjecture that queries can be operationalized into a sequence of schema and data operations. We develop that idea on a query language fragment containing selects and joins.
+ Operationalized queries are represented as a future timeline that is speculatively executed as a branch off of the present state, returning a value from its hypothetical future. Operationalized queries get rewritten to accommodate schema change "for free" by the machinery of operational differencing.
+ Altogether we develop solutions to four of the eight challenge problems of schema evolution identified in a recent paper.</p>
+<p>📝 <a href="https://alarmingdevelopment.org/?p=1716">Operational Version Control</a></p>
+<p>Abstract of a talk I just gave: It would be useful to have version control like git but for data structures, particularly the data structures we call spreadsheets, databases, and ASTs. Operational …</p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"><div id="2025-12-13T20:54:20.968Z" class="reply"><span class="user">Shalabh</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-10&amp;toDate=2025-12-16&amp;channel=linking-together&amp;filter=#2025-12-13T20:54:20.968Z" class="date">2025-12-13 20:54:20</a> <div class="message"><p>i recommend this paper to anyone doing local-first, structured-editing, or generally inventing a structured store that needs object versioning.</p>
+<p>my comments:</p>
+<ul><li>formalized timelines are really aesthetically pleasing, specifically the  <em>transfer</em>  of operations across timelines.</li><li>it handles merging where one timeline does a value replacement, while another does a type transform. i dont think crdts have anything quite like this:</li></ul><ul><li>timeline-1:  <code>{key1: 'a1'}</code>   -&gt;   <code>{key1: 'a2'}</code></li><li>timeline-2:  <code>{key1: 'a1'}</code>  -(wrap in a list)-&gt;  <code>{key1: ['a1']}</code></li><li>merged:  <code>{key1: ['a2']}</code></li><li>even works if timeline-2 appends  <code>'b1'</code>  before merging. merge produces  <code>{key1: ['a2', 'b1']}</code> .</li></ul><ul><li>there is a notion of  <em>identity</em> in this model that i’d like to examine. eg when  <code>a1</code>  is replaced with  <code>a2</code>   the containing structure “remembers”  <em>which specific value</em>  was replaced by using a unique ID.</li></ul><ul><li>even for lists, a unique ID is attached to each value so you can figure out how an operation on that value in one timeline applies to a forked list where that specific value has since moved.</li></ul><ul><li>i feel the idea can be generalized to more than records and lists. consider  if we think about a general object  <code>V</code>  as containing  <em>slots</em>  that have identity. slots hold values. transformations move slots around, add and remove slots or replace slot values. the projection and retraction methods may need to be supplied by  <code>V</code>  itself. anyway, haven’t fully worked this out.</li><li>the paper focusses on small data where each copy carries around the full history, and doesn’t need a central repo. however, the model could easily work with a central repo storing the committed or even parallel timelines for objects. local objects only need to hold zero or small histories with a pointer back to the committed timelines. if we generalize the fork/merge model here, it could apply to even large object graphs, parts of which get forked and then recombined.</li></ul><p>overall quite fascinating. there’s a big section on related work i haven’t caught up on.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2025-12-12T21:33:50.737Z" class="post"><span class="user">Eli Mellen</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-09&amp;toDate=2025-12-15&amp;channel=linking-together&amp;filter=#2025-12-12T21:33:50.737Z" class="date">2025-12-12 21:33:50</a> <div class="message"><p><a href="https://beyondloom.com/blog/sketchpad.html">Great write up from John Earnest</a>, maker of Decker and similar such beautiful beasts</p>
+<blockquote><p>Don’t underestimate the value of your sketchbook 
+ <em>being</em> 
+ your development environment!</p>
+</blockquote>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"></div></div><div id="2025-12-14T15:57:59.085Z" class="post"><span class="user">Daniel Temkin</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-11&amp;toDate=2025-12-17&amp;channel=linking-together&amp;filter=#2025-12-14T15:57:59.085Z" class="date">2025-12-14 15:57:59</a> <div class="message"><p>The presentation of the "Let's Take Esoteric Programming Languages Seriously" paper is online: <a href="https://www.youtube.com/watch?v=ewEiwdEApLc">youtube.com/watch?v=ewEiwdEApLc</a></p>
+</div> <div class="attachments"><blockquote><p>🎥 <a href="https://www.youtube.com/watch?v=ewEiwdEApLc">[Onward!'25] Let's Take Esoteric Programming Languages Seriously</a></p>
+<p><img src="https://i.ytimg.com/vi/ewEiwdEApLc/hqdefault.jpg" alt="[Onward!'25] Let's Take Esoteric Programming Languages Seriously"></p>
+</blockquote>
+</div> <div class="files"></div> <div class="replies"></div></div>
+    </div>
+  </body>
+</html>
