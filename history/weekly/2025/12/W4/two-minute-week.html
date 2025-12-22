@@ -1,0 +1,55 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2025-12-17T04:57:52.781Z" class="post"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-14&amp;toDate=2025-12-20&amp;channel=two-minute-week&amp;filter=#2025-12-17T04:57:52.781Z" class="date">2025-12-17 04:57:52</a> <div class="message"><p>This channel gets basically no action, and it's been years(?) since I've shared here, so I'm allowing myself  <em>four</em>  minutes for this. Sorry, pedants!</p>
+<p>In this video I show a  <em>code sketch</em>  of a gestural notebook interface, something I made off-and-on over the past two weeks. This is for the <a href="https://www.inkandswitch.com/project/playbook/">PlayBook</a> project.</p>
+</div> <div class="attachments"></div> <div class="files"><p>🎥 <a href="http://history.futureofcoding.org/history/msg_files/F0A/F0A40H68F38.mp4">IMG_9749 - 26.00.mp4</a></p>
+</div> <div class="replies"><div id="2025-12-17T07:19:01.235Z" class="reply"><span class="user">Xavier Lambein</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-14&amp;toDate=2025-12-20&amp;channel=two-minute-week&amp;filter=#2025-12-17T07:19:01.235Z" class="date">2025-12-17 07:19:01</a> <div class="message"><p>Curious what it is you don't like about it? Watching you it seems okay, albeit a bit slow if you need to switch back and forth between canvases quickly (I'm comparing in my head to desktop workspaces).</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-17T15:59:07.525Z" class="reply"><span class="user">John Christensen</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-14&amp;toDate=2025-12-20&amp;channel=two-minute-week&amp;filter=#2025-12-17T15:59:07.525Z" class="date">2025-12-17 15:59:07</a> <div class="message"><p>Having the sequential "notebook" inside an infinite canvas seems nice! I often drift around and get a bit disorganized working in an infinite canvas, but having at least part of the canvas stay linear seems helpful when I want some structure</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-17T23:21:02.252Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-14&amp;toDate=2025-12-20&amp;channel=two-minute-week&amp;filter=#2025-12-17T23:21:02.252Z" class="date">2025-12-17 23:21:02</a> <div class="message"><p><strong>@Xavier Lambein</strong></p>
+<p>There are a lot of values and goals behind the PlayBook project, and this little interface sketch manages to adhere to most of them but not all, and there are probably ways it could do better.</p>
+<p>For instance, there's no on-screen UI chrome. No navbar, no back button, nothing. (The little tool picker in the bottom left is just an affordance for this code sketch. In our real prototype, tool picking is done using a different method — out of scope for my code sketch.)</p>
+<p>The page-swiping works great. Happy with that part.</p>
+<p>The first level of zoom-out, where you see the infinite canvas, also works well. Aside from bugs, we're pretty happy with this part. It doesn't do everything we want in the way we want, but it's close.</p>
+<p>The second level of zoom-out, where you come out of one notebook and can switch to a different notebook… that part sucks.</p>
+<p>The interaction of pulling in from both sides (I call the gesture a "Joni", because Joni Mitchell has a song called "Both Sides Now") does different things depending on when you do it. Conceptually, it always means "go out one level". But in practice what "one level" means changes depending on whether you're focused on a single page vs looking at the infinite canvas view vs looking at the list of notebooks. This inconsistency feels bad and is limiting.</p>
+<p>For instance, I can't switch notebooks when focused on a single page. I first have to go back to the infinite canvas view. This means I also can't enter a notebook and have it already focused on a single page (which is what I would want for something like a daily journal).</p>
+<p>Another goal of the system is that everything you can see and touch is made out of "materials". Briefly, we use the term "material" to describe the appearance, interactions, behaviours, and data encompassed by a type of physical object, and "material physics" to refer to how all these things work together to define the "laws of physics" for the system overall. The core materials in our system are ink and paper, but we are also working on <a href="https://www.inkandswitch.com/ink/notes/playbook-material-studies/">other materials</a>.</p>
+<p>My goal in this interface prototype was to make it work while changing as little as possible about our current set of material physics. Some thing I had to change to make this demo:</p>
+<ul><li>Paper will snap to adjacent paper, forming a "sequence"</li><li>The camera (which is just a screen-sized piece of paper with a tiny bit of special behaviour) can be in one of two modes, locked vs unlocked, and when locked (to another piece of paper) it'll try to frame that paper in view, and will respond to edge-swipes by moving to the next/prev page in the sequence (if any).</li><li>Paper can also act like a "portal", where it will render itself by taking the view from a camera paper.</li></ul><p>Etc etc.</p>
+<p>All told, I didn't have to add much. Most of the behaviour comes from our existing physics that make paper what it is.</p>
+<p>Buuuut the additions I had to make to get the portal rendering to work don't feel all that harmonious with the rest of the system.</p>
+<p>I think I could come up with something different that would achieve the same interface goals but that require fewer additions to paper material physics and that feel better to use.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-18T20:50:31.387Z" class="reply"><span class="user">Xavier Lambein</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-15&amp;toDate=2025-12-21&amp;channel=two-minute-week&amp;filter=#2025-12-18T20:50:31.387Z" class="date">2025-12-18 20:50:31</a> <div class="message"><p>Yep I can totally see how the inconsistency of the joni could be frustrating to use. Seems like a tough thing to solve 🤔 What if you only joni to switch workspace, and you pinch to zoom in/out of a page? Then when you joni out it would retain whatever viewport you had.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-18T20:51:38.461Z" class="reply"><span class="user">Xavier Lambein</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-15&amp;toDate=2025-12-21&amp;channel=two-minute-week&amp;filter=#2025-12-18T20:51:38.461Z" class="date">2025-12-18 20:51:38</a> <div class="message"><p>I love that the camera is a piece of paper too, I hadn't realised that. Big "everything is a _" energy</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-18T20:52:06.872Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-15&amp;toDate=2025-12-21&amp;channel=two-minute-week&amp;filter=#2025-12-18T20:52:06.872Z" class="date">2025-12-18 20:52:06</a> <div class="message"><p>Another goal: when you're focused on a page, fingers need to be basically a no-op. Even using fingers to turn pages is almost too risky. We want the basic drawing mode to be safe for "hands all over", so that you never accidentally invoke some unwanted behaviour due to failed palm rejection or other errant touches.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-18T20:52:28.806Z" class="reply"><span class="user">Xavier Lambein</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-15&amp;toDate=2025-12-21&amp;channel=two-minute-week&amp;filter=#2025-12-18T20:52:28.806Z" class="date">2025-12-18 20:52:28</a> <div class="message"><p>Ah, makes sense!</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-18T20:52:40.300Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-15&amp;toDate=2025-12-21&amp;channel=two-minute-week&amp;filter=#2025-12-18T20:52:40.300Z" class="date">2025-12-18 20:52:40</a> <div class="message"><p>So Joni and swiping are the only things fingers do, normally.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-18T20:53:19.441Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-15&amp;toDate=2025-12-21&amp;channel=two-minute-week&amp;filter=#2025-12-18T20:53:19.441Z" class="date">2025-12-18 20:53:19</a> <div class="message"><p>Turns out, this "hands all over" safety is probably the #1 factor that makes an iPad feel more like real paper.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2025-12-18T20:55:16.237Z" class="reply"><span class="user">Xavier Lambein</span> <a href="https://history.futureofcoding.org/?fromDate=2025-12-15&amp;toDate=2025-12-21&amp;channel=two-minute-week&amp;filter=#2025-12-18T20:55:16.237Z" class="date">2025-12-18 20:55:16</a> <div class="message"><p>Yeah that makes complete sense, as I'm reminded every time I try to draw and didn't remember to disable the touch sensitivity of my Wacom</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
