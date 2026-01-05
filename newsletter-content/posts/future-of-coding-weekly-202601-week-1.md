@@ -1,0 +1,116 @@
+<!--
+.. title: Future of Coding Weekly 2026/01 Week 1
+.. slug: future-of-coding-weekly-202601-week-1
+.. date: 2026-01-05 11:09:34 UTC+01:00
+.. tags:
+.. category:
+.. link:
+.. description:
+.. type: text
+-->
+
+🎥 Alan Kay: 75 Years of Graphical User Interfaces 🎥 FoC Virtual Meetup December 2025 📝 Stop Digging and Start Building: Why We Need LEGO Parts, Not Deeper Type Systems
+
+# Share Your Work
+
+## 🗨️ **Medet Ahmetson**: [🎥 Ara is live.](https://youtu.be/daBZkiKarI8?si=3zOKUua15W8vXFSi)
+
+[🧵 conversation @ 2025-12-31](https://history.futureofcoding.org/history/weekly/2025/12/W6/share-your-work.html#2025-12-31T16:49:56.638Z)
+
+Hey guys, happy new year.
+
+Launched the Ara, a social media layer on top of the open-source projects, that adds maintainer-led community building.  
+Once its build, turns the open-source to the community-based project.
+
+Even though, I got early replies that's still UX needs lots of improvements, I would still encourage to try it, and your feedback will be really helpful.
+
+First, check out the youtube walkthrough <https://youtu.be/daBZkiKarI8?si=3zOKUua15W8vXFSi>  
+Then, try it yourself on <https://ara.foundation> (better to use Dark Mode, Laptop Browser, mobile screen or light mode have some bugs).
+
+And Happy New Year!
+
+[🎥 Ara is live.](https://youtu.be/daBZkiKarI8?si=3zOKUua15W8vXFSi)
+
+![Ara is live.](https://i.ytimg.com/vi/daBZkiKarI8/hqdefault.jpg)
+
+## 🗨️ **TodePond**: [🎥 pastayearrr](https://history.futureofcoding.org/history/msg_files/F0A/F0A6WL84CFK.mp4)
+
+[🧵 conversation @ 2026-01-02](https://history.futureofcoding.org/history/weekly/2026/01/W1/share-your-work.html#2026-01-02T18:08:59.137Z)
+
+i made a video montage to go with a section of the most recent [bonus episode](https://www.patreon.com/posts/all-of-false-146699458)!
+
+[🎥 pastayearrr](https://history.futureofcoding.org/history/msg_files/F0A/F0A6WL84CFK.mp4)
+
+## 🗨️ **Geert Roumen**: [🎥 matrix example plc](https://history.futureofcoding.org/history/msg_files/F0A/F0A6L1B44SZ.mp4)
+
+[🧵 conversation @ 2026-01-04](https://history.futureofcoding.org/history/weekly/2026/01/W1/share-your-work.html#2026-01-04T14:05:58.021Z)
+
+I've been working and thinking on how we can bridge different forms of data; inspired by [Magic Ink](https://worrydream.com/MagicInk/) by Bret Victor, Edward Tufte's books and perhaps also a bit by the Excel & Figma metaphors.
+
+By combining the Table, the spatial structure of the Matrix, and the focus of the Form, you can move from "viewing data" to "interacting with information."
+
+The Matrix view is a bit between a pivot table, a heat map and could still benefit greatly from adding shape/ background colour etc to the cells.
+
+I'm curious to learn what other research and experiments are done in this direction; and if you have any experience with them; especially if they are tailored to a super specific other context.
+
+[🎥 matrix example plc](https://history.futureofcoding.org/history/msg_files/F0A/F0A6L1B44SZ.mp4)
+
+## 🗨️ **guitarvydas**: [📝 Stop Digging and Start Building: Why We Need LEGO Parts, Not Deeper Type Systems](https://programmingsimplicity.substack.com/p/stop-digging-and-start-building-why?r=1egdky)
+
+[🧵 conversation @ 2026-01-04](https://history.futureofcoding.org/history/weekly/2026/01/W1/share-your-work.html#2026-01-04T22:41:50.007Z)
+
+This [article](https://programmingsimplicity.substack.com/p/stop-digging-and-start-building-why?r=1egdky) is about what I think is necessary to make Software LEGO-like Parts. I keep pumping opinion pieces out to substack (300+ thus far). I can't judge whether an article is interesting or not, but, this one seems to have garnered some interest...
+
+[📝 Stop Digging and Start Building: Why We Need LEGO Parts, Not Deeper Type Systems](https://programmingsimplicity.substack.com/p/stop-digging-and-start-building-why?r=1egdky)
+
+# DevLog Together
+
+## 🗨️ **Konrad Hinsen**:
+
+[🧵 conversation @ 2025-12-29](https://history.futureofcoding.org/history/weekly/2025/12/W6/devlog-together.html#2025-12-29T16:55:37.623Z)
+
+There's now [basic documentation](https://hyperdoc.khinsen.net/ADC54-hyperbook) for my "foreign Wiki interface", which I renamed to "hyperbook interface" because "Wiki" implies editability, which is not what I provide. I spent some time for an accepted term meaning "a collection of interlinked and somehow related hypertext pages" but found none, so I made up "hyperbook".
+
+I found some nice applications for my new abstraction layer immediately. For example, hyperbooks standing for "all functions in my Lisp image", making it possible to link to a function. Quite nice for software documentation, as you can see [here](https://hyperdoc.khinsen.net/ADC54-hyperbook/Implementing%20a%20HyperBook%20interface), for example.
+
+# Linking Together
+
+## 🗨️ **guitarvydas**: [📝 Fundamentals of Compilers](https://programmingsimplicity.substack.com/p/fundamentals-of-compilers)
+
+[🧵 conversation @ 2025-12-29](https://history.futureofcoding.org/history/weekly/2025/12/W6/linking-together.html#2025-12-29T13:48:41.606Z)
+
+Forwarding a link to a compiler book posted on OhmLand by [Patrick Dubroy](#user?key=U01DWJSAF2B). Along with a few more links to some stuff that I think is easy to read and understand.
+
+[📝 Fundamentals of Compilers](https://programmingsimplicity.substack.com/p/fundamentals-of-compilers)
+
+## 🗨️ **Ivan Reese**: [🎥 Alan Kay: 75 Years of Graphical User Interfaces](https://www.youtube.com/watch?v=qS20Z0RXr28)
+
+[🧵 conversation @ 2025-12-30](https://history.futureofcoding.org/history/weekly/2025/12/W6/linking-together.html#2025-12-30T22:39:03.933Z)
+
+New Alan Kay talk — [75 Years of Graphical User Interfaces](https://www.youtube.com/watch?v=qS20Z0RXr28). It's a tour of classic works — Sketchpad, GRAIL, Mother of all Demos, formation of PARC, Dynabook, Smalltalk, Negroponte's work on spatial UIs, Etoys, etc. — with light commentary and context.
+
+Includes a video clip of GRAIL that I hadn't seen before. It's a node-wire (esq) programming system that visualizes execution by flashing the nodes, and it gives you control over the rate of execution. Wild.
+
+![GUIと歩んだ75年 ～私の見てきたユーザーインターフェース～【アラン・ケイ 氏】POST Dev 2025｜ニジボックス主催](https://i.ytimg.com/vi/qS20Z0RXr28/hqdefault.jpg)
+
+# Present Company
+
+## 🗨️ **Ivan Reese**: [🎥 FoC Virtual Meetup December 2025](https://www.youtube.com/watch?v=9vZcmWhTeOM)
+
+[🧵 conversation @ 2025-12-31](https://history.futureofcoding.org/history/weekly/2025/12/W6/present-company.html#2025-12-31T21:02:23.288Z)
+
+Here's [the video of today's virtual meetup](https://www.youtube.com/watch?v=9vZcmWhTeOM)
+
+[🎥 December 2025](https://www.youtube.com/watch?v=9vZcmWhTeOM)
+
+![December 2025](https://i.ytimg.com/vi/9vZcmWhTeOM/hqdefault.jpg)
+
+---
+
+👨🏽‍💻 By 🐘 [@marianoguerra@hachyderm.io](https://hachyderm.io/@marianoguerra) 🐦 [@warianoguerra](https://twitter.com/warianoguerra)
+
+💬 Not a member yet? Check the [Future of Coding Community](https://futureofcoding.org/)
+
+✉️ Not subscribed yet? [Subscribe to the Newsletter](https://newsletter.futureofcoding.org/join/) / [Archive](https://newsletter.futureofcoding.org/archive.html) / [RSS](https://history.futureofcoding.org/newsletter/rss.xml)
+
+🎙️ Prefer podcasts? check the [Future of Coding Podcast](https://futureofcoding.org/episodes/)
