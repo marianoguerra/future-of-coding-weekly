@@ -1,0 +1,171 @@
+<!--
+.. title: Future of Coding Weekly 2026/01 Week 4
+.. slug: future-of-coding-weekly-202601-week-4
+.. date: 2026-02-02 20:19:50 UTC+01:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+📢 First release with a brand new set of tools, let me know if something is broken (aside from new format)
+
+# devlog-together
+
+💬 **Oleksandr Kryvonos**: [GitHub - uprun/web-console: expose your terminal as a web-page](https://github.com/uprun/web-console)
+
+[🧵conversation](https://history.futureofcoding.org/history/weekly/2026/01/W4/devlog-together.html#2026-01-24T21:58:11.353Z)
+
+I am trying to program on my Android tablet 
+with stylus and mostly on-screen-keyboard well mostly
+first I used external keyboard to write some basic server in go-lang
+I exposed my terminal as a web-page and now I can do way more from my browser [https://github.com/uprun/web-console](https://github.com/uprun/web-console)
+since then I realized that I was chasing keyboard productivity though when I program I rarely need fast typing
+... I am more of a thinker ,,, very slow thinker
+.. so yes I decided I can avoid external keyboard and focus on using a stylus input.
+
+📑 Resources
+
+- [GitHub - uprun/web-console: expose your terminal as a web-page](https://github.com/uprun/web-console)
+
+![Screenshot_20260124_214114_Samsung Internet.png](https://history.futureofcoding.org/history/msg_files/F0A/F0AASCM79SN.png)
+
+![1000001187.jpg](https://history.futureofcoding.org/history/msg_files/F0A/F0AAAV5QZ71.jpg)
+
+
+
+# linking-together
+
+💬 **Jasmine Otto**: [Coem, a poetic programming language.](https://coem-lang.org/about/)
+
+[🧵conversation](https://history.futureofcoding.org/history/weekly/2026/01/W4/linking-together.html#2026-01-22T18:39:09.956Z)
+
+a poetic esolang by Katherine Yang
+[https://coem-lang.org/about/](https://coem-lang.org/about/)
+> Examples of esolangs that have particularly inspired this project are:
+
+- Sukanya Aneja’s [in:verse](https://inverse.website/), “a programming language and environment for exploring the conflux of poetry, visuals, mathematics and code”,
+- William Hicks’s [Esopo](https://github.com/wphicks/Esopo), a family of “poetically or literarily interesting esoteric programming languages”, and
+- Zeb Burke-Conte’s [Shakespeare Programming Language](https://shakespearelang.com/), “designed with the goal of making its source code look like William Shakespeare’s plays”.
+has an [online editor](https://editor.coem-lang.org/) as well
+
+📑 Resources
+
+- [Coem | About](https://coem-lang.org/about/)
+- [in:verse](https://inverse.website/)
+- [GitHub - wphicks/Esopo: Poetic esoteric programming languages](https://github.com/wphicks/Esopo)
+- [Shakespeare Programming Language](https://shakespearelang.com/)
+- [online editor](https://editor.coem-lang.org/)
+
+
+# of-ai
+
+💬 **wtaysom**: [GitHub - urug/rubowar](https://github.com/urug/rubowar)
+
+[🧵conversation](https://history.futureofcoding.org/history/weekly/2026/01/W4/of-ai.html#2026-01-23T22:05:48.633Z)
+
+I have a simple self-contained episode of coding agent programming, I'd like to share with you all.  Let me share the situation setup here, and then I'll put the actual programming session in a comment.  First an example of what running the problem looks like...
+
+At a local Ruby meetup we played this game Rubowar game [https://github.com/urug/rubowar](https://github.com/urug/rubowar) the other night.  Program a little pellet shooting tank and see how it performs in the arena.  macOS inopportunely forgot that it knew how to use the internet. Weird cascading failure. I had to restart and install an update, so by then I was an hour behind. Luckily, I pulled out my custom coding agent to try some stuff.  Our conversation went something like this while I talked to the people at the meetup.
+
+	Me: How about you CGP Grey this one for me?
+
+	They: After 15 generations...
+
+	Me: Only 15.  Be realistic!  Evolution of fourteen parameters is going to take at least 1,500.
+
+	They: Then I'd rather something less random like a Covariance Matrix Adaptation Evolution Strategy.
+
+	Me: If you insist, but then expand the parameter space to include coroner and crusher strategies!
+
+	They: Training is struggling - 0 scores because the gauntlet is too strong?
+
+	Me: Try a subtler evaluation: how long it survives.
+
+	... few minutes later ...
+
+	Me: Wait! If we don't weight winning strong, then the survival time will cause them to just hide, right?
+
+The evolved bot did fine.  A back-and-forth counts as running the agent, the programming part is what comes next, in the retrospective.
+
+📑 Resources
+
+- [GitHub - urug/rubowar](https://github.com/urug/rubowar)
+
+---
+
+💬 **wtaysom**
+
+[🧵conversation](https://history.futureofcoding.org/history/weekly/2026/01/W4/of-ai.html#2026-01-20T04:48:54.100Z)
+
+Feeling the architecture astronaut, "Today, let's work on a system for reviewing the system that tunes the system that monitors the QA system."
+
+
+# share-your-work
+
+💬 **guitarvydas**: [Layered Abstraction - by Paul Tarvydas - Paul’s Substack](https://programmingsimplicity.substack.com/p/layered-abstraction?r=1egdky)
+
+[🧵conversation](https://history.futureofcoding.org/history/weekly/2026/01/W4/share-your-work.html#2026-01-23T18:53:08.893Z)
+
+> fan-out is necessary for DX
+...
+I've reached the conclusion that we need to use a programming language/notation that makes it equally easy to use asynchronous message sends and function calls, so that we may choose appropriately. It is not good enough to make function calls convenient, but, to require extra work to enact async message sending.
+
+📑 Resources
+
+- [Layered Abstraction - by Paul Tarvydas - Paul’s Substack](https://programmingsimplicity.substack.com/p/layered-abstraction?r=1egdky)
+
+
+# thinking-together
+
+💬 **Oleksandr Kryvonos**
+
+[🧵conversation](https://history.futureofcoding.org/history/weekly/2026/01/W4/thinking-together.html#2026-01-25T23:43:30.270Z)
+
+today I got inspiration boost from my 3.5yo son
+we went to a museum and there he saw several airplanes
+he liked them a lot and we played some flight simulator 
+I promised to him that at home I will setup to him similar app on a phone (on my phone)
+I searched in Android/Play store for a while and could not find anything appropriate
+I wanted arcade flight simulator without any ads or in game purchases
+after 30 minutes of search I realized that I already have an arcade flight simulator
+an arcade _**dragon**_ flight game that I made 2 years before he was born
+ the game is free and has no ads
+so we played it and he liked it
+and I was like - " I made this and this and that .. I made everything here"
+so "how is this relevant to this community?"
+---- here is a punch line
+yeah graphics are outdated but I crafted it and my son loves it
+so this brings a **feelings** of computing, as a medium for an interactive storytelling
+and now i can craft with this new purpose in mind. 
+
+-- P.S. I avoid adding link to the game,  but you can imagine a lowpoly reinterpretation of Spyro.
+
+---
+
+💬 **ak**: [10 PRINT CHR$(205.5+RND(1)); : GOTO 10](https://10print.org/)
+
+[🧵conversation](https://history.futureofcoding.org/history/weekly/2026/01/W4/thinking-together.html#2026-01-25T17:11:54.918Z)
+
+**Most beauty per unit code**
+
+Share your favorite short programs that have beautiful output.
+
+Any output modality, any programming language, any units.
+
+Recording of output helpful but not required.
+
+I think a program is more beautiful that doesn't generate identical output each time. But that's just my opinion.
+
+My candidate is ~24 lines of LÖVE or equivalent. I'll share it a little later.
+
+I suppose [10print](https://10print.org/) is another candidate.
+
+📑 Resources
+
+- [10 PRINT CHR$(205.5+RND(1)); : GOTO 10](https://10print.org/)
+
+
+
+
