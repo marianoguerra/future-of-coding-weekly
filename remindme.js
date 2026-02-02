@@ -16,7 +16,7 @@ function generateScriptForThisWeek(now, dayNumber) {
   console.log(`mkdir history/weekly/${dateDir}/`);
   console.log(`mkdir future-of-newsletters/mail-sent/${dateDir}/`);
   console.log(
-    `sed 's/title = "Future of Coding Weekly"/title = "Future of Coding Weekly ${curYear}\\/${monthStr} Week ${weekNumber}"/g' future-of-newsletters/resources/mail-send-config.toml |\n save future-of-newsletters/mail-sent/${dateDir}/config.toml`
+    `sed 's/title = "Feeling of Computing Weekly"/title = "Feeling of Computing Weekly ${curYear}\\/${monthStr} Week ${weekNumber}"/g' future-of-newsletters/resources/mail-send-config.toml |\n save future-of-newsletters/mail-sent/${dateDir}/config.toml`
   );
   console.log(`focWeekExport "${prevDateStr}" "${nextDateStr}"`);
   console.log(
