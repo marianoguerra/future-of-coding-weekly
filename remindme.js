@@ -24,8 +24,7 @@ function generateScriptForThisWeek(now, dayNumber) {
   );
   console.log(`git add history; git commit -m "weekly dump"; git push origin`);
   console.log(`focAfterWeeklyPush`);
-  console.log(`vim future-of-newsletters/mail-sent/${dateDir}/mail.html`);
-  console.log(`vim future-of-newsletters/mail-sent/${dateDir}/mail.txt`);
+  console.log(`nvim future-of-newsletters/mail-sent/${dateDir}/mail.html future-of-newsletters/mail-sent/${dateDir}/mail.txt`);
   console.log(
     `cd newsletter-content;uv tool run nikola new_post -f markdown -t "${issueTitle}" -e`
   );
