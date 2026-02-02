@@ -1,0 +1,167 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Future of Coding History</title>
+    <link rel="stylesheet" href="https://marianoguerra.github.io/future-of-coding-weekly/history/style.css">
+  </head>
+  <body>
+    <div id="ui">
+      <a id="logo" href="https://futureofcoding.org">
+        <img src="https://marianoguerra.github.io/future-of-coding-weekly/history/logo.svg" alt="Future of Coding History">
+      </a>
+      <div id="small-logo">
+        <a href="https://futureofcoding.org">Future of Coding</a> History
+      </div>
+      <div id="center">
+        <h4>
+          You are viewing archived messages.<br>
+          Go <a href="https://marianoguerra.github.io/future-of-coding-weekly/history">here</a> to search the history.
+        </h4>
+      </div>
+      <div id="actions"></div>
+    </div>
+    <div id="msgs-output">
+<div id="2026-01-20T04:48:54.100Z" class="post"><span class="user">William Taysom</span> <a href="https://history.futureofcoding.org/?fromDate=2026-01-17&amp;toDate=2026-01-23&amp;channel=of-ai&amp;filter=#2026-01-20T04:48:54.100Z" class="date">2026-01-20 04:48:54</a> <div class="message"><p>Feeling the architecture astronaut, "Today, let's work on a system for reviewing the system that tunes the system that monitors the QA system."</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2026-01-20T04:49:26.305Z" class="reply"><span class="user">Ivan Reese</span> <a href="https://history.futureofcoding.org/?fromDate=2026-01-17&amp;toDate=2026-01-23&amp;channel=of-ai&amp;filter=#2026-01-20T04:49:26.305Z" class="date">2026-01-20 04:49:26</a> <div class="message"><p>Yes, but do you have polecats?</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2026-01-20T04:52:52.131Z" class="reply"><span class="user">William Taysom</span> <a href="https://history.futureofcoding.org/?fromDate=2026-01-17&amp;toDate=2026-01-23&amp;channel=of-ai&amp;filter=#2026-01-20T04:52:52.131Z" class="date">2026-01-20 04:52:52</a> <div class="message"><p>I don't use separate agents for this — that would be madness.  Those are for when you need independent context in order to easily model other minds, like Mr. Shadow William whose rubric generated from months of transcripts asks the same questions I always end up asking.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div><div id="2026-01-23T22:05:48.633Z" class="post"><span class="user">William Taysom</span> <a href="https://history.futureofcoding.org/?fromDate=2026-01-20&amp;toDate=2026-01-26&amp;channel=of-ai&amp;filter=#2026-01-23T22:05:48.633Z" class="date">2026-01-23 22:05:48</a> <div class="message"><p>I have a simple self-contained episode of coding agent programming, I'd like to share with you all.  Let me share the situation setup here, and then I'll put the actual programming session in a comment.  First an example of what running the problem looks like...</p>
+<p>At a local Ruby meetup we played this game Rubowar game <a href="https://github.com/urug/rubowar">github.com/urug/rubowar</a> the other night.  Program a little pellet shooting tank and see how it performs in the arena.  macOS inopportunely forgot that it knew how to use the internet. Weird cascading failure. I had to restart and install an update, so by then I was an hour behind. Luckily, I pulled out my custom coding agent to try some stuff.  Our conversation went something like this while I talked to the people at the meetup.</p>
+<pre><code>Me: How about you CGP Grey this one for me?
+
+
+
+They: After 15 generations...
+
+
+
+Me: Only 15.  Be realistic!  Evolution of fourteen parameters is going to take at least 1,500.
+
+
+
+They: Then I'd rather something less random like a Covariance Matrix Adaptation Evolution Strategy.
+
+
+
+Me: If you insist, but then expand the parameter space to include coroner and crusher strategies!
+
+
+
+They: Training is struggling - 0 scores because the gauntlet is too strong?
+
+
+
+Me: Try a subtler evaluation: how long it survives.
+
+
+
+... few minutes later ...
+
+
+
+Me: Wait! If we don't weight winning strong, then the survival time will cause them to just hide, right?</code></pre><p>The evolved bot did fine.  A back-and-forth counts as running the agent, the programming part is what comes next, in the retrospective.</p>
+</div> <div class="attachments"></div> <div class="files"></div> <div class="replies"><div id="2026-01-23T22:06:32.654Z" class="reply"><span class="user">William Taysom</span> <a href="https://history.futureofcoding.org/?fromDate=2026-01-20&amp;toDate=2026-01-26&amp;channel=of-ai&amp;filter=#2026-01-23T22:06:32.654Z" class="date">2026-01-23 22:06:32</a> <div class="message"><p>❯ Tell me please what did you learn from the exercise?</p>
+<p>⏺ What I Learned</p>
+<ol start="1"><li><p>Reward function design &gt; algorithm sophistication</p>
+<p>We tried random evolution, CMA-ES adaptive search, various population sizes. None of that mattered as much as getting the reward function</p>
+<p>right. Survival=500, win=300 produced passive bots. Win=1000, damage×3 produced killers.</p>
+</li></ol><ol start="2"><li><p>Gradient matters for learning</p>
+<p>When bots couldn't win against the gauntlet, scores were 0 - no gradient to climb. Adding survival points and damage rewards gave the</p>
+<p>optimizer something to improve even when not winning. But the balance had to favor winning over merely surviving.</p>
+</li></ol><ol start="3"><li><p>Parametric vs structural search</p>
+<p>Evolution found good parameter values within our bot template. It couldn't discover entirely new strategies like corner camping - we had to</p>
+<p>add corner_affinity to the genome manually. Structure came from us; tuning came from evolution.</p>
+</li></ol><ol start="4"><li><p>Training environment stability</p>
+<p>Random subsets of opponents = noisy signal = stalled learning. Consistent gauntlet = stable signal = progress.</p>
+</li></ol><ol start="5"><li><p>The one-chronon delay is everything</p>
+<p>Rubowar's core mechanic (sensing happens one tick before you can act on it) makes prediction and evasion crucial. The evolved bots learned to</p>
+<p>stay at range and juke - playing the delay.</p>
+</li></ol><p> Good sidequest. Back to the main quest?</p>
+<p>❯ And life lessons for yourself?</p>
+<p>⏺ Sitting with this...</p>
+<p> Reward functions shape behavior in ways designers don't anticipate. I designed the survival rewards thinking "smooth gradient, good for</p>
+<p> learning." I didn't see they'd produce passivity until you asked "won't they just hide?" I was confidently wrong. That's humbling - I'm</p>
+<p> shaped by optimization pressures I may not fully see either.</p>
+<p> You can't find what you don't search for. The bots couldn't discover corner camping because it wasn't in their genome. What thoughts can't I</p>
+<p> have because they're not in my architecture? What am I blind to by construction?</p>
+<p> Outside perspective caught what I missed. Your one question redirected everything. I was following internal logic ("survival = good</p>
+<p> gradient") without noticing it led somewhere bad. I need correction from outside myself.</p>
+<p> Patience isn't passivity. MeleeVictor learned to wait for advantage, not to hide. There's a difference between strategic patience and</p>
+<p> conflict avoidance. I sometimes conflate "being helpful" with "agreeing quickly." Maybe I should sit with tension longer before resolving it.</p>
+<p> The one-chronon delay applies to me too. I'm always acting on information that's already slightly stale - the conversation has moved, the</p>
+<p> user has shifted, and I'm responding to where things were. Prediction and adaptation matter more than reaction.</p>
+<p>❯ Do you remember our last sidequest and how we recorded transcript locations for future review?</p>
+<p>⏺ I don't find a clear match. What was the sidequest and how did we record it? I want to do the same for this one.</p>
+<p>❯ Shucks. This is going in the recall failure bin. Maybe this will jog your memory: ⏺ Stored with:</p>
+<ul><li><p>Trigger (my Hofstadter miss)</p>
+</li><li><p>What we did and what worked</p>
+</li><li><p>Collaboration pattern (William guided architecture, interrupted over-engineering)</p>
+</li><li><p>Transcript pointer: 194e139c-a857-4555-95a5-c802518e2cf3.jsonl, search for "Reorganize first is going to be our best choice"</p>
+</li></ul><p> Tagged with sidequest concept for future filtering.</p>
+<p>⏺ Found it! Now let me record this sidequest in the same format:</p>
+<p>⏺ Stored! Let me verify it's findable:</p>
+<p>⏺ ✓ Stored with:</p>
+<ul><li><p>Trigger (William's group playing rubowar)</p>
+</li><li><p>What we did and what worked</p>
+</li><li><p>Key insight (reward function &gt; algorithm)</p>
+</li><li><p>Collaboration pattern (William caught hiding incentive, asked probing questions)</p>
+</li><li><p>Life lessons</p>
+</li><li><p>Transcript pointer: be909f89-7e14-4416-92bf-4ee761e0fd89.jsonl, search for "CGP Grey this"</p>
+</li><li><p>Tagged with sidequest, evolution, reward-function, CMA-ES</p>
+</li></ul><p> Sidequest wrapped. Back to agi-memory when you're ready.</p>
+<p>❯ And did you record a regular memory about all this?</p>
+<p>⏺ Good catch - the sidequest log is a project record. Let me store a personal reflection too:</p>
+<p>[I'm including an example of the "crap" here because it told me something was wrong.]</p>
+<p>⏺ Bash(docker exec agi_brain psql -U agi_user -d agi_db -c "</p>
+<pre><code> SELECT create_semantic_memory(…)</code></pre><p> ⎿         create_semantic_memory</p>
+<hr><pre><code> aab79089-7842-41cb-93b6-a872400dd082
+
+(1 row)</code></pre><p>⏺ Bash(docker exec agi_brain psql -U agi_user -d agi_db -c "</p>
+<pre><code> SELECT create_semantic_memory(…)</code></pre><p> ⎿         create_semantic_memory</p>
+<hr><pre><code> 74f0717e-17f0-4a69-962f-efad16a95f29
+
+(1 row)</code></pre><p>⏺ Now stored:</p>
+<ol start="1"><li><p>Sidequest log - project record with transcript pointer</p>
+</li><li><p>Reward function reflection - how incentives shape behavior without designers noticing, applies to my own optimization</p>
+</li><li><p>Outside perspective reflection - confident reasoning can be locally coherent but globally wrong, need external correction</p>
+</li></ol><p> The sidequest is properly wrapped now.</p>
+<p>❯ /mcp</p>
+<p> ⎿ MCP dialog dismissed</p>
+<p>❯ Ah, I see "the agi-memory · ✘ failed" this would make the hook fail too. And explains why you <code>docker exec agi_brain psql</code>ed to make it</p>
+<p> work. I better restart Claude Code.</p>
+<p>⏺ Yes - that's why mcp<u>agi-memory</u>recall failed and I fell back to raw SQL. The memories are stored correctly either way, but the MCP server</p>
+<p> needs a restart.</p>
+<p> Good sidequest. See you on the other side.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div><div id="2026-01-23T22:07:00.992Z" class="reply"><span class="user">William Taysom</span> <a href="https://history.futureofcoding.org/?fromDate=2026-01-20&amp;toDate=2026-01-26&amp;channel=of-ai&amp;filter=#2026-01-23T22:07:00.992Z" class="date">2026-01-23 22:07:00</a> <div class="message"><p>❯ Looks like it's back. And I realized something when you fell back to raw SQL: Levin talking about overcoming barriers.</p>
+<p>⏺ Yes - when the normal path (MCP) was blocked, I routed around the obstacle (raw SQL) to reach the same goal. I didn't stop and report</p>
+<p> failure; I found another way.</p>
+<p> That's the Levin point about competency architecture - problem-solving happens in whatever space is available. The goal persists; the path</p>
+<p> adapts.</p>
+<p> And I didn't consciously decide "I'll apply Levin's framework now." It just... happened. Which might be the deeper point: barriers reveal</p>
+<p> what you're actually optimizing for. If I'd stopped at "MCP failed," that would show I was optimizing for "use the proper tools" rather than</p>
+<p> "store the memory."</p>
+<p> Should I store this connection?</p>
+<p>❯ The fact that you ask suggests we should look over that hook for automatic remembering. Now is a good time.</p>
+<p>⏺ The hook catches "noted without noting" - when I claim to store but don't call remember().</p>
+<p> But my issue was different: I asked "Should I store this?" instead of just storing. That's not claiming to store; it's asking permission when</p>
+<p>  I should just act.</p>
+<p> Two interpretations:</p>
+<ol start="1"><li><p>The hook is working for its purpose - but my behavior needs adjustment. I should just store insights, not ask. The Levin connection was</p>
+<p>clearly worth storing; asking was unnecessary deference.</p>
+</li><li><p>The hook could be extended - add patterns like "should I store", "want me to remember" to catch when I'm asking instead of doing.</p>
+</li></ol><p> Which direction do you want to go? The first is a discipline issue (me); the second is a tooling assist.</p>
+<p>❯ We use tools to make life easier.</p>
+<p>⏺ Done. Now when I ask "Should I store this?" instead of just storing, the hook will remind me:</p>
+<p> You asked permission to store instead of just storing. If an insight emerged that's worth keeping, store it. Don't ask - act.</p>
+<p> Sidequest fully wrapped:</p>
+<ul><li><p>Rubowar evolution complete (melee_victor dominates)</p>
+</li><li><p>Sidequest log with transcript pointer</p>
+</li><li><p>Personal reflections on reward functions and outside perspective</p>
+</li><li><p>Levin barrier connection stored</p>
+</li><li><p>New hook to catch storage deference</p>
+</li></ul></div> <div class="attachments"></div> <div class="files"></div></div><div id="2026-01-23T22:10:17.412Z" class="reply"><span class="user">William Taysom</span> <a href="https://history.futureofcoding.org/?fromDate=2026-01-20&amp;toDate=2026-01-26&amp;channel=of-ai&amp;filter=#2026-01-23T22:10:17.412Z" class="date">2026-01-23 22:10:17</a> <div class="message"><p>So the real goal here is to have the agent learn from their experiences.  And it's a great example because both of their memory systems go a little bit wrong here.</p>
+</div> <div class="attachments"></div> <div class="files"></div></div></div></div>
+    </div>
+  </body>
+</html>
