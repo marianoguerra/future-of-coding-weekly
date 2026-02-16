@@ -19,9 +19,6 @@ function generateScriptForThisWeek(now, dayNumber) {
     `sed 's/title = "Feeling of Computing Weekly"/title = "Feeling of Computing Weekly ${curYear}\\/${monthStr} Week ${weekNumber}"/g' future-of-newsletters/resources/mail-send-config.toml |\n save future-of-newsletters/mail-sent/${dateDir}/config.toml`
   );
   console.log(`focWeekExport "${prevDateStr}" "${nextDateStr}"`);
-  console.log(
-    `https://github.com/marianoguerra/future-of-coding-weekly/issues/new?&template=newsletter-week-issue.md&title=Future+of+Coding+Weekly+${curYear}%2F${monthStr}+Week+${weekNumber}`
-  );
   console.log(`git add history; git commit -m "weekly dump"; git push origin`);
   console.log(`focAfterWeeklyPush`);
   console.log(`nvim future-of-newsletters/mail-sent/${dateDir}/mail.html future-of-newsletters/mail-sent/${dateDir}/mail.txt`);
