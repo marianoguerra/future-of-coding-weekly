@@ -1,0 +1,49 @@
+[
+    {
+        "user": "U02E4DAQGSZ",
+        "type": "message",
+        "ts": "1772998203.022049",
+        "edited": {
+            "user": "U02E4DAQGSZ",
+            "ts": "1772998324.000000"
+        },
+        "client_msg_id": "fd9415da-4595-47b8-8ccf-84cfd7b969b2",
+        "text": "Some progress on getting the notebook to remember changes locally.\n\n<https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_local-change-history.html#view=R100(S80(@tomlarkworthy/local-change-history),S20(@tomlarkworthy/module-selection))|https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_local-change-history.html#view=R100(S80(@tomlarkwort[\u2026]rkworthy/module-selection))>\n\nInternally cell changes are stored in git hosted in IndexDB, and replayed on startup. I learnt a ton about working with git statelessly. Because lopecode can fork itself into new tabs, you have multiple histories (branches) but on a shared filesystem (indexdb is per origin, and the tabs are considered same origin). So the whole worktree part of git would clash, so each tab pulls and pushes into a branch based on URL (different tabs have different blob URLs) but they are all part of the same git repository, and they work without worktrees (e.g. no git checkout).\n\nQuite complicated and I am sure I will be picking out bugs for a while but I think it helps unblock using Lopecode in practice, as there is less fear that you will lose your changes. To get this working variables are now assigned a \"persistent id\" that survives serialization. Cool thing now is that I can correlate variable changes across tabs, so we have a true tree shaped history implemented local-first.\n\nI put some effort in trying to describe the algorithms in prose so the module is understandable. I have integrated it with the<https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_lopecode-tour.html#view=S100(@tomlarkworthy/lopecode-tour)| Lopecode Tour >now so that now will remember user changes across page reloads",
+        "team": "T5TCAFTA9",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "QiGv8",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Some progress on getting the notebook to remember changes locally.\n\n"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_local-change-history.html#view=R100(S80(@tomlarkworthy/local-change-history),S20(@tomlarkworthy/module-selection))",
+                                "text": "https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_local-change-history.html#view=R100(S80(@tomlarkwort[\u2026]rkworthy/module-selection))"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nInternally cell changes are stored in git hosted in IndexDB, and replayed on startup. I learnt a ton about working with git statelessly. Because lopecode can fork itself into new tabs, you have multiple histories (branches) but on a shared filesystem (indexdb is per origin, and the tabs are considered same origin). So the whole worktree part of git would clash, so each tab pulls and pushes into a branch based on URL (different tabs have different blob URLs) but they are all part of the same git repository, and they work without worktrees (e.g. no git checkout).\n\nQuite complicated and I am sure I will be picking out bugs for a while but I think it helps unblock using Lopecode in practice, as there is less fear that you will lose your changes. To get this working variables are now assigned a \"persistent id\" that survives serialization. Cool thing now is that I can correlate variable changes across tabs, so we have a true tree shaped history implemented local-first.\n\nI put some effort in trying to describe the algorithms in prose so the module is understandable. I have integrated it with the"
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://tomlarkworthy.github.io/lopecode/notebooks/@tomlarkworthy_lopecode-tour.html#view=S100(@tomlarkworthy/lopecode-tour)",
+                                "text": " Lopecode Tour "
+                            },
+                            {
+                                "type": "text",
+                                "text": "now so that now will remember user changes across page reloads"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
