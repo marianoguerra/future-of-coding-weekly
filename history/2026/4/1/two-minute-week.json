@@ -1,0 +1,298 @@
+[
+    {
+        "text": "I guess observable enthusiasts around here may find this one interesting! I'm designing a way for object to \"act together\" in a more natural way. This involves objects that do stuff (as opposed to simply computing a value) and that can generate their own events. Examples on the video are a Timer (which can be started/stopped and will stop itself automatically after some time) or a KeyPresser (which can be pressed down/released, based on the physical keyboard's keys but may also generate synthetic events, according to notifications received from other objects).\n\nOn the video you can see a simple Timer-based limiter, that releases the space after half a second. I can press the key myself, and that will cause Automat to start the Timer (you can take a closer look at the hand over the Key Presser - it shows whether the key is pressed or not). And then after some time, Automat will release the key for me. If I release the key sooner, the Timer is cancelled. You can see that the flow of information is multidirectional. The direction is indicated by the movement of belts between gears. That's the first half of the video.\n\nOne fundamental issue of these observable systems is that the computation would loop forever if the objects just announced their new state on every change. Typically they are only evaluated once, according to some topological sorting (most observable systems don't allow loops) and they also store &amp; compare their state to prevent redundant updates (optional optimization in loop-free reactive systems but absolutely necessary if loops are allowed - it's the stop condition).\n\n(terminology: many people call this \"feedback loops\" and treat this as an undesired behavior, but IMO there are places where feedback loops are a sound solution, so I'll call this \"reactive echo\" - it's when an object changes state but then notifies the source of the change of its change. Another reason is that \"reactive echo\" doesn't really need to cause a loop - the issue is that a change notification is accidentally sent back)\n\nNone of this is new - it's a pretty well known pattern. Fun things start when the OS is involved &amp; objects start to flip-flop fast. This happens when I create a loop with the Timer. This is the second part of the video. The Timer switches itself off &amp; on - but it happens pretty much instantly. This off/on switching still generates notifications for the Key Presser - so it sends the events to the OS. And some time after, the OS sends these events back to Automat. There is a delay caused by the OS. The events differ from the internal state tracked by the Key Presser, so they must be announced to other synchronized objects, causing the Timer to stop &amp; restart instantly. The flow of events is:\n\n\u2022 I press the key down =&gt; \"ON\" notification sent to the Timer\n\u2022 Timer completes =&gt; \"OFF\" notification sent to the Key Presser, which posts a synthetic \"release key\" event\n\u2022 Timer restarts =&gt; \"ON\" notification sent to the Key Presser, which posts a synthetic \"press key\" event\n\u2022 OS sends back the \"key released\" event to Key Presser =&gt; \"OFF\" notification sent to the Timer (uh oh! it's a reactive echo!)\n\u2022 OS sends back the \"key pressed\" event to Key Presser =&gt; \"ON\" notification sent to the Timer (again - it's a reactive echo!)\nThe last two events should not be there. But the causal chain of reactive echo escapes the process and arrives back with a delay so it cannot be reasoned about in a local fashion. There is no portable way to distinguish synthetic vs natural events so they cannot be simply ignored. I cannot even attach anything to these events explicitly. They're pretty much indistinguishable from real user events.\n\nAs you can see on video, it actually works fine - this is because Automat is now using a completely different way to prevent the reactive echo (Automat has five different echo cancellation mechanisms, lol). I like this one the most because it's using a strategy known from biological neurons. You won't find it in the artificial ones! The real biological neurons have an inhibitory period that they enter after firing. This allows them to prevent back-flow of information in a completely distributed fashion - without the need for a central orchestrator that will sequence their activations in topological order - and without the need to track &amp; compare any internal \"value\" (neurons store no bits - they just \"fire\" &amp; rest). The way it works in Automat is that whenever a Key Presser sends an event, it records a timestamp - it's the start of its inhibitory period. For the duration of this period it will ignore the next event received from the OS. Very simple solution actually, and widely used in nature - but not so much in engineered reactive systems. But if you think about it - it could be!",
+        "files": [
+            {
+                "id": "F0AQ6QZH806",
+                "created": 1775049236,
+                "timestamp": 1775049236,
+                "mimetype": "video/mp4",
+                "filetype": "mp4",
+                "pretty_type": "MPEG 4 Video",
+                "user": "U06SS0DHZD1",
+                "user_team": "T5TCAFTA9",
+                "editable": false,
+                "size": 17166195,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "name": "2026-04-01 15-11-03.mp4",
+                "title": "2026-04-01 15-11-03.mp4",
+                "is_transcription_region_supported": true,
+                "transcription": {
+                    "status": "none"
+                },
+                "mp4": "https://files.slack.com/files-tmb/T5TCAFTA9-F0AQ6QZH806-c4f273c62a/2026-04-01_15-11-03.mp4",
+                "url_private": "https://files.slack.com/files-tmb/T5TCAFTA9-F0AQ6QZH806-c4f273c62a/2026-04-01_15-11-03.mp4",
+                "url_private_download": "https://files.slack.com/files-pri/T5TCAFTA9-F0AQ6QZH806/download/2026-04-01_15-11-03.mp4",
+                "hls": "https://files.slack.com/files-tmb/T5TCAFTA9-F0AQ6QZH806-c4f273c62a/file.m3u8?_xcb=23ead",
+                "hls_embed": "data:application/vnd.apple.mpegurl;base64,I0VYVE0zVQojRVhULVgtVkVSU0lPTjozCiNFWFQtWC1JTkRFUEVOREVOVC1TRUdNRU5UUwojRVhULVgtU1RSRUFNLUlORjpCQU5EV0lEVEg9MTg4NjM4NSxBVkVSQUdFLUJBTkRXSURUSD0xNzEyMzQ2LENPREVDUz0iYXZjMS42NDAwMjgsbXA0YS40MC41IixSRVNPTFVUSU9OPTE5MjB4MTA4MCxGUkFNRS1SQVRFPTI5Ljk3MApkYXRhOmFwcGxpY2F0aW9uL3ZuZC5hcHBsZS5tcGVndXJsO2Jhc2U2NCxJMFZZVkUwelZRb2pSVmhVTFZndFZrVlNVMGxQVGpvekNpTkZXRlF0V0MxVVFWSkhSVlJFVlZKQlZFbFBUam8zQ2lORldGUXRXQzFOUlVSSlFTMVRSVkZWUlU1RFJUb3hDaU5GV0ZRdFdDMVFURUZaVEVsVFZDMVVXVkJGT2xaUFJBb2pSVmhVU1U1R09qWXVNREEyTEFwb2RIUndjem92TDJacGJHVnpMbk5zWVdOckxtTnZiUzltYVd4bGN5MTBiV0l2VkRWVVEwRkdWRUU1TFVZd1FWRTJVVnBJT0RBMkxXTTBaakkzTTJNMk1tRXZabWxzWlY5SVh6STJORjh4T1RJd2VERXdPREJmTmpVd01FdENVRk5mTjFGV1FsSmZNREF3TURFdWRITUtJMFZZVkVsT1JqbzJMakF3Tml3S2FIUjBjSE02THk5bWFXeGxjeTV6YkdGamF5NWpiMjB2Wm1sc1pYTXRkRzFpTDFRMVZFTkJSbFJCT1MxR01FRlJObEZhU0Rnd05pMWpOR1l5TnpOak5qSmhMMlpwYkdWZlNGOHlOalJmTVRreU1IZ3hNRGd3WHpZMU1EQkxRbEJUWHpkUlZrSlNYekF3TURBeUxuUnpDaU5GV0ZSSlRrWTZOaTR3TURZc0NtaDBkSEJ6T2k4dlptbHNaWE11YzJ4aFkyc3VZMjl0TDJacGJHVnpMWFJ0WWk5VU5WUkRRVVpVUVRrdFJqQkJVVFpSV2tnNE1EWXRZelJtTWpjell6WXlZUzltYVd4bFgwaGZNalkwWHpFNU1qQjRNVEE0TUY4Mk5UQXdTMEpRVTE4M1VWWkNVbDh3TURBd015NTBjd29qUlZoVVNVNUdPall1TURBMkxBcG9kSFJ3Y3pvdkwyWnBiR1Z6TG5Oc1lXTnJMbU52YlM5bWFXeGxjeTEwYldJdlZEVlVRMEZHVkVFNUxVWXdRVkUyVVZwSU9EQTJMV00wWmpJM00yTTJNbUV2Wm1sc1pWOUlYekkyTkY4eE9USXdlREV3T0RCZk5qVXdNRXRDVUZOZk4xRldRbEpmTURBd01EUXVkSE1LSTBWWVZFbE9Sam8yTGpBd05pd0thSFIwY0hNNkx5OW1hV3hsY3k1emJHRmpheTVqYjIwdlptbHNaWE10ZEcxaUwxUTFWRU5CUmxSQk9TMUdNRUZSTmxGYVNEZ3dOaTFqTkdZeU56TmpOakpoTDJacGJHVmZTRjh5TmpSZk1Ua3lNSGd4TURnd1h6WTFNREJMUWxCVFh6ZFJWa0pTWHpBd01EQTFMblJ6Q2lORldGUkpUa1k2TkM0ME16Z3NDbWgwZEhCek9pOHZabWxzWlhNdWMyeGhZMnN1WTI5dEwyWnBiR1Z6TFhSdFlpOVVOVlJEUVVaVVFUa3RSakJCVVRaUldrZzRNRFl0WXpSbU1qY3pZell5WVM5bWFXeGxYMGhmTWpZMFh6RTVNakI0TVRBNE1GODJOVEF3UzBKUVUxODNVVlpDVWw4d01EQXdOaTUwY3dvalJWaFVMVmd0UlU1RVRFbFRWQW89Cg==",
+                "mp4_low": "https://files.slack.com/files-tmb/T5TCAFTA9-F0AQ6QZH806-c4f273c62a/2026-04-01_15-11-03_trans.mp4",
+                "duration_ms": 34467,
+                "media_display_type": "video",
+                "thumb_video": "https://files.slack.com/files-tmb/T5TCAFTA9-F0AQ6QZH806-c4f273c62a/2026-04-01_15-11-03_thumb_video.jpeg",
+                "thumb_video_w": 1920,
+                "thumb_video_h": 1080,
+                "permalink": "https://feelingofcomputing.slack.com/files/UBN9AFS0N/F0AQ6QZH806/2026-04-01_15-11-03.mp4",
+                "permalink_public": "https://slack-files.com/T5TCAFTA9-F0AQ6QZH806-bfc824ad70",
+                "is_starred": false,
+                "skipped_shares": true,
+                "has_rich_preview": false,
+                "file_access": "visible"
+            }
+        ],
+        "upload": false,
+        "user": "U06SS0DHZD1",
+        "display_as_bot": false,
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "u/yB+",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "I guess observable enthusiasts around here may find this one interesting! I'm designing a way for object to \"act together\" in a more natural way. This involves objects that do stuff (as opposed to simply computing a value) and that can generate their own events. Examples on the video are a Timer (which can be started/stopped and will stop itself automatically after some time) or a KeyPresser (which can be pressed down/released, based on the physical keyboard's keys but may also generate synthetic events, according to notifications received from other objects).\n\nOn the video you can see a simple Timer-based limiter, that releases the space after half a second. I can press the key myself, and that will cause Automat to start the Timer (you can take a closer look at the hand over the Key Presser - it shows whether the key is pressed or not). And then after some time, Automat will release the key for me. If I release the key sooner, the Timer is cancelled. You can see that the flow of information is multidirectional. The direction is indicated by the movement of belts between gears. That's the first half of the video.\n\nOne fundamental issue of these observable systems is that the computation would loop forever if the objects just announced their new state on every change. Typically they are only evaluated once, according to some topological sorting (most observable systems don't allow loops) and they also store & compare their state to prevent redundant updates (optional optimization in loop-free reactive systems but absolutely necessary if loops are allowed - it's the stop condition).\n\n(terminology: many people call this \"feedback loops\" and treat this as an undesired behavior, but IMO there are places where feedback loops are a sound solution, so I'll call this \"reactive echo\" - it's when an object changes state but then notifies the source of the change of its change. Another reason is that \"reactive echo\" doesn't really need to cause a loop - the issue is that a change notification is accidentally sent back)\n\nNone of this is new - it's a pretty well known pattern. Fun things start when the OS is involved & objects start to flip-flop fast. This happens when I create a loop with the Timer. This is the second part of the video. The Timer switches itself off & on - but it happens pretty much instantly. This off/on switching still generates notifications for the Key Presser - so it sends the events to the OS. And some time after, the OS sends these events back to Automat. There is a delay caused by the OS. The events differ from the internal state tracked by the Key Presser, so they must be announced to other synchronized objects, causing the Timer to stop & restart instantly. The flow of events is:\n\n"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "rich_text_list",
+                        "elements": [
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "I press the key down => \"ON\" notification sent to the Timer"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Timer completes => \"OFF\" notification sent to the Key Presser, which posts a synthetic \"release key\" event"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "Timer restarts => \"ON\" notification sent to the Key Presser, which posts a synthetic \"press key\" event"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "OS sends back the \"key released\" event to Key Presser => \"OFF\" notification sent to the Timer (uh oh! it's a reactive echo!)"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "rich_text_section",
+                                "elements": [
+                                    {
+                                        "type": "text",
+                                        "text": "OS sends back the \"key pressed\" event to Key Presser => \"ON\" notification sent to the Timer (again - it's a reactive echo!)"
+                                    }
+                                ]
+                            }
+                        ],
+                        "style": "bullet",
+                        "indent": 0,
+                        "border": 0
+                    },
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "\nThe last two events should not be there. But the causal chain of reactive echo escapes the process and arrives back with a delay so it cannot be reasoned about in a local fashion. There is no portable way to distinguish synthetic vs natural events so they cannot be simply ignored. I cannot even attach anything to these events explicitly. They're pretty much indistinguishable from real user events.\n\nAs you can see on video, it actually works fine - this is because Automat is now using a completely different way to prevent the reactive echo (Automat has five different echo cancellation mechanisms, lol). I like this one the most because it's using a strategy known from biological neurons. You won't find it in the artificial ones! The real biological neurons have an inhibitory period that they enter after firing. This allows them to prevent back-flow of information in a completely distributed fashion - without the need for a central orchestrator that will sequence their activations in topological order - and without the need to track & compare any internal \"value\" (neurons store no bits - they just \"fire\" & rest). The way it works in Automat is that whenever a Key Presser sends an event, it records a timestamp - it's the start of its inhibitory period. For the duration of this period it will ignore the next event received from the OS. Very simple solution actually, and widely used in nature - but not so much in engineered reactive systems. But if you think about it - it could be!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "message",
+        "ts": "1775053630.907069",
+        "client_msg_id": "96a5ec2f-822c-4fe5-85a0-d50ffaef25b5",
+        "thread_ts": "1775053630.907069",
+        "reply_count": 3,
+        "reply_users_count": 3,
+        "latest_reply": "1775463102.486289",
+        "reply_users": [
+            "UC2A2ARPT",
+            "U06SS0DHZD1",
+            "U02E4DAQGSZ"
+        ],
+        "is_locked": false,
+        "subscribed": false,
+        "reactions": [
+            {
+                "name": "heart",
+                "users": [
+                    "UFPPABQ7P",
+                    "U02E4DAQGSZ",
+                    "U05UK5T7LPP"
+                ],
+                "count": 3
+            },
+            {
+                "name": "eyes",
+                "users": [
+                    "U02E4DAQGSZ"
+                ],
+                "count": 1
+            }
+        ]
+    },
+    {
+        "user": "UC2A2ARPT",
+        "type": "message",
+        "ts": "1775135010.895829",
+        "edited": {
+            "user": "UC2A2ARPT",
+            "ts": "1775135035.000000"
+        },
+        "client_msg_id": "A1568C2B-F8D9-41F8-9D4F-2BA370394E2F",
+        "text": "Great write-up.\n\nI might be missing a realization \u2014 what makes this \"inhibitory\" approach different from a \"throttle\"? (\"debounce\" is also similar, maybe that's what i mean?)",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1775053630.907069",
+        "parent_user_id": "U06SS0DHZD1",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "P3BHl",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Great write-up.\n\nI might be missing a realization \u2014 what makes this \"inhibitor"
+                            },
+                            {
+                                "type": "text",
+                                "text": "y"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\" approach different from a \"throttle\"? (\"debounce\" is also similar, maybe that's what i mean?)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U06SS0DHZD1",
+        "type": "message",
+        "ts": "1775135353.353819",
+        "client_msg_id": "9c8ab54b-23ab-42b7-b004-ea968cef6e8d",
+        "text": "Yes - it's exactly that! A throttle (or some variant of throttle - I'm also not familiar with precise terminology around those concepts). The thing is that this throttle can be used to prevent back-flow of information in reactive graphs. This allows reactive graphs with cycles &amp; multidirectional dataflow - which are otherwise finnicky and prone to oscillations to behave in a more robust fashion.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1775053630.907069",
+        "parent_user_id": "U06SS0DHZD1",
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "DCfwD",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "Yes - it's exactly that! A throttle (or some variant of throttle - I'm also not familiar with precise terminology around those concepts). The thing is that this throttle can be used to prevent back-flow of information in reactive graphs. This allows reactive graphs with cycles & multidirectional dataflow - which are otherwise finnicky and prone to oscillations to behave in a more robust fashion."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "user": "U02E4DAQGSZ",
+        "type": "message",
+        "ts": "1775463102.486289",
+        "client_msg_id": "b2648ff6-3fdb-4b87-9a80-9972e1401913",
+        "text": "yeah the self-triggering loops are the bane of my existence.\n\n<@UEH6T3RJB> claims to have solved bi-direcitonal reactivity in `fluid.cell` <https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/>\n\nI am still trying to get my head around it.\n\nYour approach is interesting. I feel like there is this modernist approach to coding where we build fragile mathematical towers, a topological sort being a great example of.\nThen there is the post-modernist approach, where we wire into systems we can't understand (e.g. a user's randomly configured operating system) and then apply techniques to deal with the chaos, which inhibition would be more like. The post-modern can end up more robust and fault tolerant, but ultimately even harder to reason about because its adding more entropy on top of the existing entropy.",
+        "team": "T5TCAFTA9",
+        "thread_ts": "1775053630.907069",
+        "parent_user_id": "U06SS0DHZD1",
+        "attachments": [
+            {
+                "image_url": "https://ponder.org.uk/img/pond.jpg",
+                "image_width": 500,
+                "image_height": 375,
+                "image_bytes": 132630,
+                "from_url": "https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/",
+                "id": 1,
+                "original_url": "https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/",
+                "fallback": "Antranig Basman: fluid.cell: A reactive implementation supporting malleable substrates",
+                "title": "fluid.cell: A reactive implementation supporting malleable substrates",
+                "title_link": "https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/",
+                "service_name": "Antranig Basman"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "rich_text",
+                "block_id": "O4scw",
+                "elements": [
+                    {
+                        "type": "rich_text_section",
+                        "elements": [
+                            {
+                                "type": "text",
+                                "text": "yeah the self-triggering loops are the bane of my existence.\n\n"
+                            },
+                            {
+                                "type": "user",
+                                "user_id": "UEH6T3RJB"
+                            },
+                            {
+                                "type": "text",
+                                "text": " claims to have solved bi-direcitonal reactivity in "
+                            },
+                            {
+                                "type": "text",
+                                "text": "fluid.cell",
+                                "style": {
+                                    "code": true
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": " "
+                            },
+                            {
+                                "type": "link",
+                                "url": "https://ponder.org.uk/post/2026-02-20-reactivity-for-malleability/"
+                            },
+                            {
+                                "type": "text",
+                                "text": "\n\nI am still trying to get my head around it.\n\nYour approach is interesting. I feel like there is this modernist approach to coding where we build fragile mathematical towers, a topological sort being a great example of.\nThen there is the post-modernist approach, where we wire into systems we can't understand (e.g. a user's randomly configured operating system) and then apply techniques to deal with the chaos, which inhibition would be more like. The post-modern can end up more robust and fault tolerant, but ultimately even harder to reason about because its adding more entropy on top of the existing entropy."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
