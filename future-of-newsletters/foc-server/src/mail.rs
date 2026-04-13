@@ -40,8 +40,8 @@ pub struct TextConfig {
 pub enum ConfigLoadError {
     #[error("config parsing error")]
     ParseError(#[from] toml::de::Error),
-    #[error("file rendering error")]
-    ReadError(#[from] std::io::Error),
+    #[error("can't read file '{1}': {0}")]
+    ReadError(std::io::Error, String),
 }
 
 impl RawConfig {
@@ -51,7 +51,8 @@ impl RawConfig {
     }
 
     pub fn from_file(path: &str) -> Result<RawConfig, ConfigLoadError> {
-        let content = std::fs::read_to_string(path)?;
+        let content = std::fs::read_to_string(path)
+            .map_err(|e| ConfigLoadError::ReadError(e, path.to_string()))?;
         let config = Self::from_string(&content)?;
         Ok(config)
     }
@@ -177,8 +178,8 @@ pub async fn make_aws_client() -> Client {
 pub enum NewsletterSendErr {
     #[error("message send error")]
     MessageSendError(#[from] MessageSendError),
-    #[error("file rendering error")]
-    ReadFileError(#[from] std::io::Error),
+    #[error("can't read file '{1}': {0}")]
+    ReadFileError(std::io::Error, String),
     #[error("csv parsing error")]
     CsvReadError(#[from] csv::Error),
 }
@@ -193,8 +194,10 @@ pub async fn send_newsletter(
     let mail_text_path = base_path.join("mail.txt");
     let mail_html_path = base_path.join("mail.html");
 
-    let mail_text_content = std::fs::read_to_string(mail_text_path)?;
-    let mail_html_content = std::fs::read_to_string(mail_html_path)?;
+    let mail_text_content = std::fs::read_to_string(&mail_text_path)
+        .map_err(|e| NewsletterSendErr::ReadFileError(e, mail_text_path.display().to_string()))?;
+    let mail_html_content = std::fs::read_to_string(&mail_html_path)
+        .map_err(|e| NewsletterSendErr::ReadFileError(e, mail_html_path.display().to_string()))?;
 
     let client = make_aws_client().await;
 

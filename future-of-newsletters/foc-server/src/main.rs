@@ -180,11 +180,12 @@ async fn cli_send_newsletter(matches: &clap::ArgMatches) {
     let base_config_path = matches
         .get_one::<String>("config-path")
         .expect("no config-path");
-    let base_config = mail::RawConfig::from_file(base_config_path).expect("can't load base config");
+    let base_config =
+        mail::RawConfig::from_file(base_config_path).expect(&format!("can't load base config from '{base_config_path}'"));
     let config_path = std::path::Path::new(mail_path).join("config.toml");
     let mail_config =
         mail::RawConfig::from_file(config_path.to_str().expect("invalid config path"))
-            .expect("can't load newsletter's config.toml");
+            .expect(&format!("can't load newsletter config from '{}'", config_path.display()));
     let config = base_config
         .merge(&mail_config)
         .to_config()
@@ -197,7 +198,7 @@ async fn cli_send_newsletter(matches: &clap::ArgMatches) {
         .expect("can't load active subscribers");
 
     if let Err(err) = mail::send_newsletter(&config, mail_path, subscribers).await {
-        eprintln!("Error sending newsletter: {err:?}");
+        eprintln!("Error sending newsletter: {err}");
     }
 }
 
